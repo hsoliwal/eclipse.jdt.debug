@@ -88,7 +88,7 @@ public class PinnedFieldsViewTests extends AbstractDebugUiTests {
 	 * Collects the logged errors, except those of the tests themselves: they are prefixed with the name of the running test,
 	 * which contains some of the {@link #PIN_ERROR_MARKERS}
 	 */
-	private final ILogListener fLogListener = (status, _) -> {
+	private final ILogListener fLogListener = (status, unused) -> {
 		if (status.matches(IStatus.ERROR) && !TESTS_BUNDLE.equals(status.getPlugin())) {
 			fLoggedErrors.add(status);
 		}

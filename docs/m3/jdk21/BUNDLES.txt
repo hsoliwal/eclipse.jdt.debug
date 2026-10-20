@@ -1,0 +1,5 @@
+org.eclipse.jdt.debug.jdi.tests
+org.eclipse.jdt.debug.tests
+org.eclipse.jdt.debug.ui
+org.eclipse.jdt.debug
+org.eclipse.jdt.launching
