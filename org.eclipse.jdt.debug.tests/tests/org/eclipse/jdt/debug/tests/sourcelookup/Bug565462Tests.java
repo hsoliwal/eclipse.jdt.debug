@@ -58,7 +58,7 @@ public class Bug565462Tests extends AbstractDebugTest {
 		super.setUp();
 		this.javaSE11 = JavaRuntime.getExecutionEnvironmentsManager().getEnvironment("JavaSE-11");
 		this.defaultJavaSE11VM = javaSE11.getDefaultVM();
-		Predicate<IVMInstall> hasSource = vm -> vm != null && vm.getInstallLocation() != null && new File(vm.getInstallLocation(), "lib/src.zip").isFile();
+		Predicate<IVMInstall> hasSource = vm -> vm != null && vm.getInstallLocation() != null && new File(vm.getInstallLocation(), "lib/src.zip").isFile(); //FLLDCIM: MARK — M31 M3FILE_IO CALL
 		if (!hasSource.test(defaultJavaSE11VM)) {
 			Stream.of(javaSE11.getCompatibleVMs()).filter(Objects::nonNull).filter(hasSource)
 				.findAny()
@@ -111,7 +111,7 @@ public class Bug565462Tests extends AbstractDebugTest {
 
 		String className = "java/lang/Class.java";
 		File srcFile = new File(JavaRuntime.computeVMInstall(configuration).getInstallLocation(), "lib/src.zip");
-		assertTrue(srcFile.getAbsolutePath() + " doesn't exist", srcFile.isFile()); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
+		assertTrue(srcFile.getAbsolutePath() + " doesn't exist", srcFile.isFile()); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT //FLLDCIM: MARK — M31 M3FILE_IO CALL
 		Object[] foundElements = director.findSourceElements(className);
 		assertEquals("Expected only 1 match for class " + className + " in " + JavaRuntime.computeVMInstall(configuration).getInstallLocation() + " but found: " + Arrays.toString(foundElements), 1, foundElements.length); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 

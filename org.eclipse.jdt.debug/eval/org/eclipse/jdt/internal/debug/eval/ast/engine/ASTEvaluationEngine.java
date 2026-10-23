@@ -94,7 +94,7 @@ public class ASTEvaluationEngine implements IAstEvaluationEngine {
 	/**
 	 * Regex to find occurrences of 'this' in a code snippet
 	 */
-	private static Pattern fgThisPattern = Pattern.compile("(.*[^a-zA-Z0-9]+|^)(this)([^a-zA-Z0-9]+|$).*"); //$NON-NLS-1$
+	private static Pattern fgThisPattern = Pattern.compile("(.*[^a-zA-Z0-9]+|^)(this)([^a-zA-Z0-9]+|$).*"); //$NON-NLS-1$ //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
 
 	/**
 	 * Filters variable change events during an evaluation to avoid refreshing the variables view until done.
@@ -960,7 +960,7 @@ public class ASTEvaluationEngine implements IAstEvaluationEngine {
 		StringBuilder updatedSnippet = new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 		Matcher matcher = fgThisPattern.matcher(snippet); //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
 		int start = 0;
-		while (matcher.find()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
+		while (matcher.find()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
 			int end = matcher.start(2);
 			updatedSnippet.append(snippet.substring(start, end)); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			updatedSnippet.append(ArrayRuntimeContext.ARRAY_THIS_VARIABLE); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL

@@ -126,8 +126,8 @@ public class VirtualThreadTest extends AbstractJDITest {
 		StandardJavaFileManager fileManager = compiler.getStandardFileManager(null, Locale.ENGLISH, StandardCharsets.UTF_8);
 		Iterable<? extends JavaFileObject> javaFileObjects = fileManager.getJavaFileObjects(new File(sourceFilePath));
 		File outputFolder = new File(outputPath);
-		if (!outputFolder.exists()) {
-			Files.createDirectories(outputFolder.toPath());
+		if (!outputFolder.exists()) { //FLLDCIM: MARK — M31 M3FILE_IO CALL
+			Files.createDirectories(outputFolder.toPath()); //FLLDCIM: MARK — M31 M3FILE_IO CALL
 		}
 		List<String> options = List.of("-d", outputFolder.getAbsolutePath(), "-g", "-proc:none");
 		final StringWriter output = new StringWriter();

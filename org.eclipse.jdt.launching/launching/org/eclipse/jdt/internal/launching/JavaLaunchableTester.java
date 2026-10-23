@@ -260,7 +260,7 @@ public class JavaLaunchableTester extends PropertyTester {
                             // check modifiers
                             if (args.length > 2) {
                                 String modifierText = (String) args[2];
-                                String[] modifiers = modifierText.split(" "); //$NON-NLS-1$
+                                String[] modifiers = modifierText.split(" "); //$NON-NLS-1$ //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
                                 int flags = 0;
                                 for (int j = 0; j < modifiers.length; j++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
                                     String modifier = modifiers[j];
@@ -346,7 +346,7 @@ public class JavaLaunchableTester extends PropertyTester {
 			String annotationType= (String) args[0];
             int flags = 0;
 			if (args.length > 1) {
-				String[] modifiers = ((String) args[1]).split(" "); //$NON-NLS-1$
+				String[] modifiers = ((String) args[1]).split(" "); //$NON-NLS-1$ //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
                 for (int j = 0; j < modifiers.length; j++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
                     String modifier = modifiers[j];
                     Integer flag = fgModifiers.get(modifier);

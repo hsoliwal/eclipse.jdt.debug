@@ -66,7 +66,7 @@ public class VMInstallTestsLibraryLocationResolver implements ILibraryLocationRe
 	public IPath getSourcePath(IPath libraryPath) {
 		if (applies(libraryPath)) {
 			File file = JavaTestPlugin.getDefault().getFileInPlugin(new Path("testresources/test_resolver_src.zip"));
-			if (file.isFile()) {
+			if (file.isFile()) { //FLLDCIM: MARK — M31 M3FILE_IO CALL
 				return new Path(file.getAbsolutePath());
 			}
 		}
@@ -82,7 +82,7 @@ public class VMInstallTestsLibraryLocationResolver implements ILibraryLocationRe
 	public URL getJavadocLocation(IPath libraryPath) {
 		if (applies(libraryPath)) {
 			File file = JavaTestPlugin.getDefault().getFileInPlugin(new Path("testresources/test_resolver_javadoc.zip"));
-			if (file.isFile()) {
+			if (file.isFile()) { //FLLDCIM: MARK — M31 M3FILE_IO CALL
 				try {
 					return URIUtil.toURL(file.toURI());
 				}
@@ -103,7 +103,7 @@ public class VMInstallTestsLibraryLocationResolver implements ILibraryLocationRe
 	public URL getIndexLocation(IPath libraryPath) {
 		if (applies(libraryPath)) {
 			File file = JavaTestPlugin.getDefault().getFileInPlugin(new Path("testresources/test_resolver_index.index"));
-			if (file.isFile()) {
+			if (file.isFile()) { //FLLDCIM: MARK — M31 M3FILE_IO CALL
 				try {
 					return URIUtil.toURL(file.toURI());
 				}

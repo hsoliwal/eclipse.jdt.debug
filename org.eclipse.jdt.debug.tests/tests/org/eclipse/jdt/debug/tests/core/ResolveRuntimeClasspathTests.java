@@ -257,7 +257,7 @@ public class ResolveRuntimeClasspathTests extends AbstractDebugTest {
 
 	private IFolder createFolders(IProject project, String path) throws CoreException {
 		IFolder folder = null;
-		for (String segment : path.split("/")) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
+		for (String segment : path.split("/")) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
 			folder = folder != null ? folder.getFolder(segment) : project.getFolder(segment);
 			if (!folder.exists()) {
 				folder.create(true, true, null);

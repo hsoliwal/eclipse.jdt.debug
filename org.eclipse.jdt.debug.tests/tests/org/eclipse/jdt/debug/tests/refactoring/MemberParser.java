@@ -61,7 +61,7 @@ public class MemberParser{
 	private static ArrayList<String> createTypeList(String typeQualifiedName) {
 		String newname = typeQualifiedName;
 		newname = newname.replace('$','.');//ensure proper format was used.
-		String parsed[] = newname.split("\\."); //$NON-NLS-1$
+		String parsed[] = newname.split("\\."); //$NON-NLS-1$ //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
 		//make list of types to find
 		ArrayList<String> typeList = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 		for (int splitNum = 0; splitNum < parsed.length; splitNum++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP

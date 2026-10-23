@@ -66,7 +66,7 @@ public class LongCommandLineTests extends LongClassPathTests {
 
 		// Then
 		File tempFile = getTempFile(thread.getLaunch()).orElseThrow(() -> new RuntimeException("No temp file"));
-		assertTrue("No temp file created: " + tempFile, tempFile.exists()); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
+		assertTrue("No temp file created: " + tempFile, tempFile.exists()); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT //FLLDCIM: MARK — M31 M3FILE_IO CALL
 		assertTrue("Unexpected temp file name: " + tempFile, tempFile.getName().endsWith(".txt")); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String valueString = doEval(thread, "java.lang.management.ManagementFactory.getRuntimeMXBean().getInputArguments().toString()").getValueString();
 		assertTrue("Unexpected small system arguments list: " + valueString, valueString.length() >= MIN_CLASSPATH_LENGTH); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
@@ -77,7 +77,7 @@ public class LongCommandLineTests extends LongClassPathTests {
 		// Then
 		if (!Platform.OS.isWindows()) {
 			// On windows, temp file deletion may fail
-			assertFalse(tempFile.exists());
+			assertFalse(tempFile.exists()); //FLLDCIM: MARK — M31 M3FILE_IO CALL
 		}
 	}
 

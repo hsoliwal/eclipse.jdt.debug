@@ -131,7 +131,7 @@ public class JRERuntimeClasspathEntryResolver implements IRuntimeClasspathEntryR
 		List<IRuntimeClasspathEntry> resolvedEntries = new ArrayList<>(libs.length); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 		for (int i = 0; i < libs.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			IPath systemLibraryPath = libs[i].getSystemLibraryPath();
-			if (systemLibraryPath.toFile().exists()) {
+			if (systemLibraryPath.toFile().exists()) { //FLLDCIM: MARK — M31 M3FILE_IO CALL
 				resolvedEntries.add(resolveLibraryLocation(vm, libs[i], kind, overrideJavadoc));
 			}
 		}

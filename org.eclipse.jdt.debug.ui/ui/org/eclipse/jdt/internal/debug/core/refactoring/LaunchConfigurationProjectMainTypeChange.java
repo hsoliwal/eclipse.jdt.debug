@@ -62,7 +62,7 @@ public class LaunchConfigurationProjectMainTypeChange extends Change {
 			String oldName = Signature.getSimpleName(fOldMainTypeName);
 			String newName = Signature.getSimpleName(fNewMainTypeName);
 			String lcname = fLaunchConfiguration.getName();
-			fNewLaunchConfigurationName = lcname.replaceAll(oldName, newName);
+			fNewLaunchConfigurationName = lcname.replaceAll(oldName, newName); //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
 			if (lcname.equals(fNewLaunchConfigurationName) || DebugPlugin.getDefault().getLaunchManager().isExistingLaunchConfigurationName(fNewLaunchConfigurationName)) {
 				fNewLaunchConfigurationName = null;
 			}

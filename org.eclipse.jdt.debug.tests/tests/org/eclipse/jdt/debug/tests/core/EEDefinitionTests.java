@@ -292,7 +292,7 @@ public class EEDefinitionTests extends AbstractDebugTest {
 		IVMInstall jre = JavaRuntime.getDefaultVMInstall();
 		IExecutionEnvironment ee = Arrays.stream(JavaRuntime.getExecutionEnvironmentsManager().getExecutionEnvironments()) //
 				.filter(e -> e.isStrictlyCompatible(jre)).findFirst().orElseThrow();
-		String installLocation = jre.getInstallLocation().getCanonicalPath();
+		String installLocation = jre.getInstallLocation().getCanonicalPath(); //FLLDCIM: MARK — M31 M3FILE_IO CALL
 		File exePath = new File(jre.getInstallLocation(), "bin/" + (Platform.OS.isWindows() ? "java.exe" : "java")); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		List<String> libraryPaths = Arrays.stream(JavaRuntime.getLibraryLocations(jre)) //
 				.map(LibraryLocation::getSystemLibraryPath).map(IPath::toOSString).toList();

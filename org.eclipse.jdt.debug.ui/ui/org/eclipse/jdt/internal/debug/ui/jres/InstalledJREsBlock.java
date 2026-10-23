@@ -593,7 +593,7 @@ public class InstalledJREsBlock implements IAddVMDialogRequestor, ISelectionProv
 	 * Compares the given name against current names and adds the appropriate numerical
 	 * suffix to ensure that it is unique.
 	 * @param name the name with which to ensure uniqueness
-	 * @return the unique version of the given name
+	 * @return the unique version of the given name //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
 	 * @since 3.2
 	 */
 	public String generateName(String name){

@@ -164,7 +164,7 @@ public final class JavaBreakpointConditionEditor extends AbstractJavaBreakpointE
 	private static final String DS_SECTION_CONDITION_HISTORY= "conditionHistory"; //$NON-NLS-1$
 	private static final String DS_KEY_HISTORY_ENTRY_COUNT= "conditionHistoryEntryCount"; //$NON-NLS-1$
 	private static final String DS_KEY_HISTORY_ENTRY_PREFIX= "conditionHistoryEntry_"; //$NON-NLS-1$
-	private static final Pattern NEWLINE_PATTERN= Pattern.compile("\r\n|\r|\n"); //$NON-NLS-1$;
+	private static final Pattern NEWLINE_PATTERN= Pattern.compile("\r\n|\r|\n"); //$NON-NLS-1$; //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
 
 
 	/**

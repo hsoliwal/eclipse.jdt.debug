@@ -69,7 +69,7 @@ public class JavaVariablesDetailPane extends DefaultDetailPane { //FLLDCIM: MARK
 	private static final String DS_SECTION_EXPRESSION_HISTORY = "expressionHistory"; //$NON-NLS-1$
 	private static final String DS_KEY_HISTORY_ENTRY_COUNT = "expressionHistoryEntryCount"; //$NON-NLS-1$
 	private static final String DS_KEY_HISTORY_ENTRY_PREFIX = "expressionHistoryEntry_"; //$NON-NLS-1$
-	private static final Pattern NEWLINE_PATTERN = Pattern.compile("\r\n|\r|\n"); //$NON-NLS-1$ ;
+	private static final Pattern NEWLINE_PATTERN = Pattern.compile("\r\n|\r|\n"); //$NON-NLS-1$ ; //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
 
 	private IJavaVariable fVariable;
 	private IValue fValue;

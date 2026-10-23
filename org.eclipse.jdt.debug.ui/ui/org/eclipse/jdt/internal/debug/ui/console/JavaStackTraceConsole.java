@@ -121,9 +121,9 @@ public class JavaStackTraceConsole extends TextConsole {
 	 */
 	public void initializeDocument() {
         File file = new File(FILE_NAME);
-        if (file.exists()) {
+        if (file.exists()) { //FLLDCIM: MARK — M31 M3FILE_IO CALL
 			try {
-				byte[] fileContent = Files.readAllBytes(file.toPath());
+				byte[] fileContent = Files.readAllBytes(file.toPath()); //FLLDCIM: MARK — M31 M3FILE_IO CALL
 				getDocument().set(new String(fileContent));
             } catch (IOException e) {
 				getDocument().set(NLS.bind(ConsoleMessages.JavaStackTraceConsole_2, e.getMessage()));
@@ -161,14 +161,14 @@ public class JavaStackTraceConsole extends TextConsole {
 		if (document != null) {
 			if (document.getLength() > 0) {
 				String contents = document.get();
-				try (FileOutputStream fout = new FileOutputStream(FILE_NAME)) {
+				try (FileOutputStream fout = new FileOutputStream(FILE_NAME)) { //FLLDCIM: MARK — M31 M3FILE_IO NEW
 					fout.write(contents.getBytes());
 				} catch (IOException e) {
 					JDIDebugUIPlugin.log(e);
 				}
 			} else {
 				File file = new File(FILE_NAME);
-				file.delete();
+				file.delete(); //FLLDCIM: MARK — M31 M3FILE_IO CALL
 			}
 		}
     }

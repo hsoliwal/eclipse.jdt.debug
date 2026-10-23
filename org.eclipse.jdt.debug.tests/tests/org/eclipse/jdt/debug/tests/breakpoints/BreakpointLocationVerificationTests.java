@@ -69,7 +69,7 @@ public class BreakpointLocationVerificationTests extends AbstractDebugTest {
 		assertEquals("Wrong line number", expectedLineNumber, lineNumber);
 		String typeName= locator.getFullyQualifiedTypeName();
 		if (typeName != null) {
-			typeName = typeName.replaceAll("\\$", ".");
+			typeName = typeName.replaceAll("\\$", "."); //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
 		}
         if (lineNumber == -1) {
 			assertNull("Wrong type name", typeName);

@@ -1493,7 +1493,7 @@ public abstract class JavaBreakpoint extends Breakpoint implements IJavaBreakpoi
 		if (value == null) {
 			return new String[0];
 		}
-		return value.split(","); //$NON-NLS-1$
+		return value.split(","); //$NON-NLS-1$ //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
 	}
 
 	/*

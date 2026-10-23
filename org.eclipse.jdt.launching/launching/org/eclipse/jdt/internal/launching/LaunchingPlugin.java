@@ -931,10 +931,10 @@ public class LaunchingPlugin extends Plugin implements DebugOptionsListener, IEc
 			IPath libPath = getDefault().getStateLocation();
 			libPath = libPath.append("libraryInfos.xml"); //$NON-NLS-1$
 			File file = libPath.toFile();
-			if (!file.exists()) {
-				file.createNewFile();
+			if (!file.exists()) { //FLLDCIM: MARK — M31 M3FILE_IO CALL
+				file.createNewFile(); //FLLDCIM: MARK — M31 M3FILE_IO CALL
 			}
-			try (OutputStream stream = new BufferedOutputStream(new FileOutputStream(file))) {
+			try (OutputStream stream = new BufferedOutputStream(new FileOutputStream(file))) { //FLLDCIM: MARK — M31 M3FILE_IO NEW
 				stream.write(xml.getBytes(StandardCharsets.UTF_8));
 			}
 		} catch (IOException e) {
@@ -952,8 +952,8 @@ public class LaunchingPlugin extends Plugin implements DebugOptionsListener, IEc
 		IPath libPath = getDefault().getStateLocation();
 		libPath = libPath.append("libraryInfos.xml"); //$NON-NLS-1$
 		File file = libPath.toFile();
-		if (file.exists()) {
-			try (InputStream stream = new BufferedInputStream(new FileInputStream(file))) {
+		if (file.exists()) { //FLLDCIM: MARK — M31 M3FILE_IO CALL
+			try (InputStream stream = new BufferedInputStream(new FileInputStream(file))) { //FLLDCIM: MARK — M31 M3FILE_IO NEW
 				@SuppressWarnings("restriction")
 				DocumentBuilder parser = org.eclipse.core.internal.runtime.XmlProcessorFactory.createDocumentBuilderWithErrorOnDOCTYPE();
 				parser.setErrorHandler(new DefaultHandler());
@@ -1009,12 +1009,12 @@ public class LaunchingPlugin extends Plugin implements DebugOptionsListener, IEc
 				return true;
 			}
 			File file = new File(location);
-			if(file.exists()) {
+			if(file.exists()) { //FLLDCIM: MARK — M31 M3FILE_IO CALL
 				if (fgInstallTimeMap.isEmpty()) {
 					readInstallInfo();
 				}
 				Long stamp = fgInstallTimeMap.get(location);
-				long fstamp = file.lastModified();
+				long fstamp = file.lastModified(); //FLLDCIM: MARK — M31 M3FILE_IO CALL
 				if(stamp != null) {
 					if(stamp.longValue() == fstamp) {
 						return false;
@@ -1042,8 +1042,8 @@ public class LaunchingPlugin extends Plugin implements DebugOptionsListener, IEc
 		IPath libPath = getDefault().getStateLocation();
 		libPath = libPath.append(".install.xml"); //$NON-NLS-1$
 		File file = libPath.toFile();
-		if (file.exists()) {
-			try (InputStream stream = new BufferedInputStream(new FileInputStream(file))) {
+		if (file.exists()) { //FLLDCIM: MARK — M31 M3FILE_IO CALL
+			try (InputStream stream = new BufferedInputStream(new FileInputStream(file))) { //FLLDCIM: MARK — M31 M3FILE_IO NEW
 				@SuppressWarnings("restriction")
 				DocumentBuilder parser = org.eclipse.core.internal.runtime.XmlProcessorFactory.createDocumentBuilderWithErrorOnDOCTYPE();
 				parser.setErrorHandler(new DefaultHandler());
@@ -1106,10 +1106,10 @@ public class LaunchingPlugin extends Plugin implements DebugOptionsListener, IEc
 				IPath libPath = getDefault().getStateLocation();
 				libPath = libPath.append(".install.xml"); //$NON-NLS-1$
 				File file = libPath.toFile();
-				if (!file.exists()) {
-					file.createNewFile();
+				if (!file.exists()) { //FLLDCIM: MARK — M31 M3FILE_IO CALL
+					file.createNewFile(); //FLLDCIM: MARK — M31 M3FILE_IO CALL
 				}
-				try (OutputStream stream = new BufferedOutputStream(new FileOutputStream(file))) {
+				try (OutputStream stream = new BufferedOutputStream(new FileOutputStream(file))) { //FLLDCIM: MARK — M31 M3FILE_IO NEW
 					stream.write(xml.getBytes(StandardCharsets.UTF_8));
 				}
 			} catch (IOException | CoreException e) {
@@ -1198,7 +1198,7 @@ public class LaunchingPlugin extends Plugin implements DebugOptionsListener, IEc
 			return;
 		}
 		// we only delete files starting with LAUNCH_TEMP_FILE_PREFIX²
-		Arrays.stream(tempFiles.split(File.pathSeparator)).map(path -> new File(path)).filter(file -> isValidProcessTempFile(file)).forEach(file -> file.delete());
+		Arrays.stream(tempFiles.split(File.pathSeparator)).map(path -> new File(path)).filter(file -> isValidProcessTempFile(file)).forEach(file -> file.delete()); //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
 	}
 
 	private boolean isValidProcessTempFile(File file) {

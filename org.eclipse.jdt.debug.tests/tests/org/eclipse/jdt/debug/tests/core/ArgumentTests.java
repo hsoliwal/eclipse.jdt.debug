@@ -408,7 +408,7 @@ public class ArgumentTests extends AbstractDebugTest {
 		String argfile = arguments[1];
 		assertTrue("wrong command line, expected @argfile at index 1: " + commandLine, argfile != null && argfile.startsWith("@")); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		try {
-			return Files.readAllLines(Path.of(argfile.substring(1)));
+			return Files.readAllLines(Path.of(argfile.substring(1))); //FLLDCIM: MARK — M31 M3FILE_IO CALL
 		} catch (IOException e) {
 			throw new IllegalStateException("Error reading @argfile: " + argfile, e); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		}

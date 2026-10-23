@@ -215,7 +215,7 @@ public abstract class AbstractJavaLaunchConfigurationDelegate extends LaunchConf
 					null,
 					IJavaLaunchConfigurationConstants.ERR_VM_INSTALL_DOES_NOT_EXIST);
 		}
-		if (!location.exists()) {
+		if (!location.exists()) { //FLLDCIM: MARK — M31 M3FILE_IO CALL
 			abort(
 					NLS.bind(LaunchingMessages.AbstractJavaLaunchConfigurationDelegate_JRE_home_directory_for__0__does_not_exist___1__6,
 							vm.getName(), location.getAbsolutePath()),
@@ -780,7 +780,7 @@ public abstract class AbstractJavaLaunchConfigurationDelegate extends LaunchConf
 		if (path == null) {
 			File dir = getDefaultWorkingDirectory(configuration);
 			if (dir != null) {
-				if (!dir.isDirectory()) {
+				if (!dir.isDirectory()) { //FLLDCIM: MARK — M31 M3FILE_IO CALL
 					abort(
 							NLS.bind(
 									LaunchingMessages.AbstractJavaLaunchConfigurationDelegate_Working_directory_does_not_exist___0__12,
@@ -793,7 +793,7 @@ public abstract class AbstractJavaLaunchConfigurationDelegate extends LaunchConf
 		} else {
 			if (path.isAbsolute()) {
 				File dir = new File(path.toOSString());
-				if (dir.isDirectory()) {
+				if (dir.isDirectory()) { //FLLDCIM: MARK — M31 M3FILE_IO CALL
 					return dir;
 				}
 				// This may be a workspace relative path returned by a variable.
@@ -1153,7 +1153,7 @@ public abstract class AbstractJavaLaunchConfigurationDelegate extends LaunchConf
 					for (IClasspathAttribute attribute : entry.getClasspathEntry().getExtraAttributes()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 						if (IClasspathAttribute.PATCH_MODULE.equals(attribute.getName())) {
 							String patchModules = attribute.getValue();
-							for (String patchModule : patchModules.split("::")) { //$NON-NLS-1$ //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
+							for (String patchModule : patchModules.split("::")) { //$NON-NLS-1$ //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
 								int equalsIdx = patchModule.indexOf('=');
 								if (equalsIdx != -1) {
 									if (equalsIdx < patchModule.length() - 1) { // otherwise malformed?
@@ -1221,7 +1221,7 @@ public abstract class AbstractJavaLaunchConfigurationDelegate extends LaunchConf
 	}
 
 	private static String toAbsolutePathsString(String fPaths) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
-		String[] paths = fPaths.split(File.pathSeparator);
+		String[] paths = fPaths.split(File.pathSeparator); //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
 		String[] absPaths = new String[paths.length];
 		IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
 		for (int i = 0; i < paths.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP

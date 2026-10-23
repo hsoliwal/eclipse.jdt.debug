@@ -1481,7 +1481,7 @@ public class JDIModelPresentation extends LabelProvider implements IDebugModelPr
 			snippetBuffer.append(snippet); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		}
 		snippetBuffer.append('"'); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
-		snippet = snippetBuffer.toString().replaceAll("[\n\r\t]+", " ");  //$NON-NLS-1$//$NON-NLS-2$
+		snippet = snippetBuffer.toString().replaceAll("[\n\r\t]+", " ");  //$NON-NLS-1$//$NON-NLS-2$ //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
 		buff.append(snippet); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 
 		if (javaValue != null) {

@@ -103,7 +103,7 @@ public class StandardClasspathProvider implements IRuntimeClasspathProvider {
 					IVMInstall vm = JREContainerInitializer.resolveVM(path);
 					if (vm instanceof IVMInstall2 vmi2) {
 						try {
-							String javaVersion = vmi2.getJavaVersion().split("\\.")[0]; //$NON-NLS-1$
+							String javaVersion = vmi2.getJavaVersion().split("\\.")[0]; //$NON-NLS-1$ //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
 							javaRuntimeVersion = Integer.parseInt(javaVersion);
 						} catch (RuntimeException rte) {
 							// can't be used then!

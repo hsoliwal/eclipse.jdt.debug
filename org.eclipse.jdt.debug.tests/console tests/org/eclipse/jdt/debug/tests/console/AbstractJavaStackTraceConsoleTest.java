@@ -58,8 +58,8 @@ import org.eclipse.ui.internal.console.ConsoleView;
  */
 public class AbstractJavaStackTraceConsoleTest extends AbstractDebugUiTests {
 
-	private final static Pattern LEFT_INDENT = Pattern.compile("^[ \\t]*");
-	private final static Pattern RIGHT_INDENT = Pattern.compile("\\s+$");
+	private final static Pattern LEFT_INDENT = Pattern.compile("^[ \\t]*"); //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
+	private final static Pattern RIGHT_INDENT = Pattern.compile("\\s+$"); //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
 
 	protected final JavaStackTraceConsoleFactory fConsoleFactory = new JavaStackTraceConsoleFactory();
 	protected JavaStackTraceConsole fConsole;
@@ -126,9 +126,9 @@ public class AbstractJavaStackTraceConsoleTest extends AbstractDebugUiTests {
 		if (!preserveContent) {
 			assertTrue("Leaked content of JavaStackTraceConsole", Files.notExists(stackTraceFile));
 		} else {
-			assertTrue("JavaStackTraceConsole content was not persisted", Files.exists(stackTraceFile));
+			assertTrue("JavaStackTraceConsole content was not persisted", Files.exists(stackTraceFile)); //FLLDCIM: MARK — M31 M3FILE_IO CALL
 			try {
-				assertTrue("Persisted content seems incomplete", Files.size(stackTraceFile) >= contentLength);
+				assertTrue("Persisted content seems incomplete", Files.size(stackTraceFile) >= contentLength); //FLLDCIM: MARK — M31 M3FILE_IO CALL
 			} catch (IOException e) {
 				fail("Persisted content seems incomplete");
 			}
@@ -175,11 +175,11 @@ public class AbstractJavaStackTraceConsoleTest extends AbstractDebugUiTests {
 		int allowedIndentChange = 1;
 		for (int i = startLine, lineCount = doc.getNumberOfLines(); i < lineCount; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			String line = getLine(doc, i);
-			line = line.replaceFirst("^\\[[^\\s\\]]+\\] ", ""); // remove and prefix if any
+			line = line.replaceFirst("^\\[[^\\s\\]]+\\] ", ""); // remove and prefix if any //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
 			if (i != 0) { // first line can be empty
 				assertNotEquals("Empty line " + i, "", line); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 			}
-			assertFalse("Trailing whitespace in line " + i, RIGHT_INDENT.matcher(line).find()); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
+			assertFalse("Trailing whitespace in line " + i, RIGHT_INDENT.matcher(line).find()); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
 
 			boolean causedBy = line.trim().startsWith("Caused by: ");
 			boolean suppressed = line.trim().startsWith("Suppressed: ");
@@ -208,7 +208,7 @@ public class AbstractJavaStackTraceConsoleTest extends AbstractDebugUiTests {
 		int tabSize = 4;
 		String indent = "";
 		Matcher m = LEFT_INDENT.matcher(line); //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
-		if (m.find()) {
+		if (m.find()) { //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
 			indent = m.group();
 		}
 		int tabCount = indent.length() - indent.replace("\t", "").length();

@@ -77,11 +77,11 @@ public class JavaAppletLaunchConfigurationDelegate extends JavaLaunchDelegate im
 	 */
 	public String getJavaPolicyFile(File workingDir) {
 		File file = new File(workingDir, "java.policy.applet");//$NON-NLS-1$
-		if (!file.exists()) {
+		if (!file.exists()) { //FLLDCIM: MARK — M31 M3FILE_IO CALL
 			// copy it to the working directory
 			File test = LaunchingPlugin.getFileInPlugin(new Path("java.policy.applet")); //$NON-NLS-1$
-			try (BufferedOutputStream outputStream = new BufferedOutputStream(new FileOutputStream(file))) {
-				Files.copy(test.toPath(), outputStream);
+			try (BufferedOutputStream outputStream = new BufferedOutputStream(new FileOutputStream(file))) { //FLLDCIM: MARK — M31 M3FILE_IO NEW
+				Files.copy(test.toPath(), outputStream); //FLLDCIM: MARK — M31 M3FILE_IO CALL
 			} catch (IOException e) {
 				return "";//$NON-NLS-1$
 			}
@@ -103,7 +103,7 @@ public class JavaAppletLaunchConfigurationDelegate extends JavaLaunchDelegate im
 	private File buildHTMLFile(ILaunchConfiguration configuration, File dir) throws CoreException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String name = getAppletMainTypeName(configuration);
 		File tempFile = new File(dir, name + System.currentTimeMillis() + ".html"); //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
-		try (FileOutputStream stream = new FileOutputStream(tempFile)) {
+		try (FileOutputStream stream = new FileOutputStream(tempFile)) { //FLLDCIM: MARK — M31 M3FILE_IO NEW
 			String encoding = getLaunchManager().getEncoding(configuration);
 			StringBuilder buf = new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 			buf.append("<html>\n"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
@@ -232,7 +232,7 @@ public class JavaAppletLaunchConfigurationDelegate extends JavaLaunchDelegate im
 		if (temp != null) {
 			try {
 				fgLaunchToFileMap.remove(launch);
-				temp.delete();
+				temp.delete(); //FLLDCIM: MARK — M31 M3FILE_IO CALL
 			} finally {
 				if (fgLaunchToFileMap.isEmpty()) {
 					DebugPlugin.getDefault().removeDebugEventListener(this);

@@ -201,7 +201,7 @@ public class OpenFromClipboardAction implements IWorkbenchWindowActionDelegate {
 			return;
 		}
 
-		String trimmedText = inputText.replaceAll("\\s+", " "); //$NON-NLS-1$ //$NON-NLS-2$
+		String trimmedText = inputText.replaceAll("\\s+", " "); //$NON-NLS-1$ //$NON-NLS-2$ //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
 		List<Object> matches = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 		int line = 0;
 		try {
@@ -255,31 +255,31 @@ public class OpenFromClipboardAction implements IWorkbenchWindowActionDelegate {
 	}
 
 	public static int getMatchingPattern(String s) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
-		if (s.matches(JAVA_FILE_LINE_PATTERN)) {
+		if (s.matches(JAVA_FILE_LINE_PATTERN)) { //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
 			return JAVA_FILE_LINE;
 		}
-		if (s.matches(JAVA_FILE_PATTERN)) {
+		if (s.matches(JAVA_FILE_PATTERN)) { //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
 			return JAVA_FILE;
 		}
-		if (s.matches(TYPE_LINE_PATTERN)) {
+		if (s.matches(TYPE_LINE_PATTERN)) { //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
 			return TYPE_LINE;
 		}
-		if (s.matches(STACK_TRACE_LINE_PATTERN)) {
+		if (s.matches(STACK_TRACE_LINE_PATTERN)) { //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
 			return STACK_TRACE_LINE;
 		}
-		if (s.matches(METHOD_PATTERN)) {
+		if (s.matches(METHOD_PATTERN)) { //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
 			return METHOD;
 		}
-		if (s.matches(STACK_PATTERN)) {
+		if (s.matches(STACK_PATTERN)) { //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
 			return STACK;
 		}
-		if (s.matches(MEMBER_PATTERN)) {
+		if (s.matches(MEMBER_PATTERN)) { //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
 			return MEMBER;
 		}
-		if (s.matches(METHOD_JAVADOC_REFERENCE_PATTERN)) {
+		if (s.matches(METHOD_JAVADOC_REFERENCE_PATTERN)) { //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
 			return METHOD_JAVADOC_REFERENCE;
 		}
-		if (s.matches(QUALIFIED_NAME_PATTERN)) {
+		if (s.matches(QUALIFIED_NAME_PATTERN)) { //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
 			return QUALIFIED_NAME;
 		}
 		return INVALID;
@@ -340,9 +340,9 @@ public class OpenFromClipboardAction implements IWorkbenchWindowActionDelegate {
 					String lineNumber = typeLine.substring(index + 1, typeLine.length()).trim();
 					int line = Integer.parseInt(lineNumber);
 
-					Pattern pattern = Pattern.compile(STACK_TRACE_QUALIFIED_LINE_PATTERN);
+					Pattern pattern = Pattern.compile(STACK_TRACE_QUALIFIED_LINE_PATTERN); //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
 					Matcher matcher = pattern.matcher(s); //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
-					if (matcher.find()) {
+					if (matcher.find()) { //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
 						String qualifiedName = matcher.group(1);
 						index = qualifiedName.lastIndexOf('.');
 						qualifiedName = qualifiedName.substring(0, index);

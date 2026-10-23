@@ -314,7 +314,7 @@ public class OtherTestsGenerator extends TestGenerator {
 
 		code.append("}\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 
-		try (Writer file = new FileWriter(new File(className + ".java").getAbsoluteFile())) { //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
+		try (Writer file = new FileWriter(new File(className + ".java").getAbsoluteFile())) { //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT //FLLDCIM: MARK — M31 M3FILE_IO NEW
 			file.write(code.toString());
 		}
 

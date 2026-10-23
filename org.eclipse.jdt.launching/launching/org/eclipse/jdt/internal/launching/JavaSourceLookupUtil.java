@@ -110,7 +110,7 @@ public class JavaSourceLookupUtil {
 		if (path != null) {
 			// check if file or folder
 			File file = new File(path);
-			if (file.isDirectory()) {
+			if (file.isDirectory()) { //FLLDCIM: MARK — M31 M3FILE_IO CALL
 				IResource resource = entry.getResource();
 				if (resource instanceof IContainer) {
 					container = new FolderSourceContainer((IContainer) resource, false);

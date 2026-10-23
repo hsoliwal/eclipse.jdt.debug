@@ -724,12 +724,12 @@ public class LocalEvaluationEngine implements IClassFileEvaluationEngine,
 		Iterator<File> iter = snippetFiles.iterator();
 		while (iter.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			File file = iter.next();
-			if (file.exists()) {
+			if (file.exists()) { //FLLDCIM: MARK — M31 M3FILE_IO CALL
 				if (CODE_SNIPPET_NAME.equals(file.getName())
 						&& ENGINE_COUNT > 0) {
 					continue; // do not delete the common file for other engines
 				}
-				if (!file.delete()) {
+				if (!file.delete()) { //FLLDCIM: MARK — M31 M3FILE_IO CALL
 					JDIDebugPlugin
 							.log(new Status(
 									IStatus.ERROR,
@@ -746,9 +746,9 @@ public class LocalEvaluationEngine implements IClassFileEvaluationEngine,
 		int i = directories.size() - 1;
 		while (i >= 0) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			File dir = directories.get(i);
-			String[] listing = dir.list();
-			if (dir.exists() && listing != null && listing.length == 0
-					&& !dir.delete()) {
+			String[] listing = dir.list(); //FLLDCIM: MARK — M31 M3FILE_IO CALL
+			if (dir.exists() && listing != null && listing.length == 0 //FLLDCIM: MARK — M31 M3FILE_IO CALL
+					&& !dir.delete()) { //FLLDCIM: MARK — M31 M3FILE_IO CALL
 				JDIDebugPlugin
 						.log(new Status(
 								IStatus.ERROR,
@@ -869,21 +869,21 @@ public class LocalEvaluationEngine implements IClassFileEvaluationEngine,
 			// create required folders
 			File dir = LocalEvaluationEngine.this.getOutputDirectory();
 			try {
-				String pkgDirName = dir.getCanonicalPath();
+				String pkgDirName = dir.getCanonicalPath(); //FLLDCIM: MARK — M31 M3FILE_IO CALL
 				for (int j = 0; j < (compoundName.length - 1); j++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 					pkgDirName += File.separator + compoundName[j]; //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 					File pkgDir = new File(pkgDirName);
-					if (!pkgDir.exists()) {
-						pkgDir.mkdir();
+					if (!pkgDir.exists()) { //FLLDCIM: MARK — M31 M3FILE_IO CALL
+						pkgDir.mkdir(); //FLLDCIM: MARK — M31 M3FILE_IO CALL
 						addDirectory(pkgDir);
 					}
 				}
 				String name = compoundName[compoundName.length - 1] + ".class"; //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 				File classFile = new File(pkgDirName + File.separator + name); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
-				if (!classFile.exists()) {
-					classFile.createNewFile();
+				if (!classFile.exists()) { //FLLDCIM: MARK — M31 M3FILE_IO CALL
+					classFile.createNewFile(); //FLLDCIM: MARK — M31 M3FILE_IO CALL
 				}
-				try (FileOutputStream stream = new FileOutputStream(classFile)) {
+				try (FileOutputStream stream = new FileOutputStream(classFile)) { //FLLDCIM: MARK — M31 M3FILE_IO NEW
 					stream.write(classFiles[i]);
 				}
 				LocalEvaluationEngine.this.addSnippetFile(classFile);

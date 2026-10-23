@@ -65,7 +65,7 @@ public class AddExternalJarAction extends OpenDialogAction { //FLLDCIM: MARK —
 		IPath path = null;
 		for (int i= 0; i < nChosen; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			path = filterPath.append(fileNames[i]).makeAbsolute();
-			if(path.toFile().exists()) {
+			if(path.toFile().exists()) { //FLLDCIM: MARK — M31 M3FILE_IO CALL
 				list.add(JavaRuntime.newArchiveRuntimeClasspathEntry(path));
 			}
 			else {

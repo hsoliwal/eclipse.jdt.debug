@@ -91,7 +91,7 @@ public class JarSourceLookupTests extends AbstractDebugTest {
 		IFile cp = jarRefProject.getFile(".classpath");
 		assertTrue(".classpath is missing in project: " + jarRefProject.getName(), cp.exists()); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		java.nio.file.Path path = cp.getLocation().toFile().toPath();
-		List<String> lines = Files.readAllLines(path);
+		List<String> lines = Files.readAllLines(path); //FLLDCIM: MARK — M31 M3FILE_IO CALL
 		boolean foundJar = false;
 		for (String line : lines) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			if (line.contains(SAMPLE_JAR_PATH)) {
@@ -100,7 +100,7 @@ public class JarSourceLookupTests extends AbstractDebugTest {
 			}
 		}
 		assertTrue("The .classpath from project " + jarRefProject + " is unexpected and does not have an entry for " + SAMPLE_JAR_PATH + ": " //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
-				+ new String(Files.readAllBytes(path)), foundJar);
+				+ new String(Files.readAllBytes(path)), foundJar); //FLLDCIM: MARK — M31 M3FILE_IO CALL
 		waitForBuild();
 	}
 

@@ -158,7 +158,7 @@ public class MultiReleaseLaunchTests extends AbstractDebugUiTests {
 	private static int getJavaVersion(IVMInstall install) {
 		if (install instanceof IVMInstall2 vm) {
 			try {
-				String javaVersion = vm.getJavaVersion().split("\\.")[0]; //$NON-NLS-1$
+				String javaVersion = vm.getJavaVersion().split("\\.")[0]; //$NON-NLS-1$ //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
 				return Integer.parseInt(javaVersion);
 			} catch (RuntimeException rte) {
 				// can't know then...

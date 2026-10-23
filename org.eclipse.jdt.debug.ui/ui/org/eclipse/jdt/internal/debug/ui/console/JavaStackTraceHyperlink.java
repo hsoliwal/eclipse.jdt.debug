@@ -105,7 +105,7 @@ public class JavaStackTraceHyperlink implements IHyperlink {
 		int lineNumber;
 		try {
 			String linkText = getLinkText();
-			linkText = linkText.replaceAll(ANSI_ESCAPE_REGEX, ""); //$NON-NLS-1$
+			linkText = linkText.replaceAll(ANSI_ESCAPE_REGEX, ""); //$NON-NLS-1$ //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
 			generatedLink.set(linkText);
 			typeName = getTypeName(linkText);
 			lineNumber = getLineNumber(linkText);
@@ -258,23 +258,23 @@ public class JavaStackTraceHyperlink implements IHyperlink {
 	 */
 	public IStatus processAmbiguousResults(List<Object> matches, String typeName, int line, String link) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		List<Object> exactMatchesFiltered = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
-		Pattern pattern = Pattern.compile(REGEX_FOR_NORMAL);
+		Pattern pattern = Pattern.compile(REGEX_FOR_NORMAL); //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
 		Matcher matcher = pattern.matcher(link); //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
 		String methodSignature = null;
-		if (matcher.find()) {
+		if (matcher.find()) { //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
 			methodSignature = matcher.group(2) + "(" + matcher.group(3) + ")"; //$NON-NLS-1$ //$NON-NLS-2$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		}
 		if (methodSignature == null) {
-			pattern = Pattern.compile(REGEX_FOR_GENERICS);
+			pattern = Pattern.compile(REGEX_FOR_GENERICS); //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
 			matcher = pattern.matcher(link); //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
-			if (matcher.find()) {
+			if (matcher.find()) { //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
 				methodSignature = matcher.group(2) + "(" + matcher.group(3) + ")"; //$NON-NLS-1$ //$NON-NLS-2$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 			}
 		}
 		if (methodSignature == null) {
-			pattern = Pattern.compile(REGEX_FOR_INNER_CLASS);
+			pattern = Pattern.compile(REGEX_FOR_INNER_CLASS); //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
 			matcher = pattern.matcher(link); //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
-			if (matcher.find()) {
+			if (matcher.find()) { //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
 				methodSignature = matcher.group(2) + "(" + matcher.group(3) + ")"; //$NON-NLS-1$ //$NON-NLS-2$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 			}
 		}
@@ -433,19 +433,19 @@ public class JavaStackTraceHyperlink implements IHyperlink {
 					return true;
 				}
 				String methodDetails = method.toString();
-				Pattern pattern = Pattern.compile(METHOD_SIGNATURE_REGEX);
+				Pattern pattern = Pattern.compile(METHOD_SIGNATURE_REGEX); //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
 				Matcher matcher = pattern.matcher(methodDetails); //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
-				if (!matcher.find()) {
+				if (!matcher.find()) { //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
 					return false;
 				}
 				String methodName = matcher.group();
 				methodName = methodName.replace(" ", ""); //$NON-NLS-1$//$NON-NLS-2$
-				pattern = Pattern.compile(METHOD_ARGUMENTS_REGEX);
+				pattern = Pattern.compile(METHOD_ARGUMENTS_REGEX); //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
 				matcher = pattern.matcher(methodSignature); //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
-				if (!matcher.find()) {
+				if (!matcher.find()) { //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
 					return false;
 				}
-				int paramCount = matcher.group(1).split(",").length; //$NON-NLS-1$
+				int paramCount = matcher.group(1).split(",").length; //$NON-NLS-1$ //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
 				if (methodName.equals(methodSignature)) {
 					return true;
 				} else if (methodNameExtracted.equals(method.getElementName()) && paramCount == method.getNumberOfParameters()) {
@@ -487,12 +487,12 @@ public class JavaStackTraceHyperlink implements IHyperlink {
 	 */
 	private String innerClassMethodSignatureGen(String extractedMethodName, String methodSignature) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		StringBuilder newSignature = new StringBuilder(extractedMethodName + "("); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
-		Pattern pattern = Pattern.compile(INNER_CLASS_ARGUMENTS_REGEX);
+		Pattern pattern = Pattern.compile(INNER_CLASS_ARGUMENTS_REGEX); //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
 		Matcher matcher = pattern.matcher(methodSignature); //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
-		matcher.find();
+		matcher.find(); //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
 		String paramsExtracted = matcher.group(1);
 		if (paramsExtracted.indexOf(',') != -1) {
-			String[] parameters = paramsExtracted.split(","); //$NON-NLS-1$
+			String[] parameters = paramsExtracted.split(","); //$NON-NLS-1$ //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
 			for (String param : parameters) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				newSignature.append(param.substring(param.indexOf('$') + 1)); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				newSignature.append(","); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
@@ -517,7 +517,7 @@ public class JavaStackTraceHyperlink implements IHyperlink {
 	private String methodSignatureGenerator(String methodName, String targetMethod) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		StringBuilder methodSignatureBuilder = new StringBuilder(methodName); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 		methodSignatureBuilder.append('('); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
-		String[] params = targetMethod.split(","); //$NON-NLS-1$
+		String[] params = targetMethod.split(","); //$NON-NLS-1$ //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
 		for (String block : params) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			if (block.contains("...")) { //$NON-NLS-1$ Parameter is var args
 				if (params.length > 1) {
@@ -777,9 +777,9 @@ public class JavaStackTraceHyperlink implements IHyperlink {
 			List<Object> filteredResults = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 			int binaryInserted = 0;
 			try {
-				Pattern pattern = Pattern.compile("@(.*?)\\/"); //$NON-NLS-1$
+				Pattern pattern = Pattern.compile("@(.*?)\\/"); //$NON-NLS-1$ //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
 				Matcher match = pattern.matcher(link); //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
-				if (match.find()) {
+				if (match.find()) { //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
 					String jdkVersion = match.group(1);
 					for (Object ob : extracted) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 						if (ob instanceof IType type && type.isBinary()) {

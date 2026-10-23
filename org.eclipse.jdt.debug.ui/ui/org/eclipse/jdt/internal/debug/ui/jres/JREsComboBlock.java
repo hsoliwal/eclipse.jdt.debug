@@ -637,7 +637,7 @@ public class JREsComboBlock {
 					File location = install.getInstallLocation();
 					if (location == null) {
 						setError(JREMessages.JREsComboBlock_12);
-					} else if (!location.exists()) {
+					} else if (!location.exists()) { //FLLDCIM: MARK — M31 M3FILE_IO CALL
 						setError(JREMessages.JREsComboBlock_13);
 					}
 				}

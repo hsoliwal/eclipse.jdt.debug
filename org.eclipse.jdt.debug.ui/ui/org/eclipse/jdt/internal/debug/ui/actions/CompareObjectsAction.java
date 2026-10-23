@@ -352,7 +352,7 @@ public class CompareObjectsAction extends ObjectActionDelegate implements IWorkb
 				msg = msg.replace(msgRemove, "");
 			}
 			if (msg.contains("same as of") && msg.indexOf(",") == -1) {
-				msg = NLS.bind(DebugUIMessages.ListSameElementsFor2, new Object[] { msg.split(" ")[0] });
+				msg = NLS.bind(DebugUIMessages.ListSameElementsFor2, new Object[] { msg.split(" ")[0] }); //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
 			}
 			outputMessage.append(msg); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			MessageDialog.openInformation(getShell(), DebugUIMessages.ObjectComparisonTitle_long, outputMessage.toString());

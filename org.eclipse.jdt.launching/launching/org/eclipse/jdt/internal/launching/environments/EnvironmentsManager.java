@@ -66,7 +66,7 @@ import org.xml.sax.SAXException;
  */
 public class EnvironmentsManager implements IExecutionEnvironmentsManager, IVMInstallChangedListener, IPreferenceChangeListener {
 
-	private static final Pattern EE_PATTERN = Pattern.compile("(\\d+)"); //$NON-NLS-1$
+	private static final Pattern EE_PATTERN = Pattern.compile("(\\d+)"); //$NON-NLS-1$ //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
 
 	/**
 	 * Extension configuration element name.
@@ -209,7 +209,7 @@ public class EnvironmentsManager implements IExecutionEnvironmentsManager, IVMIn
 		String desc = executionEnvironment.getId();
 		// For java version > 1.8 we can simply extract the version from the string by searching the numbers
 		Matcher matcher = EE_PATTERN.matcher(desc); //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
-		if (matcher.find()) {
+		if (matcher.find()) { //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
 			String group = matcher.group(1);
 			if (Integer.parseInt(group) >= 9) {
 				return group;

@@ -155,7 +155,7 @@ public class DetectVMInstallationsJob extends Job {
 		rootDirectories.add(new File(miseDataDir(), "installs/java")); //$NON-NLS-1$
 
 		Set<File> directories = rootDirectories.stream().filter(File::isDirectory)
-			.map(dir -> dir.listFiles(File::isDirectory))
+			.map(dir -> dir.listFiles(File::isDirectory)) //FLLDCIM: MARK — M31 M3FILE_IO CALL
 			.flatMap(Arrays::stream)
 			.filter(Objects::nonNull)
 				.collect(Collectors.toCollection(HashSet::new));
@@ -257,7 +257,7 @@ public class DetectVMInstallationsJob extends Job {
 			return;
 		}
 
-		String[] fileNames = directory.list();
+		String[] fileNames = directory.list(); //FLLDCIM: MARK — M31 M3FILE_IO CALL
 		if (fileNames == null) {
 			return; // not a directory
 		}
@@ -273,7 +273,7 @@ public class DetectVMInstallationsJob extends Job {
 			monitor.subTask(NLS.bind(LaunchingMessages.SearchingJVMs, Integer.toString(found.size()),
 					file.toPath().normalize().toAbsolutePath().toString().replace("&", "&&") )); // @see bug 29855 //$NON-NLS-1$ //$NON-NLS-2$
 			IVMInstallType[] vmTypes = JavaRuntime.getVMInstallTypes();
-			if (file.isDirectory()) {
+			if (file.isDirectory()) { //FLLDCIM: MARK — M31 M3FILE_IO CALL
 				if (ignore.add(file)) {
 					boolean validLocation = false;
 

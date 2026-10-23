@@ -214,7 +214,7 @@ public class MacOSXVMInstallType extends StandardVMType {
 		if (javaVMName == null) {
 			return null;
 		}
-		if (!JVM_VERSIONS_FOLDER.exists() || !JVM_VERSIONS_FOLDER.isDirectory()) {
+		if (!JVM_VERSIONS_FOLDER.exists() || !JVM_VERSIONS_FOLDER.isDirectory()) { //FLLDCIM: MARK — M31 M3FILE_IO CALL
 			String message= NLS.bind(Messages.MacOSXVMInstallType_1, JVM_VERSIONS_FOLDER);
 			LaunchingPlugin.log(message);
 			return null;
@@ -227,7 +227,7 @@ public class MacOSXVMInstallType extends StandardVMType {
 			File versionFile= versions[i];
 			String version= versionFile.getName();
 			File home= new File(versionFile, JVM_HOME);
-			if (home.exists()) {
+			if (home.exists()) { //FLLDCIM: MARK — M31 M3FILE_IO CALL
 				boolean isDefault= currentJDK.equals(versionFile);
 				IVMInstall install= findVMInstall(version);
 				if (install == null) {
@@ -258,7 +258,7 @@ public class MacOSXVMInstallType extends StandardVMType {
 	 * @return array of files that point to JRE install directories
 	 */
 	private File[] getAllVersionsOld() {
-		File[] versionFiles= JVM_VERSIONS_FOLDER.listFiles();
+		File[] versionFiles= JVM_VERSIONS_FOLDER.listFiles(); //FLLDCIM: MARK — M31 M3FILE_IO CALL
 		for (int i= 0; i < versionFiles.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			versionFiles[i]= resolveSymbolicLinks(versionFiles[i]);
 		}
@@ -289,7 +289,7 @@ public class MacOSXVMInstallType extends StandardVMType {
 	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	protected LibraryInfo getDefaultLibraryInfo(File installLocation) {
 		IPath rtjar = getDefaultSystemLibrary(installLocation);
-		if(rtjar.toFile().isFile()) {
+		if(rtjar.toFile().isFile()) { //FLLDCIM: MARK — M31 M3FILE_IO CALL
 			//not a Mac OS VM, default to the standard VM type info collection
 			return super.getDefaultLibraryInfo(installLocation);
 		}
@@ -302,7 +302,7 @@ public class MacOSXVMInstallType extends StandardVMType {
 		File lib = new File(installLocation, "lib"); //$NON-NLS-1$
 		File extDir = new File(lib, "ext"); //$NON-NLS-1$
 		String[] dirs = null;
-		if (extDir.exists()) {
+		if (extDir.exists()) { //FLLDCIM: MARK — M31 M3FILE_IO CALL
 			dirs = new String[] {extDir.getAbsolutePath()};
 		} else {
 			dirs = new String[0];
@@ -310,7 +310,7 @@ public class MacOSXVMInstallType extends StandardVMType {
 
 		File endDir = new File(lib, "endorsed"); //$NON-NLS-1$
 		String[] endDirs = null;
-		if (endDir.exists()) {
+		if (endDir.exists()) { //FLLDCIM: MARK — M31 M3FILE_IO CALL
 			endDirs = new String[] {endDir.getAbsolutePath()};
 		} else {
 			endDirs = new String[0];
@@ -366,13 +366,13 @@ public class MacOSXVMInstallType extends StandardVMType {
 	 * @since 3.2.200
 	 */
 	File getSourceInParent(File parent) {
-		if(parent.isDirectory()) {
+		if(parent.isDirectory()) { //FLLDCIM: MARK — M31 M3FILE_IO CALL
 			File src = new File(parent, SRC_ZIP);
-			if(src.isFile()) {
+			if(src.isFile()) { //FLLDCIM: MARK — M31 M3FILE_IO CALL
 				return src;
 			}
 			src = new File(src, SRC_JAR);
-			if(src.isFile()) {
+			if(src.isFile()) { //FLLDCIM: MARK — M31 M3FILE_IO CALL
 				return src;
 			}
 		}
@@ -385,7 +385,7 @@ public class MacOSXVMInstallType extends StandardVMType {
 	@Override
 	public IStatus validateInstallLocation(File javaHome) {
 		File java= new File(javaHome, "bin"+File.separator+"java"); //$NON-NLS-2$ //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
-		if (java.isFile()) {
+		if (java.isFile()) { //FLLDCIM: MARK — M31 M3FILE_IO CALL
 			return Status.OK_STATUS;
 		}
 		return Status.error(Messages.MacOSXVMInstallType_2);
@@ -400,7 +400,7 @@ public class MacOSXVMInstallType extends StandardVMType {
 		String id= null;
 		try {
 			String post= File.separator + JVM_HOME; //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
-			String path= installLocation.getCanonicalPath();
+			String path= installLocation.getCanonicalPath(); //FLLDCIM: MARK — M31 M3FILE_IO CALL
 			if (path.startsWith(JVM_VERSION_LOC) && path.endsWith(post)) {
 				id= path.substring(JVM_VERSION_LOC.length(), path.length()-post.length());
 			}
@@ -410,10 +410,10 @@ public class MacOSXVMInstallType extends StandardVMType {
 		if (id != null) {
 			String s= JAVADOC_LOC + id + JAVADOC_SUBDIR; //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 			File docLocation= new File(s);
-			if (!docLocation.exists()) {
+			if (!docLocation.exists()) { //FLLDCIM: MARK — M31 M3FILE_IO CALL
 				s= JAVADOC_LOC + id; //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 				docLocation= new File(s);
-				if (!docLocation.exists()) {
+				if (!docLocation.exists()) { //FLLDCIM: MARK — M31 M3FILE_IO CALL
 					s= null;
 				}
 			}

@@ -103,7 +103,7 @@ public class SocketTransportService extends TransportService {
 	@Override
 	public Connection attach(String address, long attachTimeout,
 			long handshakeTimeout) throws IOException {
-		String[] strings = address.split(":"); //$NON-NLS-1$
+		String[] strings = address.split(":"); //$NON-NLS-1$ //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
 		String host = "localhost"; //$NON-NLS-1$
 		int port = 0;
 		if (strings.length == 2) {
@@ -271,7 +271,7 @@ public class SocketTransportService extends TransportService {
 		if (address != null) {
 			// jdt debugger will always specify an address in
 			// the form localhost:port
-			String[] strings = address.split(":"); //$NON-NLS-1$
+			String[] strings = address.split(":"); //$NON-NLS-1$ //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
 			host = "localhost"; //$NON-NLS-1$
 			if (strings.length == 2) {
 				host = strings[0];

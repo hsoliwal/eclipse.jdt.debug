@@ -460,7 +460,7 @@ public class ToggleBreakpointAdapter implements IToggleBreakpointsTargetExtensio
 			String pattern = getCodeTemplate((ITextSelection) finalSelection, (JavaEditor) part);
 			if (pattern != null) {
 				pattern = pattern.trim();
-				pattern = pattern.replaceAll("\\\t", ""); //$NON-NLS-1$//$NON-NLS-2$
+				pattern = pattern.replaceAll("\\\t", ""); //$NON-NLS-1$//$NON-NLS-2$ //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
 				methodBreakpoint.setCondition(pattern);
 				methodBreakpoint.setConditionEnabled(true);
 				methodBreakpoint.setConditionSuspendOnTrue(true);
@@ -593,7 +593,7 @@ public class ToggleBreakpointAdapter implements IToggleBreakpointsTargetExtensio
 					String pattern = getCodeTemplate((ITextSelection) selection, (JavaEditor) part);
 					if (pattern != null) {
 						pattern = pattern.trim();
-						pattern = pattern.replaceAll("\\\t", ""); //$NON-NLS-1$//$NON-NLS-2$
+						pattern = pattern.replaceAll("\\\t", ""); //$NON-NLS-1$//$NON-NLS-2$ //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
 						breakpoint.setCondition(pattern);
 						breakpoint.setConditionEnabled(true);
 						breakpoint.setConditionSuspendOnTrue(true);
@@ -2088,7 +2088,7 @@ public class ToggleBreakpointAdapter implements IToggleBreakpointsTargetExtensio
 			return result.toString();
 		}
 		boolean shortened = false;
-		for (String line : input.split("\n")) { //$NON-NLS-1$ //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
+		for (String line : input.split("\n")) { //$NON-NLS-1$ //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
 			if (result.length() > 0) {
 				result.append(LAMBDA_SEPARATOR); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			}

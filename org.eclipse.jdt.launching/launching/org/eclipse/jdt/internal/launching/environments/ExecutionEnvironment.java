@@ -589,7 +589,7 @@ class ExecutionEnvironment implements IExecutionEnvironment {
 			@SuppressWarnings("deprecation")
 			String subsets = properties.getProperty(Constants.FRAMEWORK_EXECUTIONENVIRONMENT);
 			if (subsets != null) {
-				String[] ids = subsets.split(","); //$NON-NLS-1$
+				String[] ids = subsets.split(","); //$NON-NLS-1$ //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
 				for (int i = 0; i < ids.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 					IExecutionEnvironment sub = JavaRuntime.getExecutionEnvironmentsManager().getEnvironment(ids[i].trim());
 					if (sub != null && !sub.getId().equals(getId())) {

@@ -77,7 +77,7 @@ import org.eclipse.ui.model.IWorkbenchAdapter;
 				return fJavaElementLabelProvider.getText(((JavaProjectSourceLocation)o).getJavaProject());
 			} else if (o instanceof DirectorySourceLocation) {
 				try {
-					return ((DirectorySourceLocation)o).getDirectory().getCanonicalPath();
+					return ((DirectorySourceLocation)o).getDirectory().getCanonicalPath(); //FLLDCIM: MARK — M31 M3FILE_IO CALL
 				} catch (IOException e) {
 					JDIDebugUIPlugin.log(e);
 					return ((DirectorySourceLocation)o).getDirectory().getName();

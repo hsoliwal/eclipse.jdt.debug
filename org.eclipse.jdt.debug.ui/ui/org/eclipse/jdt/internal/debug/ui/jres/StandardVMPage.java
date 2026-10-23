@@ -143,7 +143,7 @@ public class StandardVMPage extends AbstractVMInstallPage {
 				DirectoryDialog dialog = new DirectoryDialog(getShell(), SWT.SHEET);
 				File file = new File(fJRERoot.getText());
 				String text = fJRERoot.getText();
-				if (file.isFile()) {
+				if (file.isFile()) { //FLLDCIM: MARK — M31 M3FILE_IO CALL
 					text = file.getParentFile().getAbsolutePath();
 				}
 				dialog.setFilterPath(text);
@@ -190,7 +190,7 @@ public class StandardVMPage extends AbstractVMInstallPage {
 		}
 		else {
 			file = new File(locationName);
-			if (!file.exists()) {
+			if (!file.exists()) { //FLLDCIM: MARK — M31 M3FILE_IO CALL
 				s = new StatusInfo(IStatus.ERROR, JREMessages.addVMDialog_locationNotExists);
 			}
 			else {
@@ -213,7 +213,7 @@ public class StandardVMPage extends AbstractVMInstallPage {
 			String name = fVMName.getText();
 			if (name == null || name.trim().length() == 0) {
 				// auto-generate VM name
-				if (file.isFile()) {
+				if (file.isFile()) { //FLLDCIM: MARK — M31 M3FILE_IO CALL
 					String fileName = file.getName();
 					int index = fileName.lastIndexOf(".ee"); //$NON-NLS-1$
 					if (index > 0) {
@@ -223,7 +223,7 @@ public class StandardVMPage extends AbstractVMInstallPage {
 				} else {
 					try {
 						String genName = null;
-						IPath path = new Path(file.getCanonicalPath());
+						IPath path = new Path(file.getCanonicalPath()); //FLLDCIM: MARK — M31 M3FILE_IO CALL
 						int segs = path.segmentCount();
 						if (segs == 1) {
 							genName = path.segment(0);

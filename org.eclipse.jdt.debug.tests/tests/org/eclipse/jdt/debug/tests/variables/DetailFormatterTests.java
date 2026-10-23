@@ -481,7 +481,7 @@ public class DetailFormatterTests extends AbstractDebugTest {
 			waitForListenerValue();
 			assertNotNull("The IValue of the detailComputed callback cannot be null", fListener.value);
 			String value = fListener.result.toString().trim();
-			value = value.split("\n")[1].trim();
+			value = value.split("\n")[1].trim(); //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
 			assertEquals("at a.b.c.ExceptionDefaultTest.main(ExceptionDefaultTest.java:18)", value);
 		} finally {
 			terminateAndRemove(thread);

@@ -62,7 +62,7 @@ public class ClasspathShortenerTests extends AbstractDebugTest {
 	@Override
 	protected void tearDown() throws Exception {
 		if (classpathShortener != null) {
-			classpathShortener.getProcessTempFiles().forEach(file -> file.delete());
+			classpathShortener.getProcessTempFiles().forEach(file -> file.delete()); //FLLDCIM: MARK — M31 M3FILE_IO CALL
 		}
 		super.tearDown();
 	}
@@ -281,11 +281,11 @@ public class ClasspathShortenerTests extends AbstractDebugTest {
 	}
 
 	private String getFileContents(File file) throws IOException {
-		return new String(Files.readAllBytes(file.toPath()), StandardCharsets.UTF_8);
+		return new String(Files.readAllBytes(file.toPath()), StandardCharsets.UTF_8); //FLLDCIM: MARK — M31 M3FILE_IO CALL
 	}
 
 	private String getClasspathAttributeFromJarManifest(File jarFile) throws FileNotFoundException, IOException {
-		try (JarInputStream jarStream = new JarInputStream(new FileInputStream(jarFile))) {
+		try (JarInputStream jarStream = new JarInputStream(new FileInputStream(jarFile))) { //FLLDCIM: MARK — M31 M3FILE_IO NEW
 			Manifest mf = jarStream.getManifest();
 			return mf.getMainAttributes().getValue(Attributes.Name.CLASS_PATH);
 		}
@@ -294,7 +294,7 @@ public class ClasspathShortenerTests extends AbstractDebugTest {
 	private List<File> getClasspathJarsFromJarManifest(File jarFile) throws FileNotFoundException, IOException {
 		File parentDir = jarFile.getParentFile();
 		String classpath = getClasspathAttributeFromJarManifest(jarFile);
-		return Arrays.stream(classpath.split(" ")).map(relativePath -> {
+		return Arrays.stream(classpath.split(" ")).map(relativePath -> { //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
 			try {
 				return new File(URIUtil.makeAbsolute(new URI(relativePath), parentDir.toURI()));
 			} catch (URISyntaxException e) {

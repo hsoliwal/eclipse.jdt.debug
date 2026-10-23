@@ -88,7 +88,7 @@ public class CommandLineShortener implements IProcessTempFileCreator {
 			File argumentsFile = JavaLaunchingUtils.createFileForArgument(getLaunchTimeStamp(), processTempFilesDir, getLaunchConfigurationName(), "%s-args-%s.txt"); //$NON-NLS-1$
 			cmdLine = quoteForArgfile(cmdLine);
 
-			Files.write(argumentsFile.toPath(), Arrays.asList(cmdLine), systemCharset);
+			Files.write(argumentsFile.toPath(), Arrays.asList(cmdLine), systemCharset); //FLLDCIM: MARK — M31 M3FILE_IO CALL
 			return argumentsFile;
 		} catch (CharacterCodingException e) {
 			for (String s : cmdLine) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP

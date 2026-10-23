@@ -124,12 +124,12 @@ public class StandardSourcePathProvider extends StandardClasspathProvider {
                         if (mainAttributes != null) {
                             String value = mainAttributes.getValue(Attributes.Name.CLASS_PATH);
                             if (value != null) {
-                                String[] entries = value.split("\\s+"); //$NON-NLS-1$
+                                String[] entries = value.split("\\s+"); //$NON-NLS-1$ //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
                                 IPath base = new Path(location);
                                 base = base.removeLastSegments(1);
                                 for (int i = 0; i < entries.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
                                     IPath path = base.append(entries[i]);
-                                    if (path.toFile().exists()) {
+                                    if (path.toFile().exists()) { //FLLDCIM: MARK — M31 M3FILE_IO CALL
                                         IRuntimeClasspathEntry ref = JavaRuntime.newArchiveRuntimeClasspathEntry(path);
                                         if (!all.contains(ref)) {
                                             all.add(ref);

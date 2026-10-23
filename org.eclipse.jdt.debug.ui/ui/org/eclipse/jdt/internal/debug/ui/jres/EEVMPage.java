@@ -150,7 +150,7 @@ public class EEVMPage extends AbstractVMInstallPage {
 				dialog.setFilterExtensions(new String[]{"*.ee"}); //$NON-NLS-1$
 				File file = getDefinitionFile();
 				String text = fEEFile.getText();
-				if (file != null && file.isFile()) {
+				if (file != null && file.isFile()) { //FLLDCIM: MARK — M31 M3FILE_IO CALL
 					text = file.getParentFile().getAbsolutePath();
 				}
 				dialog.setFileName(text);
@@ -188,7 +188,7 @@ public class EEVMPage extends AbstractVMInstallPage {
 			s = new StatusInfo(IStatus.WARNING, JREMessages.EEVMPage_4);
 		}  else {
 			final File file = new File(locationName);
-			if (!file.exists()) {
+			if (!file.exists()) { //FLLDCIM: MARK — M31 M3FILE_IO CALL
 				s = new StatusInfo(IStatus.ERROR, JREMessages.EEVMPage_5);
 			} else {
 				final IStatus[] temp = new IStatus[1];

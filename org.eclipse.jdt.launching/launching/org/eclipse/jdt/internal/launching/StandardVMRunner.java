@@ -231,7 +231,7 @@ public class StandardVMRunner extends AbstractVMRunner {
 			return null;
 		}
 		File dir = new File(path);
-		if (!dir.isDirectory()) {
+		if (!dir.isDirectory()) { //FLLDCIM: MARK — M31 M3FILE_IO CALL
 			abort(NLS.bind(LaunchingMessages.StandardVMRunner_Specified_working_directory_does_not_exist_or_is_not_a_directory___0__3, path), null, IJavaLaunchConfigurationConstants.ERR_WORKING_DIRECTORY_DOES_NOT_EXIST);
 		}
 		return dir;
@@ -310,7 +310,7 @@ public class StandardVMRunner extends AbstractVMRunner {
 	 * @return true if the file indeed exists, false otherwise
 	 */
 	protected boolean fileExists(File file) {
-		return file.exists() && file.isFile();
+		return file.exists() && file.isFile(); //FLLDCIM: MARK — M31 M3FILE_IO CALL
 	}
 
 	protected String convertClassPath(String[] cp) {

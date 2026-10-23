@@ -71,7 +71,7 @@ public class VirtualMachineManagerImpl implements VirtualMachineManager {
 			OutputStream out = null;
 			if (fVerboseFile != null && fVerboseFile.length() > 0) {
 				try {
-					out = new FileOutputStream(fVerboseFile);
+					out = new FileOutputStream(fVerboseFile); //FLLDCIM: MARK — M31 M3FILE_IO NEW
 				} catch (IOException e) {
 					JDIDebugPlugin.logError(JDIMessages.VirtualMachineManagerImpl_Could_not_open_verbose_file___1 //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 									+ fVerboseFile

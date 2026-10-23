@@ -147,7 +147,7 @@ public class FileHashing {
 				return null;
 			}
 			try {
-				BasicFileAttributes attributes = Files.readAttributes(file.toPath(), BasicFileAttributes.class);
+				BasicFileAttributes attributes = Files.readAttributes(file.toPath(), BasicFileAttributes.class); //FLLDCIM: MARK — M31 M3FILE_IO CALL
 				if (!attributes.isRegularFile()) {
 					return null;
 				}
@@ -182,7 +182,7 @@ public class FileHashing {
 			throw new IllegalStateException("Unsupported JVM", e); //$NON-NLS-1$
 		}
 		byte[] buf = new byte[4096];
-		try (InputStream is = new FileInputStream(file)) {
+		try (InputStream is = new FileInputStream(file)) { //FLLDCIM: MARK — M31 M3FILE_IO NEW
 			int len;
 			while ((len = is.read(buf)) > 0) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				digest.update(buf, 0, len);

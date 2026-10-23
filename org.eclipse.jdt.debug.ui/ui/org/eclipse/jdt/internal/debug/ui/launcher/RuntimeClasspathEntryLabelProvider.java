@@ -85,7 +85,7 @@ public class RuntimeClasspathEntryLabelProvider extends LabelProvider {
 					{
 						//TODO: check for invalid paths and change image
 						File file = path.toFile();
-						if (file.exists() && file.isDirectory()) {
+						if (file.exists() && file.isDirectory()) { //FLLDCIM: MARK — M31 M3FILE_IO CALL
 							key = ISharedImages.IMG_OBJS_PACKFRAG_ROOT;
 						} else if (source) {
 	                        key = ISharedImages.IMG_OBJS_EXTERNAL_ARCHIVE_WITH_SOURCE;

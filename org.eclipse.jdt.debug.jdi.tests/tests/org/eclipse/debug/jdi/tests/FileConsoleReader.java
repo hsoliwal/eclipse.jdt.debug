@@ -34,7 +34,7 @@ public class FileConsoleReader extends AbstractReader {
 		super(name);
 		fInput = input;
 		try {
-			fFileOutputStream = new FileOutputStream(new File(fileName));
+			fFileOutputStream = new FileOutputStream(new File(fileName)); //FLLDCIM: MARK — M31 M3FILE_IO NEW
 		} catch (IOException e) {
 			System.out.println("Got exception: " + e.getMessage()); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		}

@@ -159,7 +159,7 @@ public class EEVMType extends AbstractVMInstallType {
 	 */
 	@Override
 	public IStatus validateInstallLocation(File installLocation) {
-		if (installLocation.exists()) {
+		if (installLocation.exists()) { //FLLDCIM: MARK — M31 M3FILE_IO CALL
 			return new Status(IStatus.INFO, LaunchingPlugin.ID_PLUGIN, LaunchingMessages.EEVMType_4);
 		}
 		return Status.error(NLS.bind(LaunchingMessages.EEVMType_3, installLocation.getPath()));

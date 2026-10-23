@@ -111,7 +111,7 @@ public class JavaLibraryPathTests extends AbstractDebugTest {
 
 		String[] strings = JavaRuntime.computeJavaLibraryPath(getJavaProject("PathTests1"), true);
 		assertEquals("Wrong number of entries", 1, strings.length);
-		assertEquals("Wrong entry", path.toFile().getCanonicalPath(), new File(strings[0]).getCanonicalPath());
+		assertEquals("Wrong entry", path.toFile().getCanonicalPath(), new File(strings[0]).getCanonicalPath()); //FLLDCIM: MARK — M31 M3FILE_IO CALL
 	}
 
 	public void testVMArgsForRequiredProjectExplicitPath() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
@@ -188,7 +188,7 @@ public class JavaLibraryPathTests extends AbstractDebugTest {
 
 			String[] strings = JavaRuntime.computeJavaLibraryPath(getJavaProject("PathTests1"), false);
 			assertEquals("Wrong number of entries", 1, strings.length);
-			assertEquals("Wrong entry", jar.getCanonicalFile().getCanonicalPath(), new File(strings[0]).getCanonicalPath());
+			assertEquals("Wrong entry", jar.getCanonicalFile().getCanonicalPath(), new File(strings[0]).getCanonicalPath()); //FLLDCIM: MARK — M31 M3FILE_IO CALL
 		} finally {
 			manager.removeVariables(new IValueVariable[]{variable});
 		}

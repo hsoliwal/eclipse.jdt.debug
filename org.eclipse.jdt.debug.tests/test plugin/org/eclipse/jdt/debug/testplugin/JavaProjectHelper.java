@@ -263,7 +263,7 @@ public class JavaProjectHelper {
 	static boolean isCompatible(int ver) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String version = System.getProperty("java.specification.version");
 		if (version != null) {
-			String[] nums = version.split("\\.");
+			String[] nums = version.split("\\."); //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
 			if (nums.length == 2) {
 				try {
 					int major = Integer.parseInt(nums[0]);
@@ -460,7 +460,7 @@ public class JavaProjectHelper {
 	public static IPackageFragmentRoot addLibraryWithImport(IJavaProject jproject, IPath jarPath, IPath sourceAttachPath, IPath sourceAttachRoot) throws IOException, CoreException {
 		IProject project= jproject.getProject();
 		IFile newFile= project.getFile(jarPath.lastSegment());
-		try (InputStream inputStream = new FileInputStream(jarPath.toFile())) {
+		try (InputStream inputStream = new FileInputStream(jarPath.toFile())) { //FLLDCIM: MARK — M31 M3FILE_IO NEW
 			newFile.create(inputStream, true, null);
 		}
 		return addLibrary(jproject, newFile.getFullPath(), sourceAttachPath, sourceAttachRoot);
@@ -636,13 +636,13 @@ public class JavaProjectHelper {
 	 * Recursively adds files from the specified dir to the provided list
 	 */
 	private static void addJavaFiles(File dir, List<File> collection) throws IOException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
-		File[] files = dir.listFiles();
+		File[] files = dir.listFiles(); //FLLDCIM: MARK — M31 M3FILE_IO CALL
 		if(files != null) {
 			List<File> subDirs = new ArrayList<>(2); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 			for (int i = 0; i < files.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
-				if (files[i].isFile()) {
+				if (files[i].isFile()) { //FLLDCIM: MARK — M31 M3FILE_IO CALL
 					collection.add(files[i]);
-				} else if (files[i].isDirectory() && files[i].getName().indexOf("CVS") < 0) {
+				} else if (files[i].isDirectory() && files[i].getName().indexOf("CVS") < 0) { //FLLDCIM: MARK — M31 M3FILE_IO CALL
 					subDirs.add(files[i]);
 				}
 			}

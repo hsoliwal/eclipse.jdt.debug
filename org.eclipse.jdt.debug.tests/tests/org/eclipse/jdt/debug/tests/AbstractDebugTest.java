@@ -1288,7 +1288,7 @@ public abstract class AbstractDebugTest extends TestCase implements  IEvaluation
         IPackageFragmentRoot src = JavaProjectHelper.addSourceContainer(jp, JavaProjectHelper.SRC_DIR);
         File root = JavaTestPlugin.getDefault().getFileInPlugin(new Path(contentpath));
         File srcInRoot = new File(root, src.getPath().lastSegment());
-        if (srcInRoot.isDirectory()) {
+        if (srcInRoot.isDirectory()) { //FLLDCIM: MARK — M31 M3FILE_IO CALL
             JavaProjectHelper.importFilesFromDirectory(srcInRoot, src.getPath(), null);
         } else {
             JavaProjectHelper.importFilesFromDirectory(root, src.getPath(), null);
@@ -2127,7 +2127,7 @@ public abstract class AbstractDebugTest extends TestCase implements  IEvaluation
 			IPackageFragment fragment = packageFragments[i];
 			if (fragment.getElementName().equals(packageName)) {
 				ICompilationUnit compilationUnit = fragment.getCompilationUnit(cuName);
-				String[] names = typeName.split("\\$"); //$NON-NLS-1$
+				String[] names = typeName.split("\\$"); //$NON-NLS-1$ //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
 				IType type = compilationUnit.getType(names[0]);
 				for (int j = 1; j < names.length; j++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 					type = type.getType(names[j]);

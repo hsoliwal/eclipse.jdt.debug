@@ -542,7 +542,7 @@ public final class JavaRuntime {
 		if (install != null) {
 			File location = install.getInstallLocation();
 			if (location != null) {
-				if (location.exists()) {
+				if (location.exists()) { //FLLDCIM: MARK — M31 M3FILE_IO CALL
 					return install;
 				}
 			}
@@ -1285,7 +1285,7 @@ public final class JavaRuntime {
 				String location = entry.getLocation();
 				if (location != null) {
 					File file = new File(location);
-					if (file.exists()) {
+					if (file.exists()) { //FLLDCIM: MARK — M31 M3FILE_IO CALL
 						break;
 					}
 				}
@@ -1469,7 +1469,7 @@ public final class JavaRuntime {
 	}
 
 	private static boolean containsModuleInfo(IRuntimeClasspathEntry entry) {
-		return new File(entry.getLocation() + File.separator + "module-info.class").exists(); //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
+		return new File(entry.getLocation() + File.separator + "module-info.class").exists(); //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT //FLLDCIM: MARK — M31 M3FILE_IO CALL
 	}
 
 	/**
@@ -2017,10 +2017,10 @@ public final class JavaRuntime {
 			IPath stateFile= stateLocation.append("vmConfiguration.xml"); //$NON-NLS-1$
 			File file = new File(stateFile.toOSString());
 
-			if (file.exists()) {
+			if (file.exists()) { //FLLDCIM: MARK — M31 M3FILE_IO CALL
 				// If file exists, load VM definitions from it into memory and write the definitions to
 				// the preference store WITHOUT triggering any processing of the new value
-				InputStream fileInputStream = new BufferedInputStream(new FileInputStream(file));
+				InputStream fileInputStream = new BufferedInputStream(new FileInputStream(file)); //FLLDCIM: MARK — M31 M3FILE_IO NEW
 				VMDefinitionsContainer.parseXMLIntoContainer(fileInputStream, vmDefs);
 			}
 		}
@@ -2072,10 +2072,10 @@ public final class JavaRuntime {
 						VMStandin standin = null;
 						home = substitute(home);
 						File homeDir = new File(home);
-                        if (homeDir.exists()) {
+                        if (homeDir.exists()) { //FLLDCIM: MARK — M31 M3FILE_IO CALL
                             try {
                             	// adjust for relative path names
-                                home = homeDir.getCanonicalPath();
+                                home = homeDir.getCanonicalPath(); //FLLDCIM: MARK — M31 M3FILE_IO CALL
                                 homeDir = new File(home);
                             } catch (IOException e) {
                             }
@@ -2223,14 +2223,14 @@ public final class JavaRuntime {
                     javadocLocations[i]= defJavaDocLocation;
                 }
                 indexes[i] = dflts[i].getIndexLocation();
-				if (!libraryPaths[i].toFile().isFile()) {
+				if (!libraryPaths[i].toFile().isFile()) { //FLLDCIM: MARK — M31 M3FILE_IO CALL
 					libraryPaths[i]= Path.EMPTY;
 				}
 
 				annotationPaths[i] = Path.EMPTY;
 
 				sourcePaths[i]= dflts[i].getSystemLibrarySourcePath();
-				if (sourcePaths[i].toFile().isFile()) {
+				if (sourcePaths[i].toFile().isFile()) { //FLLDCIM: MARK — M31 M3FILE_IO CALL
 					sourceRootPaths[i]= dflts[i].getPackageRootPath();
 				} else {
 					sourcePaths[i]= Path.EMPTY;
@@ -2275,10 +2275,10 @@ public final class JavaRuntime {
 				String eeFileName = System.getProperty("ee.filename"); //$NON-NLS-1$
 				if (eeFileName != null){
 					File vmFile = new File(eeFileName);
-					if (vmFile.isDirectory()){
+					if (vmFile.isDirectory()){ //FLLDCIM: MARK — M31 M3FILE_IO CALL
 						vmFile = new File(vmFile, "default.ee"); //$NON-NLS-1$
 					}
-					if (vmFile.isFile()){
+					if (vmFile.isFile()){ //FLLDCIM: MARK — M31 M3FILE_IO CALL
 						// Make sure the VM id is unique
 						long unique = System.currentTimeMillis();
 						while (vmTypes[i].findVMInstall(String.valueOf(unique)) != null) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
@@ -2316,7 +2316,7 @@ public final class JavaRuntime {
 				// Java 9 and above needs the vmInstall location till jre
 				File pluginDir = new File(detectedLocation, "plugins"); //$NON-NLS-1$
 				File featuresDir = new File(detectedLocation, "features"); //$NON-NLS-1$
-				if (pluginDir.exists() && featuresDir.exists()) {
+				if (pluginDir.exists() && featuresDir.exists()) { //FLLDCIM: MARK — M31 M3FILE_IO CALL
 					if (isJREVersionAbove8(vmType, detectedLocation)) {
 						detectedLocation = new File(detectedLocation, "jre"); //$NON-NLS-1$
 					}
@@ -2342,7 +2342,7 @@ public final class JavaRuntime {
 		LibraryLocation[] locations = vmType.getDefaultLibraryLocations(installLocation);
 		boolean exist = true;
 		for (int i = 0; i < locations.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
-			exist = exist && new File(locations[i].getSystemLibraryPath().toOSString()).exists();
+			exist = exist && new File(locations[i].getSystemLibraryPath().toOSString()).exists(); //FLLDCIM: MARK — M31 M3FILE_IO CALL
 		}
 		if (exist) {
 			return false;
@@ -2350,7 +2350,7 @@ public final class JavaRuntime {
 		exist = true;
 		LibraryLocation[] newLocations = vmType.getDefaultLibraryLocations(new File(installLocation, "jre")); //$NON-NLS-1$
 		for (int i = 0; i < newLocations.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
-			exist = exist && new File(newLocations[i].getSystemLibraryPath().toOSString()).exists();
+			exist = exist && new File(newLocations[i].getSystemLibraryPath().toOSString()).exists(); //FLLDCIM: MARK — M31 M3FILE_IO CALL
 		}
 		return exist;
 	}
@@ -3223,7 +3223,7 @@ public final class JavaRuntime {
 	public static String[] getLibraryPaths(IClasspathAttribute attribute) {
 		if (CLASSPATH_ATTR_LIBRARY_PATH_ENTRY.equals(attribute.getName())) {
 			String value = attribute.getValue();
-			return value.split("\\|"); //$NON-NLS-1$
+			return value.split("\\|"); //$NON-NLS-1$ //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
 		}
 		return null;
 	}
@@ -3457,7 +3457,7 @@ public final class JavaRuntime {
 			}
 			if (exe != null) {
 				try {
-					standin.setAttribute(EEVMInstall.ATTR_JAVA_EXE, exe.getCanonicalPath());
+					standin.setAttribute(EEVMInstall.ATTR_JAVA_EXE, exe.getCanonicalPath()); //FLLDCIM: MARK — M31 M3FILE_IO CALL
 				} catch (IOException e) {
 					throw new CoreException(new Status(IStatus.ERROR, LaunchingPlugin.getUniqueIdentifier(),
 							LaunchingMessages.JavaRuntime_24, e));
@@ -3673,7 +3673,7 @@ public final class JavaRuntime {
 						String readModules = classpathAttribute.getValue();
 						int equalsIdx = readModules.indexOf('=');
 						if (equalsIdx != -1) {
-							for (String readModule : readModules.split(":")) { //$NON-NLS-1$ //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
+							for (String readModule : readModules.split(":")) { //$NON-NLS-1$ //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
 								buf.append(OPTION_START).append(optName).append(BLANK).append(readModule).append(BLANK); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 							}
 						} else {
@@ -3692,7 +3692,7 @@ public final class JavaRuntime {
 		return buf.toString().trim();
 	}
 	private static void addLimitModules(StringBuilder buf, IJavaProject prj, IClasspathEntry systemLibrary, String value) throws JavaModelException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
-		String[] modules = value.split(COMMA);
+		String[] modules = value.split(COMMA); //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
 		boolean isUnnamed = prj.getModuleDescription() == null;
 		if (isUnnamed) {
 			Set<String> selected = new HashSet<>(Arrays.asList(modules)); //FLLDCIM: MARK — M03 M3_SET_LANES NEW

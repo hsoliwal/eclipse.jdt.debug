@@ -265,7 +265,7 @@ public final class ExecutionEnvironmentDescription {
 			for (int i = 0; i < bootpath.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				IPath path = IPath.fromOSString(bootpath[i]);
 				File lib = path.toFile();
-				if (lib.exists() && lib.isFile()) {
+				if (lib.exists() && lib.isFile()) { //FLLDCIM: MARK — M31 M3FILE_IO CALL
 					LibraryLocation libraryLocation = new LibraryLocation(path, src, IPath.EMPTY, url, indexurl);
 					boot.add(libraryLocation);
 				}
@@ -371,7 +371,7 @@ public final class ExecutionEnvironmentDescription {
 	 */
 	private static Map<String, String> loadProperties(File eeFile) throws CoreException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		Map<String, String> properties = new LinkedHashMap<>(); //FLLDCIM: MARK — M04 M3_ORDERED_LANES NEW
-		try (Stream<String> lines = Files.lines(eeFile.toPath(), Charset.defaultCharset())) {
+		try (Stream<String> lines = Files.lines(eeFile.toPath(), Charset.defaultCharset())) { //FLLDCIM: MARK — M24 M3FILE_STREAMS CALL
 			lines.filter(l -> !l.startsWith("#") && !l.isBlank()).forEach(line -> { //$NON-NLS-1$
 				int eq = line.indexOf('=');
 				if (eq > 0) {
@@ -434,7 +434,7 @@ public final class ExecutionEnvironmentDescription {
 	 * @return array of individual paths
 	 */
 	private String[] resolvePaths(String paths) {
-		String[] strings = paths.split(File.pathSeparator, -1);
+		String[] strings = paths.split(File.pathSeparator, -1); //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
 		Optional<String> root = getEEHomePath();
 		for (int i = 0; i < strings.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			strings[i] = makePathAbsolute(strings[i], root);
@@ -482,7 +482,7 @@ public final class ExecutionEnvironmentDescription {
 		Map<String, String> srcMap = new HashMap<>(); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
 		if (srcMapString != null){
 			// Entries must be separated by the file separator and have an equals splitting the lib location from the src location
-			String[] entries = srcMapString.split(File.pathSeparator);
+			String[] entries = srcMapString.split(File.pathSeparator); //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
 			for (int i = 0; i < entries.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				int index = entries[i].indexOf('=');
 				if (index > 0 && index < entries[i].length()-1){
@@ -558,16 +558,16 @@ public final class ExecutionEnvironmentDescription {
 	private void addSourceLocationsToLibraries(Map<String, String> srcMap, List<LibraryLocation> libraries){ //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		srcMap.forEach((currentKey, value) -> {
 			// Try each library regex pattern and see what libraries apply.
-			Pattern currentPattern = Pattern.compile(currentKey);
+			Pattern currentPattern = Pattern.compile(currentKey); //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
 			Matcher matcher = currentPattern.matcher(""); //$NON-NLS-1$ //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
 			for (LibraryLocation currentLibrary : libraries) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				matcher.reset(currentLibrary.getSystemLibraryPath().toOSString());
-				if (matcher.find()) {
+				if (matcher.find()) { //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
 					// Found a file that the pattern applies to, use the map to get the source location
 					String sourceLocation = matcher.replaceAll(value);
 					IPath sourcePath = IPath.fromOSString(sourceLocation);
 					// Only add the source archive if it exists
-					if (sourcePath.toFile().exists()) {
+					if (sourcePath.toFile().exists()) { //FLLDCIM: MARK — M31 M3FILE_IO CALL
 						currentLibrary.setSystemLibrarySource(sourcePath);
 					}
 

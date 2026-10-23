@@ -109,7 +109,7 @@ public class LaunchConfigurationQueryParticipant implements IQueryParticipant {
 						}
 					}
 					if(type != null) {
-						pattern = Pattern.compile(quotePattern(type.getFullyQualifiedName('$')));
+						pattern = Pattern.compile(quotePattern(type.getFullyQualifiedName('$'))); //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
 					}
 					else {
 						return;
@@ -123,7 +123,7 @@ public class LaunchConfigurationQueryParticipant implements IQueryParticipant {
 				int flags = patternQuery.isCaseSensitive() ? 0
 						: Pattern.CASE_INSENSITIVE;
 				String quotedPattern = quotePattern(patternQuery.getPattern());
-				pattern = Pattern.compile(quotedPattern, flags);
+				pattern = Pattern.compile(quotedPattern, flags); //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
 			}
 			if (subMon.isCanceled()) {
 				return;

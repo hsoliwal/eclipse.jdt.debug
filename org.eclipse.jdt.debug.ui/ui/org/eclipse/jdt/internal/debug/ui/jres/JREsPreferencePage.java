@@ -332,7 +332,7 @@ public class JREsPreferencePage extends PreferencePage implements IWorkbenchPref
 			LibraryLocation[] locations= JavaRuntime.getLibraryLocations(vm);
 			boolean exist = true;
 			for (int i = 0; i < locations.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
-				exist = exist && new File(locations[i].getSystemLibraryPath().toOSString()).exists();
+				exist = exist && new File(locations[i].getSystemLibraryPath().toOSString()).exists(); //FLLDCIM: MARK — M31 M3FILE_IO CALL
 			}
 
 			// If all library locations exist, check the corresponding entry in the list,

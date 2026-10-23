@@ -70,7 +70,7 @@ public class ExternalArchiveSourceContainerTests extends AbstractDebugTest {
 		director.setFindDuplicates(duplicates);
 		IPath p = new Path(path);
 		File file = JavaTestPlugin.getDefault().getFileInPlugin(p);
-		assertTrue("file " + path +  " does not exist", file != null && file.exists()); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
+		assertTrue("file " + path +  " does not exist", file != null && file.exists()); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT //FLLDCIM: MARK — M31 M3FILE_IO CALL
 		ExternalArchiveSourceContainer container = new ExternalArchiveSourceContainer(file.getAbsolutePath(), detect);
 		director.setSourceContainers(new ISourceContainer[]{container});
 		return container;

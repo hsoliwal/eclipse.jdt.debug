@@ -292,7 +292,7 @@ public class ClasspathShortener implements IProcessTempFileCreator {
 			IPath stateLocation = LaunchingPlugin.getDefault().getStateLocation();
 			IPath argFileTmpIPath = stateLocation.append(ARGFILE_TEMPDIR_NAME);
 			File argFileTmpDir = argFileTmpIPath.toFile();
-			if (!argFileTmpDir.exists()) {
+			if (!argFileTmpDir.exists()) { //FLLDCIM: MARK — M31 M3FILE_IO CALL
 				Files.createDirectory(argFileTmpDir.toPath());
 			}
 			File argFile = JavaLaunchingUtils.createFileForArgument(getLaunchTimeStamp(), argFileTmpDir, getLaunchConfigurationName(), "%s" //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
@@ -360,7 +360,7 @@ public class ClasspathShortener implements IProcessTempFileCreator {
 			Manifest manifest = new Manifest();
 			manifest.getMainAttributes().put(Attributes.Name.MANIFEST_VERSION, "1.0"); //$NON-NLS-1$
 			manifest.getMainAttributes().put(Attributes.Name.CLASS_PATH, manifestClasspath.toString());
-			try (JarOutputStream target = new JarOutputStream(new FileOutputStream(jarFile), manifest)) {
+			try (JarOutputStream target = new JarOutputStream(new FileOutputStream(jarFile), manifest)) { //FLLDCIM: MARK — M31 M3FILE_IO NEW
 				target.hashCode(); // avoid warning that target is unused
 			}
 			return jarFile;
@@ -370,7 +370,7 @@ public class ClasspathShortener implements IProcessTempFileCreator {
 	}
 
 	private String[] getClasspathAsArray(String classpath) {
-		return classpath.split("" + getPathSeparatorChar()); //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
+		return classpath.split("" + getPathSeparatorChar()); //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
 	}
 
 	protected char getPathSeparatorChar() {

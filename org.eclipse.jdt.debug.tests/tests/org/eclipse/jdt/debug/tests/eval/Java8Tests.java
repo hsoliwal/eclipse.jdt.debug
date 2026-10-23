@@ -188,7 +188,7 @@ public class Java8Tests extends AbstractDebugTest {
 		try {
 			String type = "FunctionalCaptureTest18";
 			ICompilationUnit cu = getType(type).getCompilationUnit();
-			String[] lines = new String(cu.getBuffer().getCharacters()).split("\n");
+			String[] lines = new String(cu.getBuffer().getCharacters()).split("\n"); //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
 
 			int i = 0;
 			for (; i < lines.length; ++i) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP

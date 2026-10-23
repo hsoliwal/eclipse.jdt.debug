@@ -42,7 +42,7 @@ import com.sun.jdi.Method;
 public class LambdaUtils {
 
 	private static final String LAMBDA_METHOD_PREFIX = "lambda$"; //$NON-NLS-1$
-	private static final Pattern LAMBDA_TYPE_PATTERN = Pattern.compile(".*\\$\\$Lambda[\\$,\\.].*"); //$NON-NLS-1$
+	private static final Pattern LAMBDA_TYPE_PATTERN = Pattern.compile(".*\\$\\$Lambda[\\$,\\.].*"); //$NON-NLS-1$ //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
 
 	/**
 	 * Inspects the top stack frame of the context; if that frame is a lambda frame, looks for a variable with the specified name in that frame and

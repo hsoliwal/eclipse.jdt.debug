@@ -37,7 +37,7 @@ public class JavaDebugStackTraceHyperlink extends JavaStackTraceHyperlink {
 
 	static final String LINE_PREFIX = "line: "; //$NON-NLS-1$
 
-	private static final Pattern LINE_PATTERN = Pattern.compile(".*(" + LINE_PREFIX + "\\d+)"); //$NON-NLS-1$ //$NON-NLS-2$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
+	private static final Pattern LINE_PATTERN = Pattern.compile(".*(" + LINE_PREFIX + "\\d+)"); //$NON-NLS-1$ //$NON-NLS-2$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
 
 	public JavaDebugStackTraceHyperlink(TextConsole console) {
 		super(console);
@@ -90,7 +90,7 @@ public class JavaDebugStackTraceHyperlink extends JavaStackTraceHyperlink {
 	public static LinkSubstring extractLineText(String linkText) {
 		LinkSubstring lineText = null;
 		Matcher matcher = LINE_PATTERN.matcher(linkText); //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
-		if (matcher.matches()) {
+		if (matcher.matches()) { //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
 			int groupCount = matcher.groupCount();
 			int groupIndex = 1;
 			if (groupIndex <= groupCount) {

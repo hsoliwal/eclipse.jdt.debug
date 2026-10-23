@@ -371,7 +371,7 @@ public abstract class AbstractVMInstall implements IVMInstall, IVMInstall2, IVMI
 		if (!cached) {
 			// launch VM to evaluate properties
 			File file = LaunchingPlugin.getFileInPlugin(new Path("lib/launchingsupport.jar")); //$NON-NLS-1$
-			if (file != null && file.exists()) {
+			if (file != null && file.exists()) { //FLLDCIM: MARK — M31 M3FILE_IO CALL
 				VMRunnerConfiguration config = new VMRunnerConfiguration("org.eclipse.jdt.internal.launching.support.LegacySystemProperties", new String[] { file.getAbsolutePath() });//$NON-NLS-1$
 				IVMRunner runner = getVMRunner(ILaunchManager.RUN_MODE);
 				if (runner == null) {

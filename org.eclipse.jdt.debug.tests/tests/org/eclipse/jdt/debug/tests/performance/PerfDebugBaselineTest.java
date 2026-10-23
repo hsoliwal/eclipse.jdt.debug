@@ -61,11 +61,11 @@ public class PerfDebugBaselineTest extends PerformanceTestCase {
      * than when there are none.
      */
     private int findMatches(String text) {
-        Pattern pattern = Pattern.compile("\\w\\S*\\(\\S*\\.java:\\S*\\)");
+        Pattern pattern = Pattern.compile("\\w\\S*\\(\\S*\\.java:\\S*\\)"); //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
         Matcher matcher = pattern.matcher(text); //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
 
         int count = 0;
-        while (matcher.find()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
+        while (matcher.find()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
             count++;
         }
         return count;

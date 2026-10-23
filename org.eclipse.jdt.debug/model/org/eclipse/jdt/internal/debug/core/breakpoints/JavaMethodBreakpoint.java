@@ -198,7 +198,7 @@ public class JavaMethodBreakpoint extends JavaLineBreakpoint implements //FLLDCI
 		run(getMarkerRule(resource), wr);
 		if (typePattern != null) {
 			String type = convertToRegularExpression(typePattern);
-			fPattern = Pattern.compile(type);
+			fPattern = Pattern.compile(type); //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
 		}
 	}
 
@@ -659,7 +659,7 @@ public class JavaMethodBreakpoint extends JavaLineBreakpoint implements //FLLDCI
 		String typePattern = marker.getAttribute(TYPE_NAME, ""); //$NON-NLS-1$
 		if (typePattern != null) {
 			try {
-				fPattern = Pattern
+				fPattern = Pattern //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
 						.compile(convertToRegularExpression(typePattern));
 			} catch (PatternSyntaxException e) {
 				throw new CoreException(new Status(IStatus.ERROR,
@@ -683,9 +683,9 @@ public class JavaMethodBreakpoint extends JavaLineBreakpoint implements //FLLDCI
 	 * @return the modified pattern
 	 */
 	private String convertToRegularExpression(String stringMatcherPattern) {
-		String regex = stringMatcherPattern.replaceAll("\\.", "\\\\."); //$NON-NLS-1$//$NON-NLS-2$
-		regex = regex.replaceAll("\\*", "\\.\\*"); //$NON-NLS-1$//$NON-NLS-2$
-		regex = regex.replaceAll("\\$", "\\\\\\$"); //$NON-NLS-1$ //$NON-NLS-2$
+		String regex = stringMatcherPattern.replaceAll("\\.", "\\\\."); //$NON-NLS-1$//$NON-NLS-2$ //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
+		regex = regex.replaceAll("\\*", "\\.\\*"); //$NON-NLS-1$//$NON-NLS-2$ //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
+		regex = regex.replaceAll("\\$", "\\\\\\$"); //$NON-NLS-1$ //$NON-NLS-2$ //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
 		return regex;
 	}
 

@@ -511,8 +511,8 @@ public class JavaSourceLocator implements IPersistableSourceLocator {
 						}
 						if (path != null) {
 							File file = new File(path);
-							if (file.exists()) {
-								if (file.isDirectory()) {
+							if (file.exists()) { //FLLDCIM: MARK — M31 M3FILE_IO CALL
+								if (file.isDirectory()) { //FLLDCIM: MARK — M31 M3FILE_IO CALL
 									location = new DirectorySourceLocation(file);
 								} else {
 									location = new ArchiveSourceLocation(path, entry.getSourceAttachmentRootLocation());

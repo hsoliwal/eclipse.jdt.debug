@@ -125,8 +125,8 @@ public abstract class AbstractJDITest extends TestCase {
 		try {
 			String cp = MainClass.class.getProtectionDomain().getCodeSource().getLocation().toURI().getPath();
 			System.out.println("MainClass path=" + cp); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
-			if (new File(cp).isDirectory() && !cp.endsWith(File.separatorChar + "bin" + File.separatorChar) //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
-					&& new File(cp + "bin" + File.separatorChar).isDirectory()) { //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
+			if (new File(cp).isDirectory() && !cp.endsWith(File.separatorChar + "bin" + File.separatorChar) //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT //FLLDCIM: MARK — M31 M3FILE_IO CALL
+					&& new File(cp + "bin" + File.separatorChar).isDirectory()) { //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT //FLLDCIM: MARK — M31 M3FILE_IO CALL
 				cp += "bin" + File.separatorChar; //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 			}
 			fClassPath = new File(cp).getAbsolutePath();
@@ -793,7 +793,7 @@ public abstract class AbstractJDITest extends TestCase {
 
 			String launcher = binDirectory.toString() + "javaw.exe"; //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 			File vm= new File(launcher);
-			if (!vm.exists()) {
+			if (!vm.exists()) { //FLLDCIM: MARK — M31 M3FILE_IO CALL
 				launcher = binDirectory + "java"; //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 			}
 			commandLine.add(launcher);
@@ -883,7 +883,7 @@ public abstract class AbstractJDITest extends TestCase {
 	 */
 	private void injectVMArgs(Vector<String> commandLine) {
 		if (fVmArgs != null) {
-			String[] args = fVmArgs.split(",");
+			String[] args = fVmArgs.split(","); //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
 			for (int i=0; i < args.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				commandLine.add(args[i]);
 			}

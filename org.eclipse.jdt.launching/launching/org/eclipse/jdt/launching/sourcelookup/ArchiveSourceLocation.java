@@ -209,7 +209,7 @@ public class ArchiveSourceLocation extends PlatformObject implements IJavaSource
 					NLS.bind(LaunchingMessages.ArchiveSourceLocation_Exception_occurred_while_detecting_root_source_directory_in_archive__0__1, new String[] {getName()}), e));
 			}
 			synchronized (zip) {
-				Enumeration<? extends ZipEntry> entries = zip.entries();
+				Enumeration<? extends ZipEntry> entries = zip.entries(); //FLLDCIM: MARK — M25 M3FILE_ARCHIVE_STREAM CALL
 				String fileName = path.toString();
 				try {
 					while (entries.hasMoreElements()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP

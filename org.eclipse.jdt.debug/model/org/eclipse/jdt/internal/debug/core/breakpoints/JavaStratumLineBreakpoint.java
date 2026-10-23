@@ -415,7 +415,7 @@ public class JavaStratumLineBreakpoint extends JavaLineBreakpoint implements //F
 		String patterns = getPattern();
 
 		// delimit by ","
-		fTypeNamePatterns = patterns.split(","); //$NON-NLS-1$
+		fTypeNamePatterns = patterns.split(","); //$NON-NLS-1$ //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
 		fSuffix = new String[fTypeNamePatterns.length];
 		fPrefix = new String[fTypeNamePatterns.length];
 		for (int i = 0; i < fTypeNamePatterns.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP

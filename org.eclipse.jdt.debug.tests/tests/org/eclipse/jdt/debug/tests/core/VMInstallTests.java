@@ -317,7 +317,7 @@ public class VMInstallTests extends AbstractDebugTest {
 			int maxSearchDepth = 1;
 			Path root = Stream.iterate(defaultVMLocation, Objects::nonNull, Path::getParent) //
 					.skip(maxSearchDepth).findFirst().orElseThrow();
-			try (Stream<Path> directories = Files.walk(root, maxSearchDepth);) {
+			try (Stream<Path> directories = Files.walk(root, maxSearchDepth);) { //FLLDCIM: MARK — M24 M3FILE_STREAMS CALL
 				candidateDirectories = directories.map(Path::toFile).collect(Collectors.toSet());
 			}
 			Arrays.stream(JavaRuntime.getVMInstallTypes()).flatMap(t -> Arrays.stream(t.getVMInstalls())) //

@@ -93,7 +93,7 @@ public class TcpipSpy extends Thread {
 					.format("Writing output to {0}", new Object[] { file.getAbsolutePath() })); //$NON-NLS-1$
 			try {
 				out = new VerbosePacketStream(new BufferedOutputStream(
-						new FileOutputStream(file)));
+						new FileOutputStream(file))); //FLLDCIM: MARK — M31 M3FILE_IO NEW
 			} catch (FileNotFoundException e) {
 				out.println(MessageFormat
 						.format("Could not open {0}.  Using stdout instead", new Object[] { file.getAbsolutePath() })); //$NON-NLS-1$

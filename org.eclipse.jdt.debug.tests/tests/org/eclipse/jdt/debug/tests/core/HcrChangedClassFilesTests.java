@@ -233,12 +233,12 @@ public class HcrChangedClassFilesTests extends AbstractDebugTest {
 	}
 
 	private static void delete(File file) {
-		File[] children = file.listFiles();
+		File[] children = file.listFiles(); //FLLDCIM: MARK — M31 M3FILE_IO CALL
 		if (children != null) {
 			for (File child : children) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				delete(child);
 			}
 		}
-		file.delete();
+		file.delete(); //FLLDCIM: MARK — M31 M3FILE_IO CALL
 	}
 }

@@ -61,7 +61,7 @@ public class LaunchingPreferenceInitializer extends AbstractPreferenceInitialize
 		//https://bugs.eclipse.org/bugs/show_bug.cgi?id=395366
 		String val = dnode.get(JavaCore.CORE_JAVA_BUILD_RESOURCE_COPY_FILTER, (String)null);
 		if(val != null && !"".equals(val)) { //$NON-NLS-1$
-			String[] filters = val.split(","); //$NON-NLS-1$
+			String[] filters = val.split(","); //$NON-NLS-1$ //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
 			StringBuilder buff = new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 			boolean found = false;
 			for (int i = 0; i < filters.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP

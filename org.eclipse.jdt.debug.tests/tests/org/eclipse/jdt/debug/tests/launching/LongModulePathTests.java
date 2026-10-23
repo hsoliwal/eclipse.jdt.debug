@@ -99,7 +99,7 @@ public class LongModulePathTests extends AbstractDebugTest {
 
 		// Then
 		File tempFile = getTempFile(thread.getLaunch()).orElseThrow(() -> new RuntimeException("No temp file"));
-		assertTrue(tempFile.exists());
+		assertTrue(tempFile.exists()); //FLLDCIM: MARK — M31 M3FILE_IO CALL
 		assertTrue(tempFile.getName().endsWith(".txt"));
 		assertTrue(doEval(thread, "System.getProperty(\"jdk.module.path\")").getValueString().length() >= minModulePathLength);
 
@@ -109,7 +109,7 @@ public class LongModulePathTests extends AbstractDebugTest {
 		// Then
 		if (!Platform.OS.isWindows()) {
 			// On windows, temp file deletion may fail
-			assertFalse(tempFile.exists());
+			assertFalse(tempFile.exists()); //FLLDCIM: MARK — M31 M3FILE_IO CALL
 		}
 	}
 

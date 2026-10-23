@@ -356,7 +356,7 @@ public class ScrapbookLauncher implements IDebugEventSetListener { //FLLDCIM: MA
 			// should use same encoding as org.eclipse.jdt.internal.debug.ui.snippeteditor.ScrapbookMain.getClasspath(String[])
 			encoded.append(URLEncoder.encode(token, StandardCharsets.UTF_8)); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		}
-		if (file.isDirectory()) {
+		if (file.isDirectory()) { //FLLDCIM: MARK — M31 M3FILE_IO CALL
 			encoded.append(urlDelimiter); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		}
 		return new URL(encoded.toString());

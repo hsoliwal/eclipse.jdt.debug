@@ -209,10 +209,10 @@ public class JavaClassPrepareBreakpoint extends JavaBreakpoint implements //FLLD
 			if (pattern == null){
 				 String typeName = ".*";//$NON-NLS-1$
 				 String breakpointName = ensureMarker().getAttribute(TYPE_NAME, null);
-				 typeName = typeName + breakpointName.replaceAll("\\.", "\\\\.");  //$NON-NLS-1$//$NON-NLS-2$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
-				 typeName = typeName.replaceAll("\\$", "\\\\\\$");  //$NON-NLS-1$//$NON-NLS-2$
+				 typeName = typeName + breakpointName.replaceAll("\\.", "\\\\.");  //$NON-NLS-1$//$NON-NLS-2$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
+				 typeName = typeName.replaceAll("\\$", "\\\\\\$");  //$NON-NLS-1$//$NON-NLS-2$ //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
 				 typeName = typeName.concat(".*"); //$NON-NLS-1$
-				 pattern = Pattern.compile(typeName);
+				 pattern = Pattern.compile(typeName); //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
 			}
 			if (isEnabled() && pattern.matcher(event.referenceType().name()).find()){ //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
 				ThreadReference threadRef = event.thread();

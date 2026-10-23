@@ -96,8 +96,8 @@ public class JavaStackTraceConsoleTest extends AbstractJavaStackTraceConsoleTest
 		sync(() -> removeConsole(true));
 
 		Path file = Paths.get(JavaStackTraceConsole.FILE_NAME);
-		assertTrue("Content was not stored.", Files.exists(file));
-		assertTrue("Content was not stored.", Files.size(file) > 0);
+		assertTrue("Content was not stored.", Files.exists(file)); //FLLDCIM: MARK — M31 M3FILE_IO CALL
+		assertTrue("Content was not stored.", Files.size(file) > 0); //FLLDCIM: MARK — M31 M3FILE_IO CALL
 
 		sync(() -> initConsole(false));
 		assertNotSame("Failed to create new console.", initialDocument, fConsole.getDocument());

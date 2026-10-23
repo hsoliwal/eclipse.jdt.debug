@@ -187,7 +187,7 @@ public class StandardVMDebugger extends StandardVMRunner {
 		arguments.add(program);
 
 		if (fVMInstance instanceof StandardVM && ((StandardVM)fVMInstance).getDebugArgs() != null){
-			String debugArgString = ((StandardVM)fVMInstance).getDebugArgs().replaceAll("\\Q" + StandardVM.VAR_PORT + "\\E", Integer.toString(port));  //$NON-NLS-1$ //$NON-NLS-2$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
+			String debugArgString = ((StandardVM)fVMInstance).getDebugArgs().replaceAll("\\Q" + StandardVM.VAR_PORT + "\\E", Integer.toString(port));  //$NON-NLS-1$ //$NON-NLS-2$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
 			arguments.addAll(Arrays.asList(DebugPlugin.parseArguments(debugArgString)));
 		} else {
 			// VM arguments are the first thing after the java program so that users can specify
@@ -496,7 +496,7 @@ public class StandardVMDebugger extends StandardVMRunner {
 			else {
 				jrepath = jrepath.append(JRE).append(BIN);
 			}
-			if(jrepath.toFile().exists()) {
+			if(jrepath.toFile().exists()) { //FLLDCIM: MARK — M31 M3FILE_IO CALL
 				String jrestr = jrepath.toOSString();
 				if(env == null){
 					Map<String, String> map = DebugPlugin.getDefault().getLaunchManager().getNativeEnvironment();

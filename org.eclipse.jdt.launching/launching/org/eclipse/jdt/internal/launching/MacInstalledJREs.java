@@ -91,7 +91,7 @@ public class MacInstalledJREs {
 		try {
 			// locate the "java_home" executable
 			File javaHome = new File(JAVA_HOME_PLIST);
-			if (!javaHome.exists()) {
+			if (!javaHome.exists()) { //FLLDCIM: MARK — M31 M3FILE_IO CALL
 				throw new CoreException(Status.warning("The java_home executable does not exist")); //$NON-NLS-1$
 			}
 			String[] cmdLine = new String[] {JAVA_HOME_PLIST, "-X"}; //$NON-NLS-1$
