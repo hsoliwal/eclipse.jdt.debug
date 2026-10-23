@@ -80,7 +80,7 @@ public class VirtualMachineImpl extends MirrorImpl implements VirtualMachine,
 	private int fRequestTimeout;
 	/** Mapping of command codes to strings. */
 
-	private static Map<Integer, String> fgHCRResultMap = null;
+	private static Map<Integer, String> fgHCRResultMap = null; //FLLDCIM: MARK — M10 M3_PRIMITIVE_LANES FIELD
 
 	/** EventRequestManager that creates event objects on request. */
 	private final EventRequestManagerImpl fEventReqMgr;

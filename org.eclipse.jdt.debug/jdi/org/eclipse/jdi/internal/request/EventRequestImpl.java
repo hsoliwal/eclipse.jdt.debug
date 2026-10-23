@@ -88,10 +88,10 @@ public abstract class EventRequestImpl extends MirrorImpl implements
 	public static final byte MODIF_KIND_PLATFORMTHREADSONLY = 13;
 
 	/** Mapping of command codes to strings. */
-	private static HashMap<Integer, String> fStepSizeMap = null;
-	private static HashMap<Integer, String> fStepDepthMap = null;
-	private static HashMap<Integer, String> fSuspendPolicyMap = null;
-	private static HashMap<Integer, String> fModifierKindMap = null;
+	private static HashMap<Integer, String> fStepSizeMap = null; //FLLDCIM: MARK — M10 M3_PRIMITIVE_LANES FIELD
+	private static HashMap<Integer, String> fStepDepthMap = null; //FLLDCIM: MARK — M10 M3_PRIMITIVE_LANES FIELD
+	private static HashMap<Integer, String> fSuspendPolicyMap = null; //FLLDCIM: MARK — M10 M3_PRIMITIVE_LANES FIELD
+	private static HashMap<Integer, String> fModifierKindMap = null; //FLLDCIM: MARK — M10 M3_PRIMITIVE_LANES FIELD
 
 	/**
 	 * Flag that indicates the request was generated from inside of this JDI
@@ -118,7 +118,7 @@ public abstract class EventRequestImpl extends MirrorImpl implements
 	 * Modifiers.
 	 */
 	/** Count filters. */
-	protected ArrayList<Integer> fCountFilters;
+	protected ArrayList<Integer> fCountFilters; //FLLDCIM: MARK — M10 M3_PRIMITIVE_LANES FIELD
 
 	/** Thread filters. */
 	protected ArrayList<ThreadReference> fThreadFilters = null;

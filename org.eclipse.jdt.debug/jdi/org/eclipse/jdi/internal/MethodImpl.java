@@ -62,8 +62,8 @@ public class MethodImpl extends TypeComponentImpl implements Method, Locatable {
 	private List<LocalVariable> fVariables = null;
 	private long fLowestValidCodeIndex = -1;
 	private long fHighestValidCodeIndex = -1;
-	private Map<Long, Integer> fCodeIndexToLine = null;
-	private Map<Integer, List<Long>> fLineToCodeIndexes = null;
+	private Map<Long, Integer> fCodeIndexToLine = null; //FLLDCIM: MARK — M10 M3_PRIMITIVE_LANES FIELD
+	private Map<Integer, List<Long>> fLineToCodeIndexes = null; //FLLDCIM: MARK — M10 M3_PRIMITIVE_LANES FIELD
 	private Map<String, Map<String, List<Location>>> fStratumAllLineLocations = null;
 	private int fArgumentSlotsCount = -1;
 	private List<LocalVariable> fArguments = null;
@@ -196,7 +196,7 @@ public class MethodImpl extends TypeComponentImpl implements Method, Locatable {
 				fCodeIndexTable[i] = lineCodeIndex;
 				fJavaStratumLineNumberTable[i] = lineNr;
 
-				List<Long> lineNrEntry = fLineToCodeIndexes.get(lineNrInt);
+				List<Long> lineNrEntry = fLineToCodeIndexes.get(lineNrInt); //FLLDCIM: MARK — M10 M3_PRIMITIVE_LANES LOCAL_VARIABLE
 				if (lineNrEntry == null) {
 					lineNrEntry = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 					fLineToCodeIndexes.put(lineNrInt, lineNrEntry);
@@ -873,10 +873,10 @@ public class MethodImpl extends TypeComponentImpl implements Method, Locatable {
 	 * or/and the VM). Return an empty list if there is not executable code at
 	 * the specified lines.
 	 */
-	protected List<Location> javaStratumLocationsOfLines(List<Integer> javaLines)	throws AbsentInformationException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
-		Set<Long> tmpLocations = new TreeSet<>();
+	protected List<Location> javaStratumLocationsOfLines(List<Integer> javaLines)	throws AbsentInformationException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD //FLLDCIM: MARK — M10 M3_PRIMITIVE_LANES PARAMETER
+		Set<Long> tmpLocations = new TreeSet<>(); //FLLDCIM: MARK — M10 M3_PRIMITIVE_LANES LOCAL_VARIABLE
 		for (Integer key : javaLines) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
-			List<Long> indexes = javaStratumLineToCodeIndexes(key.intValue());
+			List<Long> indexes = javaStratumLineToCodeIndexes(key.intValue()); //FLLDCIM: MARK — M10 M3_PRIMITIVE_LANES LOCAL_VARIABLE
 			if (indexes != null) {
 				tmpLocations.addAll(indexes);
 			}

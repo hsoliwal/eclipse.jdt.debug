@@ -64,8 +64,8 @@ public abstract class JdwpID {
 	public static final byte TYPE_TAG_ARRAY = 3; // ReferenceType is an array.
 
 	/** Mapping of command codes to strings. */
-	private static HashMap<Integer, String> fTagMap = null;
-	private static HashMap<Integer, String> fTypeTagMap = null;
+	private static HashMap<Integer, String> fTagMap = null; //FLLDCIM: MARK — M10 M3_PRIMITIVE_LANES FIELD
+	private static HashMap<Integer, String> fTypeTagMap = null; //FLLDCIM: MARK — M10 M3_PRIMITIVE_LANES FIELD
 
 	/** Jdwp representation of null ID. */
 	protected static final int VALUE_NULL = 0;

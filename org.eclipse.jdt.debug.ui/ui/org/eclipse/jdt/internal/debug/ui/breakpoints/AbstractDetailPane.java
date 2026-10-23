@@ -51,7 +51,7 @@ public abstract class AbstractDetailPane implements IDetailPane3 {
 	private final String fDescription;
 	private final String fId;
 	private AbstractJavaBreakpointEditor fEditor;
-	private final Set<Integer> fAutoSaveProperties = new HashSet<>(); //FLLDCIM: MARK — M03 M3_SET_LANES NEW
+	private final Set<Integer> fAutoSaveProperties = new HashSet<>(); //FLLDCIM: MARK — M03 M3_SET_LANES NEW //FLLDCIM: MARK — M10 M3_PRIMITIVE_LANES FIELD
 	private IWorkbenchPartSite fSite;
 
 	// property listeners

@@ -52,7 +52,7 @@ public class PacketReceiveManager extends PacketManager {
 	 * List of Packets that have timed out already. Maintained so that responses
 	 * can be discarded if/when they are received.
 	 */
-	private final ArrayList<Integer> fTimedOutPackets;
+	private final ArrayList<Integer> fTimedOutPackets; //FLLDCIM: MARK — M10 M3_PRIMITIVE_LANES FIELD
 
 	private final VirtualMachineImpl fVM;
 

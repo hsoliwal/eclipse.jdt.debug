@@ -30,7 +30,7 @@ public class InstructionSequence implements ICompiledExpression {
 	private final List<String> fErrors;
 	private final String fSnippet;
 	private CoreException fException;
-	private final List<Integer> fProblemIDs;
+	private final List<Integer> fProblemIDs; //FLLDCIM: MARK — M10 M3_PRIMITIVE_LANES FIELD
 
 	public InstructionSequence(String snippet) {
 		fInstructions = new ArrayList<>(10); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW

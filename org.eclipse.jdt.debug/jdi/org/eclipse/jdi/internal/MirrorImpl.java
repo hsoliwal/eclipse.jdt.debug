@@ -421,7 +421,7 @@ public class MirrorImpl implements Mirror {
 	 *
 	 * @return Returns value that has been read.
 	 */
-	public byte readByte(String description, Map<Integer, String> valueToString,
+	public byte readByte(String description, Map<Integer, String> valueToString, //FLLDCIM: MARK — M10 M3_PRIMITIVE_LANES PARAMETER
 			DataInputStream in) throws IOException {
 		byte result = in.readByte();
 		if (fVerboseWriter != null) {
@@ -435,7 +435,7 @@ public class MirrorImpl implements Mirror {
 	 *
 	 * @return Returns value that has been read.
 	 */
-	public short readShort(String description, Map<Integer, String> valueToString,
+	public short readShort(String description, Map<Integer, String> valueToString, //FLLDCIM: MARK — M10 M3_PRIMITIVE_LANES PARAMETER
 			DataInputStream in) throws IOException {
 		short result = in.readShort();
 		if (fVerboseWriter != null) {
@@ -449,7 +449,7 @@ public class MirrorImpl implements Mirror {
 	 *
 	 * @return Returns value that has been read.
 	 */
-	public int readInt(String description, Map<Integer, String> valueToString, DataInputStream in)
+	public int readInt(String description, Map<Integer, String> valueToString, DataInputStream in) //FLLDCIM: MARK — M10 M3_PRIMITIVE_LANES PARAMETER
 			throws IOException {
 		int result = in.readInt();
 		if (fVerboseWriter != null) {
@@ -590,7 +590,7 @@ public class MirrorImpl implements Mirror {
 	/**
 	 * Writes Jdwp data and, if verbose is on, outputs verbose info.
 	 */
-	public void writeByte(byte value, String description, Map<Integer, String> valueToString,
+	public void writeByte(byte value, String description, Map<Integer, String> valueToString, //FLLDCIM: MARK — M10 M3_PRIMITIVE_LANES PARAMETER
 			DataOutputStream out) throws IOException {
 		out.writeByte(value);
 		if (fVerboseWriter != null) {
@@ -601,7 +601,7 @@ public class MirrorImpl implements Mirror {
 	/**
 	 * Writes Jdwp data and, if verbose is on, outputs verbose info.
 	 */
-	public void writeShort(short value, String description, Map<Integer, String> valueToString,
+	public void writeShort(short value, String description, Map<Integer, String> valueToString, //FLLDCIM: MARK — M10 M3_PRIMITIVE_LANES PARAMETER
 			DataOutputStream out) throws IOException {
 		out.writeShort(value);
 		if (fVerboseWriter != null) {
@@ -612,7 +612,7 @@ public class MirrorImpl implements Mirror {
 	/**
 	 * Writes Jdwp data and, if verbose is on, outputs verbose info.
 	 */
-	public void writeInt(int value, String description, Map<Integer, String> valueToString,
+	public void writeInt(int value, String description, Map<Integer, String> valueToString, //FLLDCIM: MARK — M10 M3_PRIMITIVE_LANES PARAMETER
 			DataOutputStream out) throws IOException {
 		out.writeInt(value);
 		if (fVerboseWriter != null) {

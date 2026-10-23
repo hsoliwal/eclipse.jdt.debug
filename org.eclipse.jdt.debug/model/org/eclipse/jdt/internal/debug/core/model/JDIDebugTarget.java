@@ -332,12 +332,12 @@ public class JDIDebugTarget extends JDIDebugElement implements //FLLDCIM: MARK �
 	/**
 	 * Java types from breakpoints with the flag if they are in scope for current launch
 	 */
-	private final Map<String, Boolean> fKnownTypes = new ConcurrentHashMap<>();
+	private final Map<String, Boolean> fKnownTypes = new ConcurrentHashMap<>(); //FLLDCIM: MARK — M10 M3_PRIMITIVE_LANES FIELD
 
 	/**
 	 * Labels given by the user is stored in this map, where the key is the unique ID of the object.
 	 */
-	private final Map<Long, String> objectLabels = new HashMap<>(); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
+	private final Map<Long, String> objectLabels = new HashMap<>(); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW //FLLDCIM: MARK — M10 M3_PRIMITIVE_LANES FIELD
 
 	/**
 	 * HCR failure alert pref for current debug session.

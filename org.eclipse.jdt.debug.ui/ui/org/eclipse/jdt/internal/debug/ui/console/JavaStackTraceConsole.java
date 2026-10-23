@@ -238,7 +238,7 @@ public class JavaStackTraceConsole extends TextConsole {
 		// In combination with Suppressed the correct indentation can be ambiguous.
 		// Map has indentation in number of spaces of a previous block as key and formated
 		// indentation depth used for this block as value.
-		Map<Integer, Integer> blockDepth = new HashMap<>(3); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
+		Map<Integer, Integer> blockDepth = new HashMap<>(3); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW //FLLDCIM: MARK — M10 M3_PRIMITIVE_LANES LOCAL_VARIABLE
 
 		while (tokenizer.hasMoreTokens()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			String token = tokenizer.nextToken();

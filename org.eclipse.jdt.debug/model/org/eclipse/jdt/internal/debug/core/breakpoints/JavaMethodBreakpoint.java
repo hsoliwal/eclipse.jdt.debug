@@ -141,7 +141,7 @@ public class JavaMethodBreakpoint extends JavaLineBreakpoint implements //FLLDCI
 	 * <li>Method exit (value <code>EXIT_EVENT</code>)</li>
 	 * </ol>
 	 */
-	private final Map<IDebugTarget, Integer> fLastEventTypes = new HashMap<>(10); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
+	private final Map<IDebugTarget, Integer> fLastEventTypes = new HashMap<>(10); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW //FLLDCIM: MARK — M10 M3_PRIMITIVE_LANES FIELD
 
 	/**
 	 * Used to match type names

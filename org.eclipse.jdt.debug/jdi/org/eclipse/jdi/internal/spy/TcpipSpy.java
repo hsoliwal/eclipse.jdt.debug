@@ -54,7 +54,7 @@ public class TcpipSpy extends Thread {
 	private final DataOutputStream fDataOut;
 
 	private static VerbosePacketStream out = new VerbosePacketStream(System.out);
-	private static Map<Integer, JdwpConversation> fPackets = new HashMap<>(); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
+	private static Map<Integer, JdwpConversation> fPackets = new HashMap<>(); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW //FLLDCIM: MARK — M10 M3_PRIMITIVE_LANES FIELD
 
 	private static int fFieldIDSize;
 	private static int fMethodIDSize;

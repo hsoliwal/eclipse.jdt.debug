@@ -103,7 +103,7 @@ public abstract class ReferenceTypeImpl extends TypeImpl implements
 		 * the output source file, range in the output source file]. (Integer ->
 		 * List of int[2]).
 		 */
-		private final HashMap<Integer, List<int[]>> fLineInfo;
+		private final HashMap<Integer, List<int[]>> fLineInfo; //FLLDCIM: MARK — M10 M3_PRIMITIVE_LANES FIELD
 
 		/**
 		 * FileInfo constructor.
@@ -155,7 +155,7 @@ public abstract class ReferenceTypeImpl extends TypeImpl implements
 		 * @return a List of int[2].
 		 */
 		public List<Integer> getOutputLinesForLine(int lineNumber) {
-			List<Integer> list = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
+			List<Integer> list = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW //FLLDCIM: MARK — M10 M3_PRIMITIVE_LANES LOCAL_VARIABLE
 			List<int[]> outputLines = fLineInfo.get(Integer.valueOf(lineNumber));
 			if (outputLines != null) {
 				for (int[] info : outputLines) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
@@ -209,7 +209,7 @@ public abstract class ReferenceTypeImpl extends TypeImpl implements
 		 * Map line number in the output source file -> list of line numbers in
 		 * the input source file. (Integer -> List of Integer)
 		 */
-		private final HashMap<Integer, List<int[]>> fOutputLineToInputLine;
+		private final HashMap<Integer, List<int[]>> fOutputLineToInputLine; //FLLDCIM: MARK — M10 M3_PRIMITIVE_LANES FIELD
 
 		/**
 		 * Stratum constructor.
@@ -1999,7 +1999,7 @@ public abstract class ReferenceTypeImpl extends TypeImpl implements
 	 */
 	public List<Location> locationsOfLine(String stratumId, String sourceName, int lineNumber, MethodImpl method)	throws AbsentInformationException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		Stratum stratum = getStratum(stratumId);
-		List<Integer> javaLines = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
+		List<Integer> javaLines = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW //FLLDCIM: MARK — M10 M3_PRIMITIVE_LANES LOCAL_VARIABLE
 		if (stratum != null) {
 			boolean found = false;
 			for (Iterator<FileInfo> iter = stratum.fFileInfos.iterator(); iter.hasNext() && !found;) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP

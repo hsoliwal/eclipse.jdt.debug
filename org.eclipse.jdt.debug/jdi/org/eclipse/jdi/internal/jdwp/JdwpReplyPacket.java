@@ -85,7 +85,7 @@ public class JdwpReplyPacket extends JdwpPacket {
 	public static final short HCR_OPERATION_REFUSED = 900; // HCR specific.
 
 	/** Mapping of error codes to strings. */
-	private static HashMap<Integer, String> fErrorMap = null;
+	private static HashMap<Integer, String> fErrorMap = null; //FLLDCIM: MARK — M10 M3_PRIMITIVE_LANES FIELD
 
 	/** JDWP Error code. */
 	private short fErrorCode;

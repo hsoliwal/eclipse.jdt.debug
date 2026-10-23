@@ -120,7 +120,7 @@ public class JavaLaunchableTester extends PropertyTester {
     /**
      * Map of modifier text to corresponding flag (Integer)
      */
-    private static Map<String, Integer> fgModifiers = new HashMap<>(); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
+    private static Map<String, Integer> fgModifiers = new HashMap<>(); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW //FLLDCIM: MARK — M10 M3_PRIMITIVE_LANES FIELD
 
     private static final int FLAGS_MASK= Flags.AccPublic | Flags.AccProtected | Flags.AccPrivate | Flags.AccStatic
     	| Flags.AccFinal | Flags.AccSynchronized | Flags.AccAbstract | Flags.AccNative;

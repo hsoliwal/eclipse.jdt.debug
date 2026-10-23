@@ -492,7 +492,7 @@ public final class ExecutionEnvironmentDescription {
 					key = makePathAbsolute(key, root);
 					value = makePathAbsolute(value, root);
 
-					List<Character> wildcards = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
+					List<Character> wildcards = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW //FLLDCIM: MARK — M10 M3_PRIMITIVE_LANES LOCAL_VARIABLE
 					StringBuilder keyBuffer = new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 				    char [] chars = key.toCharArray();
 				    // Convert lib location to a regex, replace wildcards with grouped equivalents, keep track of used wildcards, allow '\' and '/' to be used, escape special chars

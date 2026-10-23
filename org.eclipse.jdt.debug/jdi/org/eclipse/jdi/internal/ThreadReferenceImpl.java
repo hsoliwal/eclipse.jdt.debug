@@ -63,7 +63,7 @@ public class ThreadReferenceImpl extends ObjectReferenceImpl implements	ThreadRe
 	public static final int SUSPEND_STATUS_SUSPENDED = 0x01;
 
 	/** Mapping of command codes to strings. */
-	private static Map<Integer, String> fgThreadStatusMap = null;
+	private static Map<Integer, String> fgThreadStatusMap = null; //FLLDCIM: MARK — M10 M3_PRIMITIVE_LANES FIELD
 
 	/** Map with Strings for flag bits. */
 	private static String[] fgSuspendStatusStrings = null;

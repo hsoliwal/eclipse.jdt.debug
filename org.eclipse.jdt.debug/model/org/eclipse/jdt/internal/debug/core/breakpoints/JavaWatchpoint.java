@@ -97,7 +97,7 @@ public class JavaWatchpoint extends JavaLineBreakpoint implements //FLLDCIM: MAR
 	 * <li>Field modification (value <code>MODIFICATION_EVENT</code>)</li>
 	 * </ol>
 	 */
-	private final HashMap<JDIDebugTarget, Integer> fLastEventTypes = new HashMap<>(10); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
+	private final HashMap<JDIDebugTarget, Integer> fLastEventTypes = new HashMap<>(10); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW //FLLDCIM: MARK — M10 M3_PRIMITIVE_LANES FIELD
 
 	public JavaWatchpoint() {
 	}

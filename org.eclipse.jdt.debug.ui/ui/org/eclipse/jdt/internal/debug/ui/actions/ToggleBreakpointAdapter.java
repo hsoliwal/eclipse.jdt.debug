@@ -1955,7 +1955,7 @@ public class ToggleBreakpointAdapter implements IToggleBreakpointsTargetExtensio
 	}
 
 	static int selectLambda(List<LambdaExpression> lambdaExps) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
-		Map<String, Integer> seen = new HashMap<>(); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
+		Map<String, Integer> seen = new HashMap<>(); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW //FLLDCIM: MARK — M10 M3_PRIMITIVE_LANES LOCAL_VARIABLE
 		// Generate unique labels used also as keys for lambda expressions. Note that two identical
 		// lambda expressions in different locations should still have different names
 		// otherwise the selection dialog cannot distinguish them.

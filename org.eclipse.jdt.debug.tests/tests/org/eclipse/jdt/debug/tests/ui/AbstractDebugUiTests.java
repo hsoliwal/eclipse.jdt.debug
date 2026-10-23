@@ -373,8 +373,8 @@ public abstract class AbstractDebugUiTests extends AbstractDebugTest {
 	}
 
 	public class BreakpointsMap {
-		IdentityHashMap<IJavaLineBreakpoint, Integer> breakpoints = new IdentityHashMap<>(); //FLLDCIM: MARK — M06 M3_IDENTITY_WEAK_LANES NEW
-		HashMap<Integer, IJavaLineBreakpoint> lines = new HashMap<>(); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
+		IdentityHashMap<IJavaLineBreakpoint, Integer> breakpoints = new IdentityHashMap<>(); //FLLDCIM: MARK — M06 M3_IDENTITY_WEAK_LANES NEW //FLLDCIM: MARK — M10 M3_PRIMITIVE_LANES FIELD
+		HashMap<Integer, IJavaLineBreakpoint> lines = new HashMap<>(); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW //FLLDCIM: MARK — M10 M3_PRIMITIVE_LANES FIELD
 
 		public void put(IJavaLineBreakpoint breakpoint, int line) throws Exception {
 			int lineNumber = breakpoint.getLineNumber();

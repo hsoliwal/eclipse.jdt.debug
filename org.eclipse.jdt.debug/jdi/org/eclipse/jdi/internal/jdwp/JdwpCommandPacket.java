@@ -183,7 +183,7 @@ public class JdwpCommandPacket extends JdwpPacket {
 	public static final int HCR_CAPABILITIES = 5 + (CSET_HOT_CODE_REPLACEMENT << 8);
 
 	/** Mapping of command codes to strings. */
-	private static Map<Integer, String> fgCommandMap = null;
+	private static Map<Integer, String> fgCommandMap = null; //FLLDCIM: MARK — M10 M3_PRIMITIVE_LANES FIELD
 
 	/** Next id to be assigned. */
 	private static int fgNextId = 1;
@@ -267,7 +267,7 @@ public class JdwpCommandPacket extends JdwpPacket {
 		Field[] fields = JdwpCommandPacket.class.getDeclaredFields();
 
 		// First get the set names.
-		Map<Integer, String> setNames = new HashMap<>(fields.length); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
+		Map<Integer, String> setNames = new HashMap<>(fields.length); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW //FLLDCIM: MARK — M10 M3_PRIMITIVE_LANES LOCAL_VARIABLE
 		for (Field field : fields) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			if ((field.getModifiers() & Modifier.PUBLIC) == 0
 					|| (field.getModifiers() & Modifier.STATIC) == 0

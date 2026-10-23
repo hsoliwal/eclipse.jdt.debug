@@ -65,7 +65,7 @@ public abstract class EventImpl extends MirrorImpl implements Event {
 	protected ThreadReferenceImpl fThreadRef;
 
 	/** Mapping of command codes to strings. */
-	private static HashMap<Integer, String> fEventKindMap = null;
+	private static HashMap<Integer, String> fEventKindMap = null; //FLLDCIM: MARK — M10 M3_PRIMITIVE_LANES FIELD
 
 	/** Request ID of event. */
 	private final RequestID fRequestID;
