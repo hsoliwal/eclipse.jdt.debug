@@ -135,6 +135,7 @@ public class OpenFromClipboardAction implements IWorkbenchWindowActionDelegate {
 	 * <code> at org.eclipse.core.runtime.Assert.isLegal(Assert.java:41)</code>
 	 */
 	private static final String STACK_TRACE_QUALIFIED_LINE_PATTERN = "[^()]*?(" + STRICT_QUALIFIED_NAME_PATTERN + ")" + WS + STACK_TRACE_PARENTHESIZED_PATTERN; //$NON-NLS-1$ //$NON-NLS-2$
+	private static final Pattern STACK_TRACE_QUALIFIED_LINE_PATTERN_COMPILED = Pattern.compile(STACK_TRACE_QUALIFIED_LINE_PATTERN);
 
 	/**
 	 * Pattern to match a method e.g.
@@ -340,7 +341,7 @@ public class OpenFromClipboardAction implements IWorkbenchWindowActionDelegate {
 					String lineNumber = typeLine.substring(index + 1, typeLine.length()).trim();
 					int line = Integer.parseInt(lineNumber);
 
-					Pattern pattern = Pattern.compile(STACK_TRACE_QUALIFIED_LINE_PATTERN);
+					Pattern pattern = STACK_TRACE_QUALIFIED_LINE_PATTERN_COMPILED;
 					Matcher matcher = pattern.matcher(s);
 					if (matcher.find()) {
 						String qualifiedName = matcher.group(1);
