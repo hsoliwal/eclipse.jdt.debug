@@ -143,7 +143,7 @@ public class JavaLineBreakpoint extends JavaBreakpoint implements
 			final int charEnd, final int hitCount, final boolean add,
 			final Map<String, Object> attributes, final String markerType)
 			throws DebugException {
-		IWorkspaceRunnable wr = _ -> {
+		IWorkspaceRunnable wr = unused -> {
 
 			// add attributes
 			addLineBreakpointAttributes(attributes, getModelIdentifier(),

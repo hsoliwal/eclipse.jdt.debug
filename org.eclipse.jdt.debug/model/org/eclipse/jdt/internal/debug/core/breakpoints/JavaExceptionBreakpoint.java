@@ -167,7 +167,7 @@ public class JavaExceptionBreakpoint extends JavaBreakpoint implements
 			final String exceptionName, final boolean caught,
 			final boolean uncaught, final boolean checked, final boolean add,
 			final Map<String, Object> attributes) throws DebugException {
-		IWorkspaceRunnable wr = _ -> {
+		IWorkspaceRunnable wr = unused -> {
 			// add attributes
 			attributes.put(IBreakpoint.ID, getModelIdentifier());
 			attributes.put(TYPE_NAME, exceptionName);

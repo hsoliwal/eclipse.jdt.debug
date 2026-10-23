@@ -1,0 +1,12 @@
+repo	kind	path	line	text
+eclipse.jdt.debug	unnamed_lambda	org.eclipse.jdt.debug.ui/ui/org/eclipse/jdt/debug/ui/launchConfigurations/JavaArgumentsTab.java	139	  fPrgmArgumentsText.addModifyListener(_ -> scheduleUpdateJob());
+eclipse.jdt.debug	unnamed_lambda	org.eclipse.jdt.debug.ui/ui/org/eclipse/jdt/internal/debug/ui/display/DisplayView.java	208	  fSourceViewer.getTextWidget().addDisposeListener(_ -> themeManager.removePropertyChangeListener(fontListener));
+eclipse.jdt.debug	unnamed_lambda	org.eclipse.jdt.debug/model/org/eclipse/jdt/internal/debug/core/breakpoints/JavaClassPrepareBreakpoint.java	92	  IWorkspaceRunnable wr = _ -> {
+eclipse.jdt.debug	unnamed_lambda	org.eclipse.jdt.debug/model/org/eclipse/jdt/internal/debug/core/breakpoints/JavaExceptionBreakpoint.java	170	  IWorkspaceRunnable wr = _ -> {
+eclipse.jdt.debug	unnamed_lambda	org.eclipse.jdt.debug/model/org/eclipse/jdt/internal/debug/core/breakpoints/JavaLineBreakpoint.java	146	  IWorkspaceRunnable wr = _ -> {
+eclipse.jdt.debug	unnamed_lambda	org.eclipse.jdt.debug/model/org/eclipse/jdt/internal/debug/core/breakpoints/JavaMethodBreakpoint.java	183	  IWorkspaceRunnable wr = _ -> {
+eclipse.jdt.debug	unnamed_lambda	org.eclipse.jdt.debug/model/org/eclipse/jdt/internal/debug/core/breakpoints/JavaMethodEntryBreakpoint.java	79	  IWorkspaceRunnable wr = _ -> {
+eclipse.jdt.debug	unnamed_lambda	org.eclipse.jdt.debug/model/org/eclipse/jdt/internal/debug/core/breakpoints/JavaPatternBreakpoint.java	67	  IWorkspaceRunnable wr = _ -> {
+eclipse.jdt.debug	unnamed_pattern	org.eclipse.jdt.debug/eval/org/eclipse/jdt/internal/debug/eval/ast/engine/ASTInstructionCompiler.java	4607	   case '_':
+eclipse.jdt.debug	unnamed_pattern	org.eclipse.jdt.debug/eval/org/eclipse/jdt/internal/debug/eval/ast/engine/ASTInstructionCompiler.java	4629	   case '_':
+eclipse.jdt.debug	unnamed_pattern	org.eclipse.jdt.launching/launching/org/eclipse/jdt/internal/launching/StandardVM.java	66	      case '_':
