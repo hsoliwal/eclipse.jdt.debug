@@ -675,6 +675,12 @@ public class JavaMethodBreakpoint extends JavaLineBreakpoint implements
 
 	}
 
+	private static final Pattern CONVERT_TO_REGULAR_EXPRESSION_PATTERN = Pattern.compile("\\.");
+
+	private static final Pattern CONVERT_TO_REGULAR_EXPRESSION_PATTERN_2 = Pattern.compile("\\*");
+
+	private static final Pattern CONVERT_TO_REGULAR_EXPRESSION_PATTERN_3 = Pattern.compile("\\$"); //$NON-NLS-1$
+
 	/**
 	 * converts the specified string to one which has been formated to our needs
 	 *
@@ -683,9 +689,9 @@ public class JavaMethodBreakpoint extends JavaLineBreakpoint implements
 	 * @return the modified pattern
 	 */
 	private String convertToRegularExpression(String stringMatcherPattern) {
-		String regex = stringMatcherPattern.replaceAll("\\.", "\\\\."); //$NON-NLS-1$//$NON-NLS-2$
-		regex = regex.replaceAll("\\*", "\\.\\*"); //$NON-NLS-1$//$NON-NLS-2$
-		regex = regex.replaceAll("\\$", "\\\\\\$"); //$NON-NLS-1$ //$NON-NLS-2$
+		String regex = CONVERT_TO_REGULAR_EXPRESSION_PATTERN.matcher(stringMatcherPattern).replaceAll("\\\\."); //$NON-NLS-1$//$NON-NLS-2$
+		regex = CONVERT_TO_REGULAR_EXPRESSION_PATTERN_2.matcher(regex).replaceAll("\\.\\*"); //$NON-NLS-1$//$NON-NLS-2$
+		regex = CONVERT_TO_REGULAR_EXPRESSION_PATTERN_3.matcher(regex).replaceAll("\\\\\\$"); //$NON-NLS-1$
 		return regex;
 	}
 

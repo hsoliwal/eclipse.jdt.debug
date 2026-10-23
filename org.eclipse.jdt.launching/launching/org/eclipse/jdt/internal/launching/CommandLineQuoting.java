@@ -2,6 +2,8 @@ package org.eclipse.jdt.internal.launching;
 
 import org.eclipse.core.runtime.Platform;
 
+import java.util.regex.Pattern;
+
 /**
  * Utility for quoting of command line Arguments
  */
@@ -47,12 +49,16 @@ public class CommandLineQuoting {
 		return false;
 	}
 
+	private static final Pattern S_PATTERN = Pattern.compile("([\\\\]*)\""); //$NON-NLS-1$
+
+	private static final Pattern S_PATTERN_2 = Pattern.compile("([\\\\]*)\\z"); //$NON-NLS-1$
+
 	private static String winQuote(String s) {
 		if (!needsQuoting(s)) {
 			return s;
 		}
-		s = s.replaceAll("([\\\\]*)\"", "$1$1\\\\\""); //$NON-NLS-1$ //$NON-NLS-2$
-		s = s.replaceAll("([\\\\]*)\\z", "$1$1"); //$NON-NLS-1$ //$NON-NLS-2$
+		s = S_PATTERN.matcher(s).replaceAll("$1$1\\\\\""); //$NON-NLS-1$
+		s = S_PATTERN_2.matcher(s).replaceAll("$1$1"); //$NON-NLS-1$
 		return "\"" + s + "\""; //$NON-NLS-1$ //$NON-NLS-2$
 	}
 

@@ -20,6 +20,7 @@ import static org.eclipse.jdt.core.eval.ICodeSnippetRequestor.LOCAL_VAR_PREFIX;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
@@ -72,6 +73,8 @@ public class RemoteEvaluator {
 		this.variableNames = variableNames;
 	}
 
+	private static final Pattern LOAD_THE_CLASSES_PATTERN = Pattern.compile("/");
+
 	private IJavaClassObject loadTheClasses(IJavaThread theThread) throws DebugException {
 
 		if (loadedClass != null) {
@@ -95,7 +98,7 @@ public class RemoteEvaluator {
 			} else {
 				IJavaArray byteArray = createClassBytes(theThread, debugTarget, entry);
 				IJavaValue[] defineClassArgs = new IJavaValue[] { // args for defineClass
-						debugTarget.newValue(className.replaceAll("/", ".")), // class name //$NON-NLS-1$ //$NON-NLS-2$
+						debugTarget.newValue(LOAD_THE_CLASSES_PATTERN.matcher(className).replaceAll(".")), // class name //$NON-NLS-1$ //$NON-NLS-2$
 						byteArray, // classBytes,
 						debugTarget.newValue(0), // offset
 						debugTarget.newValue(entry.getValue().length), // length

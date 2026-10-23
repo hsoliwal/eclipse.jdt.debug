@@ -20,6 +20,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
+import java.util.regex.Pattern;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
@@ -582,6 +583,8 @@ public class InstalledJREsBlock implements IAddVMDialogRequestor, ISelectionProv
         fVMList.refresh(true);
     }
 
+	private static final Pattern GENERATE_NAME_PATTERN = Pattern.compile(".*\\(\\d*\\)");
+
 	/**
 	 * Compares the given name against current names and adds the appropriate numerical
 	 * suffix to ensure that it is unique.
@@ -593,7 +596,7 @@ public class InstalledJREsBlock implements IAddVMDialogRequestor, ISelectionProv
             if (!isDuplicateName(name)) {
                 return name;
             }
-            if (name.matches(".*\\(\\d*\\)")) { //$NON-NLS-1$
+            if (GENERATE_NAME_PATTERN.matcher(name).matches()) { //$NON-NLS-1$
                 int start = name.lastIndexOf('(');
                 int end = name.lastIndexOf(')');
                 String stringInt = name.substring(start+1, end);
