@@ -18,6 +18,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.StringTokenizer;
+import java.util.regex.Pattern;
 
 import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IResource;
@@ -1445,6 +1446,8 @@ public class JDIModelPresentation extends LabelProvider implements IDebugModelPr
 		return detail[0];
 	}
 
+	private static final Pattern SNIPPET_PATTERN = Pattern.compile("[\n\r\t]+");
+
 	protected String getExpressionText(IExpression expression) throws DebugException {
 		boolean showTypes= isShowVariableTypeNames();
 		StringBuilder buff= new StringBuilder();
@@ -1481,7 +1484,7 @@ public class JDIModelPresentation extends LabelProvider implements IDebugModelPr
 			snippetBuffer.append(snippet);
 		}
 		snippetBuffer.append('"');
-		snippet = snippetBuffer.toString().replaceAll("[\n\r\t]+", " ");  //$NON-NLS-1$//$NON-NLS-2$
+		snippet = SNIPPET_PATTERN.matcher(snippetBuffer.toString()).replaceAll(" ");  //$NON-NLS-1$//$NON-NLS-2$
 		buff.append(snippet);
 
 		if (javaValue != null) {

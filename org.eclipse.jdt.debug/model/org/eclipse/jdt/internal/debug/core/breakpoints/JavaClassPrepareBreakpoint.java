@@ -195,6 +195,9 @@ public class JavaClassPrepareBreakpoint extends JavaBreakpoint implements
 			ThreadReference thread) {
 	}
 
+	private static final Pattern HANDLE_CLASS_PREPARE_EVENT_PATTERN = Pattern.compile("\\.");
+	private static final Pattern TYPE_NAME_PATTERN = Pattern.compile("\\$");
+
 	/*
 	 * (non-Javadoc)
 	 *
@@ -209,8 +212,8 @@ public class JavaClassPrepareBreakpoint extends JavaBreakpoint implements
 			if (pattern == null){
 				 String typeName = ".*";//$NON-NLS-1$
 				 String breakpointName = ensureMarker().getAttribute(TYPE_NAME, null);
-				 typeName = typeName + breakpointName.replaceAll("\\.", "\\\\.");  //$NON-NLS-1$//$NON-NLS-2$
-				 typeName = typeName.replaceAll("\\$", "\\\\\\$");  //$NON-NLS-1$//$NON-NLS-2$
+				 typeName = typeName + HANDLE_CLASS_PREPARE_EVENT_PATTERN.matcher(breakpointName).replaceAll("\\\\.");  //$NON-NLS-1$//$NON-NLS-2$
+				 typeName = TYPE_NAME_PATTERN.matcher(typeName).replaceAll("\\\\\\$");  //$NON-NLS-1$//$NON-NLS-2$
 				 typeName = typeName.concat(".*"); //$NON-NLS-1$
 				 pattern = Pattern.compile(typeName);
 			}
