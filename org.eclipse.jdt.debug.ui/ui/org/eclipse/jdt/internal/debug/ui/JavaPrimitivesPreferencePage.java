@@ -36,7 +36,7 @@ import org.eclipse.ui.PlatformUI;
  */
 public class JavaPrimitivesPreferencePage extends PreferencePage implements IWorkbenchPreferencePage {
 
-	private final List<BooleanFieldEditor> fEdtiors = new ArrayList<>();
+	private final List<BooleanFieldEditor> fEdtiors = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 
 	public JavaPrimitivesPreferencePage() {
 		super(DebugUIMessages.JavaPrimitivesPreferencePage_0);
@@ -47,7 +47,7 @@ public class JavaPrimitivesPreferencePage extends PreferencePage implements IWor
 	/**
 	 * @see PreferencePage#createContents(Composite)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	protected Control createContents(Composite parent) {
 		PlatformUI.getWorkbench().getHelpSystem().setHelp(getControl(), IJavaDebugHelpContextIds.JAVA_PRIMITIVES_PREFERENCE_PAGE);
 
@@ -110,7 +110,7 @@ public class JavaPrimitivesPreferencePage extends PreferencePage implements IWor
 	@Override
 	protected void performDefaults() {
 		Iterator<BooleanFieldEditor> iterator = fEdtiors.iterator();
-		while (iterator.hasNext()) {
+		while (iterator.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			BooleanFieldEditor editor = iterator.next();
 			editor.loadDefault();
 		}
@@ -123,7 +123,7 @@ public class JavaPrimitivesPreferencePage extends PreferencePage implements IWor
 	 */
 	private void loadValues() {
 		Iterator<BooleanFieldEditor> iterator = fEdtiors.iterator();
-		while (iterator.hasNext()) {
+		while (iterator.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			BooleanFieldEditor editor = iterator.next();
 			editor.load();
 		}
@@ -135,7 +135,7 @@ public class JavaPrimitivesPreferencePage extends PreferencePage implements IWor
 	 */
 	private void storeValues() {
 		Iterator<BooleanFieldEditor> iterator = fEdtiors.iterator();
-		while (iterator.hasNext()) {
+		while (iterator.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			BooleanFieldEditor editor = iterator.next();
 			editor.store();
 		}

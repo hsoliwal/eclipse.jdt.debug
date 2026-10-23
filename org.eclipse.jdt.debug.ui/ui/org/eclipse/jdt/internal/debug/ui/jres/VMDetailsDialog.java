@@ -60,7 +60,7 @@ public class VMDetailsDialog extends Dialog {
 		PlatformUI.getWorkbench().getHelpSystem().setHelp(newShell, IJavaDebugHelpContextIds.JRE_DETAILS_DIALOG);
 	}
 
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	protected Control createDialogArea(Composite ancestor) {
 		Composite parent = (Composite)super.createDialogArea(ancestor);
 		GridLayout layout = new GridLayout(2, false);
@@ -107,8 +107,8 @@ public class VMDetailsDialog extends Dialog {
 		libraryViewer.getControl().setLayoutData(gd);
 		LibraryContentProvider provider = new LibraryContentProvider();
 		libraryViewer.setContentProvider(provider);
-		libraryViewer.setLabelProvider(new LibraryLabelProvider());
-		libraryViewer.setInput(this);
+		libraryViewer.setLabelProvider(new LibraryLabelProvider()); //FLLDCIM: MARK — T24 LABEL_DELTA CALL
+		libraryViewer.setInput(this); //FLLDCIM: MARK — M21 FULL_REBUILD_TO_DELTA CALL
 		provider.setLibraries(JavaRuntime.getLibraryLocations(fVM));
 
 		applyDialogFont(parent);

@@ -202,7 +202,7 @@ public class HcrCompilationUnitDeltaTests extends AbstractDebugTest {
 	 * dropped, otherwise the running program would continue to execute the old code of the already replaced class.
 	 * </p>
 	 */
-	public void testHcrDropsFramesOfContentRestrictedSourceFile() throws Exception {
+	public void testHcrDropsFramesOfContentRestrictedSourceFile() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		createLineBreakpoint(TARGET_BREAKPOINT_LINE, TARGET_TYPE);
 		HcrListener listener = new HcrListener();
 		JDIDebugModel.addHotCodeReplaceListener(listener);
@@ -241,7 +241,7 @@ public class HcrCompilationUnitDeltaTests extends AbstractDebugTest {
 			frame = (IJavaStackFrame) thread.getTopStackFrame();
 			assertNotNull("No top stack frame", frame);
 			assertEquals("Should have dropped to a frame of the replaced type", "four", frame.getMethodName());
-			assertTrue("The affected frame was not dropped, the thread is still suspended at line " + frame.getLineNumber()
+			assertTrue("The affected frame was not dropped, the thread is still suspended at line " + frame.getLineNumber() //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 					+ ": the changes of a content restricted file must be assumed to be relevant",
 					frame.getLineNumber() < TARGET_BREAKPOINT_LINE);
 		} finally {
@@ -253,7 +253,7 @@ public class HcrCompilationUnitDeltaTests extends AbstractDebugTest {
 
 	private ICompilationUnit getTargetCompilationUnit() throws Exception {
 		ICompilationUnit cu = getCompilationUnit(get14Project(), JavaProjectHelper.SRC_DIR, TARGET_PACKAGE, TARGET_CU_NAME).getPrimary();
-		assertTrue(TARGET_CU_NAME + " does not exist", cu.exists());
+		assertTrue(TARGET_CU_NAME + " does not exist", cu.exists()); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		return cu;
 	}
 
@@ -283,8 +283,8 @@ public class HcrCompilationUnitDeltaTests extends AbstractDebugTest {
 	private static void replaceInFile(IFile file, String oldText, String newText) throws Exception {
 		String contents = readFile(file);
 		int index = contents.indexOf(oldText);
-		assertTrue("Could not find the code to replace: " + oldText, index >= 0);
-		String newContents = contents.substring(0, index) + newText + contents.substring(index + oldText.length());
+		assertTrue("Could not find the code to replace: " + oldText, index >= 0); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
+		String newContents = contents.substring(0, index) + newText + contents.substring(index + oldText.length()); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		file.setContents(new ByteArrayInputStream(newContents.getBytes(Charset.forName(file.getCharset()))), IResource.FORCE, null);
 	}
 

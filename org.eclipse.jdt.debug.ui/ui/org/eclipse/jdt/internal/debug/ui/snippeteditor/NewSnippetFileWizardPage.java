@@ -49,11 +49,11 @@ public class NewSnippetFileWizardPage extends WizardNewFileCreationPage {
 		setDescription(SnippetMessages.getString("NewSnippetFileWizardPage.description"));		 //$NON-NLS-1$
 	}
 
-	public boolean finish() {
+	public boolean finish() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		// add extension if non is provided
 		String fileName= getFileName();
 		if (fileName != null && !fileName.endsWith(fgDefaultExtension)) {
-			setFileName(fileName + fgDefaultExtension);
+			setFileName(fileName + fgDefaultExtension); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		}
 
 		boolean retValue= super.validatePage();
@@ -67,7 +67,7 @@ public class NewSnippetFileWizardPage extends WizardNewFileCreationPage {
 			}
 			final IWorkbenchPart focusPart= page.getActivePart();
 			if (focusPart instanceof ISetSelectionTarget) {
-				shell.getDisplay().asyncExec(new Runnable() {
+				shell.getDisplay().asyncExec(new Runnable() { //FLLDCIM: MARK — T08 UI_THREAD_SYNCHRONIZER CALL
 					@Override
 					public void run() {
 						ISelection selection= new StructuredSelection(file);
@@ -88,7 +88,7 @@ public class NewSnippetFileWizardPage extends WizardNewFileCreationPage {
 	/* (non-Javadoc)
 	 * @see org.eclipse.ui.dialogs.WizardNewFileCreationPage#validatePage()
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	protected boolean validatePage() {
 		// check whether file with extension doesn't exist
 		boolean valid= super.validatePage();
@@ -112,7 +112,7 @@ public class NewSnippetFileWizardPage extends WizardNewFileCreationPage {
 
 		String fileName= getFileName();
 		if (fileName != null && !fileName.endsWith(fgDefaultExtension)) {
-			fileName= fileName + fgDefaultExtension;
+			fileName= fileName + fgDefaultExtension; //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 			IPath path= getContainerFullPath();
 
 			if (path != null && workspaceRoot.exists(path.append(fileName))) {

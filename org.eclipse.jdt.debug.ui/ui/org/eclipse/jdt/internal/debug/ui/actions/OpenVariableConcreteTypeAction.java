@@ -45,7 +45,7 @@ public class OpenVariableConcreteTypeAction extends OpenVariableTypeAction {
 		return null;
 	}
 
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public boolean openElement(IAction action, Object element) throws DebugException, CoreException {
 		if (element instanceof final JDIVariable jdiVariable) {
 			if (isInterfaceType(jdiVariable)) {

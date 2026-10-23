@@ -72,7 +72,7 @@ public class AppletParametersTab extends JavaLaunchTab {
 	private Button fParametersRemoveButton;
 	private Button fParametersEditButton;
 
-	private class AppletTabListener extends SelectionAdapter implements ModifyListener {
+	private class AppletTabListener extends SelectionAdapter implements ModifyListener { //FLLDCIM: MARK — T02  IMPLEMENTS
 
 		@Override
 		public void modifyText(ModifyEvent e) {
@@ -114,7 +114,7 @@ public class AppletParametersTab extends JavaLaunchTab {
 	 */
 	private TableViewer fViewer;
 
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public void createControl(Composite parent) {
 		Composite comp = SWTFactory.createComposite(parent, 1, 1, GridData.FILL_HORIZONTAL);
 		setControl(comp);
@@ -125,17 +125,17 @@ public class AppletParametersTab extends JavaLaunchTab {
 		SWTFactory.createLabel(namecomp, LauncherMessages.appletlauncher_argumenttab_widthlabel_text, 1);
 
 		fWidthText = SWTFactory.createSingleText(namecomp, 1);
-		fWidthText.addModifyListener(fListener);
+		fWidthText.addModifyListener(fListener); //FLLDCIM: MARK — T02 TEXT_INPUT_DEBOUNCE CALL
 
 		SWTFactory.createLabel(namecomp, LauncherMessages.appletlauncher_argumenttab_namelabel_text, 1);
 
 		fNameText = SWTFactory.createSingleText(namecomp, 1);
-		fNameText.addModifyListener(fListener);
+		fNameText.addModifyListener(fListener); //FLLDCIM: MARK — T02 TEXT_INPUT_DEBOUNCE CALL
 
 		SWTFactory.createLabel(namecomp, LauncherMessages.appletlauncher_argumenttab_heightlabel_text, 1);
 
 		fHeightText = SWTFactory.createSingleText(namecomp, 1);
-		fHeightText.addModifyListener(fListener);
+		fHeightText.addModifyListener(fListener); //FLLDCIM: MARK — T02 TEXT_INPUT_DEBOUNCE CALL
 
 		Label blank = new Label(namecomp, SWT.NONE);
 		blank.setText(EMPTY_STRING);
@@ -163,8 +163,8 @@ public class AppletParametersTab extends JavaLaunchTab {
 		tableLayout.addColumnData(new ColumnWeightData(100));
 		ptable.setHeaderVisible(true);
 		ptable.setLinesVisible(true);
-		ptable.addSelectionListener(fListener);
-		ptable.addMouseListener(new MouseAdapter() {
+		ptable.addSelectionListener(fListener); //FLLDCIM: MARK — T03 SELECTION_LANE CALL
+		ptable.addMouseListener(new MouseAdapter() { //FLLDCIM: MARK — T12 INPUT_EVENT CALL
 			@Override
 			public void mouseDoubleClick(MouseEvent e) {
 				setParametersButtonsEnableState();
@@ -188,7 +188,7 @@ public class AppletParametersTab extends JavaLaunchTab {
 			}
 		});
 
-		fViewer.setLabelProvider(new ITableLabelProvider() {
+		fViewer.setLabelProvider(new ITableLabelProvider() { //FLLDCIM: MARK — T24 LABEL_DELTA CALL
 			@Override
 			public Image getColumnImage(Object element, int columnIndex) {
 				return null;
@@ -227,13 +227,13 @@ public class AppletParametersTab extends JavaLaunchTab {
 		Composite envcomp = SWTFactory.createComposite(paramcomp, paramcomp.getFont(), 1, 1, GridData.VERTICAL_ALIGN_BEGINNING | GridData.HORIZONTAL_ALIGN_FILL, 0, 0);
 
 		fParametersAddButton = createPushButton(envcomp ,LauncherMessages.appletlauncher_argumenttab_parameters_button_add_text, null);
-		fParametersAddButton.addSelectionListener(fListener);
+		fParametersAddButton.addSelectionListener(fListener); //FLLDCIM: MARK — T03 SELECTION_LANE CALL
 
 		fParametersEditButton = createPushButton(envcomp, LauncherMessages.appletlauncher_argumenttab_parameters_button_edit_text, null);
-		fParametersEditButton.addSelectionListener(fListener);
+		fParametersEditButton.addSelectionListener(fListener); //FLLDCIM: MARK — T03 SELECTION_LANE CALL
 
 		fParametersRemoveButton = createPushButton(envcomp, LauncherMessages.appletlauncher_argumenttab_parameters_button_remove_text, null);
-		fParametersRemoveButton.addSelectionListener(fListener);
+		fParametersRemoveButton.addSelectionListener(fListener); //FLLDCIM: MARK — T03 SELECTION_LANE CALL
 
 		setParametersButtonsEnableState();
 		Dialog.applyDialogFont(parent);
@@ -285,12 +285,12 @@ public class AppletParametersTab extends JavaLaunchTab {
 
 	private void handleParametersRemoveButtonSelected() {
 		IStructuredSelection selection = (IStructuredSelection) fViewer.getSelection();
-		for (Object k : selection.toArray()) {
+		for (Object k : selection.toArray()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			String key = (String) k;
 			Map<String, String> params = getViewerInput();
 			params.remove(key);
 		}
-		fViewer.refresh();
+		fViewer.refresh(); //FLLDCIM: MARK — M21 FULL_REBUILD_TO_DELTA CALL
 		setParametersButtonsEnableState();
 		updateLaunchConfigurationDialog();
 	}
@@ -329,7 +329,7 @@ public class AppletParametersTab extends JavaLaunchTab {
 		Map<String, String> params = getViewerInput();
 		params.remove(key);
 		params.put(nameValuePair[0], nameValuePair[1]);
-		fViewer.refresh();
+		fViewer.refresh(); //FLLDCIM: MARK — M21 FULL_REBUILD_TO_DELTA CALL
 		updateLaunchConfigurationDialog();
 	}
 
@@ -373,7 +373,7 @@ public class AppletParametersTab extends JavaLaunchTab {
 	}
 
 
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public void initializeFrom(ILaunchConfiguration config) {
 		try {
 			fWidthText.setText(Integer.toString(config.getAttribute(IJavaLaunchConfigurationConstants.ATTR_APPLET_WIDTH, DEFAULT_APPLET_WIDTH)));
@@ -391,7 +391,7 @@ public class AppletParametersTab extends JavaLaunchTab {
 			fNameText.setText(LauncherMessages.appletlauncher_argumenttab_name_defaultvalue);
 		}
 
-		Map<String, String> input = new HashMap<>();
+		Map<String, String> input = new HashMap<>(); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
 		try {
 			 Map<String, String> params = config.getAttribute(IJavaLaunchConfigurationConstants.ATTR_APPLET_PARAMETERS, (Map<String, String>) null);
              if (params != null) {
@@ -400,7 +400,7 @@ public class AppletParametersTab extends JavaLaunchTab {
 		} catch (CoreException e) {
 		}
 
-		fViewer.setInput(input);
+		fViewer.setInput(input); //FLLDCIM: MARK — M21 FULL_REBUILD_TO_DELTA CALL
 	}
 
 	@Override

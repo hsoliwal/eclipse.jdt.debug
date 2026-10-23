@@ -38,9 +38,9 @@ import org.eclipse.osgi.util.NLS;
  * @see AdvancedJavaLaunchDelegate
  * @since 3.1
  */
-public class JavaLaunchDelegate extends AbstractJavaLaunchConfigurationDelegate {
+public class JavaLaunchDelegate extends AbstractJavaLaunchConfigurationDelegate { //FLLDCIM: MARK — T27  IMPLEMENTS
 
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public String showCommandLine(ILaunchConfiguration configuration, String mode, ILaunch launch, IProgressMonitor monitor) throws CoreException {
 		if (monitor == null) {
 			monitor = new NullProgressMonitor();
@@ -63,7 +63,7 @@ public class JavaLaunchDelegate extends AbstractJavaLaunchConfigurationDelegate 
 		}
 	}
 
-	@SuppressWarnings("deprecation")
+	@SuppressWarnings("deprecation") //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	private VMRunnerConfiguration getVMRunnerConfiguration(ILaunchConfiguration configuration, String mode, IProgressMonitor monitor) throws CoreException {
 
 		monitor.beginTask(NLS.bind("{0}...", configuration.getName()), 3); //$NON-NLS-1$
@@ -151,7 +151,7 @@ public class JavaLaunchDelegate extends AbstractJavaLaunchConfigurationDelegate 
 		return runConfig;
 	}
 
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public void launch(ILaunchConfiguration configuration, String mode, ILaunch launch, IProgressMonitor monitor) throws CoreException {
 		if (monitor == null) {
 			monitor = new NullProgressMonitor();
@@ -188,13 +188,13 @@ public class JavaLaunchDelegate extends AbstractJavaLaunchConfigurationDelegate 
 	}
 
 	private static String concat(String args1, String args2) {
-		StringBuilder args = new StringBuilder();
+		StringBuilder args = new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 		if (args1 != null && !args1.isEmpty()) {
-			args.append(args1);
+			args.append(args1); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		}
 		if (args2 != null && !args2.isEmpty()) {
-			args.append(" "); //$NON-NLS-1$
-			args.append(args2);
+			args.append(" "); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+			args.append(args2); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		}
 		return args.toString();
 	}

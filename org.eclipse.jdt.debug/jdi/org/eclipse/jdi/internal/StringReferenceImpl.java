@@ -51,7 +51,7 @@ public class StringReferenceImpl extends ObjectReferenceImpl implements
 	/**
 	 * @return Returns the StringReference as a String.
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public String value() {
 		// Note that this information should not be cached.
 		initJdwpRequest();
@@ -98,9 +98,9 @@ public class StringReferenceImpl extends ObjectReferenceImpl implements
 	@Override
 	public String toString() {
 		try {
-			return "\"" + value() + "\""; //$NON-NLS-1$ //$NON-NLS-2$
+			return "\"" + value() + "\""; //$NON-NLS-1$ //$NON-NLS-2$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		} catch (ObjectCollectedException e) {
-			return JDIMessages.StringReferenceImpl__Garbage_Collected__StringReference__3
+			return JDIMessages.StringReferenceImpl__Garbage_Collected__StringReference__3 //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 					+ idString();
 		} catch (Exception e) {
 			return fDescription;

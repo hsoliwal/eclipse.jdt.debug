@@ -80,7 +80,7 @@ public class JavaStackTracePageParticipant implements IConsolePageParticipant {
 	/* (non-Javadoc)
 	 * @see org.eclipse.ui.console.IConsolePageParticipant#activated()
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public void activated() {
         // add EOF submissions
 		IWorkbench workbench = PlatformUI.getWorkbench();

@@ -26,7 +26,7 @@ import org.eclipse.ui.IActionFilter;
  */
 public class JavaThreadActionFilter implements IActionFilter {
 
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public boolean testAttribute(Object target, String name, String value) {
 		if (target instanceof IJavaThread) {
 			if (name.equals("TerminateEvaluationActionFilter") //$NON-NLS-1$
@@ -37,7 +37,7 @@ public class JavaThreadActionFilter implements IActionFilter {
 				&& value.equals("suspendedAtException")) { //$NON-NLS-1$
 				IJavaThread thread = (IJavaThread) target;
 				IBreakpoint[] breakpoints= thread.getBreakpoints();
-				for (int i = 0; i < breakpoints.length; i++) {
+				for (int i = 0; i < breakpoints.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 					IBreakpoint breakpoint= breakpoints[i];
 					try {
 						if (breakpoint.isRegistered() && breakpoint instanceof IJavaExceptionBreakpoint) {

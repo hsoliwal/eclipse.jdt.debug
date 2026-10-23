@@ -35,7 +35,7 @@ public class PlusOperator extends BinaryOperator {
 		super(resultId, leftTypeId, rightTypeId, isAssignmentOperator, start);
 	}
 
-	private String getString(IJavaValue value, int typeId)
+	private String getString(IJavaValue value, int typeId) //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 			throws DebugException {
 
 		// test if value == null
@@ -127,7 +127,7 @@ public class PlusOperator extends BinaryOperator {
 	@Override
 	protected String getStringResult(IJavaValue leftOperand,
 			IJavaValue rightOperand) throws CoreException {
-		return getString(leftOperand, fLeftTypeId)
+		return getString(leftOperand, fLeftTypeId) //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 				+ getString(rightOperand, fRightTypeId);
 	}
 

@@ -28,7 +28,7 @@ public class AppletWorkingDirectoryBlock extends JavaWorkingDirectoryBlock {
 		String outputDir = JavaRuntime.getProjectOutputDirectory(getLaunchConfiguration());
 		if (outputDir != null) {
 			outputDir = new Path(outputDir).makeRelative().toOSString();
-			setDefaultWorkingDirectoryText("${workspace_loc:"  + outputDir + "}");  //$NON-NLS-1$//$NON-NLS-2$
+			setDefaultWorkingDirectoryText("${workspace_loc:"  + outputDir + "}");  //$NON-NLS-1$//$NON-NLS-2$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		} else {
 			super.setDefaultWorkingDir();
 		}

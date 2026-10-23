@@ -40,7 +40,7 @@ public class JavaFxLibraryResolver implements ILibraryLocationResolver {
 	public IPath getSourcePath(IPath libraryPath) {
 		if (isJavaFx(libraryPath)) {
 			File parent = libraryPath.toFile().getParentFile();
-			while (parent != null) {
+			while (parent != null) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				File parentsrc = new File(parent, JAVAFX_SRC_ZIP);
 				if (parentsrc.isFile()) {
 					return new Path(parentsrc.getPath());

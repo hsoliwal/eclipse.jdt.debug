@@ -120,7 +120,7 @@ public class JavaLaunchableTester extends PropertyTester {
     /**
      * Map of modifier text to corresponding flag (Integer)
      */
-    private static Map<String, Integer> fgModifiers = new HashMap<>();
+    private static Map<String, Integer> fgModifiers = new HashMap<>(); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
 
     private static final int FLAGS_MASK= Flags.AccPublic | Flags.AccProtected | Flags.AccPrivate | Flags.AccStatic
     	| Flags.AccFinal | Flags.AccSynchronized | Flags.AccAbstract | Flags.AccNative;
@@ -165,7 +165,7 @@ public class JavaLaunchableTester extends PropertyTester {
 	 * @param element the element to check for the method
 	 * @return true if the method is found in the element, false otherwise
 	 */
-	private boolean hasMain(IJavaElement element) {
+	private boolean hasMain(IJavaElement element) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
             IType type = getType(element);
             if(type != null && type.exists()) {
@@ -174,7 +174,7 @@ public class JavaLaunchableTester extends PropertyTester {
 				}
 				//failed to find in public type, check static inner types
 				IJavaElement[] children = type.getChildren();
-				for(int i = 0; i < children.length; i++) {
+				for(int i = 0; i < children.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 					if(hasMainInChildren(getType(children[i]))) {
 						return true;
 					}
@@ -195,7 +195,7 @@ public class JavaLaunchableTester extends PropertyTester {
 	 */
 	private boolean hasMainMethod(IType type) throws JavaModelException {
 		IMethod[] methods = type.getMethods();
-		for (int i= 0; i < methods.length; i++) {
+		for (int i= 0; i < methods.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			if(methods[i].isMainMethodCandidate()) {
 				return true;
 			}
@@ -217,7 +217,7 @@ public class JavaLaunchableTester extends PropertyTester {
 				return true;
 			}
 			IJavaElement[] children = type.getChildren();
-			for(int i = 0; i < children.length; i++) {
+			for(int i = 0; i < children.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				if(children[i].getElementType() == IJavaElement.TYPE) {
 					return hasMainInChildren((IType) children[i]);
 				}
@@ -244,7 +244,7 @@ public class JavaLaunchableTester extends PropertyTester {
 	 * @param args first arg is method name, secondary args are parameter types signatures
 	 * @return true if the method is found in the element, false otherwise
 	 */
-	private boolean hasMethod(IJavaElement element, Object[] args) {
+	private boolean hasMethod(IJavaElement element, Object[] args) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 			if (args.length > 1) {
 	            IType type = getType(element);
@@ -262,7 +262,7 @@ public class JavaLaunchableTester extends PropertyTester {
                                 String modifierText = (String) args[2];
                                 String[] modifiers = modifierText.split(" "); //$NON-NLS-1$
                                 int flags = 0;
-                                for (int j = 0; j < modifiers.length; j++) {
+                                for (int j = 0; j < modifiers.length; j++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
                                     String modifier = modifiers[j];
                                     Integer flag = fgModifiers.get(modifier);
                                     if (flag != null) {
@@ -293,7 +293,7 @@ public class JavaLaunchableTester extends PropertyTester {
 	 * @param annotationType the qualified or unqualified name of the annotation kind to look for
 	 * @return true if the type is found in the element, false otherwise
 	 */
-	private boolean hasTypeWithAnnotation(IJavaElement element, String annotationType) {
+	private boolean hasTypeWithAnnotation(IJavaElement element, String annotationType) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 			IType type= getType(element);
 			if (type == null || !type.exists()) {
@@ -341,13 +341,13 @@ public class JavaLaunchableTester extends PropertyTester {
 	 * @param args the arguments
 	 * @return true if the method is found in the element, false otherwise
 	 */
-	private boolean hasMethodWithAnnotation(IJavaElement element, Object[] args) {
+	private boolean hasMethodWithAnnotation(IJavaElement element, Object[] args) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 			String annotationType= (String) args[0];
             int flags = 0;
 			if (args.length > 1) {
 				String[] modifiers = ((String) args[1]).split(" "); //$NON-NLS-1$
-                for (int j = 0; j < modifiers.length; j++) {
+                for (int j = 0; j < modifiers.length; j++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
                     String modifier = modifiers[j];
                     Integer flag = fgModifiers.get(modifier);
                     if (flag != null) {
@@ -379,7 +379,7 @@ public class JavaLaunchableTester extends PropertyTester {
 			}
 			IScanner scanner=null; // delay initialization
 
-			for (int i= 0; i < methods.length; i++) {
+			for (int i= 0; i < methods.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				IMethod curr= methods[i];
 				if (curr.isConstructor() || (flags != -1 && flags != (curr.getFlags() & FLAGS_MASK))) {
 					continue;
@@ -405,16 +405,16 @@ public class JavaLaunchableTester extends PropertyTester {
 		return false;
 	}
 
-	private boolean findAnnotation(IScanner scanner, String annotationName) throws InvalidInputException {
+	private boolean findAnnotation(IScanner scanner, String annotationName) throws InvalidInputException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String simpleName= Signature.getSimpleName(annotationName);
-		StringBuilder buf= new StringBuilder();
+		StringBuilder buf= new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 		int tok= scanner.getNextToken();
-		while (tok != ITerminalSymbols.TokenNameEOF) {
+		while (tok != ITerminalSymbols.TokenNameEOF) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			if (tok == ITerminalSymbols.TokenNameAT) {
 				buf.setLength(0);
 				tok= readName(scanner, buf);
 				String name= buf.toString();
-				if (name.equals(annotationName) || name.equals(simpleName) || name.endsWith('.' + simpleName)) {
+				if (name.equals(annotationName) || name.equals(simpleName) || name.endsWith('.' + simpleName)) { //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 					return true;
 				}
 			} else {
@@ -427,13 +427,13 @@ public class JavaLaunchableTester extends PropertyTester {
 	@SuppressWarnings("deprecation")
 	private int readName(IScanner scanner, StringBuilder buf) throws InvalidInputException {
 		int tok= scanner.getNextToken();
-		while (tok == ITerminalSymbols.TokenNameIdentifier) {
-			buf.append(scanner.getCurrentTokenSource());
+		while (tok == ITerminalSymbols.TokenNameIdentifier) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
+			buf.append(scanner.getCurrentTokenSource()); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			tok= scanner.getNextToken();
 			if (tok != ITerminalSymbols.TokenNameDOT) {
 				return tok;
 			}
-			buf.append('.');
+			buf.append('.'); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			tok= scanner.getNextToken();
 		}
 		return tok;
@@ -470,7 +470,7 @@ public class JavaLaunchableTester extends PropertyTester {
 			IType type = getType(element);
 			if(type != null) {
 				IType[] stypes = type.newSupertypeHierarchy(new NullProgressMonitor()).getAllSuperclasses(type);
-				for(int i = 0; i < stypes.length; i++) {
+				for(int i = 0; i < stypes.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 					if(stypes[i].getFullyQualifiedName().equals(qname) || stypes[i].getElementName().equals(qname)) {
 						return true;
 					}
@@ -494,23 +494,23 @@ public class JavaLaunchableTester extends PropertyTester {
 	private boolean hasItemOnBuildPath(IJavaElement element, Object[] args) {
 		if(element != null && args != null) {
 			IJavaProject project = element.getJavaProject();
-			Set<IJavaProject> searched = new HashSet<>();
+			Set<IJavaProject> searched = new HashSet<>(); //FLLDCIM: MARK — M03 M3_SET_LANES NEW
 			searched.add(project);
 			return hasItemsOnBuildPath(project, searched, args);
 		}
 		return false;
 	}
 
-	private boolean hasItemsOnBuildPath(IJavaProject project, Set<IJavaProject> searched, Object[] args) {
+	private boolean hasItemsOnBuildPath(IJavaProject project, Set<IJavaProject> searched, Object[] args) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
-			List<IJavaProject> projects = new ArrayList<>();
+			List<IJavaProject> projects = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 	        if(project != null && project.exists()) {
 	            IClasspathEntry[] entries = project.getResolvedClasspath(true);
-	            for(int i = 0; i < entries.length; i++) {
+	            for(int i = 0; i < entries.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 	                IClasspathEntry entry = entries[i];
 					IPath path = entry.getPath();
 	                String spath = path.toPortableString();
-	                for(int j = 0; j < args.length; j++) {
+	                for(int j = 0; j < args.length; j++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 	                	if(spath.lastIndexOf((String)args[j]) != -1) {
 	                		return true;
 	                	}
@@ -527,7 +527,7 @@ public class JavaLaunchableTester extends PropertyTester {
 	        }
 	        // search referenced projects
 	        Iterator<IJavaProject> iterator = projects.iterator();
-	        while (iterator.hasNext()) {
+	        while (iterator.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 	        	IJavaProject jp = iterator.next();
 	        	searched.add(jp);
 	        	if (hasItemsOnBuildPath(jp, searched, args)) {
@@ -549,7 +549,7 @@ public class JavaLaunchableTester extends PropertyTester {
 			IType type = getType(element);
 			if(type != null) {
 				IType[] itypes = type.newSupertypeHierarchy(new NullProgressMonitor()).getAllInterfaces();
-				for(int i = 0; i < itypes.length; i++) {
+				for(int i = 0; i < itypes.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 					if(itypes[i].getFullyQualifiedName().equals(qname)) {
 						return true;
 					}
@@ -577,7 +577,7 @@ public class JavaLaunchableTester extends PropertyTester {
 	 * @since 3.2
 	 * @return true if the specified tests pass, or the context is a container, false otherwise
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public boolean test(Object receiver, String property, Object[] args, Object expectedValue) {
 		if (PROPERTY_IS_CONTAINER.equals(property)) {
 			if (receiver instanceof IAdaptable) {

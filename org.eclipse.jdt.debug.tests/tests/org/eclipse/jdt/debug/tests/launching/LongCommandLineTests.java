@@ -51,7 +51,7 @@ public class LongCommandLineTests extends LongClassPathTests {
 	/*
 	 * Test will create lot of "-Dfoo=12345" system arguments for the started JVM and check if the startup works with argument file
 	 */
-	public void testVeryLongSystemPropertiesWithArgumentFile() throws Exception {
+	public void testVeryLongSystemPropertiesWithArgumentFile() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		createLongArguments = true;
 
 		javaProject = createJavaProjectClone("test ä VeryLongSystemPropertiesWithArgumentFile", CLASSPATH_PROJECT_CONTENT_PATH.toString(), JavaProjectHelper.JAVA_SE_9_EE_NAME, true);
@@ -66,10 +66,10 @@ public class LongCommandLineTests extends LongClassPathTests {
 
 		// Then
 		File tempFile = getTempFile(thread.getLaunch()).orElseThrow(() -> new RuntimeException("No temp file"));
-		assertTrue("No temp file created: " + tempFile, tempFile.exists());
-		assertTrue("Unexpected temp file name: " + tempFile, tempFile.getName().endsWith(".txt"));
+		assertTrue("No temp file created: " + tempFile, tempFile.exists()); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
+		assertTrue("Unexpected temp file name: " + tempFile, tempFile.getName().endsWith(".txt")); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String valueString = doEval(thread, "java.lang.management.ManagementFactory.getRuntimeMXBean().getInputArguments().toString()").getValueString();
-		assertTrue("Unexpected small system arguments list: " + valueString, valueString.length() >= MIN_CLASSPATH_LENGTH);
+		assertTrue("Unexpected small system arguments list: " + valueString, valueString.length() >= MIN_CLASSPATH_LENGTH); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 		// When
 		resumeAndExit(thread);
@@ -84,10 +84,10 @@ public class LongCommandLineTests extends LongClassPathTests {
 	private void setLongVmArgumentsList(ILaunchConfigurationWorkingCopy wc, int minArgumentsLength) throws Exception {
 		final String keyArgs = IJavaLaunchConfigurationConstants.ATTR_VM_ARGUMENTS;
 		String args = wc.getAttribute(keyArgs, "");
-		StringBuilder sb = new StringBuilder(args);
-		while (sb.length() < minArgumentsLength) {
-			sb.append(" ");
-			sb.append("-Dfoo=1234567890_1234567890_1234567890_1234567890_1234567890_1234567890_1234567890_1234567890");
+		StringBuilder sb = new StringBuilder(args); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
+		while (sb.length() < minArgumentsLength) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
+			sb.append(" "); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+			sb.append("-Dfoo=1234567890_1234567890_1234567890_1234567890_1234567890_1234567890_1234567890_1234567890"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		}
 		args += sb.toString();
 		wc.setAttribute(keyArgs, args);

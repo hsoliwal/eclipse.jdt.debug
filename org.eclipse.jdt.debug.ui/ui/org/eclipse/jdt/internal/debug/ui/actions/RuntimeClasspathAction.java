@@ -31,7 +31,7 @@ import org.eclipse.ui.actions.SelectionListenerAction;
 /**
  * Action used with a runtime classpath viewer.
  */
-public abstract class RuntimeClasspathAction extends SelectionListenerAction {
+public abstract class RuntimeClasspathAction extends SelectionListenerAction { //FLLDCIM: MARK — T04  IMPLEMENTS
 
 	public static final int DEFAULT= 0;
 	public static final int ADD= 1;
@@ -59,7 +59,7 @@ public abstract class RuntimeClasspathAction extends SelectionListenerAction {
 		}
 		fViewer = viewer;
 		if (fViewer != null) {
-			fViewer.addSelectionChangedListener(this);
+			fViewer.addSelectionChangedListener(this); //FLLDCIM: MARK — T04 VIEWER_SELECTION_DELTA CALL
 			update();
 		}
 	}
@@ -80,10 +80,10 @@ public abstract class RuntimeClasspathAction extends SelectionListenerAction {
 	 * @return targets for an action
 	 */
 	protected List<IRuntimeClasspathEntry> getOrderedSelection() {
-		List<IRuntimeClasspathEntry> targets = new ArrayList<>();
+		List<IRuntimeClasspathEntry> targets = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 		List<?> selection = ((IStructuredSelection)getViewer().getSelection()).toList();
 		IRuntimeClasspathEntry[] entries = getViewer().getEntries();
-		for (int i = 0; i < entries.length; i++) {
+		for (int i = 0; i < entries.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			IRuntimeClasspathEntry target = entries[i];
 			if (selection.contains(target)) {
 				targets.add(target);
@@ -98,8 +98,8 @@ public abstract class RuntimeClasspathAction extends SelectionListenerAction {
 	 */
 	protected List<IRuntimeClasspathEntry> getEntriesAsList() {
 		IRuntimeClasspathEntry[] entries = getViewer().getEntries();
-		List<IRuntimeClasspathEntry> list = new ArrayList<>(entries.length);
-		for (int i = 0; i < entries.length; i++) {
+		List<IRuntimeClasspathEntry> list = new ArrayList<>(entries.length); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
+		for (int i = 0; i < entries.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			list.add(entries[i]);
 		}
 		return list;
@@ -128,7 +128,7 @@ public abstract class RuntimeClasspathAction extends SelectionListenerAction {
 		}
 		Iterator<?> entries = selection.iterator();
 		List<IRuntimeClasspathEntry> list = getEntriesAsList();
-		while (entries.hasNext()) {
+		while (entries.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			Object next = entries.next();
 			if (list.indexOf(next) == index) {
 				return true;
@@ -143,7 +143,7 @@ public abstract class RuntimeClasspathAction extends SelectionListenerAction {
 	 */
 	public void setButton(Button button) {
 		fButton = button;
-		button.addSelectionListener(new SelectionAdapter() {
+		button.addSelectionListener(new SelectionAdapter() { //FLLDCIM: MARK — T03 SELECTION_LANE CALL
 			@Override
 			public void widgetSelected(SelectionEvent evt) {
 				run();

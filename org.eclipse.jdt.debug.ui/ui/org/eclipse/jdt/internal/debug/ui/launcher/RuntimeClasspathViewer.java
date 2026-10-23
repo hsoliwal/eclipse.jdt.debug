@@ -50,7 +50,7 @@ public class RuntimeClasspathViewer extends TableViewer implements IClasspathVie
 	/**
 	 * The runtime classpath entries displayed in this viewer
 	 */
-	protected List<IRuntimeClasspathEntry> fEntries = new ArrayList<>();
+	protected List<IRuntimeClasspathEntry> fEntries = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 
 	class ContentProvider implements IStructuredContentProvider {
 
@@ -83,20 +83,20 @@ public class RuntimeClasspathViewer extends TableViewer implements IClasspathVie
 	 *
 	 * @param parent the parent control
 	 */
-	public RuntimeClasspathViewer(Composite parent) {
+	public RuntimeClasspathViewer(Composite parent) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		super(parent);
 		setContentProvider(new ContentProvider());
 		RuntimeClasspathEntryLabelProvider lp = new RuntimeClasspathEntryLabelProvider();
-		setLabelProvider(lp);
-		setInput(fEntries);
+		setLabelProvider(lp); //FLLDCIM: MARK — T24 LABEL_DELTA CALL
+		setInput(fEntries); //FLLDCIM: MARK — M21 FULL_REBUILD_TO_DELTA CALL
 
-		getTable().addKeyListener(new KeyAdapter() {
+		getTable().addKeyListener(new KeyAdapter() { //FLLDCIM: MARK — T12 INPUT_EVENT CALL
 			@Override
 			public void keyPressed(KeyEvent event) {
 				if (isEnabled() && event.character == SWT.DEL && event.stateMask == 0) {
 					List<?> selection= getSelectionFromWidget();
 					fEntries.removeAll(selection);
-					setInput(fEntries);
+					setInput(fEntries); //FLLDCIM: MARK — M21 FULL_REBUILD_TO_DELTA CALL
 					notifyChanged();
 				}
 			}
@@ -109,10 +109,10 @@ public class RuntimeClasspathViewer extends TableViewer implements IClasspathVie
 	@Override
 	public void setEntries(IRuntimeClasspathEntry[] entries) {
 		fEntries.clear();
-		for (int i = 0; i < entries.length; i++) {
+		for (int i = 0; i < entries.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			fEntries.add(entries[i]);
 		}
-		setInput(fEntries);
+		setInput(fEntries); //FLLDCIM: MARK — M21 FULL_REBUILD_TO_DELTA CALL
 		notifyChanged();
 	}
 
@@ -127,18 +127,18 @@ public class RuntimeClasspathViewer extends TableViewer implements IClasspathVie
 	/* (non-Javadoc)
 	 * @see org.eclipse.jdt.internal.debug.ui.launcher.IClasspathViewer#addEntries(org.eclipse.jdt.launching.IRuntimeClasspathEntry[])
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public void addEntries(IRuntimeClasspathEntry[] entries) {
 		IStructuredSelection sel = (IStructuredSelection)getSelection();
 		if (sel.isEmpty()) {
-			for (int i = 0; i < entries.length; i++) {
+			for (int i = 0; i < entries.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				if (!fEntries.contains(entries[i])) {
 					fEntries.add(entries[i]);
 				}
 			}
 		} else {
 			int index = fEntries.indexOf(sel.getFirstElement());
-			for (int i = 0; i < entries.length; i++) {
+			for (int i = 0; i < entries.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				if (!fEntries.contains(entries[i])) {
 					fEntries.add(index, entries[i]);
 					index++;
@@ -146,7 +146,7 @@ public class RuntimeClasspathViewer extends TableViewer implements IClasspathVie
 			}
 		}
 		setSelection(new StructuredSelection(entries));
-		refresh();
+		refresh(); //FLLDCIM: MARK — M21 FULL_REBUILD_TO_DELTA CALL
 		notifyChanged();
 	}
 
@@ -191,7 +191,7 @@ public class RuntimeClasspathViewer extends TableViewer implements IClasspathVie
 	 */
 	@Override
 	public void notifyChanged() {
-		for (IEntriesChangedListener listener : fListeners) {
+		for (IEntriesChangedListener listener : fListeners) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			listener.entriesChanged(this);
 		}
 	}

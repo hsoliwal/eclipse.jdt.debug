@@ -52,7 +52,7 @@ public abstract class JavaLaunchTab extends AbstractLaunchConfigurationTab {
 	 *
 	 * @return current Java element in the active page or <code>null</code>
 	 */
-	protected IJavaElement getContext() {
+	protected IJavaElement getContext() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IWorkbenchPage page = JDIDebugUIPlugin.getActivePage();
 		if (page != null) {
 			ISelection selection = page.getSelection();

@@ -64,7 +64,7 @@ public class RuntimeClasspathViewer implements IClasspathViewer {
 
 		@Override
 		public void preferenceChange(PreferenceChangeEvent event) {
-			DebugUIPlugin.getStandardDisplay().asyncExec(() -> refresh(true));
+			DebugUIPlugin.getStandardDisplay().asyncExec(() -> refresh(true)); //FLLDCIM: MARK — T08 UI_THREAD_SYNCHRONIZER CALL
 		}
 	};
 
@@ -103,7 +103,7 @@ public class RuntimeClasspathViewer implements IClasspathViewer {
 		protected WorkbenchJob doCreateRefreshJob() {
 			final WorkbenchJob job = super.doCreateRefreshJob();
 
-			return new WorkbenchJob("Classpath filter refresh") { //$NON-NLS-1$
+			return new WorkbenchJob("Classpath filter refresh") { //$NON-NLS-1$ //FLLDCIM: MARK — T09  ANONYMOUS
 
 				@Override
 				public IStatus runInUIThread(IProgressMonitor monitor) {
@@ -130,13 +130,13 @@ public class RuntimeClasspathViewer implements IClasspathViewer {
 	 *
 	 * @param parent the parent control
 	 */
-	public RuntimeClasspathViewer(Composite parent) {
+	public RuntimeClasspathViewer(Composite parent) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 
 		final PatternFilter filter = new PatternFilter();
 		filter.setIncludeLeadingWildcard(true);
 		fTree = new RuntimeClasspathFilteredTree(parent, filter);
 
-		getTreeViewer().getTree().addKeyListener(new KeyAdapter() {
+		getTreeViewer().getTree().addKeyListener(new KeyAdapter() { //FLLDCIM: MARK — T12 INPUT_EVENT CALL
 			@Override
 			public void keyPressed(KeyEvent event) {
 				if (updateSelection(RuntimeClasspathAction.REMOVE, (IStructuredSelection) getSelection()) && event.character == SWT.DEL
@@ -147,7 +147,7 @@ public class RuntimeClasspathViewer implements IClasspathViewer {
 			}
 		});
 
-		fTree.addDisposeListener(new DisposeListener() {
+		fTree.addDisposeListener(new DisposeListener() { //FLLDCIM: MARK — T01 LIFECYCLE_RESIDENCY CALL
 			@Override
 			public void widgetDisposed(DisposeEvent e) {
 				IEclipsePreferences prefs = InstanceScope.INSTANCE.getNode(LaunchingPlugin.ID_PLUGIN);
@@ -194,7 +194,7 @@ public class RuntimeClasspathViewer implements IClasspathViewer {
 		Object beforeElement = sel.getFirstElement();
 		resolveCurrentParent(getSelection());
 		List<IClasspathEntry> existingEntries= Arrays.asList(fCurrentParent.getEntries());
-		for (int i = 0; i < entries.length; i++) {
+		for (int i = 0; i < entries.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			if (!existingEntries.contains(entries[i])) {
 				getClasspathContentProvider().add(fCurrentParent, entries[i], beforeElement);
 			}
@@ -203,11 +203,11 @@ public class RuntimeClasspathViewer implements IClasspathViewer {
 		notifyChanged();
 	}
 
-	private boolean resolveCurrentParent(ISelection selection) {
+	private boolean resolveCurrentParent(ISelection selection) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		fCurrentParent= null;
 		Iterator<?> selected= ((IStructuredSelection)selection).iterator();
 
-		while (selected.hasNext()) {
+		while (selected.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			Object element = selected.next();
 			if (element instanceof ClasspathEntry) {
 				IClasspathEntry parent= ((IClasspathEntry)element).getParent();
@@ -262,7 +262,7 @@ public class RuntimeClasspathViewer implements IClasspathViewer {
 	 */
 	@Override
 	public void notifyChanged() {
-		for (IEntriesChangedListener listener : fListeners) {
+		for (IEntriesChangedListener listener : fListeners) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			listener.entriesChanged(this);
 		}
 	}
@@ -270,18 +270,18 @@ public class RuntimeClasspathViewer implements IClasspathViewer {
 	/* (non-Javadoc)
 	 * @see org.eclipse.jdt.internal.debug.ui.launcher.IClasspathViewer#indexOf(org.eclipse.jdt.launching.IRuntimeClasspathEntry)
 	 */
-	@SuppressWarnings("unlikely-arg-type")
+	@SuppressWarnings("unlikely-arg-type") //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	@Override
 	public int indexOf(IRuntimeClasspathEntry entry) {
 		IClasspathEntry[] entries= getClasspathContentProvider().getBootstrapClasspathEntries();
-		for (int i = 0; i < entries.length; i++) {
+		for (int i = 0; i < entries.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			IClasspathEntry existingEntry = entries[i];
 			if (existingEntry.equals(entry)) {
 				return 1;
 			}
 		}
 		entries=  getClasspathContentProvider().getUserClasspathEntries();
-		for (int i = 0; i < entries.length; i++) {
+		for (int i = 0; i < entries.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			IClasspathEntry existingEntry = entries[i];
 			if (existingEntry.equals(entry)) {
 				return 1;
@@ -307,7 +307,7 @@ public class RuntimeClasspathViewer implements IClasspathViewer {
 	/* (non-Javadoc)
 	 * @see org.eclipse.jdt.internal.debug.ui.launcher.IClasspathViewer#updateSelection(int, org.eclipse.jface.viewers.IStructuredSelection)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public boolean updateSelection(int actionType, IStructuredSelection selection) {
 
 		if (selection.isEmpty()) {
@@ -316,7 +316,7 @@ public class RuntimeClasspathViewer implements IClasspathViewer {
 		switch (actionType) {
 			case RuntimeClasspathAction.ADD :
 				Iterator<IClasspathEntry> selected= selection.iterator();
-				while (selected.hasNext()) {
+				while (selected.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 					IClasspathEntry entry = selected.next();
 					if (!entry.isEditable() && entry instanceof ClasspathEntry) {
 						return false;
@@ -330,7 +330,7 @@ public class RuntimeClasspathViewer implements IClasspathViewer {
 			case RuntimeClasspathAction.REMOVE :
 			case RuntimeClasspathAction.COPY:
 				selected= selection.iterator();
-				while (selected.hasNext()) {
+				while (selected.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 					IClasspathEntry entry = selected.next();
 					if (!entry.isEditable()) {
 						return false;
@@ -349,9 +349,9 @@ public class RuntimeClasspathViewer implements IClasspathViewer {
 	 */
 	public ISelection getSelectedEntries() {
 		IStructuredSelection selection= (IStructuredSelection)getSelection();
-		List<IClasspathEntry> entries= new ArrayList<>(selection.size() * 2);
+		List<IClasspathEntry> entries= new ArrayList<>(selection.size() * 2); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 		Iterator<IClasspathEntry> itr= selection.iterator();
-		while (itr.hasNext()) {
+		while (itr.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			IClasspathEntry element = itr.next();
 			if (element.hasEntries()) {
 				entries.addAll(Arrays.asList(element.getEntries()));
@@ -365,7 +365,7 @@ public class RuntimeClasspathViewer implements IClasspathViewer {
 
 	@Override
 	public void addSelectionChangedListener(ISelectionChangedListener listener) {
-		getTreeViewer().addSelectionChangedListener(listener);
+		getTreeViewer().addSelectionChangedListener(listener); //FLLDCIM: MARK — T04 VIEWER_SELECTION_DELTA CALL
 	}
 
 	@Override
@@ -388,7 +388,7 @@ public class RuntimeClasspathViewer implements IClasspathViewer {
 		if (fTree.isDisposed()) {
 			return;
 		}
-		getTreeViewer().refresh();
+		getTreeViewer().refresh(); //FLLDCIM: MARK — M21 FULL_REBUILD_TO_DELTA CALL
 	}
 
 }

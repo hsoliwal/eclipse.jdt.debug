@@ -100,7 +100,7 @@ public class LocalVariableImpl extends MirrorImpl implements LocalVariable, Comp
 	/* (non-Javadoc)
 	 * @see java.lang.Comparable#compareTo(java.lang.Object)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public int compareTo(LocalVariable variable) {
 		if (variable == null || !variable.getClass().equals(this.getClass())) {
 			throw new ClassCastException(
@@ -141,7 +141,7 @@ public class LocalVariableImpl extends MirrorImpl implements LocalVariable, Comp
 		return fIsArgument;
 	}
 
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public boolean isVisible(StackFrame frame) throws IllegalArgumentException,
 			VMMismatchException {
 		checkVM(frame);

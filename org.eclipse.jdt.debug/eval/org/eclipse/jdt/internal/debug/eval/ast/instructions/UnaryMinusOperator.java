@@ -25,7 +25,7 @@ public class UnaryMinusOperator extends UnaryOperator {
 	/*
 	 * @see Instruction#execute()
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public void execute() throws CoreException {
 		IJavaPrimitiveValue value = (IJavaPrimitiveValue) popValue();
 		switch (fExpressionTypeId) {

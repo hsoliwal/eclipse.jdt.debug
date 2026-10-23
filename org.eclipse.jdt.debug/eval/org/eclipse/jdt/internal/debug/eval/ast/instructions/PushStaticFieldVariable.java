@@ -39,7 +39,7 @@ public class PushStaticFieldVariable extends CompoundInstruction {
 		fQualifiedTypeName = qualifiedTypeName;
 	}
 
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public void execute() throws CoreException {
 		IJavaType receiver = getType(fQualifiedTypeName);
 

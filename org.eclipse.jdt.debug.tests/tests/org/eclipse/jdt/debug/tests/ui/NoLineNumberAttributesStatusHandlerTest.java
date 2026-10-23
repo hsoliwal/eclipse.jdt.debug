@@ -65,7 +65,7 @@ public class NoLineNumberAttributesStatusHandlerTest extends AbstractDebugUiTest
 			this.toggleValue = toggleValue;
 		}
 
-		@Override
+		@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		public void run() {
 			Shell shell = PlatformUI.getWorkbench().getModalDialogShellProvider().getShell();
 			class ErrorDialogWithToggleForTest extends ErrorDialogWithToggle {
@@ -134,9 +134,9 @@ public class NoLineNumberAttributesStatusHandlerTest extends AbstractDebugUiTest
 		super(name);
 	}
 
-	@Test
+	@Test //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public void testPreferenceSettings() throws Exception {
-		List<IStatus> loggedEntries = new ArrayList<>();
+		List<IStatus> loggedEntries = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 		ILogListener listener = new ListLogListener(loggedEntries);
 
 		Platform.addLogListener(listener);
@@ -149,15 +149,15 @@ public class NoLineNumberAttributesStatusHandlerTest extends AbstractDebugUiTest
 			boolean dontTellMeAgain = true;
 			simulateErrorDialogWithToggleExecution(preferenceStore, status, dontTellMeAgain);
 			assertFalse("Wrong preference set for alert", preferenceStore.getBoolean(PREF_ALERT_UNABLE_TO_INSTALL_BREAKPOINT));
-			assertTrue("Expected no logged entries but got: " + loggedEntries, loggedEntries.isEmpty());
+			assertTrue("Expected no logged entries but got: " + loggedEntries, loggedEntries.isEmpty()); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 			triggerNoLineAttributesStatusHandler(status);
-			assertEquals("Expected no logged entries but got: " + loggedEntries, 0, Collections.frequency(loggedEntries, status));
+			assertEquals("Expected no logged entries but got: " + loggedEntries, 0, Collections.frequency(loggedEntries, status)); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 			// Error should be logged if "don't tell me" preference is not set
 			dontTellMeAgain = false;
 			simulateErrorDialogWithToggleExecution(preferenceStore, status, dontTellMeAgain);
 			assertTrue("Wrong preference set for alert", preferenceStore.getBoolean(PREF_ALERT_UNABLE_TO_INSTALL_BREAKPOINT));
-			assertTrue("Expected no logged entries but got: " + loggedEntries, loggedEntries.isEmpty());
+			assertTrue("Expected no logged entries but got: " + loggedEntries, loggedEntries.isEmpty()); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 			triggerNoLineAttributesStatusHandler(status);
 			assertEquals(1, Collections.frequency(loggedEntries, status));
 			loggedEntries.clear();
@@ -166,9 +166,9 @@ public class NoLineNumberAttributesStatusHandlerTest extends AbstractDebugUiTest
 			dontTellMeAgain = true;
 			simulateErrorDialogWithToggleExecution(preferenceStore, status, dontTellMeAgain);
 			assertFalse("Wrong preference set for alert", preferenceStore.getBoolean(PREF_ALERT_UNABLE_TO_INSTALL_BREAKPOINT));
-			assertTrue("Expected no logged entries but got: " + loggedEntries, loggedEntries.isEmpty());
+			assertTrue("Expected no logged entries but got: " + loggedEntries, loggedEntries.isEmpty()); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 			triggerNoLineAttributesStatusHandler(status);
-			assertEquals("Expected no logged entries but got: " + loggedEntries, 0, Collections.frequency(loggedEntries, status));
+			assertEquals("Expected no logged entries but got: " + loggedEntries, 0, Collections.frequency(loggedEntries, status)); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		} finally {
 			Platform.removeLogListener(listener);
 		}

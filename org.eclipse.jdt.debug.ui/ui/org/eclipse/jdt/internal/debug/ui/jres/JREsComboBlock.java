@@ -71,7 +71,7 @@ public class JREsComboBlock {
 	/**
 	 * VMs being displayed
 	 */
-	private final List<Object> fVMs = new ArrayList<>();
+	private final List<Object> fVMs = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 
 	/**
 	 * The main control
@@ -134,7 +134,7 @@ public class JREsComboBlock {
 	/**
 	 * List of execution environments
 	 */
-	private final List<Object> fEnvironments = new ArrayList<>();
+	private final List<Object> fEnvironments = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 
 	private IStatus fStatus = OK_STATUS;
 
@@ -159,7 +159,7 @@ public class JREsComboBlock {
 
 	private void firePropertyChange() {
 		PropertyChangeEvent event = new PropertyChangeEvent(this, PROPERTY_JRE, null, getPath());
-		for (IPropertyChangeListener listener : fListeners) {
+		for (IPropertyChangeListener listener : fListeners) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			listener.propertyChange(event);
 		}
 	}
@@ -188,9 +188,9 @@ public class JREsComboBlock {
 		}
 	}
 
-	private void createEEControls(Composite comp) {
+	private void createEEControls(Composite comp) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		fEnvironmentsButton = SWTFactory.createRadioButton(comp, JREMessages.JREsComboBlock_4);
-		fEnvironmentsButton.addSelectionListener(new SelectionAdapter() {
+		fEnvironmentsButton.addSelectionListener(new SelectionAdapter() { //FLLDCIM: MARK — T03 SELECTION_LANE CALL
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				if (fEnvironmentsButton.getSelection()) {
@@ -210,7 +210,7 @@ public class JREsComboBlock {
 		});
 
 		fEnvironmentsCombo = SWTFactory.createCombo(comp, SWT.DROP_DOWN | SWT.READ_ONLY, 1, null);
-		fEnvironmentsCombo.addSelectionListener(new SelectionAdapter() {
+		fEnvironmentsCombo.addSelectionListener(new SelectionAdapter() { //FLLDCIM: MARK — T03 SELECTION_LANE CALL
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				setPath(JavaRuntime.newJREContainerPath(getEnvironment()));
@@ -219,7 +219,7 @@ public class JREsComboBlock {
 		});
 
 		fManageEnvironmentsButton = SWTFactory.createPushButton(comp, JREMessages.JREsComboBlock_14, null);
-		fManageEnvironmentsButton.addListener(SWT.Selection, new Listener() {
+		fManageEnvironmentsButton.addListener(SWT.Selection, new Listener() { //FLLDCIM: MARK — T13 SWT_TYPED_EVENT CALL
 			@Override
 			public void handleEvent(Event event) {
 				showPrefPage(ExecutionEnvironmentsPreferencePage.ID);
@@ -229,13 +229,13 @@ public class JREsComboBlock {
 		fillWithWorkspaceProfiles();
 	}
 
-	private void createAlternateJREControls(Composite comp) {
+	private void createAlternateJREControls(Composite comp) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String text = JREMessages.JREsComboBlock_1;
 		if (fSpecificDescriptor != null) {
 			text = fSpecificDescriptor.getDescription();
 		}
 		fSpecificButton = SWTFactory.createRadioButton(comp, text, 1);
-		fSpecificButton.addSelectionListener(new SelectionAdapter() {
+		fSpecificButton.addSelectionListener(new SelectionAdapter() { //FLLDCIM: MARK — T03 SELECTION_LANE CALL
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				if (fSpecificButton.getSelection()) {
@@ -255,7 +255,7 @@ public class JREsComboBlock {
 		});
 		fCombo = SWTFactory.createCombo(comp, SWT.DROP_DOWN | SWT.READ_ONLY, 1, null);
 		ControlAccessibleListener.addListener(fCombo, fSpecificButton.getText());
-		fCombo.addSelectionListener(new SelectionAdapter() {
+		fCombo.addSelectionListener(new SelectionAdapter() { //FLLDCIM: MARK — T03 SELECTION_LANE CALL
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				setStatus(OK_STATUS);
@@ -264,7 +264,7 @@ public class JREsComboBlock {
 		});
 
 		fManageButton = SWTFactory.createPushButton(comp, JREMessages.JREsComboBlock_2, null);
-		fManageButton.addListener(SWT.Selection, new Listener() {
+		fManageButton.addListener(SWT.Selection, new Listener() { //FLLDCIM: MARK — T13 SWT_TYPED_EVENT CALL
 			@Override
 			public void handleEvent(Event event) {
 				showPrefPage(JREsPreferencePage.ID);
@@ -276,7 +276,7 @@ public class JREsComboBlock {
 	private void createDefaultJREControls(Composite comp) {
 		if (fDefaultDescriptor != null) {
 			fDefaultButton = SWTFactory.createRadioButton(comp, fDefaultDescriptor.getDescription(), 3);
-			fDefaultButton.addSelectionListener(new SelectionAdapter() {
+			fDefaultButton.addSelectionListener(new SelectionAdapter() { //FLLDCIM: MARK — T03 SELECTION_LANE CALL
 				@Override
 				public void widgetSelected(SelectionEvent e) {
 					if (fDefaultButton.getSelection()) {
@@ -340,11 +340,11 @@ public class JREsComboBlock {
 	 * @param jres
 	 *            JREs to be displayed
 	 */
-	protected void setJREs(List<VMStandin> jres) {
+	protected void setJREs(List<VMStandin> jres) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		fVMs.clear();
 		fVMs.addAll(jres);
 		// sort by name
-		Collections.sort(fVMs, new Comparator<>() {
+		Collections.sort(fVMs, new Comparator<>() { //FLLDCIM: MARK — M16 SORT_LANE CALL
 			@Override
 			public int compare(Object o1, Object o2) {
 				IVMInstall left = (IVMInstall)o1;
@@ -361,7 +361,7 @@ public class JREsComboBlock {
 		String[] names = new String[fVMs.size()];
 		Iterator<Object> iter = fVMs.iterator();
 		int i = 0;
-		while (iter.hasNext()) {
+		while (iter.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			IVMInstall vm = (IVMInstall)iter.next();
 			names[i] = vm.getName();
 			i++;
@@ -445,12 +445,12 @@ public class JREsComboBlock {
 	 */
 	protected void fillWithWorkspaceJREs() {
 		// fill with JREs
-		List<VMStandin> standins = new ArrayList<>();
+		List<VMStandin> standins = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 		IVMInstallType[] types = JavaRuntime.getVMInstallTypes();
-		for (int i = 0; i < types.length; i++) {
+		for (int i = 0; i < types.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			IVMInstallType type = types[i];
 			IVMInstall[] installs = type.getVMInstalls();
-			for (int j = 0; j < installs.length; j++) {
+			for (int j = 0; j < installs.length; j++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				IVMInstall install = installs[j];
 				standins.add(new VMStandin(install));
 			}
@@ -461,14 +461,14 @@ public class JREsComboBlock {
 	/**
 	 * Populates the JRE profile combo with profiles defined in the workspace.
 	 */
-	protected void fillWithWorkspaceProfiles() {
+	protected void fillWithWorkspaceProfiles() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		fEnvironments.clear();
 		fEnvironments.addAll(JavaRuntime.getExecutionEnvironmentsManager().getSupportedExecutionEnvironments());
 		Collections.reverse(fEnvironments);
 		String[] names = new String[fEnvironments.size()];
 		Iterator<Object> iter = fEnvironments.iterator();
 		int i = 0;
-		while (iter.hasNext()) {
+		while (iter.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			IExecutionEnvironment env = (IExecutionEnvironment)iter.next();
 			IPath path = JavaRuntime.newJREContainerPath(env);
 			IVMInstall install = JavaRuntime.getVMInstall(path);
@@ -563,7 +563,7 @@ public class JREsComboBlock {
 	 * @return classpath container path or <code>null</code>
 	 * @since 3.2
 	 */
-	public IPath getPath() {
+	public IPath getPath() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		if (!getStatus().isOK() && fErrorPath != null) {
 			return fErrorPath;
 		}
@@ -590,7 +590,7 @@ public class JREsComboBlock {
 	 * Sets the selection based on the given container path and returns
 	 * a status indicating if the selection was successful.
 	 */
-	public void setPath(IPath containerPath) {
+	public void setPath(IPath containerPath) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		fErrorPath = null;
 		setStatus(OK_STATUS);
 		if (JavaRuntime.newDefaultJREContainerPath().equals(containerPath)) {

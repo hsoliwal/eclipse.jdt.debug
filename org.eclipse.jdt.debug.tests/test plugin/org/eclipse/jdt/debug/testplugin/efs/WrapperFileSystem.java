@@ -58,7 +58,7 @@ public class WrapperFileSystem extends FileSystem {
 		try {
 			return new URI(scheme, uri.getUserInfo(), uri.getHost(), uri.getPort(), uri.getPath(), uri.getQuery(), uri.getFragment());
 		} catch (URISyntaxException e) {
-			throw new IllegalArgumentException("Unable to convert " + uri + " to scheme " + scheme, e); //$NON-NLS-1$ //$NON-NLS-2$
+			throw new IllegalArgumentException("Unable to convert " + uri + " to scheme " + scheme, e); //$NON-NLS-1$ //$NON-NLS-2$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		}
 	}
 

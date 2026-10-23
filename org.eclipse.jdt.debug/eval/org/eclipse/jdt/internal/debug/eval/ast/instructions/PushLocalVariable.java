@@ -41,7 +41,7 @@ public class PushLocalVariable extends SimpleInstruction {
 		fName = name;
 	}
 
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public void execute() throws CoreException {
 		IVariable internalVariable = getInternalVariable(fName);
 		if (internalVariable != null) {
@@ -50,7 +50,7 @@ public class PushLocalVariable extends SimpleInstruction {
 		}
 		IRuntimeContext context = getContext();
 		IJavaVariable[] locals = context.getLocals();
-		for (IJavaVariable local : locals) {
+		for (IJavaVariable local : locals) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			if (local.getName().equals(getName())) {
 				push(local);
 				return;
@@ -59,7 +59,7 @@ public class PushLocalVariable extends SimpleInstruction {
 		// For anonymous classes, getting variables from outer class
 		final IJavaObject innerThis = context.getThis();
 		if (null != innerThis) {
-			IJavaFieldVariable f = innerThis.getField(ASTEvaluationEngine.ANONYMOUS_VAR_PREFIX + getName(), false);
+			IJavaFieldVariable f = innerThis.getField(ASTEvaluationEngine.ANONYMOUS_VAR_PREFIX + getName(), false); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 			if (null != f) {
 				push(f);
 				return;
@@ -72,7 +72,7 @@ public class PushLocalVariable extends SimpleInstruction {
 		}
 
 		// Try search for lambda object variable
-		variable = LambdaUtils.findLambdaFrameVariable(context, ASTEvaluationEngine.ANONYMOUS_VAR_PREFIX + getName());
+		variable = LambdaUtils.findLambdaFrameVariable(context, ASTEvaluationEngine.ANONYMOUS_VAR_PREFIX + getName()); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		if (variable != null) {
 			push(variable);
 			return;

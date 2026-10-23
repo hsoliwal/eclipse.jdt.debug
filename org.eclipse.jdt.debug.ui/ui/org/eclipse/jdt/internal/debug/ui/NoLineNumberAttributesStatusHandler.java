@@ -28,13 +28,13 @@ public class NoLineNumberAttributesStatusHandler implements IStatusHandler {
 	/**
 	 * @see org.eclipse.debug.core.IStatusHandler#handleStatus(IStatus, Object)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public Object handleStatus(IStatus status, Object source) {
 		ReferenceType type= (ReferenceType) source;
 		IPreferenceStore preferenceStore= JDIDebugUIPlugin.getDefault().getPreferenceStore();
 		if (preferenceStore.getBoolean(IJDIPreferencesConstants.PREF_ALERT_UNABLE_TO_INSTALL_BREAKPOINT)) {
 			Display display= JDIDebugUIPlugin.getStandardDisplay();
-			display.syncExec(new Runnable() {
+			display.syncExec(new Runnable() { //FLLDCIM: MARK — T08 UI_THREAD_SYNCHRONIZER CALL
 				@Override
 				public void run() {
 					final ErrorDialogWithToggle dialog = new ErrorDialogWithToggle(PlatformUI.getWorkbench().getModalDialogShellProvider().getShell(),

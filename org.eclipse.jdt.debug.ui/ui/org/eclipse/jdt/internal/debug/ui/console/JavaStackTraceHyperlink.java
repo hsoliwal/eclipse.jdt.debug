@@ -99,7 +99,7 @@ public class JavaStackTraceHyperlink implements IHyperlink {
 	/**
 	 * @see org.eclipse.debug.ui.console.IConsoleHyperlink#linkActivated()
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public void linkActivated() {
 		String typeName;
 		int lineNumber;
@@ -129,9 +129,9 @@ public class JavaStackTraceHyperlink implements IHyperlink {
 	 * @param lineNumber
 	 *            the line number to open the editor on
 	 */
-	protected void startSourceSearch(final String typeName, final int lineNumber) {
+	protected void startSourceSearch(final String typeName, final int lineNumber) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		Job search = new Job(ConsoleMessages.JavaStackTraceHyperlink_2) {
-			@Override
+			@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 			protected IStatus run(IProgressMonitor monitor) {
 				ILaunch launch = getLaunch();
 				Object result = null;
@@ -165,7 +165,7 @@ public class JavaStackTraceHyperlink implements IHyperlink {
 		search.schedule();
 	}
 
-	private static List<IType> findTypesInWorkspace(String typeName) throws CoreException {
+	private static List<IType> findTypesInWorkspace(String typeName) throws CoreException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		int dot = typeName.lastIndexOf('.');
 		char[][] qualifications;
 		String simpleName;
@@ -177,7 +177,7 @@ public class JavaStackTraceHyperlink implements IHyperlink {
 			simpleName = typeName;
 		}
 		char[][] typeNames = new char[][] { simpleName.toCharArray() };
-		List<IType> matchingTypes = new ArrayList<>();
+		List<IType> matchingTypes = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 		TypeNameMatchRequestor requestor = new TypeNameMatchRequestor() {
 			@Override
 			public void acceptTypeNameMatch(TypeNameMatch match) {
@@ -201,9 +201,9 @@ public class JavaStackTraceHyperlink implements IHyperlink {
 	 * @param status
 	 *            the error status or <code>null</code> if none
 	 */
-	protected void searchCompleted(final Object source, final String typeName, final int lineNumber, final IStatus status) {
-		UIJob job = new UIJob("link search complete") { //$NON-NLS-1$
-			@Override
+	protected void searchCompleted(final Object source, final String typeName, final int lineNumber, final IStatus status) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
+		UIJob job = new UIJob("link search complete") { //$NON-NLS-1$ //FLLDCIM: MARK — T09  ANONYMOUS
+			@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 			public IStatus runInUIThread(IProgressMonitor monitor) {
 				if (source == null) {
 					if (status == null) {
@@ -226,9 +226,9 @@ public class JavaStackTraceHyperlink implements IHyperlink {
 					try {
 						return processAmbiguousResults(matches, typeName, lineNumber, link);
 					} catch(Exception e) {
-						StringBuilder temp = new StringBuilder();
-						temp.append("Unable to parse \"" + link + "\" \n "); //$NON-NLS-1$ //$NON-NLS-2$
-						temp.append(e.getClass().getSimpleName());
+						StringBuilder temp = new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
+						temp.append("Unable to parse \"" + link + "\" \n "); //$NON-NLS-1$ //$NON-NLS-2$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+						temp.append(e.getClass().getSimpleName()); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 						exceptionHandler(temp.toString(), e);
 					}
 
@@ -256,26 +256,26 @@ public class JavaStackTraceHyperlink implements IHyperlink {
 	 *            the generated link from stack trace
 	 * @return Returns the status of search results
 	 */
-	public IStatus processAmbiguousResults(List<Object> matches, String typeName, int line, String link) {
-		List<Object> exactMatchesFiltered = new ArrayList<>();
+	public IStatus processAmbiguousResults(List<Object> matches, String typeName, int line, String link) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
+		List<Object> exactMatchesFiltered = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 		Pattern pattern = Pattern.compile(REGEX_FOR_NORMAL);
-		Matcher matcher = pattern.matcher(link);
+		Matcher matcher = pattern.matcher(link); //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
 		String methodSignature = null;
 		if (matcher.find()) {
-			methodSignature = matcher.group(2) + "(" + matcher.group(3) + ")"; //$NON-NLS-1$ //$NON-NLS-2$
+			methodSignature = matcher.group(2) + "(" + matcher.group(3) + ")"; //$NON-NLS-1$ //$NON-NLS-2$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		}
 		if (methodSignature == null) {
 			pattern = Pattern.compile(REGEX_FOR_GENERICS);
-			matcher = pattern.matcher(link);
+			matcher = pattern.matcher(link); //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
 			if (matcher.find()) {
-				methodSignature = matcher.group(2) + "(" + matcher.group(3) + ")"; //$NON-NLS-1$ //$NON-NLS-2$
+				methodSignature = matcher.group(2) + "(" + matcher.group(3) + ")"; //$NON-NLS-1$ //$NON-NLS-2$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 			}
 		}
 		if (methodSignature == null) {
 			pattern = Pattern.compile(REGEX_FOR_INNER_CLASS);
-			matcher = pattern.matcher(link);
+			matcher = pattern.matcher(link); //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
 			if (matcher.find()) {
-				methodSignature = matcher.group(2) + "(" + matcher.group(3) + ")"; //$NON-NLS-1$ //$NON-NLS-2$
+				methodSignature = matcher.group(2) + "(" + matcher.group(3) + ")"; //$NON-NLS-1$ //$NON-NLS-2$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 			}
 		}
 		if (methodSignature == null) {
@@ -283,7 +283,7 @@ public class JavaStackTraceHyperlink implements IHyperlink {
 		}
 		methodSignature = methodSignature.replace(" ", ""); //$NON-NLS-1$//$NON-NLS-2$ ;
 		String methodNameExtracted = methodSignature.substring(0, methodSignature.indexOf('('));
-		for (Object obj : matches) {
+		for (Object obj : matches) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			if (filterClasses(obj, methodSignature, methodNameExtracted, link)) {
 				exactMatchesFiltered.add(obj);
 			}
@@ -323,7 +323,7 @@ public class JavaStackTraceHyperlink implements IHyperlink {
 	 *            Generated link from stack trace
 	 * @return returns <code>true</code> if a found an exact method inside the class, or <code>false</code> if there's no matching methods
 	 */
-	private boolean filterClasses(Object obj, String methodSignature, String methodNameExtracted, String link) {
+	private boolean filterClasses(Object obj, String methodSignature, String methodNameExtracted, String link) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		if (obj instanceof IType type) {
 			try {
 				if (extractFromResults(type, methodSignature, methodNameExtracted)) {
@@ -377,8 +377,8 @@ public class JavaStackTraceHyperlink implements IHyperlink {
 	private boolean extractFromInnerClassResults(IType[] innerClass, String methodSignature, String methodNameExtracted, String link) throws JavaModelException {
 		int innerClasslevel = innerClassLevels(link);
 		int levelTravelled = 0;
-		while (innerClass.length > 0) {
-			for (IType innerType : innerClass) {
+		while (innerClass.length > 0) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
+			for (IType innerType : innerClass) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				if (innerClass.length > 0) {
 					innerClass = innerType.getTypes();
 				}
@@ -401,7 +401,7 @@ public class JavaStackTraceHyperlink implements IHyperlink {
 
 	private int innerClassLevels(String genLink) {
 		int level = 0;
-		for (Character c : genLink.toCharArray()) {
+		for (Character c : genLink.toCharArray()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			if (c == '$') {
 				level++;
 			}
@@ -421,27 +421,27 @@ public class JavaStackTraceHyperlink implements IHyperlink {
 	 * @throws JavaModelException
 	 * @return returns <code>true</code> if a found an exact method inside the class, or <code>false</code> if there's no matching methods
 	 */
-	private boolean extractFromResults(IType type, String methodSignature, String methodNameExtracted) throws JavaModelException {
+	private boolean extractFromResults(IType type, String methodSignature, String methodNameExtracted) throws JavaModelException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		if (methodSignature.indexOf('(') == -1 || methodSignature.lastIndexOf(')') == -1) {
 			return false;
 		}
 		boolean paramDetailsNotIncluded = methodSignature.contains(".java:"); //$NON-NLS-1$
 		try {
 			IMethod[] methods = type.getMethods();
-			for (IMethod method : methods) {
+			for (IMethod method : methods) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				if (paramDetailsNotIncluded && method.getElementName().equals(methodNameExtracted)) {
 					return true;
 				}
 				String methodDetails = method.toString();
 				Pattern pattern = Pattern.compile(METHOD_SIGNATURE_REGEX);
-				Matcher matcher = pattern.matcher(methodDetails);
+				Matcher matcher = pattern.matcher(methodDetails); //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
 				if (!matcher.find()) {
 					return false;
 				}
 				String methodName = matcher.group();
 				methodName = methodName.replace(" ", ""); //$NON-NLS-1$//$NON-NLS-2$
 				pattern = Pattern.compile(METHOD_ARGUMENTS_REGEX);
-				matcher = pattern.matcher(methodSignature);
+				matcher = pattern.matcher(methodSignature); //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
 				if (!matcher.find()) {
 					return false;
 				}
@@ -485,21 +485,21 @@ public class JavaStackTraceHyperlink implements IHyperlink {
 	 *            generated method signature
 	 * @return returns generated <code>String</code> suitable for inner classes
 	 */
-	private String innerClassMethodSignatureGen(String extractedMethodName, String methodSignature) {
-		StringBuilder newSignature = new StringBuilder(extractedMethodName + "("); //$NON-NLS-1$
+	private String innerClassMethodSignatureGen(String extractedMethodName, String methodSignature) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
+		StringBuilder newSignature = new StringBuilder(extractedMethodName + "("); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 		Pattern pattern = Pattern.compile(INNER_CLASS_ARGUMENTS_REGEX);
-		Matcher matcher = pattern.matcher(methodSignature);
+		Matcher matcher = pattern.matcher(methodSignature); //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
 		matcher.find();
 		String paramsExtracted = matcher.group(1);
 		if (paramsExtracted.indexOf(',') != -1) {
 			String[] parameters = paramsExtracted.split(","); //$NON-NLS-1$
-			for (String param : parameters) {
-				newSignature.append(param.substring(param.indexOf('$') + 1));
-				newSignature.append(","); //$NON-NLS-1$
+			for (String param : parameters) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
+				newSignature.append(param.substring(param.indexOf('$') + 1)); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+				newSignature.append(","); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			}
 			newSignature.deleteCharAt(newSignature.length() - 1);
 			if (newSignature.charAt(newSignature.length() - 1) != ')') {
-				newSignature.append(')');
+				newSignature.append(')'); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			}
 		}
 		return newSignature.toString();
@@ -514,29 +514,29 @@ public class JavaStackTraceHyperlink implements IHyperlink {
 	 *            already extracted method signature
 	 * @return returns generated <code>String</code> suitable for normal classes
 	 */
-	private String methodSignatureGenerator(String methodName, String targetMethod) {
-		StringBuilder methodSignatureBuilder = new StringBuilder(methodName);
-		methodSignatureBuilder.append('(');
+	private String methodSignatureGenerator(String methodName, String targetMethod) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
+		StringBuilder methodSignatureBuilder = new StringBuilder(methodName); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
+		methodSignatureBuilder.append('('); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		String[] params = targetMethod.split(","); //$NON-NLS-1$
-		for (String block : params) {
+		for (String block : params) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			if (block.contains("...")) { //$NON-NLS-1$ Parameter is var args
 				if (params.length > 1) {
 					methodSignatureBuilder = varArgsParamBuilder(block, methodSignatureBuilder);
 				}
 			} else {
 				if (block.indexOf('.') == -1) {
-					methodSignatureBuilder.append(block.substring(block.lastIndexOf('(') + 1));
-					methodSignatureBuilder.append(',');
+					methodSignatureBuilder.append(block.substring(block.lastIndexOf('(') + 1)); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+					methodSignatureBuilder.append(','); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				} else {
-					methodSignatureBuilder.append(block.substring(block.lastIndexOf('.') + 1));
-					methodSignatureBuilder.append(',');
+					methodSignatureBuilder.append(block.substring(block.lastIndexOf('.') + 1)); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+					methodSignatureBuilder.append(','); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				}
 			}
 		}
 		methodSignatureBuilder.deleteCharAt(methodSignatureBuilder.length() - 1);
 
 		if (methodSignatureBuilder.charAt(methodSignatureBuilder.length() - 1) != ')') {
-			methodSignatureBuilder.append(')');
+			methodSignatureBuilder.append(')'); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		}
 		return methodSignatureBuilder.toString();
 	}
@@ -553,8 +553,8 @@ public class JavaStackTraceHyperlink implements IHyperlink {
 	private StringBuilder varArgsParamBuilder(String parameter, StringBuilder current) {
 		String sub1 = parameter.substring(0, parameter.indexOf("...")); //$NON-NLS-1$
 		sub1 = sub1.substring(sub1.lastIndexOf('.') + 1);
-		current.append(sub1);
-		current.append("...,"); //$NON-NLS-1$
+		current.append(sub1); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+		current.append("...,"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		return current;
 	}
 
@@ -568,7 +568,7 @@ public class JavaStackTraceHyperlink implements IHyperlink {
 	 * @param lineNumber
 	 *            line number on link
 	 */
-	protected void processSearchResult(Object source, String typeName, int lineNumber) {
+	protected void processSearchResult(Object source, String typeName, int lineNumber) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IDebugModelPresentation presentation = JDIDebugUIPlugin.getDefault().getModelPresentation();
 		IEditorInput editorInput = presentation.getEditorInput(source);
 		if (editorInput != null) {
@@ -587,7 +587,7 @@ public class JavaStackTraceHyperlink implements IHyperlink {
 						} catch (BadLocationException e) {
 
 							MessageDialog.openInformation(JDIDebugUIPlugin.getActiveWorkbenchShell(), ConsoleMessages.JavaStackTraceHyperlink_0, NLS.bind("{0}{1}{2}", new String[] { //$NON-NLS-1$
-									(lineNumber + 1) + "", ConsoleMessages.JavaStackTraceHyperlink_1, typeName })); //$NON-NLS-1$
+									(lineNumber + 1) + "", ConsoleMessages.JavaStackTraceHyperlink_1, typeName })); //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 						}
 						provider.disconnect(editorInput);
 					}
@@ -620,7 +620,7 @@ public class JavaStackTraceHyperlink implements IHyperlink {
 	 * @exception CoreException
 	 *                if unable to parse the type name
 	 */
-	protected String getTypeName(String linkText) throws CoreException {
+	protected String getTypeName(String linkText) throws CoreException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		int start = linkText.lastIndexOf('(');
 		int end = linkText.indexOf(':');
 		if (start >= 0 && end > start) {
@@ -651,7 +651,7 @@ public class JavaStackTraceHyperlink implements IHyperlink {
 			}
 
 			if (qualifier.length() > 0) {
-				typeName = qualifier + "." + typeName; //$NON-NLS-1$
+				typeName = qualifier + "." + typeName; //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 			}
 			// Remove the module name if exists
 			int index = typeName.lastIndexOf('/');
@@ -673,7 +673,7 @@ public class JavaStackTraceHyperlink implements IHyperlink {
 	 * @exception CoreException
 	 *                if unable to parse the number
 	 */
-	protected int getLineNumber(String linkText) throws CoreException {
+	protected int getLineNumber(String linkText) throws CoreException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		int index = linkText.lastIndexOf(':');
 		if (index >= 0) {
 			String numText = linkText.substring(index + 1);
@@ -708,7 +708,7 @@ public class JavaStackTraceHyperlink implements IHyperlink {
 	 * @exception CoreException
 	 *                if unable to retrieve the text
 	 */
-	protected String getLinkText() throws CoreException {
+	protected String getLinkText() throws CoreException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 			IDocument document = getConsole().getDocument();
 			IRegion region = getConsole().getRegion(this);
@@ -731,7 +731,7 @@ public class JavaStackTraceHyperlink implements IHyperlink {
 				int lastOpen = line.lastIndexOf('(');
 				if (lastOpen > 0) {
 					if (Character.isWhitespace(line.charAt(lastOpen - 1))) {
-						extractedTrace = line.substring(0, lastOpen - 1).trim() + line.substring(lastOpen);
+						extractedTrace = line.substring(0, lastOpen - 1).trim() + line.substring(lastOpen); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 						linkStart = extractedTrace.lastIndexOf(' ', regionOffsetInLine);
 						linkEnd = extractedTrace.indexOf(')', linkStart);
 						return extractedTrace.substring(linkStart == -1 ? 0 : linkStart + 1, linkEnd + 1).trim();
@@ -772,16 +772,16 @@ public class JavaStackTraceHyperlink implements IHyperlink {
 	 * @param link
 	 *            Stack trace from the console
 	 */
-	private List<Object> filterBinaryTypes(List<Object> extracted, String link) {
+	private List<Object> filterBinaryTypes(List<Object> extracted, String link) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		if (link != null) {
-			List<Object> filteredResults = new ArrayList<>();
+			List<Object> filteredResults = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 			int binaryInserted = 0;
 			try {
 				Pattern pattern = Pattern.compile("@(.*?)\\/"); //$NON-NLS-1$
-				Matcher match = pattern.matcher(link);
+				Matcher match = pattern.matcher(link); //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
 				if (match.find()) {
 					String jdkVersion = match.group(1);
-					for (Object ob : extracted) {
+					for (Object ob : extracted) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 						if (ob instanceof IType type && type.isBinary()) {
 							IVMInstall installedJava = JavaRuntime.getVMInstall(type.getJavaProject());
 							String jdkAvailable = installedJava.getInstallLocation().getAbsolutePath();

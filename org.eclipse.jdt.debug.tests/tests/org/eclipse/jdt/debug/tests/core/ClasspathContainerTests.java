@@ -89,10 +89,10 @@ public class ClasspathContainerTests extends AbstractDebugTest {
 	/**
 	 * Tests that the container will accept an update
 	 */
-	public void testCanUpdate() throws CoreException {
+	public void testCanUpdate() throws CoreException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		// Create a new VM install that mirrors the current install
 		IVMInstall def = JavaRuntime.getDefaultVMInstall();
-		String vmId = def.getId() + System.currentTimeMillis();
+		String vmId = def.getId() + System.currentTimeMillis(); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		VMStandin standin = new VMStandin(def.getVMInstallType(), vmId);
 		String vmName = "Alternate JRE";
 		IPath containerPath = new Path(JavaRuntime.JRE_CONTAINER);
@@ -134,7 +134,7 @@ public class ClasspathContainerTests extends AbstractDebugTest {
 		// ensure libraries are restored
 		newLibs = JavaRuntime.getLibraryLocations(newVM);
 		assertEquals("Libraries should be restored", originalLibs.length, newLibs.length);
-		for (int i = 0; i < newLibs.length; i++) {
+		for (int i = 0; i < newLibs.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			LibraryLocation location = newLibs[i];
 			LibraryLocation origi = originalLibs[i];
 			assertEquals("Library should be the equal", origi.getSystemLibraryPath().toFile(), location.getSystemLibraryPath().toFile());
@@ -145,13 +145,13 @@ public class ClasspathContainerTests extends AbstractDebugTest {
 	/**
 	 * Tests library comparison case sensitivity.
 	 */
-	public void testLibraryCaseSensitivity() {
+	public void testLibraryCaseSensitivity() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IVMInstall def = JavaRuntime.getDefaultVMInstall();
 		LibraryLocation[] libs = JavaRuntime.getLibraryLocations(def);
 		boolean caseSensitive = !Platform.OS.isWindows();
 		LibraryLocation[] set1 = new LibraryLocation[libs.length];
 		LibraryLocation[] set2 = new LibraryLocation[libs.length];
-		for (int i = 0; i < libs.length; i++) {
+		for (int i = 0; i < libs.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			LibraryLocation lib = libs[i];
 			String s1 = lib.getSystemLibraryPath().toOSString();
 			IPath p1 = new Path(s1);
@@ -174,7 +174,7 @@ public class ClasspathContainerTests extends AbstractDebugTest {
 	 * @see "https://bugs.eclipse.org/bugs/show_bug.cgi?id=399098"
 	 * @since 3.8.100
 	 */
-	public void testJREContainerIndex() throws Exception {
+	public void testJREContainerIndex() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		// get the current VM
 		IVMInstall def = JavaRuntime.getDefaultVMInstall();
 		if (JavaRuntime.isModularJava(def)) {
@@ -201,7 +201,7 @@ public class ClasspathContainerTests extends AbstractDebugTest {
 		assertEquals(1, originalEntries.length);
 		IClasspathAttribute[] cpAttributes = originalEntries[0].getExtraAttributes();
 		String indexloc = null;
-		for (int i = 0; i < cpAttributes.length; i++) {
+		for (int i = 0; i < cpAttributes.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			if(IClasspathAttribute.INDEX_LOCATION_ATTRIBUTE_NAME.equals(cpAttributes[i].getName())) {
 				indexloc = cpAttributes[i].getValue();
 				break;
@@ -219,7 +219,7 @@ public class ClasspathContainerTests extends AbstractDebugTest {
 	 * @see "https://bugs.eclipse.org/bugs/show_bug.cgi?id=399098"
 	 * @since 3.8.100
 	 */
-	public void testJREContainerIndex2() throws Exception {
+	public void testJREContainerIndex2() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		// get the current VM
 		IVMInstall def = JavaRuntime.getDefaultVMInstall();
 		if (JavaRuntime.isModularJava(def)) {
@@ -237,7 +237,7 @@ public class ClasspathContainerTests extends AbstractDebugTest {
 		newVMStandin.setLibraryLocations(newLibs);
 		IVMInstall newVM = newVMStandin.convertToRealVM();
 		libs = JavaRuntime.getLibraryLocations(newVM);
-		assertNotNull("There should be an index file for: "+libs[0].getSystemLibraryPath(), libs[0].getIndexLocation());
+		assertNotNull("There should be an index file for: "+libs[0].getSystemLibraryPath(), libs[0].getIndexLocation()); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 	}
 
 	/**
@@ -247,7 +247,7 @@ public class ClasspathContainerTests extends AbstractDebugTest {
 
 		// construct the path to the index file
 		File libraryFile = library.getSystemLibraryPath().toFile();
-		String indexName = libraryFile.getName() + ".index";
+		String indexName = libraryFile.getName() + ".index"; //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		IPath indexPath = JavaTestPlugin.getDefault().getStateLocation().append(indexName);
 		// generate the index using JDT Core API
 		JavaIndexer.generateIndexForJar(libraryFile.getAbsolutePath(), indexPath.toOSString());

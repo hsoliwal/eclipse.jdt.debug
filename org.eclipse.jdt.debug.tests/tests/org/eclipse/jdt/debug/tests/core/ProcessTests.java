@@ -32,7 +32,7 @@ public class ProcessTests extends AbstractDebugTest {
 		super(name);
 	}
 
-	public void testExitValueNormal() throws Exception {
+	public void testExitValueNormal() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String typeName = "Breakpoints";
 		ILineBreakpoint bp = createLineBreakpoint(46, typeName);
 
@@ -62,7 +62,7 @@ public class ProcessTests extends AbstractDebugTest {
 	 * Tests that an already terminated java.lang.Process behaves properly when
 	 * wrapped in an IProcess.
 	 */
-	public void testAlreadyTerminatedProcess() throws Exception {
+	public void testAlreadyTerminatedProcess() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		if (Platform.OS.isLinux()) {
 			return;
 		}
@@ -70,7 +70,7 @@ public class ProcessTests extends AbstractDebugTest {
 
 		boolean terminated = false;
 		int value = -1;
-		while (!terminated) {
+		while (!terminated) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			try {
 				value = process.exitValue();
 				terminated = true;

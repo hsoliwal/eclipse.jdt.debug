@@ -93,7 +93,7 @@ public class VMInstallTests extends AbstractDebugTest {
 	/**
 	 * Test acquiring the set of system properties that have been asked for - they should be cached in JDT launching
 	 */
-	public void testSystemPropertiesCaching() throws CoreException {
+	public void testSystemPropertiesCaching() throws CoreException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IVMInstall def = JavaRuntime.getDefaultVMInstall();
 		assertTrue("should be an IVMInstall3", def instanceof IVMInstall3);
 		IVMInstall3 vm3 = (IVMInstall3)def;
@@ -118,7 +118,7 @@ public class VMInstallTests extends AbstractDebugTest {
 	 *
 	 * @see "https://bugs.eclipse.org/bugs/show_bug.cgi?id=399798"
 	 */
-	public void testLibraryResolver1() throws Exception {
+	public void testLibraryResolver1() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		VMInstallTestsLibraryLocationResolver.isTesting = true;
 		IVMInstall vm = JavaRuntime.getDefaultVMInstall();
 		assertNotNull("There must be a default VM", vm);
@@ -166,7 +166,7 @@ public class VMInstallTests extends AbstractDebugTest {
 	 *
 	 * @see "https://bugs.eclipse.org/bugs/show_bug.cgi?id=399798"
 	 */
-	public void testLibraryResolver3() throws Exception {
+	public void testLibraryResolver3() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		VMInstallTestsLibraryLocationResolver.isTesting = true;
 		IVMInstall vm = JavaRuntime.getDefaultVMInstall();
 		assertNotNull("There must be a default VM", vm);
@@ -191,7 +191,7 @@ public class VMInstallTests extends AbstractDebugTest {
 	 *
 	 * @see "https://bugs.eclipse.org/bugs/show_bug.cgi?id=399798"
 	 */
-	public void testLibraryResolver4() throws Exception {
+	public void testLibraryResolver4() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		VMInstallTestsLibraryLocationResolver.isTesting = true;
 		try {
 			String filename = "/testfiles/test-jre/bin/test-resolver2.ee";
@@ -202,11 +202,11 @@ public class VMInstallTests extends AbstractDebugTest {
 			IVMInstall install = vm.convertToRealVM();
 			LibraryLocation[ ] locs = install.getLibraryLocations();
 			String locpath = null;
-			for (int i = 0; i < locs.length; i++) {
+			for (int i = 0; i < locs.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				IPath path = locs[i].getSystemLibraryPath();
 				if(VMInstallTestsLibraryLocationResolver.applies(path)) {
 					locpath = path.toString();
-					assertTrue("The original source path should be set on the ext lib [" + locpath + "]",
+					assertTrue("The original source path should be set on the ext lib [" + locpath + "]", //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 							locs[i].getSystemLibrarySourcePath().toString().indexOf("source.txt") > -1);
 				}
 			}
@@ -221,7 +221,7 @@ public class VMInstallTests extends AbstractDebugTest {
 	private static final String JAVA11_OR_LATER_PACKAGE = "java.net.http";
 	private static final String NON_MODULAR_JDK_PACKAGE = "javax.annotation";
 
-	public void testJavaRuntimeQuerySystemPackages_modularJDK() throws CoreException {
+	public void testJavaRuntimeQuerySystemPackages_modularJDK() throws CoreException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IVMInstall vm = JavaRuntime.getDefaultVMInstall();
 		String javaVersion = ((IVMInstall2) vm).getJavaVersion();
 		assertTrue("At least a JDK 11 expected", JavaRuntime.compareJavaVersions(vm, JavaCore.VERSION_11) > 0);
@@ -268,16 +268,16 @@ public class VMInstallTests extends AbstractDebugTest {
 		assertEquals("Invalid release: definitivly-not-a-version", e4.getMessage());
 	}
 
-	public void testJavaRuntimeQuerySystemPackages_nonModularJDK() throws Exception {
+	public void testJavaRuntimeQuerySystemPackages_nonModularJDK() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try (AutoCloseableSupplier<IVMInstall> nonModularVM = searchFirstNonModularVM()) {
 			IVMInstall vm = nonModularVM.get();
 
 			Set<String> packages = JavaRuntime.getProvidedVMPackages(vm, null);
 
 			assertContainsAllCommonPackages(vm, packages);
-			assertTrue("Not found: " + NON_MODULAR_JDK_PACKAGE, packages.contains(NON_MODULAR_JDK_PACKAGE));
-			assertFalse("Found unexpected package: " + JAVA9_OR_LATER_PACKAGE, packages.contains(JAVA9_OR_LATER_PACKAGE));
-			assertFalse("Found unexpected package: " + JAVA11_OR_LATER_PACKAGE, packages.contains(JAVA11_OR_LATER_PACKAGE));
+			assertTrue("Not found: " + NON_MODULAR_JDK_PACKAGE, packages.contains(NON_MODULAR_JDK_PACKAGE)); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
+			assertFalse("Found unexpected package: " + JAVA9_OR_LATER_PACKAGE, packages.contains(JAVA9_OR_LATER_PACKAGE)); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
+			assertFalse("Found unexpected package: " + JAVA11_OR_LATER_PACKAGE, packages.contains(JAVA11_OR_LATER_PACKAGE)); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 			// Test that for non-modular VMs the release information is just ignored
 			assertEquals(packages, JavaRuntime.getProvidedVMPackages(vm, "1.6"));
@@ -293,7 +293,7 @@ public class VMInstallTests extends AbstractDebugTest {
 		assertNotNull(javadocLocation);
 		if (!javadocLocation.getPath().contains(latest)) {
 			System.err.println("****************************WARNING!!**********************************");
-			System.err.println("Update for Java " + latest + " needed in StandardVMType.getDefaultJavadocLocation()");
+			System.err.println("Update for Java " + latest + " needed in StandardVMType.getDefaultJavadocLocation()"); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 			System.err.println("***********************************************************************");
 		}
 	}
@@ -301,16 +301,16 @@ public class VMInstallTests extends AbstractDebugTest {
 	private void assertContainsAllCommonPackages(IVMInstall vm, Set<String> packages) {
 		Set<String> missing = new LinkedHashSet<>(COMMON_JAVA_PACKAGES);
 		missing.removeAll(packages);
-		assertTrue("Not all packages found in " + vm.getInstallLocation() + ", missing " + missing, missing.isEmpty());
+		assertTrue("Not all packages found in " + vm.getInstallLocation() + ", missing " + missing, missing.isEmpty()); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 	}
 
-	private AutoCloseableSupplier<IVMInstall> searchFirstNonModularVM() throws IOException {
+	private AutoCloseableSupplier<IVMInstall> searchFirstNonModularVM() throws IOException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IVMInstallType vmType = JavaRuntime.getVMInstallType(StandardVMType.ID_STANDARD_VM_TYPE);
 
 		Set<File> candidateDirectories;
 		String nonModularJavaHome = System.getenv("NON_MODULAR_JAVA_HOME");
 		if (nonModularJavaHome != null) {
-			System.out.println(getName() + ": NON_MODULAR_JAVA_HOME: " + nonModularJavaHome);
+			System.out.println(getName() + ": NON_MODULAR_JAVA_HOME: " + nonModularJavaHome); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 			candidateDirectories = Set.of(new File(nonModularJavaHome));
 		} else {
 			Path defaultVMLocation = JavaRuntime.getDefaultVMInstall().getInstallLocation().toPath();
@@ -324,12 +324,12 @@ public class VMInstallTests extends AbstractDebugTest {
 					.map(IVMInstall::getInstallLocation) //
 					.forEach(candidateDirectories::remove);
 		}
-		System.out.println(getName() + ": found JVM candidates: " + candidateDirectories);
+		System.out.println(getName() + ": found JVM candidates: " + candidateDirectories); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 		IVMInstall candidate = null;
-		for (File file : candidateDirectories) {
+		for (File file : candidateDirectories) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			if (vmType.validateInstallLocation(file).isOK()) {
-				String id = "test-vm-" + System.nanoTime();
+				String id = "test-vm-" + System.nanoTime(); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 				IVMInstall vmCandidate = vmType.createVMInstall(id);
 				vmCandidate.setInstallLocation(file);
 				if (!JavaRuntime.isModularJava(vmCandidate)) {
@@ -349,7 +349,7 @@ public class VMInstallTests extends AbstractDebugTest {
 			assumeNotNull(candidate);
 		}
 		IVMInstall vm = candidate;
-		System.out.println(getName() + ": found non-modular JVM: " + vm.getInstallLocation());
+		System.out.println(getName() + ": found non-modular JVM: " + vm.getInstallLocation()); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		return new AutoCloseableSupplier<>() {
 			@Override
 			public IVMInstall get() {
@@ -369,23 +369,23 @@ public class VMInstallTests extends AbstractDebugTest {
 	/**
 	 * Checks the given {@link LibraryLocation}s to ensure they reference the testing resolver paths
 	 */
-	void assertResolvedLibraryLocations(LibraryLocation[] locs) {
+	void assertResolvedLibraryLocations(LibraryLocation[] locs) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String locpath = null;
-		for (int i = 0; i < locs.length; i++) {
+		for (int i = 0; i < locs.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			IPath path = locs[i].getSystemLibraryPath();
 			if(VMInstallTestsLibraryLocationResolver.applies(path)) {
 				locpath = path.toString();
-				assertTrue("There should be a source path ending in test_resolver_src.zip on the ext lib [" + locpath + "]",
+				assertTrue("There should be a source path ending in test_resolver_src.zip on the ext lib [" + locpath + "]", //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 						locs[i].getSystemLibrarySourcePath().toString().indexOf("test_resolver_src.zip") > -1);
 				IPath root = locs[i].getPackageRootPath();
-				assertEquals("The source root path should be 'src' for ext lib [" + locpath + "]", "src", root.toString());
+				assertEquals("The source root path should be 'src' for ext lib [" + locpath + "]", "src", root.toString()); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 				URL url = locs[i].getJavadocLocation();
-				assertNotNull("There should be a Javadoc URL set for ext lib ["+locpath+"]", url);
-				assertTrue("There should be a javadoc path of test_resolver_javadoc.zip on the ext lib ["+locpath+"]",
+				assertNotNull("There should be a Javadoc URL set for ext lib ["+locpath+"]", url); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
+				assertTrue("There should be a javadoc path of test_resolver_javadoc.zip on the ext lib ["+locpath+"]", //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 						url.getPath().indexOf("test_resolver_javadoc.zip") > -1);
 				url = locs[i].getIndexLocation();
-				assertNotNull("There should be an index path of test_resolver_index.index on the ext lib ["+locpath+"]", url);
-				assertTrue("There should be an index path of test_resolver_index.index on the ext lib ["+locpath+"]",
+				assertNotNull("There should be an index path of test_resolver_index.index on the ext lib ["+locpath+"]", url); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
+				assertTrue("There should be an index path of test_resolver_index.index on the ext lib ["+locpath+"]", //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 						url.getPath().indexOf("test_resolver_index.index") > -1);
 			}
 		}
@@ -397,9 +397,9 @@ public class VMInstallTests extends AbstractDebugTest {
 	 */
 	VMStandin getEEStandin(String filename) throws CoreException {
 		File ee = JavaTestPlugin.getDefault().getFileInPlugin(IPath.fromOSString(filename));
-		assertNotNull("The EE file "+filename+" was not found", ee);
+		assertNotNull("The EE file "+filename+" was not found", ee); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		VMStandin vm = JavaRuntime.createVMFromDefinitionFile(ee, "resolver-ee", "resolver-ee-id");
-		assertNotNull("the VM standin should exist for "+filename, vm);
+		assertNotNull("the VM standin should exist for "+filename, vm); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		return vm;
 	}
 
@@ -411,14 +411,14 @@ public class VMInstallTests extends AbstractDebugTest {
 	 * @return preference store key
 	 */
 	private String getSystemPropertyKey(IVMInstall vm, String property) {
-		StringBuilder buffer = new StringBuilder();
-		buffer.append("PREF_VM_INSTALL_SYSTEM_PROPERTY");
-		buffer.append("."); //$NON-NLS-1$
-		buffer.append(vm.getVMInstallType().getId());
-		buffer.append("."); //$NON-NLS-1$
-		buffer.append(vm.getId());
-		buffer.append("."); //$NON-NLS-1$
-		buffer.append(property);
+		StringBuilder buffer = new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
+		buffer.append("PREF_VM_INSTALL_SYSTEM_PROPERTY"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+		buffer.append("."); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+		buffer.append(vm.getVMInstallType().getId()); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+		buffer.append("."); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+		buffer.append(vm.getId()); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+		buffer.append("."); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+		buffer.append(property); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		return buffer.toString();
 	}
 

@@ -88,39 +88,39 @@ public class WorkbenchAdapter implements IWorkbenchAdapter {
 	/* (non-Javadoc)
 	 * @see org.eclipse.ui.model.IWorkbenchAdapter#getLabel(java.lang.Object)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public String getLabel(Object o) {
 		if (o instanceof PackageFragmentRootSourceContainer container) {
 			IPackageFragmentRoot fragmentRoot = container.getPackageFragmentRoot();
 			IPath path = fragmentRoot.getPath();
 			if (fragmentRoot instanceof JrtPackageFragmentRoot jrtPackageFragmentRoot) {
-				StringBuilder buffer = new StringBuilder();
-				buffer.append(jrtPackageFragmentRoot.getElementName());
+				StringBuilder buffer = new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
+				buffer.append(jrtPackageFragmentRoot.getElementName()); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				if (path.segmentCount() > 0) {
-					buffer.append(" - "); //$NON-NLS-1$
+					buffer.append(" - "); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 					if (path.getDevice() != null) {
-						buffer.append(path.getDevice());
+						buffer.append(path.getDevice()); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 					}
 					String[] segments = path.segments();
-					for (String segment : segments) {
-						buffer.append(File.separatorChar);
-						buffer.append(segment);
+					for (String segment : segments) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
+						buffer.append(File.separatorChar); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+						buffer.append(segment); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 					}
 					return buffer.toString();
 				}
 			} else {
 				if (path.segmentCount() > 0) {
-					StringBuilder buffer = new StringBuilder();
-					buffer.append(path.lastSegment());
+					StringBuilder buffer = new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
+					buffer.append(path.lastSegment()); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 					if (path.segmentCount() > 1) {
-						buffer.append(" - "); //$NON-NLS-1$
+						buffer.append(" - "); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 						if (path.getDevice() != null) {
-							buffer.append(path.getDevice());
+							buffer.append(path.getDevice()); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 						}
 						String[] segments = path.segments();
-						for (int i = 0; i < segments.length - 1; i++) {
-							buffer.append(File.separatorChar);
-							buffer.append(segments[i]);
+						for (int i = 0; i < segments.length - 1; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
+							buffer.append(File.separatorChar); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+							buffer.append(segments[i]); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 						}
 					}
 					return buffer.toString();

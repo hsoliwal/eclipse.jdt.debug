@@ -29,7 +29,7 @@ import org.eclipse.swt.custom.BusyIndicator;
  * An action delegate that toggles the state of its viewer to
  * show/hide qualified names.
  */
-public class ShowQualifiedAction extends ViewFilterAction {
+public class ShowQualifiedAction extends ViewFilterAction { //FLLDCIM: MARK — T23  IMPLEMENTS
 
 	/**
 	 * @see ViewFilterAction#getPreferenceKey()
@@ -53,7 +53,7 @@ public class ShowQualifiedAction extends ViewFilterAction {
 	/* (non-Javadoc)
 	 * @see org.eclipse.ui.IActionDelegate#run(org.eclipse.jface.action.IAction)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public void run(IAction action) {
 		final StructuredViewer viewer = getStructuredViewer();
 		IDebugView view = getView().getAdapter(IDebugView.class);
@@ -64,9 +64,9 @@ public class ShowQualifiedAction extends ViewFilterAction {
 				BusyIndicator.showWhile(viewer.getControl().getDisplay(), new Runnable() {
 					@Override
 					public void run() {
-						viewer.refresh();
+						viewer.refresh(); //FLLDCIM: MARK — M21 FULL_REBUILD_TO_DELTA CALL
 						IPreferenceStore store = getPreferenceStore();
-						String key = getView().getSite().getId() + "." + getPreferenceKey(); //$NON-NLS-1$
+						String key = getView().getSite().getId() + "." + getPreferenceKey(); //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 						store.setValue(key, getValue());
 					}
 				});

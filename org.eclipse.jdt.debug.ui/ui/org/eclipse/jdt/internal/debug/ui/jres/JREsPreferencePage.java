@@ -102,7 +102,7 @@ public class JREsPreferencePage extends PreferencePage implements IWorkbenchPref
 		IVMInstall realDefault= JavaRuntime.getDefaultVMInstall();
 		if (realDefault != null) {
 			IVMInstall[] vms= fJREBlock.getJREs();
-			for (int i = 0; i < vms.length; i++) {
+			for (int i = 0; i < vms.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				IVMInstall fakeVM= vms[i];
 				if (fakeVM.equals(realDefault)) {
 					verifyDefaultVM(fakeVM);
@@ -115,7 +115,7 @@ public class JREsPreferencePage extends PreferencePage implements IWorkbenchPref
 	/* (non-Javadoc)
 	 * @see org.eclipse.jface.preference.PreferencePage#createContents(org.eclipse.swt.widgets.Composite)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	protected Control createContents(Composite ancestor) {
 		initializeDialogUnits(ancestor);
 
@@ -146,7 +146,7 @@ public class JREsPreferencePage extends PreferencePage implements IWorkbenchPref
 		fCompliance.setText(JREMessages.JREsPreferencePage_14);
 		fCompliance.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 		fCompliance.setVisible(false);
-		fCompliance.addSelectionListener(new SelectionListener() {
+		fCompliance.addSelectionListener(new SelectionListener() { //FLLDCIM: MARK — T03 SELECTION_LANE CALL
 			@Override
 			public void widgetDefaultSelected(SelectionEvent e) {}
 			@Override
@@ -155,8 +155,8 @@ public class JREsPreferencePage extends PreferencePage implements IWorkbenchPref
 		PlatformUI.getWorkbench().getHelpSystem().setHelp(ancestor, IJavaDebugHelpContextIds.JRE_PREFERENCE_PAGE);
 		initDefaultVM();
 		fJREBlock.initializeTimeStamp();
-		fJREBlock.addSelectionChangedListener(new ISelectionChangedListener() {
-			@Override
+		fJREBlock.addSelectionChangedListener(new ISelectionChangedListener() { //FLLDCIM: MARK — T04 VIEWER_SELECTION_DELTA CALL
+			@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 			public void selectionChanged(SelectionChangedEvent event) {
 				IVMInstall install = getCurrentDefaultVM();
 				if (install == null) {
@@ -190,7 +190,7 @@ public class JREsPreferencePage extends PreferencePage implements IWorkbenchPref
 		return super.isValid();
 	}
 
-	private void validateComplianceAndJRE(IVMInstall vmInstall) {
+	private void validateComplianceAndJRE(IVMInstall vmInstall) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String compliance = getCurrentCompilerCompliance();
 		if (!supportsCurrentCompliance(vmInstall, compliance)) {
 			setMessage(NLS.bind(JREMessages.JREsPreferencePage_0, compliance), IMessageProvider.WARNING);
@@ -288,7 +288,7 @@ public class JREsPreferencePage extends PreferencePage implements IWorkbenchPref
 	/* (non-Javadoc)
 	 * @see org.eclipse.jface.preference.IPreferencePage#performOk()
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public boolean performOk() {
 		final boolean[] canceled = new boolean[] {false};
 		BusyIndicator.showWhile(null, new Runnable() {
@@ -325,13 +325,13 @@ public class JREsPreferencePage extends PreferencePage implements IWorkbenchPref
 	 * that all of the VM's library locations exist on the file system.  If this fails,
 	 * remove the VM from the table and try to set another default.
 	 */
-	private void verifyDefaultVM(IVMInstall vm) {
+	private void verifyDefaultVM(IVMInstall vm) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		if (vm != null) {
 
 			// Verify that all of the specified VM's library locations actually exist
 			LibraryLocation[] locations= JavaRuntime.getLibraryLocations(vm);
 			boolean exist = true;
-			for (int i = 0; i < locations.length; i++) {
+			for (int i = 0; i < locations.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				exist = exist && new File(locations[i].getSystemLibraryPath().toOSString()).exists();
 			}
 
@@ -373,7 +373,7 @@ public class JREsPreferencePage extends PreferencePage implements IWorkbenchPref
 	/*
 	 * @see org.eclipse.jface.preference.PreferencePage#okToLeave()
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public boolean okToLeave() {
 		if (fJREBlock != null && fJREBlock.hasChangesInDialog()) {
 			String title = JREMessages.JREsPreferencePage_4;

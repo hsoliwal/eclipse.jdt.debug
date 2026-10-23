@@ -38,7 +38,7 @@ import org.eclipse.ui.handlers.IHandlerService;
  * This action opens a Java editor on the element represented by text selection of
  * the code snippet.
  */
-public class SnippetOpenOnSelectionAction extends OpenAction {
+public class SnippetOpenOnSelectionAction extends OpenAction { //FLLDCIM: MARK — T04  IMPLEMENTS
 
 	protected JavaSnippetEditor fEditor;
 	private String fDialogTitle;
@@ -79,7 +79,7 @@ public class SnippetOpenOnSelectionAction extends OpenAction {
 	 * Shows a dialog for resolving an ambiguous java element.
 	 * Utility method that can be called by sub-classes.
 	 */
-	protected IJavaElement selectJavaElement(List<IJavaElement> elements, Shell shell, String title, String message) {
+	protected IJavaElement selectJavaElement(List<IJavaElement> elements, Shell shell, String title, String message) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		int nResults= elements.size();
 		if (nResults == 0) {
 			return null;
@@ -99,7 +99,7 @@ public class SnippetOpenOnSelectionAction extends OpenAction {
 			Object[] selection= dialog.getResult();
 			if (selection != null && selection.length > 0) {
 				nResults= selection.length;
-				for (int i= 0; i < nResults; i++) {
+				for (int i= 0; i < nResults; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 					Object current= selection[i];
 					if (current instanceof IJavaElement) {
 						return (IJavaElement) current;
@@ -117,8 +117,8 @@ public class SnippetOpenOnSelectionAction extends OpenAction {
 	 */
 	protected List<IJavaElement> filterResolveResults(IJavaElement[] codeResolveResults) {
 		int nResults= codeResolveResults.length;
-		List<IJavaElement> refs= new ArrayList<>(nResults);
-		for (int i= 0; i < nResults; i++) {
+		List<IJavaElement> refs= new ArrayList<>(nResults); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
+		for (int i= 0; i < nResults; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			if (codeResolveResults[i] instanceof ISourceReference) {
 				refs.add(codeResolveResults[i]);
 			}

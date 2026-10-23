@@ -52,7 +52,7 @@ import com.sun.jdi.request.EventRequestManager;
 import com.sun.jdi.request.MethodEntryRequest;
 import com.sun.jdi.request.MethodExitRequest;
 
-public class JavaMethodBreakpoint extends JavaLineBreakpoint implements
+public class JavaMethodBreakpoint extends JavaLineBreakpoint implements //FLLDCIM: MARK — T27  IMPLEMENTS
 		IJavaMethodBreakpoint {
 
 	public static final String JAVA_METHOD_BREAKPOINT = "org.eclipse.jdt.debug.javaMethodBreakpointMarker"; //$NON-NLS-1$
@@ -141,7 +141,7 @@ public class JavaMethodBreakpoint extends JavaLineBreakpoint implements
 	 * <li>Method exit (value <code>EXIT_EVENT</code>)</li>
 	 * </ol>
 	 */
-	private final Map<IDebugTarget, Integer> fLastEventTypes = new HashMap<>(10);
+	private final Map<IDebugTarget, Integer> fLastEventTypes = new HashMap<>(10); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
 
 	/**
 	 * Used to match type names
@@ -174,13 +174,13 @@ public class JavaMethodBreakpoint extends JavaLineBreakpoint implements
 	public JavaMethodBreakpoint() {
 	}
 
-	public JavaMethodBreakpoint(final IResource resource,
+	public JavaMethodBreakpoint(final IResource resource, //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 			final String typePattern, final String methodName,
 			final String methodSignature, final boolean entry,
 			final boolean exit, final boolean nativeOnly, final int lineNumber,
 			final int charStart, final int charEnd, final int hitCount,
 			final boolean register, final Map<String, Object> attributes) throws CoreException {
-		IWorkspaceRunnable wr = unused -> {
+		IWorkspaceRunnable wr = unused -> { //FLLDCIM: MARK — T09  LAMBDA
 			// add attributes
 			addLineBreakpointAttributes(attributes, getModelIdentifier(),
 					true, lineNumber, charStart, charEnd);
@@ -307,7 +307,7 @@ public class JavaMethodBreakpoint extends JavaLineBreakpoint implements
 	 *            whether or not the request will be a method entry request. If
 	 *            <code>false</code>, the request will be a method exit request.
 	 */
-	private EventRequest createMethodRequest(JDIDebugTarget target,
+	private EventRequest createMethodRequest(JDIDebugTarget target, //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 			Object classFilter, boolean entry) throws CoreException {
 		EventRequest request = null;
 		EventRequestManager manager = target.getEventRequestManager();
@@ -451,7 +451,7 @@ public class JavaMethodBreakpoint extends JavaLineBreakpoint implements
 	/**
 	 * @see JavaBreakpoint#handleBreakpointEvent(Event, JDIThread, boolean)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public boolean handleBreakpointEvent(Event event, JDIThread thread,
 			boolean suspendVote) {
 		if (event instanceof MethodEntryEvent) {
@@ -485,7 +485,7 @@ public class JavaMethodBreakpoint extends JavaLineBreakpoint implements
 	 * event has been fired by a method invocation that this breakpoint is
 	 * interested in. If it is not, do nothing.
 	 */
-	protected boolean handleMethodEvent(LocatableEvent event, Method method,
+	protected boolean handleMethodEvent(LocatableEvent event, Method method, //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 			JDIThread thread, boolean suspendVote) {
 		try {
 			if (isNativeOnly()) {
@@ -511,7 +511,7 @@ public class JavaMethodBreakpoint extends JavaLineBreakpoint implements
 			}
 
 			if (fPattern != null) {
-				if (!fPattern.matcher(method.declaringType().name()).find()) {
+				if (!fPattern.matcher(method.declaringType().name()).find()) { //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
 					return true;
 				}
 			}
@@ -536,7 +536,7 @@ public class JavaMethodBreakpoint extends JavaLineBreakpoint implements
 	 * decrement the hit count property on the request and suspend if the hit
 	 * count reaches 0.
 	 */
-	private boolean handleHitCount(LocatableEvent event, Integer count) {
+	private boolean handleHitCount(LocatableEvent event, Integer count) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		// decrement count and suspend if 0
 		int hitCount = count.intValue();
 		if (hitCount > 0) {
@@ -651,7 +651,7 @@ public class JavaMethodBreakpoint extends JavaLineBreakpoint implements
 	 *
 	 * @see org.eclipse.debug.core.model.IBreakpoint#setMarker(IMarker)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public void setMarker(IMarker marker) throws CoreException {
 		super.setMarker(marker);
 		fMethodName = marker.getAttribute(METHOD_NAME, null);

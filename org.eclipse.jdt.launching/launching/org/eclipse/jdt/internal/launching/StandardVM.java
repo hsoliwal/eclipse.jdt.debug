@@ -50,7 +50,7 @@ public class StandardVM extends AbstractVMInstall {
     /* (non-Javadoc)
      * @see org.eclipse.jdt.launching.IVMInstall#getJavaVersion()
      */
-    @Override
+    @Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public String getJavaVersion() {
         StandardVMType installType = (StandardVMType) getVMInstallType();
         File installLocation = getInstallLocation();
@@ -58,18 +58,18 @@ public class StandardVM extends AbstractVMInstall {
             File executable = getJavaExecutable();
             if (executable != null) {
                 String vmVersion = installType.getVMVersion(installLocation, executable);
-                StringBuilder version = new StringBuilder();
-				loop: for (int i = 0; i < vmVersion.length(); i++) {
+                StringBuilder version = new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
+				loop: for (int i = 0; i < vmVersion.length(); i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
                     char ch = vmVersion.charAt(i);
 					switch (ch) {
 						case '.':
 						case '_':
 						case '-':
-							version.append(ch);
+							version.append(ch); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 							break;
 						default:
 							if (Character.isDigit(ch)) {
-								version.append(ch);
+								version.append(ch); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 								break;
 							}
 							break loop;

@@ -26,7 +26,7 @@ public class StaticVariableTests extends AbstractDebugTest {
 		super(name);
 	}
 
-	public void testSetValue() throws Exception {
+	public void testSetValue() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String typeName = "StaticVariablesTests";
 
 		ILineBreakpoint bp = createLineBreakpoint(43, typeName);

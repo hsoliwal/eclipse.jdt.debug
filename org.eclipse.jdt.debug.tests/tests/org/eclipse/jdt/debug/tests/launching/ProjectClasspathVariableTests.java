@@ -46,7 +46,7 @@ public class ProjectClasspathVariableTests extends AbstractDebugTest {
 	 *
 	 * @param resource resource to select or <code>null</code> if empty
 	 */
-	protected void setSelection(final IResource resource) {
+	protected void setSelection(final IResource resource) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		Runnable r = () -> {
 			IWorkbenchPage page = DebugUIPlugin.getActiveWorkbenchWindow().getActivePage();
 			assertNotNull("the active workbench window page should not be null", page);
@@ -70,7 +70,7 @@ public class ProjectClasspathVariableTests extends AbstractDebugTest {
 			}
 
 		};
-		DebugUIPlugin.getStandardDisplay().syncExec(r);
+		DebugUIPlugin.getStandardDisplay().syncExec(r); //FLLDCIM: MARK — T08 UI_THREAD_SYNCHRONIZER CALL
 	}
 
 	/**
@@ -95,11 +95,11 @@ public class ProjectClasspathVariableTests extends AbstractDebugTest {
 		IProject project = get14Project().getProject();
 		setSelection(project);
 		String cp = manager.performStringSubstitution("${project_classpath}");
-		StringBuilder buffer = new StringBuilder();
+		StringBuilder buffer = new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 		// expecting default output location and A.jar
-		buffer.append(ResourcesPlugin.getWorkspace().getRoot().getFolder(get14Project().getOutputLocation()).getLocation().toOSString());
-		buffer.append(File.pathSeparatorChar);
-		buffer.append(get14Project().getProject().getFolder("src").getFile("A.jar").getLocation().toOSString());
+		buffer.append(ResourcesPlugin.getWorkspace().getRoot().getFolder(get14Project().getOutputLocation()).getLocation().toOSString()); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+		buffer.append(File.pathSeparatorChar); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+		buffer.append(get14Project().getProject().getFolder("src").getFile("A.jar").getLocation().toOSString()); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		assertEquals("Wrong classpath", buffer.toString(), cp);
 	}
 
@@ -119,12 +119,12 @@ public class ProjectClasspathVariableTests extends AbstractDebugTest {
 	public void testProjectClasspath() throws Exception {
 		IStringVariableManager manager = VariablesPlugin.getDefault().getStringVariableManager();
 		String projectName = get14Project().getElementName();
-		String cp = manager.performStringSubstitution("${project_classpath:" + projectName + "}");
-		StringBuilder buffer = new StringBuilder();
+		String cp = manager.performStringSubstitution("${project_classpath:" + projectName + "}"); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
+		StringBuilder buffer = new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 		// expecting default output location and A.jar
-		buffer.append(ResourcesPlugin.getWorkspace().getRoot().getFolder(get14Project().getOutputLocation()).getLocation().toOSString());
-		buffer.append(File.pathSeparatorChar);
-		buffer.append(get14Project().getProject().getFolder("src").getFile("A.jar").getLocation().toOSString());
+		buffer.append(ResourcesPlugin.getWorkspace().getRoot().getFolder(get14Project().getOutputLocation()).getLocation().toOSString()); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+		buffer.append(File.pathSeparatorChar); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+		buffer.append(get14Project().getProject().getFolder("src").getFile("A.jar").getLocation().toOSString()); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		assertEquals("Wrong classpath", buffer.toString(), cp);
 	}
 

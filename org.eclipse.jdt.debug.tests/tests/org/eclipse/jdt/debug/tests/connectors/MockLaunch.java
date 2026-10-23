@@ -31,16 +31,16 @@ public class MockLaunch implements ILaunch {
 	private final ConcurrentLinkedDeque<IProcess> processes = new ConcurrentLinkedDeque<>();
 	private final ConcurrentLinkedDeque<IDebugTarget> targets = new ConcurrentLinkedDeque<>();
 	private ISourceLocator sourceLocator;
-	private final Map<String, String> attributes = new HashMap<>();
+	private final Map<String, String> attributes = new HashMap<>(); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
 
 	@Override
 	public boolean canTerminate() {
-		for (IProcess p : processes) {
+		for (IProcess p : processes) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			if (p.canTerminate()) {
 				return true;
 			}
 		}
-		for (IDebugTarget t : targets) {
+		for (IDebugTarget t : targets) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			if (t.canTerminate()) {
 				return true;
 			}
@@ -50,12 +50,12 @@ public class MockLaunch implements ILaunch {
 
 	@Override
 	public boolean isTerminated() {
-		for (IProcess p : processes) {
+		for (IProcess p : processes) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			if (!p.isTerminated()) {
 				return false;
 			}
 		}
-		for (IDebugTarget t : targets) {
+		for (IDebugTarget t : targets) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			if (!t.isTerminated()) {
 				return false;
 			}
@@ -65,13 +65,13 @@ public class MockLaunch implements ILaunch {
 
 	@Override
 	public void terminate() throws DebugException {
-		for (Iterator<IProcess> iter = processes.iterator(); iter.hasNext(); iter.remove()) {
+		for (Iterator<IProcess> iter = processes.iterator(); iter.hasNext(); iter.remove()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			IProcess p = iter.next();
 			if (p.canTerminate()) {
 				p.terminate();
 			}
 		}
-		for (Iterator<IDebugTarget> iter = targets.iterator(); iter.hasNext(); iter.remove()) {
+		for (Iterator<IDebugTarget> iter = targets.iterator(); iter.hasNext(); iter.remove()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			IDebugTarget t = iter.next();
 			if (t.canTerminate()) {
 				t.terminate();

@@ -75,7 +75,7 @@ public class SnippetEditorActionContributor extends BasicCompilationUnitEditorAc
 	/* (non-Javadoc)
 	 * @see org.eclipse.ui.IEditorActionBarContributor#setActiveEditor(org.eclipse.ui.IEditorPart)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public void setActiveEditor(IEditorPart part) {
 
 		super.setActiveEditor(part);

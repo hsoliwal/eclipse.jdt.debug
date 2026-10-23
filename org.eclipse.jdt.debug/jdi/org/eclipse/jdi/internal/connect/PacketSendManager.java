@@ -52,7 +52,7 @@ public class PacketSendManager extends PacketManager {
 	 */
 	@Override
 	public void run() {
-		while (!VMIsDisconnected()) {
+		while (!VMIsDisconnected()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			try {
 				sendAvailablePackets();
 			}
@@ -71,7 +71,7 @@ public class PacketSendManager extends PacketManager {
 	/**
 	 * Add a packet to be sent to the Virtual Machine.
 	 */
-	public void sendPacket(JdwpPacket packet) {
+	public void sendPacket(JdwpPacket packet) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		if (VMIsDisconnected()) {
 			String message;
 			if (getDisconnectException() == null) {
@@ -101,11 +101,11 @@ public class PacketSendManager extends PacketManager {
 	/**
 	 * Send available packets to the Virtual Machine.
 	 */
-	private void sendAvailablePackets() throws InterruptedException,
+	private void sendAvailablePackets() throws InterruptedException, //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 			IOException {
 		LinkedList<JdwpPacket> packetsToSend = new LinkedList<>();
 		synchronized (fOutgoingPackets) {
-			while (fOutgoingPackets.isEmpty()) {
+			while (fOutgoingPackets.isEmpty()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				fOutgoingPackets.wait();
 			}
 			packetsToSend.addAll(fOutgoingPackets);
@@ -113,7 +113,7 @@ public class PacketSendManager extends PacketManager {
 		}
 
 		// Put available packets on Output Stream.
-		while (packetsToSend.size() > 0) {
+		while (packetsToSend.size() > 0) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			// Note that only JdwpPackets are added to the list, so a
 			// ClassCastException can't occur.
 			JdwpPacket packet = packetsToSend.removeFirst();

@@ -63,7 +63,7 @@ public class AddExceptionAction implements IViewActionDelegate, IWorkbenchWindow
 	/* (non-Javadoc)
 	 * @see org.eclipse.ui.IActionDelegate#run(org.eclipse.jface.action.IAction)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public void run(IAction action) {
 		try {
 			IDialogSettings settings = getDialogSettings();
@@ -121,15 +121,15 @@ public class AddExceptionAction implements IViewActionDelegate, IWorkbenchWindow
 	 * @throws CoreException if an exception occurs
 	 * @since 3.2
 	 */
-	private void createBreakpoint(final boolean caught, final boolean uncaught, final IType type) throws CoreException {
+	private void createBreakpoint(final boolean caught, final boolean uncaught, final IType type) throws CoreException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		final IResource resource = BreakpointUtils.getBreakpointResource(type);
-		final Map<String, Object> map = new HashMap<>(10);
+		final Map<String, Object> map = new HashMap<>(10); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
 		BreakpointUtils.addJavaBreakpointAttributes(map, type);
 		IBreakpoint[] breakpoints = DebugPlugin.getDefault().getBreakpointManager().getBreakpoints(
 						JDIDebugModel.getPluginIdentifier());
 		IJavaExceptionBreakpoint breakpoint = null;
 		boolean exists = false;
-		for (IBreakpoint b : breakpoints) {
+		for (IBreakpoint b : breakpoints) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			if (b instanceof IJavaExceptionBreakpoint) {
 				breakpoint = (IJavaExceptionBreakpoint) b;
 				String typeName = breakpoint.getTypeName();
@@ -188,7 +188,7 @@ public class AddExceptionAction implements IViewActionDelegate, IWorkbenchWindow
  	    	try {
  	            ITypeHierarchy hierarchy = type.newSupertypeHierarchy(new NullProgressMonitor());
  	            IType curr = type;
- 	            while (curr != null) {
+ 	            while (curr != null) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
  	                String name = curr.getFullyQualifiedName('.');
  	                if ("java.lang.RuntimeException".equals(name) || "java.lang.Error".equals(name)) { //$NON-NLS-2$ //$NON-NLS-1$
  	                    return false;

@@ -70,16 +70,16 @@ public class ToggleClassPrepareBreakpointAction implements IObjectActionDelegate
 	/* (non-Javadoc)
 	 * @see org.eclipse.ui.IActionDelegate#run(org.eclipse.jface.action.IAction)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public void run(IAction action) {
 		IStructuredSelection ss = (IStructuredSelection)fSelection;
 		Iterator<IType> iterator = ss.iterator();
 		IBreakpoint[] breakpoints = DebugPlugin.getDefault().getBreakpointManager().getBreakpoints(JDIDebugModel.getPluginIdentifier());
-		while (iterator.hasNext()) {
+		while (iterator.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			IType type = iterator.next();
 			IBreakpoint existing = null;
 			try {
-				for (int i = 0; i < breakpoints.length; i++) {
+				for (int i = 0; i < breakpoints.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 					IJavaBreakpoint breakpoint = (IJavaBreakpoint) breakpoints[i];
 					if (breakpoint instanceof IJavaClassPrepareBreakpoint &&
 							type.getFullyQualifiedName().equals(breakpoint.getTypeName())) {
@@ -94,7 +94,7 @@ public class ToggleClassPrepareBreakpointAction implements IObjectActionDelegate
 					if (!type.isClass()) {
 						kind = IJavaClassPrepareBreakpoint.TYPE_INTERFACE;
 					}
-					HashMap<String, Object> map = new HashMap<>(10);
+					HashMap<String, Object> map = new HashMap<>(10); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
 					BreakpointUtils.addJavaBreakpointAttributes(map, type);
 
 					ISourceRange range= type.getNameRange();

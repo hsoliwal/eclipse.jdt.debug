@@ -66,7 +66,7 @@ public class JavaVariableLabelProvider extends VariableLabelProvider implements 
 	/**
 	 * Map of view id to qualified name setting
 	 */
-	private final Map<String, Boolean> fQualifiedNameSettings = new HashMap<>();
+	private final Map<String, Boolean> fQualifiedNameSettings = new HashMap<>(); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
 	private boolean fQualifiedNames = false;
 
 	/**
@@ -159,7 +159,7 @@ public class JavaVariableLabelProvider extends VariableLabelProvider implements 
 		if (qualified == null) {
 			qualified = Boolean.valueOf(Platform.getPreferencesService().getBoolean(
 					JDIDebugUIPlugin.getUniqueIdentifier(),
-					context.getId() + '.' + IJDIPreferencesConstants.PREF_SHOW_QUALIFIED_NAMES,
+					context.getId() + '.' + IJDIPreferencesConstants.PREF_SHOW_QUALIFIED_NAMES, //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 					false,
 					null));
 			fQualifiedNameSettings.put(context.getId(), qualified);
@@ -167,14 +167,14 @@ public class JavaVariableLabelProvider extends VariableLabelProvider implements 
 		return qualified;
 	}
 
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	protected String getColumnText(IVariable variable, IValue value, IPresentationContext context, String columnId) throws CoreException {
 		if (JavaVariableColumnPresentation.COLUMN_INSTANCE_ID.equals(columnId)) {
 			if (value instanceof JDIObjectValue objectValue) {
 				long uniqueId = objectValue.getUniqueId();
 				if (uniqueId >= 0) {
-					StringBuilder buffer = new StringBuilder();
-					buffer.append(uniqueId);
+					StringBuilder buffer = new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
+					buffer.append(uniqueId); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 					return buffer.toString();
 				}
 			}
@@ -191,8 +191,8 @@ public class JavaVariableLabelProvider extends VariableLabelProvider implements 
 					if (count == -1) {
 						return DebugUIMessages.JavaVariableLabelProvider_0;
 					}
-					StringBuilder buffer = new StringBuilder();
-					buffer.append(count);
+					StringBuilder buffer = new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
+					buffer.append(count); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 					return buffer.toString();
 				}
 			}
@@ -248,7 +248,7 @@ public class JavaVariableLabelProvider extends VariableLabelProvider implements 
 		return super.getLabel(elementPath, context, columnId);
 	}
 
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	protected ISchedulingRule getRule(ILabelUpdate update) {
 		IJavaStackFrame frame = null;
 		switch (fSerializeMode) {

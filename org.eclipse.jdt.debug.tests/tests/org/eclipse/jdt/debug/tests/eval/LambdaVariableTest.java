@@ -149,7 +149,7 @@ public class LambdaVariableTest extends AbstractDebugTest {
 		assertEquals("Actual value is not true", "true", value.getValueString());
 	}
 
-	public void testEvaluate_Bug569413_NestedLambdaCapturedParameters() throws Exception {
+	public void testEvaluate_Bug569413_NestedLambdaCapturedParameters() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		debugWithBreakpoint("Bug569413", 23);
 
 		IValue pValue = doEval(javaThread, "p");
@@ -264,7 +264,7 @@ public class LambdaVariableTest extends AbstractDebugTest {
 		assertEquals("wrong result : ", "1", value.getValueString());
 	}
 
-	public void testLambdaCapturedVariablesNotStaleOnReentry() throws Exception {
+	public void testLambdaCapturedVariablesNotStaleOnReentry() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String typeName = "LambdaTest";
 		createLineBreakpoint(33, typeName);
 		IJavaThread mainThread = null;

@@ -46,18 +46,18 @@ public class GenericSignature {
 	}
 
 	private static List<String> getTypeSignatureList(String typeSignatureList) {
-		List<String> list = new ArrayList<>();
+		List<String> list = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 		int pos = 0;
-		while (pos < typeSignatureList.length()) {
+		while (pos < typeSignatureList.length()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			int signatureLength = nextTypeSignatureLength(typeSignatureList, pos);
 			list.add(typeSignatureList.substring(pos, pos += signatureLength));
 		}
 		return list;
 	}
 
-	private static int nextTypeSignatureLength(String signature, int startPos) {
+	private static int nextTypeSignatureLength(String signature, int startPos) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		int inclusionLevel = 0;
-		for (int i = startPos, length = signature.length(); i < length; i++) {
+		for (int i = startPos, length = signature.length(); i < length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			if (inclusionLevel == 0) {
 				switch (signature.charAt(i)) {
 				case C_CLASS_TYPE:

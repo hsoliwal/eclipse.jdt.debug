@@ -81,7 +81,7 @@ public class InstanceFiltersAction extends ObjectActionDelegate {
 		 */
 		@Override
 		protected String getDialogSettingsId() {
-			return IJavaDebugUIConstants.PLUGIN_ID + ".INSTANCE_FILTERS_ACTION_DIALOG"; //$NON-NLS-1$
+			return IJavaDebugUIConstants.PLUGIN_ID + ".INSTANCE_FILTERS_ACTION_DIALOG"; //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		}
 
 		/* (non-Javadoc)
@@ -120,7 +120,7 @@ public class InstanceFiltersAction extends ObjectActionDelegate {
 	/**
 	 * @see org.eclipse.ui.IActionDelegate#run(IAction)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public void run(IAction action) {
 		IStructuredSelection selection = getCurrentSelection();
 		if (selection == null || selection.size() > 1) {
@@ -142,16 +142,16 @@ public class InstanceFiltersAction extends ObjectActionDelegate {
 					}
 
 					InstanceFilterDialog dialog = new InstanceFilterDialog(JDIDebugUIPlugin.getActiveWorkbenchShell(), breakpoints, modelPresentation, NLS.bind(ActionMessages.InstanceFiltersAction_1, var.getName())){
-						@Override
+						@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 						public void okPressed() {
 							// check if breakpoints have already been restricted to other objects.
 							Object[] checkBreakpoint= getCheckBoxTableViewer().getCheckedElements();
-							for (int k= 0; k < checkBreakpoint.length; k++) {
+							for (int k= 0; k < checkBreakpoint.length; k++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 								IJavaBreakpoint breakpoint= (IJavaBreakpoint) checkBreakpoint[k];
 								try {
 									IJavaObject[] instanceFilters= breakpoint.getInstanceFilters();
 									boolean sameTarget = false;
-									for (int i = 0; i < instanceFilters.length; i++) {
+									for (int i = 0; i < instanceFilters.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 										IJavaObject instanceFilter = instanceFilters[i];
 										if (instanceFilter.getDebugTarget().equals(object.getDebugTarget())) {
 											sameTarget = true;
@@ -164,7 +164,7 @@ public class InstanceFiltersAction extends ObjectActionDelegate {
 											MessageDialog.QUESTION, new String[] { ActionMessages.InstanceFiltersAction_Yes_2, ActionMessages.InstanceFiltersAction_Cancel_3}, //
 											0);
 										if (messageDialog.open() == Window.OK) {
-											for (int i= 0; i < instanceFilters.length; i++) {
+											for (int i= 0; i < instanceFilters.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 												breakpoint.removeInstanceFilter(instanceFilters[i]);
 											}
 										} else {
@@ -182,12 +182,12 @@ public class InstanceFiltersAction extends ObjectActionDelegate {
 					dialog.setTitle(ActionMessages.InstanceFiltersAction_2);
 
 					// determine initial selection
-					List<IJavaBreakpoint> existing = new ArrayList<>();
+					List<IJavaBreakpoint> existing = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 					Iterator<IJavaBreakpoint> iter = breakpoints.iterator();
-					while (iter.hasNext()) {
+					while (iter.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 						IJavaBreakpoint bp = iter.next();
 						IJavaObject[] filters = bp.getInstanceFilters();
-						for (int i = 0; i < filters.length; i++) {
+						for (int i = 0; i < filters.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 							if (filters[i].equals(object)) {
 								existing.add(bp);
 								break;
@@ -200,14 +200,14 @@ public class InstanceFiltersAction extends ObjectActionDelegate {
 						Object[] selectedBreakpoints = dialog.getResult();
 						if (selectedBreakpoints != null) {
 							// add
-							for (int i = 0; i < selectedBreakpoints.length; i++) {
+							for (int i = 0; i < selectedBreakpoints.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 								IJavaBreakpoint bp = (IJavaBreakpoint)selectedBreakpoints[i];
 								bp.addInstanceFilter(object);
 								existing.remove(bp);
 							}
 							// remove
 							iter = existing.iterator();
-							while (iter.hasNext()) {
+							while (iter.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 								IJavaBreakpoint bp = iter.next();
 								bp.removeInstanceFilter(object);
 							}
@@ -222,20 +222,20 @@ public class InstanceFiltersAction extends ObjectActionDelegate {
 		}
 	}
 
-	protected List<IJavaBreakpoint> getApplicableBreakpoints(IJavaVariable variable, IJavaObject object) {
-		List<IJavaBreakpoint> breakpoints = new ArrayList<>();
+	protected List<IJavaBreakpoint> getApplicableBreakpoints(IJavaVariable variable, IJavaObject object) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
+		List<IJavaBreakpoint> breakpoints = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 
 		try {
 			// collect names in type hierarchy
-			List<String> superTypeNames = new ArrayList<>();
+			List<String> superTypeNames = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 			IJavaType type = object.getJavaType();
-			while (type instanceof IJavaClassType) {
+			while (type instanceof IJavaClassType) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				superTypeNames.add(type.getName());
 				type = ((IJavaClassType)type).getSuperclass();
 			}
 
 			IBreakpoint[] allBreakpoints = DebugPlugin.getDefault().getBreakpointManager().getBreakpoints();
-			for (int i = 0; i < allBreakpoints.length; i++) {
+			for (int i = 0; i < allBreakpoints.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				if (allBreakpoints[i] instanceof IJavaBreakpoint jbp) {
 					IJavaBreakpoint valid = null;
 					if (jbp instanceof IJavaWatchpoint wp && variable instanceof IJavaFieldVariable fv) {

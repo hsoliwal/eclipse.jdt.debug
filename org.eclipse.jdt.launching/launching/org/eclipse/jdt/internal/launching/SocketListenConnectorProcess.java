@@ -106,7 +106,7 @@ public class SocketListenConnectorProcess implements IProcess {
 	 * @throws CoreException if a problem occurs trying to accept a connection
 	 * @see SocketListenConnector
 	 */
-	public void waitForConnection(ListeningConnector connector, Map<String, Connector.Argument> arguments) throws CoreException{
+	public void waitForConnection(ListeningConnector connector, Map<String, Connector.Argument> arguments) throws CoreException{ //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		if (isTerminated()){
 			throw new CoreException(getStatus(LaunchingMessages.SocketListenConnectorProcess_0, null, IJavaLaunchConfigurationConstants.ERR_REMOTE_VM_CONNECTION_FAILED));
 		}
@@ -305,7 +305,7 @@ public class SocketListenConnectorProcess implements IProcess {
 			fArguments = arguments;
 		}
 
-		@Override
+		@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		protected IStatus run(IProgressMonitor monitor) {
 			try{
 				// The following code sets a timeout (not officially supported in Sun's spec).
@@ -317,7 +317,7 @@ public class SocketListenConnectorProcess implements IProcess {
 				}
 
 				VirtualMachine vm = null;
-				while (vm == null && !monitor.isCanceled()){
+				while (vm == null && !monitor.isCanceled()){ //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 					try {
 						vm = fConnector.accept(fArguments);
 					} catch (TransportTimeoutException e){
@@ -388,7 +388,7 @@ public class SocketListenConnectorProcess implements IProcess {
 		 * @param configuration the configuration
 		 * @return the new VM label
 		 */
-		protected String constructVMLabel(VirtualMachine vm, String port, ILaunchConfiguration configuration) {
+		protected String constructVMLabel(VirtualMachine vm, String port, ILaunchConfiguration configuration) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 			String name = null;
 			try {
 				name = vm.name();
@@ -404,15 +404,15 @@ public class SocketListenConnectorProcess implements IProcess {
 					name = configuration.getName();
 				}
 			}
-			StringBuilder buffer = new StringBuilder(name);
+			StringBuilder buffer = new StringBuilder(name); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 			if (fConnectionLimit != 1) {
 				// if we're accepting multiple incoming connections,
 				// append the time when each connection was accepted
-				buffer.append('<').append(getRunningTime()).append('>');
+				buffer.append('<').append(getRunningTime()).append('>'); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			}
-			buffer.append('[');
-			buffer.append(port);
-			buffer.append(']');
+			buffer.append('['); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+			buffer.append(port); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+			buffer.append(']'); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			return buffer.toString();
 		}
 

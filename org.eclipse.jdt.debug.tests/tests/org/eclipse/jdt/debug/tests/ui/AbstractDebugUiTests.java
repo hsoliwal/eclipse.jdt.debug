@@ -83,7 +83,7 @@ public abstract class AbstractDebugUiTests extends AbstractDebugTest {
 
 		preferenceStore.setValue(IInternalDebugUIConstants.PREF_SWITCH_PERSPECTIVE_ON_SUSPEND, MessageDialogWithToggle.NEVER);
 		preferenceStore.setValue(IInternalDebugUIConstants.PREF_SWITCH_TO_PERSPECTIVE, MessageDialogWithToggle.NEVER);
-		preferenceStore.setValue(IDebugUIConstants.PREF_MANAGE_VIEW_PERSPECTIVES, IDebugUIConstants.ID_DEBUG_PERSPECTIVE + "," +
+		preferenceStore.setValue(IDebugUIConstants.PREF_MANAGE_VIEW_PERSPECTIVES, IDebugUIConstants.ID_DEBUG_PERSPECTIVE + "," + //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 				JavaUI.ID_PERSPECTIVE + ",");
 		preferenceStore.setValue(IInternalDebugUIConstants.PREF_USER_VIEW_BINDINGS, IInternalDebugCoreConstants.EMPTY_STRING);
 		preferenceStore.setValue(IInternalDebugUIConstants.PREF_ACTIVATE_DEBUG_VIEW, true);
@@ -107,7 +107,7 @@ public abstract class AbstractDebugUiTests extends AbstractDebugTest {
 	 */
 	protected static void switchPerspective(IWorkbenchWindow window, String perspectiveId) {
 		IPerspectiveDescriptor descriptor = PlatformUI.getWorkbench().getPerspectiveRegistry().findPerspectiveWithId(perspectiveId);
-		assertNotNull("missing perspective " + perspectiveId, descriptor);
+		assertNotNull("missing perspective " + perspectiveId, descriptor); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		IWorkbenchPage page = window.getActivePage();
 		page.setPerspective(descriptor);
 		page.resetPerspective();
@@ -154,7 +154,7 @@ public abstract class AbstractDebugUiTests extends AbstractDebugTest {
 		sync(() -> {
 			Display display = Display.getCurrent();
 			if (!display.isDisposed()) {
-				while (display.readAndDispatch()) {
+				while (display.readAndDispatch()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 					// Keep pumping events until the queue is empty
 				}
 			}
@@ -167,13 +167,13 @@ public abstract class AbstractDebugUiTests extends AbstractDebugTest {
 	 * @param timeoutMs
 	 *            max wait time in milliseconds to process events
 	 */
-	public static void processUiEvents(final long timeoutMs) throws RuntimeException {
+	public static void processUiEvents(final long timeoutMs) throws RuntimeException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		sync(() -> {
 			long timeoutNanos = System.nanoTime() + timeoutMs * 1_000_000L;
-			while (System.nanoTime() < timeoutNanos) {
+			while (System.nanoTime() < timeoutNanos) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				Display display = Display.getCurrent();
 				if (display != null && !display.isDisposed()) {
-					while (display.readAndDispatch()) {
+					while (display.readAndDispatch()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 						// loop until the queue is empty
 					}
 				} else {
@@ -192,7 +192,7 @@ public abstract class AbstractDebugUiTests extends AbstractDebugTest {
 	 */
 	protected static void sync(Runnable r) throws RuntimeException {
 		AtomicReference<Exception> error = new AtomicReference<>();
-		DebugUIPlugin.getStandardDisplay().syncExec(() -> {
+		DebugUIPlugin.getStandardDisplay().syncExec(() -> { //FLLDCIM: MARK — T08 UI_THREAD_SYNCHRONIZER CALL
 			try {
 				r.run();
 			}
@@ -214,7 +214,7 @@ public abstract class AbstractDebugUiTests extends AbstractDebugTest {
 	protected static <V> V sync(Callable<V> c) throws RuntimeException {
 		AtomicReference<Throwable> error = new AtomicReference<>();
 		AtomicReference<V> result = new AtomicReference<>();
-		DebugUIPlugin.getStandardDisplay().syncExec(() -> {
+		DebugUIPlugin.getStandardDisplay().syncExec(() -> { //FLLDCIM: MARK — T08 UI_THREAD_SYNCHRONIZER CALL
 			try {
 				result.set(c.call());
 			}
@@ -298,7 +298,7 @@ public abstract class AbstractDebugUiTests extends AbstractDebugTest {
 	 *
 	 * @return returns the created breakpoint or <code>null</code> if none.
 	 */
-	protected IBreakpoint toggleBreakpoint(final IEditorPart editor, int lineNumber) throws Exception {
+	protected IBreakpoint toggleBreakpoint(final IEditorPart editor, int lineNumber) throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		final Object lock = new Object();
 		final AtomicReference<IBreakpoint> breakpoint = new AtomicReference<>();
 		IBreakpointListener listener = new IBreakpointListener() {
@@ -350,7 +350,7 @@ public abstract class AbstractDebugUiTests extends AbstractDebugTest {
 	 */
 	protected static void closeAllEditors() throws RuntimeException {
 		sync(() -> {
-			for (IWorkbenchWindow window : PlatformUI.getWorkbench().getWorkbenchWindows()) {
+			for (IWorkbenchWindow window : PlatformUI.getWorkbench().getWorkbenchWindows()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				window.getActivePage().closeAllEditors(false);
 			}
 		});
@@ -369,26 +369,26 @@ public abstract class AbstractDebugUiTests extends AbstractDebugTest {
 
 	private void assertBreakpointExists(IJavaLineBreakpoint bp, IBreakpoint[] bps) throws Exception {
 		boolean contains = Arrays.asList(bps).contains(bp);
-		assertTrue("Breakpoint not found: " + bp + ", all: " + Arrays.toString(bps), contains);
+		assertTrue("Breakpoint not found: " + bp + ", all: " + Arrays.toString(bps), contains); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 	}
 
 	public class BreakpointsMap {
-		IdentityHashMap<IJavaLineBreakpoint, Integer> breakpoints = new IdentityHashMap<>();
-		HashMap<Integer, IJavaLineBreakpoint> lines = new HashMap<>();
+		IdentityHashMap<IJavaLineBreakpoint, Integer> breakpoints = new IdentityHashMap<>(); //FLLDCIM: MARK — M06 M3_IDENTITY_WEAK_LANES NEW
+		HashMap<Integer, IJavaLineBreakpoint> lines = new HashMap<>(); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
 
 		public void put(IJavaLineBreakpoint breakpoint, int line) throws Exception {
 			int lineNumber = breakpoint.getLineNumber();
 			assertEquals("Breakpoint line differs from original", line, lineNumber);
 			Integer old = breakpoints.put(breakpoint, lineNumber);
-			assertNull("Breakpoint already exists for line: " + old, old);
+			assertNull("Breakpoint already exists for line: " + old, old); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 			IJavaLineBreakpoint oldB = lines.put(lineNumber, breakpoint);
-			assertNull("Breakpoint already exists for line: " + lineNumber, oldB);
+			assertNull("Breakpoint already exists for line: " + lineNumber, oldB); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		}
 
 		public void assertBreakpointsConsistency() throws Exception {
 			IBreakpoint[] bps = getBreakpointManager().getBreakpoints();
 			Set<Entry<IJavaLineBreakpoint, Integer>> set = breakpoints.entrySet();
-			for (Entry<IJavaLineBreakpoint, Integer> entry : set) {
+			for (Entry<IJavaLineBreakpoint, Integer> entry : set) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				IJavaLineBreakpoint bp = entry.getKey();
 				assertBreakpointExists(bp, bps);
 				Integer line = entry.getValue();

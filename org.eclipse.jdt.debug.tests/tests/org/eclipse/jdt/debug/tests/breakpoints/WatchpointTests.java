@@ -39,7 +39,7 @@ public class WatchpointTests extends AbstractDebugTest {
 	/**
 	 * Tests both access and modification breakpoints suspend
 	 */
-	public void testAccessAndModification() throws Exception {
+	public void testAccessAndModification() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String typeName = "org.eclipse.debug.tests.targets.Watchpoint";
 
 		IJavaWatchpoint wp = createWatchpoint(typeName, "list", true, true);
@@ -60,7 +60,7 @@ public class WatchpointTests extends AbstractDebugTest {
 
 			// should hit access 10 times
 			int count = 10;
-			while (count > 0) {
+			while (count > 0) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				thread = resume(thread);
 				hit = getBreakpoint(thread);
 				frame = thread.getTopStackFrame();
@@ -85,7 +85,7 @@ public class WatchpointTests extends AbstractDebugTest {
 	/**
 	 * Tests that a modification breakpoint suspends correctly
 	 */
-	public void testModification() throws Exception {
+	public void testModification() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String typeName = "org.eclipse.debug.tests.targets.Watchpoint";
 
 		IJavaWatchpoint wp = createWatchpoint(typeName, "list", false, true);
@@ -133,7 +133,7 @@ public class WatchpointTests extends AbstractDebugTest {
 	/**
 	 * Tests that an access watchpoint is hit
 	 */
-	public void testAccess() throws Exception {
+	public void testAccess() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String typeName = "org.eclipse.debug.tests.targets.Watchpoint";
 
 		IJavaWatchpoint wp = createWatchpoint(typeName, "list", true, false);
@@ -151,7 +151,7 @@ public class WatchpointTests extends AbstractDebugTest {
 
 			// should hit access 9 more times
 			int count = 9;
-			while (count > 0) {
+			while (count > 0) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				thread = resume(thread);
 				wp = (IJavaWatchpoint) getBreakpoint(thread);
 				frame = thread.getTopStackFrame();
@@ -176,7 +176,7 @@ public class WatchpointTests extends AbstractDebugTest {
 	/**
 	 * Tests that a disabled access watchpoint is not hit
 	 */
-	public void testDisabledAccess() throws Exception {
+	public void testDisabledAccess() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String typeName = "org.eclipse.debug.tests.targets.Watchpoint";
 
 		IJavaWatchpoint wp = createWatchpoint(typeName, "list", true, false);
@@ -209,7 +209,7 @@ public class WatchpointTests extends AbstractDebugTest {
 	/**
 	 * Tests that an access watchpoint suspends when it count is hit
 	 */
-	public void testHitCountAccess() throws Exception {
+	public void testHitCountAccess() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String typeName = "org.eclipse.debug.tests.targets.Watchpoint";
 
 		IJavaWatchpoint wp = createWatchpoint(typeName, "list", true, false);
@@ -238,7 +238,7 @@ public class WatchpointTests extends AbstractDebugTest {
 
 			// should hit access 6 more times
 			int count = 6;
-			while (count > 0) {
+			while (count > 0) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				thread = resume(thread);
 				hit = getBreakpoint(thread);
 				frame = (IJavaStackFrame) thread.getTopStackFrame();
@@ -263,7 +263,7 @@ public class WatchpointTests extends AbstractDebugTest {
 	/**
 	 * Tests that a watchpoint set to be skipped is indeed skipped
 	 */
-	public void testSkipWatchpoint() throws Exception {
+	public void testSkipWatchpoint() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String typeName = "org.eclipse.debug.tests.targets.Watchpoint";
 
 		IJavaWatchpoint wp = createWatchpoint(typeName, "list", true, true);
@@ -295,7 +295,7 @@ public class WatchpointTests extends AbstractDebugTest {
 	/**
 	 * Tests that a watchpoint set to be skipped is indeed skipped
 	 */
-	public void testFinalWatchpoint() throws Exception {
+	public void testFinalWatchpoint() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String typeName = "org.eclipse.debug.tests.targets.BreakpointsLocationBug344984";
 
 		IJavaWatchpoint wp = createWatchpoint(typeName, "fWorkingValues", true, true);

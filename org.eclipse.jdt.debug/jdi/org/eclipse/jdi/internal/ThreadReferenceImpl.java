@@ -116,7 +116,7 @@ public class ThreadReferenceImpl extends ObjectReferenceImpl implements	ThreadRe
 	 * @return Returns an ObjectReference for the monitor, if any, for which
 	 *          this thread is currently waiting.
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public ObjectReference currentContendedMonitor()
 			throws IncompatibleThreadStateException {
 		if (!virtualMachine().canGetCurrentContendedMonitor()) {
@@ -152,7 +152,7 @@ public class ThreadReferenceImpl extends ObjectReferenceImpl implements	ThreadRe
 	 * @see com.sun.jdi.ThreadReference#forceEarlyReturn(com.sun.jdi.Value)
 	 * @since 3.3
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public void forceEarlyReturn(Value value) throws InvalidTypeException,
 			ClassNotLoadedException, IncompatibleThreadStateException {
 		if (!virtualMachineImpl().canBeModified()) {
@@ -220,7 +220,7 @@ public class ThreadReferenceImpl extends ObjectReferenceImpl implements	ThreadRe
 	/**
 	 * @see com.sun.jdi.ThreadReference#frameCount()
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public int frameCount() throws IncompatibleThreadStateException {
 		// Note that this information should not be cached.
 		initJdwpRequest();
@@ -258,7 +258,7 @@ public class ThreadReferenceImpl extends ObjectReferenceImpl implements	ThreadRe
 	/* (non-Javadoc)
 	 * @see com.sun.jdi.ThreadReference#frames(int, int)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public List<StackFrame> frames(int start, int length) throws IndexOutOfBoundsException,
 			IncompatibleThreadStateException {
 		// Note that this information should not be cached.
@@ -286,8 +286,8 @@ public class ThreadReferenceImpl extends ObjectReferenceImpl implements	ThreadRe
 
 			DataInputStream replyData = replyPacket.dataInStream();
 			int nrOfElements = readInt("elements", replyData); //$NON-NLS-1$
-			List<StackFrame> frames = new ArrayList<>(nrOfElements);
-			for (int i = 0; i < nrOfElements; i++) {
+			List<StackFrame> frames = new ArrayList<>(nrOfElements); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
+			for (int i = 0; i < nrOfElements; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				StackFrameImpl frame = StackFrameImpl.readWithLocation(this,
 						this, replyData);
 				if (frame == null) {
@@ -329,7 +329,7 @@ public class ThreadReferenceImpl extends ObjectReferenceImpl implements	ThreadRe
 	/* (non-Javadoc)
 	 * @see com.sun.jdi.ThreadReference#isSuspended()
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public boolean isSuspended() {
 		// Note that this information should not be cached.
 		initJdwpRequest();
@@ -363,7 +363,7 @@ public class ThreadReferenceImpl extends ObjectReferenceImpl implements	ThreadRe
 	 * @return true if the thread is a virtual thread
 	 * @since 3.20
 	 */
-	public boolean isVirtual() {
+	public boolean isVirtual() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		if (isVirtualCached) {
 			return isVirtual;
 		}
@@ -396,7 +396,7 @@ public class ThreadReferenceImpl extends ObjectReferenceImpl implements	ThreadRe
 	/* (non-Javadoc)
 	 * @see com.sun.jdi.ThreadReference#name()
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public String name() {
 		initJdwpRequest();
 		try {
@@ -420,7 +420,7 @@ public class ThreadReferenceImpl extends ObjectReferenceImpl implements	ThreadRe
 	/* (non-Javadoc)
 	 * @see com.sun.jdi.ThreadReference#ownedMonitors()
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public List<ObjectReference> ownedMonitors() throws IncompatibleThreadStateException {
 		if (!virtualMachine().canGetOwnedMonitorInfo()) {
 			throw new UnsupportedOperationException();
@@ -441,8 +441,8 @@ public class ThreadReferenceImpl extends ObjectReferenceImpl implements	ThreadRe
 			DataInputStream replyData = replyPacket.dataInStream();
 
 			int nrOfMonitors = readInt("nr of monitors", replyData); //$NON-NLS-1$
-			List<ObjectReference> result = new ArrayList<>(nrOfMonitors);
-			for (int i = 0; i < nrOfMonitors; i++) {
+			List<ObjectReference> result = new ArrayList<>(nrOfMonitors); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
+			for (int i = 0; i < nrOfMonitors; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				result.add(ObjectReferenceImpl.readObjectRefWithTag(this,
 						replyData));
 			}
@@ -458,7 +458,7 @@ public class ThreadReferenceImpl extends ObjectReferenceImpl implements	ThreadRe
 	/* (non-Javadoc)
 	 * @see com.sun.jdi.ThreadReference#ownedMonitorsAndFrames()
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public List<com.sun.jdi.MonitorInfo> ownedMonitorsAndFrames()
 			throws IncompatibleThreadStateException {
 		initJdwpRequest();
@@ -483,10 +483,10 @@ public class ThreadReferenceImpl extends ObjectReferenceImpl implements	ThreadRe
 			DataInputStream replyData = replyPacket.dataInStream();
 
 			int owned = readInt("owned monitors", replyData); //$NON-NLS-1$
-			List<com.sun.jdi.MonitorInfo> result = new ArrayList<>(owned);
+			List<com.sun.jdi.MonitorInfo> result = new ArrayList<>(owned); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 			ObjectReference monitor = null;
 			int depth = -1;
-			for (int i = 0; i < owned; i++) {
+			for (int i = 0; i < owned; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				monitor = ObjectReferenceImpl.readObjectRefWithTag(this,
 						replyData);
 				depth = readInt("stack depth", replyData); //$NON-NLS-1$
@@ -526,7 +526,7 @@ public class ThreadReferenceImpl extends ObjectReferenceImpl implements	ThreadRe
 	/**
 	 * @return Returns the thread's status.
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public int status() {
 		// Note that this information should not be cached.
 		initJdwpRequest();
@@ -559,7 +559,7 @@ public class ThreadReferenceImpl extends ObjectReferenceImpl implements	ThreadRe
 				return THREAD_STATUS_UNKNOWN;
 			}
 			throw new InternalException(
-					JDIMessages.ThreadReferenceImpl_Unknown_thread_status_received___6
+					JDIMessages.ThreadReferenceImpl_Unknown_thread_status_received___6 //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 							+ threadStatus);
 		} catch (IOException e) {
 			defaultIOExceptionHandler(e);
@@ -574,7 +574,7 @@ public class ThreadReferenceImpl extends ObjectReferenceImpl implements	ThreadRe
 	 *
 	 * @see com.sun.jdi.ThreadReference#stop(com.sun.jdi.ObjectReference)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public void stop(ObjectReference throwable) throws InvalidTypeException {
 		checkVM(throwable);
 		ObjectReferenceImpl throwableImpl = (ObjectReferenceImpl) throwable;
@@ -649,7 +649,7 @@ public class ThreadReferenceImpl extends ObjectReferenceImpl implements	ThreadRe
 	/**
 	 * @return Returns this thread's thread group.
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public ThreadGroupReference threadGroup() {
 		if (fThreadGroup != null) {
 			return fThreadGroup;
@@ -681,7 +681,7 @@ public class ThreadReferenceImpl extends ObjectReferenceImpl implements	ThreadRe
 	 * @return Returns whether any finally or synchronized blocks are enclosing
 	 *         the current instruction.
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public boolean doReturn(Value returnValue,
 			boolean triggerFinallyAndSynchronized)
 			throws org.eclipse.jdi.hcr.OperationRefusedException {
@@ -743,7 +743,7 @@ public class ThreadReferenceImpl extends ObjectReferenceImpl implements	ThreadRe
 					new String[] { type().toString(), name(),
 							getObjectID().toString() });
 		} catch (ObjectCollectedException e) {
-			return JDIMessages.ThreadReferenceImpl__Garbage_Collected__ThreadReference__9
+			return JDIMessages.ThreadReferenceImpl__Garbage_Collected__ThreadReference__9 //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 					+ idString();
 		} catch (Exception e) {
 			return fDescription;
@@ -753,7 +753,7 @@ public class ThreadReferenceImpl extends ObjectReferenceImpl implements	ThreadRe
 	/**
 	 * @return Reads JDWP representation and returns new instance.
 	 */
-	public static ThreadReferenceImpl read(MirrorImpl target, DataInputStream in)
+	public static ThreadReferenceImpl read(MirrorImpl target, DataInputStream in) //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 			throws IOException {
 		VirtualMachineImpl vmImpl = target.virtualMachineImpl();
 		JdwpThreadID ID = new JdwpThreadID(vmImpl);
@@ -779,16 +779,16 @@ public class ThreadReferenceImpl extends ObjectReferenceImpl implements	ThreadRe
 	/**
 	 * Retrieves constant mappings.
 	 */
-	public static void getConstantMaps() {
+	public static void getConstantMaps() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		if (fgThreadStatusMap != null) {
 			return;
 		}
 
 		Field[] fields = ThreadReferenceImpl.class.getDeclaredFields();
-		fgThreadStatusMap = new HashMap<>();
+		fgThreadStatusMap = new HashMap<>(); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
 		fgSuspendStatusStrings = new String[32]; // Int
 
-		for (Field field : fields) {
+		for (Field field : fields) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			if ((field.getModifiers() & Modifier.PUBLIC) == 0
 					|| (field.getModifiers() & Modifier.STATIC) == 0
 					|| (field.getModifiers() & Modifier.FINAL) == 0) {
@@ -805,7 +805,7 @@ public class ThreadReferenceImpl extends ObjectReferenceImpl implements	ThreadRe
 					fgThreadStatusMap.put(intValue, name);
 				} else if (name.startsWith("SUSPEND_STATUS_")) { //$NON-NLS-1$
 					name = name.substring(15);
-					for (int j = 0; j < fgSuspendStatusStrings.length; j++) {
+					for (int j = 0; j < fgSuspendStatusStrings.length; j++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 						if ((1 << j & value) != 0) {
 							fgSuspendStatusStrings[j] = name;
 							break;
@@ -841,7 +841,7 @@ public class ThreadReferenceImpl extends ObjectReferenceImpl implements	ThreadRe
 	/**
 	 * @see ThreadReference#popFrames(StackFrame)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public void popFrames(StackFrame frameToPop)
 			throws IncompatibleThreadStateException {
 		if (!isSuspended()) {

@@ -68,7 +68,7 @@ public abstract class AbstractVMInstall implements IVMInstall, IVMInstall2, IVMI
 	 * Map VM specific attributes that are persisted restored with a VM install.
 	 * @since 3.4
 	 */
-	private final Map<String, String> fAttributeMap = new HashMap<>();
+	private final Map<String, String> fAttributeMap = new HashMap<>(); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
 
 	// system properties are cached in user preferences prefixed with this key, followed
 	// by VM type, VM id, and system property name
@@ -182,7 +182,7 @@ public abstract class AbstractVMInstall implements IVMInstall, IVMInstall2, IVMI
 	/* (non-Javadoc)
 	 * @see org.eclipse.jdt.launching.IVMInstall#setLibraryLocations(org.eclipse.jdt.launching.LibraryLocation[])
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public void setLibraryLocations(LibraryLocation[] locations) {
 		if (locations == fSystemLibraryDescriptions) {
 			return;
@@ -199,7 +199,7 @@ public abstract class AbstractVMInstall implements IVMInstall, IVMInstall2, IVMI
 		if (newLocations.length == prevLocations.length) {
 			int i = 0;
 			boolean equal = true;
-			while (i < newLocations.length && equal) {
+			while (i < newLocations.length && equal) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				equal = newLocations[i].equals(prevLocations[i]);
 				i++;
 			}
@@ -344,19 +344,19 @@ public abstract class AbstractVMInstall implements IVMInstall, IVMInstall2, IVMI
 	/* (non-Javadoc)
 	 * @see org.eclipse.jdt.launching.IVMInstall3#evaluateSystemProperties(java.lang.String[], org.eclipse.core.runtime.IProgressMonitor)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public Map<String, String> evaluateSystemProperties(String[] properties, IProgressMonitor monitor) throws CoreException {
 		//locate the launching support jar - it contains the main program to run
 		if (monitor == null) {
 			monitor = new NullProgressMonitor();
 		}
-		Map<String, String> map = new HashMap<>();
+		Map<String, String> map = new HashMap<>(); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
 
 		// first check cache (preference store) to avoid launching VM
 		boolean cached = true;
 		IEclipsePreferences prefs = InstanceScope.INSTANCE.getNode(LaunchingPlugin.ID_PLUGIN);
 		if(prefs != null) {
-			for (String property : properties) {
+			for (String property : properties) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				String key = getSystemPropertyKey(property);
 				String value = prefs.get(key, null);
 				if (value != null) {
@@ -397,7 +397,7 @@ public abstract class AbstractVMInstall implements IVMInstall, IVMInstall2, IVMI
 							JavaRuntime.PREF_CONNECT_TIMEOUT,
 							JavaRuntime.DEF_CONNECT_TIMEOUT,
 							null);
-					while (!process.isTerminated()) {
+					while (!process.isTerminated()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 						try {
 							if (total > max) {
 								break;
@@ -430,7 +430,7 @@ public abstract class AbstractVMInstall implements IVMInstall, IVMInstall2, IVMI
 						Element envs = document.getDocumentElement();
 						NodeList list = envs.getChildNodes();
 						int length = list.getLength();
-						for (int i = 0; i < length; ++i) {
+						for (int i = 0; i < length; ++i) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 							Node node = list.item(i);
 							short type = node.getNodeType();
 							if (type == Node.ELEMENT_NODE) {
@@ -472,7 +472,7 @@ public abstract class AbstractVMInstall implements IVMInstall, IVMInstall2, IVMI
 	 * @return preference store key
 	 */
 	private String getSystemPropertyKey(String property) {
-		return PREF_VM_INSTALL_SYSTEM_PROPERTY + '.' + getVMInstallType().getId() + '.' + getId() + '.' + property;
+		return PREF_VM_INSTALL_SYSTEM_PROPERTY + '.' + getVMInstallType().getId() + '.' + getId() + '.' + property; //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 	}
 
 	/**
@@ -500,7 +500,7 @@ public abstract class AbstractVMInstall implements IVMInstall, IVMInstall2, IVMI
 	 * @param value attribute value or <code>null</code> to remove the attribute
 	 * @since 3.4
 	 */
-	public void setAttribute(String key, String value) {
+	public void setAttribute(String key, String value) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String prevValue = fAttributeMap.remove(key);
 		boolean notify = false;
 		if (value == null) {
@@ -540,6 +540,6 @@ public abstract class AbstractVMInstall implements IVMInstall, IVMInstall2, IVMI
 	 * @since 3.4
 	 */
 	public Map<String, String> getAttributes() {
-		return new HashMap<>(fAttributeMap);
+		return new HashMap<>(fAttributeMap); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
 	}
 }

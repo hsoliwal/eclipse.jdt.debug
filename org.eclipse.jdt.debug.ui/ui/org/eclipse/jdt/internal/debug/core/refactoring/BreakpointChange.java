@@ -82,11 +82,11 @@ public abstract class BreakpointChange extends Change {
 	 */
 	protected void apply(IJavaBreakpoint breakpoint) throws CoreException {
 		breakpoint.setHitCount(fHitCount);
-		for (IJavaObject filter : fInstanceFilters) {
+		for (IJavaObject filter : fInstanceFilters) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			breakpoint.addInstanceFilter(filter);
 		}
 		breakpoint.setSuspendPolicy(fSuspendPolicy);
-		for (IJavaThread filter : fThreadFilters) {
+		for (IJavaThread filter : fThreadFilters) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			breakpoint.setThreadFilter(filter);
 		}
 		breakpoint.setEnabled(fEnabled);
@@ -201,11 +201,11 @@ public abstract class BreakpointChange extends Change {
 	 * @return the <code>IJavaElement</code> contained within the specified parent one, or the parent one
 	 * by default
 	 */
-	public static IJavaElement findElement(IJavaElement parent, IJavaElement element) {
+	public static IJavaElement findElement(IJavaElement parent, IJavaElement element) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		List<IJavaElement> children = getPath(element);
 		List<IJavaElement> path = getPath(parent);
 		IJavaElement currentElement = parent;
-		for (int i = children.size() - path.size() - 1; i >= 0; i--) {
+		for (int i = children.size() - path.size() - 1; i >= 0; i--) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			IJavaElement child = children.get(i);
 			switch (child.getElementType()) {
 				case IJavaElement.PACKAGE_DECLARATION:
@@ -259,8 +259,8 @@ public abstract class BreakpointChange extends Change {
 	 * @return element's path
 	 */
 	private static List<IJavaElement> getPath(IJavaElement element) {
-		ArrayList<IJavaElement> children = new ArrayList<>();
-		while (element != null && element.getElementType() != IJavaElement.COMPILATION_UNIT) {
+		ArrayList<IJavaElement> children = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
+		while (element != null && element.getElementType() != IJavaElement.COMPILATION_UNIT) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			children.add(element);
 			element = element.getParent();
 		}

@@ -94,7 +94,7 @@ public class StepIntoSelectionHyperlinkDetector extends AbstractHyperlinkDetecto
 	/**
 	 * @see org.eclipse.jface.text.hyperlink.IHyperlinkDetector#detectHyperlinks(org.eclipse.jface.text.ITextViewer, org.eclipse.jface.text.IRegion, boolean)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public IHyperlink[] detectHyperlinks(ITextViewer textViewer, IRegion region, boolean canShowMultipleHyperlinks) {
 		ITextEditor editor = getAdapter(ITextEditor.class);
 		if(editor != null && EvaluationContextManager.getEvaluationContext(JDIDebugUIPlugin.getActiveWorkbenchWindow()) != null) {

@@ -61,7 +61,7 @@ public class PListParser {
 	 * @return Object(s) in the stream
 	 * @throws CoreException if an error occurs
 	 */
-	public Object parse(InputStream stream) throws CoreException {
+	public Object parse(InputStream stream) throws CoreException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 			stream = new BufferedInputStream(stream);
 			return parseXML(stream);
@@ -97,7 +97,7 @@ public class PListParser {
 	 * @throws IOException if reading the stream fails
 	 * @throws SAXException if parsing itself fails
 	 */
-	private Object parseXML(InputStream stream) throws CoreException, ParserConfigurationException, IOException, SAXException {
+	private Object parseXML(InputStream stream) throws CoreException, ParserConfigurationException, IOException, SAXException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		Element root = null;
 		@SuppressWarnings("restriction")
 		DocumentBuilder parser = org.eclipse.core.internal.runtime.XmlProcessorFactory.createDocumentBuilderIgnoringDOCTYPE();
@@ -110,7 +110,7 @@ public class PListParser {
 		NodeList list = root.getChildNodes();
 		Node node = null;
 		Element element = null;
-		for (int i = 0; i < list.getLength(); ++i) {
+		for (int i = 0; i < list.getLength(); ++i) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			node = list.item(i);
 			short nodeType = node.getNodeType();
 			if (nodeType == Node.ELEMENT_NODE) {
@@ -137,7 +137,7 @@ public class PListParser {
 	 * @return parsed object or <code>null</code>
 	 * @throws CoreException if an error occurs
 	 */
-	private Object parseObject(Element element) throws CoreException {
+	private Object parseObject(Element element) throws CoreException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String nodeName = element.getNodeName();
 		if (nodeName.equalsIgnoreCase(ARRAY_ELEMENT)) {
 			return parseArray(element);
@@ -168,12 +168,12 @@ public class PListParser {
 	 * @return parsed array or <code>null</code>
 	 * @throws CoreException if an error occurs
 	 */
-	private Object[] parseArray(Element root) throws CoreException {
-		List<Object> collection = new ArrayList<>();
+	private Object[] parseArray(Element root) throws CoreException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
+		List<Object> collection = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 		NodeList list = root.getChildNodes();
 		Node node = null;
 		Element element = null;
-		for (int i = 0; i < list.getLength(); ++i) {
+		for (int i = 0; i < list.getLength(); ++i) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			node = list.item(i);
 			short nodeType = node.getNodeType();
 			if (nodeType == Node.ELEMENT_NODE) {
@@ -194,14 +194,14 @@ public class PListParser {
 	 * @return parsed map or <code>null</code>
 	 * @throws CoreException if an error occurs
 	 */
-	private Map<String, Object> parseDictionary(Element root) throws CoreException {
-		Map<String, Object> dict = new HashMap<>();
+	private Map<String, Object> parseDictionary(Element root) throws CoreException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
+		Map<String, Object> dict = new HashMap<>(); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
 		NodeList list = root.getChildNodes();
 		Node node = null;
 		Element element = null;
 		String nodeName = null;
 		String key = null;
-		for (int i = 0; i < list.getLength(); ++i) {
+		for (int i = 0; i < list.getLength(); ++i) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			node = list.item(i);
 			short nodeType = node.getNodeType();
 			if (nodeType == Node.ELEMENT_NODE) {
@@ -227,7 +227,7 @@ public class PListParser {
 	private String getText(Element root) {
 		NodeList list = root.getChildNodes();
 		Node node = null;
-		for (int i = 0; i < list.getLength(); ++i) {
+		for (int i = 0; i < list.getLength(); ++i) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			node = list.item(i);
 			short nodeType = node.getNodeType();
 			if (nodeType == Node.TEXT_NODE) {

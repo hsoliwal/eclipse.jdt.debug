@@ -88,7 +88,7 @@ public class JavaLibraryPathTests extends AbstractDebugTest {
 
 	private void addToClasspath(IJavaProject jproject, IClasspathEntry cpe) throws JavaModelException {
 		IClasspathEntry[] oldEntries= jproject.getRawClasspath();
-		for (int i= 0; i < oldEntries.length; i++) {
+		for (int i= 0; i < oldEntries.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			if (oldEntries[i].equals(cpe)) {
 				return;
 			}
@@ -114,7 +114,7 @@ public class JavaLibraryPathTests extends AbstractDebugTest {
 		assertEquals("Wrong entry", path.toFile().getCanonicalPath(), new File(strings[0]).getCanonicalPath());
 	}
 
-	public void testVMArgsForRequiredProjectExplicitPath() throws Exception {
+	public void testVMArgsForRequiredProjectExplicitPath() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		// add required project with one java library path entry
 		IPath path = ResourcesPlugin.getWorkspace().getRoot().getLocation();
 		IClasspathAttribute attribute = JavaRuntime.newLibraryPathsAttribute(new String[]{path.toString()});
@@ -132,11 +132,11 @@ public class JavaLibraryPathTests extends AbstractDebugTest {
 		assertTrue(delegate instanceof JavaLaunchDelegate);
 		JavaLaunchDelegate launcher = (JavaLaunchDelegate) delegate;
 		String arguments = launcher.getVMArguments(workingCopy);
-		String expect = "-Djava.library.path=\"" + path.toFile().getAbsolutePath() + "\"";
+		String expect = "-Djava.library.path=\"" + path.toFile().getAbsolutePath() + "\""; //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		assertTrue("wrong VM args", arguments.indexOf(expect) >= 0);
 	}
 
-	public void testMultiVMArgsForRequiredProjectExplicitPath() throws Exception {
+	public void testMultiVMArgsForRequiredProjectExplicitPath() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		// add required project with one java library path entry
 		IPath path = ResourcesPlugin.getWorkspace().getRoot().getLocation();
 		IPath path2 = ResourcesPlugin.getWorkspace().getRoot().getProject("PathTests1").getLocation();
@@ -155,7 +155,7 @@ public class JavaLibraryPathTests extends AbstractDebugTest {
 		assertTrue(delegate instanceof JavaLaunchDelegate);
 		JavaLaunchDelegate launcher = (JavaLaunchDelegate) delegate;
 		String arguments = launcher.getVMArguments(workingCopy);
-		String expect = "-Djava.library.path=\"" + path.toFile().getAbsolutePath() + File.pathSeparator + path2.toFile().getAbsolutePath() + "\"";
+		String expect = "-Djava.library.path=\"" + path.toFile().getAbsolutePath() + File.pathSeparator + path2.toFile().getAbsolutePath() + "\""; //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		assertTrue("wrong VM args", arguments.indexOf(expect) >= 0);
 	}
 
@@ -172,16 +172,16 @@ public class JavaLibraryPathTests extends AbstractDebugTest {
 		assertEquals("Wrong number of entries", 0, strings.length);
 	}
 
-	public void testStringVariablePath() throws Exception {
+	public void testStringVariablePath() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		//add A.jar
-		File jar = JavaTestPlugin.getDefault().getFileInPlugin(new Path("testjars" + File.separator + "A.jar"));
+		File jar = JavaTestPlugin.getDefault().getFileInPlugin(new Path("testjars" + File.separator + "A.jar")); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		IStringVariableManager manager = VariablesPlugin.getDefault().getStringVariableManager();
 		IValueVariable variable = manager.newValueVariable("a-path", "testStringVariablePath");
 		IPath rootPath = new Path(jar.getParentFile().getAbsolutePath());
 		variable.setValue(rootPath.toPortableString());
 		manager.addVariables(new IValueVariable[]{variable});
 		try {
-			String path = "${a-path}" + File.separator +"A.jar";
+			String path = "${a-path}" + File.separator +"A.jar"; //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 			IClasspathAttribute attribute = JavaRuntime.newLibraryPathsAttribute(new String[]{path});
 			IClasspathEntry entry = JavaCore.newLibraryEntry(new Path(jar.getAbsolutePath()), null, null, new IAccessRule[0], new IClasspathAttribute[]{attribute}, false);
 			addToClasspath(getJavaProject("PathTests1"), entry);

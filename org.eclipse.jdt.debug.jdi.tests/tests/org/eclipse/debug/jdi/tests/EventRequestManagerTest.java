@@ -64,7 +64,7 @@ public class EventRequestManagerTest extends AbstractJDITest {
 	 * Test JDI createAccessWatchpointRequest(Field), accessWatchpointRequests()
 	 * and deleteEventRequest(EventRequest)
 	 */
-	public void testJDIAccessWatchpointRequest() {
+	public void testJDIAccessWatchpointRequest() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		if (!fVM.canWatchFieldAccess()) {
 			return;
 		}
@@ -78,8 +78,8 @@ public class EventRequestManagerTest extends AbstractJDITest {
 		List<?> requests = fManager.accessWatchpointRequests();
 		ListIterator<?> iterator = requests.listIterator();
 		int i=0;
-		while (iterator.hasNext()) {
-			assertTrue("2."+i++, iterator.next() instanceof AccessWatchpointRequest);
+		while (iterator.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
+			assertTrue("2."+i++, iterator.next() instanceof AccessWatchpointRequest); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		}
 
 		// Delete an access watchpoint request
@@ -90,7 +90,7 @@ public class EventRequestManagerTest extends AbstractJDITest {
 	 * Test JDI createBreakpointRequest(Location), breakpointRequests(),
 	 * deleteEventRequest(EventRequest) and deleteAllBreakpoints()
 	 */
-	public void testJDIBreakpointRequest() {
+	public void testJDIBreakpointRequest() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		// Create a breakpoint at a valid location
 		Location location = getLocation();
 		BreakpointRequest bp = fManager.createBreakpointRequest(location);
@@ -99,7 +99,7 @@ public class EventRequestManagerTest extends AbstractJDITest {
 		// Get all breakpoints
 		List<?> breakpoints = fManager.breakpointRequests();
 		ListIterator<?> iterator = breakpoints.listIterator();
-		while (iterator.hasNext()) {
+		while (iterator.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			Object breakpoint = iterator.next();
 			assertTrue("3", breakpoint instanceof BreakpointRequest);
 		}
@@ -125,8 +125,8 @@ public class EventRequestManagerTest extends AbstractJDITest {
 		List<?> requests = fManager.classPrepareRequests();
 		ListIterator<?> iterator = requests.listIterator();
 		int i=0;
-		while (iterator.hasNext()) {
-			assertTrue("1."+i++, iterator.next() instanceof ClassPrepareRequest);
+		while (iterator.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
+			assertTrue("1."+i++, iterator.next() instanceof ClassPrepareRequest); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		}
 
 		// Delete a class prepare request
@@ -145,8 +145,8 @@ public class EventRequestManagerTest extends AbstractJDITest {
 		List<?> requests = fManager.classUnloadRequests();
 		ListIterator<?> iterator = requests.listIterator();
 		int i=0;
-		while (iterator.hasNext()) {
-			assertTrue("1."+i++, iterator.next() instanceof ClassUnloadRequest);
+		while (iterator.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
+			assertTrue("1."+i++, iterator.next() instanceof ClassUnloadRequest); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		}
 
 		// Delete a class unload request
@@ -165,8 +165,8 @@ public class EventRequestManagerTest extends AbstractJDITest {
 		List<?> requests = fManager.exceptionRequests();
 		ListIterator<?> iterator = requests.listIterator();
 		int i=0;
-		while (iterator.hasNext()) {
-			assertTrue("1."+i++, iterator.next() instanceof ExceptionRequest);
+		while (iterator.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
+			assertTrue("1."+i++, iterator.next() instanceof ExceptionRequest); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		}
 
 		// Delete a exception request
@@ -177,7 +177,7 @@ public class EventRequestManagerTest extends AbstractJDITest {
 	 * Test JDI createModificationWatchpointRequest(Field),
 	 * accessWatchpointRequests() and deleteEventRequest(EventRequest)
 	 */
-	public void testJDIModificationWatchpointRequest() {
+	public void testJDIModificationWatchpointRequest() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		if (!fVM.canWatchFieldAccess()) {
 			return;
 		}
@@ -191,8 +191,8 @@ public class EventRequestManagerTest extends AbstractJDITest {
 		List<?> requests = fManager.modificationWatchpointRequests();
 		ListIterator<?> iterator = requests.listIterator();
 		int i=0;
-		while (iterator.hasNext()) {
-			assertTrue("2."+i++, iterator.next() instanceof ModificationWatchpointRequest);
+		while (iterator.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
+			assertTrue("2."+i++, iterator.next() instanceof ModificationWatchpointRequest); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		}
 
 		// Delete a modification watchpoint
@@ -211,8 +211,8 @@ public class EventRequestManagerTest extends AbstractJDITest {
 		List<?> requests = fManager.stepRequests();
 		ListIterator<?> iterator = requests.listIterator();
 		int i=0;
-		while (iterator.hasNext()) {
-			assertTrue("1."+i++, iterator.next() instanceof StepRequest);
+		while (iterator.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
+			assertTrue("1."+i++, iterator.next() instanceof StepRequest); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		}
 
 		// Delete a step request
@@ -231,8 +231,8 @@ public class EventRequestManagerTest extends AbstractJDITest {
 		List<?> requests = fManager.threadDeathRequests();
 		ListIterator<?> iterator = requests.listIterator();
 		int i=0;
-		while (iterator.hasNext()) {
-			assertTrue("1."+i++, iterator.next() instanceof ThreadDeathRequest);
+		while (iterator.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
+			assertTrue("1."+i++, iterator.next() instanceof ThreadDeathRequest); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		}
 
 		// Delete a ThreadDeath request
@@ -251,8 +251,8 @@ public class EventRequestManagerTest extends AbstractJDITest {
 		List<?> requests = fManager.classUnloadRequests();
 		ListIterator<?> iterator = requests.listIterator();
 		int i=0;
-		while (iterator.hasNext()) {
-			assertTrue("1."+i++, iterator.next() instanceof ThreadStartRequest);
+		while (iterator.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
+			assertTrue("1."+i++, iterator.next() instanceof ThreadStartRequest); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		}
 
 		// Delete a ThreadStart request

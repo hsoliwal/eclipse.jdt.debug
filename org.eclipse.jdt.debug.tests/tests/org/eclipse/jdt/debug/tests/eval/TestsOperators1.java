@@ -34,16 +34,16 @@ public class TestsOperators1 extends Tests {
 		destroyFrame();
 	}
 
-	public void testIntPlusInt() throws Throwable {
+	public void testIntPlusInt() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xInt + plusOp + yInt);
+		IValue value = eval(xInt + plusOp + yInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("int plus int : wrong type : ", "int", typeName);
 		int intValue = ((IJavaPrimitiveValue)value).getIntValue();
 		assertEquals("int plus int : wrong result : ", xIntValue + yIntValue, intValue);
 
-		value = eval(yInt + plusOp + xInt);
+		value = eval(yInt + plusOp + xInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("int plus int : wrong type : ", "int", typeName);
 		intValue = ((IJavaPrimitiveValue)value).getIntValue();
@@ -53,26 +53,26 @@ public class TestsOperators1 extends Tests {
 		}
 	}
 
-	public void testStringPlusString() throws Throwable {
+	public void testStringPlusString() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xString + plusOp + yString);
+		IValue value = eval(xString + plusOp + yString); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("java.lang.String plus java.lang.String : wrong type : ", "java.lang.String", typeName);
 		String stringValue = ((JDIObjectValue)value).getValueString();
-		assertEquals("java.lang.String plus java.lang.String : wrong result : ", xStringValue + yStringValue, stringValue);
+		assertEquals("java.lang.String plus java.lang.String : wrong result : ", xStringValue + yStringValue, stringValue); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
-		value = eval(yString + plusOp + xString);
+		value = eval(yString + plusOp + xString); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("java.lang.String plus java.lang.String : wrong type : ", "java.lang.String", typeName);
 		stringValue = ((JDIObjectValue)value).getValueString();
-		assertEquals("java.lang.String plus java.lang.String : wrong result : ", yStringValue + xStringValue, stringValue);
+		assertEquals("java.lang.String plus java.lang.String : wrong result : ", yStringValue + xStringValue, stringValue); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		} finally {
 		end();
 		}
 	}
 
-	public void testInt() throws Throwable {
+	public void testInt() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
 		IValue value = eval(xVarInt);
@@ -91,7 +91,7 @@ public class TestsOperators1 extends Tests {
 		}
 	}
 
-	public void testString() throws Throwable {
+	public void testString() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
 		IValue value = eval(xVarString);

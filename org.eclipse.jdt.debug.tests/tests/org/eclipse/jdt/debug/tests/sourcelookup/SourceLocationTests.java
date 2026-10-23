@@ -72,7 +72,7 @@ public class SourceLocationTests extends AbstractDebugTest {
 		assertEquals("archive locations should be equal", location, restored);
 	}
 
-	public void testJavaSourceLocatorMemento() throws Exception {
+	public void testJavaSourceLocatorMemento() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IJavaSourceLocation location1 = new JavaProjectSourceLocation(get14Project());
 		File dir = ResourcesPlugin.getWorkspace().getRoot().getLocation().toFile();
 		IJavaSourceLocation location2 = new DirectorySourceLocation(dir);
@@ -91,7 +91,7 @@ public class SourceLocationTests extends AbstractDebugTest {
 		assertEquals("3rd locations not equal", location3, locations[2]);
 	}
 
-	public void testJavaUISourceLocatorMemento() throws Exception {
+	public void testJavaUISourceLocatorMemento() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IJavaSourceLocation location1 = new JavaProjectSourceLocation(get14Project());
 		File dir = ResourcesPlugin.getWorkspace().getRoot().getLocation().toFile();
 		IJavaSourceLocation location2 = new DirectorySourceLocation(dir);
@@ -160,10 +160,10 @@ public class SourceLocationTests extends AbstractDebugTest {
 		assertNull("Should not have found source", source);
 	}
 
-	public void testPositiveSystemLibrarySourceLocation() throws Exception {
+	public void testPositiveSystemLibrarySourceLocation() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IClasspathEntry[] cpes = get14Project().getRawClasspath();
 		IClasspathEntry lib = null;
-		for (int i = 0; i < cpes.length; i++) {
+		for (int i = 0; i < cpes.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			if (cpes[i].getEntryKind() == IClasspathEntry.CPE_CONTAINER) {
 				if (cpes[i].getPath().equals(new Path(JRE_CONTAINER_1_8_CPE_NAME))) {
 					lib = cpes[i];
@@ -175,7 +175,7 @@ public class SourceLocationTests extends AbstractDebugTest {
 
 		IPackageFragmentRoot[] roots = get14Project().findPackageFragmentRoots(lib);
 		Object source = null;
-		for (int i = 0; i < roots.length; i++) {
+		for (int i = 0; i < roots.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			IPackageFragmentRoot root = roots[i];
 			IJavaSourceLocation location = new PackageFragmentRootSourceLocation(root);
 			source = location.findSourceElement("java.lang.Object");
@@ -188,7 +188,7 @@ public class SourceLocationTests extends AbstractDebugTest {
 		IClassFile cf = (IClassFile)source;
 		assertEquals("Did not find source for 'Object'", "Object.class", cf.getElementName());
 
-		for (int i = 0; i < roots.length; i++) {
+		for (int i = 0; i < roots.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			IPackageFragmentRoot root = roots[i];
 			IJavaSourceLocation location = new PackageFragmentRootSourceLocation(root);
 			source = location.findSourceElement("java.util.Vector$1");
@@ -201,10 +201,10 @@ public class SourceLocationTests extends AbstractDebugTest {
 		assertEquals("Did not find source for 'Vector$1'", "Vector$1.class", cf.getElementName());
 	}
 
-	public void testNegativeSystemLibrarySourceLocation() throws Exception {
+	public void testNegativeSystemLibrarySourceLocation() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IClasspathEntry[] cpes = get14Project().getRawClasspath();
 		IClasspathEntry lib = null;
-		for (int i = 0; i < cpes.length; i++) {
+		for (int i = 0; i < cpes.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			if (cpes[i].getEntryKind() == IClasspathEntry.CPE_CONTAINER) {
 				if (cpes[i].getPath().equals(new Path(JRE_CONTAINER_1_8_CPE_NAME))) {
 					lib = cpes[i];
@@ -216,7 +216,7 @@ public class SourceLocationTests extends AbstractDebugTest {
 
 		IPackageFragmentRoot[] roots = get14Project().findPackageFragmentRoots(lib);
 		Object source = null;
-		for (int i = 0; i < roots.length; i++) {
+		for (int i = 0; i < roots.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			IPackageFragmentRoot root = roots[i];
 			IJavaSourceLocation location = new PackageFragmentRootSourceLocation(root);
 			source = location.findSourceElement("xyz.abc.Object");

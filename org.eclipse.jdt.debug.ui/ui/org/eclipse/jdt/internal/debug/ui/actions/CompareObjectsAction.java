@@ -97,9 +97,9 @@ public class CompareObjectsAction extends ObjectActionDelegate implements IWorkb
 	 * @param selections
 	 *            Selected objects from variable view
 	 */
-	@SuppressWarnings("nls")
+	@SuppressWarnings("nls") //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	protected void compareSelectedObjects(List<IStructuredSelection> selections) {
-		Map<IJavaVariable, Object> result = new HashMap<>();
+		Map<IJavaVariable, Object> result = new HashMap<>(); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
 		try {
 			Set<String> valueSet = selectionTypeChecker(selections);
 			if (valueSet.size() != 1) {
@@ -221,8 +221,8 @@ public class CompareObjectsAction extends ObjectActionDelegate implements IWorkb
 	 * @throws DebugException
 	 */
 	private Set<String> selectionTypeChecker(List<IStructuredSelection> selections) throws DebugException {
-		Map<String, String> selectionTypeCheck = new HashMap<>();
-		for (Object selection : selections) {
+		Map<String, String> selectionTypeCheck = new HashMap<>(); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
+		for (Object selection : selections) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			if (selection instanceof IJavaVariable selectedObject) {
 				String temp = comparisonTypeCheck(selectedObject);
 				selectionTypeCheck.put(selectedObject.getName(), temp);
@@ -243,10 +243,10 @@ public class CompareObjectsAction extends ObjectActionDelegate implements IWorkb
 	 * @throws PartInitException
 	 */
 	private void displayInDiffView(Map<IJavaVariable, Object> result, String type) throws DebugException, PartInitException {
-		List<Map<String, Object>> resultsList = new ArrayList<>();
-		List<String> objectsName = new ArrayList<>();
-		for (Entry<IJavaVariable, Object> mp : result.entrySet()) {
-			Map<String, Object> temp = new HashMap<>();
+		List<Map<String, Object>> resultsList = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
+		List<String> objectsName = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
+		for (Entry<IJavaVariable, Object> mp : result.entrySet()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
+			Map<String, Object> temp = new HashMap<>(); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
 			temp.put(mp.getKey().getName(), mp.getValue());
 			resultsList.add(temp);
 			objectsName.add(mp.getKey().getName());
@@ -263,19 +263,19 @@ public class CompareObjectsAction extends ObjectActionDelegate implements IWorkb
 	 * @throws DebugException
 	 * @throws PartInitException
 	 */
-	private void displayInDiffViewForComplex(Map<IJavaVariable, Object> result) throws DebugException, PartInitException {
-		List<Map<String, Object>> resultsList = new ArrayList<>();
-		List<String> objectsName = new ArrayList<>();
-		List<String> fieldNames = new ArrayList<>();
+	private void displayInDiffViewForComplex(Map<IJavaVariable, Object> result) throws DebugException, PartInitException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
+		List<Map<String, Object>> resultsList = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
+		List<String> objectsName = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
+		List<String> fieldNames = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 		IJavaVariable javaVar = null;
-		for (Entry<IJavaVariable, Object> mp : result.entrySet()) {
-			Map<String, Object> temp = new HashMap<>();
+		for (Entry<IJavaVariable, Object> mp : result.entrySet()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
+			Map<String, Object> temp = new HashMap<>(); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
 			temp.put(mp.getKey().getName(), mp.getValue());
 			resultsList.add(temp);
 			javaVar = mp.getKey();
 			objectsName.add(mp.getKey().getName());
 		}
-		for (IVariable x : javaVar.getValue().getVariables()) {
+		for (IVariable x : javaVar.getValue().getVariables()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			fieldNames.add(x.getName());
 		}
 		if (fieldNames.isEmpty()) {
@@ -294,11 +294,11 @@ public class CompareObjectsAction extends ObjectActionDelegate implements IWorkb
 	 *            Type of the objects
 	 * @throws DebugException
 	 */
-	@SuppressWarnings({ "nls", "unchecked" })
+	@SuppressWarnings({ "nls", "unchecked" }) //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	private void displayComparisonResults(Map<IJavaVariable, Object> result, String type) throws DebugException {
 		String message;
-		List<IJavaVariable> selections = new ArrayList<>();
-		for (Map.Entry<IJavaVariable, Object> current : result.entrySet()) {
+		List<IJavaVariable> selections = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
+		for (Map.Entry<IJavaVariable, Object> current : result.entrySet()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			IJavaVariable c = current.getKey();
 			selections.add(c);
 		}
@@ -331,12 +331,12 @@ public class CompareObjectsAction extends ObjectActionDelegate implements IWorkb
 	 *            Map containing details of comparison result
 	 * @throws DebugException
 	 */
-	@SuppressWarnings({ "nls", "unchecked" })
+	@SuppressWarnings({ "nls", "unchecked" }) //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	private void displayListResultsInDialogBox(Map<IJavaVariable, Object> result) throws DebugException {
 		int displayLimit = 30;
-		StringBuilder outputMessage = new StringBuilder();
-		List<IJavaVariable> selections = new ArrayList<>();
-		for (Map.Entry<IJavaVariable, Object> current : result.entrySet()) {
+		StringBuilder outputMessage = new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
+		List<IJavaVariable> selections = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
+		for (Map.Entry<IJavaVariable, Object> current : result.entrySet()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			IJavaVariable c = current.getKey();
 			selections.add(c);
 		}
@@ -354,7 +354,7 @@ public class CompareObjectsAction extends ObjectActionDelegate implements IWorkb
 			if (msg.contains("same as of") && msg.indexOf(",") == -1) {
 				msg = NLS.bind(DebugUIMessages.ListSameElementsFor2, new Object[] { msg.split(" ")[0] });
 			}
-			outputMessage.append(msg);
+			outputMessage.append(msg); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			MessageDialog.openInformation(getShell(), DebugUIMessages.ObjectComparisonTitle_long, outputMessage.toString());
 			return;
 		}
@@ -363,26 +363,26 @@ public class CompareObjectsAction extends ObjectActionDelegate implements IWorkb
 		String message;
 		if (!size1.equals(size2)) {
 			message = NLS.bind(DebugUIMessages.DialogBoxListItemCount, new Object[] { selection1, size1 });
-			outputMessage.append(message + "\n");
+			outputMessage.append(message + "\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			message = NLS.bind(DebugUIMessages.DialogBoxListItemCount, new Object[] { selection2, size2 });
-			outputMessage.append(message);
+			outputMessage.append(message); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		}
 		if (obj1.containsKey(ObjectComparison.OBJECT_VALUES)) {
 			List<String> missingValues = (List<String>) obj1.get(ObjectComparison.OBJECT_VALUES);
 			if (missingValues.size() > displayLimit) {
-				outputMessage.append(printListContents(selection1, missingValues, displayLimit));
+				outputMessage.append(printListContents(selection1, missingValues, displayLimit)); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			} else {
 				message = NLS.bind(DebugUIMessages.DialogBoxListMissing, new Object[] { selection1, missingValues.toString() });
-				outputMessage.append("\n" + message);
+				outputMessage.append("\n" + message); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			}
 		}
 		if (obj2.containsKey(ObjectComparison.OBJECT_VALUES)) {
 			List<String> missingValues = (List<String>) obj2.get(ObjectComparison.OBJECT_VALUES);
 			if (missingValues.size() > displayLimit) {
-				outputMessage.append(printListContents(selection2, missingValues, displayLimit));
+				outputMessage.append(printListContents(selection2, missingValues, displayLimit)); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			} else {
 				message = NLS.bind(DebugUIMessages.DialogBoxListMissing, new Object[] { selection2, missingValues.toString() });
-				outputMessage.append("\n" + message);
+				outputMessage.append("\n" + message); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			}
 		}
 		MessageDialog.openInformation(getShell(), DebugUIMessages.ObjectComparisonTitle_long, outputMessage.toString());
@@ -396,12 +396,12 @@ public class CompareObjectsAction extends ObjectActionDelegate implements IWorkb
 	 *            Map containing details of comparison result
 	 * @throws DebugException
 	 */
-	@SuppressWarnings({ "nls", "unchecked" })
+	@SuppressWarnings({ "nls", "unchecked" }) //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	private void displayMapResultsInDialogBox(Map<IJavaVariable, Object> result) throws DebugException {
 		int displayLimit = 30;
-		StringBuilder outputMessage = new StringBuilder();
-		List<IJavaVariable> selections = new ArrayList<>();
-		for (Map.Entry<IJavaVariable, Object> current : result.entrySet()) {
+		StringBuilder outputMessage = new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
+		List<IJavaVariable> selections = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
+		for (Map.Entry<IJavaVariable, Object> current : result.entrySet()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			IJavaVariable c = current.getKey();
 			selections.add(c);
 		}
@@ -418,46 +418,46 @@ public class CompareObjectsAction extends ObjectActionDelegate implements IWorkb
 			return;
 		}
 		if (obj1.containsKey(ObjectComparison.MAP_KEY_SAME) || obj2.containsKey(ObjectComparison.MAP_KEY_SAME)) {
-			outputMessage.append(DebugUIMessages.DialogBoxMapKeySame + "\n");
+			outputMessage.append(DebugUIMessages.DialogBoxMapKeySame + "\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		}
 		if (obj1.containsKey(ObjectComparison.MAP_VAL_SAME) || obj2.containsKey(ObjectComparison.MAP_VAL_SAME)) {
-			outputMessage.append(DebugUIMessages.DialogBoxMapValSame + "\n");
+			outputMessage.append(DebugUIMessages.DialogBoxMapValSame + "\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		}
 		String message;
 		if (obj1.containsKey("MapValues")) {
 			tempList = (List<String>) obj1.get("MapValues");
 			if (tempList.size() > displayLimit) {
-				outputMessage.append(printListContents(selection1, tempList, displayLimit) + "\n");
+				outputMessage.append(printListContents(selection1, tempList, displayLimit) + "\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			} else {
 				message = NLS.bind(DebugUIMessages.DialogBoxMapMissingVal, new Object[] { selection1, tempList.toString() });
-				outputMessage.append(message + "\n");
+				outputMessage.append(message + "\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			}
 		}
 		if (obj2.containsKey("MapValues")) {
 			tempList = (List<String>) obj2.get("MapValues");
 			if (tempList.size() > displayLimit) {
-				outputMessage.append(printListContents(selection2, tempList, displayLimit) + "\n");
+				outputMessage.append(printListContents(selection2, tempList, displayLimit) + "\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			} else {
 				message = NLS.bind(DebugUIMessages.DialogBoxMapMissingVal, new Object[] { selection2, tempList.toString() });
-				outputMessage.append(message + "\n");
+				outputMessage.append(message + "\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			}
 		}
 		if (obj1.containsKey("MapKeys")) {
 			tempList = (List<String>) obj1.get("MapKeys");
 			if (tempList.size() > displayLimit) {
-				outputMessage.append(printListContents(selection1, tempList, displayLimit) + "\n");
+				outputMessage.append(printListContents(selection1, tempList, displayLimit) + "\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			} else {
 				message = NLS.bind(DebugUIMessages.DialogBoxMapMissingKey, new Object[] { selection1, tempList.toString() });
-				outputMessage.append(message + "\n");
+				outputMessage.append(message + "\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			}
 		}
 		if (obj2.containsKey("MapKeys")) {
 			tempList = (List<String>) obj2.get("MapKeys");
 			if (tempList.size() > displayLimit) {
-				outputMessage.append(printListContents(selection2, tempList, displayLimit) + "\n");
+				outputMessage.append(printListContents(selection2, tempList, displayLimit) + "\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			} else {
 				message = NLS.bind(DebugUIMessages.DialogBoxMapMissingKey, new Object[] { selection2, tempList.toString() });
-				outputMessage.append(message + "\n");
+				outputMessage.append(message + "\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			}
 		}
 
@@ -478,10 +478,10 @@ public class CompareObjectsAction extends ObjectActionDelegate implements IWorkb
 	 */
 	@SuppressWarnings("nls")
 	private String printListContents(String Selection, List<String> list, int displayLimit) {
-		StringBuilder content = new StringBuilder();
-		content.append("[");
-		content.append(list.stream().limit(displayLimit).collect(Collectors.joining(",")));
-		content.append("......]");
+		StringBuilder content = new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
+		content.append("["); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+		content.append(list.stream().limit(displayLimit).collect(Collectors.joining(","))); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+		content.append("......]"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		String message = NLS.bind(DebugUIMessages.DialogBoxMapMissingKey, new Object[] { Selection, content.toString() });
 		return message;
 	}

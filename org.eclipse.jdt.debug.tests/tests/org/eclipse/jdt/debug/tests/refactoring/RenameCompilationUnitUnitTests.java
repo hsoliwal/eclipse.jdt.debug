@@ -33,7 +33,7 @@ public class RenameCompilationUnitUnitTests extends AbstractRefactoringDebugTest
 		super(name);
 	}
 
-	private void runClassLoadBreakpointTest(String src, String pack, String cunit, String fullTargetName, String newTargetLineage) throws Exception {
+	private void runClassLoadBreakpointTest(String src, String pack, String cunit, String fullTargetName, String newTargetLineage) throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 			//create breakpoint to test
 			IJavaClassPrepareBreakpoint breakpoint = createClassPrepareBreakpoint(src, pack, cunit, fullTargetName);
@@ -53,7 +53,7 @@ public class RenameCompilationUnitUnitTests extends AbstractRefactoringDebugTest
 		}
 	}
 
-	private void runLineBreakpointTest(String src, String pack, String cunit, String fullTargetName, String targetsParentName, int lineNumber) throws Exception {
+	private void runLineBreakpointTest(String src, String pack, String cunit, String fullTargetName, String targetsParentName, int lineNumber) throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 			//create breakpoint to test
 			IJavaLineBreakpoint breakpoint = createLineBreakpoint(lineNumber, src, pack, cunit, fullTargetName);
@@ -74,7 +74,7 @@ public class RenameCompilationUnitUnitTests extends AbstractRefactoringDebugTest
 		}
 	}
 
-	private void runMethodBreakpointTest(String src, String pack, String cunit, String fullTargetName, String newTargetLineage, String methodName) throws Exception {
+	private void runMethodBreakpointTest(String src, String pack, String cunit, String fullTargetName, String newTargetLineage, String methodName) throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 			//create breakpoint to test
 			IJavaMethodBreakpoint breakpoint = createMethodBreakpoint(src, pack, cunit,fullTargetName, true, false);
@@ -95,7 +95,7 @@ public class RenameCompilationUnitUnitTests extends AbstractRefactoringDebugTest
 		}
 	}
 
-	private void runWatchPointTest(String src, String pack, String cunit, String fullTargetName, String newTargetLineage, String fieldName) throws Exception {
+	private void runWatchPointTest(String src, String pack, String cunit, String fullTargetName, String newTargetLineage, String fieldName) throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 			//create breakpoint to test
 			IJavaWatchpoint breakpoint = createNestedTypeWatchPoint(src, pack, cunit, fullTargetName, true, true);
@@ -139,7 +139,7 @@ public class RenameCompilationUnitUnitTests extends AbstractRefactoringDebugTest
 					pack = "a.b.c",
 					cunit = "MoveeChild.java",
 					fullTargetName = "MoveeChild$InnerChildType$innerChildsMethod()V$1",
-					newTargetLineage = pack+"."+"RenamedCompilationUnit$InnerChildType$1";
+					newTargetLineage = pack+"."+"RenamedCompilationUnit$InnerChildType$1"; //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 			runClassLoadBreakpointTest(src, pack, cunit, fullTargetName, newTargetLineage);
 	}//end testBreakPoint
 
@@ -148,7 +148,7 @@ public class RenameCompilationUnitUnitTests extends AbstractRefactoringDebugTest
 					pack = "a.b.c",
 					cunit = "MoveeChild.java",
 					fullTargetName = "MoveeChild$InnerChildType$innerChildsMethod()V$1",
-					newTargetLineage = pack+"."+"RenamedCompilationUnit$InnerChildType$1";
+					newTargetLineage = pack+"."+"RenamedCompilationUnit$InnerChildType$1"; //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 			int lineNumber = 40;
 
 			runLineBreakpointTest(src, pack, cunit, fullTargetName, newTargetLineage, lineNumber);
@@ -159,7 +159,7 @@ public class RenameCompilationUnitUnitTests extends AbstractRefactoringDebugTest
 					pack = "a.b.c",
 					cunit = "MoveeChild.java",
 					fullTargetName = "MoveeChild$InnerChildType$innerChildsMethod()V$1$anonTypeMethod()V",
-					newTargetLineage = pack+"."+"RenamedCompilationUnit$InnerChildType$1",
+					newTargetLineage = pack+"."+"RenamedCompilationUnit$InnerChildType$1", //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 					methodName = "anonTypeMethod";
 			runMethodBreakpointTest(src, pack, cunit, fullTargetName, newTargetLineage, methodName);
 	}//end testBreakPoint
@@ -169,7 +169,7 @@ public class RenameCompilationUnitUnitTests extends AbstractRefactoringDebugTest
 					pack = "a.b.c",
 					cunit = "MoveeChild.java",
 					fullTargetName = "MoveeChild$InnerChildType$innerChildsMethod()V$1$anAnonInt",
-					newTargetLineage = pack+"."+"RenamedCompilationUnit$InnerChildType$1",
+					newTargetLineage = pack+"."+"RenamedCompilationUnit$InnerChildType$1", //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 					fieldName = "anAnonInt";
 
 			runWatchPointTest(src, pack, cunit, fullTargetName, newTargetLineage, fieldName);
@@ -180,7 +180,7 @@ public class RenameCompilationUnitUnitTests extends AbstractRefactoringDebugTest
 					pack = "a.b.c",
 					cunit = "MoveeChild.java",
 					fullTargetName = "MoveeChild$InnerChildType",
-					newTargetLineage = pack+"."+"RenamedCompilationUnit$InnerChildType";
+					newTargetLineage = pack+"."+"RenamedCompilationUnit$InnerChildType"; //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 			runClassLoadBreakpointTest(src, pack, cunit, fullTargetName, newTargetLineage);
 	}//end testBreakPoint
@@ -190,7 +190,7 @@ public class RenameCompilationUnitUnitTests extends AbstractRefactoringDebugTest
 					pack = "a.b.c",
 					cunit = "MoveeChild.java",
 					fullTargetName = "MoveeChild$InnerChildType",
-					newTargetLineage = pack+"."+"RenamedCompilationUnit$InnerChildType";
+					newTargetLineage = pack+"."+"RenamedCompilationUnit$InnerChildType"; //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 			int lineNumber = 35;
 
 			runLineBreakpointTest(src, pack, cunit, fullTargetName, newTargetLineage, lineNumber);
@@ -201,7 +201,7 @@ public class RenameCompilationUnitUnitTests extends AbstractRefactoringDebugTest
 					pack = "a.b.c",
 					cunit = "MoveeChild.java",
 					fullTargetName = "MoveeChild$InnerChildType$innerChildsMethod()V",
-					newTargetLineage = pack+"."+"RenamedCompilationUnit$InnerChildType",
+					newTargetLineage = pack+"."+"RenamedCompilationUnit$InnerChildType", //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 					methodName = "innerChildsMethod";
 			runMethodBreakpointTest(src, pack, cunit, fullTargetName, newTargetLineage, methodName);
 	}//end testBreakPoint
@@ -211,7 +211,7 @@ public class RenameCompilationUnitUnitTests extends AbstractRefactoringDebugTest
 					pack = "a.b.c",
 					cunit = "MoveeChild.java",
 					fullTargetName = "MoveeChild$InnerChildType$innerChildInt",
-					newTargetLineage = pack+"."+"RenamedCompilationUnit$InnerChildType",
+					newTargetLineage = pack+"."+"RenamedCompilationUnit$InnerChildType", //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 					fieldName = "innerChildInt";
 
 			runWatchPointTest(src, pack, cunit, fullTargetName, newTargetLineage, fieldName);
@@ -222,7 +222,7 @@ public class RenameCompilationUnitUnitTests extends AbstractRefactoringDebugTest
 					pack = "a.b.c",
 					cunit = "MoveeChild.java",
 					fullTargetName = "NonPublicChildType$nonPublicChildsMethod()V$1",
-					newTargetLineage = pack+"."+"NonPublicChildType$1";
+					newTargetLineage = pack+"."+"NonPublicChildType$1"; //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 			runClassLoadBreakpointTest(src, pack, cunit, fullTargetName, newTargetLineage);
 	}//end testBreakPoint
@@ -232,7 +232,7 @@ public class RenameCompilationUnitUnitTests extends AbstractRefactoringDebugTest
 					pack = "a.b.c",
 					cunit = "MoveeChild.java",
 					fullTargetName = "NonPublicChildType$nonPublicChildsMethod()V$1",
-					newTargetLineage = pack+"."+"NonPublicChildType$1";
+					newTargetLineage = pack+"."+"NonPublicChildType$1"; //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 			int lineNumber = 56;
 
 			runLineBreakpointTest(src, pack, cunit, fullTargetName, newTargetLineage, lineNumber);
@@ -243,7 +243,7 @@ public class RenameCompilationUnitUnitTests extends AbstractRefactoringDebugTest
 					pack = "a.b.c",
 					cunit = "MoveeChild.java",
 					fullTargetName = "NonPublicChildType$nonPublicChildsMethod()V$1$anonTypeMethod()V",
-					newTargetLineage = pack+"."+"NonPublicChildType$1",
+					newTargetLineage = pack+"."+"NonPublicChildType$1", //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 					methodName = "anonTypeMethod";
 			runMethodBreakpointTest(src, pack, cunit, fullTargetName, newTargetLineage, methodName);
 	}//end testBreakPoint
@@ -253,7 +253,7 @@ public class RenameCompilationUnitUnitTests extends AbstractRefactoringDebugTest
 					pack = "a.b.c",
 					cunit = "MoveeChild.java",
 					fullTargetName = "NonPublicChildType$nonPublicChildsMethod()V$1$anAnonInt",
-					newTargetLineage = pack+"."+"NonPublicChildType$1",
+					newTargetLineage = pack+"."+"NonPublicChildType$1", //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 					fieldName = "anAnonInt";
 
 			runWatchPointTest(src, pack, cunit, fullTargetName, newTargetLineage, fieldName);
@@ -264,7 +264,7 @@ public class RenameCompilationUnitUnitTests extends AbstractRefactoringDebugTest
 					pack = "a.b.c",
 					cunit = "MoveeChild.java",
 					fullTargetName = "NonPublicChildType",
-					newTargetLineage = pack+"."+"NonPublicChildType";
+					newTargetLineage = pack+"."+"NonPublicChildType"; //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 
 			runClassLoadBreakpointTest(src, pack, cunit, fullTargetName, newTargetLineage);
@@ -275,7 +275,7 @@ public class RenameCompilationUnitUnitTests extends AbstractRefactoringDebugTest
 					pack = "a.b.c",
 					cunit = "MoveeChild.java",
 					fullTargetName = "NonPublicChildType",
-					newTargetLineage = pack+"."+"NonPublicChildType";
+					newTargetLineage = pack+"."+"NonPublicChildType"; //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 			int lineNumber = 51;
 
 			runLineBreakpointTest(src, pack, cunit, fullTargetName, newTargetLineage, lineNumber);
@@ -286,7 +286,7 @@ public class RenameCompilationUnitUnitTests extends AbstractRefactoringDebugTest
 					pack = "a.b.c",
 					cunit = "MoveeChild.java",
 					fullTargetName = "NonPublicChildType$nonPublicChildsMethod()V$",
-					newTargetLineage = pack+"."+"NonPublicChildType",
+					newTargetLineage = pack+"."+"NonPublicChildType", //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 					methodName = "nonPublicChildsMethod";
 			runMethodBreakpointTest(src, pack, cunit, fullTargetName, newTargetLineage, methodName);
 	}//end testBreakPoint
@@ -296,7 +296,7 @@ public class RenameCompilationUnitUnitTests extends AbstractRefactoringDebugTest
 					pack = "a.b.c",
 					cunit = "MoveeChild.java",
 					fullTargetName = "NonPublicChildType$nonPublicChildInt",
-					newTargetLineage = pack+"."+"NonPublicChildType",
+					newTargetLineage = pack+"."+"NonPublicChildType", //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 					fieldName = "nonPublicChildInt";
 
 			runWatchPointTest(src, pack, cunit, fullTargetName, newTargetLineage, fieldName);
@@ -308,7 +308,7 @@ public class RenameCompilationUnitUnitTests extends AbstractRefactoringDebugTest
 		pack = "a.b.c",
 		cunit = "MoveeChild.java",
 		fullTargetName = "MoveeChild$childsMethod()V$1",
-		newTargetLineage = pack+"."+"RenamedCompilationUnit$1";
+		newTargetLineage = pack+"."+"RenamedCompilationUnit$1"; //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 		runClassLoadBreakpointTest(src, pack, cunit, fullTargetName, newTargetLineage);
 	}//end testBreakPoint
@@ -319,7 +319,7 @@ public class RenameCompilationUnitUnitTests extends AbstractRefactoringDebugTest
 		pack = "a.b.c",
 		cunit = "MoveeChild.java",
 		fullTargetName = "MoveeChild$childsMethod()V$1",
-		newTargetLineage = pack+"."+"RenamedCompilationUnit$1";
+		newTargetLineage = pack+"."+"RenamedCompilationUnit$1"; //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		int lineNumber = 26;
 
 		runLineBreakpointTest(src, pack, cunit, fullTargetName, newTargetLineage, lineNumber);
@@ -330,7 +330,7 @@ public class RenameCompilationUnitUnitTests extends AbstractRefactoringDebugTest
 		pack = "a.b.c",
 		cunit = "MoveeChild.java",
 		fullTargetName = "MoveeChild$childsMethod()V$1$anonTypeMethod()V",
-		newTargetLineage = pack+"."+"RenamedCompilationUnit$1",
+		newTargetLineage = pack+"."+"RenamedCompilationUnit$1", //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		methodName = "anonTypeMethod";
 
 		runMethodBreakpointTest(src, pack, cunit, fullTargetName, newTargetLineage, methodName);
@@ -341,7 +341,7 @@ public class RenameCompilationUnitUnitTests extends AbstractRefactoringDebugTest
 		pack = "a.b.c",
 		cunit = "MoveeChild.java",
 		fullTargetName = "MoveeChild$childsMethod()V$1$anAnonInt",
-		newTargetLineage = pack+"."+"RenamedCompilationUnit$1",
+		newTargetLineage = pack+"."+"RenamedCompilationUnit$1", //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		fieldName = "anAnonInt";
 
 		runWatchPointTest(src, pack, cunit, fullTargetName, newTargetLineage, fieldName);
@@ -352,7 +352,7 @@ public class RenameCompilationUnitUnitTests extends AbstractRefactoringDebugTest
 					pack = "a.b.c",
 					cunit = "MoveeChild.java",
 					fullTargetName = "MoveeChild",
-					newTargetLineage = pack+"."+"RenamedCompilationUnit";
+					newTargetLineage = pack+"."+"RenamedCompilationUnit"; //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 			runClassLoadBreakpointTest(src, pack, cunit, fullTargetName, newTargetLineage);
 	}//end testBreakPoint
 
@@ -362,7 +362,7 @@ public void testPublicLineBreakpoint() throws Exception {
 					pack = "a.b.c",
 					cunit = "MoveeChild.java",
 					fullTargetName = "MoveeChild",
-					newTargetLineage = pack+"."+"RenamedCompilationUnit";
+					newTargetLineage = pack+"."+"RenamedCompilationUnit"; //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 			int lineNumber = 21;
 
 			runLineBreakpointTest(src, pack, cunit, fullTargetName, newTargetLineage, lineNumber);
@@ -373,7 +373,7 @@ public void testPublicLineBreakpoint() throws Exception {
 					pack = "a.b.c",
 					cunit = "MoveeChild.java",
 					fullTargetName = "MoveeChild$childsMethod()V",
-					newTargetLineage = pack+"."+"RenamedCompilationUnit",
+					newTargetLineage = pack+"."+"RenamedCompilationUnit", //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 					methodName = "childsMethod";
 			runMethodBreakpointTest(src, pack, cunit, fullTargetName, newTargetLineage, methodName);
 	}//end testBreakPoint
@@ -383,7 +383,7 @@ public void testPublicLineBreakpoint() throws Exception {
 					pack = "a.b.c",
 					cunit = "MoveeChild.java",
 					fullTargetName = "MoveeChild$aChildInt",
-					newTargetLineage = pack+"."+"RenamedCompilationUnit",
+					newTargetLineage = pack+"."+"RenamedCompilationUnit", //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 					fieldName = "aChildInt";
 			runWatchPointTest(src, pack, cunit, fullTargetName, newTargetLineage, fieldName);
 	}//end testBreakPoint

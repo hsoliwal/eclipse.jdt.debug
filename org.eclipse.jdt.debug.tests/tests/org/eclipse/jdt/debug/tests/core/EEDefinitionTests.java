@@ -84,14 +84,14 @@ public class EEDefinitionTests extends AbstractDebugTest {
 	/**
 	 * Tests libraries for the EE file
 	 */
-	public void testLibraries() throws CoreException {
+	public void testLibraries() throws CoreException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		File file = getEEFile();
 		assertNotNull("Missing EE file", file);
 		ExecutionEnvironmentDescription description = new ExecutionEnvironmentDescription(file);
 		LibraryLocation[] libs = description.getLibraryLocations();
 		String[] expected = new String[]{"end.jar", "classes.txt", "others.txt", "add.jar", "ext1.jar", "ext2.jar", "opt-ext.jar"};
 		assertEquals("Wrong number of libraries", expected.length, libs.length);
-		for (int i = 0; i < expected.length; i++) {
+		for (int i = 0; i < expected.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			switch (i) {
 			case 4:
 				// ext1 and ext2 can be in either order due to file system ordering
@@ -116,14 +116,14 @@ public class EEDefinitionTests extends AbstractDebugTest {
 	/**
 	 * Tests source attachments
 	 */
-	public void testSourceAttachments() throws CoreException {
+	public void testSourceAttachments() throws CoreException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		File file = getEEFile();
 		assertNotNull("Missing EE file", file);
 		ExecutionEnvironmentDescription description = new ExecutionEnvironmentDescription(file);
 		LibraryLocation[] libs = description.getLibraryLocations();
 		String[] expected = new String[]{"end.txt", "source.txt", "source.txt", "sourceaddsource.jar", "extra1-src.txt", "extra2-src.txt", ""};
 		assertEquals("Wrong number of libraries", expected.length, libs.length);
-		for (int i = 0; i < expected.length; i++) {
+		for (int i = 0; i < expected.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			switch (i) {
 			case 4:
 				// ext1 and ext2 can be in either order due to file system ordering
@@ -198,7 +198,7 @@ public class EEDefinitionTests extends AbstractDebugTest {
 	 * Tests default VM arguments. All arguments from the EE file should get passed through in the
 	 * same order to the command line.
 	 */
-	public void testVMArguments() throws CoreException {
+	public void testVMArguments() throws CoreException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		File file = getEEFile();
 		assertNotNull("Missing EE file", file);
 		ExecutionEnvironmentDescription description = new ExecutionEnvironmentDescription(file);
@@ -209,10 +209,10 @@ public class EEDefinitionTests extends AbstractDebugTest {
 				"-XspecialArg3=789"
 		};
 		int prev = -1;
-		for (int i = 0; i < expected.length; i++) {
+		for (int i = 0; i < expected.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			int next = defaultVMArguments.indexOf(expected[i]);
-			assertTrue("Missing argument: " + expected[i] + ": was: " + defaultVMArguments,  next >= 0);
-			assertTrue("Wrong argument order: " + expected[i] + ": " + defaultVMArguments,  next > prev);
+			assertTrue("Missing argument: " + expected[i] + ": was: " + defaultVMArguments,  next >= 0); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
+			assertTrue("Wrong argument order: " + expected[i] + ": " + defaultVMArguments,  next > prev); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 			prev = next;
 		}
 	}
@@ -220,7 +220,7 @@ public class EEDefinitionTests extends AbstractDebugTest {
 	/**
 	 * Test compatible environments
 	 */
-	public void testCompatibleEEs() throws CoreException {
+	public void testCompatibleEEs() throws CoreException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IVMInstall install = null;
 		EEVMType vmType = (EEVMType) getVMInstallType();
 		try {
@@ -233,13 +233,13 @@ public class EEDefinitionTests extends AbstractDebugTest {
 			IExecutionEnvironmentsManager manager = JavaRuntime.getExecutionEnvironmentsManager();
 			IExecutionEnvironment[] envs = manager.getExecutionEnvironments();
 			boolean found11 = false;
-			for (int i = 0; i < envs.length; i++) {
+			for (int i = 0; i < envs.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				IExecutionEnvironment env = envs[i];
 				if (env.getId().equals("CDC-1.1/Foundation-1.1")) {
 					found11 = true;
-					assertTrue("Should be strictly compatible with " + env.getId(), env.isStrictlyCompatible(install));
+					assertTrue("Should be strictly compatible with " + env.getId(), env.isStrictlyCompatible(install)); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 				} else if (env.getId().indexOf("jdt.debug.tests") < 0) {
-					assertFalse("Should *not* be strictly compatible with " + env.getId(), env.isStrictlyCompatible(install));
+					assertFalse("Should *not* be strictly compatible with " + env.getId(), env.isStrictlyCompatible(install)); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 				}
 			}
 			assertTrue("Did not find foundation 1.1 environment", found11);
@@ -275,7 +275,7 @@ public class EEDefinitionTests extends AbstractDebugTest {
 	}
 
 	protected void validateProperty(String key, String value, ExecutionEnvironmentDescription ee) {
-		assertEquals("Unexpeted value for: " + key, value, ee.getProperty(key));
+		assertEquals("Unexpeted value for: " + key, value, ee.getProperty(key)); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 	}
 
 	/**
@@ -288,12 +288,12 @@ public class EEDefinitionTests extends AbstractDebugTest {
 		validateProperty("-Dee.empty", "", ee);
 	}
 
-	public void testNoEEHomeRequiredForAbsolutePaths() throws IOException {
+	public void testNoEEHomeRequiredForAbsolutePaths() throws IOException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IVMInstall jre = JavaRuntime.getDefaultVMInstall();
 		IExecutionEnvironment ee = Arrays.stream(JavaRuntime.getExecutionEnvironmentsManager().getExecutionEnvironments()) //
 				.filter(e -> e.isStrictlyCompatible(jre)).findFirst().orElseThrow();
 		String installLocation = jre.getInstallLocation().getCanonicalPath();
-		File exePath = new File(jre.getInstallLocation(), "bin/" + (Platform.OS.isWindows() ? "java.exe" : "java"));
+		File exePath = new File(jre.getInstallLocation(), "bin/" + (Platform.OS.isWindows() ? "java.exe" : "java")); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		List<String> libraryPaths = Arrays.stream(JavaRuntime.getLibraryLocations(jre)) //
 				.map(LibraryLocation::getSystemLibraryPath).map(IPath::toOSString).toList();
 

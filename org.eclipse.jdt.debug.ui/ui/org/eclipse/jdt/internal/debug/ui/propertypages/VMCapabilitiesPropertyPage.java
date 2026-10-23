@@ -73,13 +73,13 @@ public class VMCapabilitiesPropertyPage extends PropertyPage {
 	 * Constructor
 	 */
 	public VMCapabilitiesPropertyPage() {
-		fExpandedComps = new ArrayList<>();
+		fExpandedComps = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 	}
 
 	/* (non-Javadoc)
 	 * @see org.eclipse.jface.preference.PreferencePage#createContents(org.eclipse.swt.widgets.Composite)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	protected Control createContents(Composite parent) {
 		noDefaultAndApplyButton();
 		final ScrollPain scomp = new ScrollPain(parent);
@@ -156,8 +156,8 @@ public class VMCapabilitiesPropertyPage extends PropertyPage {
 	private void createHeadingLabel(Composite parent, VirtualMachineImpl vm) {
 		Composite comp = SWTFactory.createComposite(parent, parent.getFont(), 2, 2, GridData.HORIZONTAL_ALIGN_BEGINNING);
 		SWTFactory.createLabel(comp, PropertyPageMessages.VMCapabilitiesPropertyPage_1, fHeadingFont, 1);
-		StringBuilder buff = new StringBuilder(vm.name().trim());
-		buff = buff.append(" ").append(vm.version().trim()); //$NON-NLS-1$
+		StringBuilder buff = new StringBuilder(vm.name().trim()); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
+		buff = buff.append(" ").append(vm.version().trim()); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		Text text = SWTFactory.createText(comp, SWT.READ_ONLY, 1, buff.toString());
 		text.setBackground(parent.getBackground());
 	}
@@ -175,7 +175,7 @@ public class VMCapabilitiesPropertyPage extends PropertyPage {
 	 * Returns the VM from the debug target
 	 * @return the VM form the element
 	 */
-	private VirtualMachineImpl getVM() {
+	private VirtualMachineImpl getVM() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		Object obj = getElement();
 		IDebugTarget target = null;
 		if(obj instanceof IDebugElement) {
@@ -243,8 +243,8 @@ public class VMCapabilitiesPropertyPage extends PropertyPage {
 	private void persistExpansionState() {
 		IPreferenceStore store = getPreferenceStore();
 		if(store != null) {
-			for (int i = 0; i < fExpandedComps.size(); i++) {
-				store.setValue(EXPANDED_STATE+i, fExpandedComps.get(i).isExpanded());
+			for (int i = 0; i < fExpandedComps.size(); i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
+				store.setValue(EXPANDED_STATE+i, fExpandedComps.get(i).isExpanded()); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 			}
 		}
 	}
@@ -259,9 +259,9 @@ public class VMCapabilitiesPropertyPage extends PropertyPage {
 		}
 		else {
 			ExpandableComposite ex;
-			for (int i = 0; i < fExpandedComps.size(); i++) {
+			for (int i = 0; i < fExpandedComps.size(); i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				ex = fExpandedComps.get(i);
-				ex.setExpanded(store.getBoolean(EXPANDED_STATE+i));
+				ex.setExpanded(store.getBoolean(EXPANDED_STATE+i)); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 			}
 		}
 	}
@@ -283,7 +283,7 @@ public class VMCapabilitiesPropertyPage extends PropertyPage {
 	 */
 	private ScrollPain getParentScrollPane(Composite comp) {
 		Control parent = comp.getParent();
-		while(parent != null && !(parent instanceof ScrollPain)) {
+		while(parent != null && !(parent instanceof ScrollPain)) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			parent = parent.getParent();
 		}
 		if(parent != null) {

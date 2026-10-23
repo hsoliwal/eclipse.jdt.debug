@@ -31,7 +31,7 @@ public class MoveInnerTypeToNewFileUnitTests extends AbstractRefactoringDebugTes
 		super(name);
 	}
 
-	public void testLineBreakPoint() throws Exception {
+	public void testLineBreakPoint() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 			int lineNumber = 29;
 			//create breakpoint to test
@@ -54,7 +54,7 @@ public class MoveInnerTypeToNewFileUnitTests extends AbstractRefactoringDebugTes
 	}//end testBreakPoint
 
 
-	public void testMethodBreakPoint() throws Exception {
+	public void testMethodBreakPoint() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 			//create Breakpoint to test
 			createMethodBreakpoint("a.b.c.Movee$InnerType", "innerTypeMethod", "()V", true, false);
@@ -74,7 +74,7 @@ public class MoveInnerTypeToNewFileUnitTests extends AbstractRefactoringDebugTes
 		}
 	}//end testBreakPoint
 
-	public void testWatchPoint() throws Exception {
+	public void testWatchPoint() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 			//create Breakpoint to test
 			createWatchpoint("a.b.c.Movee$InnerType", "innerTypeInt", true, true);
@@ -94,7 +94,7 @@ public class MoveInnerTypeToNewFileUnitTests extends AbstractRefactoringDebugTes
 		}
 	}//end testBreakPoint
 
-	public void testClassLoadBreakPoint() throws Exception {
+	public void testClassLoadBreakPoint() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 			//create Breakpoint to test
 			createClassPrepareBreakpoint("a.b.c.Movee$InnerType");

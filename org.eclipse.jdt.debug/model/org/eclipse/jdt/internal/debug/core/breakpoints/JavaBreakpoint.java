@@ -58,7 +58,7 @@ import com.sun.jdi.request.ClassPrepareRequest;
 import com.sun.jdi.request.EventRequest;
 import com.sun.jdi.request.EventRequestManager;
 
-public abstract class JavaBreakpoint extends Breakpoint implements IJavaBreakpoint, IJDIEventListener, IDebugEventSetListener {
+public abstract class JavaBreakpoint extends Breakpoint implements IJavaBreakpoint, IJDIEventListener, IDebugEventSetListener { //FLLDCIM: MARK — T27  IMPLEMENTS
 
 	/**
 	 * Breakpoint attribute storing the expired value (value
@@ -180,8 +180,8 @@ public abstract class JavaBreakpoint extends Breakpoint implements IJavaBreakpoi
 	private boolean disableOnHit;
 
 	public JavaBreakpoint() {
-		fRequestsByTarget = new HashMap<>(1);
-		fFilteredThreadsByTarget = new HashMap<>(1);
+		fRequestsByTarget = new HashMap<>(1); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
+		fFilteredThreadsByTarget = new HashMap<>(1); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
 	}
 
 	/*
@@ -268,7 +268,7 @@ public abstract class JavaBreakpoint extends Breakpoint implements IJavaBreakpoi
 	protected ArrayList<EventRequest> getRequests(JDIDebugTarget target) {
 		ArrayList<EventRequest> list = (ArrayList<EventRequest>) fRequestsByTarget.get(target);
 		if (list == null) {
-			list = new ArrayList<>(2);
+			list = new ArrayList<>(2); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 		}
 		return list;
 	}
@@ -325,7 +325,7 @@ public abstract class JavaBreakpoint extends Breakpoint implements IJavaBreakpoi
 	 * (com.sun.jdi.event.Event,
 	 * org.eclipse.jdt.internal.debug.core.model.JDIDebugTarget, boolean)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public void eventSetComplete(Event event, JDIDebugTarget target,
 			boolean suspend, EventSet eventSet) {
 		ThreadReference threadRef = null;
@@ -417,7 +417,7 @@ public abstract class JavaBreakpoint extends Breakpoint implements IJavaBreakpoi
 	 * breakpoint to be installed in the given target. Query registered
 	 * breakpoint listeners.
 	 */
-	protected boolean installableReferenceType(ReferenceType type,
+	protected boolean installableReferenceType(ReferenceType type, //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 			JDIDebugTarget target) throws CoreException {
 		String installableType = getTypeName();
 		if (installableType == null ) {
@@ -452,7 +452,7 @@ public abstract class JavaBreakpoint extends Breakpoint implements IJavaBreakpoi
 	 *            the event whose request should have its hit count expired or
 	 *            <code>null</code> to only update the breakpoint marker.
 	 */
-	protected void expireHitCount(Event event) {
+	protected void expireHitCount(Event event) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		Integer requestCount = null;
 		EventRequest request = null;
 		if (event != null) {
@@ -473,7 +473,7 @@ public abstract class JavaBreakpoint extends Breakpoint implements IJavaBreakpoi
 		}
 	}
 
-	protected void disableTriggerPoint(@SuppressWarnings("unused") Event event) {
+	protected void disableTriggerPoint(@SuppressWarnings("unused") Event event) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try{
 			if (isTriggerPoint() && isEnabled()) {
 				if (this instanceof JavaLineBreakpoint) {
@@ -521,7 +521,7 @@ public abstract class JavaBreakpoint extends Breakpoint implements IJavaBreakpoi
 			return false;
 		}
 		fInstalledTypeName = type.name();
-		for (EventRequest request : requests) {
+		for (EventRequest request : requests) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			registerRequest(request, target);
 		}
 		return true;
@@ -586,7 +586,7 @@ public abstract class JavaBreakpoint extends Breakpoint implements IJavaBreakpoi
 			JDIDebugTarget target) {
 		if (fInstanceFilters != null && !fInstanceFilters.isEmpty()) {
 			Iterator<IJavaObject> iter = fInstanceFilters.iterator();
-			while (iter.hasNext()) {
+			while (iter.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				IJavaObject object = iter.next();
 				if (object.getDebugTarget().equals(target)) {
 					addInstanceFilter(request,
@@ -619,7 +619,7 @@ public abstract class JavaBreakpoint extends Breakpoint implements IJavaBreakpoi
 	/**
 	 * Creates event requests for the given target
 	 */
-	protected void createRequests(JDIDebugTarget target) throws CoreException {
+	protected void createRequests(JDIDebugTarget target) throws CoreException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		if (target.isTerminated() || shouldSkipBreakpoint()) {
 			return;
 		}
@@ -635,13 +635,13 @@ public abstract class JavaBreakpoint extends Breakpoint implements IJavaBreakpoi
 			// register to ensure we hear about local and anonymous inner
 			// classes
 			registerRequest(
-					target.createClassPrepareRequest(enclosingTypeName + "$*"), target); //$NON-NLS-1$
+					target.createClassPrepareRequest(enclosingTypeName + "$*"), target); //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		} else {
 			registerRequest(
 					target.createClassPrepareRequest(referenceTypeName), target);
 			// register to ensure we hear about local and anonymous inner
 			// classes
-			registerRequest(target.createClassPrepareRequest(enclosingTypeName
+			registerRequest(target.createClassPrepareRequest(enclosingTypeName //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 					+ "$*", referenceTypeName), target); //$NON-NLS-1$
 		}
 
@@ -653,7 +653,7 @@ public abstract class JavaBreakpoint extends Breakpoint implements IJavaBreakpoi
 
 		boolean success = false;
 		Iterator<ReferenceType> iter = classes.iterator();
-		while (iter.hasNext()) {
+		while (iter.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			ReferenceType type = iter.next();
 			if (createRequest(target, type)) {
 				success = true;
@@ -683,8 +683,8 @@ public abstract class JavaBreakpoint extends Breakpoint implements IJavaBreakpoi
 	 */
 	protected void addToTargetForLocalType(JDIDebugTarget target, String enclosingTypeName) throws CoreException {
 		List<ReferenceType> classes = target.jdiClassesByName(enclosingTypeName);
-		for(ReferenceType type : classes) {
-			for(ReferenceType nestedType : type.nestedTypes()) {
+		for(ReferenceType type : classes) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
+			for(ReferenceType nestedType : type.nestedTypes()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				if (createRequest(target, nestedType)) {
 					break;
 				}
@@ -743,7 +743,7 @@ public abstract class JavaBreakpoint extends Breakpoint implements IJavaBreakpoi
 	/**
 	 * Removes this breakpoint from the given target.
 	 */
-	public void removeFromTarget(final JDIDebugTarget target)
+	public void removeFromTarget(final JDIDebugTarget target) //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 			throws CoreException {
 		removeRequests(target);
 		Object removed = fFilteredThreadsByTarget.remove(target);
@@ -755,7 +755,7 @@ public abstract class JavaBreakpoint extends Breakpoint implements IJavaBreakpoi
 
 		// remove instance filters
 		if (fInstanceFilters != null && !fInstanceFilters.isEmpty()) {
-			for (int i = 0; i < fInstanceFilters.size(); i++) {
+			for (int i = 0; i < fInstanceFilters.size(); i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				IJavaObject object = fInstanceFilters.get(i);
 				if (object.getDebugTarget().equals(target)) {
 					fInstanceFilters.remove(i);
@@ -777,17 +777,17 @@ public abstract class JavaBreakpoint extends Breakpoint implements IJavaBreakpoi
 	 * Remove all requests that this breakpoint has installed in the given debug
 	 * target.
 	 */
-	protected void removeRequests(final JDIDebugTarget target) throws CoreException {
+	protected void removeRequests(final JDIDebugTarget target) throws CoreException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		// removing was previously done is a workspace runnable, but that is
 		// not possible since it can be a resource callback (marker deletion)
 		// that causes a breakpoint to be removed
-		ArrayList<EventRequest> requests = new ArrayList<>(getRequests(target));
+		ArrayList<EventRequest> requests = new ArrayList<>(getRequests(target)); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 		// Iterate over a copy of the requests since this list of requests
 		// can be changed in other threads which would cause an
 		// ConcurrentModificationException
 		Iterator<EventRequest> iter = requests.iterator();
 		EventRequest req;
-		while (iter.hasNext()) {
+		while (iter.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			req = iter.next();
 			try {
 				if (target.isAvailable() && !isExpired(req)) {
@@ -936,17 +936,17 @@ public abstract class JavaBreakpoint extends Breakpoint implements IJavaBreakpoi
 	 * to <code>true</code>. If a workbench crashes, the attributes could have
 	 * been persisted in an incorrect state.
 	 */
-	private void configureAtStartup() throws CoreException {
+	private void configureAtStartup() throws CoreException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		List<String> attributes = null;
-		List<Object> values = new ArrayList<>(3);
+		List<Object> values = new ArrayList<>(3); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 		if (isInstalled()) {
-			attributes = new ArrayList<>(3);
+			attributes = new ArrayList<>(3); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 			attributes.add(INSTALL_COUNT);
 			values.add(Integer.valueOf(0));
 		}
 		if (isExpired()) {
 			if (attributes == null) {
-				attributes = new ArrayList<>(3);
+				attributes = new ArrayList<>(3); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 			}
 			// if breakpoint was auto-disabled, re-enable it
 			attributes.add(EXPIRED);
@@ -960,8 +960,8 @@ public abstract class JavaBreakpoint extends Breakpoint implements IJavaBreakpoi
 		}
 		String[] listeners = readBreakpointListeners();
 		if (listeners.length > 0) {
-			fBreakpointListenerIds = new ArrayList<>();
-			for (String listener : listeners) {
+			fBreakpointListenerIds = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
+			for (String listener : listeners) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				fBreakpointListenerIds.add(listener);
 			}
 		}
@@ -997,13 +997,13 @@ public abstract class JavaBreakpoint extends Breakpoint implements IJavaBreakpoi
 		}
 	}
 
-	protected String getMarkerMessage(int hitCount, int suspendPolicy) {
-		StringBuilder buff = new StringBuilder();
+	protected String getMarkerMessage(int hitCount, int suspendPolicy) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
+		StringBuilder buff = new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 		if (hitCount > 0) {
-			buff.append(MessageFormat
+			buff.append(MessageFormat //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 					.format(JDIDebugBreakpointMessages.JavaBreakpoint___Hit_Count___0___1,
 							new Object[] { Integer.toString(hitCount) }));
-			buff.append(' ');
+			buff.append(' '); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		}
 		String suspendPolicyString;
 		if (suspendPolicy == IJavaBreakpoint.SUSPEND_THREAD) {
@@ -1012,7 +1012,7 @@ public abstract class JavaBreakpoint extends Breakpoint implements IJavaBreakpoi
 			suspendPolicyString = JDIDebugBreakpointMessages.JavaBreakpoint__suspend_policy__VM__2;
 		}
 
-		buff.append(suspendPolicyString);
+		buff.append(suspendPolicyString); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		return buff.toString();
 	}
 
@@ -1108,7 +1108,7 @@ public abstract class JavaBreakpoint extends Breakpoint implements IJavaBreakpoi
 	protected void setInstalledIn(IJavaDebugTarget target, boolean installed) {
 		if (installed) {
 			if (fInstalledTargets == null) {
-				fInstalledTargets = new HashSet<>();
+				fInstalledTargets = new HashSet<>(); //FLLDCIM: MARK — M03 M3_SET_LANES NEW
 			}
 			fInstalledTargets.add(target);
 		} else {
@@ -1125,7 +1125,7 @@ public abstract class JavaBreakpoint extends Breakpoint implements IJavaBreakpoi
 	 * org.eclipse.jdt.debug.core.IJavaBreakpoint#setThreadFilter(org.eclipse
 	 * .jdt.debug.core.IJavaThread)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public void setThreadFilter(IJavaThread thread) throws CoreException {
 		if (!(thread.getDebugTarget() instanceof JDIDebugTarget)
 				|| !(thread instanceof JDIThread)) {
@@ -1154,9 +1154,9 @@ public abstract class JavaBreakpoint extends Breakpoint implements IJavaBreakpoi
 	 * org.eclipse.debug.core.IDebugEventSetListener#handleDebugEvents(org.eclipse
 	 * .debug.core.DebugEvent[])
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public void handleDebugEvents(DebugEvent[] events) {
-		for (DebugEvent event : events) {
+		for (DebugEvent event : events) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			if (event.getKind() == DebugEvent.TERMINATE) {
 				Object source = event.getSource();
 				if (!(source instanceof JDIThread)) {
@@ -1281,7 +1281,7 @@ public abstract class JavaBreakpoint extends Breakpoint implements IJavaBreakpoi
 	@Override
 	public void addInstanceFilter(IJavaObject object) throws CoreException {
 		if (fInstanceFilters == null) {
-			fInstanceFilters = new ArrayList<>();
+			fInstanceFilters = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 		}
 		if (!fInstanceFilters.contains(object)) {
 			fInstanceFilters.add(object);
@@ -1338,12 +1338,12 @@ public abstract class JavaBreakpoint extends Breakpoint implements IJavaBreakpoi
 	 * An attribute of this breakpoint has changed - recreate event requests in
 	 * all targets.
 	 */
-	protected void recreate() throws CoreException {
+	protected void recreate() throws CoreException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		DebugPlugin plugin = DebugPlugin.getDefault();
 		if (plugin != null) {
 			IDebugTarget[] targets = plugin.getLaunchManager()
 					.getDebugTargets();
-			for (IDebugTarget target : targets) {
+			for (IDebugTarget target : targets) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				MultiStatus multiStatus = new MultiStatus(
 						JDIDebugPlugin.getUniqueIdentifier(),
 						JDIDebugPlugin.ERROR,
@@ -1421,7 +1421,7 @@ public abstract class JavaBreakpoint extends Breakpoint implements IJavaBreakpoi
 	public synchronized void addBreakpointListener(String identifier)
 			throws CoreException {
 		if (fBreakpointListenerIds == null) {
-			fBreakpointListenerIds = new ArrayList<>();
+			fBreakpointListenerIds = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 		}
 		if (!fBreakpointListenerIds.contains(identifier)) {
 			fBreakpointListenerIds.add(identifier);
@@ -1434,12 +1434,12 @@ public abstract class JavaBreakpoint extends Breakpoint implements IJavaBreakpoi
 	 * marker.
 	 */
 	private void writeBreakpointListeners() throws CoreException {
-		StringBuilder buf = new StringBuilder();
+		StringBuilder buf = new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 		Iterator<String> iterator = fBreakpointListenerIds.iterator();
-		while (iterator.hasNext()) {
-			buf.append(iterator.next());
+		while (iterator.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
+			buf.append(iterator.next()); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			if (iterator.hasNext()) {
-				buf.append(","); //$NON-NLS-1$
+				buf.append(","); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			}
 		}
 		setAttribute(BREAKPOINT_LISTENERS, buf.toString());

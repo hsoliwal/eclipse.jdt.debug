@@ -75,7 +75,7 @@ public class HeapWalkingTests extends AbstractJDITest {
 	public void testGetInstanceCountsUnsupported() {
 		if(is16OrGreater()) {
 			try {
-				fVM.instanceCounts(new ArrayList<>());
+				fVM.instanceCounts(new ArrayList<>()); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 			}
 			catch(UnsupportedOperationException uoe) {
 				fail("Threw unsupported exception in 1.6 VM");
@@ -83,7 +83,7 @@ public class HeapWalkingTests extends AbstractJDITest {
 		}
 		else {
 			try {
-				fVM.instanceCounts(new ArrayList<>());
+				fVM.instanceCounts(new ArrayList<>()); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 				fail("No exception for non 1.6 VM");
 			}
 			catch(UnsupportedOperationException uoe) {}
@@ -94,13 +94,13 @@ public class HeapWalkingTests extends AbstractJDITest {
 	 * test to collect any referring instances can be collected for the specified class.
 	 * test is not applicable to non 1.6 VMs.
 	 */
-	public void testGetInstanceCounts() {
+	public void testGetInstanceCounts() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		if(!fVM.canGetInstanceInfo()) {
 			return;
 		}
 		triggerAndWait(fVM.eventRequestManager().createClassPrepareRequest(), "refclass3load", true);
 		triggerAndWait(fVM.eventRequestManager().createClassPrepareRequest(), "refclassload", true);
-		ArrayList<ReferenceType> list = new ArrayList<>(2);
+		ArrayList<ReferenceType> list = new ArrayList<>(2); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 		fClass = getClass("org.eclipse.debug.jdi.tests.program.RefClass1");
 		assertNotNull("RefClass should not be null", fClass);
 		list.add(fClass);
@@ -116,7 +116,7 @@ public class HeapWalkingTests extends AbstractJDITest {
 	/**
 	 * test to make sure instances throws an unsupported exception for non 1.6 VMs
 	 */
-	public void testGetInstancesUnsupported() {
+	public void testGetInstancesUnsupported() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		fClass = getClass("java.io.PrintStream");
 		assertNotNull("classs should not be null", fClass);
 		if(is16OrGreater()) {
@@ -175,7 +175,7 @@ public class HeapWalkingTests extends AbstractJDITest {
 	/**
 	 * test to make sure referringObjects throws an unsupported exception for non-1.6 VMs
 	 */
-	public void testGetReferringObjectsUnsupported() {
+	public void testGetReferringObjectsUnsupported() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		fClass = getMainClass();
 		assertNotNull("main class ref should not be null", fClass);
 		fObject = getObjectReference();

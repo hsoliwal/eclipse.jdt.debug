@@ -70,7 +70,7 @@ public class MultipleConnectionsTest extends AbstractDebugTest {
 	@Test
 	public void testDefaultBehaviour() throws CoreException, InterruptedException {
 		connector = new SocketListenConnector();
-		Map<String, String> arguments = new HashMap<>();
+		Map<String, String> arguments = new HashMap<>(); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
 		arguments.put("port", Integer.toString(port));
 		connector.connect(arguments, new NullProgressMonitor(), launch);
 		Thread.sleep(200);
@@ -85,7 +85,7 @@ public class MultipleConnectionsTest extends AbstractDebugTest {
 	@Test
 	public void testSingleConnectionBehaviour() throws CoreException, InterruptedException {
 		connector = new SocketListenConnector();
-		Map<String, String> arguments = new HashMap<>();
+		Map<String, String> arguments = new HashMap<>(); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
 		arguments.put("port", Integer.toString(port));
 		arguments.put("connectionLimit", "1");
 		connector.connect(arguments, new NullProgressMonitor(), launch);
@@ -102,7 +102,7 @@ public class MultipleConnectionsTest extends AbstractDebugTest {
 	@Test
 	public void testTwoConnectionsBehaviour() throws CoreException, InterruptedException {
 		connector = new SocketListenConnector();
-		Map<String, String> arguments = new HashMap<>();
+		Map<String, String> arguments = new HashMap<>(); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
 		arguments.put("port", Integer.toString(port));
 		arguments.put("connectionLimit", "2");
 		connector.connect(arguments, new NullProgressMonitor(), launch);
@@ -119,14 +119,14 @@ public class MultipleConnectionsTest extends AbstractDebugTest {
 	@Test
 	public void testUnlimitedConnectionsBehaviour() throws CoreException, InterruptedException {
 		connector = new SocketListenConnector();
-		Map<String, String> arguments = new HashMap<>();
+		Map<String, String> arguments = new HashMap<>(); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
 		arguments.put("port", Integer.toString(port));
 		arguments.put("connectionLimit", "0");
 		connector.connect(arguments, new NullProgressMonitor(), launch);
 		Thread.sleep(200);
 
-		for (int i = 0; i < 10; i++) {
-			assertTrue("connection " + i + " should succeed", connect());
+		for (int i = 0; i < 10; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
+			assertTrue("connection " + i + " should succeed", connect()); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		}
 	}
 
@@ -137,7 +137,7 @@ public class MultipleConnectionsTest extends AbstractDebugTest {
 		super.tearDown();
 	}
 
-	private boolean connect() {
+	private boolean connect() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		boolean result = true;
 		// Two try blocks to distinguish between exceptions from socket close (ignorable)
 		// and from dealing with the remote (errors)

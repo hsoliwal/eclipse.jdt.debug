@@ -26,9 +26,9 @@ public class CompositeId {
 	}
 
 	public static CompositeId fromString(String idString) {
-		ArrayList<String> parts= new ArrayList<>();
+		ArrayList<String> parts= new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 		int commaIndex= idString.indexOf(',');
-		while (commaIndex > 0) {
+		while (commaIndex > 0) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			int length= Integer.parseInt(idString.substring(0, commaIndex));
 			String part= idString.substring(commaIndex+1, commaIndex+1+length);
 			parts.add(part);
@@ -41,11 +41,11 @@ public class CompositeId {
 
 	@Override
 	public String toString() {
-		StringBuilder buf= new StringBuilder();
-		for (int i= 0; i < fParts.length; i++) {
-			buf.append(fParts[i].length());
-			buf.append(',');
-			buf.append(fParts[i]);
+		StringBuilder buf= new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
+		for (int i= 0; i < fParts.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
+			buf.append(fParts[i].length()); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+			buf.append(','); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+			buf.append(fParts[i]); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		}
 		return buf.toString();
 	}

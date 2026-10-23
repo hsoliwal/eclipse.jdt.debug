@@ -40,7 +40,7 @@ public class CurrentValueContext extends CurrentFrameContext {
     /* (non-Javadoc)
      * @see org.eclipse.jdt.internal.debug.ui.contentassist.IJavaDebugContentAssistContext#getType()
      */
-    @Override
+    @Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public IType getType() throws CoreException {
     	IJavaValue value = resolveValue();
     	if (value == null || value instanceof IJavaPrimitiveValue) {
@@ -69,7 +69,7 @@ public class CurrentValueContext extends CurrentFrameContext {
      * @return the value for which completions are to be computed for, or <code>null</code> if none
      * @throws CoreException if an exception occurs
      */
-    protected IJavaValue resolveValue() throws CoreException {
+    protected IJavaValue resolveValue() throws CoreException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
         IJavaStackFrame stackFrame= getStackFrame();
         if (stackFrame == null) {
             unableToResolveType();

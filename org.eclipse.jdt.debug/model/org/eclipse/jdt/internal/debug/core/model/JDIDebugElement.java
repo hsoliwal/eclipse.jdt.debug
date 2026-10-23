@@ -69,7 +69,7 @@ public abstract class JDIDebugElement extends DebugElement implements
 	/**
 	 * @see org.eclipse.core.runtime.IAdaptable#getAdapter(java.lang.Class)
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings("unchecked") //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	@Override
 	public <T> T getAdapter(Class<T> adapter) {
 		if (adapter == IDebugElement.class) {

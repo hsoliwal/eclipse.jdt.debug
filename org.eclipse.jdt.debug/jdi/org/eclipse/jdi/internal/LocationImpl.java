@@ -90,7 +90,7 @@ public class LocationImpl extends MirrorImpl implements Location {
 	/* (non-Javadoc)
 	 * @see java.lang.Comparable#compareTo(java.lang.Object)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public int compareTo(Location locatable) {
 		if (locatable == null || !locatable.getClass().equals(this.getClass())) {
 			throw new ClassCastException(

@@ -72,10 +72,10 @@ public class HcrChangedClassFilesTests extends AbstractDebugTest {
 	/**
 	 * Collects the class files detected by the HCR manager for all POST_BUILD events it receives.
 	 */
-	static class ChangedClassFilesCollector implements IResourceChangeListener {
+	static class ChangedClassFilesCollector implements IResourceChangeListener { //FLLDCIM: MARK — T07  IMPLEMENTS
 
-		final List<IResource> resources = Collections.synchronizedList(new ArrayList<>());
-		final List<String> names = Collections.synchronizedList(new ArrayList<>());
+		final List<IResource> resources = Collections.synchronizedList(new ArrayList<>()); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
+		final List<String> names = Collections.synchronizedList(new ArrayList<>()); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 		final AtomicInteger events = new AtomicInteger();
 		volatile Exception error;
 
@@ -153,7 +153,7 @@ public class HcrChangedClassFilesTests extends AbstractDebugTest {
 		doTestChangedClassFileDetected(true);
 	}
 
-	private void doTestChangedClassFileDetected(boolean nonLocal) throws Exception {
+	private void doTestChangedClassFileDetected(boolean nonLocal) throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IWorkspace workspace = ResourcesPlugin.getWorkspace();
 		IFile classFile = createProjectWithClassFile(nonLocal);
 
@@ -175,11 +175,11 @@ public class HcrChangedClassFilesTests extends AbstractDebugTest {
 			workspace.removeResourceChangeListener(collector);
 		}
 
-		assertNull("Failed to compute the changed class files: " + collector.error, collector.error);
+		assertNull("Failed to compute the changed class files: " + collector.error, collector.error); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		assertTrue("No POST_BUILD event was received at all", collector.events.get() > 0);
-		assertTrue("The changed class file was not detected, detected files: " + collector.resources,
+		assertTrue("The changed class file was not detected, detected files: " + collector.resources, //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 				collector.resources.contains(classFile));
-		assertTrue("Unexpected fully qualified type names detected: " + collector.names,
+		assertTrue("Unexpected fully qualified type names detected: " + collector.names, //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 				collector.names.contains(ClassTwo.class.getName()));
 	}
 
@@ -190,7 +190,7 @@ public class HcrChangedClassFilesTests extends AbstractDebugTest {
 	 *            if <code>true</code> the project is created in a file system which is not the local one
 	 * @return the created class file
 	 */
-	private IFile createProjectWithClassFile(boolean nonLocal) throws Exception {
+	private IFile createProjectWithClassFile(boolean nonLocal) throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IWorkspace workspace = ResourcesPlugin.getWorkspace();
 		String name = nonLocal ? "HcrNonLocalClassFiles" : "HcrLocalClassFiles";
 		project = workspace.getRoot().getProject(name);
@@ -217,9 +217,9 @@ public class HcrChangedClassFilesTests extends AbstractDebugTest {
 	 * Returns the byte code of the given (already compiled) type.
 	 */
 	private static byte[] getClassFileBytes(Class<?> clazz) throws IOException {
-		String resource = clazz.getName().replace('.', '/') + ".class";
+		String resource = clazz.getName().replace('.', '/') + ".class"; //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		try (InputStream stream = clazz.getClassLoader().getResourceAsStream(resource)) {
-			assertNotNull("Unable to find the class file of " + clazz.getName(), stream);
+			assertNotNull("Unable to find the class file of " + clazz.getName(), stream); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 			return stream.readAllBytes();
 		}
 	}
@@ -235,7 +235,7 @@ public class HcrChangedClassFilesTests extends AbstractDebugTest {
 	private static void delete(File file) {
 		File[] children = file.listFiles();
 		if (children != null) {
-			for (File child : children) {
+			for (File child : children) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				delete(child);
 			}
 		}

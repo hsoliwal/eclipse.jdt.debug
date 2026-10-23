@@ -27,16 +27,16 @@ public class JdwpString {
 	 * Reads String from Jdwp stream. Read a UTF where length has 4 bytes, and
 	 * not just 2. This code was based on the OTI Retysin source for readUTF.
 	 */
-	public static String read(DataInputStream in) throws IOException {
+	public static String read(DataInputStream in) throws IOException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		int utfSize = in.readInt();
 		byte utfBytes[] = new byte[utfSize];
 		in.readFully(utfBytes);
 		/* Guess at buffer size */
-		StringBuilder strBuffer = new StringBuilder(utfSize / 3 * 2);
-		for (int i = 0; i < utfSize;) {
+		StringBuilder strBuffer = new StringBuilder(utfSize / 3 * 2); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
+		for (int i = 0; i < utfSize;) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			int a = utfBytes[i] & 0xFF;
 			if ((a >> 4) < 12) {
-				strBuffer.append((char) a);
+				strBuffer.append((char) a); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				i++;
 			} else {
 				int b = utfBytes[i + 1] & 0xFF;
@@ -45,7 +45,7 @@ public class JdwpString {
 						throw new UTFDataFormatException(
 								JDWPMessages.JdwpString_Second_byte_input_does_not_match_UTF_Specification_1);
 					}
-					strBuffer.append((char) (((a & 0x1F) << 6) | (b & 0x3F)));
+					strBuffer.append((char) (((a & 0x1F) << 6) | (b & 0x3F))); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 					i += 2;
 				} else {
 					int c = utfBytes[i + 2] & 0xFF;
@@ -54,7 +54,7 @@ public class JdwpString {
 							throw new UTFDataFormatException(
 									JDWPMessages.JdwpString_Second_or_third_byte_input_does_not_mach_UTF_Specification_2);
 						}
-						strBuffer.append((char) (((a & 0x0F) << 12)
+						strBuffer.append((char) (((a & 0x0F) << 12) //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 								| ((b & 0x3F) << 6) | (c & 0x3F)));
 						i += 3;
 					} else {
@@ -71,13 +71,13 @@ public class JdwpString {
 	 * Writes String to Jdwp stream. Write a UTF where length has 4 bytes, and
 	 * not just 2. This code was based on OTI Retsin source for writeUTF.
 	 */
-	public static void write(String str, DataOutputStream out)
+	public static void write(String str, DataOutputStream out) //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 			throws IOException {
 		if (str == null)
 			throw new NullPointerException(
 					JDWPMessages.JdwpString_str_is_null_4);
 		int utfCount = 0;
-		for (int i = 0; i < str.length(); i++) {
+		for (int i = 0; i < str.length(); i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			int charValue = str.charAt(i);
 			if (charValue > 0 && charValue <= 127)
 				utfCount += 1;
@@ -88,7 +88,7 @@ public class JdwpString {
 		}
 		byte utfBytes[] = new byte[utfCount];
 		int utfIndex = 0;
-		for (int i = 0; i < str.length(); i++) {
+		for (int i = 0; i < str.length(); i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			int charValue = str.charAt(i);
 			if (charValue > 0 && charValue <= 127)
 				utfBytes[utfIndex++] = (byte) charValue;

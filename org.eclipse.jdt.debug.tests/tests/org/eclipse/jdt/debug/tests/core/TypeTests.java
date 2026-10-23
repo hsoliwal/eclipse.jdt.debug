@@ -34,11 +34,11 @@ public class TypeTests extends AbstractDebugTest {
 		super(name);
 	}
 
-	public void testDeclaringTypes() throws Exception {
+	public void testDeclaringTypes() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IJavaType[] types = new IJavaType[3];
 		int index = 0;
 		String typeName = "Breakpoints";
-		List<IJavaLineBreakpoint> bps = new ArrayList<>();
+		List<IJavaLineBreakpoint> bps = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 		// main
 		bps.add(createLineBreakpoint(55, typeName));
 		// threading
@@ -50,7 +50,7 @@ public class TypeTests extends AbstractDebugTest {
 		try {
 			thread= launchToBreakpoint(typeName);
 			assertNotNull("Breakpoint not hit within timeout period", thread);
-			while (!bps.isEmpty()) {
+			while (!bps.isEmpty()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				IBreakpoint hit = getBreakpoint(thread);
 				assertNotNull("suspended, but not by breakpoint", hit);
 				assertTrue("hit un-registered breakpoint", bps.contains(hit));
@@ -83,9 +83,9 @@ public class TypeTests extends AbstractDebugTest {
 		}
 	}
 
-    public void testClassLoader() throws Exception {
+    public void testClassLoader() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
         String typeName = "Breakpoints";
-        List<IJavaLineBreakpoint> bps = new ArrayList<>();
+        List<IJavaLineBreakpoint> bps = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
         // instance method
 		bps.add(createLineBreakpoint(84, typeName));
         bps.add(createLineBreakpoint(81, typeName));
@@ -96,7 +96,7 @@ public class TypeTests extends AbstractDebugTest {
         try {
             thread= launchToBreakpoint(typeName);
             assertNotNull("Breakpoint not hit within timeout period", thread);
-            while (!bps.isEmpty()) {
+            while (!bps.isEmpty()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
                 IBreakpoint hit = getBreakpoint(thread);
                 assertNotNull("suspended, but not by breakpoint", hit);
                 assertTrue("hit un-registered breakpoint", bps.contains(hit));

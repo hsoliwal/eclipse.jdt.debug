@@ -40,7 +40,7 @@ public class TestInstanceRetrieval extends AbstractDebugTest {
 	/**
 	 * Test the logical structure for a list.
 	 */
-	public void testGetInstances() throws Exception {
+	public void testGetInstances() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String typeName = "java6.AllInstancesTests";
 		createLineBreakpoint(64, typeName);
 		IJavaLineBreakpoint bp2 = createLineBreakpoint(66, typeName);
@@ -67,7 +67,7 @@ public class TestInstanceRetrieval extends AbstractDebugTest {
 
 				assertEquals("Wrong instance count", 13, instanceCount);
 				assertEquals("Wrong number of instances", 13, instances.length);
-				for (int i = 0; i < instances.length; i++) {
+				for (int i = 0; i < instances.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 					assertEquals("Instance is of unexpected type", refType, instances[i].getJavaType());
 				}
 
@@ -85,7 +85,7 @@ public class TestInstanceRetrieval extends AbstractDebugTest {
 
 				assertEquals("Wrong instance count", 1002, instanceCount);
 				assertEquals("Wrong number of instances", 100, instances.length);
-				for (int i = 0; i < instances.length; i++) {
+				for (int i = 0; i < instances.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 					assertEquals("Instance is of unexpected type", refType, instances[i].getJavaType());
 				}
 			}

@@ -38,7 +38,7 @@ public class JavaVariablesDetailPaneFactory implements IDetailPaneFactory {
 
 	@Override
 	public Set<String> getDetailPaneTypes(IStructuredSelection selection) {
-		HashSet<String> set = new HashSet<>();
+		HashSet<String> set = new HashSet<>(); //FLLDCIM: MARK — M03 M3_SET_LANES NEW
 		if (selection.size() == 1) {
 			IJavaVariable b = (IJavaVariable) selection.getFirstElement();
 			if (b != null) {
@@ -79,7 +79,7 @@ public class JavaVariablesDetailPaneFactory implements IDetailPaneFactory {
 
 	private Map<String, String> getNameMap() {
 		if (fNameMap == null) {
-			fNameMap = new HashMap<>();
+			fNameMap = new HashMap<>(); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
 			fNameMap.put(JavaVariablesDetailPane.JAVA_VARIABLE_DETAIL_PANE_VARIABLES, PropertyPageMessages.JavaVariableDetailsPane_settings);
 		}
 		return fNameMap;

@@ -133,7 +133,7 @@ public class ObjectReferenceImpl extends ValueImpl implements ObjectReference {
 	/**
 	 * @return Returns monitor info.
 	 */
-	private MonitorInfo monitorInfo() throws IncompatibleThreadStateException {
+	private MonitorInfo monitorInfo() throws IncompatibleThreadStateException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		if (!virtualMachine().canGetMonitorInfo()) {
 			throw new UnsupportedOperationException();
 		}
@@ -156,8 +156,8 @@ public class ObjectReferenceImpl extends ValueImpl implements ObjectReference {
 			result.owner = ThreadReferenceImpl.read(this, replyData);
 			result.entryCount = readInt("entry count", replyData); //$NON-NLS-1$
 			int nrOfWaiters = readInt("nr of waiters", replyData); //$NON-NLS-1$
-			result.waiters = new ArrayList<>(nrOfWaiters);
-			for (int i = 0; i < nrOfWaiters; i++)
+			result.waiters = new ArrayList<>(nrOfWaiters); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
+			for (int i = 0; i < nrOfWaiters; i++) //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				result.waiters.add(ThreadReferenceImpl.read(this, replyData));
 			return result;
 		} catch (IOException e) {
@@ -202,7 +202,7 @@ public class ObjectReferenceImpl extends ValueImpl implements ObjectReference {
 	 */
 	@Override
 	public Value getValue(Field field) {
-		ArrayList<Field> list = new ArrayList<>(1);
+		ArrayList<Field> list = new ArrayList<>(1); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 		list.add(field);
 		return getValues(list).get(field);
 	}
@@ -217,7 +217,7 @@ public class ObjectReferenceImpl extends ValueImpl implements ObjectReference {
 	 *
 	 * @since 3.3
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public List<ObjectReference> referringObjects(long maxReferrers)
 			throws UnsupportedOperationException, IllegalArgumentException {
 		try {
@@ -252,8 +252,8 @@ public class ObjectReferenceImpl extends ValueImpl implements ObjectReference {
 			if (max > 0 && elements > max) {
 				elements = max;
 			}
-			ArrayList<ObjectReference> list = new ArrayList<>();
-			for (int i = 0; i < elements; i++) {
+			ArrayList<ObjectReference> list = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
+			for (int i = 0; i < elements; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				list.add((ObjectReference)ValueImpl.readWithTag(this, replyData));
 			}
 			return list;
@@ -269,11 +269,11 @@ public class ObjectReferenceImpl extends ValueImpl implements ObjectReference {
 	 * @return Returns the value of multiple instance and/or static fields in
 	 *         this object.
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public Map<Field, Value> getValues(List<? extends Field> allFields) {
 		// if the field list is empty, nothing to do.
 		if (allFields.isEmpty()) {
-			return new HashMap<>();
+			return new HashMap<>(); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
 		}
 		// Note that this information should not be cached.
 		initJdwpRequest();
@@ -285,12 +285,12 @@ public class ObjectReferenceImpl extends ValueImpl implements ObjectReference {
 			 * Distinguish static fields from non-static fields: For static
 			 * fields ReferenceTypeImpl.getValues() must be used.
 			 */
-			List<Field> staticFields = new ArrayList<>();
-			List<FieldImpl> nonStaticFields = new ArrayList<>();
+			List<Field> staticFields = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
+			List<FieldImpl> nonStaticFields = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 
 			// Separate static and non-static fields.
 			int allFieldsSize = allFields.size();
-			for (int i = 0; i < allFieldsSize; i++) {
+			for (int i = 0; i < allFieldsSize; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				FieldImpl field = (FieldImpl) allFields.get(i);
 				checkVM(field);
 				if (field.isStatic())
@@ -302,7 +302,7 @@ public class ObjectReferenceImpl extends ValueImpl implements ObjectReference {
 			// First get values for the static fields.
 			Map<Field, Value> resultMap;
 			if (staticFields.isEmpty()) {
-				resultMap = new HashMap<>();
+				resultMap = new HashMap<>(); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
 			} else {
 				resultMap = referenceType().getValues(staticFields);
 			}
@@ -316,7 +316,7 @@ public class ObjectReferenceImpl extends ValueImpl implements ObjectReference {
 			int nonStaticFieldsSize = nonStaticFields.size();
 			write(this, outData);
 			writeInt(nonStaticFieldsSize, "size", outData); //$NON-NLS-1$
-			for (int i = 0; i < nonStaticFieldsSize; i++) {
+			for (int i = 0; i < nonStaticFieldsSize; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				FieldImpl field = nonStaticFields.get(i);
 				field.write(this, outData);
 			}
@@ -331,7 +331,7 @@ public class ObjectReferenceImpl extends ValueImpl implements ObjectReference {
 				throw new InternalError(
 						JDIMessages.ObjectReferenceImpl_Retrieved_a_different_number_of_values_from_the_VM_than_requested_1);
 
-			for (int i = 0; i < nrOfElements; i++) {
+			for (int i = 0; i < nrOfElements; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				resultMap.put(nonStaticFields.get(i),
 						ValueImpl.readWithTag(this, replyData));
 			}
@@ -386,7 +386,7 @@ public class ObjectReferenceImpl extends ValueImpl implements ObjectReference {
 	 *
 	 * @return Returns a Value mirror of the invoked method's return value.
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public Value invokeMethod(ThreadReference thread, Method method, List<? extends Value> arguments, int options) throws InvalidTypeException,
 			ClassNotLoadedException, IncompatibleThreadStateException,
 			InvocationException {
@@ -424,7 +424,7 @@ public class ObjectReferenceImpl extends ValueImpl implements ObjectReference {
 
 			writeInt(checkedArguments.size(), "size", outData); //$NON-NLS-1$
 			Iterator<Value> iter = checkedArguments.iterator();
-			while (iter.hasNext()) {
+			while (iter.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				ValueImpl elt = (ValueImpl) iter.next();
 				if (elt != null) {
 					elt.writeWithTag(this, outData);
@@ -481,7 +481,7 @@ public class ObjectReferenceImpl extends ValueImpl implements ObjectReference {
 	 * @return Returns if this object has been garbage collected in the target
 	 *         VM.
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public boolean isCollected() {
 		// Note that this information should not be cached.
 		initJdwpRequest();
@@ -518,7 +518,7 @@ public class ObjectReferenceImpl extends ValueImpl implements ObjectReference {
 	/**
 	 * @return Returns the ReferenceType that mirrors the type of this object.
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public ReferenceType referenceType() {
 		if (fReferenceType != null) {
 			return fReferenceType;
@@ -550,7 +550,7 @@ public class ObjectReferenceImpl extends ValueImpl implements ObjectReference {
 	/**
 	 * Sets the value of a given instance or static field in this object.
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public void setValue(Field field, Value value) throws InvalidTypeException,
 			ClassNotLoadedException {
 		// Note that this information should not be cached.
@@ -602,7 +602,7 @@ public class ObjectReferenceImpl extends ValueImpl implements ObjectReference {
 	 * @return Returns string with value of ID.
 	 */
 	public String idString() {
-		return "(id=" + fObjectID + ")"; //$NON-NLS-1$ //$NON-NLS-2$
+		return "(id=" + fObjectID + ")"; //$NON-NLS-1$ //$NON-NLS-2$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 	}
 
 	/**
@@ -611,9 +611,9 @@ public class ObjectReferenceImpl extends ValueImpl implements ObjectReference {
 	@Override
 	public String toString() {
 		try {
-			return type().toString() + " " + idString(); //$NON-NLS-1$
+			return type().toString() + " " + idString(); //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		} catch (ObjectCollectedException e) {
-			return JDIMessages.ObjectReferenceImpl__Garbage_Collected__ObjectReference__8
+			return JDIMessages.ObjectReferenceImpl__Garbage_Collected__ObjectReference__8 //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 					+ idString();
 		} catch (Exception e) {
 			return fDescription;
@@ -641,7 +641,7 @@ public class ObjectReferenceImpl extends ValueImpl implements ObjectReference {
 	/**
 	 * @return Reads JDWP representation and returns new instance.
 	 */
-	public static ObjectReferenceImpl readObjectRefWithTag(MirrorImpl target,
+	public static ObjectReferenceImpl readObjectRefWithTag(MirrorImpl target, //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 			DataInputStream in) throws IOException {
 		byte objectTag = target.readByte("object tag", JdwpID.tagMap(), in); //$NON-NLS-1$
 		switch (objectTag) {
@@ -663,7 +663,7 @@ public class ObjectReferenceImpl extends ValueImpl implements ObjectReference {
 			return ThreadReferenceImpl.read(target, in);
 		}
 		throw new InternalException(
-				JDIMessages.ObjectReferenceImpl_Invalid_ObjectID_tag_encountered___9
+				JDIMessages.ObjectReferenceImpl_Invalid_ObjectID_tag_encountered___9 //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 						+ objectTag);
 	}
 

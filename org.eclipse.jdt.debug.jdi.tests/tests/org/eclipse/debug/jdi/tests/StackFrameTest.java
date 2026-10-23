@@ -60,7 +60,7 @@ public class StackFrameTest extends AbstractJDITest {
 	/**
 	 * Test JDI equals() and hashCode().
 	 */
-	public void testJDIEquality() {
+	public void testJDIEquality() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		StackFrame sameFrame = getFrame(RUN_FRAME_OFFSET);
 		StackFrame otherFrame = getFrame(0);
 
@@ -88,7 +88,7 @@ public class StackFrameTest extends AbstractJDITest {
 	 * Test JDI setValue(LocalVariable, Value), getValue(LocalVariable) and
 	 * getValues(List).
 	 */
-	public void testJDISetGetValue() {
+	public void testJDISetGetValue() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		// setValue
 		ThreadReference thread = fVM.allThreads().get(0);
 		LocalVariable var = getLocalVariable();
@@ -173,7 +173,7 @@ public class StackFrameTest extends AbstractJDITest {
 
 		LocalVariable var;
 		int i = 0;
-		do {
+		do { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			var = (LocalVariable) vars.get(i++);
 		} while (!var.name().equals("t"));
 		assertEquals("3", getLocalVariable(), var);

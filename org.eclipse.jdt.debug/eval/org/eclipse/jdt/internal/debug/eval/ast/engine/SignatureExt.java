@@ -22,7 +22,7 @@ import org.eclipse.jdt.internal.compiler.util.Util;
 @SuppressWarnings("restriction")
 public class SignatureExt {
 
-	public static char[][] getTypeSuperClassInterfaces(char[] typeSignature)
+	public static char[][] getTypeSuperClassInterfaces(char[] typeSignature) //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 			throws IllegalArgumentException {
 		try {
 			int length = typeSignature.length;
@@ -32,7 +32,7 @@ public class SignatureExt {
 			int i = 0;
 			if (typeSignature[0] == Signature.C_GENERIC_START) {
 				i++; // leading '<'
-				while (i < length
+				while (i < length //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 						&& typeSignature[i] != Signature.C_GENERIC_END) {
 					i = CharOperation.indexOf(Signature.C_COLON, typeSignature,
 							i);
@@ -40,7 +40,7 @@ public class SignatureExt {
 						throw new IllegalArgumentException();
 					}
 					// iterate over bounds
-					nextBound: while (typeSignature[i] == ':') {
+					nextBound: while (typeSignature[i] == ':') { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 						i++; // skip colon
 						if (typeSignature[i] == ':') {
 							continue nextBound; // empty bound
@@ -54,8 +54,8 @@ public class SignatureExt {
 				}
 				i++; // trailing '>'
 			}
-			ArrayList<char[]> superList = new ArrayList<>();
-			while (i < length) {
+			ArrayList<char[]> superList = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
+			while (i < length) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				int superStart = i;
 				i = Util.scanTypeSignature(typeSignature, i);
 				i++;

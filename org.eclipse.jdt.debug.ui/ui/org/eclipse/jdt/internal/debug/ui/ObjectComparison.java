@@ -59,14 +59,14 @@ public final class ObjectComparison {
 	 * @return Returns actual value of the object in string format for valid objects else returns combination object's name and reference identity as
 	 *         presented in variable view
 	 */
-	@SuppressWarnings("nls")
+	@SuppressWarnings("nls") //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public static String objectValueExtraction(IJavaValue value) throws DebugException {
 		String refType1 = value.getReferenceTypeName();
 		List<String> interfaceCheck = getInterfaces(refType1);
 		if (interfaceCheck.contains("java.lang.CharSequence")) {
 			return stringValueExtraction((IJavaObject) value);
 		}
-		for (IVariable v : value.getVariables()) {
+		for (IVariable v : value.getVariables()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			if (v.getName().equalsIgnoreCase("value")) {
 				return v.getValue().getValueString();
 			}
@@ -103,8 +103,8 @@ public final class ObjectComparison {
 	 * @throws DebugException
 	 */
 	public static Map<IJavaVariable, Object> setExtraction(List<IStructuredSelection> selections) throws DebugException {
-		Map<IJavaVariable, Object> result = new HashMap<>();
-		for (Object selection : selections) {
+		Map<IJavaVariable, Object> result = new HashMap<>(); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
+		for (Object selection : selections) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			if (selection instanceof IJavaVariable selectedObject) {
 				if (selectedObject.getValue() instanceof IJavaObject javaObject) {
 					List<String> contents = setElementsExtraction(javaObject);
@@ -125,10 +125,10 @@ public final class ObjectComparison {
 	 */
 	@SuppressWarnings("nls")
 	public static List<String> setElementsExtraction(IJavaObject javaObject1) throws DebugException {
-		List<String> contents = new ArrayList<>();
+		List<String> contents = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 		IJavaThread thread = getSuspendedThread(javaObject1);
 		IJavaValue toArray = javaObject1.sendMessage("toArray", "()[Ljava/lang/Object;", null, thread, false);
-		for (IVariable ob : toArray.getVariables()) {
+		for (IVariable ob : toArray.getVariables()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			contents.add(objectValueExtraction((IJavaValue) ob.getValue()));
 		}
 		return contents;
@@ -142,16 +142,16 @@ public final class ObjectComparison {
 	 * @throws DebugException
 	 * @return Returns a Map of comparison result for given IJavaVariable keys
 	 */
-	@SuppressWarnings({ "unchecked", "nls" })
+	@SuppressWarnings({ "unchecked", "nls" }) //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public static Map<IJavaVariable, Object> compareCustomObjects(Map<IJavaVariable, Object> compareResults) throws DebugException {
-		Map<IJavaVariable, Object> result = new HashMap<>();
-		for (Map.Entry<IJavaVariable, Object> entry1 : compareResults.entrySet()) {
-			Map<String, Object> properties = new HashMap<>();
+		Map<IJavaVariable, Object> result = new HashMap<>(); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
+		for (Map.Entry<IJavaVariable, Object> entry1 : compareResults.entrySet()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
+			Map<String, Object> properties = new HashMap<>(); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
 			if (entry1.getValue() instanceof String obj1Value) { // Types that doesn't have any fields
 				IJavaVariable key1 = entry1.getKey();
-				Set<String> same = new HashSet<>();
-				Set<String> diff = new HashSet<>();
-				for (Map.Entry<IJavaVariable, Object> entrySub : compareResults.entrySet()) {
+				Set<String> same = new HashSet<>(); //FLLDCIM: MARK — M03 M3_SET_LANES NEW
+				Set<String> diff = new HashSet<>(); //FLLDCIM: MARK — M03 M3_SET_LANES NEW
+				for (Map.Entry<IJavaVariable, Object> entrySub : compareResults.entrySet()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 					IJavaVariable key2 = entrySub.getKey();
 					if (!key1.equals(key2)) {
 						String obj1Value2 = entrySub.getValue().toString();
@@ -170,20 +170,20 @@ public final class ObjectComparison {
 
 				Map<String, String> objectFields1 = (Map<String, String>) entry1.getValue();
 				IJavaVariable key1 = entry1.getKey();
-				properties = new HashMap<>();
-				Map<String, Set<String>> fieldSame = new HashMap<>();
-				Map<String, Set<String>> filedDiff = new HashMap<>();
-				Map<String, String> fieldsStatus = new HashMap<>();
-				for (String keys : objectFields1.keySet()) {
+				properties = new HashMap<>(); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
+				Map<String, Set<String>> fieldSame = new HashMap<>(); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
+				Map<String, Set<String>> filedDiff = new HashMap<>(); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
+				Map<String, String> fieldsStatus = new HashMap<>(); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
+				for (String keys : objectFields1.keySet()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 					fieldsStatus.put(keys, null);
-					fieldSame.put(keys, new HashSet<>());
-					filedDiff.put(keys, new HashSet<>());
+					fieldSame.put(keys, new HashSet<>()); //FLLDCIM: MARK — M03 M3_SET_LANES NEW
+					filedDiff.put(keys, new HashSet<>()); //FLLDCIM: MARK — M03 M3_SET_LANES NEW
 				}
-				for (Map.Entry<IJavaVariable, Object> entrySub : compareResults.entrySet()) {
+				for (Map.Entry<IJavaVariable, Object> entrySub : compareResults.entrySet()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 					IJavaVariable key2 = entrySub.getKey();
 					if (!key1.equals(key2)) {
 						Map<String, String> objectFields2 = (Map<String, String>) entrySub.getValue();
-						for (String keys : objectFields1.keySet()) {
+						for (String keys : objectFields1.keySet()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 							String val1 = objectFields1.get(keys);
 							String val2 = objectFields2.get(keys);
 							if (val1.equals(val2)) {
@@ -194,7 +194,7 @@ public final class ObjectComparison {
 						}
 					}
 				}
-				for (String key : fieldsStatus.keySet()) {
+				for (String key : fieldsStatus.keySet()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 					Set<String> same = fieldSame.get(key);
 					Set<String> diff = filedDiff.get(key);
 					if (same.isEmpty() && !diff.isEmpty()) {
@@ -222,16 +222,16 @@ public final class ObjectComparison {
 	 * @throws DebugException
 	 * @return returns a Map of comparison result details
 	 */
-	public static Map<IJavaVariable, Object> compareObjects(Map<IJavaVariable, Object> compareResults) throws DebugException {
-		Map<IJavaVariable, Object> result = new HashMap<>();
-		for (Map.Entry<IJavaVariable, Object> entry1 : compareResults.entrySet()) {
+	public static Map<IJavaVariable, Object> compareObjects(Map<IJavaVariable, Object> compareResults) throws DebugException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
+		Map<IJavaVariable, Object> result = new HashMap<>(); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
+		for (Map.Entry<IJavaVariable, Object> entry1 : compareResults.entrySet()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			String val1 = entry1.getValue().toString();
 			IJavaVariable key1 = entry1.getKey();
 			String refType1 = key1.getValue().getReferenceTypeName();
-			Map<String, Object> properties = new HashMap<>();
-			List<String> sameList = new ArrayList<>();
-			List<String> diffList = new ArrayList<>();
-			for (Map.Entry<IJavaVariable, Object> entrySub : compareResults.entrySet()) {
+			Map<String, Object> properties = new HashMap<>(); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
+			List<String> sameList = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
+			List<String> diffList = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
+			for (Map.Entry<IJavaVariable, Object> entrySub : compareResults.entrySet()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				IJavaVariable key2 = entrySub.getKey();
 				if (!key1.equals(key2)) {
 					String val2 = entrySub.getValue().toString();
@@ -268,8 +268,8 @@ public final class ObjectComparison {
 	 * @return Returns a Map of IJavaVariable and field value pair
 	 */
 	public static Map<IJavaVariable, Object> extractCustomObjects(List<IStructuredSelection> selections) throws Exception {
-		Map<IJavaVariable, Object> result = new HashMap<>();
-		for (Object selection : selections) {
+		Map<IJavaVariable, Object> result = new HashMap<>(); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
+		for (Object selection : selections) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			if (selection instanceof IJavaVariable selectedObject) {
 				if (selectedObject.getValue() instanceof IJavaObject javaObject1) {
 					if (javaObject1.getVariables().length == 0) { // No fields for comparison
@@ -293,8 +293,8 @@ public final class ObjectComparison {
 	 * @throws DebugException
 	 */
 	public static Map<IJavaVariable, Object> customObjectsReferencesExtraction(List<IStructuredSelection> selections) throws DebugException {
-		Map<IJavaVariable, Object> result = new HashMap<>();
-		for (Object selection : selections) {
+		Map<IJavaVariable, Object> result = new HashMap<>(); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
+		for (Object selection : selections) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			if (selection instanceof IJavaVariable selectedObject) {
 				if (selectedObject.getValue() instanceof IJavaObject javaObject) {
 					result.put(selectedObject, javaObject);
@@ -313,10 +313,10 @@ public final class ObjectComparison {
 	 *         reference
 	 */
 	public static boolean objectsRefCheck(Map<IJavaVariable, Object> compareResults) {
-		for (Map.Entry<IJavaVariable, Object> entry1 : compareResults.entrySet()) {
+		for (Map.Entry<IJavaVariable, Object> entry1 : compareResults.entrySet()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			String val1 = entry1.getValue().toString();
 			IJavaVariable key1 = entry1.getKey();
-			for (Map.Entry<IJavaVariable, Object> entrySub : compareResults.entrySet()) {
+			for (Map.Entry<IJavaVariable, Object> entrySub : compareResults.entrySet()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				IJavaVariable key2 = entrySub.getKey();
 				if (!key1.equals(key2)) {
 					String val2 = entrySub.getValue().toString();
@@ -338,8 +338,8 @@ public final class ObjectComparison {
 	 * @return Returns a Map of IJavaVariable and field value pair
 	 */
 	public static Map<String, String> customObjectValueExtraction(IJavaObject javaObject1) throws DebugException {
-		Map<String, String> contents = new HashMap<>();
-		for (IVariable ob : javaObject1.getVariables()) {
+		Map<String, String> contents = new HashMap<>(); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
+		for (IVariable ob : javaObject1.getVariables()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			String content;
 			if (ob.getValue() instanceof IJavaObject javaObj) {
 				content = objectValueExtraction(javaObj);
@@ -360,8 +360,8 @@ public final class ObjectComparison {
 	 * @throws DebugException
 	 */
 	public static Map<IJavaVariable, Object> extractOtherObjects(List<IStructuredSelection> selections) throws DebugException {
-		Map<IJavaVariable, Object> result = new HashMap<>();
-		for (Object selection : selections) {
+		Map<IJavaVariable, Object> result = new HashMap<>(); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
+		for (Object selection : selections) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			if (selection instanceof IJavaVariable selectedObject) {
 				if (selectedObject.getValue() instanceof IJavaObject javaObject1) {
 					String contents = objectValueExtraction(javaObject1);
@@ -381,8 +381,8 @@ public final class ObjectComparison {
 	 * @throws DebugException
 	 */
 	public static Map<IJavaVariable, Object> arrayExtraction(List<IStructuredSelection> selections) throws DebugException {
-		Map<IJavaVariable, Object> result = new HashMap<>();
-		for (Object selection : selections) {
+		Map<IJavaVariable, Object> result = new HashMap<>(); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
+		for (Object selection : selections) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			if (selection instanceof IJavaVariable selectedObject) {
 				List<String> contents = arrayElementsExtraction(selectedObject);
 				result.put(selectedObject, contents);
@@ -400,9 +400,9 @@ public final class ObjectComparison {
 	 * @return Returns a List of array elements
 	 */
 	public static List<String> arrayElementsExtraction(IJavaVariable selectedObject1) throws DebugException {
-		List<String> arrayElements1 = new ArrayList<>();
+		List<String> arrayElements1 = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 		if (selectedObject1.getValue() instanceof IJavaValue javaVal1) {
-			for (IVariable jv : javaVal1.getVariables()) {
+			for (IVariable jv : javaVal1.getVariables()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				String val1 = objectValueExtraction((IJavaValue) jv.getValue());
 				arrayElements1.add(val1);
 			}
@@ -421,7 +421,7 @@ public final class ObjectComparison {
 	 *         from list2
 	 */
 	public static <T> boolean listContentsCheck(List<T> l1, List<T> l2) {
-		for (T t : l1) {
+		for (T t : l1) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			if (!l2.contains(t)) {
 				return false;
 			}
@@ -437,16 +437,16 @@ public final class ObjectComparison {
 	 * @throws DebugException
 	 * @return Returns a Map of comparison result for given IJavaVariable
 	 */
-	public static Map<IJavaVariable, Object> stringCompare(Map<IJavaVariable, Object> compareResults) throws DebugException {
-		Map<IJavaVariable, Object> result = new HashMap<>();
-		for (Map.Entry<IJavaVariable, Object> entry1 : compareResults.entrySet()) {
+	public static Map<IJavaVariable, Object> stringCompare(Map<IJavaVariable, Object> compareResults) throws DebugException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
+		Map<IJavaVariable, Object> result = new HashMap<>(); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
+		for (Map.Entry<IJavaVariable, Object> entry1 : compareResults.entrySet()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			String val1 = (String) entry1.getValue();
 			IJavaVariable key1 = entry1.getKey();
 			String refType1 = key1.getValue().getReferenceTypeName();
-			Map<String, Object> properties = new HashMap<>();
-			List<String> sameList = new ArrayList<>();
-			List<String> diffList = new ArrayList<>();
-			for (Map.Entry<IJavaVariable, Object> entrySub : compareResults.entrySet()) {
+			Map<String, Object> properties = new HashMap<>(); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
+			List<String> sameList = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
+			List<String> diffList = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
+			for (Map.Entry<IJavaVariable, Object> entrySub : compareResults.entrySet()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				IJavaVariable key2 = entrySub.getKey();
 				if (!key1.equals(key2)) {
 					String val2 = (String) entrySub.getValue();
@@ -483,21 +483,21 @@ public final class ObjectComparison {
 	 * @throws DebugException
 	 * @return Returns a Map of comparison result for given IJavaVariable
 	 */
-	@SuppressWarnings({ "unchecked", "nls" })
+	@SuppressWarnings({ "unchecked", "nls" }) //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public static Map<IJavaVariable, Object> compareSelectedLists(Map<IJavaVariable, Object> compareResults, String interfaceType) throws DebugException {
-		Map<IJavaVariable, Object> result = new HashMap<>();
-		for (Map.Entry<IJavaVariable, Object> entry1 : compareResults.entrySet()) {
+		Map<IJavaVariable, Object> result = new HashMap<>(); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
+		for (Map.Entry<IJavaVariable, Object> entry1 : compareResults.entrySet()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			List<String> listV1 = (List<String>) entry1.getValue();
 			int size = listV1.size();
 			IJavaVariable key1 = entry1.getKey();
-			Map<String, String> missingData = new HashMap<>();
+			Map<String, String> missingData = new HashMap<>(); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
 			String refType1 = key1.getValue().getReferenceTypeName();
-			Map<String, Object> properties = new HashMap<>();
-			List<String> differencesMain = new ArrayList<>();
-			for (Map.Entry<IJavaVariable, Object> entrySub : compareResults.entrySet()) {
+			Map<String, Object> properties = new HashMap<>(); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
+			List<String> differencesMain = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
+			for (Map.Entry<IJavaVariable, Object> entrySub : compareResults.entrySet()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				IJavaVariable key2 = entrySub.getKey();
 				if (!key1.equals(key2)) {
-					List<String> differencesCurrent = new ArrayList<>();
+					List<String> differencesCurrent = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 					List<String> listV2 = (List<String>) entrySub.getValue();
 					String message;
 					if (listV1.equals(listV2)) {
@@ -514,7 +514,7 @@ public final class ObjectComparison {
 						}
 						continue;
 					} else {
-						for (String item : listV2) {
+						for (String item : listV2) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 							if (!listV1.contains(item)) {
 								if (!differencesCurrent.contains(item)) {
 									differencesCurrent.add(item);
@@ -523,7 +523,7 @@ public final class ObjectComparison {
 						}
 						if (!differencesCurrent.isEmpty()) {
 							missingData.put(key2.getName(), differencesCurrent.toString());
-							differencesMain = new ArrayList<>(differencesCurrent);
+							differencesMain = new ArrayList<>(differencesCurrent); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 						}
 					}
 				}
@@ -549,23 +549,23 @@ public final class ObjectComparison {
 	 * @throws DebugException
 	 * @return Returns a Map of comparison result for given IJavaVariable
 	 */
-	@SuppressWarnings({ "nls", "unchecked" })
+	@SuppressWarnings({ "nls", "unchecked" }) //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public static Map<IJavaVariable, Object> compareSelectedMaps(Map<IJavaVariable, Object> compareResults) throws DebugException {
-		Map<IJavaVariable, Object> result = new HashMap<>();
-		for (Map.Entry<IJavaVariable, Object> entry1 : compareResults.entrySet()) {
+		Map<IJavaVariable, Object> result = new HashMap<>(); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
+		for (Map.Entry<IJavaVariable, Object> entry1 : compareResults.entrySet()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			Map<String, Object> current = (Map<String, Object>) entry1.getValue();
 			List<String> listV1 = (List<String>) current.get(VALUESET_1);
 			IJavaVariable key1 = entry1.getKey();
 			List<String> keyList1 = (List<String>) current.get(KEYSET_1);
-			Map<String, Object> properties = new HashMap<>();
-			Map<String, String> missingKeyData = new HashMap<>();
-			Map<String, String> missingValData = new HashMap<>();
-			Set<String> keySimilarities = new HashSet<>();
-			Set<String> valueSimilarities = new HashSet<>();
-			Set<String> keyDifferences = new HashSet<>();
-			Set<String> valueDifferences = new HashSet<>();
+			Map<String, Object> properties = new HashMap<>(); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
+			Map<String, String> missingKeyData = new HashMap<>(); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
+			Map<String, String> missingValData = new HashMap<>(); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
+			Set<String> keySimilarities = new HashSet<>(); //FLLDCIM: MARK — M03 M3_SET_LANES NEW
+			Set<String> valueSimilarities = new HashSet<>(); //FLLDCIM: MARK — M03 M3_SET_LANES NEW
+			Set<String> keyDifferences = new HashSet<>(); //FLLDCIM: MARK — M03 M3_SET_LANES NEW
+			Set<String> valueDifferences = new HashSet<>(); //FLLDCIM: MARK — M03 M3_SET_LANES NEW
 
-			for (Map.Entry<IJavaVariable, Object> entrySub : compareResults.entrySet()) {
+			for (Map.Entry<IJavaVariable, Object> entrySub : compareResults.entrySet()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				Map<String, Object> currentSub = (Map<String, Object>) entrySub.getValue();
 				IJavaVariable key2 = entrySub.getKey();
 				if (!key1.equals(key2)) {
@@ -582,7 +582,7 @@ public final class ObjectComparison {
 
 						keySimilarities.add(key2.getName());
 					} else {
-						for (String item : keyList2) {
+						for (String item : keyList2) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 							if (!keyList1.contains(item)) {
 								keyDifferences.add(item);
 							}
@@ -596,7 +596,7 @@ public final class ObjectComparison {
 						valueSimilarities.add(key2.getName());
 
 					} else {
-						for (String item : listV2) {
+						for (String item : listV2) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 							if (!listV1.contains(item)) {
 								valueDifferences.add(item);
 							}
@@ -616,12 +616,12 @@ public final class ObjectComparison {
 				}
 			}
 			if (!missingKeyData.isEmpty()) {
-				properties.put("MapKeys", new ArrayList<>(keyDifferences));
+				properties.put("MapKeys", new ArrayList<>(keyDifferences)); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 				String listKeyString = missingKeyData.toString();
 				properties.put("MultiMapKeys", listKeyString);
 			}
 			if (!missingValData.isEmpty()) {
-				properties.put("MapValues", new ArrayList<>(valueDifferences));
+				properties.put("MapValues", new ArrayList<>(valueDifferences)); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 				String listValString = missingValData.toString();
 				properties.put("MultiMapValues", listValString);
 			}
@@ -642,8 +642,8 @@ public final class ObjectComparison {
 	 * @return Returns a Map of IJavaVariable and its Iterable contents
 	 */
 	public static Map<IJavaVariable, Object> iterableExtraction(List<IStructuredSelection> selections) throws Exception {
-		Map<IJavaVariable, Object> result = new HashMap<>();
-		for (Object selection : selections) {
+		Map<IJavaVariable, Object> result = new HashMap<>(); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
+		for (Object selection : selections) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			if (selection instanceof IJavaVariable selectedObject) {
 				if (selectedObject.getValue() instanceof IJavaObject javaObject1) {
 					List<String> contents = iterableElementsExtraction(javaObject1);
@@ -664,10 +664,10 @@ public final class ObjectComparison {
 	 */
 	@SuppressWarnings("nls")
 	public static List<String> iterableElementsExtraction(IJavaObject javaObject1) throws DebugException {
-		List<String> contents = new ArrayList<>();
+		List<String> contents = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 		IJavaThread thread = getSuspendedThread(javaObject1);
 		IJavaObject iterator = (IJavaObject) javaObject1.sendMessage("iterator", "()Ljava/util/Iterator;", null, thread, false);
-		while (true) {
+		while (true) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			IJavaValue hasNext = iterator.sendMessage("hasNext", "()Z", null, thread, false);
 			if (hasNext.getValueString().equals("false")) {
 				break;
@@ -688,8 +688,8 @@ public final class ObjectComparison {
 	 * @return Returns a Map of IJavaVariable and its List contents
 	 */
 	public static Map<IJavaVariable, Object> listExtraction(List<IStructuredSelection> selections) throws Exception {
-		Map<IJavaVariable, Object> result = new HashMap<>();
-		for (Object selection : selections) {
+		Map<IJavaVariable, Object> result = new HashMap<>(); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
+		for (Object selection : selections) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			if (selection instanceof IJavaVariable selectedObject) {
 				if (selectedObject.getValue() instanceof IJavaObject javaObject1) {
 					List<String> contents = listElementsExtraction(javaObject1);
@@ -710,10 +710,10 @@ public final class ObjectComparison {
 	 */
 	@SuppressWarnings("nls")
 	public static List<String> listElementsExtraction(IJavaObject javaObject1) throws DebugException {
-		List<String> contents = new ArrayList<>();
+		List<String> contents = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 		IJavaThread thread = getSuspendedThread(javaObject1);
 		IJavaValue toArray = javaObject1.sendMessage("toArray", "()[Ljava/lang/Object;", null, thread, false);
-		for (IVariable ob : toArray.getVariables()) {
+		for (IVariable ob : toArray.getVariables()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			contents.add(objectValueExtraction((IJavaValue) ob.getValue()));
 		}
 		return contents;
@@ -728,8 +728,8 @@ public final class ObjectComparison {
 	 * @return Returns actual List
 	 */
 	public static Map<IJavaVariable, Object> mapExtraction(List<IStructuredSelection> selections) throws Exception {
-		Map<IJavaVariable, Object> result = new HashMap<>();
-		for (Object selection : selections) {
+		Map<IJavaVariable, Object> result = new HashMap<>(); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
+		for (Object selection : selections) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			if (selection instanceof IJavaVariable selectedObject) {
 				Map<String, Object> mapData = mapElementsExtraction(selectedObject);
 				result.put(selectedObject, mapData);
@@ -747,8 +747,8 @@ public final class ObjectComparison {
 	 * @return Returns Map of IJavaVariable and string contents
 	 */
 	public static Map<IJavaVariable, Object> stringExtraction(List<IStructuredSelection> selections) throws Exception {
-		Map<IJavaVariable, Object> result = new HashMap<>();
-		for (Object selection : selections) {
+		Map<IJavaVariable, Object> result = new HashMap<>(); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
+		for (Object selection : selections) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			if (selection instanceof IJavaVariable selectedObject) {
 				if (selectedObject.getValue() instanceof IJavaObject javaObject1) {
 					String value = stringValueExtraction(javaObject1);
@@ -767,22 +767,22 @@ public final class ObjectComparison {
 	 * @throws DebugException
 	 * @return returns a Map of comparison result details
 	 */
-	@SuppressWarnings("nls")
+	@SuppressWarnings("nls") //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public static Map<String, Object> mapElementsExtraction(IJavaVariable selectedObject1) throws DebugException {
 		if (selectedObject1.getValue() instanceof IJavaObject javaObject1) {
 			IJavaThread thread = getSuspendedThread(javaObject1);
-			Map<String, Object> result = new HashMap<>();
-			List<String> keySet = new ArrayList<>();
+			Map<String, Object> result = new HashMap<>(); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
+			List<String> keySet = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 			IJavaObject keySetObject = (IJavaObject) javaObject1.sendMessage("keySet", "()Ljava/util/Set;", null, thread, false);
 			IJavaValue keyToArray = keySetObject.sendMessage("toArray", "()[Ljava/lang/Object;", null, thread, false);
-			for (IVariable ob : keyToArray.getVariables()) {
+			for (IVariable ob : keyToArray.getVariables()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				keySet.add(objectValueExtraction((IJavaValue) ob.getValue()));
 			}
 
-			List<String> valueSet = new ArrayList<>();
+			List<String> valueSet = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 			IJavaObject valueSetObject = (IJavaObject) javaObject1.sendMessage("values", "()Ljava/util/Collection;", null, thread, false);
 			IJavaValue valToArray = valueSetObject.sendMessage("toArray", "()[Ljava/lang/Object;", null, thread, false);
-			for (IVariable ob : valToArray.getVariables()) {
+			for (IVariable ob : valToArray.getVariables()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				valueSet.add(objectValueExtraction((IJavaValue) ob.getValue()));
 			}
 
@@ -800,7 +800,7 @@ public final class ObjectComparison {
 	 *            Class name of the object
 	 * @return returns a List of interfaces
 	 */
-	public static List<String> getInterfaces(String className) {
+	public static List<String> getInterfaces(String className) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		List<String> names;
 		if (className.contains("<")) { //$NON-NLS-1$
 			className = className.substring(0, className.indexOf('<'));
@@ -810,10 +810,10 @@ public final class ObjectComparison {
 			if (interfaces.isEmpty()) {
 				interfaces = List.of(Class.forName(className).getSuperclass().getInterfaces());
 			}
-			names = new ArrayList<>(interfaces.stream().map(Class::getCanonicalName).toList());
+			names = new ArrayList<>(interfaces.stream().map(Class::getCanonicalName).toList()); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 			names.add(Class.forName(className).getSuperclass().getSimpleName());
 		} catch (Exception e) {
-			names = new ArrayList<>();
+			names = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 			names.add(className);
 		}
 		return names;
@@ -827,7 +827,7 @@ public final class ObjectComparison {
 	 *            Class name of the object
 	 * @return returns a Generic type of the object
 	 */
-	@SuppressWarnings("nls")
+	@SuppressWarnings("nls") //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public static String checkInterfaces(String className) {
 		if (className.contains("<")) { //$NON-NLS-1$
 			className = className.substring(0, className.indexOf('<'));

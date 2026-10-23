@@ -49,10 +49,10 @@ public class Timer {
 	/**
 	 * Constructs a new timer
 	 */
-	public Timer() {
+	public Timer() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		setTimeout(Integer.MAX_VALUE);
 		Runnable r = () -> {
-			while (isAlive()) {
+			while (isAlive()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				boolean interrupted = false;
 				try {
 					Thread.sleep(getTimeout());

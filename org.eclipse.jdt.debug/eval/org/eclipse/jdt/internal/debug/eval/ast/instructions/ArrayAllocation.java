@@ -43,7 +43,7 @@ public class ArrayAllocation extends ArrayInstruction {
 	/*
 	 * @see Instruction#execute()
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public void execute() throws CoreException {
 		if (fHasInitializer) {
 			IJavaArray array = (IJavaArray) popValue();
@@ -53,7 +53,7 @@ public class ArrayAllocation extends ArrayInstruction {
 
 			int[] exprDimensions = new int[fExprDimension];
 
-			for (int i = fExprDimension - 1; i >= 0; i--) {
+			for (int i = fExprDimension - 1; i >= 0; i--) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				exprDimensions[i] = ((IJavaPrimitiveValue) popValue())
 						.getIntValue();
 			}
@@ -62,7 +62,7 @@ public class ArrayAllocation extends ArrayInstruction {
 
 			fCachedArrayTypes = new IJavaArrayType[fDimension + 1];
 
-			for (int i = fDimension, lim = fDimension - fExprDimension; i > lim; i--) {
+			for (int i = fDimension, lim = fDimension - fExprDimension; i > lim; i--) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				fCachedArrayTypes[i] = (IJavaArrayType) type;
 				type = ((IJavaArrayType) type).getComponentType();
 			}
@@ -76,7 +76,7 @@ public class ArrayAllocation extends ArrayInstruction {
 	/**
 	 * Create and populate an array.
 	 */
-	private IJavaArray createArray(int dimension, int[] exprDimensions)
+	private IJavaArray createArray(int dimension, int[] exprDimensions) //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 			throws CoreException {
 
 		IJavaArray array = fCachedArrayTypes[dimension]
@@ -84,11 +84,11 @@ public class ArrayAllocation extends ArrayInstruction {
 
 		if (exprDimensions.length > 1) {
 			int[] newExprDimension = new int[exprDimensions.length - 1];
-			for (int i = 0; i < newExprDimension.length; i++) {
+			for (int i = 0; i < newExprDimension.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				newExprDimension[i] = exprDimensions[i + 1];
 			}
 
-			for (int i = 0; i < exprDimensions[0]; i++) {
+			for (int i = 0; i < exprDimensions[0]; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				array.setValue(i, createArray(dimension - 1, newExprDimension));
 			}
 

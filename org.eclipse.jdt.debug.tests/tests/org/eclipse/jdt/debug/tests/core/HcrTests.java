@@ -104,7 +104,7 @@ public class HcrTests extends AbstractDebugTest {
 	 *
 	 * @see junit.framework.TestCase#tearDown()
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	protected void tearDown() throws Exception {
 		ICompilationUnit cu = getCompilationUnit(get14Project(), "src", "org.eclipse.debug.tests.targets", "HcrClass.java");
 		cu = cu.getPrimary();
@@ -116,7 +116,7 @@ public class HcrTests extends AbstractDebugTest {
 		String contents = buffer.getContents();
 		int index = contents.indexOf("\"Two\"");
 		if (index >= 0) {
-			String newCode = contents.substring(0, index) + "\"One\"" + contents.substring(index + 5);
+			String newCode = contents.substring(0, index) + "\"One\"" + contents.substring(index + 5); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 			buffer.setContents(newCode);
 			cu.commitWorkingCopy(true, null);
 			waitForBuild();
@@ -124,7 +124,7 @@ public class HcrTests extends AbstractDebugTest {
 		super.tearDown();
 	}
 
-	public void testSimpleHcr() throws Exception {
+	public void testSimpleHcr() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String typeName = "org.eclipse.debug.tests.targets.HcrClass";
 		createLineBreakpoint(42, typeName);
 
@@ -154,7 +154,7 @@ public class HcrTests extends AbstractDebugTest {
 				String originalContent = buffer.getContents();
 				int index = contents.indexOf("\"One\"");
 				assertTrue("Could not find code to replace", index > 0);
-				String newCode = contents.substring(0, index) + "\"Two\"" + contents.substring(index + 5);
+				String newCode = contents.substring(0, index) + "\"Two\"" + contents.substring(index + 5); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 				buffer.setContents(newCode);
 
 				// save contents
@@ -196,7 +196,7 @@ public class HcrTests extends AbstractDebugTest {
 	/**
 	 * Tests a general (plug-in) listener.
 	 */
-	public void testGeneralHcrListener() throws Exception {
+	public void testGeneralHcrListener() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String typeName = "org.eclipse.debug.tests.targets.HcrClass";
 		createLineBreakpoint(42, typeName);
 		HCRListener listener = new HCRListener();
@@ -225,7 +225,7 @@ public class HcrTests extends AbstractDebugTest {
 				String contents = buffer.getContents();
 				int index = contents.indexOf("\"One\"");
 				assertTrue("Could not find code to replace", index > 0);
-				String newCode = contents.substring(0, index) + "\"Two\"" + contents.substring(index + 5);
+				String newCode = contents.substring(0, index) + "\"Two\"" + contents.substring(index + 5); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 				buffer.setContents(newCode);
 
 				// save contents
@@ -245,7 +245,7 @@ public class HcrTests extends AbstractDebugTest {
 	/**
 	 * Tests that a target specific listener overrides a generic listener.
 	 */
-	public void testSpecificHcrListener() throws Exception {
+	public void testSpecificHcrListener() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String typeName = "org.eclipse.debug.tests.targets.HcrClass";
 		createLineBreakpoint(42, typeName);
 		HCRListener listener = new HCRListener();
@@ -276,7 +276,7 @@ public class HcrTests extends AbstractDebugTest {
 				String contents = buffer.getContents();
 				int index = contents.indexOf("\"One\"");
 				assertTrue("Could not find code to replace", index > 0);
-				String newCode = contents.substring(0, index) + "\"Two\"" + contents.substring(index + 5);
+				String newCode = contents.substring(0, index) + "\"Two\"" + contents.substring(index + 5); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 				buffer.setContents(newCode);
 
 				// save contents
@@ -299,7 +299,7 @@ public class HcrTests extends AbstractDebugTest {
 	 * method
 	 * @since 3.8.100
 	 */
-	public void testHCRLocalType() throws Exception {
+	public void testHCRLocalType() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String typeName = "org.eclipse.debug.tests.targets.HcrClass2";
 		createLineBreakpoint(36, typeName);
 		HCRListener listener = new HCRListener();
@@ -323,7 +323,7 @@ public class HcrTests extends AbstractDebugTest {
 				String contents = buffer.getContents();
 				int index = contents.indexOf("\"Local#run()\"");
 				assertTrue("Could not find code to replace", index > 0);
-				String newCode = contents.substring(0, index) + "\"Local#run\"" + contents.substring(index + 13);
+				String newCode = contents.substring(0, index) + "\"Local#run\"" + contents.substring(index + 13); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 				buffer.setContents(newCode);
 
 				DebugEventWaiter waiter = new DebugEventWaiter(DebugEvent.SUSPEND);
@@ -352,7 +352,7 @@ public class HcrTests extends AbstractDebugTest {
 	 *
 	 * @since 3.8.100
 	 */
-	public void testHCRLocalType2() throws Exception {
+	public void testHCRLocalType2() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String typeName = "org.eclipse.debug.tests.targets.HcrClass2";
 		createLineBreakpoint(40, typeName);
 		HCRListener listener = new HCRListener();
@@ -376,7 +376,7 @@ public class HcrTests extends AbstractDebugTest {
 				String contents = buffer.getContents();
 				int index = contents.indexOf("\"Local#run2()\"");
 				assertTrue("Could not find code to replace", index > 0);
-				String newCode = contents.substring(0, index) + "\"Local#run2\"" + contents.substring(index + 14);
+				String newCode = contents.substring(0, index) + "\"Local#run2\"" + contents.substring(index + 14); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 				buffer.setContents(newCode);
 
 				DebugEventWaiter waiter = new DebugEventWaiter(DebugEvent.SUSPEND);
@@ -405,7 +405,7 @@ public class HcrTests extends AbstractDebugTest {
 	 *
 	 * @since 3.8.100
 	 */
-	public void testHCRLocalType3() throws Exception {
+	public void testHCRLocalType3() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String typeName = "org.eclipse.debug.tests.targets.HcrClass2";
 		createLineBreakpoint(22, typeName);
 		HCRListener listener = new HCRListener();
@@ -429,7 +429,7 @@ public class HcrTests extends AbstractDebugTest {
 				String contents = buffer.getContents();
 				int index = contents.indexOf("\"CLocal#run()\"");
 				assertTrue("Could not find code to replace", index > 0);
-				String newCode = contents.substring(0, index) + "\"CLocal#run\"" + contents.substring(index + 14);
+				String newCode = contents.substring(0, index) + "\"CLocal#run\"" + contents.substring(index + 14); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 				buffer.setContents(newCode);
 
 				DebugEventWaiter waiter = new DebugEventWaiter(DebugEvent.SUSPEND);
@@ -458,7 +458,7 @@ public class HcrTests extends AbstractDebugTest {
 	 *
 	 * @since 3.8.100
 	 */
-	public void testHCRAnonymousType() throws Exception {
+	public void testHCRAnonymousType() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String typeName = "org.eclipse.debug.tests.targets.HcrClass3";
 		createLineBreakpoint(37, typeName);
 		HCRListener listener = new HCRListener();
@@ -482,7 +482,7 @@ public class HcrTests extends AbstractDebugTest {
 				String contents = buffer.getContents();
 				int index = contents.indexOf("\"TEST_RUN1\"");
 				assertTrue("Could not find code to replace", index > 0);
-				String newCode = contents.substring(0, index) + "\"NEW_CODE\"" + contents.substring(index + 11);
+				String newCode = contents.substring(0, index) + "\"NEW_CODE\"" + contents.substring(index + 11); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 				buffer.setContents(newCode);
 
 				DebugEventWaiter waiter = new DebugEventWaiter(DebugEvent.SUSPEND);
@@ -510,7 +510,7 @@ public class HcrTests extends AbstractDebugTest {
 	 * Tests HCR in an anonymous type defined in a method
 	 * @since 3.8.100
 	 */
-	public void testHCRAnonymousType2() throws Exception {
+	public void testHCRAnonymousType2() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String typeName = "org.eclipse.debug.tests.targets.HcrClass3";
 		createLineBreakpoint(47, typeName);
 		HCRListener listener = new HCRListener();
@@ -534,7 +534,7 @@ public class HcrTests extends AbstractDebugTest {
 				String contents = buffer.getContents();
 				int index = contents.indexOf("\"TEST_RUN2\"");
 				assertTrue("Could not find code to replace", index > 0);
-				String newCode = contents.substring(0, index) + "\"NEW_CODE\"" + contents.substring(index + 11);
+				String newCode = contents.substring(0, index) + "\"NEW_CODE\"" + contents.substring(index + 11); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 				buffer.setContents(newCode);
 
 				DebugEventWaiter waiter = new DebugEventWaiter(DebugEvent.SUSPEND);
@@ -561,7 +561,7 @@ public class HcrTests extends AbstractDebugTest {
 	 * Tests HCR in an anonymous type defined in a constructor
 	 * @since 3.8.100
 	 */
-	public void testHCRAnonymousType3() throws Exception {
+	public void testHCRAnonymousType3() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String typeName = "org.eclipse.debug.tests.targets.HcrClass3";
 		createLineBreakpoint(27, typeName);
 		HCRListener listener = new HCRListener();
@@ -585,7 +585,7 @@ public class HcrTests extends AbstractDebugTest {
 				String contents = buffer.getContents();
 				int index = contents.indexOf("\"TEST_RUN3\"");
 				assertTrue("Could not find code to replace", index > 0);
-				String newCode = contents.substring(0, index) + "\"NEW_CODE\"" + contents.substring(index + 11);
+				String newCode = contents.substring(0, index) + "\"NEW_CODE\"" + contents.substring(index + 11); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 				buffer.setContents(newCode);
 
 				DebugEventWaiter waiter = new DebugEventWaiter(DebugEvent.SUSPEND);
@@ -612,7 +612,7 @@ public class HcrTests extends AbstractDebugTest {
 	 * Tests HCR on a method called from a constructor
 	 * @since 3.8.100
 	 */
-	public void testHCRConstructor() throws Exception {
+	public void testHCRConstructor() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String typeName = "org.eclipse.debug.tests.targets.HcrClass4";
 		createLineBreakpoint(24, typeName);
 		HCRListener listener = new HCRListener();
@@ -636,7 +636,7 @@ public class HcrTests extends AbstractDebugTest {
 				String contents = buffer.getContents();
 				int index = contents.indexOf("\"HcrClass4#run()\"");
 				assertTrue("Could not find code to replace", index > 0);
-				String newCode = contents.substring(0, index) + "\"HcrClass4#run\"" + contents.substring(index + 17);
+				String newCode = contents.substring(0, index) + "\"HcrClass4#run\"" + contents.substring(index + 17); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 				buffer.setContents(newCode);
 
 				DebugEventWaiter waiter = new DebugEventWaiter(DebugEvent.SUSPEND);
@@ -663,7 +663,7 @@ public class HcrTests extends AbstractDebugTest {
 	 * Tests HCR within a constructor
 	 * @since 3.8.100
 	 */
-	public void testHCRConstructor2() throws Exception {
+	public void testHCRConstructor2() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String typeName = "org.eclipse.debug.tests.targets.HcrClass4";
 		createLineBreakpoint(19, typeName);
 		HCRListener listener = new HCRListener();
@@ -687,7 +687,7 @@ public class HcrTests extends AbstractDebugTest {
 				String contents = buffer.getContents();
 				int index = contents.indexOf("\"Constructor\"");
 				assertTrue("Could not find code to replace", index > 0);
-				String newCode = contents.substring(0, index) + "\"Construct\"" + contents.substring(index + 13);
+				String newCode = contents.substring(0, index) + "\"Construct\"" + contents.substring(index + 13); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 				buffer.setContents(newCode);
 
 				DebugEventWaiter waiter = new DebugEventWaiter(DebugEvent.SUSPEND);
@@ -716,7 +716,7 @@ public class HcrTests extends AbstractDebugTest {
 	 * method it was called from
 	 * @since 3.8.100
 	 */
-	public void testHCRInnerType() throws Exception {
+	public void testHCRInnerType() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String typeName = "org.eclipse.debug.tests.targets.HcrClass5";
 		createLineBreakpoint(26, typeName);
 		HCRListener listener = new HCRListener();
@@ -742,7 +742,7 @@ public class HcrTests extends AbstractDebugTest {
 				String contents = buffer.getContents();
 				int index = contents.indexOf("\"InnerClass#run()\"");
 				assertTrue("Could not find code to replace", index > 0);
-				String newCode = contents.substring(0, index) + "\"InnerClass#run\"" + contents.substring(index + 18);
+				String newCode = contents.substring(0, index) + "\"InnerClass#run\"" + contents.substring(index + 18); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 				buffer.setContents(newCode);
 
 				DebugEventWaiter waiter = new DebugEventWaiter(DebugEvent.SUSPEND);
@@ -770,7 +770,7 @@ public class HcrTests extends AbstractDebugTest {
 	 * Tests HCR on an inner type method
 	 * @since 3.8.100
 	 */
-	public void testHCRInnerType2() throws Exception {
+	public void testHCRInnerType2() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String typeName = "org.eclipse.debug.tests.targets.HcrClass5";
 		createLineBreakpoint(30, typeName);
 		HCRListener listener = new HCRListener();
@@ -796,7 +796,7 @@ public class HcrTests extends AbstractDebugTest {
 				String contents = buffer.getContents();
 				int index = contents.indexOf("\"InnerClass#run2()\"");
 				assertTrue("Could not find code to replace", index > 0);
-				String newCode = contents.substring(0, index) + "\"InnerClass#run2\"" + contents.substring(index + 19);
+				String newCode = contents.substring(0, index) + "\"InnerClass#run2\"" + contents.substring(index + 19); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 				buffer.setContents(newCode);
 
 				DebugEventWaiter waiter = new DebugEventWaiter(DebugEvent.SUSPEND);
@@ -824,7 +824,7 @@ public class HcrTests extends AbstractDebugTest {
 	 * Tests HCR on a constructor in an inner type
 	 * @since 3.8.100
 	 */
-	public void testHCRInnerType3() throws Exception {
+	public void testHCRInnerType3() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String typeName = "org.eclipse.debug.tests.targets.HcrClass5";
 		createLineBreakpoint(21, typeName);
 		HCRListener listener = new HCRListener();
@@ -850,7 +850,7 @@ public class HcrTests extends AbstractDebugTest {
 				String contents = buffer.getContents();
 				int index = contents.indexOf("\"Constructor\"");
 				assertTrue("Could not find code to replace", index > 0);
-				String newCode = contents.substring(0, index) + "\"Construct\"" + contents.substring(index + 13);
+				String newCode = contents.substring(0, index) + "\"Construct\"" + contents.substring(index + 13); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 				buffer.setContents(newCode);
 
 				DebugEventWaiter waiter = new DebugEventWaiter(DebugEvent.SUSPEND);
@@ -880,7 +880,7 @@ public class HcrTests extends AbstractDebugTest {
 	 * method with the same name
 	 * @since 3.8.100
 	 */
-	public void testHCRInnerType4() throws Exception {
+	public void testHCRInnerType4() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String typeName = "org.eclipse.debug.tests.targets.HcrClass5";
 		createLineBreakpoint(36, typeName);
 		HCRListener listener = new HCRListener();
@@ -906,7 +906,7 @@ public class HcrTests extends AbstractDebugTest {
 				String contents = buffer.getContents();
 				int index = contents.indexOf("\"LocalHCR#run()\"");
 				assertTrue("Could not find code to replace", index > 0);
-				String newCode = contents.substring(0, index) + "\"LocalHCR#run\"" + contents.substring(index + 16);
+				String newCode = contents.substring(0, index) + "\"LocalHCR#run\"" + contents.substring(index + 16); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 				buffer.setContents(newCode);
 
 				DebugEventWaiter waiter = new DebugEventWaiter(DebugEvent.SUSPEND);
@@ -935,7 +935,7 @@ public class HcrTests extends AbstractDebugTest {
 	 * method
 	 * @since 3.8.100
 	 */
-	public void testHCRInnerType5() throws Exception {
+	public void testHCRInnerType5() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String typeName = "org.eclipse.debug.tests.targets.HcrClass5";
 		createLineBreakpoint(40, typeName);
 		HCRListener listener = new HCRListener();
@@ -961,7 +961,7 @@ public class HcrTests extends AbstractDebugTest {
 				String contents = buffer.getContents();
 				int index = contents.indexOf("\"LocalHCR#outerrun()\"");
 				assertTrue("Could not find code to replace", index > 0);
-				String newCode = contents.substring(0, index) + "\"LocalHCR#outerrun\"" + contents.substring(index +21);
+				String newCode = contents.substring(0, index) + "\"LocalHCR#outerrun\"" + contents.substring(index +21); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 				buffer.setContents(newCode);
 
 				DebugEventWaiter waiter = new DebugEventWaiter(DebugEvent.SUSPEND);
@@ -989,7 +989,7 @@ public class HcrTests extends AbstractDebugTest {
 	 * Tests HCR on a local type defined in an inner type
 	 * @since 3.8.100
 	 */
-	public void testHCRLocalInner() throws Exception {
+	public void testHCRLocalInner() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String typeName = "org.eclipse.debug.tests.targets.HcrClass9";
 		createLineBreakpoint(22, typeName);
 		HCRListener listener = new HCRListener();
@@ -1015,7 +1015,7 @@ public class HcrTests extends AbstractDebugTest {
 				String contents = buffer.getContents();
 				int index = contents.indexOf("\"Inner$Local#run()\"");
 				assertTrue("Could not find code to replace", index > 0);
-				String newCode = contents.substring(0, index) + "\"Inner$Local#run\"" + contents.substring(index +19);
+				String newCode = contents.substring(0, index) + "\"Inner$Local#run\"" + contents.substring(index +19); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 				buffer.setContents(newCode);
 
 				DebugEventWaiter waiter = new DebugEventWaiter(DebugEvent.SUSPEND);
@@ -1043,7 +1043,7 @@ public class HcrTests extends AbstractDebugTest {
 	 * Tests HCR on a local type defined in an anonymous type
 	 * @since 3.8.100
 	 */
-	public void testHCRLocalAnonymous() throws Exception {
+	public void testHCRLocalAnonymous() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String typeName = "org.eclipse.debug.tests.targets.HcrClass8";
 		createLineBreakpoint(27, typeName);
 		HCRListener listener = new HCRListener();
@@ -1069,7 +1069,7 @@ public class HcrTests extends AbstractDebugTest {
 				String contents = buffer.getContents();
 				int index = contents.indexOf("\"Inner$Local#run()\"");
 				assertTrue("Could not find code to replace", index > 0);
-				String newCode = contents.substring(0, index) + "\"Inner$Local#run\"" + contents.substring(index +19);
+				String newCode = contents.substring(0, index) + "\"Inner$Local#run\"" + contents.substring(index +19); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 				buffer.setContents(newCode);
 
 				DebugEventWaiter waiter = new DebugEventWaiter(DebugEvent.SUSPEND);
@@ -1097,7 +1097,7 @@ public class HcrTests extends AbstractDebugTest {
 	 * Tests HCR on an inner type defined in a local type
 	 * @since 3.8.100
 	 */
-	public void testHCRInnerLocal() throws Exception {
+	public void testHCRInnerLocal() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String typeName = "org.eclipse.debug.tests.targets.HcrClass7";
 		createLineBreakpoint(22, typeName);
 		HCRListener listener = new HCRListener();
@@ -1123,7 +1123,7 @@ public class HcrTests extends AbstractDebugTest {
 				String contents = buffer.getContents();
 				int index = contents.indexOf("\"Local$Inner#run()\"");
 				assertTrue("Could not find code to replace", index > 0);
-				String newCode = contents.substring(0, index) + "\"Local$Inner#run\"" + contents.substring(index +19);
+				String newCode = contents.substring(0, index) + "\"Local$Inner#run\"" + contents.substring(index +19); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 				buffer.setContents(newCode);
 
 				DebugEventWaiter waiter = new DebugEventWaiter(DebugEvent.SUSPEND);
@@ -1151,7 +1151,7 @@ public class HcrTests extends AbstractDebugTest {
 	 * Tests HCR on an anonymous type defined in a local type
 	 * @since 3.8.100
 	 */
-	public void testHCRAnnonymousLocal() throws Exception {
+	public void testHCRAnnonymousLocal() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String typeName = "org.eclipse.debug.tests.targets.HcrClass6";
 		createLineBreakpoint(26, typeName);
 		HCRListener listener = new HCRListener();
@@ -1177,7 +1177,7 @@ public class HcrTests extends AbstractDebugTest {
 				String contents = buffer.getContents();
 				int index = contents.indexOf("\"Local$Inner#run()\"");
 				assertTrue("Could not find code to replace", index > 0);
-				String newCode = contents.substring(0, index) + "\"Local$Inner#run\"" + contents.substring(index +19);
+				String newCode = contents.substring(0, index) + "\"Local$Inner#run\"" + contents.substring(index +19); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 				buffer.setContents(newCode);
 
 				DebugEventWaiter waiter = new DebugEventWaiter(DebugEvent.SUSPEND);
@@ -1204,7 +1204,7 @@ public class HcrTests extends AbstractDebugTest {
 	/**
 	 * Tests that HCR is NOT triggered if the code change is happened on an unrelated type, see bug 508524 and 5188
 	 */
-	public void testNoHcrOnUnrelatedType() throws Exception {
+	public void testNoHcrOnUnrelatedType() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String typeName = "org.eclipse.debug.tests.targets.HcrClass";
 		IJavaProject unrelatedProject = get14Project();
 		IJavaProject debuggedProject = get15Project();
@@ -1229,7 +1229,7 @@ public class HcrTests extends AbstractDebugTest {
 		IJavaThread thread = null;
 		try {
 			// We start debugging on the one project but do modifications on the unrelated one!
-			thread = launchToBreakpoint(debuggedProject, typeName, typeName + CLONE_SUFFIX, true);
+			thread = launchToBreakpoint(debuggedProject, typeName, typeName + CLONE_SUFFIX, true); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 			assertNotNull("Breakpoint not hit within timeout period", thread);
 
 			IJavaDebugTarget target = (IJavaDebugTarget) thread.getDebugTarget();
@@ -1252,7 +1252,7 @@ public class HcrTests extends AbstractDebugTest {
 				String contents = buffer.getContents();
 				int index = contents.indexOf("\"One\"");
 				assertTrue("Could not find code to replace", index > 0);
-				String newCode = contents.substring(0, index) + "\"Two\"" + contents.substring(index + 5);
+				String newCode = contents.substring(0, index) + "\"Two\"" + contents.substring(index + 5); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 				buffer.setContents(newCode);
 
 				// save contents

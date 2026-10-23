@@ -40,7 +40,7 @@ public class MirrorTest extends AbstractJDITest {
 	/**
 	 * Init the fields that are used by this test only.
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public void localSetUp() {
 		// Get all kinds of concrete mirror that can be found in the VM
 		// in alphabetical order.
@@ -92,10 +92,10 @@ public class MirrorTest extends AbstractJDITest {
 	/**
 	 * Make sure the test leaves the VM in the same state it found it.
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public void localTearDown() {
 		ListIterator<Mirror> iterator = fMirrors.listIterator();
-		while (iterator.hasNext()) {
+		while (iterator.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			Object mirror = iterator.next();
 
 			// Delete the access watchpoint request we created in this test
@@ -127,7 +127,7 @@ public class MirrorTest extends AbstractJDITest {
 	 * Test JDI toString().
 	 */
 	public void testJDIToString() {
-		for (int i = 0; i < fMirrors.size(); i++) {
+		for (int i = 0; i < fMirrors.size(); i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			Mirror mirror = fMirrors.get(i);
 			assertNotNull(Integer.toString(i), mirror.toString());
 		}
@@ -136,7 +136,7 @@ public class MirrorTest extends AbstractJDITest {
 	 * Test JDI virtualMachine().
 	 */
 	public void testJDIVirtualMachine() {
-		for (int i = 0; i < fMirrors.size(); i++) {
+		for (int i = 0; i < fMirrors.size(); i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			Mirror mirror = fMirrors.get(i);
 			assertEquals(Integer.toString(i), fVM, mirror.virtualMachine());
 		}

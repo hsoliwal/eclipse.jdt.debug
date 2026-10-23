@@ -54,7 +54,7 @@ public class VirtualMachineManagerImpl implements VirtualMachineManager {
 	 */
 	private PrintWriter fVerbosePrintWriter = null;
 	/** List of all VMs that are currently connected. */
-	List<VirtualMachine> fConnectedVMs = new ArrayList<>();
+	List<VirtualMachine> fConnectedVMs = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 
 	/** Name of verbose file. */
 	private String fVerboseFile;
@@ -62,7 +62,7 @@ public class VirtualMachineManagerImpl implements VirtualMachineManager {
 	/**
 	 * Creates new VirtualMachineManagerImpl.
 	 */
-	public VirtualMachineManagerImpl() {
+	public VirtualMachineManagerImpl() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 
 		getPreferences();
 
@@ -73,7 +73,7 @@ public class VirtualMachineManagerImpl implements VirtualMachineManager {
 				try {
 					out = new FileOutputStream(fVerboseFile);
 				} catch (IOException e) {
-					JDIDebugPlugin.logError(JDIMessages.VirtualMachineManagerImpl_Could_not_open_verbose_file___1
+					JDIDebugPlugin.logError(JDIMessages.VirtualMachineManagerImpl_Could_not_open_verbose_file___1 //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 									+ fVerboseFile
 									+ JDIMessages.VirtualMachineManagerImpl_____2
 							, e); //
@@ -182,7 +182,7 @@ public class VirtualMachineManagerImpl implements VirtualMachineManager {
 	 */
 	@Override
 	public List<Connector> allConnectors() {
-		List<Connector> result = new ArrayList<>(attachingConnectors());
+		List<Connector> result = new ArrayList<>(attachingConnectors()); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 		result.addAll(launchingConnectors());
 		result.addAll(listeningConnectors());
 		return result;
@@ -193,7 +193,7 @@ public class VirtualMachineManagerImpl implements VirtualMachineManager {
 	 */
 	@Override
 	public List<AttachingConnector> attachingConnectors() {
-		ArrayList<AttachingConnector> list = new ArrayList<>(1);
+		ArrayList<AttachingConnector> list = new ArrayList<>(1); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 		list.add(new SocketAttachingConnectorImpl(this));
 		return list;
 	}
@@ -203,7 +203,7 @@ public class VirtualMachineManagerImpl implements VirtualMachineManager {
 	 */
 	@Override
 	public List<LaunchingConnector> launchingConnectors() {
-		ArrayList<LaunchingConnector> list = new ArrayList<>(2);
+		ArrayList<LaunchingConnector> list = new ArrayList<>(2); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 		list.add(new SocketLaunchingConnectorImpl(this));
 		list.add(new SocketRawLaunchingConnectorImpl(this));
 		return list;
@@ -214,7 +214,7 @@ public class VirtualMachineManagerImpl implements VirtualMachineManager {
 	 */
 	@Override
 	public List<ListeningConnector> listeningConnectors() {
-		ArrayList<ListeningConnector> list = new ArrayList<>(1);
+		ArrayList<ListeningConnector> list = new ArrayList<>(1); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 		list.add(new SocketListeningConnectorImpl(this));
 		return list;
 	}

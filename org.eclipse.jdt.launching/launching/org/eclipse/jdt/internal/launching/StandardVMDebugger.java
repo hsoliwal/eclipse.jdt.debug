@@ -156,7 +156,7 @@ public class StandardVMDebugger extends StandardVMRunner {
 		return getCmdLineAsString(cmdLine);
 	}
 
-	private CommandDetails getCommandLine(VMRunnerConfiguration config, ILaunch launch, IProgressMonitor monitor) throws CoreException {
+	private CommandDetails getCommandLine(VMRunnerConfiguration config, ILaunch launch, IProgressMonitor monitor) throws CoreException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IProgressMonitor subMonitor = SubMonitor.convert(monitor, 1);
 
 		// check for cancellation
@@ -182,12 +182,12 @@ public class StandardVMDebugger extends StandardVMRunner {
 
 		String program= constructProgramString(config);
 
-		List<String> arguments= new ArrayList<>(12);
+		List<String> arguments= new ArrayList<>(12); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 
 		arguments.add(program);
 
 		if (fVMInstance instanceof StandardVM && ((StandardVM)fVMInstance).getDebugArgs() != null){
-			String debugArgString = ((StandardVM)fVMInstance).getDebugArgs().replaceAll("\\Q" + StandardVM.VAR_PORT + "\\E", Integer.toString(port));  //$NON-NLS-1$ //$NON-NLS-2$
+			String debugArgString = ((StandardVM)fVMInstance).getDebugArgs().replaceAll("\\Q" + StandardVM.VAR_PORT + "\\E", Integer.toString(port));  //$NON-NLS-1$ //$NON-NLS-2$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 			arguments.addAll(Arrays.asList(DebugPlugin.parseArguments(debugArgString)));
 		} else {
 			// VM arguments are the first thing after the java program so that users can specify
@@ -209,9 +209,9 @@ public class StandardVMDebugger extends StandardVMRunner {
 				}
 			}
 			if (version < 1.5) {
-				arguments.add("-Xrunjdwp:transport=dt_socket,suspend=y,address=localhost:" + port); //$NON-NLS-1$
+				arguments.add("-Xrunjdwp:transport=dt_socket,suspend=y,address=localhost:" + port); //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 			} else {
-				arguments.add("-agentlib:jdwp=transport=dt_socket,suspend=y,address=localhost:" + port); //$NON-NLS-1$
+				arguments.add("-agentlib:jdwp=transport=dt_socket,suspend=y,address=localhost:" + port); //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 			}
 
 		}
@@ -245,7 +245,7 @@ public class StandardVMDebugger extends StandardVMRunner {
 
 		if (isModular(config, fVMInstance)) {
 			arguments.add("-m"); //$NON-NLS-1$
-			arguments.add(config.getModuleDescription() + "/" + config.getClassToLaunch()); //$NON-NLS-1$
+			arguments.add(config.getModuleDescription() + "/" + config.getClassToLaunch()); //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		} else {
 			arguments.add(config.getClassToLaunch());
 		}
@@ -304,7 +304,7 @@ public class StandardVMDebugger extends StandardVMRunner {
 	 * @see org.eclipse.jdt.launching.IVMRunner#run(org.eclipse.jdt.launching.VMRunnerConfiguration, org.eclipse.debug.core.ILaunch,
 	 * org.eclipse.core.runtime.IProgressMonitor)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public void run(VMRunnerConfiguration config, ILaunch launch, IProgressMonitor monitor) throws CoreException {
 		IProgressMonitor subMonitor = SubMonitor.convert(monitor, 1);
 		CommandDetails cmdDetails = getCommandLine(config, launch, subMonitor);
@@ -355,11 +355,11 @@ public class StandardVMDebugger extends StandardVMRunner {
 				}
 				if (cmdDetails.getEnvp() != null) {
 					Arrays.sort(cmdDetails.getEnvp());
-					StringBuilder buff = new StringBuilder();
-					for (int i = 0; i < cmdDetails.getEnvp().length; i++) {
-						buff.append(cmdDetails.getEnvp()[i]);
+					StringBuilder buff = new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
+					for (int i = 0; i < cmdDetails.getEnvp().length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
+						buff.append(cmdDetails.getEnvp()[i]); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 						if (i < cmdDetails.getEnvp().length - 1) {
-							buff.append('\n');
+							buff.append('\n'); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 						}
 					}
 					process.setAttribute(DebugPlugin.ATTR_ENVIRONMENT, buff.toString());
@@ -373,14 +373,14 @@ public class StandardVMDebugger extends StandardVMRunner {
 				subMonitor.subTask(LaunchingMessages.StandardVMDebugger_Establishing_debug_connection____5);
 				int retryCount = 0;
 				boolean retry= false;
-				do  {
+				do  { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 					try {
 
 						ConnectRunnable runnable = new ConnectRunnable(connector, map);
 						Thread connectThread = new Thread(runnable, "Listening Connector"); //$NON-NLS-1$
                         connectThread.setDaemon(true);
 						connectThread.start();
-						while (connectThread.isAlive()) {
+						while (connectThread.isAlive()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 							if (subMonitor.isCanceled()) {
                                 try {
                                     connector.stopListening(map);
@@ -445,7 +445,7 @@ public class StandardVMDebugger extends StandardVMRunner {
 						if (!retry && retryCount < 5) {
 							retry = true;
 							retryCount++;
-							LaunchingPlugin.log("Retrying count: " + retryCount); //$NON-NLS-1$
+							LaunchingPlugin.log("Retrying count: " + retryCount); //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 						}
 					}
@@ -484,7 +484,7 @@ public class StandardVMDebugger extends StandardVMRunner {
 	 * @return the altered JRE path
 	 * @since 3.3
 	 */
-	protected String[] prependJREPath(String[] env, IPath jdkpath) {
+	protected String[] prependJREPath(String[] env, IPath jdkpath) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		if (Platform.OS.isWindows()) {
 			IPath jrepath = jdkpath.removeLastSegments(1);
 			if(jrepath.lastSegment().equals(BIN)) {
@@ -502,29 +502,29 @@ public class StandardVMDebugger extends StandardVMRunner {
 					Map<String, String> map = DebugPlugin.getDefault().getLaunchManager().getNativeEnvironment();
 					env = new String[map.size()];
 					int index = 0;
-					for (String var : map.keySet()) {
+					for (String var : map.keySet()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 						String value = map.get(var);
 						if (value == null) {
 							value = ""; //$NON-NLS-1$
 						}
 						if (var.equalsIgnoreCase("path")) { //$NON-NLS-1$
 							if (!value.contains(jrestr)) {
-								value = jrestr+';'+value;
+								value = jrestr+';'+value; //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 							}
 						}
-						env[index] = var+"="+value; //$NON-NLS-1$
+						env[index] = var+"="+value; //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 						index++;
 					}
 				} else {
 					String var = null;
 					int esign = -1;
-					for(int i = 0; i < env.length; i++) {
+					for(int i = 0; i < env.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 						esign = env[i].indexOf('=');
 						if(esign > -1) {
 							var = env[i].substring(0, esign);
 							if(var != null && var.equalsIgnoreCase("path")) { //$NON-NLS-1$
 								if(env[i].indexOf(jrestr) == -1) {
-									env[i] = var + "="+jrestr+';'+(esign == env[i].length() ? "" : env[i].substring(esign+1)); //$NON-NLS-1$ //$NON-NLS-2$
+									env[i] = var + "="+jrestr+';'+(esign == env[i].length() ? "" : env[i].substring(esign+1)); //$NON-NLS-1$ //$NON-NLS-2$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 									break;
 								}
 							}
@@ -596,7 +596,7 @@ public class StandardVMDebugger extends StandardVMRunner {
 	 */
 	@SuppressWarnings("nls")
 	protected ListeningConnector getConnector() {
-		for (ListeningConnector c : Bootstrap.virtualMachineManager().listeningConnectors()) {
+		for (ListeningConnector c : Bootstrap.virtualMachineManager().listeningConnectors()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			if ("com.sun.jdi.SocketListen".equals(c.name())) {
 				return c;
 			}

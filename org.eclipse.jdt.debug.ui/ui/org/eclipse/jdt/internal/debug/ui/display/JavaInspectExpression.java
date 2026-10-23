@@ -37,7 +37,7 @@ import com.sun.jdi.InvocationException;
  * itself from the expression manager when its debug
  * target terminates.
  */
-public class JavaInspectExpression extends PlatformObject implements IErrorReportingExpression, IDebugEventSetListener {
+public class JavaInspectExpression extends PlatformObject implements IErrorReportingExpression, IDebugEventSetListener { //FLLDCIM: MARK — T27  IMPLEMENTS
 
 	/**
 	 * The value of this expression
@@ -64,7 +64,7 @@ public class JavaInspectExpression extends PlatformObject implements IErrorRepor
 	public JavaInspectExpression(String expression, IJavaValue value) {
 		fValue = value;
 		fExpression = expression;
-		DebugPlugin.getDefault().addDebugEventListener(this);
+		DebugPlugin.getDefault().addDebugEventListener(this); //FLLDCIM: MARK — T27 DEBUG_EVENT_ADAPTER CALL
 	}
 
 	/**
@@ -131,9 +131,9 @@ public class JavaInspectExpression extends PlatformObject implements IErrorRepor
 	/**
 	 * @see IDebugEventSetListener#handleDebugEvents(DebugEvent[])
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public void handleDebugEvents(DebugEvent[] events) {
-		for (int i = 0; i < events.length; i++) {
+		for (int i = 0; i < events.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			DebugEvent event = events[i];
 			switch (event.getKind()) {
 				case DebugEvent.TERMINATE:
@@ -179,7 +179,7 @@ public class JavaInspectExpression extends PlatformObject implements IErrorRepor
 		return getErrorMessages(fResult);
 	}
 
-	public static String[] getErrorMessages(IEvaluationResult result) {
+	public static String[] getErrorMessages(IEvaluationResult result) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		if (result == null) {
 			return new String[0];
 		}

@@ -34,7 +34,7 @@ import org.eclipse.jdt.internal.debug.ui.JavaDebugOptionsManager;
  */
 public class SuspendOnUncaughtExceptionListener implements IJavaBreakpointListener {
 
-	public static final String ID_UNCAUGHT_EXCEPTION_LISTENER = JDIDebugUIPlugin.getUniqueIdentifier() + ".uncaughtExceptionListener"; //$NON-NLS-1$
+	public static final String ID_UNCAUGHT_EXCEPTION_LISTENER = JDIDebugUIPlugin.getUniqueIdentifier() + ".uncaughtExceptionListener"; //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 	/* (non-Javadoc)
 	 * @see org.eclipse.jdt.debug.core.IJavaBreakpointListener#addingBreakpoint(org.eclipse.jdt.debug.core.IJavaDebugTarget, org.eclipse.jdt.debug.core.IJavaBreakpoint)
@@ -60,7 +60,7 @@ public class SuspendOnUncaughtExceptionListener implements IJavaBreakpointListen
 	/* (non-Javadoc)
 	 * @see org.eclipse.jdt.debug.core.IJavaBreakpointListener#breakpointHit(org.eclipse.jdt.debug.core.IJavaThread, org.eclipse.jdt.debug.core.IJavaBreakpoint)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public int breakpointHit(IJavaThread thread, IJavaBreakpoint breakpoint) {
 		// the "uncaught" exceptions breakpoint subsumes the "compilation error" breakpoint
 		// since "Throwable" is a supertype of "Error". Thus, if there is actually a compilation

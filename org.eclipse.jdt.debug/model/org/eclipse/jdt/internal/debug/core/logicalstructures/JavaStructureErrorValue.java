@@ -114,14 +114,14 @@ public class JavaStructureErrorValue implements IJavaValue {
 	@Override
 	public IVariable[] getVariables() throws DebugException {
 		IVariable[] variables = new IVariable[fMessages.length];
-		for (int i = 0; i < variables.length; i++) {
-			StringBuilder varName = new StringBuilder();
+		for (int i = 0; i < variables.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
+			StringBuilder varName = new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 			if (variables.length > 1) {
-				varName.append(
+				varName.append( //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 						LogicalStructuresMessages.JavaStructureErrorValue_0)
 						.append('[').append(i).append(']');
 			} else {
-				varName.append(LogicalStructuresMessages.JavaStructureErrorValue_1);
+				varName.append(LogicalStructuresMessages.JavaStructureErrorValue_1); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			}
 			variables[i] = new JDIPlaceholderVariable(varName.toString(),
 					new JavaStructureErrorValue(fMessages[i], fValue));

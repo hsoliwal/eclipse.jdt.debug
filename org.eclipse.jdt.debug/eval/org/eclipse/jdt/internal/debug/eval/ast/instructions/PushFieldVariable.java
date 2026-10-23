@@ -50,7 +50,7 @@ public class PushFieldVariable extends CompoundInstruction {
 		fDeclaringTypeSignature = declaringTypeSignature;
 	}
 
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public void execute() throws CoreException {
 		Object value = popValue();
 		if (value instanceof JDINullValue) {

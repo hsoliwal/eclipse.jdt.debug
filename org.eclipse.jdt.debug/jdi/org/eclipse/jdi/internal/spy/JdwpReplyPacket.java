@@ -133,14 +133,14 @@ public class JdwpReplyPacket extends JdwpPacket {
 	/**
 	 * Retrieves constant mappings.
 	 */
-	public static void getConstantMaps() {
+	public static void getConstantMaps() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		if (fErrorMap != null) {
 			return;
 		}
 
 		Field[] fields = JdwpReplyPacket.class.getDeclaredFields();
-		fErrorMap = new HashMap<>(fields.length);
-		for (Field field : fields) {
+		fErrorMap = new HashMap<>(fields.length); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
+		for (Field field : fields) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			if ((field.getModifiers() & Modifier.PUBLIC) == 0
 					|| (field.getModifiers() & Modifier.STATIC) == 0
 					|| (field.getModifiers() & Modifier.FINAL) == 0)

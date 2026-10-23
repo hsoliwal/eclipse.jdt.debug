@@ -33,7 +33,7 @@ public class InstanceVariableTests extends AbstractDebugTest {
 		super(name);
 	}
 
-	public void testGetField() throws Exception {
+	public void testGetField() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String typeName = "InstanceVariablesTests";
 
 		ILineBreakpoint bp = createLineBreakpoint(33, typeName);
@@ -68,7 +68,7 @@ public class InstanceVariableTests extends AbstractDebugTest {
 		}
 	}
 
-	public void testGetDeclaredFieldNames() throws Exception {
+	public void testGetDeclaredFieldNames() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String typeName = "InstanceVariablesTests";
 
 		ILineBreakpoint bp = createLineBreakpoint(31, typeName);
@@ -83,8 +83,8 @@ public class InstanceVariableTests extends AbstractDebugTest {
 
 			String[] names = ((IJavaReferenceType)object.getJavaType()).getDeclaredFieldNames();
 			assertEquals("Should be 7 declared fields", 7, names.length);
-			List<String> fields = new ArrayList<>();
-			for (int i = 0; i < names.length; i++) {
+			List<String> fields = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
+			for (int i = 0; i < names.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				String string = names[i];
 				fields.add(string);
 			}
@@ -101,7 +101,7 @@ public class InstanceVariableTests extends AbstractDebugTest {
 		}
 	}
 
-	public void testGetDeclaredFieldNamesInSubclass() throws Exception {
+	public void testGetDeclaredFieldNamesInSubclass() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String typeName = "InstanceVariablesTests";
 
 		ILineBreakpoint bp = createLineBreakpoint(33, typeName);
@@ -117,8 +117,8 @@ public class InstanceVariableTests extends AbstractDebugTest {
 
 			String[] names = ((IJavaReferenceType)object.getJavaType()).getDeclaredFieldNames();
 			assertEquals("Should be 3 declared fields", 3, names.length);
-			List<String> fields = new ArrayList<>();
-			for (int i = 0; i < names.length; i++) {
+			List<String> fields = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
+			for (int i = 0; i < names.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				String string = names[i];
 				fields.add(string);
 			}
@@ -131,7 +131,7 @@ public class InstanceVariableTests extends AbstractDebugTest {
 		}
 	}
 
-	public void testGetAllFieldNamesInSubclass() throws Exception {
+	public void testGetAllFieldNamesInSubclass() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String typeName = "InstanceVariablesTests";
 
 		ILineBreakpoint bp = createLineBreakpoint(33, typeName);
@@ -154,7 +154,7 @@ public class InstanceVariableTests extends AbstractDebugTest {
 		}
 	}
 
-	public void testEvaluationAssignments() throws Exception {
+	public void testEvaluationAssignments() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String typeName = "InstanceVariablesTests";
 
 		ILineBreakpoint bp = createLineBreakpoint(31, typeName);
@@ -182,7 +182,7 @@ public class InstanceVariableTests extends AbstractDebugTest {
 		}
 	}
 
-	public void testValueHasChanged() throws Exception {
+	public void testValueHasChanged() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String typeName = "VariableChanges";
 
 		ILineBreakpoint bp = createLineBreakpoint(24, typeName);

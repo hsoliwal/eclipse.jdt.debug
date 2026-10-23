@@ -45,12 +45,12 @@ public class StandardVMCommandTab extends AbstractLaunchConfigurationTab {
 	protected Button fDefaultButton;
 	protected Button fSpecificButton;
 
-	protected static final Map<?, ?> EMPTY_MAP = new HashMap<>(1);
+	protected static final Map<?, ?> EMPTY_MAP = new HashMap<>(1); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
 
 	/**
 	 * @see ILaunchConfigurationTab#createControl(Composite)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public void createControl(Composite parent) {
 		Font font = parent.getFont();
 		Composite comp = new Composite(parent, parent.getStyle());
@@ -77,7 +77,7 @@ public class StandardVMCommandTab extends AbstractLaunchConfigurationTab {
 		fDefaultButton.setLayoutData(gd);
 		fDefaultButton.setText(NLS.bind(JREMessages.AbstractJavaCommandTab_2, getDefaultCommand()));
 
-		fDefaultButton.addSelectionListener(new SelectionAdapter() {
+		fDefaultButton.addSelectionListener(new SelectionAdapter() { //FLLDCIM: MARK — T03 SELECTION_LANE CALL
 			@Override
 			public void widgetSelected(SelectionEvent evt) {
 				handleSelection();
@@ -90,7 +90,7 @@ public class StandardVMCommandTab extends AbstractLaunchConfigurationTab {
 		fSpecificButton.setLayoutData(gd);
 		fSpecificButton.setText(JREMessages.AbstractJavaCommandTab_4);
 
-		fSpecificButton.addSelectionListener(new SelectionAdapter() {
+		fSpecificButton.addSelectionListener(new SelectionAdapter() { //FLLDCIM: MARK — T03 SELECTION_LANE CALL
 			@Override
 			public void widgetSelected(SelectionEvent evt) {
 				handleSelection();
@@ -101,7 +101,7 @@ public class StandardVMCommandTab extends AbstractLaunchConfigurationTab {
 		gd = new GridData(GridData.FILL_HORIZONTAL);
 		fJavaCommandText.setLayoutData(gd);
 		fJavaCommandText.setFont(font);
-		fJavaCommandText.addModifyListener(new ModifyListener() {
+		fJavaCommandText.addModifyListener(new ModifyListener() { //FLLDCIM: MARK — T02 TEXT_INPUT_DEBOUNCE CALL
 			@Override
 			public void modifyText(ModifyEvent evt) {
 				updateLaunchConfigurationDialog();
@@ -134,7 +134,7 @@ public class StandardVMCommandTab extends AbstractLaunchConfigurationTab {
 	/* (non-Javadoc)
 	 * @see org.eclipse.debug.ui.ILaunchConfigurationTab#initializeFrom(org.eclipse.debug.core.ILaunchConfiguration)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public void initializeFrom(ILaunchConfiguration configuration) {
 		String javaCommand= null;
 		try {
@@ -167,7 +167,7 @@ public class StandardVMCommandTab extends AbstractLaunchConfigurationTab {
 			configuration.setAttribute(IJavaLaunchConfigurationConstants.ATTR_VM_INSTALL_TYPE_SPECIFIC_ATTRS_MAP, (Map<String, String>)null);
 		} else {
 			String javaCommand = fJavaCommandText.getText();
-			Map<String, String> attributeMap = new HashMap<>(1);
+			Map<String, String> attributeMap = new HashMap<>(1); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
 			attributeMap.put(IJavaLaunchConfigurationConstants.ATTR_JAVA_COMMAND, javaCommand);
 			configuration.setAttribute(IJavaLaunchConfigurationConstants.ATTR_VM_INSTALL_TYPE_SPECIFIC_ATTRS_MAP, attributeMap);
 		}

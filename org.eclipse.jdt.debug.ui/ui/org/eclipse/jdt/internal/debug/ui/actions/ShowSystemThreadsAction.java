@@ -21,7 +21,7 @@ import org.eclipse.jdt.debug.ui.IJavaDebugUIConstants;
  * An action delegate that toggles the state of its viewer to
  * show/hide System Threads.
  */
-public class ShowSystemThreadsAction extends AbstractThreadsViewFilterAction {
+public class ShowSystemThreadsAction extends AbstractThreadsViewFilterAction { //FLLDCIM: MARK — T23  IMPLEMENTS
 
 	@Override
 	protected String getPreferenceKey() {

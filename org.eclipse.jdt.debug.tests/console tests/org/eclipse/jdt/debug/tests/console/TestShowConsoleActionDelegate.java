@@ -67,7 +67,7 @@ public class TestShowConsoleActionDelegate implements IActionDelegate2, IWorkben
 	/**
 	 * @see org.eclipse.ui.IActionDelegate#run(org.eclipse.jface.action.IAction)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public void run(IAction action) {
 		final MessageConsoleStream stream1 = console1.newMessageStream();
 		final MessageConsoleStream stream2 = console2.newMessageStream();
@@ -75,7 +75,7 @@ public class TestShowConsoleActionDelegate implements IActionDelegate2, IWorkben
 		stream2.setColor(Display.getDefault().getSystemColor(SWT.COLOR_RED));
 
 		new Thread(new Runnable() {
-			@Override
+			@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 			public void run() {
 
 				//write to console #1, show it, write again
@@ -89,7 +89,7 @@ public class TestShowConsoleActionDelegate implements IActionDelegate2, IWorkben
 				stream2.print("More Testing"); //$NON-NLS-1$
 
 				try {
-					for (int i=0; i<4; i++) {
+					for (int i=0; i<4; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 						consoleManager.showConsoleView(console1);
 						Thread.sleep(1000);
 						consoleManager.showConsoleView(console2);

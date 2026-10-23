@@ -42,7 +42,7 @@ public class InstanceFilterTests extends AbstractDebugTest {
 	/**
 	 * Instance filter on a line breakpoint
 	 */
-	public void testLineBreakpoint() throws Exception {
+	public void testLineBreakpoint() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String typeName = "InstanceFilterObject";
 		// main
 		IJavaLineBreakpoint mainBreakpoint = createLineBreakpoint(42, typeName);
@@ -94,7 +94,7 @@ public class InstanceFilterTests extends AbstractDebugTest {
 	/**
 	 * Instance filter on a method entry breakpoint
 	 */
-	public void testMethodEntryBreakpoint() throws Exception {
+	public void testMethodEntryBreakpoint() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String typeName = "InstanceFilterObject";
 		// main
 		IJavaLineBreakpoint mainBreakpoint = createLineBreakpoint(42, typeName);
@@ -151,7 +151,7 @@ public class InstanceFilterTests extends AbstractDebugTest {
 	/**
 	 * Instance filter on a method exit breakpoint
 	 */
-	public void testMethodExitBreakpoint() throws Exception {
+	public void testMethodExitBreakpoint() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String typeName = "InstanceFilterObject";
 		// main
 		IJavaLineBreakpoint mainBreakpoint = createLineBreakpoint(42, typeName);
@@ -208,7 +208,7 @@ public class InstanceFilterTests extends AbstractDebugTest {
 	/**
 	 * Instance filter on an exception breakpoint
 	 */
-	public void testExceptionBreakpoint() throws Exception {
+	public void testExceptionBreakpoint() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String typeName = "InstanceFilterObject";
 		// main
 		IJavaLineBreakpoint mainBreakpoint = createLineBreakpoint(42, typeName);
@@ -260,7 +260,7 @@ public class InstanceFilterTests extends AbstractDebugTest {
 	/**
 	 * Instance filter on an access watchpoint
 	 */
-	public void testAccessWatchpoint() throws Exception {
+	public void testAccessWatchpoint() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String typeName = "InstanceFilterObject";
 		// main
 		IJavaLineBreakpoint mainBreakpoint = createLineBreakpoint(42, typeName);
@@ -315,7 +315,7 @@ public class InstanceFilterTests extends AbstractDebugTest {
 	/**
 	 * Instance filter on an modification watchpoint
 	 */
-	public void testModificationWatchpoint() throws Exception {
+	public void testModificationWatchpoint() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String typeName = "InstanceFilterObject";
 		// main
 		IJavaLineBreakpoint mainBreakpoint = createLineBreakpoint(42, typeName);

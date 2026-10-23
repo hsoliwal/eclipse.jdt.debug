@@ -44,7 +44,7 @@ public class WatchpointEventTest extends AbstractJDITest {
 	/**
 	 * Init the fields that are used by this test only.
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public void localSetUp() {
 		// Trigger an access watchpoint event
 		fAccessWatchpointEvent =
@@ -83,9 +83,9 @@ public class WatchpointEventTest extends AbstractJDITest {
 		// Delete the event requests we created in this test
 		EventRequestManager requestManager = fVM.eventRequestManager();
 		requestManager.deleteEventRequests(
-			new ArrayList<>(requestManager.accessWatchpointRequests()));
+			new ArrayList<>(requestManager.accessWatchpointRequests())); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 		requestManager.deleteEventRequests(
-			new ArrayList<>(requestManager.modificationWatchpointRequests()));
+			new ArrayList<>(requestManager.modificationWatchpointRequests())); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 
 		// Set the value of the "fBool" field back to its original value
 		resetField();

@@ -42,7 +42,7 @@ public class PackageFragmentRootSourceContainer extends AbstractSourceContainer 
 	 * Unique identifier for Java project source container type
 	 * (value <code>org.eclipse.jdt.launching.sourceContainer.packageFragmentRoot</code>).
 	 */
-	public static final String TYPE_ID = LaunchingPlugin.getUniqueIdentifier() + ".sourceContainer.packageFragmentRoot";   //$NON-NLS-1$
+	public static final String TYPE_ID = LaunchingPlugin.getUniqueIdentifier() + ".sourceContainer.packageFragmentRoot";   //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 	/**
 	 * Constructs a new package fragment root source container on the
@@ -57,7 +57,7 @@ public class PackageFragmentRootSourceContainer extends AbstractSourceContainer 
 	/* (non-Javadoc)
 	 * @see org.eclipse.debug.internal.core.sourcelookup.ISourceContainer#findSourceElements(java.lang.String)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public Object[] findSourceElements(String name) throws CoreException {
 		// look for a class file
 		int index = name.lastIndexOf('.');
@@ -78,16 +78,16 @@ public class PackageFragmentRootSourceContainer extends AbstractSourceContainer 
 		if (fragment.exists()) {
 			switch (fragment.getKind()) {
 				case IPackageFragmentRoot.K_BINARY:
-					IClassFile file = fragment.getClassFile(typeName + ".class"); //$NON-NLS-1$
+					IClassFile file = fragment.getClassFile(typeName + ".class"); //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 					if (file.exists()) {
 						return new Object[]{file};
 					}
 					break;
 				case IPackageFragmentRoot.K_SOURCE:
 					String[] extensions = JavaCore.getJavaLikeExtensions();
-					for (int i = 0; i < extensions.length; i++) {
+					for (int i = 0; i < extensions.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 						String ext = extensions[i];
-						ICompilationUnit unit = fragment.getCompilationUnit(typeName + '.' + ext);
+						ICompilationUnit unit = fragment.getCompilationUnit(typeName + '.' + ext); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 						if (unit.exists()) {
 							return new Object[]{unit};
 						}
@@ -147,16 +147,16 @@ public class PackageFragmentRootSourceContainer extends AbstractSourceContainer 
 
 	@Override
 	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("["); //$NON-NLS-1$
+		StringBuilder builder = new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
+		builder.append("["); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		if (fRoot != null) {
-			builder.append(fRoot.getElementName());
-			builder.append(", parent="); //$NON-NLS-1$
-			builder.append(fRoot.getParent().getElementName());
-			builder.append(", path="); //$NON-NLS-1$
-			builder.append(getPath());
+			builder.append(fRoot.getElementName()); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+			builder.append(", parent="); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+			builder.append(fRoot.getParent().getElementName()); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+			builder.append(", path="); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+			builder.append(getPath()); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		}
-		builder.append("]"); //$NON-NLS-1$
+		builder.append("]"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		return builder.toString();
 	}
 

@@ -31,7 +31,7 @@ import org.eclipse.swt.widgets.FileDialog;
 /**
  * Adds an external jar to the runtime class path.
  */
-public class AddExternalJarAction extends OpenDialogAction {
+public class AddExternalJarAction extends OpenDialogAction { //FLLDCIM: MARK — T04  IMPLEMENTS
 
 	public AddExternalJarAction(IClasspathViewer viewer, String dialogSettingsPrefix) {
 		super(ActionMessages.AddExternalJar_Add_E_xternal_JARs_1, viewer, dialogSettingsPrefix);
@@ -42,7 +42,7 @@ public class AddExternalJarAction extends OpenDialogAction {
 	 *
 	 * @see IAction#run()
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public void run() {
 
 		String lastUsedPath = getDialogSetting(LAST_PATH_SETTING);
@@ -61,9 +61,9 @@ public class AddExternalJarAction extends OpenDialogAction {
 		int nChosen = fileNames.length;
 
 		IPath filterPath = new Path(dialog.getFilterPath());
-		ArrayList<IRuntimeClasspathEntry> list = new ArrayList<>();
+		ArrayList<IRuntimeClasspathEntry> list = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 		IPath path = null;
-		for (int i= 0; i < nChosen; i++) {
+		for (int i= 0; i < nChosen; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			path = filterPath.append(fileNames[i]).makeAbsolute();
 			if(path.toFile().exists()) {
 				list.add(JavaRuntime.newArchiveRuntimeClasspathEntry(path));

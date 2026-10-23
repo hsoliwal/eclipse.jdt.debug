@@ -48,7 +48,7 @@ public class AdvancedSourceLookup {
 	 * Returns {@code true} if the given project has sources folders, {@code false} otherwise.
 	 */
 	public static boolean isSourceProject(IJavaProject project) throws JavaModelException {
-		for (IPackageFragmentRoot fragment : project.getPackageFragmentRoots()) {
+		for (IPackageFragmentRoot fragment : project.getPackageFragmentRoots()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			if (fragment.getKind() == IPackageFragmentRoot.K_SOURCE) {
 				return true;
 			}
@@ -56,9 +56,9 @@ public class AdvancedSourceLookup {
 		return false;
 	}
 
-	public static Map<File, IPackageFragmentRoot> getClasspath(IJavaProject project) throws JavaModelException {
-		final Map<File, IPackageFragmentRoot> classpath = new LinkedHashMap<>();
-		for (IPackageFragmentRoot fragment : project.getPackageFragmentRoots()) {
+	public static Map<File, IPackageFragmentRoot> getClasspath(IJavaProject project) throws JavaModelException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
+		final Map<File, IPackageFragmentRoot> classpath = new LinkedHashMap<>(); //FLLDCIM: MARK — M04 M3_ORDERED_LANES NEW
+		for (IPackageFragmentRoot fragment : project.getPackageFragmentRoots()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			if (fragment.getKind() == IPackageFragmentRoot.K_BINARY) {
 				File classpathLocation = null;
 				if (fragment.isExternal()) {
@@ -83,7 +83,7 @@ public class AdvancedSourceLookup {
 	public static Set<File> getOutputDirectories(IJavaProject project) throws JavaModelException {
 		final Set<File> locations = new LinkedHashSet<>();
 		addWorkspaceLocation(locations, project.getOutputLocation());
-		for (IClasspathEntry cpe : project.getRawClasspath()) {
+		for (IClasspathEntry cpe : project.getRawClasspath()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			if (cpe.getEntryKind() == IClasspathEntry.CPE_SOURCE && cpe.getOutputLocation() != null) {
 				addWorkspaceLocation(locations, cpe.getOutputLocation());
 			}

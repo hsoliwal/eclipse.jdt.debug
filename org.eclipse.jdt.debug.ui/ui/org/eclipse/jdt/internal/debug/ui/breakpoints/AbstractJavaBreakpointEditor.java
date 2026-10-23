@@ -163,7 +163,7 @@ public abstract class AbstractJavaBreakpointEditor {
 	 */
 	protected void firePropertyChange(int propId) {
 		if (!fSuppressPropertyChanges) {
-			for (IPropertyListener listener : fListeners) {
+			for (IPropertyListener listener : fListeners) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				listener.propertyChanged(this, propId);
 			}
 		}

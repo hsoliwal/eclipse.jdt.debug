@@ -47,7 +47,7 @@ import com.sun.jdi.request.EventRequestManager;
 import com.sun.jdi.request.ModificationWatchpointRequest;
 import com.sun.jdi.request.WatchpointRequest;
 
-public class JavaWatchpoint extends JavaLineBreakpoint implements
+public class JavaWatchpoint extends JavaLineBreakpoint implements //FLLDCIM: MARK — T27  IMPLEMENTS
 		IJavaWatchpoint {
 
 	public static final String JAVA_WATCHPOINT = "org.eclipse.jdt.debug.javaWatchpointMarker"; //$NON-NLS-1$
@@ -97,7 +97,7 @@ public class JavaWatchpoint extends JavaLineBreakpoint implements
 	 * <li>Field modification (value <code>MODIFICATION_EVENT</code>)</li>
 	 * </ol>
 	 */
-	private final HashMap<JDIDebugTarget, Integer> fLastEventTypes = new HashMap<>(10);
+	private final HashMap<JDIDebugTarget, Integer> fLastEventTypes = new HashMap<>(10); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
 
 	public JavaWatchpoint() {
 	}
@@ -106,11 +106,11 @@ public class JavaWatchpoint extends JavaLineBreakpoint implements
 	 * @see JDIDebugModel#createWatchpoint(IResource, String, String, int, int,
 	 *      int, int, boolean, Map)
 	 */
-	public JavaWatchpoint(final IResource resource, final String typeName,
+	public JavaWatchpoint(final IResource resource, final String typeName, //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 			final String fieldName, final int lineNumber, final int charStart,
 			final int charEnd, final int hitCount, final boolean add,
 			final Map<String, Object> attributes) throws DebugException {
-		IWorkspaceRunnable wr = monitor -> {
+		IWorkspaceRunnable wr = monitor -> { //FLLDCIM: MARK — T09  LAMBDA
 			// add attributes
 			addLineBreakpointAttributes(attributes, getModelIdentifier(),
 					true, lineNumber, charStart, charEnd);
@@ -137,7 +137,7 @@ public class JavaWatchpoint extends JavaLineBreakpoint implements
 	 *      this watchpoint is an access watchpoint, modification watchpoint, or
 	 *      both. Finally, the requests are registered with the given target.
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	protected boolean createRequest(JDIDebugTarget target, ReferenceType type)
 			throws CoreException {
 		if (shouldSkipBreakpoint()) {
@@ -227,7 +227,7 @@ public class JavaWatchpoint extends JavaLineBreakpoint implements
 	 *         <code>true</code>; ModificationWatchpointRequest if access is
 	 *         <code>false</code>).
 	 */
-	protected WatchpointRequest createWatchpoint(JDIDebugTarget target,
+	protected WatchpointRequest createWatchpoint(JDIDebugTarget target, //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 			Field field, boolean access) throws CoreException {
 		WatchpointRequest request = null;
 		EventRequestManager manager = target.getEventRequestManager();
@@ -259,7 +259,7 @@ public class JavaWatchpoint extends JavaLineBreakpoint implements
 	/**
 	 * @see JavaBreakpoint#recreate(JDIDebugTarget)
 	 */
-	protected EventRequest recreateRequest(EventRequest request,
+	protected EventRequest recreateRequest(EventRequest request, //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 			JDIDebugTarget target) throws CoreException {
 		try {
 			Field field = ((WatchpointRequest) request).field();
@@ -377,7 +377,7 @@ public class JavaWatchpoint extends JavaLineBreakpoint implements
 	protected void setDefaultAccessAndModification() throws CoreException {
 		boolean[] def = getDefaultAccessAndModificationValues();
 		Object[] values = new Object[def.length];
-		for (int i = 0; i < def.length; i++) {
+		for (int i = 0; i < def.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			values[i] = Boolean.valueOf(def[i]);
 		}
 		String[] attributes = new String[] { ACCESS, MODIFICATION };
@@ -402,7 +402,7 @@ public class JavaWatchpoint extends JavaLineBreakpoint implements
 	 *
 	 * @since 3.3.1
 	 */
-	protected boolean[] getDefaultAccessAndModificationValues() {
+	protected boolean[] getDefaultAccessAndModificationValues() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		int value = Platform.getPreferencesService().getInt(
 				JDIDebugPlugin.getUniqueIdentifier(),
 				JDIDebugPlugin.PREF_DEFAULT_WATCHPOINT_SUSPEND_POLICY,
@@ -477,7 +477,7 @@ public class JavaWatchpoint extends JavaLineBreakpoint implements
 	/**
 	 * @see JavaBreakpoint#updateEnabledState(EventRequest, JDIDebugTarget)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	protected void updateEnabledState(EventRequest request,
 			JDIDebugTarget target) throws CoreException {
 		boolean enabled = isEnabled();

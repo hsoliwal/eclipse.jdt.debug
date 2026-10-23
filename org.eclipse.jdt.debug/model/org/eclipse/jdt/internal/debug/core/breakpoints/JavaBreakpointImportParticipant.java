@@ -136,7 +136,7 @@ public class JavaBreakpointImportParticipant implements
 		 * @return the fully qualified name of the enclosing type
 		 */
 		private String getTypeName(ASTNode node) {
-			return getTypeName(node, new StringBuilder());
+			return getTypeName(node, new StringBuilder()); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 		}
 
 		/**
@@ -148,7 +148,7 @@ public class JavaBreakpointImportParticipant implements
 		 *            the buffer to write the name into
 		 * @return the fully qualified name of the parent
 		 */
-		private String getTypeName(ASTNode node, StringBuilder buffer) {
+		private String getTypeName(ASTNode node, StringBuilder buffer) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 			switch (node.getNodeType()) {
 			case ASTNode.COMPILATION_UNIT: {
 				CompilationUnit unit = (CompilationUnit) node;
@@ -227,7 +227,7 @@ public class JavaBreakpointImportParticipant implements
 		 *
 		 * @return true if child nodes should be visited false otherwise
 		 */
-		private boolean doTypeVisit(AbstractTypeDeclaration node) {
+		private boolean doTypeVisit(AbstractTypeDeclaration node) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 			SimpleName name = node.getName();
 			String typename = getTypeName(node);
 			fTypeNameStack.push(typename);
@@ -254,7 +254,7 @@ public class JavaBreakpointImportParticipant implements
 		/**
 		 * @see org.eclipse.jdt.core.dom.ASTVisitor#visit(org.eclipse.jdt.core.dom.FieldDeclaration)
 		 */
-		@Override
+		@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		public boolean visit(FieldDeclaration node) {
 			if (!fTypename.equals(fTypeNameStack.peek())) {
 				return false;
@@ -263,7 +263,7 @@ public class JavaBreakpointImportParticipant implements
 			SimpleName name = null;
 			IMarker marker = fBreakpoint.getMarker();
 			int currentstart = marker.getAttribute(IMarker.CHAR_START, -1);
-			for (VariableDeclarationFragment fragment : fragments) {
+			for (VariableDeclarationFragment fragment : fragments) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				name = fragment.getName();
 				if (name != null && name.getFullyQualifiedName().equals(fName)) {
 					// found field update the charstart / charend
@@ -284,7 +284,7 @@ public class JavaBreakpointImportParticipant implements
 		/**
 		 * @see org.eclipse.jdt.core.dom.ASTVisitor#visit(org.eclipse.jdt.core.dom.MethodDeclaration)
 		 */
-		@Override
+		@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		public boolean visit(MethodDeclaration node) {
 			if (fTypeNameStack.isEmpty()) {
 				return false;
@@ -325,7 +325,7 @@ public class JavaBreakpointImportParticipant implements
 		 *
 		 * @return the signature for the given method node or <code>null</code>
 		 */
-		private String getMethodSignatureFromNode(MethodDeclaration node) {
+		private String getMethodSignatureFromNode(MethodDeclaration node) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 			Assert.isNotNull(node);
 			List<SingleVariableDeclaration> params = node.parameters();
 			List<String> rparams = getParametersTypeNames(params);
@@ -343,10 +343,10 @@ public class JavaBreakpointImportParticipant implements
 						}
 					}
 				} else {
-					StringBuilder buffer = new StringBuilder();
-					buffer.append("<init>"); //$NON-NLS-1$
+					StringBuilder buffer = new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
+					buffer.append("<init>"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 					collectSyntheticParam(node, rparams);
-					buffer.append(Signature.createMethodSignature(
+					buffer.append(Signature.createMethodSignature( //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 							rparams.toArray(new String[rparams
 									.size()]), Signature.SIG_VOID));
 					return buffer.toString();
@@ -361,9 +361,9 @@ public class JavaBreakpointImportParticipant implements
 		 * @return a listing of signatures for the specified parameters
 		 */
 		private List<String> getParametersTypeNames(List<SingleVariableDeclaration> rawparams) {
-			List<String> rparams = new ArrayList<>(rawparams.size());
+			List<String> rparams = new ArrayList<>(rawparams.size()); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 			String pname = null;
-			for (SingleVariableDeclaration param : rawparams) {
+			for (SingleVariableDeclaration param : rawparams) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				pname = getTypeSignature(param.getType());
 				if (pname != null) {
 					rparams.add(pname);
@@ -380,7 +380,7 @@ public class JavaBreakpointImportParticipant implements
 		 * @return the signature for the type or <code>null</code> if one could
 		 *         not be derived
 		 */
-		private String getTypeSignature(Type type) {
+		private String getTypeSignature(Type type) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 			ITypeBinding binding = type.resolveBinding();
 			if (binding == null) {
 				return null;
@@ -418,15 +418,15 @@ public class JavaBreakpointImportParticipant implements
 		 * @param rparams
 		 *            the listing of parameters to add to
 		 */
-		private void collectSyntheticParam(final MethodDeclaration method,
+		private void collectSyntheticParam(final MethodDeclaration method, //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 				List<String> rparams) {
 			Assert.isNotNull(method);
 			if (isInTopLevelType(method)) {
 				return;
 			}
 			ASTNode parent = method.getParent();
-			StringBuilder name = new StringBuilder();
-			while (parent != null) {
+			StringBuilder name = new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
+			while (parent != null) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				parent = parent.getParent();
 				if (parent instanceof AbstractTypeDeclaration) {
 					AbstractTypeDeclaration type = (AbstractTypeDeclaration) parent;
@@ -447,7 +447,7 @@ public class JavaBreakpointImportParticipant implements
 				}
 			}
 			name.insert(0, "L"); //$NON-NLS-1$
-			name.append(';');
+			name.append(';'); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			if (name.length() > 2) {
 				rparams.add(0, name.toString());
 			}
@@ -470,7 +470,7 @@ public class JavaBreakpointImportParticipant implements
 	 * org.eclipse.debug.core.model.IBreakpointImportParticipant#matches(java
 	 * .util.Map, org.eclipse.debug.core.model.IBreakpoint)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public boolean matches(Map<String, Object> attributes, IBreakpoint breakpoint)
 			throws CoreException {
 		if (attributes == null || breakpoint == null) {
@@ -528,7 +528,7 @@ public class JavaBreakpointImportParticipant implements
 	 * org.eclipse.debug.core.model.IBreakpointImportParticipant#verify(org.
 	 * eclipse.debug.core.model.IBreakpoint)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public void verify(IBreakpoint breakpoint) throws CoreException {
 		IResource resource = breakpoint.getMarker().getResource();
 		CompilationUnit unit = null;

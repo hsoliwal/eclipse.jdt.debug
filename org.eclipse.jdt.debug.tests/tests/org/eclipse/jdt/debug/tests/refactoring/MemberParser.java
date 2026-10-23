@@ -63,8 +63,8 @@ public class MemberParser{
 		newname = newname.replace('$','.');//ensure proper format was used.
 		String parsed[] = newname.split("\\."); //$NON-NLS-1$
 		//make list of types to find
-		ArrayList<String> typeList = new ArrayList<>();
-		for (int splitNum = 0; splitNum < parsed.length; splitNum++) {
+		ArrayList<String> typeList = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
+		for (int splitNum = 0; splitNum < parsed.length; splitNum++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			typeList.add(parsed[splitNum]);
 		}
 		return typeList;
@@ -73,15 +73,15 @@ public class MemberParser{
 	 * @param fragments the scope of which you wish to return compilation units
 	 * @return a handle to all compilation units contained by the given fragments
 	 */
-	private static ICompilationUnit[] getAllCompilationUnits(IPackageFragment[] fragments) throws JavaModelException {
+	private static ICompilationUnit[] getAllCompilationUnits(IPackageFragment[] fragments) throws JavaModelException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		if(fragments == null) {
 			return null;
 		}
-		final Set<ICompilationUnit> results = new HashSet<>();
-		for (int fragmentNum = 0; fragmentNum < fragments.length; fragmentNum++) {
+		final Set<ICompilationUnit> results = new HashSet<>(); //FLLDCIM: MARK — M03 M3_SET_LANES NEW
+		for (int fragmentNum = 0; fragmentNum < fragments.length; fragmentNum++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			if(fragments[fragmentNum].containsJavaResources()){
 				ICompilationUnit cunits[] = fragments[fragmentNum].getCompilationUnits();
-				for (int cunitNum = 0; cunitNum < cunits.length; cunitNum++) {
+				for (int cunitNum = 0; cunitNum < cunits.length; cunitNum++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 					results.add(cunits[cunitNum]);
 				}
 			}
@@ -112,10 +112,10 @@ public class MemberParser{
 			return null;
 		}
 
-		final Set<IMethod> results = new HashSet<>();
-		for (int typeNum = 0; typeNum < types.length; typeNum++) {
+		final Set<IMethod> results = new HashSet<>(); //FLLDCIM: MARK — M03 M3_SET_LANES NEW
+		for (int typeNum = 0; typeNum < types.length; typeNum++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			IMethod[] methods = types[typeNum].getMethods();
-			for (int methodNum = 0; methodNum < methods.length; methodNum++) {
+			for (int methodNum = 0; methodNum < methods.length; methodNum++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				results.add(methods[methodNum]);
 			}
 		}
@@ -130,12 +130,12 @@ public class MemberParser{
 	 * @return all package fragments in the scope
 	 */
 	private static IPackageFragment[] getAllPackageFragments(IProject[] projects) throws JavaModelException {
-		final Set<IPackageFragment> results = new HashSet<>();
-		for (int projectNum = 0; projectNum < projects.length; projectNum++) {
+		final Set<IPackageFragment> results = new HashSet<>(); //FLLDCIM: MARK — M03 M3_SET_LANES NEW
+		for (int projectNum = 0; projectNum < projects.length; projectNum++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			IJavaProject javaProj = JavaCore.create(projects[projectNum]);
 			if(javaProj!= null && javaProj.exists() && javaProj.hasChildren()){
 				IPackageFragment fragments[] = javaProj.getPackageFragments();
-				for (int fragmentNum = 0; fragmentNum < fragments.length; fragmentNum++) {
+				for (int fragmentNum = 0; fragmentNum < fragments.length; fragmentNum++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 					results.add(fragments[fragmentNum]);
 				}
 			}
@@ -161,10 +161,10 @@ public class MemberParser{
 			return null;
 		}
 
-		final Set<IType> results = new HashSet<>();
-		for (int cunitNum = 0; cunitNum < cunits.length; cunitNum++) {
+		final Set<IType> results = new HashSet<>(); //FLLDCIM: MARK — M03 M3_SET_LANES NEW
+		for (int cunitNum = 0; cunitNum < cunits.length; cunitNum++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			IType types[] = cunits[cunitNum].getTypes(); //get all topLevel types
-			for (int typeNum = 0; typeNum < types.length; typeNum++) {
+			for (int typeNum = 0; typeNum < types.length; typeNum++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				results.add(types[typeNum]);
 			}
 		}
@@ -178,14 +178,14 @@ public class MemberParser{
 	 * @param methods the scope of the search
 	 * @return an array of all types declared within the given methods.
 	 */
-	private static IType[] getAllTypes(IMethod[] methods) throws JavaModelException {
+	private static IType[] getAllTypes(IMethod[] methods) throws JavaModelException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		if(methods==null) {
 			return null;
 		}
-		final Set<IJavaElement> results = new HashSet<>();
-		for (int methodNum = 0; methodNum < methods.length; methodNum++) {
+		final Set<IJavaElement> results = new HashSet<>(); //FLLDCIM: MARK — M03 M3_SET_LANES NEW
+		for (int methodNum = 0; methodNum < methods.length; methodNum++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			IJavaElement[] children = methods[methodNum].getChildren();
-			for (int childNum = 0; childNum < children.length; childNum++) {
+			for (int childNum = 0; childNum < children.length; childNum++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				if(children[childNum] instanceof IType) {
 					results.add(children[childNum]);
 				}
@@ -202,21 +202,21 @@ public class MemberParser{
 	 * @param types the scope of the search
 	 * @return all types within the given scope
 	 */
-	public static IType[] getAllTypes(IType[] types) throws JavaModelException{
+	public static IType[] getAllTypes(IType[] types) throws JavaModelException{ //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		if(types == null) {
 			return null;
 		}
 		IType[] newtypes = types;
-		final Set<IType> results = new HashSet<>();
+		final Set<IType> results = new HashSet<>(); //FLLDCIM: MARK — M03 M3_SET_LANES NEW
 		//get all the obvious type declarations
-		for (int mainTypeNum = 0; mainTypeNum < newtypes.length; mainTypeNum++) {
+		for (int mainTypeNum = 0; mainTypeNum < newtypes.length; mainTypeNum++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			IType declaredTypes[] = newtypes[mainTypeNum].getTypes();
-			for (int declaredTypeNum = 0; declaredTypeNum < declaredTypes.length; declaredTypeNum++) {
+			for (int declaredTypeNum = 0; declaredTypeNum < declaredTypes.length; declaredTypeNum++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				results.add(declaredTypes[declaredTypeNum]);
 			}
 			//get all the type's method's type declarations
 			newtypes = getAllTypes(getAllMethods(newtypes));
-			for (int methodTypes = 0; methodTypes < newtypes.length; methodTypes++) {
+			for (int methodTypes = 0; methodTypes < newtypes.length; methodTypes++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				results.add(newtypes[methodTypes]);
 			}
 		}
@@ -237,13 +237,13 @@ public class MemberParser{
 	 * @param projects where to search
 	 * @return the 1st instance of the given packageName
 	 */
-	private static IPackageFragment[] getAllPackageFragments(String packageName, IProject[] projects) throws JavaModelException{
-		final Set<IPackageFragment> results = new HashSet<>();
-		for (int projectNum = 0; projectNum < projects.length; projectNum++) {
+	private static IPackageFragment[] getAllPackageFragments(String packageName, IProject[] projects) throws JavaModelException{ //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
+		final Set<IPackageFragment> results = new HashSet<>(); //FLLDCIM: MARK — M03 M3_SET_LANES NEW
+		for (int projectNum = 0; projectNum < projects.length; projectNum++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			IJavaProject javaProj = JavaCore.create(projects[projectNum]);
 			if(javaProj!= null && javaProj.exists() && javaProj.hasChildren()){
 				IPackageFragment fragments[] = javaProj.getPackageFragments();
-				for (int fragmentNum = 0; fragmentNum < fragments.length; fragmentNum++) {
+				for (int fragmentNum = 0; fragmentNum < fragments.length; fragmentNum++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 					if(fragments[fragmentNum].getElementName().equalsIgnoreCase(packageName)) {
 						results.add(fragments[fragmentNum]);
 					}
@@ -261,16 +261,16 @@ public class MemberParser{
 		return ResourcesPlugin.getWorkspace().getRoot().getProject(projectName);
 	}
 
-	private static IType getType(ArrayList<String> typeList, ICompilationUnit[] cunits) throws JavaModelException{
+	private static IType getType(ArrayList<String> typeList, ICompilationUnit[] cunits) throws JavaModelException{ //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IType[] types = getAllTypes(cunits);
 		//if 1st letter is a number, it's anonymous
 		boolean targetIsAnonymous = Character.isDigit(typeList.get(0).toString().charAt(0));
 		boolean targetFound=false;
 		char separator = '.';
-		while (true) {//search all types for desired target - will return internally.
+		while (true) {//search all types for desired target - will return internally. //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			//check all the types we have
 			int typeNum=0;
-			while(typeNum < types.length) {//search current list of types
+			while(typeNum < types.length) {//search current list of types //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				if(targetIsAnonymous){//must ensure format is same for both.
 					String nameOfCurrentType = types[typeNum].getTypeQualifiedName(separator);
 					nameOfCurrentType = nameOfCurrentType.substring(nameOfCurrentType.lastIndexOf(separator)+1);
@@ -313,7 +313,7 @@ public class MemberParser{
 	 * @param projectName the elemental name of the project containing the given type - may be null
 	 * @return the IType handle to the requested type
 	 */
-	public static IType getType(String typeName, String packageName, String projectName) throws JavaModelException{
+	public static IType getType(String typeName, String packageName, String projectName) throws JavaModelException{ //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		if(typeName == null) {
 			return null;
 		}
@@ -349,7 +349,7 @@ public class MemberParser{
 	 */
 	public IMember getDeepest(ICompilationUnit cu, String target)
 	{
-		for(int i=0;i<target.length();i++)
+		for(int i=0;i<target.length();i++) //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 		{
 			if(target.charAt(i)=='$')
 			{//EnclosingType$InnerType$MoreInner
@@ -373,7 +373,7 @@ public class MemberParser{
 	 * eg: EnclosingType$InnerType
 	 * @return the designated type, or null if type not found.
 	 */
-	protected IMember getDeepest(IMember top, String tail) {
+	protected IMember getDeepest(IMember top, String tail) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String newtail = tail;
 		if(newtail==null || newtail.length()==0 ) {
 			return top;
@@ -385,7 +385,7 @@ public class MemberParser{
 
 		//check if there are more nested elements
 		String head=null;
-		for(int i=0;i<newtail.length();i++)
+		for(int i=0;i<newtail.length();i++) //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 		{
 			if(newtail.charAt(i)=='$')//nested Item?
 			{//Enclosing$Inner$MoreInner
@@ -419,7 +419,7 @@ public class MemberParser{
 	 * e.g. head = "1Type";
 	 */
 	protected String getLocalTypeName(String head) {
-		for(int i=0;i<head.length();i++)
+		for(int i=0;i<head.length();i++) //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 		{
 			if(!Character.isDigit(head.charAt(i)))
 			{
@@ -436,7 +436,7 @@ public class MemberParser{
 	 * e.g. head = "1Type";
 	 */
 	protected int getLocalTypeOccurrence(String head) {
-		for(int i=0;i<head.length();i++)
+		for(int i=0;i<head.length();i++) //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 		{
 			if(!Character.isDigit(head.charAt(i))) {
 				return Integer.parseInt(head.substring(0, i));
@@ -452,7 +452,7 @@ public class MemberParser{
 	 * e.g.  head = "someMethod()V"
 	 */
 	protected String getName(String head) {
-		for(int i=0;i<head.length();i++)
+		for(int i=0;i<head.length();i++) //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 		{
 			if(head.charAt(i)=='(') { //nested Item?
 				return head.substring(0,i);
@@ -503,7 +503,7 @@ public class MemberParser{
 	 * @param tail the remaining members to find
 	 * @return the next member down contained by the given Type
 	 */
-	protected IMember getNextFromType(IMember top, String head, String tail) {
+	protected IMember getNextFromType(IMember top, String head, String tail) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IType current = (IType)top;
 
 		//is next part a Type?
@@ -532,7 +532,7 @@ public class MemberParser{
 	 * e.g.  head = "someMethod()V"
 	 */
 	protected String[] getSignature(String head) {
-		for(int i=0;i<head.length();i++)
+		for(int i=0;i<head.length();i++) //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 		{
 			if(head.charAt(i)=='(') { //nested Item?
 				return Signature.getParameterTypes(head.substring(i));

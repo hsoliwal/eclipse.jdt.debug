@@ -50,11 +50,11 @@ import org.eclipse.jface.util.PropertyChangeEvent;
  * Write methods are expected to be called from the UI thread.
  * </p>
  */
-public final class PinnedFieldsManager implements IPropertyChangeListener {
+public final class PinnedFieldsManager implements IPropertyChangeListener { //FLLDCIM: MARK — T06  IMPLEMENTS
 
 	private static final char FIELD_SEPARATOR = '#';
 
-	private static final String PREFERENCE_SUFFIX = "." + IJDIPreferencesConstants.PREF_PINNED_FIELDS; //$NON-NLS-1$
+	private static final String PREFERENCE_SUFFIX = "." + IJDIPreferencesConstants.PREF_PINNED_FIELDS; //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 	private static PinnedFieldsManager fgDefault;
 
@@ -101,7 +101,7 @@ public final class PinnedFieldsManager implements IPropertyChangeListener {
 	 * @return the key of the view specific preference
 	 */
 	public static String getPreferenceKey(String viewId) {
-		return viewId + PREFERENCE_SUFFIX;
+		return viewId + PREFERENCE_SUFFIX; //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 	}
 
 	/**
@@ -152,14 +152,14 @@ public final class PinnedFieldsManager implements IPropertyChangeListener {
 	public void setPinned(String viewId, Collection<? extends IJavaFieldVariable> fields, boolean pin) {
 		Set<String> keys = new LinkedHashSet<>(getPinned(viewId));
 		boolean changed = false;
-		for (IJavaFieldVariable field : fields) {
+		for (IJavaFieldVariable field : fields) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			String key = getKey(field);
 			if (key != null) {
 				changed |= pin ? keys.add(key) : keys.remove(key);
 			}
 		}
 		if (changed) {
-			update(viewId, new ArrayList<>(keys));
+			update(viewId, new ArrayList<>(keys)); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 		}
 	}
 
@@ -204,7 +204,7 @@ public final class PinnedFieldsManager implements IPropertyChangeListener {
 		if (neighbor < 0) {
 			return false;
 		}
-		List<String> keys = new ArrayList<>(pinned);
+		List<String> keys = new ArrayList<>(pinned); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 		Collections.swap(keys, rank, neighbor);
 		update(viewId, keys);
 		return true;
@@ -220,7 +220,7 @@ public final class PinnedFieldsManager implements IPropertyChangeListener {
 			return -1;
 		}
 		int neighbor = -1;
-		for (Object sibling : siblings) {
+		for (Object sibling : siblings) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			if (sibling instanceof IJavaFieldVariable siblingField) {
 				int siblingRank = getRank(pinned, siblingField);
 				if (up ? siblingRank >= 0 && siblingRank < rank && siblingRank > neighbor
@@ -253,15 +253,15 @@ public final class PinnedFieldsManager implements IPropertyChangeListener {
 	 *            children of a variable, an expression or a stack frame
 	 * @return the reordered children, or the given array itself when no child is pinned
 	 */
-	public Object[] movePinnedFirst(String viewId, Object[] children) {
+	public Object[] movePinnedFirst(String viewId, Object[] children) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		List<String> keys = getPinned(viewId);
 		if (keys.isEmpty() || children.length < 2) {
 			return children;
 		}
 		Object[] pinned = new Object[keys.size()];
-		List<Object> others = new ArrayList<>(children.length);
+		List<Object> others = new ArrayList<>(children.length); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 		boolean found = false;
-		for (Object child : children) {
+		for (Object child : children) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			int rank = child instanceof IJavaFieldVariable field ? getRank(keys, field) : -1;
 			if (rank >= 0 && pinned[rank] == null) {
 				pinned[rank] = child;
@@ -273,8 +273,8 @@ public final class PinnedFieldsManager implements IPropertyChangeListener {
 		if (!found) {
 			return children;
 		}
-		List<Object> result = new ArrayList<>(children.length);
-		for (Object child : pinned) {
+		List<Object> result = new ArrayList<>(children.length); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
+		for (Object child : pinned) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			if (child != null) {
 				result.add(child);
 			}
@@ -344,7 +344,7 @@ public final class PinnedFieldsManager implements IPropertyChangeListener {
 	private static String getKey(IJavaFieldVariable field) {
 		try {
 			IJavaType declaringType = field.getDeclaringType();
-			return declaringType == null ? null : declaringType.getName() + FIELD_SEPARATOR + field.getName();
+			return declaringType == null ? null : declaringType.getName() + FIELD_SEPARATOR + field.getName(); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		} catch (DebugException e) {
 			return null;
 		}
@@ -352,7 +352,7 @@ public final class PinnedFieldsManager implements IPropertyChangeListener {
 
 	private static List<String> parse(String value) {
 		Set<String> keys = new LinkedHashSet<>();
-		for (String key : JavaDebugOptionsManager.parseList(value)) {
+		for (String key : JavaDebugOptionsManager.parseList(value)) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			if (key.indexOf(FIELD_SEPARATOR) > 0) {
 				keys.add(key);
 			}

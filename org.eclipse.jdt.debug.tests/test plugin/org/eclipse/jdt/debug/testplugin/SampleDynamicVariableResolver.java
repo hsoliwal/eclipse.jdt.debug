@@ -29,6 +29,6 @@ public class SampleDynamicVariableResolver implements IDynamicVariableResolver {
 		if (argument == null) {
 			return "no arg";
 		}
-		return "the arg is " + argument;
+		return "the arg is " + argument; //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 	}
 }

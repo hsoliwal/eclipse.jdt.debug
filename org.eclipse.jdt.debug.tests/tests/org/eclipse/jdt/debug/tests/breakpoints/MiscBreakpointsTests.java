@@ -52,7 +52,7 @@ public class MiscBreakpointsTests extends AbstractDebugTest {
 			javaThread= launchAndSuspend(typeName);
 
 			int stackLine = javaThread.getTopStackFrame().getLineNumber();
-			assertEquals("line number should be '29', but was " + stackLine, 29, stackLine);
+			assertEquals("line number should be '29', but was " + stackLine, 29, stackLine); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 		} finally {
             getPrefStore().setValue(IJDIPreferencesConstants.PREF_SUSPEND_ON_UNCAUGHT_EXCEPTIONS, false);
@@ -65,7 +65,7 @@ public class MiscBreakpointsTests extends AbstractDebugTest {
 	 * This method DEPENDS on the default setting of the 'suspend on compilation errors'
 	 * preference being TRUE.
 	 */
-	public void testSuspendOnCompilationErrors() throws Exception {
+	public void testSuspendOnCompilationErrors() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String typeName = "CompileError";
 		getPrefStore().setValue(IJDIPreferencesConstants.PREF_SUSPEND_ON_UNCAUGHT_EXCEPTIONS, false);
 		getPrefStore().setValue(IJDIPreferencesConstants.PREF_SUSPEND_ON_COMPILATION_ERRORS, true);
@@ -79,7 +79,7 @@ public class MiscBreakpointsTests extends AbstractDebugTest {
 			javaThread= launchAndSuspend(typeName);
 
 			int stackLine = javaThread.getTopStackFrame().getLineNumber();
-			assertEquals("line number should be '3', but was " + stackLine, 3, stackLine);
+			assertEquals("line number should be '3', but was " + stackLine, 3, stackLine); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 		} finally {
             getPrefStore().setValue(IJDIPreferencesConstants.PREF_SUSPEND_ON_UNCAUGHT_EXCEPTIONS, false);
@@ -95,7 +95,7 @@ public class MiscBreakpointsTests extends AbstractDebugTest {
 	 * Tests that the program will not suspend on uncaught exceptions or errors if the corresponding
 	 * preferences are set to false
 	 */
-	public void testDontSuspendOnCompilationErrors() throws Exception {
+	public void testDontSuspendOnCompilationErrors() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String typeName = "CompileError";
 		getPrefStore().setValue(IJDIPreferencesConstants.PREF_SUSPEND_ON_UNCAUGHT_EXCEPTIONS, false);
 		getPrefStore().setValue(IJDIPreferencesConstants.PREF_SUSPEND_ON_COMPILATION_ERRORS, false);

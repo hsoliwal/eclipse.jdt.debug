@@ -32,7 +32,7 @@ public class NewDetailFormatterAction extends ObjectActionDelegate {
 	/**
 	 * @see org.eclipse.ui.IActionDelegate#run(org.eclipse.jface.action.IAction)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public void run(IAction action) {
 		IStructuredSelection selection= getCurrentSelection();
 		if (selection == null || selection.size() != 1) {

@@ -64,7 +64,7 @@ public class JarSourceLookupTests extends AbstractDebugTest {
 	 */
 	void disposeContainers(ISourceContainer[] containers) {
 		if(containers != null) {
-			for (int i = 0; i < containers.length; i++) {
+			for (int i = 0; i < containers.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				containers[i].dispose();
 			}
 		}
@@ -75,7 +75,7 @@ public class JarSourceLookupTests extends AbstractDebugTest {
 		return fgJarProject;
 	}
 
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	protected void setUp() throws Exception {
 		super.setUp();
 		TestUtil.cleanUp(getName());
@@ -83,28 +83,28 @@ public class JarSourceLookupTests extends AbstractDebugTest {
 		IProject jarProject = createProjectClone(fJarProject, testrpath.append(fJarProject).toString(), true);
 
 		IFile jar = jarProject.getFile("lib/sample.jar");
-		assertTrue("lib/sample.jar is missing in project: " + jarProject.getName(), jar.exists());
+		assertTrue("lib/sample.jar is missing in project: " + jarProject.getName(), jar.exists()); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 		fgJarProject = createJavaProjectClone(RefPjName, testrpath.append(RefPjName).toString(), JavaProjectHelper.JAVA_SE_1_8_EE_NAME, true);
 
 		IProject jarRefProject = fgJarProject.getProject();
 		IFile cp = jarRefProject.getFile(".classpath");
-		assertTrue(".classpath is missing in project: " + jarRefProject.getName(), cp.exists());
+		assertTrue(".classpath is missing in project: " + jarRefProject.getName(), cp.exists()); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		java.nio.file.Path path = cp.getLocation().toFile().toPath();
 		List<String> lines = Files.readAllLines(path);
 		boolean foundJar = false;
-		for (String line : lines) {
+		for (String line : lines) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			if (line.contains(SAMPLE_JAR_PATH)) {
 				foundJar = true;
 				break;
 			}
 		}
-		assertTrue("The .classpath from project " + jarRefProject + " is unexpected and does not have an entry for " + SAMPLE_JAR_PATH + ": "
+		assertTrue("The .classpath from project " + jarRefProject + " is unexpected and does not have an entry for " + SAMPLE_JAR_PATH + ": " //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 				+ new String(Files.readAllBytes(path)), foundJar);
 		waitForBuild();
 	}
 
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	protected void tearDown() throws Exception {
 		removeAllBreakpoints();
 		if (fgJarProject.exists()) {
@@ -130,7 +130,7 @@ public class JarSourceLookupTests extends AbstractDebugTest {
 	 *
 	 * See https://bugs.eclipse.org/bugs/show_bug.cgi?id=346116
 	 */
-	public void testTranslateContainers() throws Exception {
+	public void testTranslateContainers() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		createLaunchConfiguration(fgJarProject, LAUNCHCONFIGURATIONS, A_RUN_JAR);
 		ILaunchConfiguration config = getLaunchConfiguration(fgJarProject, LAUNCHCONFIGURATIONS, A_RUN_JAR);
 		IRuntimeClasspathEntry[] entries = JavaRuntime.computeUnresolvedSourceLookupPath(config);
@@ -146,7 +146,7 @@ public class JarSourceLookupTests extends AbstractDebugTest {
 			assertTrue("There must be computed containers", containers.length > 0);
 			//the number of containers is M + 2, where M is unknown across JREs, 1 for the project container and 1 for the JAR we are looking for
 			assertTrue("There should be at least 2 containers returned", containers.length >= 2);
-			for (int i = 0; i < containers.length; i++) {
+			for (int i = 0; i < containers.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				ISourceContainer sourceContainer = containers[i];
 				if ("sample.jar".equals(sourceContainer.getName()) && sourceContainer instanceof PackageFragmentRootSourceContainer) {
 					PackageFragmentRootSourceContainer container = (PackageFragmentRootSourceContainer) sourceContainer;
@@ -155,24 +155,24 @@ public class JarSourceLookupTests extends AbstractDebugTest {
 					}
 				}
 			}
-			StringBuilder dump = new StringBuilder();
-			for (ISourceContainer sc : containers) {
-				dump.append(sc.getName());
+			StringBuilder dump = new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
+			for (ISourceContainer sc : containers) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
+				dump.append(sc.getName()); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				if (sc instanceof PackageFragmentRootSourceContainer) {
 					PackageFragmentRootSourceContainer pfsc = (PackageFragmentRootSourceContainer) sc;
-					dump.append(" with path: ").append(pfsc.getPath());
+					dump.append(" with path: ").append(pfsc.getPath()); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				}
-				dump.append(", ");
+				dump.append(", "); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			}
 			dump.setLength(dump.length() - 2);
-			dump.append(".\n Those containers were resolved from: ");
-			for (IRuntimeClasspathEntry cpe : resolved) {
-				dump.append(cpe);
-				dump.append(", ");
+			dump.append(".\n Those containers were resolved from: "); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+			for (IRuntimeClasspathEntry cpe : resolved) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
+				dump.append(cpe); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+				dump.append(", "); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			}
 
 			dump.setLength(dump.length() - 2);
-			fail("We did not find a source container that was a PackageFragmentRootSourceContainer "
+			fail("We did not find a source container that was a PackageFragmentRootSourceContainer " //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 					+ "and had the name " + SAMPLE_JAR_PATH + ", but found source containers: " + dump);
 		}
 		finally {
@@ -185,7 +185,7 @@ public class JarSourceLookupTests extends AbstractDebugTest {
 	 *
 	 * See https://bugs.eclipse.org/bugs/show_bug.cgi?id=346116
 	 */
-	public void testInspectClassFileFromJar() throws Exception {
+	public void testInspectClassFileFromJar() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		createLaunchConfiguration(fgJarProject, LAUNCHCONFIGURATIONS, A_RUN_JAR);
 		createLineBreakpoint(21, A_RUN_JAR);
 		ILaunchConfiguration config = getLaunchConfiguration(fgJarProject, LAUNCHCONFIGURATIONS, A_RUN_JAR);
@@ -210,7 +210,7 @@ public class JarSourceLookupTests extends AbstractDebugTest {
 	 *
 	 * See https://bugs.eclipse.org/bugs/show_bug.cgi?id=346116
 	 */
-	public void testShowClassFileFromJar() throws Exception {
+	public void testShowClassFileFromJar() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		createLaunchConfiguration(fgJarProject, LAUNCHCONFIGURATIONS, A_RUN_JAR);
 		createLineBreakpoint(21, A_RUN_JAR);
 		ILaunchConfiguration config = getLaunchConfiguration(fgJarProject, LAUNCHCONFIGURATIONS, A_RUN_JAR);

@@ -30,7 +30,7 @@ public class TestAll {
 	 * NB2: The last element must be the VMDeathEventTest class since
 	 *      it shuts the VM down.
 	 */
-	protected static Vector<Class<?>> getAllTestCases(VMInformation info) {
+	protected static Vector<Class<?>> getAllTestCases(VMInformation info) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		Vector<Class<?>> classes = new Vector<>();
 		classes.addElement(AccessibleTest.class);
 		classes.addElement(ArrayReferenceTest.class);
@@ -100,7 +100,7 @@ public class TestAll {
 	 * Run all tests with the given arguments.
 	 * @see AbstractJDITest for details on the arguments.
 	 */
-	public static void main(String[] arguments) throws Throwable {
+	public static void main(String[] arguments) throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		// Create test result
 		TextTestResult result= new TextTestResult();
 
@@ -120,7 +120,7 @@ public class TestAll {
 
 		// Run the other tests
 		Enumeration<Class<?>> enumeration= classes.elements();
-		while (enumeration.hasMoreElements()) {
+		while (enumeration.hasMoreElements()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			Class<?> testClass= enumeration.nextElement();
 			test= run(result, testClass, arguments, info);
 			info= test.getVMInfo(); // In case the test has changed this info
@@ -138,7 +138,7 @@ public class TestAll {
 	 * Returns null if there was a problem with the arguments.
 	 * @see AbstractJDITest for details on the arguments.
 	 */
-	private static AbstractJDITest run(junit.framework.TestResult result, Class<?> testClass, String[] arguments, VMInformation info) throws Throwable {
+	private static AbstractJDITest run(junit.framework.TestResult result, Class<?> testClass, String[] arguments, VMInformation info) throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		// Create test
 		Class<?>[] argTypes= {};
 		Constructor<?> construct = null;
@@ -161,14 +161,14 @@ public class TestAll {
 		test.setInControl(false);
 
 		// Run test
-		System.out.println("\n" + new java.util.Date());
-		System.out.println("Begin testing " + test.getName() + "...");
+		System.out.println("\n" + new java.util.Date()); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
+		System.out.println("Begin testing " + test.getName() + "..."); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		long startNanos = System.nanoTime();
 		test.suite().run(result);
 		long endNanos = System.nanoTime();
 		long runNanos = endNanos - startNanos;
-		System.out.println("\nTime in ms: " + runNanos / 1_000_000L);
-		System.out.println("Done testing " + test.getName() + ".");
+		System.out.println("\nTime in ms: " + runNanos / 1_000_000L); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
+		System.out.println("Done testing " + test.getName() + "."); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 		return test;
 	}

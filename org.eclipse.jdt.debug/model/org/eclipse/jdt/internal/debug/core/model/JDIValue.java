@@ -96,7 +96,7 @@ public class JDIValue extends JDIDebugElement implements IJavaValue {
 	 * Creates the appropriate kind of value - i.e. a primitive value, object,
 	 * class object, array, <code>null</code> or void.
 	 */
-	public static JDIValue createValue(JDIDebugTarget target, Value value) {
+	public static JDIValue createValue(JDIDebugTarget target, Value value) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		if (value == null) {
 			return new JDINullValue(target);
 		}
@@ -121,7 +121,7 @@ public class JDIValue extends JDIDebugElement implements IJavaValue {
 	/**
 	 * @see IValue#getValueString()
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public String getValueString() throws DebugException {
 		if (fValue == null) {
 			return JDIDebugModelMessages.JDIValue_null_4;
@@ -142,11 +142,11 @@ public class JDIValue extends JDIDebugElement implements IJavaValue {
 			}
 		}
 		if (fValue instanceof ObjectReference) {
-			StringBuilder name = new StringBuilder();
+			StringBuilder name = new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 			if (fValue instanceof ClassObjectReference) {
-				name.append('(');
-				name.append(((ClassObjectReference) fValue).reflectedType());
-				name.append(')');
+				name.append('('); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+				name.append(((ClassObjectReference) fValue).reflectedType()); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+				name.append(')'); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			}
 			long id = 0;
 			try {
@@ -160,8 +160,8 @@ public class JDIValue extends JDIDebugElement implements IJavaValue {
 				// #targetRequestFailed will thrown an exception
 				return null;
 			}
-			name.append(" "); //$NON-NLS-1$
-			name.append(MessageFormat.format(
+			name.append(" "); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+			name.append(MessageFormat.format( //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 					JDIDebugModelMessages.JDIValue_id_8,
 					new Object[] { String.valueOf(id) }));
 			return name.toString();
@@ -238,16 +238,16 @@ public class JDIValue extends JDIDebugElement implements IJavaValue {
 	 *
 	 * @return list of variable children
 	 */
-	protected synchronized List<IJavaVariable> getVariablesList() throws DebugException {
+	protected synchronized List<IJavaVariable> getVariablesList() throws DebugException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		if (fVariables != null) {
 			return fVariables;
 		} else if (fValue instanceof ObjectReference) {
 			ObjectReference object = (ObjectReference) fValue;
-			fVariables = new ArrayList<>();
+			fVariables = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 			if (isArray()) {
 				try {
 					int length = getArrayLength();
-					for (int i = 0; i < length; i++) {
+					for (int i = 0; i < length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 						fVariables.add(new JDIArrayEntryVariable(
 								getJavaDebugTarget(), getArrayReference(), i,
 								fLogicalParent));
@@ -275,13 +275,13 @@ public class JDIValue extends JDIDebugElement implements IJavaValue {
 					return null;
 				}
 				Iterator<Field> list = fields.iterator();
-				while (list.hasNext()) {
+				while (list.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 					Field field = list.next();
 					fVariables.add(new JDIFieldVariable(
 							(JDIDebugTarget) getDebugTarget(), field, object,
 							fLogicalParent));
 				}
-				Collections.sort(fVariables, (a, b) -> sortChildren(a, b));
+				Collections.sort(fVariables, (a, b) -> sortChildren(a, b)); //FLLDCIM: MARK — M16 SORT_LANE CALL
 			}
 
 			return fVariables;
@@ -294,7 +294,7 @@ public class JDIValue extends JDIDebugElement implements IJavaValue {
 	 * Group statics and instance variables, sort alphabetically within each
 	 * group.
 	 */
-	protected int sortChildren(Object a, Object b) {
+	protected int sortChildren(Object a, Object b) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IJavaVariable v1 = (IJavaVariable) a;
 		IJavaVariable v2 = (IJavaVariable) b;
 
@@ -334,7 +334,7 @@ public class JDIValue extends JDIDebugElement implements IJavaValue {
 	/**
 	 * @see IValue#isAllocated()
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public boolean isAllocated() throws DebugException {
 		if (fAllocated) {
 			if (fValue instanceof ObjectReference) {
@@ -385,7 +385,7 @@ public class JDIValue extends JDIDebugElement implements IJavaValue {
 	 *
 	 * @see org.eclipse.jdt.debug.core.IJavaValue#getGenericSignature()
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public String getGenericSignature() throws DebugException {
 		try {
 			if (fValue != null) {

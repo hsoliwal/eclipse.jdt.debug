@@ -48,7 +48,7 @@ public class ExternalArchiveSourceContainerTests extends AbstractDebugTest {
 		director.initializeParticipants();
 		director.setFindDuplicates(duplicates);
 		LibraryLocation[] locations = JavaRuntime.getLibraryLocations(JavaRuntime.getDefaultVMInstall());
-		for (int i = 0; i < locations.length; i++) {
+		for (int i = 0; i < locations.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			LibraryLocation location = locations[i];
 			IPath path = location.getSystemLibrarySourcePath();
 			if (path != null && !path.isEmpty()) {
@@ -70,7 +70,7 @@ public class ExternalArchiveSourceContainerTests extends AbstractDebugTest {
 		director.setFindDuplicates(duplicates);
 		IPath p = new Path(path);
 		File file = JavaTestPlugin.getDefault().getFileInPlugin(p);
-		assertTrue("file " + path +  " does not exist", file != null && file.exists());
+		assertTrue("file " + path +  " does not exist", file != null && file.exists()); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		ExternalArchiveSourceContainer container = new ExternalArchiveSourceContainer(file.getAbsolutePath(), detect);
 		director.setSourceContainers(new ISourceContainer[]{container});
 		return container;
@@ -157,18 +157,18 @@ public class ExternalArchiveSourceContainerTests extends AbstractDebugTest {
 	/**
 	 * Test for bug 515941 (ConcurrentModificationException on container dispose)
 	 */
-	public void testDisposed() throws Exception {
+	public void testDisposed() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		int threads = Math.min(Runtime.getRuntime().availableProcessors(), 4);
 		ExecutorService exec = Executors.newFixedThreadPool(threads);
 		AtomicReference<Throwable> err = new AtomicReference<>();
 		AtomicReference<ExternalArchiveSourceContainer> container = new AtomicReference<>();
 		AtomicReference<Boolean> stop = new AtomicReference<>(Boolean.FALSE);
 		CountDownLatch latch = new CountDownLatch(1);
-		for (int i = 0; i < threads; i++) {
+		for (int i = 0; i < threads; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			exec.submit(() -> {
 				try {
 					latch.await();
-					while (!stop.get()) {
+					while (!stop.get()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 						ExternalArchiveSourceContainer c = container.get();
 						if (c != null) {
 							c.dispose();
@@ -182,7 +182,7 @@ public class ExternalArchiveSourceContainerTests extends AbstractDebugTest {
 		}
 		latch.countDown();
 		try {
-			for (int i = 0; i < 5_000; i++) {
+			for (int i = 0; i < 5_000; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				ExternalArchiveSourceContainer cont = getContainer("testresources/source-test.zip", true, false);
 				try {
 					container.set(cont);

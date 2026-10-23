@@ -195,7 +195,7 @@ public class MirrorImpl implements Mirror {
 	 *
 	 * @return Returns reply data.
 	 */
-	public JdwpReplyPacket requestVM(int command, byte[] outData) {
+	public JdwpReplyPacket requestVM(int command, byte[] outData) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		JdwpCommandPacket commandPacket = new JdwpCommandPacket(command);
 		commandPacket.setData(outData);
 		long sent = System.currentTimeMillis();
@@ -207,15 +207,15 @@ public class MirrorImpl implements Mirror {
 				.getReply(commandPacket);
 		long recieved = System.currentTimeMillis();
 		if (JDIDebugOptions.DEBUG_JDI_REQUEST_TIMES) {
-			StringBuilder buf = new StringBuilder();
-			buf.append(JDIDebugOptions.FORMAT.format(Instant.ofEpochMilli(sent)));
-			buf.append(" JDI Request: "); //$NON-NLS-1$
-			buf.append(commandPacket.toString());
-			buf.append("\n\tResponse Time: "); //$NON-NLS-1$
-			buf.append(recieved - sent);
-			buf.append("ms"); //$NON-NLS-1$
-			buf.append(" length: "); //$NON-NLS-1$
-			buf.append(reply.getLength());
+			StringBuilder buf = new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
+			buf.append(JDIDebugOptions.FORMAT.format(Instant.ofEpochMilli(sent))); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+			buf.append(" JDI Request: "); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+			buf.append(commandPacket.toString()); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+			buf.append("\n\tResponse Time: "); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+			buf.append(recieved - sent); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+			buf.append("ms"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+			buf.append(" length: "); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+			buf.append(reply.getLength()); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			JDIDebugOptions.trace(buf.toString());
 		}
 		if (fVerboseWriter != null) {
@@ -286,7 +286,7 @@ public class MirrorImpl implements Mirror {
 	/**
 	 * Performs default error handling.
 	 */
-	public void defaultReplyErrorHandler(int error) {
+	public void defaultReplyErrorHandler(int error) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		switch (error) {
 		case JdwpReplyPacket.NONE:
 			break;
@@ -312,7 +312,7 @@ public class MirrorImpl implements Mirror {
 			throw new VMDisconnectedException();
 		default:
 			throw new InternalException(
-					JDIMessages.MirrorImpl_Got_error_code_in_reply___1 + error,
+					JDIMessages.MirrorImpl_Got_error_code_in_reply___1 + error, //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 					error);
 		}
 	}
@@ -322,7 +322,7 @@ public class MirrorImpl implements Mirror {
 	 * Jdwp packet.
 	 */
 	public void defaultIOExceptionHandler(Exception e) {
-		throw new InternalException(JDIMessages.MirrorImpl_Got_invalid_data___2
+		throw new InternalException(JDIMessages.MirrorImpl_Got_invalid_data___2 //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 				+ e);
 	}
 

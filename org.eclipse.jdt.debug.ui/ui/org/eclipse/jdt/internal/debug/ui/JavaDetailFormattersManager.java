@@ -66,7 +66,7 @@ import com.sun.jdi.InvocationException;
 /**
  * Generates strings for the detail pane of views displaying java elements.
  */
-public class JavaDetailFormattersManager implements IPropertyChangeListener, IDebugEventSetListener, ILaunchesListener {
+public class JavaDetailFormattersManager implements IPropertyChangeListener, IDebugEventSetListener, ILaunchesListener { //FLLDCIM: MARK — T06  IMPLEMENTS
 	/**
 	 * The default detail formatters manager.
 	 */
@@ -103,9 +103,9 @@ public class JavaDetailFormattersManager implements IPropertyChangeListener, IDe
 		populateDetailFormattersMap();
 		JDIDebugUIPlugin.getDefault().getPreferenceStore().addPropertyChangeListener(this);
 		DebugPlugin.getDefault().getLaunchManager().addLaunchListener(this);
-		DebugPlugin.getDefault().addDebugEventListener(this);
+		DebugPlugin.getDefault().addDebugEventListener(this); //FLLDCIM: MARK — T27 DEBUG_EVENT_ADAPTER CALL
 		DebugUITools.getPreferenceStore().addPropertyChangeListener(this);
-		fCacheMap= new HashMap<>();
+		fCacheMap= new HashMap<>(); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
 	}
 
 	/**
@@ -113,8 +113,8 @@ public class JavaDetailFormattersManager implements IPropertyChangeListener, IDe
 	 */
 	private void populateDetailFormattersMap() {
 		String[] detailFormattersList= JavaDebugOptionsManager.parseList(JDIDebugUIPlugin.getDefault().getPreferenceStore().getString(IJDIPreferencesConstants.PREF_DETAIL_FORMATTERS_LIST));
-		fDetailFormattersMap= new HashMap<>(detailFormattersList.length / 3);
-		for (int i= 0, length= detailFormattersList.length; i < length;) {
+		fDetailFormattersMap= new HashMap<>(detailFormattersList.length / 3); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
+		for (int i= 0, length= detailFormattersList.length; i < length;) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			String typeName= detailFormattersList[i++];
 			String snippet= detailFormattersList[i++].replace('\u0000', ',');
 			boolean enabled= ! JavaDetailFormattersPreferencePage.DETAIL_FORMATTER_IS_DISABLED.equals(detailFormattersList[i++]);
@@ -141,7 +141,7 @@ public class JavaDetailFormattersManager implements IPropertyChangeListener, IDe
 		});
 	}
 
-	private void resolveFormatter(final IJavaValue value, final IJavaThread thread, final IValueDetailListener listener) {
+	private void resolveFormatter(final IJavaValue value, final IJavaThread thread, final IValueDetailListener listener) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		EvaluationListener evaluationListener = new EvaluationListener(value, thread, listener);
 		if (value instanceof IJavaObject) {
 			IJavaObject objectValue= (IJavaObject) value;
@@ -193,13 +193,13 @@ public class JavaDetailFormattersManager implements IPropertyChangeListener, IDe
 		}
 	}
 
-	private IJavaProject getJavaProject(IJavaValue javaValue, IJavaThread thread) throws CoreException {
+	private IJavaProject getJavaProject(IJavaValue javaValue, IJavaThread thread) throws CoreException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 
 		IType type = null;
 		if (javaValue instanceof IJavaArray) {
 			IJavaArrayType arrType = (IJavaArrayType) javaValue.getJavaType();
 			IJavaType compType = arrType.getComponentType();
-			while (compType instanceof IJavaArrayType) {
+			while (compType instanceof IJavaArrayType) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				compType = ((IJavaArrayType)compType).getComponentType();
 			}
 			type = JavaDebugUtils.resolveType(compType);
@@ -233,7 +233,7 @@ public class JavaDetailFormattersManager implements IPropertyChangeListener, IDe
 		try {
 			IJavaInterfaceType[] inter = type.getAllInterfaces();
 			Object formatter = null;
-			for (int i = 0; i < inter.length; i++) {
+			for (int i = 0; i < inter.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				formatter = fDetailFormattersMap.get(inter[i].getName());
 				if(formatter != null) {
 					return (DetailFormatter) formatter;
@@ -294,7 +294,7 @@ public class JavaDetailFormattersManager implements IPropertyChangeListener, IDe
 		return getAssociatedDetailFormatter(type) != null;
 	}
 
-	public DetailFormatter getAssociatedDetailFormatter(IJavaType type) {
+	public DetailFormatter getAssociatedDetailFormatter(IJavaType type) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String typeName = Util.ZERO_LENGTH_STRING;
 		try {
 			if (type instanceof IJavaArrayType javaArray) {
@@ -324,7 +324,7 @@ public class JavaDetailFormattersManager implements IPropertyChangeListener, IDe
 		Collection<DetailFormatter> valuesList= fDetailFormattersMap.values();
 		String[] values= new String[valuesList.size() * 3];
 		int i= 0;
-		for (Iterator<DetailFormatter> iter= valuesList.iterator(); iter.hasNext();) {
+		for (Iterator<DetailFormatter> iter= valuesList.iterator(); iter.hasNext();) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			DetailFormatter detailFormatter= iter.next();
 			values[i++]= detailFormatter.getTypeName();
 			values[i++]= detailFormatter.getSnippet().replace(',','\u0000');
@@ -347,7 +347,7 @@ public class JavaDetailFormattersManager implements IPropertyChangeListener, IDe
 			return snippet;
 		}
 		IJavaInterfaceType[] allInterfaces= type.getAllInterfaces();
-		for (int i= 0; i < allInterfaces.length; i++) {
+		for (int i= 0; i < allInterfaces.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			DetailFormatter detailFormatter= fDetailFormattersMap.get(allInterfaces[i].getName());
 			if (detailFormatter != null && detailFormatter.isEnabled()) {
 				return detailFormatter.getSnippet();
@@ -380,7 +380,7 @@ public class JavaDetailFormattersManager implements IPropertyChangeListener, IDe
 	 * @return the snippet for the given class / super class
 	 * @throws DebugException if there is a problem computing the snippet
 	 */
-	@SuppressWarnings("nls")
+	@SuppressWarnings("nls") //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	private String getDetailFormatterSuperClass(IJavaClassType type) throws DebugException {
 		if (type == null) {
 			return null;
@@ -440,7 +440,7 @@ public class JavaDetailFormattersManager implements IPropertyChangeListener, IDe
 	 * @return the compiled expression to be evaluated
 	 * @throws CoreException is a problem occurs compiling the expression
 	 */
-	private Expression getCompiledExpression(IJavaObject javaObject, IJavaDebugTarget debugTarget, IJavaThread thread) throws CoreException {
+	private Expression getCompiledExpression(IJavaObject javaObject, IJavaDebugTarget debugTarget, IJavaThread thread) throws CoreException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IJavaType type = javaObject.getJavaType();
 		if (type == null) {
 			return null;
@@ -469,7 +469,7 @@ public class JavaDetailFormattersManager implements IPropertyChangeListener, IDe
 					Expression exp = new Expression(res, evaluationEngine);
 					if (exp.getExpression().hasErrors()) {
 						boolean hasModuleError = false;
-						for (int prblemID : exp.getExpression().getProblemIDs()) {
+						for (int prblemID : exp.getExpression().getProblemIDs()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 							if (prblemID == IProblem.ConflictingPackageFromModules || prblemID == IProblem.ConflictingPackageFromOtherModules) {
 								hasModuleError = true;
 							}
@@ -501,7 +501,7 @@ public class JavaDetailFormattersManager implements IPropertyChangeListener, IDe
 	 * @throws CoreException
 	 *             is a problem occurs compiling the expression
 	 */
-	private Expression getCompiledExpression(IJavaPrimitiveValue javaPM, IJavaDebugTarget debugTarget, IJavaThread thread) throws CoreException {
+	private Expression getCompiledExpression(IJavaPrimitiveValue javaPM, IJavaDebugTarget debugTarget, IJavaThread thread) throws CoreException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IJavaType type = javaPM.getJavaType();
 		if (type == null) {
 			return null;
@@ -545,7 +545,7 @@ public class JavaDetailFormattersManager implements IPropertyChangeListener, IDe
 	 *            primitive object
 	 * @return modified expression to be evaluated
 	 */
-	@SuppressWarnings("nls")
+	@SuppressWarnings("nls") //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	private String primitiveSnippets(String snippet, String typeName, IJavaPrimitiveValue primitiveValue) {
 		String modified = null;
 		if (typeName.equals("float")) {
@@ -582,7 +582,7 @@ public class JavaDetailFormattersManager implements IPropertyChangeListener, IDe
 	/**
 	 * @see org.eclipse.jface.util.IPropertyChangeListener#propertyChange(PropertyChangeEvent)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public void propertyChange(PropertyChangeEvent event) {
 		String property = event.getProperty();
 		if (property.equals(IJDIPreferencesConstants.PREF_DETAIL_FORMATTERS_LIST) ||
@@ -608,7 +608,7 @@ public class JavaDetailFormattersManager implements IPropertyChangeListener, IDe
 	 */
 	@Override
 	public void handleDebugEvents(DebugEvent[] events) {
-		for (int i = 0; i < events.length; i++) {
+		for (int i = 0; i < events.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			DebugEvent event = events[i];
 			if (event.getSource() instanceof IJavaDebugTarget && event.getKind() == DebugEvent.TERMINATE) {
 				deleteCacheForTarget((IJavaDebugTarget) event.getSource());
@@ -635,10 +635,10 @@ public class JavaDetailFormattersManager implements IPropertyChangeListener, IDe
 	 */
 	@Override
 	public void launchesRemoved(ILaunch[] launches) {
-		for (int i = 0; i < launches.length; i++) {
+		for (int i = 0; i < launches.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			ILaunch launch = launches[i];
 			IDebugTarget[] debugTargets= launch.getDebugTargets();
-			for (int j = 0; j < debugTargets.length; j++) {
+			for (int j = 0; j < debugTargets.length; j++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				if (debugTargets[j] instanceof IJavaDebugTarget) {
 					deleteCacheForTarget((IJavaDebugTarget)debugTargets[j]);
 				}
@@ -653,7 +653,7 @@ public class JavaDetailFormattersManager implements IPropertyChangeListener, IDe
 	 * @param debugTarget the target
 	 */
 	private synchronized void deleteCacheForTarget(IJavaDebugTarget debugTarget) {
-		for (Iterator<Key> iter= fCacheMap.keySet().iterator(); iter.hasNext();) {
+		for (Iterator<Key> iter= fCacheMap.keySet().iterator(); iter.hasNext();) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			Key key= iter.next();
 			if ((key).fDebugTarget == debugTarget) {
 				iter.remove();
@@ -744,26 +744,26 @@ public class JavaDetailFormattersManager implements IPropertyChangeListener, IDe
 			fListener= listener;
 		}
 
-		@Override
+		@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		public void evaluationComplete(IEvaluationResult result) {
 			if (result.hasErrors()) {
-				StringBuilder error= new StringBuilder(DebugUIMessages.JavaDetailFormattersManager_Detail_formatter_error___1);
+				StringBuilder error= new StringBuilder(DebugUIMessages.JavaDetailFormattersManager_Detail_formatter_error___1); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 				DebugException exception= result.getException();
 				if (exception != null) {
 					Throwable throwable= exception.getStatus().getException();
-					error.append("\n\t\t"); //$NON-NLS-1$
+					error.append("\n\t\t"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 					if (throwable instanceof InvocationException) {
-						error.append(NLS.bind(DebugUIMessages.JavaDetailFormattersManager_An_exception_occurred___0__3, ((InvocationException) throwable).exception().referenceType().name()));
+						error.append(NLS.bind(DebugUIMessages.JavaDetailFormattersManager_An_exception_occurred___0__3, ((InvocationException) throwable).exception().referenceType().name())); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 					} else if (throwable instanceof UnsupportedOperationException) {
-						error = new StringBuilder();
-						error.append(DebugUIMessages.JavaDetailFormattersManager_7);
+						error = new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
+						error.append(DebugUIMessages.JavaDetailFormattersManager_7); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 					} else {
-						error.append(exception.getStatus().getMessage());
+						error.append(exception.getStatus().getMessage()); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 					}
 				} else {
 					String[] errors= result.getErrorMessages();
-					for (int i= 0, length= errors.length; i < length; i++) {
-						error.append("\n\t\t").append(errors[i]); //$NON-NLS-1$
+					for (int i= 0, length= errors.length; i < length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
+						error.append("\n\t\t").append(errors[i]); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 					}
 				}
 				fListener.detailComputed(fValue, error.toString());
@@ -776,7 +776,7 @@ public class JavaDetailFormattersManager implements IPropertyChangeListener, IDe
 			}
 		}
 
-		public void valueToString(final IJavaValue objectValue) throws DebugException {
+		public void valueToString(final IJavaValue objectValue) throws DebugException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 			String nonEvalResult = null;
 			StringBuilder result= null;
 			if (objectValue.getSignature() == null) {
@@ -784,16 +784,16 @@ public class JavaDetailFormattersManager implements IPropertyChangeListener, IDe
 				nonEvalResult = DebugUIMessages.JavaDetailFormattersManager_null;
 			} else if (objectValue instanceof IJavaPrimitiveValue) {
 				// no need to spawn evaluate for a primitive value
-				result = new StringBuilder();
+				result = new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 				appendJDIPrimitiveValueString(result, objectValue);
 			} else if (fThread == null || !fThread.isSuspended()) {
 				// no thread available
-				result = new StringBuilder();
-				result.append(DebugUIMessages.JavaDetailFormattersManager_no_suspended_threads);
+				result = new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
+				result.append(DebugUIMessages.JavaDetailFormattersManager_no_suspended_threads); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				appendJDIValueString(result, objectValue);
 			} else if (objectValue instanceof IJavaObject && STRING_SIGNATURE.equals(objectValue.getSignature())) {
 				// no need to spawn evaluate for a java.lang.String
-				result = new StringBuilder();
+				result = new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 				appendJDIValueString(result, objectValue);
 			}
 			if (result != null) {
@@ -807,7 +807,7 @@ public class JavaDetailFormattersManager implements IPropertyChangeListener, IDe
 			IEvaluationRunnable eval = new IEvaluationRunnable() {
 				@Override
 				public void run(IJavaThread thread, IProgressMonitor monitor) throws DebugException {
-					StringBuilder buf= new StringBuilder();
+					StringBuilder buf= new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 					if (objectValue instanceof IJavaArray) {
 						appendArrayDetail(buf, (IJavaArray) objectValue);
 					} else if (objectValue instanceof IJavaObject) {
@@ -827,8 +827,8 @@ public class JavaDetailFormattersManager implements IPropertyChangeListener, IDe
 		 * Arrays.asList().toString() to minimize toString() calls on remote target (i.e. one call to
 		 * List.toString() instead of one call per item in the array).
 		 */
-		protected void appendArrayDetail(StringBuilder result, IJavaArray arrayValue) throws DebugException {
-			result.append('[');
+		protected void appendArrayDetail(StringBuilder result, IJavaArray arrayValue) throws DebugException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
+			result.append('['); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			boolean partial = false;
 			IJavaValue[] arrayValues = null;
 			int maxLength = getMaxDetailLength();
@@ -840,7 +840,7 @@ public class JavaDetailFormattersManager implements IPropertyChangeListener, IDe
 					partial = true;
 					IVariable[] variables = arrayValue.getVariables(0, maxEntries);
 					arrayValues = new IJavaValue[variables.length];
-					for (int i = 0; i < variables.length; i++) {
+					for (int i = 0; i < variables.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 						arrayValues[i] = (IJavaValue) variables[i].getValue();
 					}
 				} else {
@@ -848,11 +848,11 @@ public class JavaDetailFormattersManager implements IPropertyChangeListener, IDe
 				}
 			} catch (DebugException de) {
 				JDIDebugUIPlugin.log(de);
-				result.append(de.getStatus().getMessage());
+				result.append(de.getStatus().getMessage()); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				return;
 			}
 
-			for (int i= 0; i < arrayValues.length; i++) {
+			for (int i= 0; i < arrayValues.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				IJavaValue value= arrayValues[i];
 				if (value instanceof IJavaArray) {
 					appendArrayDetail(result, (IJavaArray) value);
@@ -862,29 +862,29 @@ public class JavaDetailFormattersManager implements IPropertyChangeListener, IDe
 					appendJDIValueString(result, value);
 				}
 				if (i < arrayValues.length - 1) {
-					result.append(',');
-					result.append(' ');
+					result.append(','); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+					result.append(' '); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				}
 				if (partial && result.length() > maxLength) {
 					break;
 				}
 			}
 			if (!partial) {
-				result.append(']');
+				result.append(']'); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			}
 		}
 
 		protected void appendJDIPrimitiveValueString(StringBuilder result, IJavaValue value) throws DebugException {
-			result.append(value.getValueString());
+			result.append(value.getValueString()); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		}
 
 
 		protected void appendJDIValueString(StringBuilder result, IJavaValue value) throws DebugException {
-			result.append(value.getValueString());
+			result.append(value.getValueString()); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		}
 
 
-		protected void appendObjectDetail(StringBuilder result, IJavaObject objectValue) throws DebugException {
+		protected void appendObjectDetail(StringBuilder result, IJavaObject objectValue) throws DebugException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 			if(objectValue instanceof JDINullValue) {
 				appendJDIValueString(result, objectValue);
 				return;
@@ -896,7 +896,7 @@ public class JavaDetailFormattersManager implements IPropertyChangeListener, IDe
 
 				IJavaValue toStringValue= objectValue.sendMessage(EvaluationListener.fgToString, EvaluationListener.fgToStringSignature, null, fThread, false);
 				if (toStringValue == null) {
-					result.append(DebugUIMessages.JavaDetailFormattersManager__unknown_);
+					result.append(DebugUIMessages.JavaDetailFormattersManager__unknown_); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				} else {
 					appendJDIValueString(result, toStringValue);
 				}

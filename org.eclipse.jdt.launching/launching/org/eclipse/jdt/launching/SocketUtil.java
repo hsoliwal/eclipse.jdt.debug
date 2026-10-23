@@ -43,7 +43,7 @@ public class SocketUtil {
 	@Deprecated
 	public static int findUnusedLocalPort(String host, int searchFrom, int searchTo) {
 
-		for (int i= 0; i < 10; i++) {
+		for (int i= 0; i < 10; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			int port= getRandomPort(searchFrom, searchTo);
 			try (Socket s = new Socket(host, port)) {
 				s.getLocalPort(); // avoid warning on s being unused

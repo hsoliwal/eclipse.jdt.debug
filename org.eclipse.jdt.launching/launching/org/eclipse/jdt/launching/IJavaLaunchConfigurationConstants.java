@@ -31,32 +31,32 @@ public interface IJavaLaunchConfigurationConstants {
 	 * Identifier for the Local Java Application launch configuration type
 	 * (value <code>"org.eclipse.jdt.launching.localJavaApplication"</code>).
 	 */
-	public static final String ID_JAVA_APPLICATION = LaunchingPlugin.getUniqueIdentifier() + ".localJavaApplication"; //$NON-NLS-1$
+	public static final String ID_JAVA_APPLICATION = LaunchingPlugin.getUniqueIdentifier() + ".localJavaApplication"; //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 	/**
 	 * Identifier for the Remote Java Application launch configuration type
 	 * (value <code>"org.eclipse.jdt.launching.remoteJavaApplication"</code>).
 	 */
-	public static final String ID_REMOTE_JAVA_APPLICATION = LaunchingPlugin.getUniqueIdentifier() + ".remoteJavaApplication"; //$NON-NLS-1$
+	public static final String ID_REMOTE_JAVA_APPLICATION = LaunchingPlugin.getUniqueIdentifier() + ".remoteJavaApplication"; //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 	/**
 	 * Identifier for the Java Applet launch configuration type
 	 * (value <code>"org.eclipse.jdt.launching.javaApplet"</code>).
 	 */
-	public static final String ID_JAVA_APPLET = LaunchingPlugin.getUniqueIdentifier() + ".javaApplet"; //$NON-NLS-1$
+	public static final String ID_JAVA_APPLET = LaunchingPlugin.getUniqueIdentifier() + ".javaApplet"; //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 	/**
 	 * Identifier for the standard Socket Attaching VM connector
 	 * (value <code>"org.eclipse.jdt.launching.socketAttachConnector"</code>).
 	 */
-	public static final String ID_SOCKET_ATTACH_VM_CONNECTOR = LaunchingPlugin.getUniqueIdentifier() + ".socketAttachConnector"; //$NON-NLS-1$
+	public static final String ID_SOCKET_ATTACH_VM_CONNECTOR = LaunchingPlugin.getUniqueIdentifier() + ".socketAttachConnector"; //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 	/**
 	 * Identifier for the standard Socket Listening VM connector
 	 * (value <code>"org.eclipse.jdt.launching.socketListenConnector"</code>).
 	 * @since 3.4
 	 */
-	public static final String ID_SOCKET_LISTEN_VM_CONNECTOR = LaunchingPlugin.getUniqueIdentifier() + ".socketListenConnector"; //$NON-NLS-1$
+	public static final String ID_SOCKET_LISTEN_VM_CONNECTOR = LaunchingPlugin.getUniqueIdentifier() + ".socketListenConnector"; //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 	/**
 	 * Identifier for the java process type, which is annotated on processes created
@@ -74,20 +74,20 @@ public interface IJavaLaunchConfigurationConstants {
 	 * This constant is referenced from an upper-layer bundle
 	 * @see org.eclipse.jdt.internal.debug.core.model.JDIDebugTarget#prepareBreakpointsSearchScope()
 	 */
-	public static final String ATTR_PROJECT_NAME = LaunchingPlugin.getUniqueIdentifier() + ".PROJECT_ATTR"; //$NON-NLS-1$
+	public static final String ATTR_PROJECT_NAME = LaunchingPlugin.getUniqueIdentifier() + ".PROJECT_ATTR"; //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 	/**
 	 * Launch configuration attribute key. The value is a fully qualified name
 	 * of a main type to launch.
 	 */
-	public static final String ATTR_MAIN_TYPE_NAME = LaunchingPlugin.getUniqueIdentifier() + ".MAIN_TYPE";	 //$NON-NLS-1$
+	public static final String ATTR_MAIN_TYPE_NAME = LaunchingPlugin.getUniqueIdentifier() + ".MAIN_TYPE";	 //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 	/**
 	 * Launch configuration attribute key. The value is the module name for the main type to launch.
 	 *
 	 * @since 3.17
 	 */
-	public static final String ATTR_MODULE_NAME = LaunchingPlugin.getUniqueIdentifier() + ".MODULE_NAME"; //$NON-NLS-1$
+	public static final String ATTR_MODULE_NAME = LaunchingPlugin.getUniqueIdentifier() + ".MODULE_NAME"; //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 	/**
 	 * Launch configuration attribute key. The value is a boolean specifying
@@ -96,21 +96,21 @@ public interface IJavaLaunchConfigurationConstants {
 	 *
 	 * @since 2.1
 	 */
-	public static final String ATTR_STOP_IN_MAIN = LaunchingPlugin.getUniqueIdentifier() + ".STOP_IN_MAIN";	 //$NON-NLS-1$
+	public static final String ATTR_STOP_IN_MAIN = LaunchingPlugin.getUniqueIdentifier() + ".STOP_IN_MAIN";	 //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 	/**
 	 * Launch configuration attribute key. The value is a string specifying
 	 * program arguments for a Java launch configuration, as they should appear
 	 * on the command line.
 	 */
-	public static final String ATTR_PROGRAM_ARGUMENTS = LaunchingPlugin.getUniqueIdentifier() + ".PROGRAM_ARGUMENTS"; //$NON-NLS-1$
+	public static final String ATTR_PROGRAM_ARGUMENTS = LaunchingPlugin.getUniqueIdentifier() + ".PROGRAM_ARGUMENTS"; //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 	/**
 	 * Launch configuration attribute key. The value is a string specifying
 	 * VM arguments for a Java launch configuration, as they should appear
 	 * on the command line.
 	 */
-	public static final String ATTR_VM_ARGUMENTS = LaunchingPlugin.getUniqueIdentifier() + ".VM_ARGUMENTS";	 //$NON-NLS-1$
+	public static final String ATTR_VM_ARGUMENTS = LaunchingPlugin.getUniqueIdentifier() + ".VM_ARGUMENTS";	 //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 	/**
 	 * Launch configuration attribute key. The value is a string specifying a
@@ -122,7 +122,7 @@ public interface IJavaLaunchConfigurationConstants {
 	 * launch configuration, the working directory is inherited from the current
 	 * process.
 	 */
-	public static final String ATTR_WORKING_DIRECTORY = LaunchingPlugin.getUniqueIdentifier() + ".WORKING_DIRECTORY";	 //$NON-NLS-1$
+	public static final String ATTR_WORKING_DIRECTORY = LaunchingPlugin.getUniqueIdentifier() + ".WORKING_DIRECTORY";	 //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 	/**
 	 * Launch configuration attribute key. The value is a path identifying the JRE used
@@ -147,7 +147,7 @@ public interface IJavaLaunchConfigurationConstants {
 	 * @deprecated use <code>ATTR_JRE_CONTAINER_PATH</code>
 	 */
 	@Deprecated
-	public static final String ATTR_VM_INSTALL_NAME = LaunchingPlugin.getUniqueIdentifier() + ".VM_INSTALL_NAME"; //$NON-NLS-1$
+	public static final String ATTR_VM_INSTALL_NAME = LaunchingPlugin.getUniqueIdentifier() + ".VM_INSTALL_NAME"; //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 	/**
 	 * Launch configuration attribute key. The value is an identifier of
@@ -159,7 +159,7 @@ public interface IJavaLaunchConfigurationConstants {
 	 * @deprecated use <code>ATTR_JRE_CONTAINER_PATH</code>
 	 */
 	@Deprecated
-	public static final String ATTR_VM_INSTALL_TYPE = LaunchingPlugin.getUniqueIdentifier() + ".VM_INSTALL_TYPE_ID"; //$NON-NLS-1$
+	public static final String ATTR_VM_INSTALL_TYPE = LaunchingPlugin.getUniqueIdentifier() + ".VM_INSTALL_TYPE_ID"; //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 	/**
 	 * Launch configuration attribute key. The value is a Map of attributes specific
@@ -168,14 +168,14 @@ public interface IJavaLaunchConfigurationConstants {
 	 * when launching a VM. The attributes in the map are implementation dependent
 	 * and are limited to String keys and values.
 	 */
-	public static final String ATTR_VM_INSTALL_TYPE_SPECIFIC_ATTRS_MAP = LaunchingPlugin.getUniqueIdentifier() + "VM_INSTALL_TYPE_SPECIFIC_ATTRS_MAP"; //$NON-NLS-1$
+	public static final String ATTR_VM_INSTALL_TYPE_SPECIFIC_ATTRS_MAP = LaunchingPlugin.getUniqueIdentifier() + "VM_INSTALL_TYPE_SPECIFIC_ATTRS_MAP"; //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 	/**
 	 * Launch configuration attribute key. The value is an identifier of
 	 * a VM connector, specifying a connector to use when attaching to
 	 * a remote VM.
 	 */
-	public static final String ATTR_VM_CONNECTOR= LaunchingPlugin.getUniqueIdentifier() + ".VM_CONNECTOR_ID"; //$NON-NLS-1$
+	public static final String ATTR_VM_CONNECTOR= LaunchingPlugin.getUniqueIdentifier() + ".VM_CONNECTOR_ID"; //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 	/**
 	 * Launch configuration attribute key. The attribute value is an ordered list of strings
@@ -183,7 +183,7 @@ public interface IJavaLaunchConfigurationConstants {
 	 * classpath is generated by the classpath provider associated with a launch
 	 * configuration (via the <code>ATTR_CLASSPATH_PROVIDER</code> attribute).
 	 */
-	public static final String ATTR_CLASSPATH = LaunchingPlugin.getUniqueIdentifier() + ".CLASSPATH";	 //$NON-NLS-1$
+	public static final String ATTR_CLASSPATH = LaunchingPlugin.getUniqueIdentifier() + ".CLASSPATH";	 //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 	/**
 	 * Launch configuration attribute key. The attribute value is an ordered list of strings which are mementos for runtime module path entries. When
@@ -192,7 +192,7 @@ public interface IJavaLaunchConfigurationConstants {
 	 *
 	 * @since 3.10
 	 */
-	public static final String ATTR_MODULEPATH = LaunchingPlugin.getUniqueIdentifier() + ".MODULEPATH"; //$NON-NLS-1$
+	public static final String ATTR_MODULEPATH = LaunchingPlugin.getUniqueIdentifier() + ".MODULEPATH"; //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 	/**
 	 * Launch configuration attribute key. The value is a boolean specifying
@@ -206,7 +206,7 @@ public interface IJavaLaunchConfigurationConstants {
 	 * This constant is referenced from an upper-layer bundle
 	 * @see org.eclipse.jdt.internal.debug.core.model.JDIDebugTarget#prepareBreakpointsSearchScope()
 	 */
-	public static final String ATTR_DEFAULT_CLASSPATH = LaunchingPlugin.getUniqueIdentifier() + ".DEFAULT_CLASSPATH"; //$NON-NLS-1$
+	public static final String ATTR_DEFAULT_CLASSPATH = LaunchingPlugin.getUniqueIdentifier() + ".DEFAULT_CLASSPATH"; //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 	/**
 	 * Launch configuration attribute key. The value is a boolean specifying whether a default build path module cli options should be used when
@@ -215,7 +215,7 @@ public interface IJavaLaunchConfigurationConstants {
 	 *
 	 * @since 3.10
 	 */
-	public static final String ATTR_DEFAULT_MODULE_CLI_OPTIONS = LaunchingPlugin.getUniqueIdentifier() + ".DEFAULT_MODULE_CLI_OPTIONS"; //$NON-NLS-1$
+	public static final String ATTR_DEFAULT_MODULE_CLI_OPTIONS = LaunchingPlugin.getUniqueIdentifier() + ".DEFAULT_MODULE_CLI_OPTIONS"; //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 	/**
 	 * Launch configuration attribute key. The value is a string with module cli options if the default is not used for launching a local Java
@@ -223,7 +223,7 @@ public interface IJavaLaunchConfigurationConstants {
 	 *
 	 * @since 3.10
 	 */
-	public static final String ATTR_MODULE_CLI_OPTIONS = LaunchingPlugin.getUniqueIdentifier() + ".MODULE_CLI_OPTIONS"; //$NON-NLS-1$
+	public static final String ATTR_MODULE_CLI_OPTIONS = LaunchingPlugin.getUniqueIdentifier() + ".MODULE_CLI_OPTIONS"; //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 	/**
 	 * Launch configuration attribute key. The value is an identifier of a
@@ -231,7 +231,7 @@ public interface IJavaLaunchConfigurationConstants {
 	 * for a launch configuration. When unspecified, the default classpath
 	 * provider is used - <code>StandardClasspathProvider</code>.
 	 */
-	public static final String ATTR_CLASSPATH_PROVIDER = LaunchingPlugin.getUniqueIdentifier() + ".CLASSPATH_PROVIDER";	 //$NON-NLS-1$
+	public static final String ATTR_CLASSPATH_PROVIDER = LaunchingPlugin.getUniqueIdentifier() + ".CLASSPATH_PROVIDER";	 //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 	/**
 	 * Launch configuration attribute key. The value is an ordered list of
@@ -241,7 +241,7 @@ public interface IJavaLaunchConfigurationConstants {
 	 * associated with a launch configurations (via the
 	 * <code>ATTR_SOURCE_PATH_PROVIDER</code> attribute).
 	 */
-	public static final String ATTR_SOURCE_PATH = LaunchingPlugin.getUniqueIdentifier() + ".SOURCE_PATH";	 //$NON-NLS-1$
+	public static final String ATTR_SOURCE_PATH = LaunchingPlugin.getUniqueIdentifier() + ".SOURCE_PATH";	 //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 	/**
 	 * Launch configuration attribute key. The value is a boolean specifying
@@ -251,7 +251,7 @@ public interface IJavaLaunchConfigurationConstants {
 	 * unspecified, a source lookup path is computed by the source path
 	 * provider associated with a launch configuration.
 	 */
-	public static final String ATTR_DEFAULT_SOURCE_PATH = LaunchingPlugin.getUniqueIdentifier() + ".DEFAULT_SOURCE_PATH"; //$NON-NLS-1$
+	public static final String ATTR_DEFAULT_SOURCE_PATH = LaunchingPlugin.getUniqueIdentifier() + ".DEFAULT_SOURCE_PATH"; //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 	/**
 	 * Launch configuration attribute key. The value is an identifier of a
@@ -259,21 +259,21 @@ public interface IJavaLaunchConfigurationConstants {
 	 * for a launch configuration. When unspecified, the default source lookup
 	 * path provider is used - <code>StandardSourcePathProvider</code>.
 	 */
-	public static final String ATTR_SOURCE_PATH_PROVIDER = LaunchingPlugin.getUniqueIdentifier() + ".SOURCE_PATH_PROVIDER";	 //$NON-NLS-1$
+	public static final String ATTR_SOURCE_PATH_PROVIDER = LaunchingPlugin.getUniqueIdentifier() + ".SOURCE_PATH_PROVIDER";	 //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 	/**
 	 * Launch configuration attribute key. The value is a boolean, indicating
 	 * whether a VM will support/allow the terminate action.
 	 * This attribute is used for remote debugging.
 	 */
-	public static final String ATTR_ALLOW_TERMINATE = LaunchingPlugin.getUniqueIdentifier() + ".ALLOW_TERMINATE";	 //$NON-NLS-1$
+	public static final String ATTR_ALLOW_TERMINATE = LaunchingPlugin.getUniqueIdentifier() + ".ALLOW_TERMINATE";	 //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 	/**
 	 * Attribute key for VM specific attributes found in the
 	 * <code>ATTR_VM_INSTALL_TYPE_SPECIFIC_ATTRS_MAP</code>. The value is a String,
 	 * indicating the String to use to invoke the JRE.
 	 */
-	public static final String ATTR_JAVA_COMMAND = LaunchingPlugin.getUniqueIdentifier() + ".JAVA_COMMAND";	 //$NON-NLS-1$
+	public static final String ATTR_JAVA_COMMAND = LaunchingPlugin.getUniqueIdentifier() + ".JAVA_COMMAND";	 //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 	/**
 	 * Launch configuration attribute key. The value is
@@ -282,7 +282,7 @@ public interface IJavaLaunchConfigurationConstants {
 	 * Values are strings corresponding to the values to use when
 	 * establishing a connection to a remote VM.
 	 */
-	public static final String ATTR_CONNECT_MAP = LaunchingPlugin.getUniqueIdentifier() + ".CONNECT_MAP";	 //$NON-NLS-1$
+	public static final String ATTR_CONNECT_MAP = LaunchingPlugin.getUniqueIdentifier() + ".CONNECT_MAP";	 //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 	/**
 	 * Launch configuration attribute key. The value is an integer
@@ -290,7 +290,7 @@ public interface IJavaLaunchConfigurationConstants {
 	 *
 	 * @since 2.1
 	 */
-	public static final String ATTR_APPLET_WIDTH = LaunchingPlugin.getUniqueIdentifier() + ".APPLET_WIDTH";	 //$NON-NLS-1$
+	public static final String ATTR_APPLET_WIDTH = LaunchingPlugin.getUniqueIdentifier() + ".APPLET_WIDTH";	 //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 	/**
 	 * Launch configuration attribute key. The value is an integer
@@ -298,7 +298,7 @@ public interface IJavaLaunchConfigurationConstants {
 	 *
 	 * @since 2.1
 	 */
-	public static final String ATTR_APPLET_HEIGHT = LaunchingPlugin.getUniqueIdentifier() + ".APPLET_HEIGHT";	 //$NON-NLS-1$
+	public static final String ATTR_APPLET_HEIGHT = LaunchingPlugin.getUniqueIdentifier() + ".APPLET_HEIGHT";	 //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 	/**
 	 * Launch configuration attribute key. The value is a String indicating the
@@ -306,7 +306,7 @@ public interface IJavaLaunchConfigurationConstants {
 	 *
 	 * @since 2.1
 	 */
-	public static final String ATTR_APPLET_NAME = LaunchingPlugin.getUniqueIdentifier() + ".APPLET_NAME";	 //$NON-NLS-1$
+	public static final String ATTR_APPLET_NAME = LaunchingPlugin.getUniqueIdentifier() + ".APPLET_NAME";	 //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 	/**
 	 * Launch configuration attribute key. The value is a Map. Keys in the map
@@ -315,7 +315,7 @@ public interface IJavaLaunchConfigurationConstants {
 	 *
 	 * @since 2.1
 	 */
-	public static final String ATTR_APPLET_PARAMETERS = LaunchingPlugin.getUniqueIdentifier() + ".APPLET_PARAMETERS";	 //$NON-NLS-1$
+	public static final String ATTR_APPLET_PARAMETERS = LaunchingPlugin.getUniqueIdentifier() + ".APPLET_PARAMETERS";	 //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 	/**
 	 * Launch configuration attribute key. The value is a String indicating the
@@ -323,7 +323,7 @@ public interface IJavaLaunchConfigurationConstants {
 	 *
 	 * @since 2.1
 	 */
-	public static final String ATTR_APPLET_APPLETVIEWER_CLASS = LaunchingPlugin.getUniqueIdentifier() + ".APPLET_APPLETVIEWER_CLASS";	 //$NON-NLS-1$
+	public static final String ATTR_APPLET_APPLETVIEWER_CLASS = LaunchingPlugin.getUniqueIdentifier() + ".APPLET_APPLETVIEWER_CLASS";	 //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 	/**
 	 * Attribute key for a VM specific argument. Value is an array
@@ -335,7 +335,7 @@ public interface IJavaLaunchConfigurationConstants {
 	 *
 	 * @since 3.0
 	 */
-	public static final String ATTR_BOOTPATH_PREPEND = LaunchingPlugin.getUniqueIdentifier() + ".-Xbootclasspath/p:";	 //$NON-NLS-1$
+	public static final String ATTR_BOOTPATH_PREPEND = LaunchingPlugin.getUniqueIdentifier() + ".-Xbootclasspath/p:";	 //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 	/**
 	 * Attribute key for a VM specific argument. Value is an array
@@ -347,7 +347,7 @@ public interface IJavaLaunchConfigurationConstants {
 	 *
 	 * @since 3.0
 	 */
-	public static final String ATTR_BOOTPATH = LaunchingPlugin.getUniqueIdentifier() + ".-Xbootclasspath:";	 //$NON-NLS-1$
+	public static final String ATTR_BOOTPATH = LaunchingPlugin.getUniqueIdentifier() + ".-Xbootclasspath:";	 //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 	/**
 	 * Attribute key for a VM specific argument. Value is an array
@@ -359,7 +359,7 @@ public interface IJavaLaunchConfigurationConstants {
 	 *
 	 * @since 3.0
 	 */
-	public static final String ATTR_BOOTPATH_APPEND = LaunchingPlugin.getUniqueIdentifier() + ".-Xbootclasspath/a:";	 //$NON-NLS-1$
+	public static final String ATTR_BOOTPATH_APPEND = LaunchingPlugin.getUniqueIdentifier() + ".-Xbootclasspath/a:";	 //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 	/**
 	 * Attribute key for a Mac OSX VM-specific argument. Value is a boolean
@@ -368,7 +368,7 @@ public interface IJavaLaunchConfigurationConstants {
 	 *
 	 * @since 3.7
 	 */
-	public static final String ATTR_USE_START_ON_FIRST_THREAD = LaunchingPlugin.getUniqueIdentifier() + ".ATTR_USE_START_ON_FIRST_THREAD"; //$NON-NLS-1$
+	public static final String ATTR_USE_START_ON_FIRST_THREAD = LaunchingPlugin.getUniqueIdentifier() + ".ATTR_USE_START_ON_FIRST_THREAD"; //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 	/**
 	 * Attribute key to improve the usability of NullPointerExceptions generated by the JVM by describing precisely which variable was null. Value is
@@ -377,7 +377,7 @@ public interface IJavaLaunchConfigurationConstants {
 	 *
 	 * @since 3.18
 	 */
-	public static final String ATTR_SHOW_CODEDETAILS_IN_EXCEPTION_MESSAGES = LaunchingPlugin.getUniqueIdentifier()
+	public static final String ATTR_SHOW_CODEDETAILS_IN_EXCEPTION_MESSAGES = LaunchingPlugin.getUniqueIdentifier() //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 			+ ".ATTR_SHOW_CODEDETAILS_IN_EXCEPTION_MESSAGES"; //$NON-NLS-1$
 
 	/**
@@ -386,7 +386,7 @@ public interface IJavaLaunchConfigurationConstants {
 	 *
 	 * @since 3.19
 	 */
-	public static final String ATTR_USE_ARGFILE = LaunchingPlugin.getUniqueIdentifier() + ".ATTR_ATTR_USE_ARGFILE"; //$NON-NLS-1$
+	public static final String ATTR_USE_ARGFILE = LaunchingPlugin.getUniqueIdentifier() + ".ATTR_ATTR_USE_ARGFILE"; //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 	/**
 	 * Launch configuration attribute key. The value is a boolean specifying whether output folders corresponding to test sources should not be added
@@ -394,7 +394,7 @@ public interface IJavaLaunchConfigurationConstants {
 	 *
 	 * @since 3.10
 	 */
-	public static final String ATTR_EXCLUDE_TEST_CODE = LaunchingPlugin.getUniqueIdentifier() + ".ATTR_EXCLUDE_TEST_CODE"; //$NON-NLS-1$
+	public static final String ATTR_EXCLUDE_TEST_CODE = LaunchingPlugin.getUniqueIdentifier() + ".ATTR_EXCLUDE_TEST_CODE"; //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 	/**
 	 * Launch configuration attribute key. When set, the JPMS option {@code --add-modules} will be added to the command line with the provided string
@@ -403,12 +403,12 @@ public interface IJavaLaunchConfigurationConstants {
 	 *
 	 * @since 3.16
 	 */
-	public static final String ATTR_SPECIAL_ADD_MODULES = LaunchingPlugin.getUniqueIdentifier() + ".ATTR_SPECIAL_ADD_MODULES"; //$NON-NLS-1$
+	public static final String ATTR_SPECIAL_ADD_MODULES = LaunchingPlugin.getUniqueIdentifier() + ".ATTR_SPECIAL_ADD_MODULES"; //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 	/**
 	 * @since 3.11
 	 */
-	public static final String ATTR_USE_CLASSPATH_ONLY_JAR = LaunchingPlugin.getUniqueIdentifier() + ".ATTR_USE_CLASSPATH_ONLY_JAR"; //$NON-NLS-1$
+	public static final String ATTR_USE_CLASSPATH_ONLY_JAR = LaunchingPlugin.getUniqueIdentifier() + ".ATTR_USE_CLASSPATH_ONLY_JAR"; //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 	/**
 	 * Status code indicating a launch configuration does not specify a project when a project is required.

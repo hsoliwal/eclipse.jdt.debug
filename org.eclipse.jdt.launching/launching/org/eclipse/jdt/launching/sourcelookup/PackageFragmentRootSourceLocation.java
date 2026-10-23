@@ -83,7 +83,7 @@ public class PackageFragmentRootSourceLocation extends PlatformObject implements
 	/* (non-Javadoc)
 	 * @see org.eclipse.jdt.launching.sourcelookup.IJavaSourceLocation#findSourceElement(java.lang.String)
 	 */
-	@Deprecated
+	@Deprecated //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	@Override
 	public Object findSourceElement(String name) throws CoreException {
 		if (name != null && getPackageFragmentRoot() != null) {
@@ -99,12 +99,12 @@ public class PackageFragmentRootSourceLocation extends PlatformObject implements
 			if (pkg.exists()) {
 				boolean possibleInnerType = false;
 				String typeName = name;
-				do {
-					ICompilationUnit cu = pkg.getCompilationUnit(typeName + ".java"); //$NON-NLS-1$
+				do { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
+					ICompilationUnit cu = pkg.getCompilationUnit(typeName + ".java"); //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 					if (cu.exists()) {
 						return cu;
 					}
-					IClassFile cf = pkg.getClassFile(typeName + ".class"); //$NON-NLS-1$
+					IClassFile cf = pkg.getClassFile(typeName + ".class"); //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 					if (cf.exists()) {
 						return cf;
 					}
@@ -141,7 +141,7 @@ public class PackageFragmentRootSourceLocation extends PlatformObject implements
 	/* (non-Javadoc)
 	 * @see org.eclipse.jdt.launching.sourcelookup.IJavaSourceLocation#initializeFrom(java.lang.String)
 	 */
-	@Deprecated
+	@Deprecated //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	@Override
 	public void initializeFrom(String memento) throws CoreException {
 		Exception ex = null;

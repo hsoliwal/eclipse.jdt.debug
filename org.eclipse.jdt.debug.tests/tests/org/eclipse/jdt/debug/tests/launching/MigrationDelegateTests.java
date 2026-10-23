@@ -40,7 +40,7 @@ public class MigrationDelegateTests extends AbstractDebugTest {
 		createLaunchConfiguration("MigrationTests"); //$NON-NLS-1$
 		ILaunchConfiguration config = getLaunchConfiguration("MigrationTests"); //$NON-NLS-1$
 		try{
-			assertTrue("LC: "+config.getName()+" should be a candidate for migration", config.isMigrationCandidate()); //$NON-NLS-1$ //$NON-NLS-2$
+			assertTrue("LC: "+config.getName()+" should be a candidate for migration", config.isMigrationCandidate()); //$NON-NLS-1$ //$NON-NLS-2$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 			config.migrate();
 			IResource[] mappedResources = config.getMappedResources();
 			assertEquals("Wrong number of mapped resources", 1, mappedResources.length); //$NON-NLS-1$
@@ -58,9 +58,9 @@ public class MigrationDelegateTests extends AbstractDebugTest {
 		createLaunchConfiguration("MigrationTests2"); //$NON-NLS-1$
 		ILaunchConfiguration config = getLaunchConfiguration("MigrationTests2"); //$NON-NLS-1$
 		try{
-			assertTrue("LC: "+config.getName()+" should be a candidate for migration", config.isMigrationCandidate()); //$NON-NLS-1$ //$NON-NLS-2$
+			assertTrue("LC: "+config.getName()+" should be a candidate for migration", config.isMigrationCandidate()); //$NON-NLS-1$ //$NON-NLS-2$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 			config.migrate();
-			assertFalse("LC: " + config.getName() + " should not be a candidate for migration", config.isMigrationCandidate()); //$NON-NLS-1$ //$NON-NLS-2$
+			assertFalse("LC: " + config.getName() + " should not be a candidate for migration", config.isMigrationCandidate()); //$NON-NLS-1$ //$NON-NLS-2$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		}
 		finally {
 			config = null;

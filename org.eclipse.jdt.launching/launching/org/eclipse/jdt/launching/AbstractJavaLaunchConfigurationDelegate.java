@@ -79,7 +79,7 @@ import org.eclipse.osgi.util.NLS;
  *
  * @since 2.0
  */
-public abstract class AbstractJavaLaunchConfigurationDelegate extends LaunchConfigurationDelegate implements IDebugEventSetListener {
+public abstract class AbstractJavaLaunchConfigurationDelegate extends LaunchConfigurationDelegate implements IDebugEventSetListener { //FLLDCIM: MARK — T27  IMPLEMENTS
 	private boolean allowAdvancedSourcelookup;
 
 	/**
@@ -199,7 +199,7 @@ public abstract class AbstractJavaLaunchConfigurationDelegate extends LaunchConf
 	 *                unspecified, or if the home location is unspecified or
 	 *                does not exist
 	 */
-	public IVMInstall verifyVMInstall(ILaunchConfiguration configuration)
+	public IVMInstall verifyVMInstall(ILaunchConfiguration configuration) //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 			throws CoreException {
 		IVMInstall vm = getVMInstall(configuration);
 		if (vm == null) {
@@ -256,7 +256,7 @@ public abstract class AbstractJavaLaunchConfigurationDelegate extends LaunchConf
 	 * @exception CoreException
 	 *                if unable to retrieve the attribute
 	 */
-	public String[] getBootpath(ILaunchConfiguration configuration)
+	public String[] getBootpath(ILaunchConfiguration configuration) //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 			throws CoreException {
 		if (JavaRuntime.isModularConfiguration(configuration)) {
 			return null;
@@ -272,10 +272,10 @@ public abstract class AbstractJavaLaunchConfigurationDelegate extends LaunchConf
 		IRuntimeClasspathEntry[] entries = JavaRuntime
 				.computeUnresolvedRuntimeClasspath(configuration);
 		entries = JavaRuntime.resolveRuntimeClasspath(entries, configuration);
-		List<String> bootEntries = new ArrayList<>(entries.length);
+		List<String> bootEntries = new ArrayList<>(entries.length); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 		boolean empty = true;
 		boolean allStandard = true;
-		for (int i = 0; i < entries.length; i++) {
+		for (int i = 0; i < entries.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			if (entries[i].getClasspathProperty() != IRuntimeClasspathEntry.USER_CLASSES) {
 				String location = entries[i].getLocation();
 				if (location != null) {
@@ -312,15 +312,15 @@ public abstract class AbstractJavaLaunchConfigurationDelegate extends LaunchConf
 	 *                if unable to retrieve the attribute
 	 * @since 3.0
 	 */
-	public String[][] getBootpathExt(ILaunchConfiguration configuration)
+	public String[][] getBootpathExt(ILaunchConfiguration configuration) //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 			throws CoreException {
 		String[][] bootpathInfo = new String[3][];
 		IRuntimeClasspathEntry[] entries = JavaRuntime
 				.computeUnresolvedRuntimeClasspath(configuration);
-		List<IRuntimeClasspathEntry> bootEntriesPrepend = new ArrayList<>();
+		List<IRuntimeClasspathEntry> bootEntriesPrepend = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 		int index = 0;
 		IRuntimeClasspathEntry jreEntry = null;
-		while (jreEntry == null && index < entries.length) {
+		while (jreEntry == null && index < entries.length) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			IRuntimeClasspathEntry entry = entries[index++];
 			if (JavaRuntime.isVMInstallReference(entry)) {
 				jreEntry = entry;
@@ -336,13 +336,13 @@ public abstract class AbstractJavaLaunchConfigurationDelegate extends LaunchConf
 		String[] entriesPrep = null;
 		if (bootEntriesPrep.length > 0) {
 			entriesPrep = new String[bootEntriesPrep.length];
-			for (int i = 0; i < bootEntriesPrep.length; i++) {
+			for (int i = 0; i < bootEntriesPrep.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				entriesPrep[i] = bootEntriesPrep[i].getLocation();
 			}
 		}
 		if (jreEntry != null) {
-			List<IRuntimeClasspathEntry> bootEntriesAppend = new ArrayList<>();
-			for (; index < entries.length; index++) {
+			List<IRuntimeClasspathEntry> bootEntriesAppend = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
+			for (; index < entries.length; index++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				IRuntimeClasspathEntry entry = entries[index];
 				if (entry.getClasspathProperty() == IRuntimeClasspathEntry.BOOTSTRAP_CLASSES) {
 					bootEntriesAppend.add(entry);
@@ -356,7 +356,7 @@ public abstract class AbstractJavaLaunchConfigurationDelegate extends LaunchConf
 											.size()]), configuration);
 			if (bootEntriesApp.length > 0) {
 				bootpathInfo[2] = new String[bootEntriesApp.length];
-				for (int i = 0; i < bootEntriesApp.length; i++) {
+				for (int i = 0; i < bootEntriesApp.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 					bootpathInfo[2][i] = bootEntriesApp[i].getLocation();
 				}
 			}
@@ -390,7 +390,7 @@ public abstract class AbstractJavaLaunchConfigurationDelegate extends LaunchConf
 								bootEntriesPrep.length);
 					}
 					int dest = bootEntriesPrep.length;
-					for (int i = 0; i < bootEntries.length; i++) {
+					for (int i = 0; i < bootEntries.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 						bootpath[dest] = bootEntries[i].getLocation();
 						dest++;
 					}
@@ -431,7 +431,7 @@ public abstract class AbstractJavaLaunchConfigurationDelegate extends LaunchConf
 				.computeUnresolvedRuntimeClasspath(configuration);
 		entries = JavaRuntime.resolveRuntimeClasspath(entries, configuration);
 		Set<String> set = new LinkedHashSet<>(entries.length);
-		for (IRuntimeClasspathEntry entry : entries) {
+		for (IRuntimeClasspathEntry entry : entries) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			if (entry.getClasspathProperty() == IRuntimeClasspathEntry.USER_CLASSES
 					|| entry.getClasspathProperty() == IRuntimeClasspathEntry.CLASS_PATH) {
 				String location = entry.getLocation();
@@ -454,13 +454,13 @@ public abstract class AbstractJavaLaunchConfigurationDelegate extends LaunchConf
 	 *                if unable to retrieve the attribute
 	 * @since 3.10
 	 */
-	public String[][] getClasspathAndModulepath(ILaunchConfiguration config) throws CoreException {
+	public String[][] getClasspathAndModulepath(ILaunchConfiguration config) throws CoreException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IRuntimeClasspathEntry[] entries = JavaRuntime.computeUnresolvedRuntimeClasspath(config);
 		entries = JavaRuntime.resolveRuntimeClasspath(entries, config);
 		String[][] path = new String[2][entries.length];
 		Set<String> classpathSet = new LinkedHashSet<>(entries.length);
 		Set<String> modulepathSet = new LinkedHashSet<>(entries.length);
-		for (IRuntimeClasspathEntry entry : entries) {
+		for (IRuntimeClasspathEntry entry : entries) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			String location = entry.getLocation();
 			if (location != null) {
 				switch (entry.getClasspathProperty()) {
@@ -578,7 +578,7 @@ public abstract class AbstractJavaLaunchConfigurationDelegate extends LaunchConf
 	 * @exception CoreException
 	 *                if unable to retrieve the attribute
 	 */
-	public String getVMArguments(ILaunchConfiguration configuration) throws CoreException {
+	public String getVMArguments(ILaunchConfiguration configuration) throws CoreException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String arguments = configuration.getAttribute(IJavaLaunchConfigurationConstants.ATTR_VM_ARGUMENTS, ""); //$NON-NLS-1$
 		String args = VariablesPlugin.getDefault().getStringVariableManager().performStringSubstitution(arguments);
 		int libraryPath = args.indexOf("-Djava.library.path"); //$NON-NLS-1$
@@ -586,16 +586,16 @@ public abstract class AbstractJavaLaunchConfigurationDelegate extends LaunchConf
 			// if a library path is already specified, do not override
 			String[] javaLibraryPath = getJavaLibraryPath(configuration);
 			if (javaLibraryPath != null && javaLibraryPath.length > 0) {
-				StringBuilder path = new StringBuilder(args);
-				path.append(" -Djava.library.path="); //$NON-NLS-1$
-				path.append("\""); //$NON-NLS-1$
-				for (int i = 0; i < javaLibraryPath.length; i++) {
+				StringBuilder path = new StringBuilder(args); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
+				path.append(" -Djava.library.path="); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+				path.append("\""); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+				for (int i = 0; i < javaLibraryPath.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 					if (i > 0) {
-						path.append(File.pathSeparatorChar);
+						path.append(File.pathSeparatorChar); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 					}
-					path.append(javaLibraryPath[i]);
+					path.append(javaLibraryPath[i]); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				}
-				path.append("\""); //$NON-NLS-1$
+				path.append("\""); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				args = path.toString();
 			}
 		}
@@ -652,9 +652,9 @@ public abstract class AbstractJavaLaunchConfigurationDelegate extends LaunchConf
 	 * @exception CoreException
 	 *                if unable to retrieve the attribute
 	 */
-	public Map<String, Object> getVMSpecificAttributesMap(ILaunchConfiguration configuration) throws CoreException {
+	public Map<String, Object> getVMSpecificAttributesMap(ILaunchConfiguration configuration) throws CoreException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		Map<String, String> map = configuration.getAttribute(IJavaLaunchConfigurationConstants.ATTR_VM_INSTALL_TYPE_SPECIFIC_ATTRS_MAP,(Map<String, String>) null);
-		Map<String, Object> attributes = new HashMap<>();
+		Map<String, Object> attributes = new HashMap<>(); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
 		if(map != null) {
 			attributes.putAll(map);
 		}
@@ -774,7 +774,7 @@ public abstract class AbstractJavaLaunchConfigurationDelegate extends LaunchConf
 	 * @exception CoreException
 	 *                if unable to retrieve the attribute
 	 */
-	public File verifyWorkingDirectory(ILaunchConfiguration configuration)
+	public File verifyWorkingDirectory(ILaunchConfiguration configuration) //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 			throws CoreException {
 		IPath path = getWorkingDirectoryPath(configuration);
 		if (path == null) {
@@ -899,7 +899,7 @@ public abstract class AbstractJavaLaunchConfigurationDelegate extends LaunchConf
 			// as an event listener (there is no dispose notification for
 			// launch delegates). However, since there is only one delegate
 			// instantiated per config type, this is tolerable.
-			DebugPlugin.getDefault().addDebugEventListener(this);
+			DebugPlugin.getDefault().addDebugEventListener(this); //FLLDCIM: MARK — T27 DEBUG_EVENT_ADAPTER CALL
 		}
 	}
 	/**
@@ -909,9 +909,9 @@ public abstract class AbstractJavaLaunchConfigurationDelegate extends LaunchConf
 	 *            the debug events.
 	 * @see org.eclipse.debug.core.IDebugEventSetListener#handleDebugEvents(DebugEvent[])
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public void handleDebugEvents(DebugEvent[] events) {
-		for (int i = 0; i < events.length; i++) {
+		for (int i = 0; i < events.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			DebugEvent event = events[i];
 			if (event.getKind() == DebugEvent.CREATE
 					&& event.getSource() instanceof IJavaDebugTarget target) {
@@ -924,7 +924,7 @@ public abstract class AbstractJavaLaunchConfigurationDelegate extends LaunchConf
 							if (isStopInMain(configuration)) {
 								String mainType = getMainTypeName(configuration);
 								if (mainType != null) {
-									Map<String, Object> map = new HashMap<>();
+									Map<String, Object> map = new HashMap<>(); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
 									map
 											.put(
 													IJavaLaunchConfigurationConstants.ATTR_STOP_IN_MAIN,
@@ -1130,14 +1130,14 @@ public abstract class AbstractJavaLaunchConfigurationDelegate extends LaunchConf
 	 *
 	 * @since 3.10
 	 */
-	public String getModuleCLIOptions(ILaunchConfiguration configuration) throws CoreException {
+	public String getModuleCLIOptions(ILaunchConfiguration configuration) throws CoreException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String moduleCLIOptions = JavaRuntime.getModuleCLIOptions(configuration);
 
 		IRuntimeClasspathEntry[] entries = JavaRuntime.computeUnresolvedRuntimeClasspath(configuration);
 		entries = JavaRuntime.resolveRuntimeClasspath(entries, configuration);
-		LinkedHashMap<String, String> moduleToLocations = new LinkedHashMap<>();
+		LinkedHashMap<String, String> moduleToLocations = new LinkedHashMap<>(); //FLLDCIM: MARK — M04 M3_ORDERED_LANES NEW
 
-		for (IRuntimeClasspathEntry entry : entries) {
+		for (IRuntimeClasspathEntry entry : entries) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			String location = entry.getLocation();
 			if (location != null) {
 				if (entry.getClasspathProperty() == IRuntimeClasspathEntry.PATCH_MODULE) {
@@ -1150,10 +1150,10 @@ public abstract class AbstractJavaLaunchConfigurationDelegate extends LaunchConf
 						// should not happen, log?
 					}
 				} else {
-					for (IClasspathAttribute attribute : entry.getClasspathEntry().getExtraAttributes()) {
+					for (IClasspathAttribute attribute : entry.getClasspathEntry().getExtraAttributes()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 						if (IClasspathAttribute.PATCH_MODULE.equals(attribute.getName())) {
 							String patchModules = attribute.getValue();
-							for (String patchModule : patchModules.split("::")) { //$NON-NLS-1$
+							for (String patchModule : patchModules.split("::")) { //$NON-NLS-1$ //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 								int equalsIdx = patchModule.indexOf('=');
 								if (equalsIdx != -1) {
 									if (equalsIdx < patchModule.length() - 1) { // otherwise malformed?
@@ -1165,7 +1165,7 @@ public abstract class AbstractJavaLaunchConfigurationDelegate extends LaunchConf
 									// old (discouraged) format without explicit paths: list all output locations of the current project
 									IJavaProject javaProject = JavaRuntime.getJavaProject(configuration);
 									addPatchModuleLocations(moduleToLocations, patchModule, toAbsolutePathsString(javaProject.getOutputLocation().toString()));
-									for (IClasspathEntry cpEntry : javaProject.getRawClasspath()) {
+									for (IClasspathEntry cpEntry : javaProject.getRawClasspath()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 										if (cpEntry.getOutputLocation() != null) {
 											addPatchModuleLocations(moduleToLocations, patchModule, toAbsolutePathsString(cpEntry.getOutputLocation().toString()));
 										}
@@ -1184,13 +1184,13 @@ public abstract class AbstractJavaLaunchConfigurationDelegate extends LaunchConf
 			return moduleCLIOptions;
 		}
 
-		ArrayList<String> list = new ArrayList<>();
+		ArrayList<String> list = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 
 		Collections.addAll(list, DebugPlugin.parseArguments(moduleCLIOptions));
 
-		for (Entry<String, String> entry : moduleToLocations.entrySet()) {
+		for (Entry<String, String> entry : moduleToLocations.entrySet()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			list.add("--patch-module"); //$NON-NLS-1$
-			list.add(entry.getKey() + '=' + entry.getValue());
+			list.add(entry.getKey() + '=' + entry.getValue()); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		}
 
 		boolean excludeTestCode = configuration.getAttribute(IJavaLaunchConfigurationConstants.ATTR_EXCLUDE_TEST_CODE, false);
@@ -1198,9 +1198,9 @@ public abstract class AbstractJavaLaunchConfigurationDelegate extends LaunchConf
 			// TODO: revisit to examine other possible solutions
 			IJavaProject project = getJavaProject(configuration);
 			if (project != null) {
-				for (String moduleName : project.determineModulesOfProjectsWithNonEmptyClasspath()) {
+				for (String moduleName : project.determineModulesOfProjectsWithNonEmptyClasspath()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 					list.add("--add-reads"); //$NON-NLS-1$
-					list.add(moduleName + '=' + "ALL-UNNAMED"); //$NON-NLS-1$
+					list.add(moduleName + '=' + "ALL-UNNAMED"); //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 				}
 			}
 		}
@@ -1216,15 +1216,15 @@ public abstract class AbstractJavaLaunchConfigurationDelegate extends LaunchConf
 		if (existing == null) {
 			moduleToLocations.put(moduleName, locations);
 		} else {
-			moduleToLocations.put(moduleName, existing + File.pathSeparator + locations);
+			moduleToLocations.put(moduleName, existing + File.pathSeparator + locations); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		}
 	}
 
-	private static String toAbsolutePathsString(String fPaths) {
+	private static String toAbsolutePathsString(String fPaths) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String[] paths = fPaths.split(File.pathSeparator);
 		String[] absPaths = new String[paths.length];
 		IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
-		for (int i = 0; i < paths.length; i++) {
+		for (int i = 0; i < paths.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			IResource resource = root.findMember(new Path(paths[i]));
 			try {
 				absPaths[i] = toAbsolutePath(resource, root);
@@ -1239,13 +1239,13 @@ public abstract class AbstractJavaLaunchConfigurationDelegate extends LaunchConf
 		return allPaths;
 	}
 
-	private static String toAbsolutePath(IResource resource, IWorkspaceRoot root) throws CoreException {
+	private static String toAbsolutePath(IResource resource, IWorkspaceRoot root) throws CoreException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IJavaElement element = JavaCore.create(resource);
 		if (element != null && element.exists()) {
 			if (element instanceof IJavaProject project) {
-				Set<String> paths = new HashSet<>();
+				Set<String> paths = new HashSet<>(); //FLLDCIM: MARK — M03 M3_SET_LANES NEW
 				paths.add(absPath(root, project.getOutputLocation()));
-				for (IClasspathEntry entry : project.getResolvedClasspath(true)) {
+				for (IClasspathEntry entry : project.getResolvedClasspath(true)) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 					if (entry.getEntryKind() == IClasspathEntry.CPE_SOURCE && entry.getOutputLocation() != null) {
 						paths.add(absPath(root, entry.getOutputLocation()));
 					}

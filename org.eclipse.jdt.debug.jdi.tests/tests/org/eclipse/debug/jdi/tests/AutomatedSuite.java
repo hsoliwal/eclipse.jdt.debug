@@ -29,7 +29,7 @@ public class AutomatedSuite extends TestSuite {
 	/**
 	 * runs the specified tests
 	 */
-	public AutomatedSuite() {
+	public AutomatedSuite() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		AbstractJDITest.parseArgs(new String[] {});
 
 		addTest(new TestSuite(AccessibleTest.class));

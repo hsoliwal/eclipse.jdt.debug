@@ -97,7 +97,7 @@ public class ThreadGroupReferenceTest extends AbstractJDITest {
 		List<?> threads = fThreadGroup.threads();
 		ListIterator<?> iterator = threads.listIterator();
 		boolean isIncluded = false;
-		while (iterator.hasNext()) {
+		while (iterator.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			ThreadReference thread = (ThreadReference) iterator.next();
 			if (thread.name().equals("Test Thread")) {
 				isIncluded = true;

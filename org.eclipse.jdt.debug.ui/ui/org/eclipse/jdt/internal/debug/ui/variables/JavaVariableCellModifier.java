@@ -30,7 +30,7 @@ public class JavaVariableCellModifier extends DefaultVariableCellModifier {
      * @see org.eclipse.debug.internal.ui.elements.adapters.DefaultVariableCellModifier#canModify(java.lang.Object,
      *      java.lang.String)
      */
-    @Override
+    @Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public boolean canModify(Object element, String property) {
         if (IDebugUIConstants.COLUMN_ID_VARIABLE_VALUE.equals(property)) {
             if (element instanceof IJavaVariable) {
@@ -78,7 +78,7 @@ public class JavaVariableCellModifier extends DefaultVariableCellModifier {
         return super.getValue(element, property);
     }
 
-    @Override
+    @Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public void modify(Object element, String property, Object value) {
         Object oldValue = getValue(element, property);
         if (!value.equals(oldValue)) {

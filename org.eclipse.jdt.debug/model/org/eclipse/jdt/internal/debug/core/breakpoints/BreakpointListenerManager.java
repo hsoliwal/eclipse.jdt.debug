@@ -204,13 +204,13 @@ public class BreakpointListenerManager {
 	/**
 	 * Load extensions.
 	 */
-	private synchronized void init() {
+	private synchronized void init() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		if (fgJavaBreakpointListenersMap == null) {
-			fgJavaBreakpointListenersMap = new HashMap<>();
-			List<JavaBreakpointListenerProxy> global = new ArrayList<>();
+			fgJavaBreakpointListenersMap = new HashMap<>(); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
+			List<JavaBreakpointListenerProxy> global = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 			IExtensionPoint extensionPoint = Platform.getExtensionRegistry().getExtensionPoint(JDIDebugPlugin.getUniqueIdentifier(), JDIDebugPlugin.EXTENSION_POINT_JAVA_BREAKPOINT_LISTENERS);
 			IConfigurationElement[] actionDelegateElements = extensionPoint.getConfigurationElements();
-			for (IConfigurationElement actionDelegateElement : actionDelegateElements) {
+			for (IConfigurationElement actionDelegateElement : actionDelegateElements) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				try {
 					String id = actionDelegateElement.getAttribute(ATTR_ID);
 					if (id == null) {

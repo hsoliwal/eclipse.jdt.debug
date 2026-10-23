@@ -53,7 +53,7 @@ public class JavaConsoleTracker implements IPatternMatchListenerDelegate {
     /* (non-Javadoc)
      * @see org.eclipse.ui.console.IPatternMatchListenerDelegate#matchFound(org.eclipse.ui.console.PatternMatchEvent)
      */
-    @Override
+    @Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
     public void matchFound(PatternMatchEvent event) {
         try {
             int offset = event.getOffset() + 1; // skip the leading (

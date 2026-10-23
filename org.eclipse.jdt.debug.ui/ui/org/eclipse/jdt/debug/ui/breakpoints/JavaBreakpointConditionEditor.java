@@ -212,7 +212,7 @@ public final class JavaBreakpointConditionEditor extends AbstractJavaBreakpointE
 	 * @param input breakpoint or <code>null</code>
 	 * @throws CoreException if unable to access breakpoint attributes
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public void setInput(Object input) throws CoreException {
 		try {
 			boolean sameBreakpoint= fBreakpoint == input;
@@ -244,7 +244,7 @@ public final class JavaBreakpointConditionEditor extends AbstractJavaBreakpointE
 	 * @param breakpoint the breakpoint to edit or <code>null</code> if none
 	 * @exception CoreException if unable to access breakpoint attributes
 	 */
-	private void setBreakpoint(IJavaLineBreakpoint breakpoint) throws CoreException {
+	private void setBreakpoint(IJavaLineBreakpoint breakpoint) throws CoreException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		fBreakpoint = breakpoint;
 		if (fDocumentListener != null) {
 			fViewer.getDocument().removeDocumentListener(fDocumentListener);
@@ -321,7 +321,7 @@ public final class JavaBreakpointConditionEditor extends AbstractJavaBreakpointE
 					return fCompletionProcessor;
 			}
 		});
-		fDocumentListener = new IDocumentListener() {
+		fDocumentListener = new IDocumentListener() { //FLLDCIM: MARK — T28  ANONYMOUS
 			@Override
 			public void documentAboutToBeChanged(DocumentEvent event) {
 			}
@@ -348,7 +348,7 @@ public final class JavaBreakpointConditionEditor extends AbstractJavaBreakpointE
 	 * @param parent composite to embed the editor controls in
 	 * @return top level control
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public Control createControl(Composite parent) {
 		Composite controls = SWTFactory.createComposite(parent, parent.getFont(), 2, 1, GridData.FILL_HORIZONTAL, 0, 0);
 		fConditional = SWTFactory.createCheckButton(controls,
@@ -357,7 +357,7 @@ public final class JavaBreakpointConditionEditor extends AbstractJavaBreakpointE
 				false,
 				1);
 		fConditional.setLayoutData(new GridData(SWT.BEGINNING, SWT.CENTER, false, false));
-		fConditional.addSelectionListener(new SelectionAdapter() {
+		fConditional.addSelectionListener(new SelectionAdapter() { //FLLDCIM: MARK — T03 SELECTION_LANE CALL
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				boolean checked = fConditional.getSelection();
@@ -373,13 +373,13 @@ public final class JavaBreakpointConditionEditor extends AbstractJavaBreakpointE
 		fWhenTrue.setLayoutData(new GridData());
 		fWhenChange = SWTFactory.createRadioButton(radios, processMnemonics(PropertyPageMessages.JavaBreakpointConditionEditor_2));
 		fWhenChange.setLayoutData(new GridData());
-		fWhenTrue.addSelectionListener(new SelectionAdapter() {
+		fWhenTrue.addSelectionListener(new SelectionAdapter() { //FLLDCIM: MARK — T03 SELECTION_LANE CALL
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				setDirty(PROP_CONDITION_SUSPEND_POLICY);
 			}
 		});
-		fWhenChange.addSelectionListener(new SelectionAdapter() {
+		fWhenChange.addSelectionListener(new SelectionAdapter() { //FLLDCIM: MARK — T03 SELECTION_LANE CALL
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				setDirty(PROP_CONDITION_SUSPEND_POLICY);
@@ -387,10 +387,10 @@ public final class JavaBreakpointConditionEditor extends AbstractJavaBreakpointE
 		});
 
 		if (fConditionHistoryDialogSettings != null) {
-			fLocalConditionHistory= new HashMap<>();
+			fLocalConditionHistory= new HashMap<>(); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
 			fConditionHistory= SWTFactory.createCombo(parent, SWT.DROP_DOWN | SWT.READ_ONLY, 1, null);
 			initializeConditionHistoryDropDown();
-			fConditionHistory.addSelectionListener(new SelectionAdapter() {
+			fConditionHistory.addSelectionListener(new SelectionAdapter() { //FLLDCIM: MARK — T03 SELECTION_LANE CALL
 				@Override
 				public void widgetSelected(SelectionEvent e) {
 					int historyIndex= fConditionHistory.getSelectionIndex() - 1;
@@ -402,7 +402,7 @@ public final class JavaBreakpointConditionEditor extends AbstractJavaBreakpointE
 			GridData data= new GridData(GridData.FILL_HORIZONTAL);
 			data.widthHint= 10;
 			fConditionHistory.setLayoutData(data);
-			fLocalConditionHistory= new HashMap<>(10);
+			fLocalConditionHistory= new HashMap<>(10); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
 		}
 
 		fViewer = new JDISourceViewer(parent, null, SWT.BORDER | SWT.V_SCROLL | SWT.H_SCROLL | SWT.LEFT_TO_RIGHT);
@@ -443,7 +443,7 @@ public final class JavaBreakpointConditionEditor extends AbstractJavaBreakpointE
 			}
 		};
 		fHandlerService = PlatformUI.getWorkbench().getAdapter(IHandlerService.class);
-		fViewer.getControl().addFocusListener(new FocusAdapter() {
+		fViewer.getControl().addFocusListener(new FocusAdapter() { //FLLDCIM: MARK — T15 FOCUS CALL
 			@Override
 			public void focusGained(FocusEvent e) {
 				activateHandlers();
@@ -453,7 +453,7 @@ public final class JavaBreakpointConditionEditor extends AbstractJavaBreakpointE
 				deactivateHandlers();
 			}
 		});
-		parent.addDisposeListener(new DisposeListener() {
+		parent.addDisposeListener(new DisposeListener() { //FLLDCIM: MARK — T01 LIFECYCLE_RESIDENCY CALL
 			@Override
 			public void widgetDisposed(DisposeEvent e) {
 				dispose();
@@ -559,7 +559,7 @@ public final class JavaBreakpointConditionEditor extends AbstractJavaBreakpointE
 		}
 	}
 
-	private void deactivateHandlers() {
+	private void deactivateHandlers() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		if (fContentAssistActivation != null) {
 			fHandlerService.deactivateHandler(fContentAssistActivation);
 			fContentAssistActivation= null;
@@ -598,7 +598,7 @@ public final class JavaBreakpointConditionEditor extends AbstractJavaBreakpointE
 	 * @param enabled <code>true</code> if enabled, <code>false</code> otherwise
 	 * @param focus <code>true</code> if focus should be set, <code>false</code> otherwise
 	 */
-	private void setEnabled(boolean enabled, boolean focus) {
+	private void setEnabled(boolean enabled, boolean focus) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 			if (fBreakpoint != null) {
 				if (fBreakpoint.getSuspendPolicy() == IJavaBreakpoint.RESUME_ON_HIT) {
@@ -666,8 +666,8 @@ public final class JavaBreakpointConditionEditor extends AbstractJavaBreakpointE
 	private String[] getConditionHistoryLabels() {
 		String[] conditions= getConditionHistory();
 		String[] labels= new String[conditions.length];
-		for (int i= 0; i < conditions.length; i++) {
-			labels[i]= NEWLINE_PATTERN.matcher(conditions[i]).replaceAll(" "); //$NON-NLS-1$
+		for (int i= 0; i < conditions.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
+			labels[i]= NEWLINE_PATTERN.matcher(conditions[i]).replaceAll(" "); //$NON-NLS-1$ //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
 		}
 		return labels;
 	}
@@ -677,7 +677,7 @@ public final class JavaBreakpointConditionEditor extends AbstractJavaBreakpointE
 	 *
 	 * @return an array of strings containing the history of conditions
 	 */
-	private String[] getConditionHistory() {
+	private String[] getConditionHistory() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		fSeparatorIndex= -1;
 
 		// Get global history
@@ -692,7 +692,7 @@ public final class JavaBreakpointConditionEditor extends AbstractJavaBreakpointE
 		// Create combined history
 		int localHistorySize= Math.min(localHistory.size(), MAX_HISTORY_SIZE);
 		String[] historyItems= new String[localHistorySize + globalItems.length + 1];
-		for (int i= 0; i < localHistorySize; i++) {
+		for (int i= 0; i < localHistorySize; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			historyItems[i]= localHistory.get(localHistory.size() - i - 1);
 		}
 		fSeparatorIndex= localHistorySize;
@@ -704,7 +704,7 @@ public final class JavaBreakpointConditionEditor extends AbstractJavaBreakpointE
 	/**
 	 * Updates the local and global condition histories.
 	 */
-	private void updateConditionHistories() {
+	private void updateConditionHistories() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String newItem= fViewer.getDocument().get();
 		if (newItem.length() == 0) {
 			return;
@@ -753,8 +753,8 @@ public final class JavaBreakpointConditionEditor extends AbstractJavaBreakpointE
 		}
 		count= Math.min(count, MAX_HISTORY_SIZE);
 		String[] conditions= new String[count];
-		for (int i= 0; i < count; i++) {
-			conditions[i]= dialogSettings.get(DS_KEY_HISTORY_ENTRY_PREFIX + i);
+		for (int i= 0; i < count; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
+			conditions[i]= dialogSettings.get(DS_KEY_HISTORY_ENTRY_PREFIX + i); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		}
 		return conditions;
 	}
@@ -768,13 +768,13 @@ public final class JavaBreakpointConditionEditor extends AbstractJavaBreakpointE
 	private static void storeConditionHistory(String[] conditions, IDialogSettings dialogSettings) {
 		int length= Math.min(conditions.length, MAX_HISTORY_SIZE);
 		int count= 0;
-		outer: for (int i= 0; i < length; i++) {
-			for (int j= 0; j < i; j++) {
+		outer: for (int i= 0; i < length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
+			for (int j= 0; j < i; j++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				if (conditions[i].equals(conditions[j])) {
 					break outer;
 				}
 			}
-			dialogSettings.put(DS_KEY_HISTORY_ENTRY_PREFIX + count, conditions[i]);
+			dialogSettings.put(DS_KEY_HISTORY_ENTRY_PREFIX + count, conditions[i]); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 			count= count + 1;
 		}
 		dialogSettings.put(DS_KEY_HISTORY_ENTRY_COUNT, count);
@@ -785,7 +785,7 @@ public final class JavaBreakpointConditionEditor extends AbstractJavaBreakpointE
 	 *
 	 * @return the label for the history separator
 	 */
-	private String getSeparatorLabel() {
+	private String getSeparatorLabel() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		int borderWidth= fConditionHistory.computeTrim(0, 0, 0, 0).width;
 		Rectangle rect= fConditionHistory.getBounds();
 		int width= rect.width - borderWidth;
@@ -799,20 +799,20 @@ public final class JavaBreakpointConditionEditor extends AbstractJavaBreakpointE
 
 		gc.dispose();
 
-		StringBuilder dashes= new StringBuilder();
+		StringBuilder dashes= new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 		int chars= (((width - fMessageLength) / fSeparatorWidth) / 2) - 2;
-		for (int i= 0; i < chars; i++) {
-			dashes.append('-');
+		for (int i= 0; i < chars; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
+			dashes.append('-'); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		}
 
-		StringBuilder result= new StringBuilder();
-		result.append(dashes);
-		result.append(" " + separatorLabel + " "); //$NON-NLS-1$//$NON-NLS-2$
-		result.append(dashes);
+		StringBuilder result= new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
+		result.append(dashes); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+		result.append(" " + separatorLabel + " "); //$NON-NLS-1$//$NON-NLS-2$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+		result.append(dashes); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		return result.toString().trim();
 	}
 
-	private void registerViewerUndoRedoActions() {
+	private void registerViewerUndoRedoActions() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		if (!fViewer.getTextWidget().isFocusControl()) {
 			return;
 		}

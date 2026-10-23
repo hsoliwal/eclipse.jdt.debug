@@ -85,7 +85,7 @@ public class DirectorySourceLocation extends PlatformObject implements IJavaSour
 	/* (non-Javadoc)
 	 * @see org.eclipse.jdt.launching.sourcelookup.IJavaSourceLocation#findSourceElement(java.lang.String)
 	 */
-	@Deprecated
+	@Deprecated //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	@Override
 	public Object findSourceElement(String name) throws CoreException {
 		if (getDirectory() == null) {
@@ -98,8 +98,8 @@ public class DirectorySourceLocation extends PlatformObject implements IJavaSour
 			IPath root = new Path(getDirectory().getCanonicalPath());
 			boolean possibleInnerType = false;
 			String typeName = pathStr;
-			do {
-				IPath filePath = root.append(new Path(typeName + ".java")); //$NON-NLS-1$
+			do { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
+				IPath filePath = root.append(new Path(typeName + ".java")); //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 				File file = filePath.toFile();
 				if (file.exists()) {
 					return new LocalFileStorage(file);
@@ -174,7 +174,7 @@ public class DirectorySourceLocation extends PlatformObject implements IJavaSour
 	/* (non-Javadoc)
 	 * @see org.eclipse.jdt.launching.sourcelookup.IJavaSourceLocation#initializeFrom(java.lang.String)
 	 */
-	@Deprecated
+	@Deprecated //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	@Override
 	public void initializeFrom(String memento) throws CoreException {
 		Exception ex = null;

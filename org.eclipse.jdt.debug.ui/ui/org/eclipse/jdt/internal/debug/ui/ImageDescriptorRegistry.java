@@ -29,7 +29,7 @@ import org.eclipse.swt.widgets.Display;
  */
 public class ImageDescriptorRegistry {
 
-	private final Map<ImageDescriptor, Image> fRegistry= Collections.synchronizedMap(new HashMap<ImageDescriptor, Image>(10));
+	private final Map<ImageDescriptor, Image> fRegistry= Collections.synchronizedMap(new HashMap<ImageDescriptor, Image>(10)); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
 	private final Display fDisplay;
 
 	/**
@@ -81,7 +81,7 @@ public class ImageDescriptorRegistry {
 	 * Disposes all images managed by this registry.
 	 */
 	public void dispose() {
-		for (Iterator<Image> iter= fRegistry.values().iterator(); iter.hasNext(); ) {
+		for (Iterator<Image> iter= fRegistry.values().iterator(); iter.hasNext(); ) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			Image image= iter.next();
 			image.dispose();
 		}
@@ -89,7 +89,7 @@ public class ImageDescriptorRegistry {
 	}
 
 	private void hookDisplay() {
-		fDisplay.asyncExec(new Runnable() {
+		fDisplay.asyncExec(new Runnable() { //FLLDCIM: MARK — T08 UI_THREAD_SYNCHRONIZER CALL
 			@Override
 			public void run() {
 			fDisplay.disposeExec(new Runnable() {

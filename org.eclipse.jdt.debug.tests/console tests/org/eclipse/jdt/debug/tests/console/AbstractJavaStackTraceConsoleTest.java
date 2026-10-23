@@ -92,7 +92,7 @@ public class AbstractJavaStackTraceConsoleTest extends AbstractDebugUiTests {
 		IConsoleManager consoleManager = ConsolePlugin.getDefault().getConsoleManager();
 		IConsole[] consoles = consoleManager.getConsoles();
 		fConsole = null;
-		for (IConsole console : consoles) {
+		for (IConsole console : consoles) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			if (console instanceof JavaStackTraceConsole) {
 				fConsole = (JavaStackTraceConsole) console;
 				// do not end loop. There should be only one JavaStackTraceConsole but if there are more
@@ -113,7 +113,7 @@ public class AbstractJavaStackTraceConsoleTest extends AbstractDebugUiTests {
 	 *            {@link JavaStackTraceConsole}.
 	 * @see #initConsole(boolean)
 	 */
-	protected void removeConsole(boolean preserveContent) {
+	protected void removeConsole(boolean preserveContent) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		if (!preserveContent) {
 			fConsole.clearConsole();
 		}
@@ -165,7 +165,7 @@ public class AbstractJavaStackTraceConsoleTest extends AbstractDebugUiTests {
 	 * @param startLine
 	 *            first line to check
 	 */
-	protected void checkIndentationConsistency(IDocument doc, int startLine) {
+	protected void checkIndentationConsistency(IDocument doc, int startLine) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		boolean firstSuppress = true;
 		int lastIndent = -1;
 		// Remember how the next line's indentation can differ from the previous.
@@ -173,13 +173,13 @@ public class AbstractJavaStackTraceConsoleTest extends AbstractDebugUiTests {
 		// 0 -> equal
 		// 1 -> more indented
 		int allowedIndentChange = 1;
-		for (int i = startLine, lineCount = doc.getNumberOfLines(); i < lineCount; i++) {
+		for (int i = startLine, lineCount = doc.getNumberOfLines(); i < lineCount; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			String line = getLine(doc, i);
 			line = line.replaceFirst("^\\[[^\\s\\]]+\\] ", ""); // remove and prefix if any
 			if (i != 0) { // first line can be empty
-				assertNotEquals("Empty line " + i, "", line);
+				assertNotEquals("Empty line " + i, "", line); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 			}
-			assertFalse("Trailing whitespace in line " + i, RIGHT_INDENT.matcher(line).find());
+			assertFalse("Trailing whitespace in line " + i, RIGHT_INDENT.matcher(line).find()); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 			boolean causedBy = line.trim().startsWith("Caused by: ");
 			boolean suppressed = line.trim().startsWith("Suppressed: ");
@@ -189,11 +189,11 @@ public class AbstractJavaStackTraceConsoleTest extends AbstractDebugUiTests {
 
 			int lineIndent = getLineIndentation(line);
 			if (allowedIndentChange < 0) {
-				assertTrue("Wrong indented line " + i + ": " + lastIndent + " > " + lineIndent, lastIndent > lineIndent);
+				assertTrue("Wrong indented line " + i + ": " + lastIndent + " > " + lineIndent, lastIndent > lineIndent); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 			} else if (allowedIndentChange == 0) {
-				assertEquals("Mixed indentation in line " + i, lastIndent, lineIndent);
+				assertEquals("Mixed indentation in line " + i, lastIndent, lineIndent); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 			} else if (allowedIndentChange > 0) {
-				assertTrue("Wrong indented line " + i + ": " + lastIndent + " < " + lineIndent, lastIndent < lineIndent);
+				assertTrue("Wrong indented line " + i + ": " + lastIndent + " < " + lineIndent, lastIndent < lineIndent); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 			}
 			lastIndent = lineIndent;
 			allowedIndentChange = 0;
@@ -207,7 +207,7 @@ public class AbstractJavaStackTraceConsoleTest extends AbstractDebugUiTests {
 	protected int getLineIndentation(String line) {
 		int tabSize = 4;
 		String indent = "";
-		Matcher m = LEFT_INDENT.matcher(line);
+		Matcher m = LEFT_INDENT.matcher(line); //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
 		if (m.find()) {
 			indent = m.group();
 		}
@@ -237,9 +237,9 @@ public class AbstractJavaStackTraceConsoleTest extends AbstractDebugUiTests {
 	protected String[] linkTextsAtPositions(int... offsets) throws BadLocationException {
 		IDocument document = fConsole.getDocument();
 
-		List<String> texts = new ArrayList<>(offsets.length);
+		List<String> texts = new ArrayList<>(offsets.length); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 		List<Position> positions = linkPositions(offsets);
-		for (Position pos : positions) {
+		for (Position pos : positions) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			String matchText = document.get(pos.getOffset(), pos.getLength());
 			texts.add(matchText);
 		}
@@ -247,9 +247,9 @@ public class AbstractJavaStackTraceConsoleTest extends AbstractDebugUiTests {
 	}
 
 	protected List<Position> linkPositions(int... offsets) {
-		List<Position> filteredPositions = new ArrayList<>(offsets.length);
-		for (Position position : allLinkPositions()) {
-			for (int offset : offsets) {
+		List<Position> filteredPositions = new ArrayList<>(offsets.length); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
+		for (Position position : allLinkPositions()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
+			for (int offset : offsets) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				if (offset >= position.getOffset() && offset <= (position.getOffset() + position.getLength())) {
 					filteredPositions.add(position);
 					break;
@@ -284,14 +284,14 @@ public class AbstractJavaStackTraceConsoleTest extends AbstractDebugUiTests {
 	 *
 	 * @return the consoles viewer
 	 */
-	protected TextConsoleViewer getConsolesViewer() {
+	protected TextConsoleViewer getConsolesViewer() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		TestUtil.waitForJobs(getName(), 100, DEFAULT_TIMEOUT);
 		IWorkbenchWindow workbenchWindow = PlatformUI.getWorkbench().getActiveWorkbenchWindow();
 		assertNotNull(workbenchWindow);
 		IWorkbenchPage activePage = workbenchWindow.getActivePage();
 		assertNotNull(activePage);
 		JavaStackTraceConsolePage page = null;
-		for (IViewReference vref : activePage.getViewReferences()) {
+		for (IViewReference vref : activePage.getViewReferences()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			IViewPart view = vref.getView(false);
 			if (view instanceof ConsoleView) {
 				ConsoleView consoleView = (ConsoleView) view;

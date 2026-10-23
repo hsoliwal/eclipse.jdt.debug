@@ -35,7 +35,7 @@ import com.sun.jdi.request.EventRequest;
  * A line breakpoint at the first executable location in a specific method.
  */
 
-public class JavaMethodEntryBreakpoint extends JavaLineBreakpoint implements
+public class JavaMethodEntryBreakpoint extends JavaLineBreakpoint implements //FLLDCIM: MARK — T27  IMPLEMENTS
 		IJavaMethodEntryBreakpoint {
 
 	protected static final String JAVA_METHOD_ENTRY_BREAKPOINT = "org.eclipse.jdt.debug.javaMethodEntryBreakpointMarker"; //$NON-NLS-1$
@@ -76,7 +76,7 @@ public class JavaMethodEntryBreakpoint extends JavaLineBreakpoint implements
 			final String methodSignature, final int lineNumber,
 			final int charStart, final int charEnd, final int hitCount,
 			final boolean register, final Map<String, Object> attributes) throws CoreException {
-		IWorkspaceRunnable wr = unused -> {
+		IWorkspaceRunnable wr = unused -> { //FLLDCIM: MARK — T09  LAMBDA
 			// add attributes
 			addLineBreakpointAttributes(attributes, getModelIdentifier(),
 					true, lineNumber, charStart, charEnd);
@@ -148,7 +148,7 @@ public class JavaMethodEntryBreakpoint extends JavaLineBreakpoint implements
 	/**
 	 * @see JavaBreakpoint#newRequests(JDIDebugTarget, ReferenceType)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	protected EventRequest[] newRequests(JDIDebugTarget target,
 			ReferenceType type) throws CoreException {
 		try {

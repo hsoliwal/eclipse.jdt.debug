@@ -36,7 +36,7 @@ import org.eclipse.ui.PartInitException;
 /**
  * Places the result of an evaluation in the debug expression view.
  */
-public class InspectAction extends EvaluateAction {
+public class InspectAction extends EvaluateAction { //FLLDCIM: MARK — T20  IMPLEMENTS
 
 	/**
 	 * @see EvaluateAction#displayResult(IEvaluationResult)
@@ -44,7 +44,7 @@ public class InspectAction extends EvaluateAction {
 	@Override
 	protected void displayResult(final IEvaluationResult result) {
 		final Display display= JDIDebugUIPlugin.getStandardDisplay();
-		display.asyncExec(new Runnable() {
+		display.asyncExec(new Runnable() { //FLLDCIM: MARK — T08 UI_THREAD_SYNCHRONIZER CALL
 			@Override
 			public void run() {
 				if (!display.isDisposed()) {
@@ -61,7 +61,7 @@ public class InspectAction extends EvaluateAction {
 	 * Make the expression view visible or open one
 	 * if required.
 	 */
-	protected void showExpressionView() {
+	protected void showExpressionView() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		if (getTargetPart().getSite().getId().equals(IDebugUIConstants.ID_EXPRESSION_VIEW)) {
 			return;
 		}
@@ -80,7 +80,7 @@ public class InspectAction extends EvaluateAction {
 		}
 	}
 
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	protected void run() {
 		IWorkbenchPart part= getTargetPart();
 		if (part instanceof JavaSnippetEditor) {
@@ -96,7 +96,7 @@ public class InspectAction extends EvaluateAction {
 
 		//inspecting from the context of the variables view
 		Iterator<IJavaVariable> variables = ((IStructuredSelection)selection).iterator();
-		while (variables.hasNext()) {
+		while (variables.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			IJavaVariable var = variables.next();
 			try {
 				JavaInspectExpression expr = new JavaInspectExpression(var.getName(), (IJavaValue)var.getValue());

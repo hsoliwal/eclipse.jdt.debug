@@ -29,13 +29,13 @@ import org.eclipse.ui.IActionDelegate2;
 import org.eclipse.ui.IViewActionDelegate;
 import org.eclipse.ui.IViewPart;
 
-public abstract class ViewFilterAction extends ViewerFilter implements IViewActionDelegate, IActionDelegate2 {
+public abstract class ViewFilterAction extends ViewerFilter implements IViewActionDelegate, IActionDelegate2 { //FLLDCIM: MARK — T23  IMPLEMENTS
 
 	private IViewPart fView;
 	private IAction fAction;
 	private final IPropertyChangeListener fListener = new Updater();
 
-	class Updater implements IPropertyChangeListener {
+	class Updater implements IPropertyChangeListener { //FLLDCIM: MARK — T06  IMPLEMENTS
 
 		/* (non-Javadoc)
 		 * @see org.eclipse.jface.util.IPropertyChangeListener#propertyChange(org.eclipse.jface.util.PropertyChangeEvent)
@@ -93,25 +93,25 @@ public abstract class ViewFilterAction extends ViewerFilter implements IViewActi
 	/* (non-Javadoc)
 	 * @see org.eclipse.ui.IActionDelegate#run(org.eclipse.jface.action.IAction)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public void run(IAction action) {
 		StructuredViewer viewer = getStructuredViewer();
 		ViewerFilter[] filters = viewer.getFilters();
 		ViewerFilter filter = null;
-		for (int i = 0; i < filters.length; i++) {
+		for (int i = 0; i < filters.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			if (filters[i] == this) {
 				filter = filters[i];
 				break;
 			}
 		}
 		if (filter == null) {
-			viewer.addFilter(this);
+			viewer.addFilter(this); //FLLDCIM: MARK — T23 FILTER_LANE CALL
 		} else {
 			// only refresh is removing - adding will refresh automatically
-			viewer.refresh();
+			viewer.refresh(); //FLLDCIM: MARK — M21 FULL_REBUILD_TO_DELTA CALL
 		}
 		IPreferenceStore store = getPreferenceStore();
-		String key = getView().getSite().getId() + "." + getPreferenceKey(); //$NON-NLS-1$
+		String key = getView().getSite().getId() + "." + getPreferenceKey(); //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		store.setValue(key, action.isChecked());
 	}
 
@@ -160,7 +160,7 @@ public abstract class ViewFilterAction extends ViewerFilter implements IViewActi
 	protected String getCompositeKey() {
 		String baseKey = getPreferenceKey();
 		String viewKey = getView().getSite().getId();
-		return viewKey + "." + baseKey; //$NON-NLS-1$
+		return viewKey + "." + baseKey; //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 	}
 
 	protected IViewPart getView() {

@@ -107,8 +107,8 @@ public class JavaStackTraceConsoleTest extends AbstractJavaStackTraceConsoleTest
 	/**
 	 * Test for Bug 343023. Test if initial content is cleared on first edit and not cleared if it was changed programmatically before.
 	 */
-	public void testClearInitialContent() {
-		PlatformUI.getWorkbench().getDisplay().syncExec(() -> {
+	public void testClearInitialContent() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
+		PlatformUI.getWorkbench().getDisplay().syncExec(() -> { //FLLDCIM: MARK — T08 UI_THREAD_SYNCHRONIZER CALL
 			// type at start of initial content
 			TextConsoleViewer viewer = getConsolesViewer();
 			viewer.getTextWidget().invokeAction(ST.TEXT_START);
@@ -175,7 +175,7 @@ public class JavaStackTraceConsoleTest extends AbstractJavaStackTraceConsoleTest
 			viewer.getTextWidget().setText(text);
 			viewer.getTextWidget().invokeAction(ST.TEXT_END);
 			doKeyStroke(viewer.getTextWidget(), '!');
-			assertEquals(text + "!", fConsole.getDocument().get());
+			assertEquals(text + "!", fConsole.getDocument().get()); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 			removeConsole(true); // preserve content this time!
 
 			// check first edit does not clear if console is initialized with custom content
@@ -244,7 +244,7 @@ public class JavaStackTraceConsoleTest extends AbstractJavaStackTraceConsoleTest
 	}
 
 	/** Test formatting with a ... more entry. */
-	public void testFormatMore() throws Exception {
+	public void testFormatMore() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		// additional this one is missing the 'header' line and starting with an 'at' line
 		IDocument doc = consoleDocumentFormatted(" at org.springframework.orm.jpa.persistenceunit.DefaultPersistenceUnitManager.preparePersistenceUnitInfos(DefaultPersistenceUnitManager.java:470)\n"
 				+ "    at org.springframework.orm.jpa.persistenceunit.DefaultPersistenceUnitManager.afterPropertiesSet(DefaultPersistenceUnitManager.java:424)\n"
@@ -264,7 +264,7 @@ public class JavaStackTraceConsoleTest extends AbstractJavaStackTraceConsoleTest
 	}
 
 	/** Test formatting stack trace with cause. */
-	public void testFormatCause() throws Exception {
+	public void testFormatCause() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IDocument doc = consoleDocumentFormatted("HighLevelException:\n LowLevelException\n" + "\tat Junk.a(Junk.java:13)\n"
 				+ "         at Junk.main(Junk.java:4)\n" + "     Caused by: LowLevelException\n" + " at Junk.e(Junk.java:30)\n"
 				+ "    at Junk.d\n(Junk.java:27)\n" + "at Junk.c(Junk.java:21)");
@@ -299,7 +299,7 @@ public class JavaStackTraceConsoleTest extends AbstractJavaStackTraceConsoleTest
 	}
 
 	/** Test formatting stack trace with suppressed exceptions. */
-	public void testFormatSuppressed() throws Exception {
+	public void testFormatSuppressed() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IDocument doc = consoleDocumentFormatted("Exception in thread \"main\" java.lang.Exception: Something happened\n" + "at Foo.bar(Native)\n"
 				+ "  at Foo.main(Foo.java:5)\n" + "  Suppressed: Resource$CloseFailException: Resource ID = 0\n"
 				+ "    at Resource.close(Resource\n.java:26)\n" + "      at Foo.bar(Foo.java)\n" + "         ... 1 more\n" + "");
@@ -329,7 +329,7 @@ public class JavaStackTraceConsoleTest extends AbstractJavaStackTraceConsoleTest
 	}
 
 	/** Test formatting stack trace with mixture of cause and suppressed. */
-	public void testFormatSuppressedWithCause() throws Exception {
+	public void testFormatSuppressedWithCause() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		// exception with suppressed and cause
 		IDocument doc = consoleDocumentFormatted("Exception in thread \"main\" java.lang.Exception: Main block\n" + "  at Foo3.main(Foo3.java:7)\n"
 				+ "  Suppressed: Resource$CloseFailException: Resource ID = 1\n" + "          at Resource.close(Resource.java:26)\n"

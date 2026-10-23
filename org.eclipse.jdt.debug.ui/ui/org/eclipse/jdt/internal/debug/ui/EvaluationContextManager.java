@@ -49,20 +49,20 @@ public class EvaluationContextManager implements IWindowListener, IDebugContextL
 	 * System property indicating a stack frame is selected in the debug view with an
 	 * <code>IJavaStackFrame</code> adapter.
 	 */
-	private static final String DEBUGGER_ACTIVE = JDIDebugUIPlugin.getUniqueIdentifier() + ".debuggerActive"; //$NON-NLS-1$
+	private static final String DEBUGGER_ACTIVE = JDIDebugUIPlugin.getUniqueIdentifier() + ".debuggerActive"; //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 	/**
 	 * System property indicating an element is selected in the debug view that is
 	 * an instanceof <code>IJavaStackFrame</code> or <code>IJavaThread</code>.
 	 */
-	private static final String INSTANCE_OF_IJAVA_STACK_FRAME = JDIDebugUIPlugin.getUniqueIdentifier() + ".instanceof.IJavaStackFrame"; //$NON-NLS-1$
+	private static final String INSTANCE_OF_IJAVA_STACK_FRAME = JDIDebugUIPlugin.getUniqueIdentifier() + ".instanceof.IJavaStackFrame"; //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 	/**
 	 * System property indicating the frame in the debug view supports 'force return'
 	 */
-	private static final String SUPPORTS_FORCE_RETURN = JDIDebugUIPlugin.getUniqueIdentifier() + ".supportsForceReturn"; //$NON-NLS-1$
+	private static final String SUPPORTS_FORCE_RETURN = JDIDebugUIPlugin.getUniqueIdentifier() + ".supportsForceReturn"; //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 	/**
 	 * System property indicating whether the frame in the debug view supports instance and reference retrieval (1.5 VMs and later).
 	 */
-	private static final String SUPPORTS_INSTANCE_RETRIEVAL = JDIDebugUIPlugin.getUniqueIdentifier() + ".supportsInstanceRetrieval"; //$NON-NLS-1$
+	private static final String SUPPORTS_INSTANCE_RETRIEVAL = JDIDebugUIPlugin.getUniqueIdentifier() + ".supportsInstanceRetrieval"; //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 	private Map<IWorkbenchPage, IJavaStackFrame> fContextsByPage = null;
 
@@ -79,7 +79,7 @@ public class EvaluationContextManager implements IWindowListener, IDebugContextL
 				if (fgManager == null) {
 					fgManager = new EvaluationContextManager();
 					IWorkbench workbench = PlatformUI.getWorkbench();
-					for (IWorkbenchWindow window : workbench.getWorkbenchWindows()) {
+					for (IWorkbenchWindow window : workbench.getWorkbenchWindows()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 						fgManager.windowOpened(window);
 					}
 					workbench.addWindowListener(fgManager);
@@ -87,7 +87,7 @@ public class EvaluationContextManager implements IWindowListener, IDebugContextL
 				}
 			}
 		};
-		JDIDebugUIPlugin.getStandardDisplay().asyncExec(r);
+		JDIDebugUIPlugin.getStandardDisplay().asyncExec(r); //FLLDCIM: MARK — T08 UI_THREAD_SYNCHRONIZER CALL
 	}
 
 	/* (non-Javadoc)
@@ -123,9 +123,9 @@ public class EvaluationContextManager implements IWindowListener, IDebugContextL
 	 * Sets the evaluation context for the given page, and notes that
 	 * a valid execution context exists.
 	 */
-	private void setContext(IWorkbenchPage page, IJavaStackFrame frame, boolean instOf) {
+	private void setContext(IWorkbenchPage page, IJavaStackFrame frame, boolean instOf) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		if (fContextsByPage == null) {
-			fContextsByPage = new HashMap<>();
+			fContextsByPage = new HashMap<>(); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
 		}
 		fContextsByPage.put(page, frame);
 		System.setProperty(DEBUGGER_ACTIVE, "true"); //$NON-NLS-1$
@@ -210,21 +210,21 @@ public class EvaluationContextManager implements IWindowListener, IDebugContextL
 	 *   if none
 	 */
 	public static IJavaStackFrame getEvaluationContext(IWorkbenchWindow window) {
-		List<IWorkbenchWindow> alreadyVisited= new ArrayList<>();
+		List<IWorkbenchWindow> alreadyVisited= new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 		if (window == null) {
 			window = fgManager.fActiveWindow;
 		}
 		return getEvaluationContext(window, alreadyVisited);
 	}
 
-	private static IJavaStackFrame getEvaluationContext(IWorkbenchWindow window, List<IWorkbenchWindow> alreadyVisited) {
+	private static IJavaStackFrame getEvaluationContext(IWorkbenchWindow window, List<IWorkbenchWindow> alreadyVisited) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IWorkbenchPage activePage = window.getActivePage();
 		IJavaStackFrame frame = null;
 		if (activePage != null) {
 			frame = getContext(activePage);
 		}
 		if (frame == null) {
-			for (IWorkbenchPage page : window.getPages()) {
+			for (IWorkbenchPage page : window.getPages()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				if (activePage != page) {
 					frame = getContext(page);
 					if (frame != null) {
@@ -235,7 +235,7 @@ public class EvaluationContextManager implements IWindowListener, IDebugContextL
 
 			alreadyVisited.add(window);
 
-			for (IWorkbenchWindow w : PlatformUI.getWorkbench().getWorkbenchWindows()) {
+			for (IWorkbenchWindow w : PlatformUI.getWorkbench().getWorkbenchWindows()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				if (!alreadyVisited.contains(w)) {
 					frame = getEvaluationContext(w, alreadyVisited);
 					if (frame != null) {
@@ -248,7 +248,7 @@ public class EvaluationContextManager implements IWindowListener, IDebugContextL
 		return frame;
 	}
 
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public void debugContextChanged(DebugContextEvent event) {
 		if ((event.getFlags() & DebugContextEvent.ACTIVATED) > 0) {
 			IWorkbenchPart part = event.getDebugContextProvider().getPart();

@@ -29,7 +29,7 @@ public class TestGenerator {
 		return fTypeTable[type][T_int];
 	}
 
-	static protected boolean needCast(int type1, int type2) {
+	static protected boolean needCast(int type1, int type2) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		if (type1 == type2) {
 			return false;
 		}
@@ -140,7 +140,7 @@ public class TestGenerator {
 	 * Set the working directory of the launch configuration to generate the files
 	 * in the correct package location.
 	 */
-	static public void main(String[] args) throws Exception {
+	static public void main(String[] args) throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 
 		genTestsNumericTypeAllOpsAllTypes(T_byte);
 		genTestsNumericTypeAllOpsAllTypes(T_char);
@@ -186,11 +186,11 @@ public class TestGenerator {
 
 	//-------------------------------
 
-	public static void genTestsNumericTypeAllOpsAllTypes(int type) throws Exception {
+	public static void genTestsNumericTypeAllOpsAllTypes(int type) throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 
-		StringBuilder code = new StringBuilder();
+		StringBuilder code = new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 
-		String className = typeUpperName[type] + "OperatorsTests";
+		String className = typeUpperName[type] + "OperatorsTests"; //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 		genTestsNumericTypeArithmeticOpNumericTypes(type, Op_plus, code);
 		genTestTypeBinaryOpTypeBinaryPromotion(type, Op_plus, T_String, code);
@@ -224,7 +224,7 @@ public class TestGenerator {
 	}
 
 	public static void genTestsBooleanAllOpsBoolean() throws Exception {
-		StringBuilder code = new StringBuilder();
+		StringBuilder code = new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 
 		String className = "BooleanOperatorsTests";
 
@@ -236,13 +236,13 @@ public class TestGenerator {
 		createJavaFile(className, "EvalSimpleTests", 15, 1, false, code);
 	}
 
-	public static void genTestsStringPlusOpAllTypes() throws Exception {
+	public static void genTestsStringPlusOpAllTypes() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 
-		StringBuilder code = new StringBuilder();
+		StringBuilder code = new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 
 		String className = "StringPlusOpTests";
 
-		code.append("\t// " + fTypeName[T_String] + " " + opSymbol[Op_plus] + " {" + fTypeName[T_byte] + ", " + fTypeName[T_char] + ", " + fTypeName[T_short] + ", " + fTypeName[T_int] + ", " + fTypeName[T_long] + ", " + fTypeName[T_String] + ", " + fTypeName[T_null] + "}\n" +
+		code.append("\t// " + fTypeName[T_String] + " " + opSymbol[Op_plus] + " {" + fTypeName[T_byte] + ", " + fTypeName[T_char] + ", " + fTypeName[T_short] + ", " + fTypeName[T_int] + ", " + fTypeName[T_long] + ", " + fTypeName[T_String] + ", " + fTypeName[T_null] + "}\n" + //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 					"\n");
 
 		genTestTypeBinaryOpTypeBinaryPromotion(T_String, Op_plus, T_byte, code);
@@ -258,12 +258,12 @@ public class TestGenerator {
 		createJavaFile(className, "EvalSimpleTests", 15, 1, true, false, code);
 	}
 
-	public static void genTestsLocalVarValue() throws Exception {
-		StringBuilder code = new StringBuilder();
+	public static void genTestsLocalVarValue() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
+		StringBuilder code = new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 
 		String className = "LocalVarValueTests";
 
-		code.append("\t// \n" +
+		code.append("\t// \n" + //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 					"\n");
 
 		genTestLocalVarValue(T_byte, code);
@@ -280,12 +280,12 @@ public class TestGenerator {
 		createJavaFile(className, "EvalSimpleTests", 37, 1, true, code);
 	}
 
-	public static void genTestsLocalVarAssignment() throws Exception {
-		StringBuilder code = new StringBuilder();
+	public static void genTestsLocalVarAssignment() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
+		StringBuilder code = new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 
 		String className = "LocalVarAssignmentTests";
 
-		code.append("\t// \n" +
+		code.append("\t// \n" + //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 					"\n");
 
 		genTestLocalVarAssignment(T_byte, code);
@@ -301,11 +301,11 @@ public class TestGenerator {
 		createJavaFile(className, "EvalSimpleTests", 37, 1, true, code);
 	}
 
-	public static void genTestsNumericTypeAllAssignmentOpsAllTypes(int type) throws Exception {
+	public static void genTestsNumericTypeAllAssignmentOpsAllTypes(int type) throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 
-		StringBuilder code = new StringBuilder();
+		StringBuilder code = new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 
-		String className = typeUpperName[type] + "AssignmentOperatorsTests";
+		String className = typeUpperName[type] + "AssignmentOperatorsTests"; //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 		genTestsNumericTypeArithmeticAssignmentOpNumericTypes(type, Op_plusAss, code);
 		genTestsNumericTypeArithmeticAssignmentOpNumericTypes(type, Op_minusAss, code);
@@ -326,33 +326,33 @@ public class TestGenerator {
 
 	}
 
-	public static void genTestsBooleanAllAssignmentOpsBoolean() throws Exception {
-		StringBuilder code = new StringBuilder();
+	public static void genTestsBooleanAllAssignmentOpsBoolean() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
+		StringBuilder code = new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 
 		String className = "BooleanAssignmentOperatorsTests";
 
-		code.append("\t// " + fTypeName[T_boolean] + " " + opSymbol[Op_orAss] + " " + fTypeName[T_boolean] + "\n" +
+		code.append("\t// " + fTypeName[T_boolean] + " " + opSymbol[Op_orAss] + " " + fTypeName[T_boolean] + "\n" + //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 					"\n");
 		genTestTypeAssignmentOpType(T_boolean, Op_orAss, T_boolean, code);
 
-		code.append("\t// " + fTypeName[T_boolean] + " " + opSymbol[Op_andAss] + " " + fTypeName[T_boolean] + "\n" +
+		code.append("\t// " + fTypeName[T_boolean] + " " + opSymbol[Op_andAss] + " " + fTypeName[T_boolean] + "\n" + //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 					"\n");
 		genTestTypeAssignmentOpType(T_boolean, Op_andAss, T_boolean, code);
 
-		code.append("\t// " + fTypeName[T_boolean] + " " + opSymbol[Op_xorAss] + " " + fTypeName[T_boolean] + "\n" +
+		code.append("\t// " + fTypeName[T_boolean] + " " + opSymbol[Op_xorAss] + " " + fTypeName[T_boolean] + "\n" + //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 					"\n");
 		genTestTypeAssignmentOpType(T_boolean, Op_xorAss, T_boolean, code);
 
 		createJavaFile(className, "EvalSimpleTests", 37, 1, false, code);
 	}
 
-	public static void genTestsStringPlusAssignmentOpAllTypes() throws Exception {
+	public static void genTestsStringPlusAssignmentOpAllTypes() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 
-		StringBuilder code = new StringBuilder();
+		StringBuilder code = new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 
 		String className = "StringPlusAssignmentOpTests";
 
-		code.append("\t// " + fTypeName[T_String] + " " + opSymbol[Op_plusAss] + " {" + fTypeName[T_byte] + ", " + fTypeName[T_char] + ", " + fTypeName[T_short] + ", " + fTypeName[T_int] + ", " + fTypeName[T_long] + ", " + fTypeName[T_String] + ", " + fTypeName[T_null] + "}\n" +
+		code.append("\t// " + fTypeName[T_String] + " " + opSymbol[Op_plusAss] + " {" + fTypeName[T_byte] + ", " + fTypeName[T_char] + ", " + fTypeName[T_short] + ", " + fTypeName[T_int] + ", " + fTypeName[T_long] + ", " + fTypeName[T_String] + ", " + fTypeName[T_null] + "}\n" + //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 					"\n");
 
 		genTestTypeAssignmentOpType(T_String, Op_plusAss, T_byte, code);
@@ -369,7 +369,7 @@ public class TestGenerator {
 	}
 
 	public static void genTestsNumericTypeCast() throws Exception {
-		StringBuilder code = new StringBuilder();
+		StringBuilder code = new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 
 		String className = "NumericTypesCastTests";
 
@@ -385,7 +385,7 @@ public class TestGenerator {
 	}
 
 	public static void genTestsAllIntegerTypesAllXfixOps() throws Exception {
-		StringBuilder code = new StringBuilder();
+		StringBuilder code = new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 
 		String className = "XfixOperatorsTests";
 
@@ -401,7 +401,7 @@ public class TestGenerator {
 	}
 
 	public static void genTestsQualifiedFieldValue() throws Exception {
-		StringBuilder code = new StringBuilder();
+		StringBuilder code = new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 
 		String className = "QualifiedFieldValueTests";
 
@@ -418,8 +418,8 @@ public class TestGenerator {
 		createJavaFile(className, "EvalTypeTests", 73, 1, true, code);
 	}
 
-	public static void genTestsQualifiedStaticFieldValue() throws Exception {
-		StringBuilder code = new StringBuilder();
+	public static void genTestsQualifiedStaticFieldValue() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
+		StringBuilder code = new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 
 		String className = "QualifiedStaticFieldValueTests";
 
@@ -435,7 +435,7 @@ public class TestGenerator {
 
 		createJavaFile(className, "EvalTypeTests", 73, 1, true, code);
 
-		code = new StringBuilder();
+		code = new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 
 		className = "QualifiedStaticFieldValueTests2";
 
@@ -453,7 +453,7 @@ public class TestGenerator {
 	}
 
 	public static void genTestsFieldValue() throws Exception {
-		StringBuilder code = new StringBuilder();
+		StringBuilder code = new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 
 		String className = "FieldValueTests";
 
@@ -470,8 +470,8 @@ public class TestGenerator {
 		createJavaFile(className, "EvalTypeTests", 63, 2, true, code);
 	}
 
-	public static void genTestsStaticFieldValue() throws Exception {
-		StringBuilder code = new StringBuilder();
+	public static void genTestsStaticFieldValue() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
+		StringBuilder code = new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 
 		String className = "StaticFieldValueTests";
 
@@ -492,8 +492,8 @@ public class TestGenerator {
 		createJavaFile(className, "EvalTypeTests", 67, 2, true, code);
 	}
 
-	public static void genTestsArrayValue() throws Exception {
-		StringBuilder code = new StringBuilder();
+	public static void genTestsArrayValue() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
+		StringBuilder code = new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 
 		String className = "ArrayValueTests";
 
@@ -521,7 +521,7 @@ public class TestGenerator {
 	}
 
 	public static void genTestsArrayAssignment() throws Exception {
-		StringBuilder code = new StringBuilder();
+		StringBuilder code = new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 
 		String className = "ArrayAssignmentTests";
 
@@ -539,7 +539,7 @@ public class TestGenerator {
 	}
 
 	public static void genTestsArrayAllocation() throws Exception {
-		StringBuilder code = new StringBuilder();
+		StringBuilder code = new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 
 		String className = "ArrayAllocationTests";
 
@@ -557,7 +557,7 @@ public class TestGenerator {
 	}
 
 	public static void genTestsArrayInitialization() throws Exception {
-		StringBuilder code = new StringBuilder();
+		StringBuilder code = new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 
 		String className = "ArrayInitializationTests";
 
@@ -577,7 +577,7 @@ public class TestGenerator {
 
 	public static void genTestsNumericTypeArithmeticOpNumericTypes(int type, int op, StringBuilder code) {
 
-		code.append("\t// " + fTypeName[type] + " " + opSymbol[op] + " {" + fTypeName[T_byte] + ", " + fTypeName[T_char] + ", " + fTypeName[T_short] + ", " + fTypeName[T_int] + ", " + fTypeName[T_long] + ", " + fTypeName[T_float] + ", " + fTypeName[T_double] + "}\n" +
+		code.append("\t// " + fTypeName[type] + " " + opSymbol[op] + " {" + fTypeName[T_byte] + ", " + fTypeName[T_char] + ", " + fTypeName[T_short] + ", " + fTypeName[T_int] + ", " + fTypeName[T_long] + ", " + fTypeName[T_float] + ", " + fTypeName[T_double] + "}\n" + //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 					"\n");
 
 		genTestTypeBinaryOpTypeBinaryPromotion(type, op, T_byte, code);
@@ -592,7 +592,7 @@ public class TestGenerator {
 
 	public static void genTestsNumericTypeComparisonOpNumericTypes(int type, int op, StringBuilder code) {
 
-		code.append("\t// " + fTypeName[type] + " " + opSymbol[op] + " {" + fTypeName[T_byte] + ", " + fTypeName[T_char] + ", " + fTypeName[T_short] + ", " + fTypeName[T_int] + ", " + fTypeName[T_long] + ", " + fTypeName[T_float] + ", " + fTypeName[T_double] + "}\n" +
+		code.append("\t// " + fTypeName[type] + " " + opSymbol[op] + " {" + fTypeName[T_byte] + ", " + fTypeName[T_char] + ", " + fTypeName[T_short] + ", " + fTypeName[T_int] + ", " + fTypeName[T_long] + ", " + fTypeName[T_float] + ", " + fTypeName[T_double] + "}\n" + //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 					"\n");
 
 		genTestTypeBinaryOpTypeBooleanResult(type, op, T_byte, code);
@@ -607,7 +607,7 @@ public class TestGenerator {
 
 	public static void genTestsIntegerTypeShiftOpIntegerTypes(int type, int op, StringBuilder code) {
 
-		code.append("\t// " + fTypeName[type] + " " + opSymbol[op] + " {" + fTypeName[T_byte] + ", " + fTypeName[T_char] + ", " + fTypeName[T_short] + ", " + fTypeName[T_int] + ", " + fTypeName[T_long] + "}\n" +
+		code.append("\t// " + fTypeName[type] + " " + opSymbol[op] + " {" + fTypeName[T_byte] + ", " + fTypeName[T_char] + ", " + fTypeName[T_short] + ", " + fTypeName[T_int] + ", " + fTypeName[T_long] + "}\n" + //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 					"\n");
 
 		genTestTypeBinaryOpTypeUnaryPromotion(type, op, T_byte, code);
@@ -620,7 +620,7 @@ public class TestGenerator {
 
 	public static void genTestsIntegerTypeBooleanOpIntegerTypes(int type, int op, StringBuilder code) {
 
-		code.append("\t// " + fTypeName[type] + " " + opSymbol[op] + " {" + fTypeName[T_byte] + ", " + fTypeName[T_char] + ", " + fTypeName[T_short] + ", " + fTypeName[T_int] + ", " + fTypeName[T_long] + "}\n" +
+		code.append("\t// " + fTypeName[type] + " " + opSymbol[op] + " {" + fTypeName[T_byte] + ", " + fTypeName[T_char] + ", " + fTypeName[T_short] + ", " + fTypeName[T_int] + ", " + fTypeName[T_long] + "}\n" + //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 					"\n");
 
 		genTestTypeBinaryOpTypeBinaryPromotion(type, op, T_byte, code);
@@ -633,7 +633,7 @@ public class TestGenerator {
 
 	public static void genTestsNumericTypeArithmeticAssignmentOpNumericTypes(int type, int op, StringBuilder code) {
 
-		code.append("\t// " + fTypeName[type] + " " + opSymbol[op] + " {" + fTypeName[T_byte] + ", " + fTypeName[T_char] + ", " + fTypeName[T_short] + ", " + fTypeName[T_int] + ", " + fTypeName[T_long] + ", " + fTypeName[T_float] + ", " + fTypeName[T_double] + "}\n" +
+		code.append("\t// " + fTypeName[type] + " " + opSymbol[op] + " {" + fTypeName[T_byte] + ", " + fTypeName[T_char] + ", " + fTypeName[T_short] + ", " + fTypeName[T_int] + ", " + fTypeName[T_long] + ", " + fTypeName[T_float] + ", " + fTypeName[T_double] + "}\n" + //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 					"\n");
 
 		genTestTypeAssignmentOpType(type, op, T_byte, code);
@@ -648,7 +648,7 @@ public class TestGenerator {
 
 	public static void genTestsIntegerTypeArithmeticAssignmentOpIntegerTypes(int type, int op, StringBuilder code) {
 
-		code.append("\t// " + fTypeName[type] + " " + opSymbol[op] + " {" + fTypeName[T_byte] + ", " + fTypeName[T_char] + ", " + fTypeName[T_short] + ", " + fTypeName[T_int] + ", " + fTypeName[T_long] + ", " + fTypeName[T_float] + ", " + fTypeName[T_double] + "}\n" +
+		code.append("\t// " + fTypeName[type] + " " + opSymbol[op] + " {" + fTypeName[T_byte] + ", " + fTypeName[T_char] + ", " + fTypeName[T_short] + ", " + fTypeName[T_int] + ", " + fTypeName[T_long] + ", " + fTypeName[T_float] + ", " + fTypeName[T_double] + "}\n" + //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 					"\n");
 
 		genTestTypeAssignmentOpType(type, op, T_byte, code);
@@ -661,7 +661,7 @@ public class TestGenerator {
 
 	public static void genTestsNumericTypeCast(int type, StringBuilder code) {
 
-		code.append("\t// (" + fTypeName[type] + ") {" + fTypeName[T_byte] + ", " + fTypeName[T_char] + ", " + fTypeName[T_short] + ", " + fTypeName[T_int] + ", " + fTypeName[T_long] + ", " + fTypeName[T_float] + ", " + fTypeName[T_double] + "}\n" +
+		code.append("\t// (" + fTypeName[type] + ") {" + fTypeName[T_byte] + ", " + fTypeName[T_char] + ", " + fTypeName[T_short] + ", " + fTypeName[T_int] + ", " + fTypeName[T_long] + ", " + fTypeName[T_float] + ", " + fTypeName[T_double] + "}\n" + //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 					"\n");
 
 		genTestNumericTypeCast(type, T_byte, code);
@@ -676,7 +676,7 @@ public class TestGenerator {
 
 	public static void genTestsNumericTypeAllXfixOps(int type, StringBuilder code) {
 
-		code.append("\t// {" + opSymbol[Op_prefixPlusPlus] + ", " + opSymbol[Op_prefixMinusMinus] + "} " + fTypeName[type] + "\n" +
+		code.append("\t// {" + opSymbol[Op_prefixPlusPlus] + ", " + opSymbol[Op_prefixMinusMinus] + "} " + fTypeName[type] + "\n" + //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 					"\t// " + fTypeName[type] + " {" + opSymbol[Op_postfixPlusPlus] + ", " + opSymbol[Op_postfixMinusMinus] + "}\n" +
 					"\n");
 
@@ -696,16 +696,16 @@ public class TestGenerator {
 		String t2UName = typeUpperName[type2];
 		String oUName = opUpperName[op];
 
-		code.append("\tpublic void test" + t1UName + oUName + t2UName + "() throws Throwable {\n");
+		code.append("\tpublic void test" + t1UName + oUName + t2UName + "() throws Throwable {\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		tryBlockBegin(code);
 		genCodeBinaryOp(type1, op, type2, promotedType, 0, 1, true, code);
-		code.append("\n");
+		code.append("\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		genCodeBinaryOp(type1, op, type2, promotedType, 1, 0, false, code);
 		tryBlockEnd(code);
-		code.append("\t}\n\n");
+		code.append("\t}\n\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 	}
 
-	public static void genTestTypeBinaryOpTypeBooleanResult(int type1, int op, int type2, StringBuilder code) {
+	public static void genTestTypeBinaryOpTypeBooleanResult(int type1, int op, int type2, StringBuilder code) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 
 		int promotedType = T_boolean;
 
@@ -713,15 +713,15 @@ public class TestGenerator {
 		String t2UName = typeUpperName[type2];
 		String oUName = opUpperName[op];
 
-		code.append("\tpublic void test" + t1UName + oUName + t2UName + "() throws Throwable {\n");
+		code.append("\tpublic void test" + t1UName + oUName + t2UName + "() throws Throwable {\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		tryBlockBegin(code);
 		genCodeBinaryOp(type1, op, type2, promotedType, 0, 1, true, code);
-		code.append("\n");
+		code.append("\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		genCodeBinaryOp(type1, op, type2, promotedType, 1, 0, false, code);
-		code.append("\n");
+		code.append("\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		genCodeBinaryOp(type1, op, type2, promotedType, 0, 0, false, code);
 		tryBlockEnd(code);
-		code.append("\t}\n\n");
+		code.append("\t}\n\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 
 	}
 
@@ -733,40 +733,40 @@ public class TestGenerator {
 		String t2UName = typeUpperName[type2];
 		String oUName = opUpperName[op];
 
-		code.append("\tpublic void test" + t1UName + oUName + t2UName + "() throws Throwable {\n");
+		code.append("\tpublic void test" + t1UName + oUName + t2UName + "() throws Throwable {\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		tryBlockBegin(code);
 		genCodeBinaryOp(type1, op, type2, promotedType, 0, 1, true, code);
-		code.append("\n");
+		code.append("\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		genCodeBinaryOp(type1, op, type2, promotedType, 1, 0, false, code);
 		tryBlockEnd(code);
-		code.append("\t}\n\n");
+		code.append("\t}\n\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 	}
 
-	public static void genTestBooleanBinaryOpBoolean(int op, StringBuilder code) {
+	public static void genTestBooleanBinaryOpBoolean(int op, StringBuilder code) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 
 		int type = T_boolean;
 
 		String uName = typeUpperName[type];
 		String oUName = opUpperName[op];
 
-		code.append("\t// " + fTypeName[type] + " " + opSymbol[op] + " " + fTypeName[type] + "\n" +
+		code.append("\t// " + fTypeName[type] + " " + opSymbol[op] + " " + fTypeName[type] + "\n" + //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 					"\n");
 
-		code.append("\tpublic void test" + uName + oUName + uName + "() throws Throwable {\n");
+		code.append("\tpublic void test" + uName + oUName + uName + "() throws Throwable {\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		tryBlockBegin(code);
 		genCodeBinaryOp(type, op, type, type, 0, 0, true, code);
-		code.append("\n");
+		code.append("\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		genCodeBinaryOp(type, op, type, type, 0, 1, false, code);
-		code.append("\n");
+		code.append("\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		genCodeBinaryOp(type, op, type, type, 1, 0, false, code);
-		code.append("\n");
+		code.append("\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		genCodeBinaryOp(type, op, type, type, 1, 1, false, code);
 		tryBlockEnd(code);
-		code.append("\t}\n\n");
+		code.append("\t}\n\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 
 	}
 
-	public static void genTestUnaryOpNumericType(int type, int op, StringBuilder code) {
+	public static void genTestUnaryOpNumericType(int type, int op, StringBuilder code) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 
 		int promotedType = getUnaryPromotionType(type);
 
@@ -775,89 +775,89 @@ public class TestGenerator {
 		String oSymbol = opSymbol[op];
 		String oUName = opUpperName[op];
 
-		code.append("\t// " + oSymbol + " " + tName + "\n" +
+		code.append("\t// " + oSymbol + " " + tName + "\n" + //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 					"\n");
 
-		code.append("\tpublic void test" + oUName + tUName + "() throws Throwable {\n");
+		code.append("\tpublic void test" + oUName + tUName + "() throws Throwable {\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		tryBlockBegin(code);
 		genCodeUnaryOp(type, op, promotedType, 0, true, code);
-		code.append("\n");
+		code.append("\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		genCodeUnaryOp(type, op, promotedType, 1, false, code);
 		tryBlockEnd(code);
-		code.append("\t}\n\n");
+		code.append("\t}\n\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 	}
 
-	public static void genTestUnaryOpBoolean(int op, StringBuilder code) {
+	public static void genTestUnaryOpBoolean(int op, StringBuilder code) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 
 		int type = T_boolean;
 
 		String uName = typeUpperName[type];
 		String oUName = opUpperName[op];
 
-		code.append("\t// " + opSymbol[op] + " " + fTypeName[type] + "\n" +
+		code.append("\t// " + opSymbol[op] + " " + fTypeName[type] + "\n" + //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 					"\n");
 
-		code.append("\tpublic void test" + oUName + uName + "() throws Throwable {\n");
+		code.append("\tpublic void test" + oUName + uName + "() throws Throwable {\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		tryBlockBegin(code);
 		genCodeUnaryOp(type, op, type, 0, true, code);
-		code.append("\n");
+		code.append("\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		genCodeUnaryOp(type, op, type, 1, false, code);
 		tryBlockEnd(code);
-		code.append("\t}\n\n");
+		code.append("\t}\n\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 
 	}
 
 	public static void genTestLocalVarValue(int type, StringBuilder code ) {
 		String tUName = typeUpperName[type];
 
-		code.append("\tpublic void test" + tUName + "() throws Throwable {\n");
+		code.append("\tpublic void test" + tUName + "() throws Throwable {\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		tryBlockBegin(code);
 		genCodeLocalVarValue(type, 0, true, code);
-		code.append("\n");
+		code.append("\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		genCodeLocalVarValue(type, 1, false, code);
 		tryBlockEnd(code);
-		code.append("\t}\n\n");
+		code.append("\t}\n\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 	}
 
 	public static void genTestLocalVarAssignment(int type, StringBuilder code) {
 		String tUName = typeUpperName[type];
 
-		code.append("\tpublic void test" + tUName + "() throws Throwable {\n");
+		code.append("\tpublic void test" + tUName + "() throws Throwable {\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		tryBlockBegin(code);
 		genCodeLocalVarAssignment(type, 0, 0, true, code);
-		code.append("\n");
+		code.append("\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		genCodeLocalVarAssignment(type, 0, 1, false, code);
-		code.append("\n");
+		code.append("\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		genCodeLocalVarAssignment(type, 1, 0, false, code);
-		code.append("\n");
+		code.append("\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		genCodeLocalVarAssignment(type, 1, 1, false, code);
 		tryBlockEnd(code);
-		code.append("\t}\n\n");
+		code.append("\t}\n\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 	}
 
-	public static void genTestTypeAssignmentOpType(int type1, int op, int type2, StringBuilder code) {
+	public static void genTestTypeAssignmentOpType(int type1, int op, int type2, StringBuilder code) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 
 		String t1UName = typeUpperName[type1];
 		String t2UName = typeUpperName[type2];
 		String oUName = opUpperName[op];
 
-		code.append("\tpublic void test" + t1UName + oUName + t2UName + "() throws Throwable {\n");
+		code.append("\tpublic void test" + t1UName + oUName + t2UName + "() throws Throwable {\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		tryBlockBegin(code);
-		genCodeSetTmp("tmp" + fVariable[0], type1, Op_equal, fVariable[0] + t1UName + "Value", true, code);
-		genCodeSetTmp("tmp" + fVariable[0], type1, op, immediate[0] + t2UName + "Value", false, code);
+		genCodeSetTmp("tmp" + fVariable[0], type1, Op_equal, fVariable[0] + t1UName + "Value", true, code); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
+		genCodeSetTmp("tmp" + fVariable[0], type1, op, immediate[0] + t2UName + "Value", false, code); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		genCodeAssignmentOp(type1, op, type2, 0, 0, true, code);
-		code.append("\n");
-		genCodeSetTmp("tmp" + fVariable[0], type1, op, immediate[1] + t2UName + "Value", false, code);
+		code.append("\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+		genCodeSetTmp("tmp" + fVariable[0], type1, op, immediate[1] + t2UName + "Value", false, code); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		genCodeAssignmentOp(type1, op, type2, 0, 1, false, code);
-		code.append("\n");
-		genCodeSetTmp("tmp" + fVariable[1], type1, Op_equal, fVariable[1] + t1UName + "Value", true, code);
-		genCodeSetTmp("tmp" + fVariable[1], type1, op, immediate[0] + t2UName + "Value", false, code);
+		code.append("\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+		genCodeSetTmp("tmp" + fVariable[1], type1, Op_equal, fVariable[1] + t1UName + "Value", true, code); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
+		genCodeSetTmp("tmp" + fVariable[1], type1, op, immediate[0] + t2UName + "Value", false, code); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		genCodeAssignmentOp(type1, op, type2, 1, 0, false, code);
-		code.append("\n");
-		genCodeSetTmp("tmp" + fVariable[1], type1, op, immediate[1] + t2UName + "Value", false, code);
+		code.append("\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+		genCodeSetTmp("tmp" + fVariable[1], type1, op, immediate[1] + t2UName + "Value", false, code); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		genCodeAssignmentOp(type1, op, type2, 1, 1, false, code);
 		tryBlockEnd(code);
-		code.append("\t}\n\n");
+		code.append("\t}\n\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 	}
 
 	public static void genTestNumericTypeCast(int type1, int type2, StringBuilder code) {
@@ -865,13 +865,13 @@ public class TestGenerator {
 		String t1UName = typeUpperName[type1];
 		String t2UName = typeUpperName[type2];
 
-		code.append("\tpublic void test" + t1UName + "Cast" + t2UName + "() throws Throwable {\n");
+		code.append("\tpublic void test" + t1UName + "Cast" + t2UName + "() throws Throwable {\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		tryBlockBegin(code);
 		genCodeCast(type1, type2, 0, true, code);
-		code.append("\n");
+		code.append("\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		genCodeCast(type1, type2, 1, false, code);
 		tryBlockEnd(code);
-		code.append("\t}\n\n");
+		code.append("\t}\n\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 
 	}
 
@@ -880,13 +880,13 @@ public class TestGenerator {
 		String tUName = typeUpperName[type];
 		String oUName = opUpperName[op];
 
-		code.append("\tpublic void test" + oUName + tUName + "() throws Throwable {\n");
+		code.append("\tpublic void test" + oUName + tUName + "() throws Throwable {\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		tryBlockBegin(code);
 		genCodePrefixOp(type, op, 0, true, code);
-		code.append("\n");
+		code.append("\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		genCodePrefixOp(type, op, 1, false, code);
 		tryBlockEnd(code);
-		code.append("\t}\n\n");
+		code.append("\t}\n\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 	}
 
 	public static void genTestNumericTypePostfixOp(int type, int op, StringBuilder code) {
@@ -894,118 +894,118 @@ public class TestGenerator {
 		String tUName = typeUpperName[type];
 		String oUName = opUpperName[op];
 
-		code.append("\tpublic void test" + oUName + tUName + "() throws Throwable {\n");
+		code.append("\tpublic void test" + oUName + tUName + "() throws Throwable {\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		tryBlockBegin(code);
 		genCodePostfixOp(type, op, 0, true, code);
-		code.append("\n");
+		code.append("\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		genCodePostfixOp(type, op, 1, false, code);
 		tryBlockEnd(code);
-		code.append("\t}\n\n");
+		code.append("\t}\n\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 	}
 
 	public static void genTestFieldValue(int type, int prefix, StringBuilder code ) {
 		String tUName = typeUpperName[type];
 
-		code.append("\tpublic void test" + tUName + "FieldValue() throws Throwable {\n");
+		code.append("\tpublic void test" + tUName + "FieldValue() throws Throwable {\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		tryBlockBegin(code);
 		genCodeFieldValue(type, 0, prefix, true, code);
-		code.append("\n");
+		code.append("\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		genCodeFieldValue(type, 1, prefix, false, code);
 		tryBlockEnd(code);
-		code.append("\t}\n\n");
+		code.append("\t}\n\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 	}
 
 	public static void genTestStaticFieldValue(int type, int prefix, StringBuilder code ) {
 		String tUName = typeUpperName[type];
 
-		code.append("\tpublic void test" + tUName + "StaticFieldValue() throws Throwable {\n");
+		code.append("\tpublic void test" + tUName + "StaticFieldValue() throws Throwable {\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		tryBlockBegin(code);
 		genCodeFieldValue(type, 2, prefix, true, code);
-		code.append("\n");
+		code.append("\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		genCodeFieldValue(type, 3, prefix, false, code);
 		tryBlockEnd(code);
-		code.append("\t}\n\n");
+		code.append("\t}\n\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 	}
 
-	public static void genTestArrayValue(int type, StringBuilder code ) {
+	public static void genTestArrayValue(int type, StringBuilder code ) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String tUName = typeUpperName[type];
 
-		code.append("\tpublic void test" + tUName + "ArrayValue() throws Throwable {\n");
+		code.append("\tpublic void test" + tUName + "ArrayValue() throws Throwable {\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		tryBlockBegin(code);
 		genCodeArrayValue(type, 2, 0, true, code);
-		code.append("\n");
+		code.append("\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		genCodeArrayValue(type, 2, 1, false, code);
-		code.append("\n");
+		code.append("\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		genCodeArrayValue(type, 2, 2, false, code);
-		code.append("\n");
+		code.append("\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		genCodeArrayValue(type, 3, 0, false, code);
-		code.append("\n");
+		code.append("\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		genCodeArrayValue(type, 3, 1, false, code);
-		code.append("\n");
+		code.append("\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		genCodeArrayValue(type, 3, 2, false, code);
 		tryBlockEnd(code);
-		code.append("\t}\n\n");
+		code.append("\t}\n\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 	}
 
 	public static void genTestArrayLength(int type, StringBuilder code ) {
 		String tUName = typeUpperName[type];
 
-		code.append("\tpublic void test" + tUName + "ArrayLength() throws Throwable {\n");
+		code.append("\tpublic void test" + tUName + "ArrayLength() throws Throwable {\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		tryBlockBegin(code);
 		genCodeArrayLength(type, 2, true, code);
-		code.append("\n");
+		code.append("\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		genCodeArrayLength(type, 3, false, code);
 		tryBlockEnd(code);
-		code.append("\t}\n\n");
+		code.append("\t}\n\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 	}
 
-	public static void genTestArrayAssignment(int type, StringBuilder code ) {
+	public static void genTestArrayAssignment(int type, StringBuilder code ) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String tUName = typeUpperName[type];
 
-		code.append("\tpublic void test" + tUName + "ArrayAssignment() throws Throwable {\n");
+		code.append("\tpublic void test" + tUName + "ArrayAssignment() throws Throwable {\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		tryBlockBegin(code);
 		genCodeArrayAssignment(type, 2, 0, 0, true, code);
-		code.append("\n");
+		code.append("\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		genCodeArrayAssignment(type, 2, 1, 1, false, code);
-		code.append("\n");
+		code.append("\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		genCodeArrayAssignment(type, 2, 2, 0, false, code);
-		code.append("\n");
+		code.append("\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		genCodeArrayAssignment(type, 3, 0, 1, false, code);
-		code.append("\n");
+		code.append("\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		genCodeArrayAssignment(type, 3, 1, 0, false, code);
-		code.append("\n");
+		code.append("\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		genCodeArrayAssignment(type, 3, 2, 1, false, code);
 		tryBlockEnd(code);
-		code.append("\t}\n\n");
+		code.append("\t}\n\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 	}
 
 	public static void genTestArrayAllocation(int type, StringBuilder code) {
 		String tUName = typeUpperName[type];
 
-		code.append("\tpublic void test" + tUName + "ArrayAllocation() throws Throwable {\n");
+		code.append("\tpublic void test" + tUName + "ArrayAllocation() throws Throwable {\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		tryBlockBegin(code);
 		genCodeArrayAllocation(type, 2, 0, true, code);
-		code.append("\n");
+		code.append("\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		genCodeArrayAllocation(type, 3, 1, false, code);
 		tryBlockEnd(code);
-		code.append("\t}\n\n");
+		code.append("\t}\n\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 	}
 
 	public static void genTestArrayInitialization(int type, StringBuilder code) {
 		String tUName = typeUpperName[type];
 
-		code.append("\tpublic void test" + tUName + "ArrayAllocation() throws Throwable {\n");
+		code.append("\tpublic void test" + tUName + "ArrayAllocation() throws Throwable {\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		tryBlockBegin(code);
 		genCodeArrayInitialization(type, 2, true, code);
-		code.append("\n");
+		code.append("\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		genCodeArrayInitialization(type, 3, false, code);
 		tryBlockEnd(code);
-		code.append("\t}\n\n");
+		code.append("\t}\n\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 	}
 
 	//-------------------------------
 
-	public static void genCodeBinaryOp(int type1, int op, int type2, int resultType, int var1, int var2, boolean first, StringBuilder code) {
+	public static void genCodeBinaryOp(int type1, int op, int type2, int resultType, int var1, int var2, boolean first, StringBuilder code) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 
 		String t1Name = fTypeName[type1];
 		String t1UName = typeUpperName[type1];
@@ -1018,23 +1018,23 @@ public class TestGenerator {
 		String v1Name = immediate[var1];
 		String v2Name = immediate[var2];
 
-		genCodeEval(v1Name + t1UName + " + " + oName + "Op + " + v2Name + t2UName, first, code);
-		genCodeReturnTypeCheck(t1Name + " " + oName + " " + t2Name, resName, first, code);
+		genCodeEval(v1Name + t1UName + " + " + oName + "Op + " + v2Name + t2UName, first, code); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
+		genCodeReturnTypeCheck(t1Name + " " + oName + " " + t2Name, resName, first, code); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		switch (resultType) {
 			case T_String:
-				genCodeReturnValueCheckStringType(t1Name + " " + oName + " " + t2Name, v1Name + t1UName + "Value " + oSymbol + " " + v2Name + t2UName + "Value", first, code);
+				genCodeReturnValueCheckStringType(t1Name + " " + oName + " " + t2Name, v1Name + t1UName + "Value " + oSymbol + " " + v2Name + t2UName + "Value", first, code); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 				break;
 			case T_float:
 			case T_double:
-				genCodeReturnValueCheckFloatDoubleType(t1Name + " " + oName + " " + t2Name, resName, resUName, v1Name + t1UName + "Value " + oSymbol + " " + v2Name + t2UName + "Value", first, code);
+				genCodeReturnValueCheckFloatDoubleType(t1Name + " " + oName + " " + t2Name, resName, resUName, v1Name + t1UName + "Value " + oSymbol + " " + v2Name + t2UName + "Value", first, code); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 				break;
 			default:
-				genCodeReturnValueCheckPrimitiveType(t1Name + " " + oName + " " + t2Name, resName, resUName, v1Name + t1UName + "Value " + oSymbol + " " + v2Name + t2UName + "Value", first, code);
+				genCodeReturnValueCheckPrimitiveType(t1Name + " " + oName + " " + t2Name, resName, resUName, v1Name + t1UName + "Value " + oSymbol + " " + v2Name + t2UName + "Value", first, code); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 				break;
 		}
 	}
 
-	public static void genCodeUnaryOp(int type, int op, int resultType, int var, boolean first, StringBuilder code) {
+	public static void genCodeUnaryOp(int type, int op, int resultType, int var, boolean first, StringBuilder code) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 
 		String tName = fTypeName[type];
 		String tUName = typeUpperName[type];
@@ -1044,12 +1044,12 @@ public class TestGenerator {
 		String oSymbol = opSymbol[op];
 		String vName = immediate[var];
 
-		genCodeEval(oName + "Op + " + vName + tUName, first, code);
-		genCodeReturnTypeCheck(oName + " " + tName, resName, first, code);
+		genCodeEval(oName + "Op + " + vName + tUName, first, code); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
+		genCodeReturnTypeCheck(oName + " " + tName, resName, first, code); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		if (type == T_float || type == T_double) {
-			genCodeReturnValueCheckFloatDoubleType(oName + " " + tName, resName, resUName, oSymbol + " " + vName + tUName + "Value", first, code);
+			genCodeReturnValueCheckFloatDoubleType(oName + " " + tName, resName, resUName, oSymbol + " " + vName + tUName + "Value", first, code); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		} else {
-			genCodeReturnValueCheckPrimitiveType(oName + " " + tName, resName, resUName, oSymbol + " " + vName + tUName + "Value", first, code);
+			genCodeReturnValueCheckPrimitiveType(oName + " " + tName, resName, resUName, oSymbol + " " + vName + tUName + "Value", first, code); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		}
 	}
 
@@ -1057,32 +1057,32 @@ public class TestGenerator {
 		String tUName = typeUpperName[type];
 		String vName = fVariable[var];
 
-		genCodeLocalVarValue(type,var, vName + tUName + "Value", first, code);
+		genCodeLocalVarValue(type,var, vName + tUName + "Value", first, code); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 	}
 
-	public static void genCodeLocalVarValue(int type, int var, String referenceExpression, boolean first, StringBuilder code) {
+	public static void genCodeLocalVarValue(int type, int var, String referenceExpression, boolean first, StringBuilder code) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 
 		String tName = fTypeName[type];
 		String tUName = typeUpperName[type];
 		String vName = fVariable[var];
 
-		genCodeEval(vName + tUName, first, code);
-		genCodeReturnTypeCheck(tName + " local variable value", tName, first,code);
+		genCodeEval(vName + tUName, first, code); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
+		genCodeReturnTypeCheck(tName + " local variable value", tName, first,code); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		switch (type) {
 			case T_String:
-				genCodeReturnValueCheckStringType(tName + " local variable value", referenceExpression, first, code);
+				genCodeReturnValueCheckStringType(tName + " local variable value", referenceExpression, first, code); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 				break;
 			case T_float:
 			case T_double:
-				genCodeReturnValueCheckFloatDoubleType(tName + " local variable value", tName, tUName, referenceExpression, first, code);
+				genCodeReturnValueCheckFloatDoubleType(tName + " local variable value", tName, tUName, referenceExpression, first, code); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 				break;
 			default:
-				genCodeReturnValueCheckPrimitiveType(tName + " local variable value", tName, tUName, referenceExpression, first, code);
+				genCodeReturnValueCheckPrimitiveType(tName + " local variable value", tName, tUName, referenceExpression, first, code); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 				break;
 		}
 	}
 
-	public static void genCodeLocalVarAssignment(int type, int var, int imm, boolean first, StringBuilder code) {
+	public static void genCodeLocalVarAssignment(int type, int var, int imm, boolean first, StringBuilder code) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 
 		String tName = fTypeName[type];
 		String tUName = typeUpperName[type];
@@ -1090,24 +1090,24 @@ public class TestGenerator {
 		String iName = immediate[imm];
 		String oName = opName[Op_equal];
 
-		genCodeEval(vName + tUName + " + " + oName + "Op +" + iName + tUName, first, code);
-		genCodeReturnTypeCheck(tName + " local variable assignment", tName, first,code);
+		genCodeEval(vName + tUName + " + " + oName + "Op +" + iName + tUName, first, code); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
+		genCodeReturnTypeCheck(tName + " local variable assignment", tName, first,code); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		switch (type) {
 			case T_String:
-				genCodeReturnValueCheckStringType(tName + " local variable assignment", iName + tUName + "Value", first, code);
+				genCodeReturnValueCheckStringType(tName + " local variable assignment", iName + tUName + "Value", first, code); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 				break;
 			case T_float:
 			case T_double:
-				genCodeReturnValueCheckFloatDoubleType(tName + " local variable assignment", tName, tUName, iName + tUName + "Value", first, code);
+				genCodeReturnValueCheckFloatDoubleType(tName + " local variable assignment", tName, tUName, iName + tUName + "Value", first, code); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 				break;
 			default:
-				genCodeReturnValueCheckPrimitiveType(tName + " local variable assignment", tName, tUName, iName + tUName + "Value", first, code);
+				genCodeReturnValueCheckPrimitiveType(tName + " local variable assignment", tName, tUName, iName + tUName + "Value", first, code); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 				break;
 		}
-		genCodeLocalVarValue(type, var, iName + tUName + "Value", false, code);
+		genCodeLocalVarValue(type, var, iName + tUName + "Value", false, code); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 	}
 
-	public static void genCodeAssignmentOp(int type1, int op, int type2, int var, int imm, boolean first, StringBuilder code) {
+	public static void genCodeAssignmentOp(int type1, int op, int type2, int var, int imm, boolean first, StringBuilder code) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String t1Name = fTypeName[type1];
 		String t1UName = typeUpperName[type1];
 		String t2Name = fTypeName[type2];
@@ -1116,21 +1116,21 @@ public class TestGenerator {
 		String vName = fVariable[var];
 		String iName = immediate[imm];
 
-		genCodeEval(vName + t1UName + " + " + oName + "Op + " + iName + t2UName, first, code);
-		genCodeReturnTypeCheck(t1Name + " " + oName + " " + t2Name, t1Name, first, code);
+		genCodeEval(vName + t1UName + " + " + oName + "Op + " + iName + t2UName, first, code); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
+		genCodeReturnTypeCheck(t1Name + " " + oName + " " + t2Name, t1Name, first, code); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		switch (type1) {
 			case T_String:
-				genCodeReturnValueCheckStringType(t1Name + " " + oName + " " + t2Name, "tmp" + vName, first, code);
+				genCodeReturnValueCheckStringType(t1Name + " " + oName + " " + t2Name, "tmp" + vName, first, code); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 				break;
 			case T_float:
 			case T_double:
-				genCodeReturnValueCheckFloatDoubleType(t1Name + " " + oName + " " + t2Name, t1Name, t1UName, "tmp" + vName, first, code);
+				genCodeReturnValueCheckFloatDoubleType(t1Name + " " + oName + " " + t2Name, t1Name, t1UName, "tmp" + vName, first, code); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 				break;
 			default:
-				genCodeReturnValueCheckPrimitiveType(t1Name + " " + oName + " " + t2Name, t1Name, t1UName, "tmp" + vName, first, code);
+				genCodeReturnValueCheckPrimitiveType(t1Name + " " + oName + " " + t2Name, t1Name, t1UName, "tmp" + vName, first, code); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 				break;
 		}
-		genCodeLocalVarValue(type1, var, "tmp" + vName, false, code);
+		genCodeLocalVarValue(type1, var, "tmp" + vName, false, code); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 	}
 
 	public static void genCodeCast(int type1, int type2, int imm, boolean first, StringBuilder code) {
@@ -1140,12 +1140,12 @@ public class TestGenerator {
 		String t2UName = typeUpperName[type2];
 		String iName = immediate[imm];
 
-		genCodeEval("\"(" + t1Name + ")\" + " + iName + t2UName, first, code);
-		genCodeReturnTypeCheck("(" + t1Name + ") " + t2Name, t1Name, first, code);
+		genCodeEval("\"(" + t1Name + ")\" + " + iName + t2UName, first, code); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
+		genCodeReturnTypeCheck("(" + t1Name + ") " + t2Name, t1Name, first, code); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		if (type1 == T_float || type1 == T_double) {
-			genCodeReturnValueCheckFloatDoubleType("(" + t1Name + ") " + t2Name, t1Name, t1UName, (needCast(type1, type2) ? "( " + t1Name + ") " : IInternalDebugCoreConstants.EMPTY_STRING) + iName + t2UName + "Value", first, code);
+			genCodeReturnValueCheckFloatDoubleType("(" + t1Name + ") " + t2Name, t1Name, t1UName, (needCast(type1, type2) ? "( " + t1Name + ") " : IInternalDebugCoreConstants.EMPTY_STRING) + iName + t2UName + "Value", first, code); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		} else {
-			genCodeReturnValueCheckPrimitiveType("(" + t1Name + ") " + t2Name, t1Name, t1UName, (needCast(type1, type2) ? "( " + t1Name + ") " : IInternalDebugCoreConstants.EMPTY_STRING) + iName + t2UName + "Value", first, code);
+			genCodeReturnValueCheckPrimitiveType("(" + t1Name + ") " + t2Name, t1Name, t1UName, (needCast(type1, type2) ? "( " + t1Name + ") " : IInternalDebugCoreConstants.EMPTY_STRING) + iName + t2UName + "Value", first, code); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		}
 	}
 
@@ -1156,15 +1156,15 @@ public class TestGenerator {
 		String oName = opName[op];
 		String oSymbol = opSymbol[op];
 
-		genCodeSetTmp("tmp" + vName, type, Op_equal, vName + tUName + "Value", true, code);
-		genCodeEval(oName + "Op + " + vName + tUName, first, code);
-		genCodeReturnTypeCheck(oName + " " + tName, tName, first, code);
+		genCodeSetTmp("tmp" + vName, type, Op_equal, vName + tUName + "Value", true, code); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
+		genCodeEval(oName + "Op + " + vName + tUName, first, code); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
+		genCodeReturnTypeCheck(oName + " " + tName, tName, first, code); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		if (type == T_float || type == T_double) {
-			genCodeReturnValueCheckFloatDoubleType(oName + " " + tName, tName, tUName, oSymbol + "tmp" + vName, first,code);
+			genCodeReturnValueCheckFloatDoubleType(oName + " " + tName, tName, tUName, oSymbol + "tmp" + vName, first,code); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		} else {
-			genCodeReturnValueCheckPrimitiveType(oName + " " + tName, tName, tUName, oSymbol + "tmp" + vName, first,code);
+			genCodeReturnValueCheckPrimitiveType(oName + " " + tName, tName, tUName, oSymbol + "tmp" + vName, first,code); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		}
-		genCodeLocalVarValue(type, var, "tmp" + vName, false, code);
+		genCodeLocalVarValue(type, var, "tmp" + vName, false, code); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 	}
 
 	public static void genCodePostfixOp(int type, int op, int var, boolean first, StringBuilder code) {
@@ -1174,43 +1174,43 @@ public class TestGenerator {
 		String oName = opName[op];
 		String oSymbol = opSymbol[op];
 
-		genCodeSetTmp("tmp" + vName, type, Op_equal, vName + tUName + "Value", true, code);
-		genCodeEval(vName + tUName + " + " + oName + "Op", first, code);
-		genCodeReturnTypeCheck(tName + " " + oName, tName, first, code);
+		genCodeSetTmp("tmp" + vName, type, Op_equal, vName + tUName + "Value", true, code); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
+		genCodeEval(vName + tUName + " + " + oName + "Op", first, code); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
+		genCodeReturnTypeCheck(tName + " " + oName, tName, first, code); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		if (type == T_float || type == T_double) {
-			genCodeReturnValueCheckFloatDoubleType(tName + " " + oName, tName, tUName, "tmp" + vName + oSymbol, first,code);
+			genCodeReturnValueCheckFloatDoubleType(tName + " " + oName, tName, tUName, "tmp" + vName + oSymbol, first,code); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		} else {
-			genCodeReturnValueCheckPrimitiveType(tName + " " + oName, tName, tUName, "tmp" + vName + oSymbol, first,code);
+			genCodeReturnValueCheckPrimitiveType(tName + " " + oName, tName, tUName, "tmp" + vName + oSymbol, first,code); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		}
-		genCodeLocalVarValue(type, var, "tmp" + vName, false, code);
+		genCodeLocalVarValue(type, var, "tmp" + vName, false, code); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 	}
 
 	public static void genCodeFieldValue(int type, int var, int prefix, boolean first, StringBuilder code) {
 		String tUName = typeUpperName[type];
 		String fName = field[var];
 
-		genCodeFieldValue(type, var, prefix, fName + tUName + "Value", first, code);
+		genCodeFieldValue(type, var, prefix, fName + tUName + "Value", first, code); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 	}
 
-	public static void genCodeFieldValue(int type, int var, int prefix, String referenceExpression, boolean first, StringBuilder code) {
+	public static void genCodeFieldValue(int type, int var, int prefix, String referenceExpression, boolean first, StringBuilder code) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 
 		String tName = fTypeName[type];
 		String tUName = typeUpperName[type];
 		String fName = field[var];
 		String prefixVal = prefixList[prefix];
 
-		genCodeEval("\"" + prefixVal + "\" + " + fName + tUName, first, code);
-		genCodeReturnTypeCheck(tName + " field value", tName, first,code);
+		genCodeEval("\"" + prefixVal + "\" + " + fName + tUName, first, code); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
+		genCodeReturnTypeCheck(tName + " field value", tName, first,code); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		switch (type) {
 			case T_String:
-				genCodeReturnValueCheckStringType(tName + " field value", referenceExpression, first, code);
+				genCodeReturnValueCheckStringType(tName + " field value", referenceExpression, first, code); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 				break;
 			case T_float:
 			case T_double:
-				genCodeReturnValueCheckFloatDoubleType(tName + " field value", tName, tUName, referenceExpression, first, code);
+				genCodeReturnValueCheckFloatDoubleType(tName + " field value", tName, tUName, referenceExpression, first, code); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 				break;
 			default:
-				genCodeReturnValueCheckPrimitiveType(tName + " field value", tName, tUName, referenceExpression, first, code);
+				genCodeReturnValueCheckPrimitiveType(tName + " field value", tName, tUName, referenceExpression, first, code); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 				break;
 		}
 	}
@@ -1220,7 +1220,7 @@ public class TestGenerator {
 		String tUName = typeUpperName[type];
 		String vName = fVariable[var];
 
-		genCodeArrayLength(type, var, vName + tUName + "Value.length", first, code);
+		genCodeArrayLength(type, var, vName + tUName + "Value.length", first, code); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 	}
 
@@ -1230,9 +1230,9 @@ public class TestGenerator {
 		String tUName = typeUpperName[type];
 		String vName = fVariable[var];
 
-		genCodeEval(vName + tUName + " + \".length\"", first, code);
-		genCodeReturnTypeCheck(tName + " array length", fTypeName[T_int], first,code);
-		genCodeReturnValueCheckPrimitiveType(tName + " array length", fTypeName[T_int], typeUpperName[T_int], referenceExpression, first, code);
+		genCodeEval(vName + tUName + " + \".length\"", first, code); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
+		genCodeReturnTypeCheck(tName + " array length", fTypeName[T_int], first,code); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
+		genCodeReturnValueCheckPrimitiveType(tName + " array length", fTypeName[T_int], typeUpperName[T_int], referenceExpression, first, code); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 	}
 
 	public static void genCodeArrayValue(int type, int var, int index, boolean first, StringBuilder code) {
@@ -1240,32 +1240,32 @@ public class TestGenerator {
 		String tUName = typeUpperName[type];
 		String vName = fVariable[var];
 
-		genCodeArrayValue(type, var, index, vName + tUName + "Value[" + index + "]", first, code);
+		genCodeArrayValue(type, var, index, vName + tUName + "Value[" + index + "]", first, code); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 	}
 
-	public static void genCodeArrayValue(int type, int var, int index, String referenceExpression, boolean first, StringBuilder code) {
+	public static void genCodeArrayValue(int type, int var, int index, String referenceExpression, boolean first, StringBuilder code) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 
 		String tName = fTypeName[type];
 		String tUName = typeUpperName[type];
 		String vName = fVariable[var];
 
-		genCodeEval(vName + tUName + " + \"[" + index + "]\"", first, code);
-		genCodeReturnTypeCheck(tName + " array value", tName, first,code);
+		genCodeEval(vName + tUName + " + \"[" + index + "]\"", first, code); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
+		genCodeReturnTypeCheck(tName + " array value", tName, first,code); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		switch (type) {
 			case T_String:
-				genCodeReturnValueCheckStringType(tName + " array value", referenceExpression, first, code);
+				genCodeReturnValueCheckStringType(tName + " array value", referenceExpression, first, code); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 				break;
 			case T_float:
 			case T_double:
-				genCodeReturnValueCheckFloatDoubleType(tName + " array value", tName, tUName, referenceExpression, first, code);
+				genCodeReturnValueCheckFloatDoubleType(tName + " array value", tName, tUName, referenceExpression, first, code); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 				break;
 			default:
-				genCodeReturnValueCheckPrimitiveType(tName + " array value", tName, tUName, referenceExpression, first, code);
+				genCodeReturnValueCheckPrimitiveType(tName + " array value", tName, tUName, referenceExpression, first, code); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 				break;
 		}
 	}
 
-	public static void genCodeArrayAssignment(int type, int var, int index, int imm, boolean first, StringBuilder code) {
+	public static void genCodeArrayAssignment(int type, int var, int index, int imm, boolean first, StringBuilder code) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 
 		String tName = fTypeName[type];
 		String tUName = typeUpperName[type];
@@ -1273,21 +1273,21 @@ public class TestGenerator {
 		String iName = immediate[imm];
 		String oName = opName[Op_equal];
 
-		genCodeEval(vName + tUName + " + \"[" + index + "]\" + " + oName + "Op +" + iName + tUName, first, code);
-		genCodeReturnTypeCheck(tName + " array assignment", tName, first,code);
+		genCodeEval(vName + tUName + " + \"[" + index + "]\" + " + oName + "Op +" + iName + tUName, first, code); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
+		genCodeReturnTypeCheck(tName + " array assignment", tName, first,code); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		switch (type) {
 			case T_String:
-				genCodeReturnValueCheckStringType(tName + " array assignment", iName + tUName + "Value", first, code);
+				genCodeReturnValueCheckStringType(tName + " array assignment", iName + tUName + "Value", first, code); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 				break;
 			case T_float:
 			case T_double:
-				genCodeReturnValueCheckFloatDoubleType(tName + " array assignment", tName, tUName, iName + tUName + "Value", first, code);
+				genCodeReturnValueCheckFloatDoubleType(tName + " array assignment", tName, tUName, iName + tUName + "Value", first, code); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 				break;
 			default:
-				genCodeReturnValueCheckPrimitiveType(tName + " array assignment", tName, tUName, iName + tUName + "Value", first, code);
+				genCodeReturnValueCheckPrimitiveType(tName + " array assignment", tName, tUName, iName + tUName + "Value", first, code); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 				break;
 		}
-		genCodeArrayValue(type, var, index, iName + tUName + "Value", false, code);
+		genCodeArrayValue(type, var, index, iName + tUName + "Value", false, code); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 	}
 
 	public static void genCodeArrayAllocation(int type, int var, int dim, boolean first, StringBuilder code) {
@@ -1298,15 +1298,15 @@ public class TestGenerator {
 		String iName = immediate[dim];
 		String oName = opName[Op_equal];
 
-		genCodeEval(vName + tUName + " + " + oName + "Op + \"new " + tName + "[\" + " + iName + charUName + " + \"]\"", first, code);
-		genCodeReturnTypeCheck(tName + " array assignment", tName + "[]", first, code);
+		genCodeEval(vName + tUName + " + " + oName + "Op + \"new " + tName + "[\" + " + iName + charUName + " + \"]\"", first, code); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
+		genCodeReturnTypeCheck(tName + " array assignment", tName + "[]", first, code); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		if (first) {
 			genCodeSetTmp("intValue", T_int, Op_equal, "0", true, code);
 		}
-		genCodeArrayLength(type, var, iName + charUName + "Value", false, code);
+		genCodeArrayLength(type, var, iName + charUName + "Value", false, code); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 	}
 
-	public static void genCodeArrayInitialization(int type, int var, boolean first, StringBuilder code) {
+	public static void genCodeArrayInitialization(int type, int var, boolean first, StringBuilder code) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String tName = fTypeName[type];
 		String tUName = typeUpperName[type];
 		String vName = fVariable[var];
@@ -1315,52 +1315,52 @@ public class TestGenerator {
 
 		String value = IInternalDebugCoreConstants.EMPTY_STRING;
 		boolean f = true;
-		for (int i = 0; i < var; i ++) {
+		for (int i = 0; i < var; i ++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			if (f) {
 				f = false;
 			} else {
 				value += " + \", \" + ";
 			}
-			value += immediate[i % 2] + tUName;
+			value += immediate[i % 2] + tUName; //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		}
 
-		genCodeEval(vName + tUName + " + " + oName + "Op + \"new " + tName + "[]{\" + " + value + " + \"}\"", first, code);
-		genCodeReturnTypeCheck(tName + " array assignment", tName + "[]", first, code);
+		genCodeEval(vName + tUName + " + " + oName + "Op + \"new " + tName + "[]{\" + " + value + " + \"}\"", first, code); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
+		genCodeReturnTypeCheck(tName + " array assignment", tName + "[]", first, code); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		if (first) {
 			genCodeSetTmp("intValue", T_int, Op_equal, "0", true, code);
 			if (type != T_int) {
-				genCodeSetTmp(((type == T_String)? "string" : tName) + "Value", type, Op_equal, i1Name + tUName + "Value", true, code);
+				genCodeSetTmp(((type == T_String)? "string" : tName) + "Value", type, Op_equal, i1Name + tUName + "Value", true, code); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 			}
 		}
-		genCodeArrayLength(type, var, IInternalDebugCoreConstants.EMPTY_STRING + var, false, code);
-		for (int i = 0; i < var; i++) {
-			genCodeArrayValue(type, var, i, immediate[i % 2] + tUName + "Value", false, code);
+		genCodeArrayLength(type, var, IInternalDebugCoreConstants.EMPTY_STRING + var, false, code); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
+		for (int i = 0; i < var; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
+			genCodeArrayValue(type, var, i, immediate[i % 2] + tUName + "Value", false, code); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		}
 	}
 
 	//----------------------------
 
 	public static void genCodeEval(String expression, boolean first, StringBuilder code) {
-		code.append("\t\t" + ((first)? "IValue " : IInternalDebugCoreConstants.EMPTY_STRING) + "value = eval(" + expression + ");\n");
+		code.append("\t\t" + ((first)? "IValue " : IInternalDebugCoreConstants.EMPTY_STRING) + "value = eval(" + expression + ");\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 	}
 
 	public static void genCodeReturnTypeCheck(String test, String typeName, boolean first, StringBuilder code) {
-		code.append("\t\t" + ((first)? "String " : IInternalDebugCoreConstants.EMPTY_STRING) + "typeName = value.getReferenceTypeName();\n" +
+		code.append("\t\t" + ((first)? "String " : IInternalDebugCoreConstants.EMPTY_STRING) + "typeName = value.getReferenceTypeName();\n" + //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 					"\t\tassertEquals(\"" + test + " : wrong type : \", \"" + typeName + "\", typeName);\n");
 	}
 
 	public static void genCodeReturnValueCheckPrimitiveType(String test, String resType, String uResType, String referenceExpression, boolean first, StringBuilder code) {
-		code.append("\t\t" + ((first)? resType + " " : IInternalDebugCoreConstants.EMPTY_STRING) + resType + "Value = ((IJavaPrimitiveValue)value).get" + uResType + "Value();\n" +
+		code.append("\t\t" + ((first)? resType + " " : IInternalDebugCoreConstants.EMPTY_STRING) + resType + "Value = ((IJavaPrimitiveValue)value).get" + uResType + "Value();\n" + //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 					"\t\tassertEquals(\"" + test + " : wrong result : \", " + referenceExpression + ", " + resType+ "Value);\n");
 	}
 
 	public static void genCodeReturnValueCheckFloatDoubleType(String test, String resType, String uResType, String referenceExpression, boolean first, StringBuilder code) {
-		code.append("\t\t" + ((first)? resType + " " : IInternalDebugCoreConstants.EMPTY_STRING) + resType + "Value = ((IJavaPrimitiveValue)value).get" + uResType + "Value();\n" +
+		code.append("\t\t" + ((first)? resType + " " : IInternalDebugCoreConstants.EMPTY_STRING) + resType + "Value = ((IJavaPrimitiveValue)value).get" + uResType + "Value();\n" + //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 					"\t\tassertEquals(\"" + test + " : wrong result : \", " + referenceExpression + ", " + resType+ "Value, 0);\n");
 	}
 
 	public static void genCodeReturnValueCheckStringType(String test, String referenceExpression, boolean first, StringBuilder code) {
-		code.append("\t\t" + ((first)? "String " : IInternalDebugCoreConstants.EMPTY_STRING) + "stringValue = ((JDIObjectValue)value).getValueString();\n" +
+		code.append("\t\t" + ((first)? "String " : IInternalDebugCoreConstants.EMPTY_STRING) + "stringValue = ((JDIObjectValue)value).getValueString();\n" + //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 					"\t\tassertEquals(\"" + test + " : wrong result : \", " + referenceExpression + ", " + "stringValue);\n");
 	}
 
@@ -1370,16 +1370,16 @@ public class TestGenerator {
 	}*/
 
 	public static void genCodeSetTmp(String varName, int type, int op, String value, boolean init , StringBuilder code) {
-		code.append("\t\t" + ((init)? fTypeName[type] + " " : IInternalDebugCoreConstants.EMPTY_STRING) + varName + " " + opSymbol[op] + " " + value + ";\n");
+		code.append("\t\t" + ((init)? fTypeName[type] + " " : IInternalDebugCoreConstants.EMPTY_STRING) + varName + " " + opSymbol[op] + " " + value + ";\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 	}
 
 
 	public static void tryBlockBegin(StringBuilder code) {
-		code.append("\t\ttry {\n\t\tinit();\n");
+		code.append("\t\ttry {\n\t\tinit();\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 	}
 
 	public static void tryBlockEnd(StringBuilder code) {
-		code.append("\t\t} finally {\n\t\tend();\n\t\t}\n");
+		code.append("\t\t} finally {\n\t\tend();\n\t\t}\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 	}
 
 	//------------------------------
@@ -1388,32 +1388,32 @@ public class TestGenerator {
 		createJavaFile(className, testClass, breakPointLine, frameNumber, importJDIObjectValue, true, tests);
 	}
 
-	public static void createJavaFile(String className, String testClass, int breakPointLine, int frameNumber, boolean importJDIObjectValue, boolean importIJavaPrimitiveValue, StringBuilder tests) throws Exception {
+	public static void createJavaFile(String className, String testClass, int breakPointLine, int frameNumber, boolean importJDIObjectValue, boolean importIJavaPrimitiveValue, StringBuilder tests) throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 
-		StringBuilder code = new StringBuilder();
+		StringBuilder code = new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 
-		code.append("/*******************************************************************************\n");
-		code.append(" * Copyright (c) 2002, 2003 IBM Corporation and others.\n");
-		code.append("This program and the accompanying materials \n");
-		code.append(" * are made available under the terms of the Eclipse Public License 2.0\n");
-		code.append(" * which accompanies this distribution, and is available at\n");
-		code.append(" * https://www.eclipse.org/legal/epl-2.0/");
-		code.append(" * \n");
-		code.append(" * SPDX-License-Identifier: EPL-2.0\n");
-		code.append(" * \n");
-		code.append(" * Contributors:\n");
-		code.append(" *     IBM Corporation - initial API and implementation\n");
-		code.append(" *******************************************************************************/\n");
-		code.append("package org.eclipse.jdt.debug.tests.eval;\n\n" +
+		code.append("/*******************************************************************************\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+		code.append(" * Copyright (c) 2002, 2003 IBM Corporation and others.\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+		code.append("This program and the accompanying materials \n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+		code.append(" * are made available under the terms of the Eclipse Public License 2.0\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+		code.append(" * which accompanies this distribution, and is available at\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+		code.append(" * https://www.eclipse.org/legal/epl-2.0/"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+		code.append(" * \n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+		code.append(" * SPDX-License-Identifier: EPL-2.0\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+		code.append(" * \n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+		code.append(" * Contributors:\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+		code.append(" *     IBM Corporation - initial API and implementation\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+		code.append(" *******************************************************************************/\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+		code.append("package org.eclipse.jdt.debug.tests.eval;\n\n" + //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 					"import org.eclipse.debug.core.model.IValue;\n");
 
 		if (importIJavaPrimitiveValue) {
-			code.append("import org.eclipse.jdt.debug.core.IJavaPrimitiveValue;\n");
+			code.append("import org.eclipse.jdt.debug.core.IJavaPrimitiveValue;\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		}
 		if (importJDIObjectValue) {
-			code.append("import org.eclipse.jdt.internal.debug.core.model.JDIObjectValue;\n");
+			code.append("import org.eclipse.jdt.internal.debug.core.model.JDIObjectValue;\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		}
-		code.append("\n" +
+		code.append("\n" + //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 					"public class " + className + " extends Tests {\n" +
 					"\n" +
 					"\tpublic " + className + "(String arg) {\n" +
@@ -1428,11 +1428,11 @@ public class TestGenerator {
 					"\t\tdestroyFrame();\n" +
 					"\t}\n\n");
 
-		code.append(tests);
+		code.append(tests); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 
-		code.append("\n}\n");
+		code.append("\n}\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 
-		try (Writer file = new FileWriter(new File(className + ".java").getAbsoluteFile())) {
+		try (Writer file = new FileWriter(new File(className + ".java").getAbsoluteFile())) { //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 			file.write(code.toString());
 		}
 

@@ -56,10 +56,10 @@ public class WatchpointTypeChange extends WatchpointChange {
 	/* (non-Javadoc)
 	 * @see org.eclipse.ltk.core.refactoring.Change#perform(org.eclipse.core.runtime.IProgressMonitor)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public Change perform(IProgressMonitor pm) throws CoreException {
 		IField destField = fDestType.getField(getFieldName());
-		Map<String, Object> map = new HashMap<>();
+		Map<String, Object> map = new HashMap<>(); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
 		BreakpointUtils.addJavaBreakpointAttributes(map, destField);
 		IResource resource = BreakpointUtils.getBreakpointResource(destField);
 		int[] range = getNewLineNumberAndRange(destField);

@@ -92,7 +92,7 @@ public class JREsEnvironmentLabelProvider extends JREsLabelProvider implements I
 			if (fFont == null) {
 	            Font dialogFont = JFaceResources.getDialogFont();
 				FontData[] fontData = dialogFont.getFontData();
-	            for (int i = 0; i < fontData.length; i++) {
+	            for (int i = 0; i < fontData.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 					FontData data = fontData[i];
 					data.setStyle(SWT.BOLD);
 				}

@@ -88,7 +88,7 @@ public class LaunchConfigurationQueryParticipant implements IQueryParticipant {
 	/* (non-Javadoc)
 	 * @see org.eclipse.jdt.ui.search.IQueryParticipant#search(org.eclipse.jdt.ui.search.ISearchRequestor, org.eclipse.jdt.ui.search.QuerySpecification, org.eclipse.core.runtime.IProgressMonitor)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public void search(ISearchRequestor requestor, QuerySpecification query, IProgressMonitor monitor) throws CoreException {
 		if (!isValid(query)) {
 			return;
@@ -141,36 +141,36 @@ public class LaunchConfigurationQueryParticipant implements IQueryParticipant {
 	 * @return the original pattern adjusted to escape special chars in Java,and change Eclipse
 	 * search chars to Java RegEx chars
 	 */
-	private String quotePattern(String pattern) {
+	private String quotePattern(String pattern) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		StringTokenizer t = new StringTokenizer(pattern, ".?*$()", true); //$NON-NLS-1$
-		StringBuilder buf = new StringBuilder();
+		StringBuilder buf = new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 		String token = null;
-		while (t.hasMoreTokens()) {
+		while (t.hasMoreTokens()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			token = t.nextToken();
 			switch (token.charAt(0)) {
 				case '.': {
-					buf.append('\\');
+					buf.append('\\'); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 					break;
 				}
 				case '?':
 				case '*': {
-					buf.append('.');
+					buf.append('.'); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 					break;
 				}
 				case '$': {
-					buf.append('\\');
+					buf.append('\\'); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 					break;
 				}
 				case '(': {
-					buf.append('\\');
+					buf.append('\\'); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 					break;
 				}
 				case ')': {
-					buf.append('\\');
+					buf.append('\\'); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 					break;
 				}
 			}
-			buf.append(token);
+			buf.append(token); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		}
 		return buf.toString();
 	}
@@ -180,7 +180,7 @@ public class LaunchConfigurationQueryParticipant implements IQueryParticipant {
 	 * @param query the current query
 	 * @return true if the query should be considered, false otherwise
 	 */
-	private boolean isValid(QuerySpecification query) {
+	private boolean isValid(QuerySpecification query) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		switch(query.getLimitTo()) {
 			case IJavaSearchConstants.REFERENCES:
 			case IJavaSearchConstants.ALL_OCCURRENCES: {
@@ -216,7 +216,7 @@ public class LaunchConfigurationQueryParticipant implements IQueryParticipant {
 	 * @return true if there were matching elements for the pattern, false otherwise
 	 * @throws CoreException if an exception occurs
 	 */
-	private boolean matches(IJavaSearchScope scope, ILaunchConfiguration config, Pattern pattern) throws CoreException {
+	private boolean matches(IJavaSearchScope scope, ILaunchConfiguration config, Pattern pattern) throws CoreException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		if(!config.exists() || !config.getType().isPublic() || !DebugUIPlugin.doLaunchConfigurationFiltering(config)) {
 			return false;
 		}
@@ -230,12 +230,12 @@ public class LaunchConfigurationQueryParticipant implements IQueryParticipant {
 		catch(CoreException ce) {
 			return false;
 		}
-		if (! pattern.matcher(mainTypeName).matches()) {
+		if (! pattern.matcher(mainTypeName).matches()) { //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
 			return false;
 		}
 		IResource[] resources = config.getMappedResources();
 		if (resources != null) {
-			for (IResource resource : resources) {
+			for (IResource resource : resources) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				if (scope.encloses(resource.getFullPath().toString())) {
 					return true;
 				}
@@ -256,7 +256,7 @@ public class LaunchConfigurationQueryParticipant implements IQueryParticipant {
 		ILaunchConfiguration[] configs = DebugPlugin.getDefault().getLaunchManager().getLaunchConfigurations();
 		monitor.beginTask("Searching for launch configurations", configs.length); //$NON-NLS-1$
 		try {
-			for (ILaunchConfiguration config : configs) {
+			for (ILaunchConfiguration config : configs) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				if (monitor.isCanceled()) {
 					return;
 				}
@@ -288,7 +288,7 @@ public class LaunchConfigurationQueryParticipant implements IQueryParticipant {
 		/* (non-Javadoc)
 		 * @see org.eclipse.jdt.ui.search.IMatchPresentation#showMatch(org.eclipse.search.ui.text.Match, int, int, boolean)
 		 */
-		@Override
+		@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		public void showMatch(Match match, int currentOffset, int currentLength, boolean activate) throws PartInitException {
 			Object o = match.getElement();
 			if (o instanceof ILaunchConfiguration) {
@@ -298,7 +298,7 @@ public class LaunchConfigurationQueryParticipant implements IQueryParticipant {
 						Set<Set<String>> modes =  config.getType().getSupportedModeCombinations();
 						ILaunchGroup group = null;
 						Set<String> mode = null;
-						for (Iterator<Set<String>> iter = modes.iterator(); iter.hasNext();) {
+						for (Iterator<Set<String>> iter = modes.iterator(); iter.hasNext();) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 							mode = iter.next();
 							if(mode.size() == 1) {
 								group = DebugUITools.getLaunchGroup(config, mode.iterator().next());

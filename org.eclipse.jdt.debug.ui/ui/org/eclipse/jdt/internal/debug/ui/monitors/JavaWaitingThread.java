@@ -56,19 +56,19 @@ public class JavaWaitingThread implements IDebugElement, ITerminate {
 		return fParent;
 	}
 
-	public JavaOwnedMonitor[] getOwnedMonitors() {
+	public JavaOwnedMonitor[] getOwnedMonitors() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		JavaMonitor[] ownedMonitors= fThread.getOwnedMonitors0();
 		JavaOwnedMonitor[] tmp= new JavaOwnedMonitor[ownedMonitors.length];
 		if (fOwnedMonitors == null) {
 			// the list was empty, creating new objects
-			for (int i= 0; i < ownedMonitors.length; i++) {
+			for (int i= 0; i < ownedMonitors.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				tmp[i]= new JavaOwnedMonitor(ownedMonitors[i], this);
 			}
 		} else {
 			// trying to reuse the objects from the previous list
-	outer:	for (int i= 0; i < ownedMonitors.length; i++) {
+	outer:	for (int i= 0; i < ownedMonitors.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				JavaMonitor ownedMonitor= ownedMonitors[i];
-				for (int j= 0; j < fOwnedMonitors.length; j++) {
+				for (int j= 0; j < fOwnedMonitors.length; j++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 					if (fOwnedMonitors[j].getMonitor() == ownedMonitor) {
 						tmp[i]= fOwnedMonitors[j];
 						continue outer;

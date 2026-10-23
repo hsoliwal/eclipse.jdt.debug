@@ -32,16 +32,16 @@ public class StaticFieldValueTests2 extends Tests {
 		destroyFrame();
 	}
 
-	public void testByteStaticFieldValue() throws Throwable {
+	public void testByteStaticFieldValue() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(IInternalDebugCoreConstants.EMPTY_STRING + xStaticFieldByte);
+		IValue value = eval(IInternalDebugCoreConstants.EMPTY_STRING + xStaticFieldByte); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("byte field value : wrong type : ", "byte", typeName);
 		byte byteValue = ((IJavaPrimitiveValue)value).getByteValue();
 		assertEquals("byte field value : wrong result : ", xStaticFieldByteValue, byteValue);
 
-		value = eval(IInternalDebugCoreConstants.EMPTY_STRING + yStaticFieldByte);
+		value = eval(IInternalDebugCoreConstants.EMPTY_STRING + yStaticFieldByte); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte field value : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -51,16 +51,16 @@ public class StaticFieldValueTests2 extends Tests {
 		}
 	}
 
-	public void testCharStaticFieldValue() throws Throwable {
+	public void testCharStaticFieldValue() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(IInternalDebugCoreConstants.EMPTY_STRING + xStaticFieldChar);
+		IValue value = eval(IInternalDebugCoreConstants.EMPTY_STRING + xStaticFieldChar); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("char field value : wrong type : ", "char", typeName);
 		char charValue = ((IJavaPrimitiveValue)value).getCharValue();
 		assertEquals("char field value : wrong result : ", xStaticFieldCharValue, charValue);
 
-		value = eval(IInternalDebugCoreConstants.EMPTY_STRING + yStaticFieldChar);
+		value = eval(IInternalDebugCoreConstants.EMPTY_STRING + yStaticFieldChar); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("char field value : wrong type : ", "char", typeName);
 		charValue = ((IJavaPrimitiveValue)value).getCharValue();
@@ -70,16 +70,16 @@ public class StaticFieldValueTests2 extends Tests {
 		}
 	}
 
-	public void testShortStaticFieldValue() throws Throwable {
+	public void testShortStaticFieldValue() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(IInternalDebugCoreConstants.EMPTY_STRING + xStaticFieldShort);
+		IValue value = eval(IInternalDebugCoreConstants.EMPTY_STRING + xStaticFieldShort); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("short field value : wrong type : ", "short", typeName);
 		short shortValue = ((IJavaPrimitiveValue)value).getShortValue();
 		assertEquals("short field value : wrong result : ", xStaticFieldShortValue, shortValue);
 
-		value = eval(IInternalDebugCoreConstants.EMPTY_STRING + yStaticFieldShort);
+		value = eval(IInternalDebugCoreConstants.EMPTY_STRING + yStaticFieldShort); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("short field value : wrong type : ", "short", typeName);
 		shortValue = ((IJavaPrimitiveValue)value).getShortValue();
@@ -89,16 +89,16 @@ public class StaticFieldValueTests2 extends Tests {
 		}
 	}
 
-	public void testIntStaticFieldValue() throws Throwable {
+	public void testIntStaticFieldValue() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(IInternalDebugCoreConstants.EMPTY_STRING + xStaticFieldInt);
+		IValue value = eval(IInternalDebugCoreConstants.EMPTY_STRING + xStaticFieldInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("int field value : wrong type : ", "int", typeName);
 		int intValue = ((IJavaPrimitiveValue)value).getIntValue();
 		assertEquals("int field value : wrong result : ", xStaticFieldIntValue, intValue);
 
-		value = eval(IInternalDebugCoreConstants.EMPTY_STRING + yStaticFieldInt);
+		value = eval(IInternalDebugCoreConstants.EMPTY_STRING + yStaticFieldInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("int field value : wrong type : ", "int", typeName);
 		intValue = ((IJavaPrimitiveValue)value).getIntValue();
@@ -108,16 +108,16 @@ public class StaticFieldValueTests2 extends Tests {
 		}
 	}
 
-	public void testLongStaticFieldValue() throws Throwable {
+	public void testLongStaticFieldValue() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(IInternalDebugCoreConstants.EMPTY_STRING + xStaticFieldLong);
+		IValue value = eval(IInternalDebugCoreConstants.EMPTY_STRING + xStaticFieldLong); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("long field value : wrong type : ", "long", typeName);
 		long longValue = ((IJavaPrimitiveValue)value).getLongValue();
 		assertEquals("long field value : wrong result : ", xStaticFieldLongValue, longValue);
 
-		value = eval(IInternalDebugCoreConstants.EMPTY_STRING + yStaticFieldLong);
+		value = eval(IInternalDebugCoreConstants.EMPTY_STRING + yStaticFieldLong); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("long field value : wrong type : ", "long", typeName);
 		longValue = ((IJavaPrimitiveValue)value).getLongValue();
@@ -127,16 +127,16 @@ public class StaticFieldValueTests2 extends Tests {
 		}
 	}
 
-	public void testFloatStaticFieldValue() throws Throwable {
+	public void testFloatStaticFieldValue() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(IInternalDebugCoreConstants.EMPTY_STRING + xStaticFieldFloat);
+		IValue value = eval(IInternalDebugCoreConstants.EMPTY_STRING + xStaticFieldFloat); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("float field value : wrong type : ", "float", typeName);
 		float floatValue = ((IJavaPrimitiveValue)value).getFloatValue();
 		assertEquals("float field value : wrong result : ", xStaticFieldFloatValue, floatValue, 0);
 
-		value = eval(IInternalDebugCoreConstants.EMPTY_STRING + yStaticFieldFloat);
+		value = eval(IInternalDebugCoreConstants.EMPTY_STRING + yStaticFieldFloat); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("float field value : wrong type : ", "float", typeName);
 		floatValue = ((IJavaPrimitiveValue)value).getFloatValue();
@@ -146,16 +146,16 @@ public class StaticFieldValueTests2 extends Tests {
 		}
 	}
 
-	public void testDoubleStaticFieldValue() throws Throwable {
+	public void testDoubleStaticFieldValue() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(IInternalDebugCoreConstants.EMPTY_STRING + xStaticFieldDouble);
+		IValue value = eval(IInternalDebugCoreConstants.EMPTY_STRING + xStaticFieldDouble); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("double field value : wrong type : ", "double", typeName);
 		double doubleValue = ((IJavaPrimitiveValue)value).getDoubleValue();
 		assertEquals("double field value : wrong result : ", xStaticFieldDoubleValue, doubleValue, 0);
 
-		value = eval(IInternalDebugCoreConstants.EMPTY_STRING + yStaticFieldDouble);
+		value = eval(IInternalDebugCoreConstants.EMPTY_STRING + yStaticFieldDouble); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("double field value : wrong type : ", "double", typeName);
 		doubleValue = ((IJavaPrimitiveValue)value).getDoubleValue();
@@ -165,16 +165,16 @@ public class StaticFieldValueTests2 extends Tests {
 		}
 	}
 
-	public void testStringStaticFieldValue() throws Throwable {
+	public void testStringStaticFieldValue() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(IInternalDebugCoreConstants.EMPTY_STRING + xStaticFieldString);
+		IValue value = eval(IInternalDebugCoreConstants.EMPTY_STRING + xStaticFieldString); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("java.lang.String field value : wrong type : ", "java.lang.String", typeName);
 		String stringValue = ((JDIObjectValue)value).getValueString();
 		assertEquals("java.lang.String field value : wrong result : ", xStaticFieldStringValue, stringValue);
 
-		value = eval(IInternalDebugCoreConstants.EMPTY_STRING + yStaticFieldString);
+		value = eval(IInternalDebugCoreConstants.EMPTY_STRING + yStaticFieldString); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("java.lang.String field value : wrong type : ", "java.lang.String", typeName);
 		stringValue = ((JDIObjectValue)value).getValueString();
@@ -184,16 +184,16 @@ public class StaticFieldValueTests2 extends Tests {
 		}
 	}
 
-	public void testBooleanStaticFieldValue() throws Throwable {
+	public void testBooleanStaticFieldValue() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(IInternalDebugCoreConstants.EMPTY_STRING + xStaticFieldBoolean);
+		IValue value = eval(IInternalDebugCoreConstants.EMPTY_STRING + xStaticFieldBoolean); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("boolean field value : wrong type : ", "boolean", typeName);
 		boolean booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
 		assertEquals("boolean field value : wrong result : ", xStaticFieldBooleanValue, booleanValue);
 
-		value = eval(IInternalDebugCoreConstants.EMPTY_STRING + yStaticFieldBoolean);
+		value = eval(IInternalDebugCoreConstants.EMPTY_STRING + yStaticFieldBoolean); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("boolean field value : wrong type : ", "boolean", typeName);
 		booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();

@@ -131,7 +131,7 @@ public class EvalTestSuite extends TestSuite {
 	/**
 	 * Construct the test suite.
 	 */
-	public EvalTestSuite() {
+	public EvalTestSuite() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		addTest(new TestSuite(ProjectCreationDecorator.class));
 		// Tests included in the automated suite
 		addTest(new TestSuite(Java8Tests.class));
@@ -246,7 +246,7 @@ public class EvalTestSuite extends TestSuite {
 	 * waiter blocks the UI when a resource changes.
 	 * @see junit.framework.TestSuite#run(junit.framework.TestResult)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public void run(final TestResult result) {
 		final Display display = Display.getCurrent();
 		Thread thread = null;
@@ -254,7 +254,7 @@ public class EvalTestSuite extends TestSuite {
 			Runnable r = new Runnable() {
 				@Override
 				public void run() {
-					for (Enumeration<Test> e= tests(); e.hasMoreElements(); ) {
+					for (Enumeration<Test> e= tests(); e.hasMoreElements(); ) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				  		if (result.shouldStop() ) {
 							break;
 						}
@@ -270,7 +270,7 @@ public class EvalTestSuite extends TestSuite {
 			e.printStackTrace();
 		}
 
-		while (fTesting) {
+		while (fTesting) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			try {
 				if (!display.readAndDispatch()) {
 					display.sleep();

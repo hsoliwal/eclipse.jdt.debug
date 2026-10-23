@@ -41,7 +41,7 @@ public class PreLaunchBreakpointTest extends AbstractDebugTest {
 	 * Tests that the perspective will switch if breakpoints are detected and the program was launched in
 	 * 'run' mode
 	 */
-	public void testRunModeLaunchWithBreakpoints() throws Exception {
+	public void testRunModeLaunchWithBreakpoints() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String typeName = "Breakpoints";
 
 		ILaunchConfiguration configuration = getLaunchConfiguration(typeName);

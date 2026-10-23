@@ -33,7 +33,7 @@ public class LocalVarValueTests extends Tests {
 
 	//
 
-	public void testByte() throws Throwable {
+	public void testByte() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
 		IValue value = eval(xVarByte);
@@ -52,7 +52,7 @@ public class LocalVarValueTests extends Tests {
 		}
 	}
 
-	public void testChar() throws Throwable {
+	public void testChar() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
 		IValue value = eval(xVarChar);
@@ -71,7 +71,7 @@ public class LocalVarValueTests extends Tests {
 		}
 	}
 
-	public void testShort() throws Throwable {
+	public void testShort() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
 		IValue value = eval(xVarShort);
@@ -90,7 +90,7 @@ public class LocalVarValueTests extends Tests {
 		}
 	}
 
-	public void testInt() throws Throwable {
+	public void testInt() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
 		IValue value = eval(xVarInt);
@@ -109,7 +109,7 @@ public class LocalVarValueTests extends Tests {
 		}
 	}
 
-	public void testLong() throws Throwable {
+	public void testLong() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
 		IValue value = eval(xVarLong);
@@ -128,7 +128,7 @@ public class LocalVarValueTests extends Tests {
 		}
 	}
 
-	public void testFloat() throws Throwable {
+	public void testFloat() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
 		IValue value = eval(xVarFloat);
@@ -147,7 +147,7 @@ public class LocalVarValueTests extends Tests {
 		}
 	}
 
-	public void testDouble() throws Throwable {
+	public void testDouble() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
 		IValue value = eval(xVarDouble);
@@ -166,7 +166,7 @@ public class LocalVarValueTests extends Tests {
 		}
 	}
 
-	public void testString() throws Throwable {
+	public void testString() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
 		IValue value = eval(xVarString);
@@ -185,7 +185,7 @@ public class LocalVarValueTests extends Tests {
 		}
 	}
 
-	public void testBoolean() throws Throwable {
+	public void testBoolean() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
 		IValue value = eval(xVarBoolean);

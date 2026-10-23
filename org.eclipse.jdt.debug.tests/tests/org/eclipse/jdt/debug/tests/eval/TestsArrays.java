@@ -33,40 +33,40 @@ public class TestsArrays extends Tests {
 		destroyFrame();
 	}
 
-	public void testIntArrayValue() throws Throwable {
+	public void testIntArrayValue() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xArrayInt + "[0]");
+		IValue value = eval(xArrayInt + "[0]"); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("int array value : wrong type : ", "int", typeName);
 		int intValue = ((IJavaPrimitiveValue)value).getIntValue();
 		assertEquals("int array value : wrong result : ", xArrayIntValue[0], intValue);
 
-		value = eval(xArrayInt + "[1]");
+		value = eval(xArrayInt + "[1]"); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("int array value : wrong type : ", "int", typeName);
 		intValue = ((IJavaPrimitiveValue)value).getIntValue();
 		assertEquals("int array value : wrong result : ", xArrayIntValue[1], intValue);
 
-		value = eval(xArrayInt + "[2]");
+		value = eval(xArrayInt + "[2]"); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("int array value : wrong type : ", "int", typeName);
 		intValue = ((IJavaPrimitiveValue)value).getIntValue();
 		assertEquals("int array value : wrong result : ", xArrayIntValue[2], intValue);
 
-		value = eval(yArrayInt + "[0]");
+		value = eval(yArrayInt + "[0]"); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("int array value : wrong type : ", "int", typeName);
 		intValue = ((IJavaPrimitiveValue)value).getIntValue();
 		assertEquals("int array value : wrong result : ", yArrayIntValue[0], intValue);
 
-		value = eval(yArrayInt + "[1]");
+		value = eval(yArrayInt + "[1]"); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("int array value : wrong type : ", "int", typeName);
 		intValue = ((IJavaPrimitiveValue)value).getIntValue();
 		assertEquals("int array value : wrong result : ", yArrayIntValue[1], intValue);
 
-		value = eval(yArrayInt + "[2]");
+		value = eval(yArrayInt + "[2]"); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("int array value : wrong type : ", "int", typeName);
 		intValue = ((IJavaPrimitiveValue)value).getIntValue();
@@ -76,16 +76,16 @@ public class TestsArrays extends Tests {
 		}
 	}
 
-	public void testIntArrayLength() throws Throwable {
+	public void testIntArrayLength() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xArrayInt + ".length");
+		IValue value = eval(xArrayInt + ".length"); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("int array length : wrong type : ", "int", typeName);
 		int intValue = ((IJavaPrimitiveValue)value).getIntValue();
 		assertEquals("int array length : wrong result : ", xArrayIntValue.length, intValue);
 
-		value = eval(yArrayInt + ".length");
+		value = eval(yArrayInt + ".length"); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("int array length : wrong type : ", "int", typeName);
 		intValue = ((IJavaPrimitiveValue)value).getIntValue();
@@ -95,70 +95,70 @@ public class TestsArrays extends Tests {
 		}
 	}
 
-	public void testIntArrayAssignment() throws Throwable {
+	public void testIntArrayAssignment() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xArrayInt + "[0]" + equalOp +xInt);
+		IValue value = eval(xArrayInt + "[0]" + equalOp +xInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("int array assignment : wrong type : ", "int", typeName);
 		int intValue = ((IJavaPrimitiveValue)value).getIntValue();
 		assertEquals("int array assignment : wrong result : ", xIntValue, intValue);
-		value = eval(xArrayInt + "[0]");
+		value = eval(xArrayInt + "[0]"); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("int array value : wrong type : ", "int", typeName);
 		intValue = ((IJavaPrimitiveValue)value).getIntValue();
 		assertEquals("int array value : wrong result : ", xIntValue, intValue);
 
-		value = eval(xArrayInt + "[1]" + equalOp +yInt);
+		value = eval(xArrayInt + "[1]" + equalOp +yInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("int array assignment : wrong type : ", "int", typeName);
 		intValue = ((IJavaPrimitiveValue)value).getIntValue();
 		assertEquals("int array assignment : wrong result : ", yIntValue, intValue);
-		value = eval(xArrayInt + "[1]");
+		value = eval(xArrayInt + "[1]"); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("int array value : wrong type : ", "int", typeName);
 		intValue = ((IJavaPrimitiveValue)value).getIntValue();
 		assertEquals("int array value : wrong result : ", yIntValue, intValue);
 
-		value = eval(xArrayInt + "[2]" + equalOp +xInt);
+		value = eval(xArrayInt + "[2]" + equalOp +xInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("int array assignment : wrong type : ", "int", typeName);
 		intValue = ((IJavaPrimitiveValue)value).getIntValue();
 		assertEquals("int array assignment : wrong result : ", xIntValue, intValue);
-		value = eval(xArrayInt + "[2]");
+		value = eval(xArrayInt + "[2]"); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("int array value : wrong type : ", "int", typeName);
 		intValue = ((IJavaPrimitiveValue)value).getIntValue();
 		assertEquals("int array value : wrong result : ", xIntValue, intValue);
 
-		value = eval(yArrayInt + "[0]" + equalOp +yInt);
+		value = eval(yArrayInt + "[0]" + equalOp +yInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("int array assignment : wrong type : ", "int", typeName);
 		intValue = ((IJavaPrimitiveValue)value).getIntValue();
 		assertEquals("int array assignment : wrong result : ", yIntValue, intValue);
-		value = eval(yArrayInt + "[0]");
+		value = eval(yArrayInt + "[0]"); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("int array value : wrong type : ", "int", typeName);
 		intValue = ((IJavaPrimitiveValue)value).getIntValue();
 		assertEquals("int array value : wrong result : ", yIntValue, intValue);
 
-		value = eval(yArrayInt + "[1]" + equalOp +xInt);
+		value = eval(yArrayInt + "[1]" + equalOp +xInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("int array assignment : wrong type : ", "int", typeName);
 		intValue = ((IJavaPrimitiveValue)value).getIntValue();
 		assertEquals("int array assignment : wrong result : ", xIntValue, intValue);
-		value = eval(yArrayInt + "[1]");
+		value = eval(yArrayInt + "[1]"); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("int array value : wrong type : ", "int", typeName);
 		intValue = ((IJavaPrimitiveValue)value).getIntValue();
 		assertEquals("int array value : wrong result : ", xIntValue, intValue);
 
-		value = eval(yArrayInt + "[2]" + equalOp +yInt);
+		value = eval(yArrayInt + "[2]" + equalOp +yInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("int array assignment : wrong type : ", "int", typeName);
 		intValue = ((IJavaPrimitiveValue)value).getIntValue();
 		assertEquals("int array assignment : wrong result : ", yIntValue, intValue);
-		value = eval(yArrayInt + "[2]");
+		value = eval(yArrayInt + "[2]"); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("int array value : wrong type : ", "int", typeName);
 		intValue = ((IJavaPrimitiveValue)value).getIntValue();
@@ -168,48 +168,48 @@ public class TestsArrays extends Tests {
 		}
 	}
 
-	public void testIntArrayAllocation() throws Throwable {
+	public void testIntArrayAllocation() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xArrayInt + equalOp + "new int[]{" + xInt + ", " + yInt + "}");
+		IValue value = eval(xArrayInt + equalOp + "new int[]{" + xInt + ", " + yInt + "}"); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("int array assignment : wrong type : ", "int[]", typeName);
 		int intValue = 0;
-		value = eval(xArrayInt + ".length");
+		value = eval(xArrayInt + ".length"); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("int array length : wrong type : ", "int", typeName);
 		intValue = ((IJavaPrimitiveValue)value).getIntValue();
 		assertEquals("int array length : wrong result : ", 2, intValue);
-		value = eval(xArrayInt + "[0]");
+		value = eval(xArrayInt + "[0]"); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("int array value : wrong type : ", "int", typeName);
 		intValue = ((IJavaPrimitiveValue)value).getIntValue();
 		assertEquals("int array value : wrong result : ", xIntValue, intValue);
-		value = eval(xArrayInt + "[1]");
+		value = eval(xArrayInt + "[1]"); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("int array value : wrong type : ", "int", typeName);
 		intValue = ((IJavaPrimitiveValue)value).getIntValue();
 		assertEquals("int array value : wrong result : ", yIntValue, intValue);
 
-		value = eval(yArrayInt + equalOp + "new int[]{" + xInt + ", " + yInt + ", " + xInt + "}");
+		value = eval(yArrayInt + equalOp + "new int[]{" + xInt + ", " + yInt + ", " + xInt + "}"); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("int array assignment : wrong type : ", "int[]", typeName);
-		value = eval(yArrayInt + ".length");
+		value = eval(yArrayInt + ".length"); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("int array length : wrong type : ", "int", typeName);
 		intValue = ((IJavaPrimitiveValue)value).getIntValue();
 		assertEquals("int array length : wrong result : ", 3, intValue);
-		value = eval(yArrayInt + "[0]");
+		value = eval(yArrayInt + "[0]"); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("int array value : wrong type : ", "int", typeName);
 		intValue = ((IJavaPrimitiveValue)value).getIntValue();
 		assertEquals("int array value : wrong result : ", xIntValue, intValue);
-		value = eval(yArrayInt + "[1]");
+		value = eval(yArrayInt + "[1]"); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("int array value : wrong type : ", "int", typeName);
 		intValue = ((IJavaPrimitiveValue)value).getIntValue();
 		assertEquals("int array value : wrong result : ", yIntValue, intValue);
-		value = eval(yArrayInt + "[2]");
+		value = eval(yArrayInt + "[2]"); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("int array value : wrong type : ", "int", typeName);
 		intValue = ((IJavaPrimitiveValue)value).getIntValue();
@@ -219,40 +219,40 @@ public class TestsArrays extends Tests {
 		}
 	}
 
-	public void testStringArrayValue() throws Throwable {
+	public void testStringArrayValue() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xArrayString + "[0]");
+		IValue value = eval(xArrayString + "[0]"); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("java.lang.String array value : wrong type : ", "java.lang.String", typeName);
 		String stringValue = ((JDIObjectValue)value).getValueString();
 		assertEquals("java.lang.String array value : wrong result : ", xArrayStringValue[0], stringValue);
 
-		value = eval(xArrayString + "[1]");
+		value = eval(xArrayString + "[1]"); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("java.lang.String array value : wrong type : ", "java.lang.String", typeName);
 		stringValue = ((JDIObjectValue)value).getValueString();
 		assertEquals("java.lang.String array value : wrong result : ", xArrayStringValue[1], stringValue);
 
-		value = eval(xArrayString + "[2]");
+		value = eval(xArrayString + "[2]"); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("java.lang.String array value : wrong type : ", "java.lang.String", typeName);
 		stringValue = ((JDIObjectValue)value).getValueString();
 		assertEquals("java.lang.String array value : wrong result : ", xArrayStringValue[2], stringValue);
 
-		value = eval(yArrayString + "[0]");
+		value = eval(yArrayString + "[0]"); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("java.lang.String array value : wrong type : ", "java.lang.String", typeName);
 		stringValue = ((JDIObjectValue)value).getValueString();
 		assertEquals("java.lang.String array value : wrong result : ", yArrayStringValue[0], stringValue);
 
-		value = eval(yArrayString + "[1]");
+		value = eval(yArrayString + "[1]"); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("java.lang.String array value : wrong type : ", "java.lang.String", typeName);
 		stringValue = ((JDIObjectValue)value).getValueString();
 		assertEquals("java.lang.String array value : wrong result : ", yArrayStringValue[1], stringValue);
 
-		value = eval(yArrayString + "[2]");
+		value = eval(yArrayString + "[2]"); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("java.lang.String array value : wrong type : ", "java.lang.String", typeName);
 		stringValue = ((JDIObjectValue)value).getValueString();
@@ -262,16 +262,16 @@ public class TestsArrays extends Tests {
 		}
 	}
 
-	public void testStringArrayLength() throws Throwable {
+	public void testStringArrayLength() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xArrayString + ".length");
+		IValue value = eval(xArrayString + ".length"); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("java.lang.String array length : wrong type : ", "int", typeName);
 		int intValue = ((IJavaPrimitiveValue)value).getIntValue();
 		assertEquals("java.lang.String array length : wrong result : ", xArrayStringValue.length, intValue);
 
-		value = eval(yArrayString + ".length");
+		value = eval(yArrayString + ".length"); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("java.lang.String array length : wrong type : ", "int", typeName);
 		intValue = ((IJavaPrimitiveValue)value).getIntValue();
@@ -281,70 +281,70 @@ public class TestsArrays extends Tests {
 		}
 	}
 
-	public void testStringArrayAssignment() throws Throwable {
+	public void testStringArrayAssignment() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xArrayString + "[0]" + equalOp +xString);
+		IValue value = eval(xArrayString + "[0]" + equalOp +xString); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("java.lang.String array assignment : wrong type : ", "java.lang.String", typeName);
 		String stringValue = ((JDIObjectValue)value).getValueString();
 		assertEquals("java.lang.String array assignment : wrong result : ", xStringValue, stringValue);
-		value = eval(xArrayString + "[0]");
+		value = eval(xArrayString + "[0]"); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("java.lang.String array value : wrong type : ", "java.lang.String", typeName);
 		stringValue = ((JDIObjectValue)value).getValueString();
 		assertEquals("java.lang.String array value : wrong result : ", xStringValue, stringValue);
 
-		value = eval(xArrayString + "[1]" + equalOp +yString);
+		value = eval(xArrayString + "[1]" + equalOp +yString); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("java.lang.String array assignment : wrong type : ", "java.lang.String", typeName);
 		stringValue = ((JDIObjectValue)value).getValueString();
 		assertEquals("java.lang.String array assignment : wrong result : ", yStringValue, stringValue);
-		value = eval(xArrayString + "[1]");
+		value = eval(xArrayString + "[1]"); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("java.lang.String array value : wrong type : ", "java.lang.String", typeName);
 		stringValue = ((JDIObjectValue)value).getValueString();
 		assertEquals("java.lang.String array value : wrong result : ", yStringValue, stringValue);
 
-		value = eval(xArrayString + "[2]" + equalOp +xString);
+		value = eval(xArrayString + "[2]" + equalOp +xString); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("java.lang.String array assignment : wrong type : ", "java.lang.String", typeName);
 		stringValue = ((JDIObjectValue)value).getValueString();
 		assertEquals("java.lang.String array assignment : wrong result : ", xStringValue, stringValue);
-		value = eval(xArrayString + "[2]");
+		value = eval(xArrayString + "[2]"); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("java.lang.String array value : wrong type : ", "java.lang.String", typeName);
 		stringValue = ((JDIObjectValue)value).getValueString();
 		assertEquals("java.lang.String array value : wrong result : ", xStringValue, stringValue);
 
-		value = eval(yArrayString + "[0]" + equalOp +yString);
+		value = eval(yArrayString + "[0]" + equalOp +yString); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("java.lang.String array assignment : wrong type : ", "java.lang.String", typeName);
 		stringValue = ((JDIObjectValue)value).getValueString();
 		assertEquals("java.lang.String array assignment : wrong result : ", yStringValue, stringValue);
-		value = eval(yArrayString + "[0]");
+		value = eval(yArrayString + "[0]"); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("java.lang.String array value : wrong type : ", "java.lang.String", typeName);
 		stringValue = ((JDIObjectValue)value).getValueString();
 		assertEquals("java.lang.String array value : wrong result : ", yStringValue, stringValue);
 
-		value = eval(yArrayString + "[1]" + equalOp +xString);
+		value = eval(yArrayString + "[1]" + equalOp +xString); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("java.lang.String array assignment : wrong type : ", "java.lang.String", typeName);
 		stringValue = ((JDIObjectValue)value).getValueString();
 		assertEquals("java.lang.String array assignment : wrong result : ", xStringValue, stringValue);
-		value = eval(yArrayString + "[1]");
+		value = eval(yArrayString + "[1]"); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("java.lang.String array value : wrong type : ", "java.lang.String", typeName);
 		stringValue = ((JDIObjectValue)value).getValueString();
 		assertEquals("java.lang.String array value : wrong result : ", xStringValue, stringValue);
 
-		value = eval(yArrayString + "[2]" + equalOp +yString);
+		value = eval(yArrayString + "[2]" + equalOp +yString); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("java.lang.String array assignment : wrong type : ", "java.lang.String", typeName);
 		stringValue = ((JDIObjectValue)value).getValueString();
 		assertEquals("java.lang.String array assignment : wrong result : ", yStringValue, stringValue);
-		value = eval(yArrayString + "[2]");
+		value = eval(yArrayString + "[2]"); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("java.lang.String array value : wrong type : ", "java.lang.String", typeName);
 		stringValue = ((JDIObjectValue)value).getValueString();
@@ -354,49 +354,49 @@ public class TestsArrays extends Tests {
 		}
 	}
 
-	public void testStringArrayAllocation() throws Throwable {
+	public void testStringArrayAllocation() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xArrayString + equalOp + "new java.lang.String[]{" + xString + ", " + yString + "}");
+		IValue value = eval(xArrayString + equalOp + "new java.lang.String[]{" + xString + ", " + yString + "}"); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("java.lang.String array assignment : wrong type : ", "java.lang.String[]", typeName);
 		int intValue = 0;
 		java.lang.String stringValue = yStringValue;
-		value = eval(xArrayString + ".length");
+		value = eval(xArrayString + ".length"); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("java.lang.String array length : wrong type : ", "int", typeName);
 		intValue = ((IJavaPrimitiveValue)value).getIntValue();
 		assertEquals("java.lang.String array length : wrong result : ", 2, intValue);
-		value = eval(xArrayString + "[0]");
+		value = eval(xArrayString + "[0]"); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("java.lang.String array value : wrong type : ", "java.lang.String", typeName);
 		stringValue = ((JDIObjectValue)value).getValueString();
 		assertEquals("java.lang.String array value : wrong result : ", xStringValue, stringValue);
-		value = eval(xArrayString + "[1]");
+		value = eval(xArrayString + "[1]"); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("java.lang.String array value : wrong type : ", "java.lang.String", typeName);
 		stringValue = ((JDIObjectValue)value).getValueString();
 		assertEquals("java.lang.String array value : wrong result : ", yStringValue, stringValue);
 
-		value = eval(yArrayString + equalOp + "new java.lang.String[]{" + xString + ", " + yString + ", " + xString + "}");
+		value = eval(yArrayString + equalOp + "new java.lang.String[]{" + xString + ", " + yString + ", " + xString + "}"); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("java.lang.String array assignment : wrong type : ", "java.lang.String[]", typeName);
-		value = eval(yArrayString + ".length");
+		value = eval(yArrayString + ".length"); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("java.lang.String array length : wrong type : ", "int", typeName);
 		intValue = ((IJavaPrimitiveValue)value).getIntValue();
 		assertEquals("java.lang.String array length : wrong result : ", 3, intValue);
-		value = eval(yArrayString + "[0]");
+		value = eval(yArrayString + "[0]"); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("java.lang.String array value : wrong type : ", "java.lang.String", typeName);
 		stringValue = ((JDIObjectValue)value).getValueString();
 		assertEquals("java.lang.String array value : wrong result : ", xStringValue, stringValue);
-		value = eval(yArrayString + "[1]");
+		value = eval(yArrayString + "[1]"); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("java.lang.String array value : wrong type : ", "java.lang.String", typeName);
 		stringValue = ((JDIObjectValue)value).getValueString();
 		assertEquals("java.lang.String array value : wrong result : ", yStringValue, stringValue);
-		value = eval(yArrayString + "[2]");
+		value = eval(yArrayString + "[2]"); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("java.lang.String array value : wrong type : ", "java.lang.String", typeName);
 		stringValue = ((JDIObjectValue)value).getValueString();

@@ -93,7 +93,7 @@ public class JavaJRETab extends JavaLaunchTab {
 
 
 	// Selection changed listener (checked JRE)
-	private final IPropertyChangeListener fCheckListener = new IPropertyChangeListener() {
+	private final IPropertyChangeListener fCheckListener = new IPropertyChangeListener() { //FLLDCIM: MARK — T06  ANONYMOUS
 		@Override
 		public void propertyChange(PropertyChangeEvent event) {
 			handleSelectedJREChanged();
@@ -206,7 +206,7 @@ public class JavaJRETab extends JavaLaunchTab {
 	/**
 	 * @see ILaunchConfigurationTab#performApply(ILaunchConfigurationWorkingCopy)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	@SuppressWarnings("deprecation")
 	public void performApply(ILaunchConfigurationWorkingCopy configuration) {
 		if (fJREBlock.isDefaultJRE()) {
@@ -240,7 +240,7 @@ public class JavaJRETab extends JavaLaunchTab {
 	/**
 	 * @see ILaunchConfigurationTab#isValid(ILaunchConfiguration)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public boolean isValid(ILaunchConfiguration config) {
 
 		setErrorMessage(null);
@@ -295,7 +295,7 @@ public class JavaJRETab extends JavaLaunchTab {
 	 * @return the status of the check
 	 * @since 3.3
 	 */
-	private IStatus checkCompliance() {
+	private IStatus checkCompliance() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IJavaProject javaProject = getJavaProject();
 		if (javaProject == null) {
 			return Status.OK_STATUS;
@@ -380,7 +380,7 @@ public class JavaJRETab extends JavaLaunchTab {
 	 * This method updates the jre selection from the <code>ILaunchConfiguration</code>
 	 * @param config the config to update from
 	 */
-	@SuppressWarnings("deprecation")
+	@SuppressWarnings("deprecation") //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	protected void updateJREFromConfig(ILaunchConfiguration config) {
 		try {
 			String path = config.getAttribute(IJavaLaunchConfigurationConstants.ATTR_JRE_CONTAINER_PATH, (String)null);
@@ -405,7 +405,7 @@ public class JavaJRETab extends JavaLaunchTab {
 	/**
 	 * Notification that the user changed the selection in the JRE combination box.
 	 */
-	protected void handleSelectedJREChanged() {
+	protected void handleSelectedJREChanged() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		loadDynamicJREArea();
 
 		// always set the newly created area with defaults
@@ -482,11 +482,11 @@ public class JavaJRETab extends JavaLaunchTab {
 	 * Show the contributed piece of UI that was registered for the install type
 	 * of the currently selected VM.
 	 */
-	protected void loadDynamicJREArea() {
+	protected void loadDynamicJREArea() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 
 		// Dispose of any current child widgets in the tab holder area
 		Control[] children = getDynamicTabHolder().getChildren();
-		for (int i = 0; i < children.length; i++) {
+		for (int i = 0; i < children.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			children[i].dispose();
 		}
 
@@ -558,13 +558,13 @@ public class JavaJRETab extends JavaLaunchTab {
 		return fUseDynamicArea;
 	}
 
-	protected JREDescriptor getDefaultJREDescriptor() {
+	protected JREDescriptor getDefaultJREDescriptor() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		return new JREDescriptor() {
 
 			/* (non-Javadoc)
 			 * @see org.eclipse.jdt.internal.debug.ui.jres.DefaultJREDescriptor#getDescription()
 			 */
-			@Override
+			@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 			public String getDescription() {
 				IJavaProject project = getJavaProject();
 				String name = LauncherMessages.JavaJRETab_7;
@@ -578,7 +578,7 @@ public class JavaJRETab extends JavaLaunchTab {
 				try {
 					String eeName = null;
 					IClasspathEntry[] classpath = project.getRawClasspath();
-					for (int i = 0; i < classpath.length; i++) {
+					for (int i = 0; i < classpath.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 						IClasspathEntry entry = classpath[i];
 						if (entry.getEntryKind() == IClasspathEntry.CPE_CONTAINER) {
 							if (JavaRuntime.JRE_CONTAINER.equals(entry.getPath().segment(0))) {

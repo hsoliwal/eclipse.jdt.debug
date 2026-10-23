@@ -34,7 +34,7 @@ public class MoveFieldUnitTests extends MoveRefactoringTest {
 	/**
 	 * Tests if a WatchPointBreakPoint was moved appropriately.
 	 */
-	public void testPublicTypeFieldMove() throws Exception {
+	public void testPublicTypeFieldMove() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IJavaProject javaProject = get14Project();
 		ICompilationUnit cunit= getCompilationUnit(javaProject, "src", "a.b.c", "Movee.java");
 		IJavaElement type = cunit.getType("Movee").getField("anInt");
@@ -60,7 +60,7 @@ public class MoveFieldUnitTests extends MoveRefactoringTest {
 	/**
 	 * Tests if a WatchPointBreakPoint was moved appropriately.
 	 */
-	public void testInnerTypeFieldMove() throws Exception {
+	public void testInnerTypeFieldMove() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IJavaProject javaProject = get14Project();
 		ICompilationUnit cunit= getCompilationUnit(javaProject, "src", "a.b.c", "Movee.java");
 		IJavaElement type = cunit.getType("Movee").getType("InnerType").getField("innerTypeInt");
@@ -86,7 +86,7 @@ public class MoveFieldUnitTests extends MoveRefactoringTest {
 	/**
 	 * Tests if a WatchPointBreakPoint was moved appropriately.
 	 */
-	public void testNonPublicTypeFieldMove() throws Exception {
+	public void testNonPublicTypeFieldMove() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IJavaProject javaProject = get14Project();
 		ICompilationUnit cunit= getCompilationUnit(javaProject, "src", "a.b.c", "Movee.java");
 		IJavaElement type = cunit.getType("NonPublicType").getField("differentInt");

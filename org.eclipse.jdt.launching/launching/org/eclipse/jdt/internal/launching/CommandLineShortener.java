@@ -51,7 +51,7 @@ public class CommandLineShortener implements IProcessTempFileCreator {
 	private final String[] cmdLine;
 	private File processTempFilesDir;
 
-	private final List<File> processTempFiles = new ArrayList<>();
+	private final List<File> processTempFiles = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 
 	/**
 	 *
@@ -82,7 +82,7 @@ public class CommandLineShortener implements IProcessTempFileCreator {
 		processTempFiles.add(file);
 	}
 
-	protected File createArgumentFile(String[] cmdLine) throws CoreException {
+	protected File createArgumentFile(String[] cmdLine) throws CoreException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		Charset systemCharset = Platform.getSystemCharset();
 		try {
 			File argumentsFile = JavaLaunchingUtils.createFileForArgument(getLaunchTimeStamp(), processTempFilesDir, getLaunchConfigurationName(), "%s-args-%s.txt"); //$NON-NLS-1$
@@ -91,11 +91,11 @@ public class CommandLineShortener implements IProcessTempFileCreator {
 			Files.write(argumentsFile.toPath(), Arrays.asList(cmdLine), systemCharset);
 			return argumentsFile;
 		} catch (CharacterCodingException e) {
-			for (String s : cmdLine) {
-				for (char c : s.toCharArray()) {
+			for (String s : cmdLine) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
+				for (char c : s.toCharArray()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 					if (!systemCharset.newEncoder().canEncode(c)) {
-						throw new CoreException(new Status(IStatus.ERROR, LaunchingPlugin.getUniqueIdentifier(), IStatus.ERROR, "Cannot encode argument as file: Illegal character " //$NON-NLS-1$
-								+ String.format("\\u%04x", (int) c) //$NON-NLS-1$
+						throw new CoreException(new Status(IStatus.ERROR, LaunchingPlugin.getUniqueIdentifier(), IStatus.ERROR, "Cannot encode argument as file: Illegal character " //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
+								+ String.format("\\u%04x", (int) c) //$NON-NLS-1$ //FLLDCIM: MARK — M11 FORMAT_PRECOMPUTE CALL
 								+ " for system charset " + systemCharset.displayName() + ".", e)); //$NON-NLS-1$ //$NON-NLS-2$
 
 					}
@@ -107,22 +107,22 @@ public class CommandLineShortener implements IProcessTempFileCreator {
 		}
 	}
 
-	String[] quoteForArgfile(String[] cmdLine) {
+	String[] quoteForArgfile(String[] cmdLine) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String[] quotedCmdLine = new String[cmdLine.length];
-		for (int i = 0; i < cmdLine.length; i++) {
+		for (int i = 0; i < cmdLine.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			String arg = cmdLine[i];
 			if (CommandLineQuoting.needsQuoting(arg)) {
-				StringBuilder escapedArg = new StringBuilder();
-				for (int j = 0; j < arg.length(); j++) {
+				StringBuilder escapedArg = new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
+				for (int j = 0; j < arg.length(); j++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 					char c = arg.charAt(j);
 					if (c == '\\') {
-						escapedArg.append('\\');
+						escapedArg.append('\\'); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 					} else if (c == '\"') {
-						escapedArg.append('\\');
+						escapedArg.append('\\'); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 					}
-					escapedArg.append(c);
+					escapedArg.append(c); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				}
-				arg = "\"" + escapedArg.toString() + "\""; //$NON-NLS-1$ //$NON-NLS-2$
+				arg = "\"" + escapedArg.toString() + "\""; //$NON-NLS-1$ //$NON-NLS-2$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 			}
 			quotedCmdLine[i] = arg;
 		}
@@ -139,7 +139,7 @@ public class CommandLineShortener implements IProcessTempFileCreator {
 
 	@Override
 	public List<File> getProcessTempFiles() {
-		return new ArrayList<>(processTempFiles);
+		return new ArrayList<>(processTempFiles); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 	}
 
 	public File getProcessTempFilesDir() {
@@ -175,14 +175,14 @@ public class CommandLineShortener implements IProcessTempFileCreator {
 	 * @return a shortened command line
 	 */
 	public String[] shortenCommandLine() throws CoreException {
-		List<String> fullCommandLine = new ArrayList<>(Arrays.asList(cmdLine));
-		List<String> shortCommandLine = new ArrayList<>();
+		List<String> fullCommandLine = new ArrayList<>(Arrays.asList(cmdLine)); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
+		List<String> shortCommandLine = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 
 		shortCommandLine.add(fullCommandLine.remove(0));
 
 		File argumentFile = createArgumentFile(fullCommandLine.toArray(new String[fullCommandLine.size()]));
 		addProcessTempFile(argumentFile);
-		shortCommandLine.add("@" + argumentFile.getAbsolutePath());//$NON-NLS-1$
+		shortCommandLine.add("@" + argumentFile.getAbsolutePath());//$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 		return shortCommandLine.toArray(new String[shortCommandLine.size()]);
 	}

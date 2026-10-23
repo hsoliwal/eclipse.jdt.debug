@@ -95,7 +95,7 @@ public class DebugHoverTests extends AbstractDebugUiTests {
 		return get18Project();
 	}
 
-	public void testResolveInLambda() throws Exception {
+	public void testResolveInLambda() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		final String typeName = "DebugHoverTest18";
 		final String expectedMethod1 = "lambda$0";
 		final String expectedMethod2 = "lambda$1";
@@ -104,12 +104,12 @@ public class DebugHoverTests extends AbstractDebugUiTests {
 		final int bpLine1 = 34;
 		final int bpLine2 = 41;
 
-		IJavaBreakpoint bp1 = createLineBreakpoint(bpLine1, "", typeName + ".java", typeName);
-		IJavaBreakpoint bp2 = createLineBreakpoint(bpLine2, "", typeName + ".java", typeName);
+		IJavaBreakpoint bp1 = createLineBreakpoint(bpLine1, "", typeName + ".java", typeName); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
+		IJavaBreakpoint bp2 = createLineBreakpoint(bpLine2, "", typeName + ".java", typeName); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		bp1.setSuspendPolicy(IJavaBreakpoint.SUSPEND_THREAD);
 		bp2.setSuspendPolicy(IJavaBreakpoint.SUSPEND_THREAD);
 		IFile file = (IFile) bp1.getMarker().getResource();
-		assertEquals(typeName + ".java", file.getName());
+		assertEquals(typeName + ".java", file.getName()); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 		IJavaThread thread = null;
 		try {
@@ -119,15 +119,15 @@ public class DebugHoverTests extends AbstractDebugUiTests {
 			JavaDebugHover hover = new JavaDebugHover();
 			hover.setEditor(part);
 
-			Map<String, Region> offsets = new LinkedHashMap<>();
-			offsets.put(VAL_PREFIX + "arg", new Region(1059, "arg".length()));
-			offsets.put(VAL_PREFIX + "var1", new Region(1030, "var1".length()));
+			Map<String, Region> offsets = new LinkedHashMap<>(); //FLLDCIM: MARK — M04 M3_ORDERED_LANES NEW
+			offsets.put(VAL_PREFIX + "arg", new Region(1059, "arg".length())); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
+			offsets.put(VAL_PREFIX + "var1", new Region(1030, "var1".length())); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 			offsets.put(/* local */ "var2", new Region(1001, "var2".length()));
 
 			Set<Entry<String, Region>> entrySet = offsets.entrySet();
 			int startLine = bpLine1;
 			int valueIndex = 0;
-			for (Entry<String, Region> varData : entrySet) {
+			for (Entry<String, Region> varData : entrySet) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				// select variables and validate the hover, going backwards from the breakpoint
 				validateLine(startLine--, valueIndex++, part, hover, varData);
 			}
@@ -135,16 +135,16 @@ public class DebugHoverTests extends AbstractDebugUiTests {
 			resumeToLineBreakpoint(thread, (ILineBreakpoint) bp2);
 			part = openEditorAndValidateStack(expectedMethod2, framesNumber2, file, thread);
 
-			offsets = new LinkedHashMap<>();
-			offsets.put(VAL_PREFIX + "arg", new Region(1216, "arg".length()));
-			offsets.put(VAL_PREFIX + "var1", new Region(1186, "var1".length()));
-			offsets.put(VAL_PREFIX + "var2", new Region(1156, "var2".length()));
+			offsets = new LinkedHashMap<>(); //FLLDCIM: MARK — M04 M3_ORDERED_LANES NEW
+			offsets.put(VAL_PREFIX + "arg", new Region(1216, "arg".length())); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
+			offsets.put(VAL_PREFIX + "var1", new Region(1186, "var1".length())); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
+			offsets.put(VAL_PREFIX + "var2", new Region(1156, "var2".length())); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 			offsets.put(/* local */ "var3", new Region(1126, "var3".length()));
 
 			entrySet = offsets.entrySet();
 			startLine = bpLine2;
 			valueIndex = 0;
-			for (Entry<String, Region> varData : entrySet) {
+			for (Entry<String, Region> varData : entrySet) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				// select variables and validate the hover, going backwards from the breakpoint
 				validateLine(startLine--, valueIndex++, part, hover, varData);
 			}
@@ -155,16 +155,16 @@ public class DebugHoverTests extends AbstractDebugUiTests {
 		}
 	}
 
-	public void testResolveInStaticInit() throws Exception {
+	public void testResolveInStaticInit() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		final String typeName = "Bug549394";
 		final String expectedMethod1 = "<clinit>";
 		final int framesNumber1 = 1;
 		final int bpLine1 = 18;
 
-		IJavaBreakpoint bp1 = createLineBreakpoint(bpLine1, "", typeName + ".java", typeName);
+		IJavaBreakpoint bp1 = createLineBreakpoint(bpLine1, "", typeName + ".java", typeName); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		bp1.setSuspendPolicy(IJavaBreakpoint.SUSPEND_THREAD);
 		IFile file = (IFile) bp1.getMarker().getResource();
-		assertEquals(typeName + ".java", file.getName());
+		assertEquals(typeName + ".java", file.getName()); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 		IJavaThread thread = null;
 		try {
@@ -174,13 +174,13 @@ public class DebugHoverTests extends AbstractDebugUiTests {
 			JavaDebugHover hover = new JavaDebugHover();
 			hover.setEditor(part);
 
-			Map<String, Region> offsets = new LinkedHashMap<>();
+			Map<String, Region> offsets = new LinkedHashMap<>(); //FLLDCIM: MARK — M04 M3_ORDERED_LANES NEW
 			offsets.put("local", new Region(657, "local".length()));
 
 			Set<Entry<String, Region>> entrySet = offsets.entrySet();
 			int startLine = bpLine1;
 			int valueIndex = 0;
-			for (Entry<String, Region> varData : entrySet) {
+			for (Entry<String, Region> varData : entrySet) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				// select variables and validate the hover, going backwards from the breakpoint
 				validateLine(startLine--, valueIndex++, part, hover, varData);
 			}
@@ -190,11 +190,11 @@ public class DebugHoverTests extends AbstractDebugUiTests {
 		}
 	}
 
-	public void testResolveInInner() throws Exception {
+	public void testResolveInInner() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		final String typeName = "Bug317045";
-		final String typeName1 = typeName + "$Class0";
+		final String typeName1 = typeName + "$Class0"; //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		final String typeName2 = typeName;
-		final String typeName3 = typeName + "$Class2";
+		final String typeName3 = typeName + "$Class2"; //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		final String expectedMethod1 = "run0";
 		final String expectedMethod2 = "run11";
 		final String expectedMethod3 = "run2";
@@ -205,14 +205,14 @@ public class DebugHoverTests extends AbstractDebugUiTests {
 		final int bpLine2 = 39;
 		final int bpLine3 = 71;
 
-		IJavaBreakpoint bp1 = createLineBreakpoint(bpLine1, "", typeName + ".java", typeName1);
-		IJavaBreakpoint bp2 = createLineBreakpoint(bpLine2, "", typeName + ".java", typeName2);
-		IJavaBreakpoint bp3 = createLineBreakpoint(bpLine3, "", typeName + ".java", typeName3);
+		IJavaBreakpoint bp1 = createLineBreakpoint(bpLine1, "", typeName + ".java", typeName1); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
+		IJavaBreakpoint bp2 = createLineBreakpoint(bpLine2, "", typeName + ".java", typeName2); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
+		IJavaBreakpoint bp3 = createLineBreakpoint(bpLine3, "", typeName + ".java", typeName3); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		bp1.setSuspendPolicy(IJavaBreakpoint.SUSPEND_THREAD);
 		bp2.setSuspendPolicy(IJavaBreakpoint.SUSPEND_THREAD);
 		bp3.setSuspendPolicy(IJavaBreakpoint.SUSPEND_THREAD);
 		IFile file = (IFile) bp1.getMarker().getResource();
-		assertEquals(typeName + ".java", file.getName());
+		assertEquals(typeName + ".java", file.getName()); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 		IJavaThread thread = null;
 		try {
@@ -222,7 +222,7 @@ public class DebugHoverTests extends AbstractDebugUiTests {
 			JavaDebugHover hover = new JavaDebugHover();
 			hover.setEditor(part);
 
-			Map<String, Region> offsets = new LinkedHashMap<>();
+			Map<String, Region> offsets = new LinkedHashMap<>(); //FLLDCIM: MARK — M04 M3_ORDERED_LANES NEW
 			offsets.put("var3", new Region(1832, "var3".length()));
 			offsets.put("var2", new Region(1803, "var2".length()));
 			offsets.put("var1", new Region(1774, "var1".length()));
@@ -231,7 +231,7 @@ public class DebugHoverTests extends AbstractDebugUiTests {
 			Set<Entry<String, Region>> entrySet = offsets.entrySet();
 			int startLine = bpLine1;
 			int valueIndex = 0;
-			for (Entry<String, Region> varData : entrySet) {
+			for (Entry<String, Region> varData : entrySet) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				// select variables and validate the hover, going backwards from the breakpoint
 				validateLine(startLine--, part, hover, varData, values[valueIndex++]);
 			}
@@ -239,7 +239,7 @@ public class DebugHoverTests extends AbstractDebugUiTests {
 			resumeToLineBreakpoint(thread, (ILineBreakpoint) bp2);
 			part = openEditorAndValidateStack(expectedMethod2, framesNumber2, file, thread);
 
-			offsets = new LinkedHashMap<>();
+			offsets = new LinkedHashMap<>(); //FLLDCIM: MARK — M04 M3_ORDERED_LANES NEW
 			offsets.put("var3", new Region(1242, "var3".length()));
 			offsets.put("var2", new Region(1210, "var2".length()));
 			offsets.put("var1", new Region(1178, "var1".length()));
@@ -249,12 +249,12 @@ public class DebugHoverTests extends AbstractDebugUiTests {
 			entrySet = offsets.entrySet();
 			startLine = bpLine2;
 			valueIndex = 0;
-			for (Entry<String, Region> varData : entrySet) {
+			for (Entry<String, Region> varData : entrySet) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				// select variables and validate the hover, going backwards from the breakpoint
 				validateLine(startLine--, part, hover, varData, values[valueIndex++]);
 			}
 
-			offsets = new LinkedHashMap<>();
+			offsets = new LinkedHashMap<>(); //FLLDCIM: MARK — M04 M3_ORDERED_LANES NEW
 			offsets.put("var3", new Region(1030, "var3".length()));
 			offsets.put("var2", new Region(1000, "var2".length()));
 			offsets.put("var1", new Region(970, "var1".length()));
@@ -264,7 +264,7 @@ public class DebugHoverTests extends AbstractDebugUiTests {
 			entrySet = offsets.entrySet();
 			startLine = 32;
 			valueIndex = 0;
-			for (Entry<String, Region> varData : entrySet) {
+			for (Entry<String, Region> varData : entrySet) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				// select variables and validate the hover, going backwards from the breakpoint
 				validateLine(startLine--, part, hover, varData, values[valueIndex++]);
 			}
@@ -272,7 +272,7 @@ public class DebugHoverTests extends AbstractDebugUiTests {
 			resumeToLineBreakpoint(thread, (ILineBreakpoint) bp3);
 			part = openEditorAndValidateStack(expectedMethod3, framesNumber3, file, thread);
 
-			offsets = new LinkedHashMap<>();
+			offsets = new LinkedHashMap<>(); //FLLDCIM: MARK — M04 M3_ORDERED_LANES NEW
 			offsets.put("var3", new Region(2040, "var3".length()));
 			offsets.put("var2", new Region(2011, "var2".length()));
 			offsets.put("var1", new Region(1982, "var1".length()));
@@ -281,7 +281,7 @@ public class DebugHoverTests extends AbstractDebugUiTests {
 			entrySet = offsets.entrySet();
 			startLine = bpLine3;
 			valueIndex = 0;
-			for (Entry<String, Region> varData : entrySet) {
+			for (Entry<String, Region> varData : entrySet) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				// select variables and validate the hover, going backwards from the breakpoint
 				validateLine(startLine--, part, hover, varData, values[valueIndex++]);
 			}
@@ -291,7 +291,7 @@ public class DebugHoverTests extends AbstractDebugUiTests {
 		}
 	}
 
-	public void testBug572629_ChainFieldHover_2Chains_ExpectValueFromChain() throws Exception {
+	public void testBug572629_ChainFieldHover_2Chains_ExpectValueFromChain() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		sync(() -> TestUtil.waitForJobs(getName(), 1000, 10000, ProcessConsole.class));
 
 		final String typeName = "Bug572629";
@@ -299,10 +299,10 @@ public class DebugHoverTests extends AbstractDebugUiTests {
 		final int frameNumber = 2;
 		final int bpLine = 37;
 
-		IJavaBreakpoint bp = createLineBreakpoint(bpLine, "", typeName + ".java", typeName);
+		IJavaBreakpoint bp = createLineBreakpoint(bpLine, "", typeName + ".java", typeName); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		bp.setSuspendPolicy(IJavaBreakpoint.SUSPEND_THREAD);
 		IFile file = (IFile) bp.getMarker().getResource();
-		assertEquals(typeName + ".java", file.getName());
+		assertEquals(typeName + ".java", file.getName()); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 		IJavaThread thread = null;
 		try {
@@ -328,7 +328,7 @@ public class DebugHoverTests extends AbstractDebugUiTests {
 		}
 	}
 
-	public void testBug572629_ChainFieldHover_ArrayLengthChainsOnThisExpression_ExpectValueFromChain() throws Exception {
+	public void testBug572629_ChainFieldHover_ArrayLengthChainsOnThisExpression_ExpectValueFromChain() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		sync(() -> TestUtil.waitForJobs(getName(), 1000, 10000, ProcessConsole.class));
 
 		final String typeName = "Bug572629";
@@ -336,10 +336,10 @@ public class DebugHoverTests extends AbstractDebugUiTests {
 		final int frameNumber = 2;
 		final int bpLine = 37;
 
-		IJavaBreakpoint bp = createLineBreakpoint(bpLine, "", typeName + ".java", typeName);
+		IJavaBreakpoint bp = createLineBreakpoint(bpLine, "", typeName + ".java", typeName); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		bp.setSuspendPolicy(IJavaBreakpoint.SUSPEND_THREAD);
 		IFile file = (IFile) bp.getMarker().getResource();
-		assertEquals(typeName + ".java", file.getName());
+		assertEquals(typeName + ".java", file.getName()); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 		IJavaThread thread = null;
 		try {
@@ -365,7 +365,7 @@ public class DebugHoverTests extends AbstractDebugUiTests {
 		}
 	}
 
-	public void testBug572629_ChainFieldHover_ArrayLengthChainsOnVariableExpression_ExpectValueFromChain() throws Exception {
+	public void testBug572629_ChainFieldHover_ArrayLengthChainsOnVariableExpression_ExpectValueFromChain() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		sync(() -> TestUtil.waitForJobs(getName(), 1000, 10000, ProcessConsole.class));
 
 		final String typeName = "Bug572629";
@@ -373,10 +373,10 @@ public class DebugHoverTests extends AbstractDebugUiTests {
 		final int frameNumber = 2;
 		final int bpLine = 37;
 
-		IJavaBreakpoint bp = createLineBreakpoint(bpLine, "", typeName + ".java", typeName);
+		IJavaBreakpoint bp = createLineBreakpoint(bpLine, "", typeName + ".java", typeName); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		bp.setSuspendPolicy(IJavaBreakpoint.SUSPEND_THREAD);
 		IFile file = (IFile) bp.getMarker().getResource();
-		assertEquals(typeName + ".java", file.getName());
+		assertEquals(typeName + ".java", file.getName()); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 		IJavaThread thread = null;
 		try {
@@ -402,7 +402,7 @@ public class DebugHoverTests extends AbstractDebugUiTests {
 		}
 	}
 
-	public void testBug572629_ChainFieldHover_ArrayLengthChainsOnVariableThisExpression_ExpectValueFromChain() throws Exception {
+	public void testBug572629_ChainFieldHover_ArrayLengthChainsOnVariableThisExpression_ExpectValueFromChain() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		sync(() -> TestUtil.waitForJobs(getName(), 1000, 10000, ProcessConsole.class));
 
 		final String typeName = "Bug572629";
@@ -410,10 +410,10 @@ public class DebugHoverTests extends AbstractDebugUiTests {
 		final int frameNumber = 2;
 		final int bpLine = 37;
 
-		IJavaBreakpoint bp = createLineBreakpoint(bpLine, "", typeName + ".java", typeName);
+		IJavaBreakpoint bp = createLineBreakpoint(bpLine, "", typeName + ".java", typeName); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		bp.setSuspendPolicy(IJavaBreakpoint.SUSPEND_THREAD);
 		IFile file = (IFile) bp.getMarker().getResource();
-		assertEquals(typeName + ".java", file.getName());
+		assertEquals(typeName + ".java", file.getName()); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 		IJavaThread thread = null;
 		try {
@@ -439,7 +439,7 @@ public class DebugHoverTests extends AbstractDebugUiTests {
 		}
 	}
 
-	public void testBug572629_ChainFieldHover_3Chains_ExpectValueFromChainAtMiddle() throws Exception {
+	public void testBug572629_ChainFieldHover_3Chains_ExpectValueFromChainAtMiddle() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		sync(() -> TestUtil.waitForJobs(getName(), 1000, 10000, ProcessConsole.class));
 
 		final String typeName = "Bug572629";
@@ -447,10 +447,10 @@ public class DebugHoverTests extends AbstractDebugUiTests {
 		final int frameNumber = 2;
 		final int bpLine = 37;
 
-		IJavaBreakpoint bp = createLineBreakpoint(bpLine, "", typeName + ".java", typeName);
+		IJavaBreakpoint bp = createLineBreakpoint(bpLine, "", typeName + ".java", typeName); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		bp.setSuspendPolicy(IJavaBreakpoint.SUSPEND_THREAD);
 		IFile file = (IFile) bp.getMarker().getResource();
-		assertEquals(typeName + ".java", file.getName());
+		assertEquals(typeName + ".java", file.getName()); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 		IJavaThread thread = null;
 		try {
@@ -476,7 +476,7 @@ public class DebugHoverTests extends AbstractDebugUiTests {
 		}
 	}
 
-	public void testBug572629_ChainFieldHover_ArrayLengthOnStaticField_ExpectValue() throws Exception {
+	public void testBug572629_ChainFieldHover_ArrayLengthOnStaticField_ExpectValue() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		sync(() -> TestUtil.waitForJobs(getName(), 1000, 10000, ProcessConsole.class));
 
 		final String typeName = "Bug572629";
@@ -484,10 +484,10 @@ public class DebugHoverTests extends AbstractDebugUiTests {
 		final int frameNumber = 2;
 		final int bpLine = 36;
 
-		IJavaBreakpoint bp = createLineBreakpoint(bpLine, "", typeName + ".java", typeName);
+		IJavaBreakpoint bp = createLineBreakpoint(bpLine, "", typeName + ".java", typeName); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		bp.setSuspendPolicy(IJavaBreakpoint.SUSPEND_THREAD);
 		IFile file = (IFile) bp.getMarker().getResource();
-		assertEquals(typeName + ".java", file.getName());
+		assertEquals(typeName + ".java", file.getName()); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 		IJavaThread thread = null;
 		try {
@@ -513,7 +513,7 @@ public class DebugHoverTests extends AbstractDebugUiTests {
 		}
 	}
 
-	public void testBug572629_LocalVariableHover_ArrayLength_ExpectValue() throws Exception {
+	public void testBug572629_LocalVariableHover_ArrayLength_ExpectValue() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		sync(() -> TestUtil.waitForJobs(getName(), 1000, 10000, ProcessConsole.class));
 
 		final String typeName = "Bug572629";
@@ -521,10 +521,10 @@ public class DebugHoverTests extends AbstractDebugUiTests {
 		final int frameNumber = 2;
 		final int bpLine = 44;
 
-		IJavaBreakpoint bp = createLineBreakpoint(bpLine, "", typeName + ".java", typeName);
+		IJavaBreakpoint bp = createLineBreakpoint(bpLine, "", typeName + ".java", typeName); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		bp.setSuspendPolicy(IJavaBreakpoint.SUSPEND_THREAD);
 		IFile file = (IFile) bp.getMarker().getResource();
-		assertEquals(typeName + ".java", file.getName());
+		assertEquals(typeName + ".java", file.getName()); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 		IJavaThread thread = null;
 		try {
@@ -550,7 +550,7 @@ public class DebugHoverTests extends AbstractDebugUiTests {
 		}
 	}
 
-	public void testBug572629_ParameterVariableHover_ArrayLength_ExpectValue() throws Exception {
+	public void testBug572629_ParameterVariableHover_ArrayLength_ExpectValue() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		sync(() -> TestUtil.waitForJobs(getName(), 1000, 10000, ProcessConsole.class));
 
 		final String typeName = "Bug572629";
@@ -558,10 +558,10 @@ public class DebugHoverTests extends AbstractDebugUiTests {
 		final int frameNumber = 2;
 		final int bpLine = 46;
 
-		IJavaBreakpoint bp = createLineBreakpoint(bpLine, "", typeName + ".java", typeName);
+		IJavaBreakpoint bp = createLineBreakpoint(bpLine, "", typeName + ".java", typeName); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		bp.setSuspendPolicy(IJavaBreakpoint.SUSPEND_THREAD);
 		IFile file = (IFile) bp.getMarker().getResource();
-		assertEquals(typeName + ".java", file.getName());
+		assertEquals(typeName + ".java", file.getName()); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 		IJavaThread thread = null;
 		try {
@@ -587,7 +587,7 @@ public class DebugHoverTests extends AbstractDebugUiTests {
 		}
 	}
 
-	public void testBug572629_ChainedLocalVariableHover_ExpectValue() throws Exception {
+	public void testBug572629_ChainedLocalVariableHover_ExpectValue() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		sync(() -> TestUtil.waitForJobs(getName(), 1000, 10000, ProcessConsole.class));
 
 		final String typeName = "Bug572629";
@@ -595,10 +595,10 @@ public class DebugHoverTests extends AbstractDebugUiTests {
 		final int frameNumber = 2;
 		final int bpLine = 45;
 
-		IJavaBreakpoint bp = createLineBreakpoint(bpLine, "", typeName + ".java", typeName);
+		IJavaBreakpoint bp = createLineBreakpoint(bpLine, "", typeName + ".java", typeName); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		bp.setSuspendPolicy(IJavaBreakpoint.SUSPEND_THREAD);
 		IFile file = (IFile) bp.getMarker().getResource();
-		assertEquals(typeName + ".java", file.getName());
+		assertEquals(typeName + ".java", file.getName()); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 		IJavaThread thread = null;
 		try {
@@ -624,7 +624,7 @@ public class DebugHoverTests extends AbstractDebugUiTests {
 		}
 	}
 
-	public void testBug572629_LocalArrayVariableLengthHoverInSideLambda_ExpectValue() throws Exception {
+	public void testBug572629_LocalArrayVariableLengthHoverInSideLambda_ExpectValue() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		sync(() -> TestUtil.waitForJobs(getName(), 1000, 10000, ProcessConsole.class));
 
 		final String typeName = "Bug572629";
@@ -632,10 +632,10 @@ public class DebugHoverTests extends AbstractDebugUiTests {
 		final int frameNumber = 6;
 		final int bpLine = 48;
 
-		IJavaBreakpoint bp = createLineBreakpoint(bpLine, "", typeName + ".java", typeName);
+		IJavaBreakpoint bp = createLineBreakpoint(bpLine, "", typeName + ".java", typeName); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		bp.setSuspendPolicy(IJavaBreakpoint.SUSPEND_THREAD);
 		IFile file = (IFile) bp.getMarker().getResource();
-		assertEquals(typeName + ".java", file.getName());
+		assertEquals(typeName + ".java", file.getName()); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 		IJavaThread thread = null;
 		try {
@@ -661,7 +661,7 @@ public class DebugHoverTests extends AbstractDebugUiTests {
 		}
 	}
 
-	public void testBug573553_ChainFieldHover_DeepChain_OnThisObjectPrimitive_ExpectValue() throws Exception {
+	public void testBug573553_ChainFieldHover_DeepChain_OnThisObjectPrimitive_ExpectValue() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		sync(() -> TestUtil.waitForJobs(getName(), 1000, 10000, ProcessConsole.class));
 
 		final String typeName = "Bug572629";
@@ -669,10 +669,10 @@ public class DebugHoverTests extends AbstractDebugUiTests {
 		final int frameNumber = 2;
 		final int bpLine = 53;
 
-		IJavaBreakpoint bp = createLineBreakpoint(bpLine, "", typeName + ".java", typeName);
+		IJavaBreakpoint bp = createLineBreakpoint(bpLine, "", typeName + ".java", typeName); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		bp.setSuspendPolicy(IJavaBreakpoint.SUSPEND_THREAD);
 		IFile file = (IFile) bp.getMarker().getResource();
-		assertEquals(typeName + ".java", file.getName());
+		assertEquals(typeName + ".java", file.getName()); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 		IJavaThread thread = null;
 		try {
@@ -698,7 +698,7 @@ public class DebugHoverTests extends AbstractDebugUiTests {
 		}
 	}
 
-	public void testBug573553_ChainFieldHover_DeepChain_OnThisObject_ExpectValue() throws Exception {
+	public void testBug573553_ChainFieldHover_DeepChain_OnThisObject_ExpectValue() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		sync(() -> TestUtil.waitForJobs(getName(), 1000, 10000, ProcessConsole.class));
 
 		final String typeName = "Bug572629";
@@ -706,10 +706,10 @@ public class DebugHoverTests extends AbstractDebugUiTests {
 		final int frameNumber = 2;
 		final int bpLine = 54;
 
-		IJavaBreakpoint bp = createLineBreakpoint(bpLine, "", typeName + ".java", typeName);
+		IJavaBreakpoint bp = createLineBreakpoint(bpLine, "", typeName + ".java", typeName); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		bp.setSuspendPolicy(IJavaBreakpoint.SUSPEND_THREAD);
 		IFile file = (IFile) bp.getMarker().getResource();
-		assertEquals(typeName + ".java", file.getName());
+		assertEquals(typeName + ".java", file.getName()); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 		IJavaThread thread = null;
 		try {
@@ -735,7 +735,7 @@ public class DebugHoverTests extends AbstractDebugUiTests {
 		}
 	}
 
-	public void testBug573553_ChainFieldHover_DeepChain_Primitive_ExpectValue() throws Exception {
+	public void testBug573553_ChainFieldHover_DeepChain_Primitive_ExpectValue() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		sync(() -> TestUtil.waitForJobs(getName(), 1000, 10000, ProcessConsole.class));
 
 		final String typeName = "Bug572629";
@@ -743,10 +743,10 @@ public class DebugHoverTests extends AbstractDebugUiTests {
 		final int frameNumber = 2;
 		final int bpLine = 55;
 
-		IJavaBreakpoint bp = createLineBreakpoint(bpLine, "", typeName + ".java", typeName);
+		IJavaBreakpoint bp = createLineBreakpoint(bpLine, "", typeName + ".java", typeName); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		bp.setSuspendPolicy(IJavaBreakpoint.SUSPEND_THREAD);
 		IFile file = (IFile) bp.getMarker().getResource();
-		assertEquals(typeName + ".java", file.getName());
+		assertEquals(typeName + ".java", file.getName()); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 		IJavaThread thread = null;
 		try {
@@ -772,7 +772,7 @@ public class DebugHoverTests extends AbstractDebugUiTests {
 		}
 	}
 
-	public void testBug573553_ChainFieldHover_DeepChain_Object_ExpectValue() throws Exception {
+	public void testBug573553_ChainFieldHover_DeepChain_Object_ExpectValue() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		sync(() -> TestUtil.waitForJobs(getName(), 1000, 10000, ProcessConsole.class));
 
 		final String typeName = "Bug572629";
@@ -780,10 +780,10 @@ public class DebugHoverTests extends AbstractDebugUiTests {
 		final int frameNumber = 2;
 		final int bpLine = 56;
 
-		IJavaBreakpoint bp = createLineBreakpoint(bpLine, "", typeName + ".java", typeName);
+		IJavaBreakpoint bp = createLineBreakpoint(bpLine, "", typeName + ".java", typeName); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		bp.setSuspendPolicy(IJavaBreakpoint.SUSPEND_THREAD);
 		IFile file = (IFile) bp.getMarker().getResource();
-		assertEquals(typeName + ".java", file.getName());
+		assertEquals(typeName + ".java", file.getName()); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 		IJavaThread thread = null;
 		try {
@@ -809,7 +809,7 @@ public class DebugHoverTests extends AbstractDebugUiTests {
 		}
 	}
 
-	public void testBug572629_onThisExpression() throws Exception {
+	public void testBug572629_onThisExpression() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		sync(() -> TestUtil.waitForJobs(getName(), 1000, 10000, ProcessConsole.class));
 
 		final String typeName = "Bug572629";
@@ -817,10 +817,10 @@ public class DebugHoverTests extends AbstractDebugUiTests {
 		final int frameNumber = 2;
 		final int bpLine = 37;
 
-		IJavaBreakpoint bp = createLineBreakpoint(bpLine, "", typeName + ".java", typeName);
+		IJavaBreakpoint bp = createLineBreakpoint(bpLine, "", typeName + ".java", typeName); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		bp.setSuspendPolicy(IJavaBreakpoint.SUSPEND_THREAD);
 		IFile file = (IFile) bp.getMarker().getResource();
-		assertEquals(typeName + ".java", file.getName());
+		assertEquals(typeName + ".java", file.getName()); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 		IJavaThread thread = null;
 		try {
@@ -846,7 +846,7 @@ public class DebugHoverTests extends AbstractDebugUiTests {
 		}
 	}
 
-	public void testBug573223_onLocalVarChain_onArrayField() throws Exception {
+	public void testBug573223_onLocalVarChain_onArrayField() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		sync(() -> TestUtil.waitForJobs(getName(), 1000, 10000, ProcessConsole.class));
 
 		final String typeName = "Bug572629";
@@ -854,10 +854,10 @@ public class DebugHoverTests extends AbstractDebugUiTests {
 		final int frameNumber = 1;
 		final int bpLine = 64;
 
-		IJavaBreakpoint bp = createLineBreakpoint(bpLine, "", typeName + ".java", typeName);
+		IJavaBreakpoint bp = createLineBreakpoint(bpLine, "", typeName + ".java", typeName); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		bp.setSuspendPolicy(IJavaBreakpoint.SUSPEND_THREAD);
 		IFile file = (IFile) bp.getMarker().getResource();
-		assertEquals(typeName + ".java", file.getName());
+		assertEquals(typeName + ".java", file.getName()); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 		IJavaThread thread = null;
 		try {
@@ -883,7 +883,7 @@ public class DebugHoverTests extends AbstractDebugUiTests {
 		}
 	}
 
-	public void testBug573223_onLocalVarChain_onArrayLength() throws Exception {
+	public void testBug573223_onLocalVarChain_onArrayLength() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		sync(() -> TestUtil.waitForJobs(getName(), 1000, 10000, ProcessConsole.class));
 
 		final String typeName = "Bug572629";
@@ -891,10 +891,10 @@ public class DebugHoverTests extends AbstractDebugUiTests {
 		final int frameNumber = 1;
 		final int bpLine = 64;
 
-		IJavaBreakpoint bp = createLineBreakpoint(bpLine, "", typeName + ".java", typeName);
+		IJavaBreakpoint bp = createLineBreakpoint(bpLine, "", typeName + ".java", typeName); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		bp.setSuspendPolicy(IJavaBreakpoint.SUSPEND_THREAD);
 		IFile file = (IFile) bp.getMarker().getResource();
-		assertEquals(typeName + ".java", file.getName());
+		assertEquals(typeName + ".java", file.getName()); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 		IJavaThread thread = null;
 		try {
@@ -920,7 +920,7 @@ public class DebugHoverTests extends AbstractDebugUiTests {
 		}
 	}
 
-	public void testBug574969_onChainHover_preserveEditorSelection() throws Exception {
+	public void testBug574969_onChainHover_preserveEditorSelection() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		sync(() -> TestUtil.waitForJobs(getName(), 1000, 10000, ProcessConsole.class));
 
 		final String typeName = "Bug572629";
@@ -928,10 +928,10 @@ public class DebugHoverTests extends AbstractDebugUiTests {
 		final int frameNumber = 1;
 		final int bpLine = 64;
 
-		IJavaBreakpoint bp = createLineBreakpoint(bpLine, "", typeName + ".java", typeName);
+		IJavaBreakpoint bp = createLineBreakpoint(bpLine, "", typeName + ".java", typeName); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		bp.setSuspendPolicy(IJavaBreakpoint.SUSPEND_THREAD);
 		IFile file = (IFile) bp.getMarker().getResource();
-		assertEquals(typeName + ".java", file.getName());
+		assertEquals(typeName + ".java", file.getName()); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 		IJavaThread thread = null;
 		try {
@@ -962,7 +962,7 @@ public class DebugHoverTests extends AbstractDebugUiTests {
 		}
 	}
 
-	public void testBug573547_insideLambda_onOuterScopeLocalVariableChain() throws Exception {
+	public void testBug573547_insideLambda_onOuterScopeLocalVariableChain() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		sync(() -> TestUtil.waitForJobs(getName(), 1000, 10000, ProcessConsole.class));
 
 		final String typeName = "Bug573547";
@@ -971,10 +971,10 @@ public class DebugHoverTests extends AbstractDebugUiTests {
 		final int bpLine = 41;
 		final int hoverLine = 34;
 
-		IJavaBreakpoint bp = createLineBreakpoint(bpLine, "", typeName + ".java", typeName);
+		IJavaBreakpoint bp = createLineBreakpoint(bpLine, "", typeName + ".java", typeName); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		bp.setSuspendPolicy(IJavaBreakpoint.SUSPEND_THREAD);
 		IFile file = (IFile) bp.getMarker().getResource();
-		assertEquals(typeName + ".java", file.getName());
+		assertEquals(typeName + ".java", file.getName()); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 		IJavaThread thread = null;
 		try {
@@ -1001,7 +1001,7 @@ public class DebugHoverTests extends AbstractDebugUiTests {
 		}
 	}
 
-	public void testBug573547_insideLambda_onOuterScopeMemberVariable() throws Exception {
+	public void testBug573547_insideLambda_onOuterScopeMemberVariable() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		sync(() -> TestUtil.waitForJobs(getName(), 1000, 10000, ProcessConsole.class));
 		final String typeName = "Bug573547";
 		final String expectedMethod = "lambda$0";
@@ -1009,10 +1009,10 @@ public class DebugHoverTests extends AbstractDebugUiTests {
 		final int bpLine = 41;
 		final int hoverLine = 38;
 
-		IJavaBreakpoint bp = createLineBreakpoint(bpLine, "", typeName + ".java", typeName);
+		IJavaBreakpoint bp = createLineBreakpoint(bpLine, "", typeName + ".java", typeName); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		bp.setSuspendPolicy(IJavaBreakpoint.SUSPEND_THREAD);
 		IFile file = (IFile) bp.getMarker().getResource();
-		assertEquals(typeName + ".java", file.getName());
+		assertEquals(typeName + ".java", file.getName()); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 		IJavaThread thread = null;
 		try {
@@ -1038,7 +1038,7 @@ public class DebugHoverTests extends AbstractDebugUiTests {
 		}
 	}
 
-	public void testBug573547_insideLambda_onOuterScopeMemberVariable_withThis() throws Exception {
+	public void testBug573547_insideLambda_onOuterScopeMemberVariable_withThis() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		sync(() -> TestUtil.waitForJobs(getName(), 1000, 10000, ProcessConsole.class));
 		final String typeName = "Bug573547";
 		final String expectedMethod = "lambda$0";
@@ -1046,10 +1046,10 @@ public class DebugHoverTests extends AbstractDebugUiTests {
 		final int bpLine = 41;
 		final int hoverLine = 37;
 
-		IJavaBreakpoint bp = createLineBreakpoint(bpLine, "", typeName + ".java", typeName);
+		IJavaBreakpoint bp = createLineBreakpoint(bpLine, "", typeName + ".java", typeName); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		bp.setSuspendPolicy(IJavaBreakpoint.SUSPEND_THREAD);
 		IFile file = (IFile) bp.getMarker().getResource();
-		assertEquals(typeName + ".java", file.getName());
+		assertEquals(typeName + ".java", file.getName()); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 		IJavaThread thread = null;
 		try {
@@ -1075,7 +1075,7 @@ public class DebugHoverTests extends AbstractDebugUiTests {
 		}
 	}
 
-	public void testBug573547_insideLambda_onOuterScopeStaticVariable() throws Exception {
+	public void testBug573547_insideLambda_onOuterScopeStaticVariable() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		sync(() -> TestUtil.waitForJobs(getName(), 1000, 10000, ProcessConsole.class));
 		final String typeName = "Bug573547";
 		final String expectedMethod = "lambda$0";
@@ -1083,10 +1083,10 @@ public class DebugHoverTests extends AbstractDebugUiTests {
 		final int bpLine = 41;
 		final int hoverLine = 22;
 
-		IJavaBreakpoint bp = createLineBreakpoint(bpLine, "", typeName + ".java", typeName);
+		IJavaBreakpoint bp = createLineBreakpoint(bpLine, "", typeName + ".java", typeName); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		bp.setSuspendPolicy(IJavaBreakpoint.SUSPEND_THREAD);
 		IFile file = (IFile) bp.getMarker().getResource();
-		assertEquals(typeName + ".java", file.getName());
+		assertEquals(typeName + ".java", file.getName()); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 		IJavaThread thread = null;
 		try {
@@ -1112,7 +1112,7 @@ public class DebugHoverTests extends AbstractDebugUiTests {
 		}
 	}
 
-	public void testBug573547_insideLambda_onOuterScopeMemberVariable_onLength() throws Exception {
+	public void testBug573547_insideLambda_onOuterScopeMemberVariable_onLength() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		sync(() -> TestUtil.waitForJobs(getName(), 1000, 10000, ProcessConsole.class));
 		final String typeName = "Bug573547";
 		final String expectedMethod = "lambda$0";
@@ -1120,10 +1120,10 @@ public class DebugHoverTests extends AbstractDebugUiTests {
 		final int bpLine = 41;
 		final int hoverLine = 38;
 
-		IJavaBreakpoint bp = createLineBreakpoint(bpLine, "", typeName + ".java", typeName);
+		IJavaBreakpoint bp = createLineBreakpoint(bpLine, "", typeName + ".java", typeName); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		bp.setSuspendPolicy(IJavaBreakpoint.SUSPEND_THREAD);
 		IFile file = (IFile) bp.getMarker().getResource();
-		assertEquals(typeName + ".java", file.getName());
+		assertEquals(typeName + ".java", file.getName()); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 		IJavaThread thread = null;
 		try {
@@ -1150,7 +1150,7 @@ public class DebugHoverTests extends AbstractDebugUiTests {
 		}
 	}
 
-	public void testBug573547_insideLambda_onOuterScopeMemberVariable_withThis_onLength() throws Exception {
+	public void testBug573547_insideLambda_onOuterScopeMemberVariable_withThis_onLength() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		sync(() -> TestUtil.waitForJobs(getName(), 1000, 10000, ProcessConsole.class));
 		final String typeName = "Bug573547";
 		final String expectedMethod = "lambda$0";
@@ -1158,10 +1158,10 @@ public class DebugHoverTests extends AbstractDebugUiTests {
 		final int bpLine = 41;
 		final int hoverLine = 37;
 
-		IJavaBreakpoint bp = createLineBreakpoint(bpLine, "", typeName + ".java", typeName);
+		IJavaBreakpoint bp = createLineBreakpoint(bpLine, "", typeName + ".java", typeName); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		bp.setSuspendPolicy(IJavaBreakpoint.SUSPEND_THREAD);
 		IFile file = (IFile) bp.getMarker().getResource();
-		assertEquals(typeName + ".java", file.getName());
+		assertEquals(typeName + ".java", file.getName()); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 		IJavaThread thread = null;
 		try {
@@ -1188,7 +1188,7 @@ public class DebugHoverTests extends AbstractDebugUiTests {
 		}
 	}
 
-	public void testBug573547_insideLambda_onOuterScopeLocalVariable_onLength() throws Exception {
+	public void testBug573547_insideLambda_onOuterScopeLocalVariable_onLength() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		sync(() -> TestUtil.waitForJobs(getName(), 1000, 10000, ProcessConsole.class));
 		final String typeName = "Bug573547";
 		final String expectedMethod = "lambda$0";
@@ -1196,10 +1196,10 @@ public class DebugHoverTests extends AbstractDebugUiTests {
 		final int bpLine = 41;
 		final int hoverLine = 36;
 
-		IJavaBreakpoint bp = createLineBreakpoint(bpLine, "", typeName + ".java", typeName);
+		IJavaBreakpoint bp = createLineBreakpoint(bpLine, "", typeName + ".java", typeName); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		bp.setSuspendPolicy(IJavaBreakpoint.SUSPEND_THREAD);
 		IFile file = (IFile) bp.getMarker().getResource();
-		assertEquals(typeName + ".java", file.getName());
+		assertEquals(typeName + ".java", file.getName()); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 		IJavaThread thread = null;
 		try {
@@ -1226,7 +1226,7 @@ public class DebugHoverTests extends AbstractDebugUiTests {
 		}
 	}
 
-	public void testBug573547_insideLambda_onOuterScopeVariable_whileOnPreviousFrame() throws Exception {
+	public void testBug573547_insideLambda_onOuterScopeVariable_whileOnPreviousFrame() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		sync(() -> TestUtil.waitForJobs(getName(), 1000, 10000, ProcessConsole.class));
 		final String typeName = "Bug573547";
 		final String expectedMethod = "lambda$0";
@@ -1234,10 +1234,10 @@ public class DebugHoverTests extends AbstractDebugUiTests {
 		final int bpLine = 41;
 		final int hoverLine = 36;
 
-		IJavaBreakpoint bp = createLineBreakpoint(bpLine, "", typeName + ".java", typeName);
+		IJavaBreakpoint bp = createLineBreakpoint(bpLine, "", typeName + ".java", typeName); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		bp.setSuspendPolicy(IJavaBreakpoint.SUSPEND_THREAD);
 		IFile file = (IFile) bp.getMarker().getResource();
-		assertEquals(typeName + ".java", file.getName());
+		assertEquals(typeName + ".java", file.getName()); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 		IJavaThread thread = null;
 		try {
@@ -1266,7 +1266,7 @@ public class DebugHoverTests extends AbstractDebugUiTests {
 		}
 	}
 
-	public void testBug573547_inNestedMethodInvocation_useCorrectFrameForSelectedVariable() throws Exception {
+	public void testBug573547_inNestedMethodInvocation_useCorrectFrameForSelectedVariable() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		sync(() -> TestUtil.waitForJobs(getName(), 1000, 10000, ProcessConsole.class));
 		final String typeName = "Bug573547";
 		final String expectedMethod = "nestedHover";
@@ -1274,10 +1274,10 @@ public class DebugHoverTests extends AbstractDebugUiTests {
 		final int bpLine = 48;
 		final int hoverLine = 48;
 
-		IJavaBreakpoint bp = createLineBreakpoint(bpLine, "", typeName + ".java", typeName);
+		IJavaBreakpoint bp = createLineBreakpoint(bpLine, "", typeName + ".java", typeName); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		bp.setSuspendPolicy(IJavaBreakpoint.SUSPEND_THREAD);
 		IFile file = (IFile) bp.getMarker().getResource();
-		assertEquals(typeName + ".java", file.getName());
+		assertEquals(typeName + ".java", file.getName()); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 		IJavaThread thread = null;
 		try {
@@ -1303,7 +1303,7 @@ public class DebugHoverTests extends AbstractDebugUiTests {
 		}
 	}
 
-	public void testBug573547_onVariableOutOfExecutionStack_expectNoHoverInfo() throws Exception {
+	public void testBug573547_onVariableOutOfExecutionStack_expectNoHoverInfo() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		sync(() -> TestUtil.waitForJobs(getName(), 1000, 10000, ProcessConsole.class));
 		final String typeName = "Bug573547";
 		final String expectedMethod = "nestedHover";
@@ -1311,10 +1311,10 @@ public class DebugHoverTests extends AbstractDebugUiTests {
 		final int bpLine = 48;
 		final int hoverLine = 60;
 
-		IJavaBreakpoint bp = createLineBreakpoint(bpLine, "", typeName + ".java", typeName);
+		IJavaBreakpoint bp = createLineBreakpoint(bpLine, "", typeName + ".java", typeName); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		bp.setSuspendPolicy(IJavaBreakpoint.SUSPEND_THREAD);
 		IFile file = (IFile) bp.getMarker().getResource();
-		assertEquals(typeName + ".java", file.getName());
+		assertEquals(typeName + ".java", file.getName()); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 		IJavaThread thread = null;
 		try {
@@ -1338,7 +1338,7 @@ public class DebugHoverTests extends AbstractDebugUiTests {
 		}
 	}
 
-	public void testBug573547_inNestedMethodInvocation_inNestedClasses_useCorrectFrameForSelectedVariables() throws Exception {
+	public void testBug573547_inNestedMethodInvocation_inNestedClasses_useCorrectFrameForSelectedVariables() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		sync(() -> TestUtil.waitForJobs(getName(), 1000, 10000, ProcessConsole.class));
 		final String typeName = "Bug573547";
 		final String expectedMethod = "nestedHover";
@@ -1347,10 +1347,10 @@ public class DebugHoverTests extends AbstractDebugUiTests {
 		final int hoverLineVar = 60;
 		final int hoverLineField = 56;
 
-		IJavaBreakpoint bp = createLineBreakpoint(bpLine, "", typeName + ".java", typeName);
+		IJavaBreakpoint bp = createLineBreakpoint(bpLine, "", typeName + ".java", typeName); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		bp.setSuspendPolicy(IJavaBreakpoint.SUSPEND_THREAD);
 		IFile file = (IFile) bp.getMarker().getResource();
-		assertEquals(typeName + ".java", file.getName());
+		assertEquals(typeName + ".java", file.getName()); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 		IJavaThread thread = null;
 		try {
@@ -1390,7 +1390,7 @@ public class DebugHoverTests extends AbstractDebugUiTests {
 		}
 	}
 
-	private CompilationUnitEditor openEditorAndValidateStack(final String expectedMethod, final int expectedFramesNumber, IFile file, IJavaThread thread) throws Exception, DebugException {
+	private CompilationUnitEditor openEditorAndValidateStack(final String expectedMethod, final int expectedFramesNumber, IFile file, IJavaThread thread) throws Exception, DebugException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		// Let now all pending jobs proceed, ignore console jobs
 		sync(() -> TestUtil.waitForJobs(getName(), 1000, 10000, ProcessConsole.class));
 		CompilationUnitEditor part = (CompilationUnitEditor) sync(() -> openEditor(file));
@@ -1424,7 +1424,7 @@ public class DebugHoverTests extends AbstractDebugUiTests {
 		assertEquals(JDIObjectValue.class, value.getClass());
 		JDIObjectValue valueObj = (JDIObjectValue) var.getValue();
 		StringReferenceImpl object = (StringReferenceImpl) valueObj.getUnderlyingObject();
-		assertEquals("v" + valueIndex, object.value());
+		assertEquals("v" + valueIndex, object.value()); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 	}
 
 	private void validateLine(final int line, CompilationUnitEditor part, JavaDebugHover hover, Entry<String, Region> varData, String varValue) throws Exception, DebugException {
@@ -1457,7 +1457,7 @@ public class DebugHoverTests extends AbstractDebugUiTests {
 		return sync(() -> selection.getText());
 	}
 
-	private void selectFrame(CompilationUnitEditor editor, IStackFrame frame) throws Exception {
+	private void selectFrame(CompilationUnitEditor editor, IStackFrame frame) throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		LaunchView debugView = sync(() -> (LaunchView) getActivePage().findView(IDebugUIConstants.ID_DEBUG_VIEW));
 		assertNotNull("expected Debug View to be open", debugView);
 
@@ -1476,13 +1476,13 @@ public class DebugHoverTests extends AbstractDebugUiTests {
 			int lineNumber;
 			long timeoutNanos = System.nanoTime() + timeoutms * 1_000_000L;
 			debugView.getViewer().setSelection(newSelection, true);
-			do {
+			do { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				TestUtil.runEventLoop();
 				lineNumber = ((ITextSelection) editor.getSelectionProvider().getSelection()).getStartLine();
 			} while (lineNumber != targetLineNumber && System.nanoTime() < timeoutNanos);
 			return lineNumber;
 		});
-		assertEquals("After waiting " + timeoutms
+		assertEquals("After waiting " + timeoutms //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 				+ "ms the editor selection was not moved to the expected line", targetLineNumber, selectedLineNumer);
 	}
 
@@ -1491,7 +1491,7 @@ public class DebugHoverTests extends AbstractDebugUiTests {
 		return true;
 	}
 
-	public void testResolveIn2Lambdas() throws Exception {
+	public void testResolveIn2Lambdas() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		sync(() -> TestUtil.waitForJobs(getName(), 1000, 10000, ProcessConsole.class));
 
 		final String typeName = "DebugHoverTest2Lambdas";
@@ -1499,10 +1499,10 @@ public class DebugHoverTests extends AbstractDebugUiTests {
 		final int framesNumber1 = 13;
 		final int bpLine1 = 31;
 
-		IJavaBreakpoint bp1 = createLineBreakpoint(bpLine1, "", typeName + ".java", typeName);
+		IJavaBreakpoint bp1 = createLineBreakpoint(bpLine1, "", typeName + ".java", typeName); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		bp1.setSuspendPolicy(IJavaBreakpoint.SUSPEND_THREAD);
 		IFile file = (IFile) bp1.getMarker().getResource();
-		assertEquals(typeName + ".java", file.getName());
+		assertEquals(typeName + ".java", file.getName()); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 		IJavaThread thread = null;
 		try {
@@ -1512,7 +1512,7 @@ public class DebugHoverTests extends AbstractDebugUiTests {
 			JavaDebugHover hover = new JavaDebugHover();
 			hover.setEditor(part);
 
-			String debugVarName = VAL_PREFIX + "pattern";
+			String debugVarName = VAL_PREFIX + "pattern"; //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 			String variableName = "pattern";
 			IRegion region = new Region(1054, "pattern".length());
 			String text = selectAndReveal(part, bpLine1, region);
@@ -1528,16 +1528,16 @@ public class DebugHoverTests extends AbstractDebugUiTests {
 		}
 	}
 
-	public void testHoverOnInnerClassConstructorVariables() throws Exception {
+	public void testHoverOnInnerClassConstructorVariables() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		sync(() -> TestUtil.waitForJobs(getName(), 1000, 10000, ProcessConsole.class));
 		final String typeName = "InnerClassBug";
 		final String expectedMethod = "<init>";
 		final int frameNumber = 3;
 		final int bpLine = 25;
-		IJavaBreakpoint bp = createLineBreakpoint(bpLine, "", typeName + ".java", typeName);
+		IJavaBreakpoint bp = createLineBreakpoint(bpLine, "", typeName + ".java", typeName); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		bp.setSuspendPolicy(IJavaBreakpoint.SUSPEND_THREAD);
 		IFile file = (IFile) bp.getMarker().getResource();
-		assertEquals(typeName + ".java", file.getName());
+		assertEquals(typeName + ".java", file.getName()); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		IJavaThread thread = null;
 		try {
 			thread = launchToBreakpoint(typeName);
@@ -1560,7 +1560,7 @@ public class DebugHoverTests extends AbstractDebugUiTests {
 		}
 	}
 
-	public void testResolveSameFieldsInSuperAndSub() throws Exception {
+	public void testResolveSameFieldsInSuperAndSub() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		sync(() -> TestUtil.waitForJobs(getName(), 1000, 10000, ProcessConsole.class));
 
 		final String typeName = "SubClass";
@@ -1568,10 +1568,10 @@ public class DebugHoverTests extends AbstractDebugUiTests {
 		final int framesNumber = 2;
 		final int bpLine1 = 18;
 
-		IJavaBreakpoint bp1 = createLineBreakpoint(bpLine1, "", typeName + ".java", typeName);
+		IJavaBreakpoint bp1 = createLineBreakpoint(bpLine1, "", typeName + ".java", typeName); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		bp1.setSuspendPolicy(IJavaBreakpoint.SUSPEND_THREAD);
 		IFile file = (IFile) bp1.getMarker().getResource();
-		assertEquals(typeName + ".java", file.getName());
+		assertEquals(typeName + ".java", file.getName()); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 		IJavaThread thread = null;
 		try {
@@ -1595,7 +1595,7 @@ public class DebugHoverTests extends AbstractDebugUiTests {
 		}
 	}
 
-	public void testResolveFieldOnInheritedMethodFrame() throws Exception {
+	public void testResolveFieldOnInheritedMethodFrame() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		sync(() -> TestUtil.waitForJobs(getName(), 1000, 10000, ProcessConsole.class));
 
 		final String typeName = "Element";
@@ -1603,10 +1603,10 @@ public class DebugHoverTests extends AbstractDebugUiTests {
 		final int framesNumber = 2;
 		final int bpLine1 = 26;
 
-		IJavaBreakpoint bp1 = createLineBreakpoint(bpLine1, "", typeName + ".java", typeName);
+		IJavaBreakpoint bp1 = createLineBreakpoint(bpLine1, "", typeName + ".java", typeName); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		bp1.setSuspendPolicy(IJavaBreakpoint.SUSPEND_THREAD);
 		IFile file = (IFile) bp1.getMarker().getResource();
-		assertEquals(typeName + ".java", file.getName());
+		assertEquals(typeName + ".java", file.getName()); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		IJavaThread thread = null;
 		try {
 			thread = launchToBreakpoint(typeName);

@@ -21,7 +21,7 @@ import org.eclipse.jdt.debug.core.IJavaBreakpoint;
 import org.eclipse.jdt.debug.core.IJavaMethodBreakpoint;
 import org.eclipse.jface.viewers.IStructuredSelection;
 
-public class EntryToggleAction extends BreakpointToggleAction {
+public class EntryToggleAction extends BreakpointToggleAction { //FLLDCIM: MARK — T20  IMPLEMENTS
 
 	/**
 	 * @see BreakpointToggleAction#getToggleState(IJavaBreakpoint)
@@ -45,7 +45,7 @@ public class EntryToggleAction extends BreakpointToggleAction {
 	@Override
 	public boolean isEnabledFor(IStructuredSelection selection) {
 		Iterator<?> iter= selection.iterator();
-		while (iter.hasNext()) {
+		while (iter.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			Object element = iter.next();
 			if (!(element instanceof IJavaMethodBreakpoint javaMethodBp && !javaMethodBp.isLambdaBreakpoint())) {
 				return false;

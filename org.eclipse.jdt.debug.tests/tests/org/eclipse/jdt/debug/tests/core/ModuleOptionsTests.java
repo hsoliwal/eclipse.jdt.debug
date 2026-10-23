@@ -149,7 +149,7 @@ public class ModuleOptionsTests extends AbstractDebugTest {
 	}
 
 	private int indexOfJREContainer(IClasspathEntry[] rawClasspath) {
-		for (int i = 0; i < rawClasspath.length; i++) {
+		for (int i = 0; i < rawClasspath.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			IClasspathEntry classpathEntry = rawClasspath[i];
 			if (classpathEntry.getEntryKind() == IClasspathEntry.CPE_CONTAINER
 					&& JavaRuntime.JRE_CONTAINER.equals(classpathEntry.getPath().segment(0))) {
@@ -159,7 +159,7 @@ public class ModuleOptionsTests extends AbstractDebugTest {
 		return -1;
 	}
 
-	public void testAddModules1() throws Exception {
+	public void testAddModules1() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IJavaProject javaProject = getProjectContext();
 		checkVMInstall(javaProject);
 		List<String> defaultModules = getDefaultModules(javaProject);
@@ -183,7 +183,7 @@ public class ModuleOptionsTests extends AbstractDebugTest {
 		}
 	}
 
-	public void testLimitModules_release9() throws Exception {
+	public void testLimitModules_release9() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IJavaProject javaProject = getProjectContext();
 		checkVMInstall(javaProject);
 		try {
@@ -223,7 +223,7 @@ public class ModuleOptionsTests extends AbstractDebugTest {
 							+ "jdk.unsupported.desktop,jdk.xml.dom";
 					break;
 				default:
-					fail("Unknown set of default modules " + moduleList);
+					fail("Unknown set of default modules " + moduleList); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 					return;
 			}
 			assertTrue("expected module was not in defaultModules", defaultModules.remove("jdk.javadoc")); // requires java.compiler and jdk.compiler
@@ -235,14 +235,14 @@ public class ModuleOptionsTests extends AbstractDebugTest {
 			ILaunchConfiguration launchConfiguration = getLaunchConfiguration(javaProject, "LogicalStructures");
 			String cliOptions = JavaRuntime.getModuleCLIOptions(launchConfiguration);
 			String add = " --add-modules java.se";
-			assertEquals("Unexpectd cli options", "--limit-modules " + expectedModules + add, cliOptions);
+			assertEquals("Unexpectd cli options", "--limit-modules " + expectedModules + add, cliOptions); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		} finally {
 			javaProject.setOption(JavaCore.COMPILER_RELEASE, JavaCore.DISABLED);
 			removeClasspathAttributesFromSystemLibrary(javaProject);
 		}
 	}
 
-	public void testLimitModules1() throws Exception {
+	public void testLimitModules1() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IJavaProject javaProject = getProjectContext();
 		javaProject.setOption(JavaCore.COMPILER_RELEASE, JavaCore.DISABLED);
 		checkVMInstall(javaProject);
@@ -274,7 +274,7 @@ public class ModuleOptionsTests extends AbstractDebugTest {
 						+ "jdk.xml.dom";
 				break;
 			default:
-				fail("Unknown set of default modules " + moduleList);
+				fail("Unknown set of default modules " + moduleList); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 				return;
 		}
 		assertTrue("expected module was not in defaultModules", defaultModules.remove("jdk.javadoc")); // requires java.compiler and jdk.compiler but
@@ -286,7 +286,7 @@ public class ModuleOptionsTests extends AbstractDebugTest {
 
 			ILaunchConfiguration launchConfiguration = getLaunchConfiguration(javaProject, "LogicalStructures");
 			String cliOptions = JavaRuntime.getModuleCLIOptions(launchConfiguration);
-			assertEquals("Unexpectd cli options", "--limit-modules " + expectedModules, cliOptions);
+			assertEquals("Unexpectd cli options", "--limit-modules " + expectedModules, cliOptions); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		} finally {
 			removeClasspathAttributesFromSystemLibrary(javaProject);
 		}
@@ -295,6 +295,6 @@ public class ModuleOptionsTests extends AbstractDebugTest {
 	private void checkVMInstall(IJavaProject javaProject) throws CoreException {
 		IVMInstall defaultVm = JavaRuntime.getDefaultVMInstall();
 		IVMInstall vm = JavaRuntime.getVMInstall(javaProject);
-		assertEquals("Expected default VM but got: " + vm.getInstallLocation(), defaultVm.getName(), vm.getName());
+		assertEquals("Expected default VM but got: " + vm.getInstallLocation(), defaultVm.getName(), vm.getName()); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 	}
 }

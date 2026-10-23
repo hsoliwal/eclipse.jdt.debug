@@ -47,12 +47,12 @@ public interface IJavaDebugUIConstants {
 	/**
 	 * Display view identifier (value <code>"org.eclipse.jdt.debug.ui.DisplayView"</code>).
 	 */
-	public static final String ID_DISPLAY_VIEW= PLUGIN_ID + ".DisplayView"; //$NON-NLS-1$
+	public static final String ID_DISPLAY_VIEW= PLUGIN_ID + ".DisplayView"; //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 	/**
 	 * Java snippet editor identifier (value <code>"org.eclipse.jdt.debug.ui.SnippetEditor"</code>)
 	 */
-	public static final String ID_JAVA_SNIPPET_EDITOR= PLUGIN_ID + ".SnippetEditor"; //$NON-NLS-1$
+	public static final String ID_JAVA_SNIPPET_EDITOR= PLUGIN_ID + ".SnippetEditor"; //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 	/**
 	 * Java snippet editor context menu identifier (value <code>"#JavaSnippetEditorContext"</code>).
@@ -80,41 +80,41 @@ public interface IJavaDebugUIConstants {
 	 *
 	 * @since 3.2
 	 */
-	public static final String PREF_SHOW_MONITOR_THREAD_INFO = PLUGIN_ID + ".show_monitor_thread_info"; //$NON-NLS-1$
+	public static final String PREF_SHOW_MONITOR_THREAD_INFO = PLUGIN_ID + ".show_monitor_thread_info"; //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 	/**
 	 * Boolean preference indicating whether system threads should appear visible in the debug view.
 	 *
 	 * @since 3.2
 	 */
-	public static final String PREF_SHOW_SYSTEM_THREADS = PLUGIN_ID + ".show_system_threads"; //$NON-NLS-1$
+	public static final String PREF_SHOW_SYSTEM_THREADS = PLUGIN_ID + ".show_system_threads"; //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 	/**
 	 * Boolean preference indicating whether running threads should appear visible in the debug view.
 	 *
 	 * @since 3.10
 	 */
-	public static final String PREF_SHOW_RUNNING_THREADS = PLUGIN_ID + ".show_running_threads"; //$NON-NLS-1$
+	public static final String PREF_SHOW_RUNNING_THREADS = PLUGIN_ID + ".show_running_threads"; //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 	/**
 	 * Boolean preference indicating whether thread groups should be displayed in the debug view.
 	 *
 	 * @since 3.2
 	 */
-	public static final String PREF_SHOW_THREAD_GROUPS = PLUGIN_ID + ".show_thread_group_info"; //$NON-NLS-1$
+	public static final String PREF_SHOW_THREAD_GROUPS = PLUGIN_ID + ".show_thread_group_info"; //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 	/**
 	 * Integer preference for the maximum number of instances to show with the All Instances action
 	 *
 	 *   @since 3.3
 	 */
-	public static final String PREF_ALLINSTANCES_MAX_COUNT = PLUGIN_ID + ".all_instances_max_count"; //$NON-NLS-1$
+	public static final String PREF_ALLINSTANCES_MAX_COUNT = PLUGIN_ID + ".all_instances_max_count"; //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 	/**
 	 * Integer preference for the maximum number of references to show with the All References action
 	 *
 	 * @since 3.3
 	 */
-	public static final String PREF_ALLREFERENCES_MAX_COUNT = PLUGIN_ID + ".all_references_max_count"; //$NON-NLS-1$
+	public static final String PREF_ALLREFERENCES_MAX_COUNT = PLUGIN_ID + ".all_references_max_count"; //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 }

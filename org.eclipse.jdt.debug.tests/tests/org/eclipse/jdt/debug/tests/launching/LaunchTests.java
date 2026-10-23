@@ -47,7 +47,7 @@ public class LaunchTests extends AbstractDebugTest implements ILaunchListener {
 		super(name);
 	}
 
-	public void testUri() throws DebugException {
+	public void testUri() throws DebugException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		// https://github.com/eclipse-jdt/eclipse.jdt.debug/issues/330
 		if (OS.isWindows()) {
 			IJavaReferenceType ref1 = new JDIReferenceType(null, null) {
@@ -92,11 +92,11 @@ public class LaunchTests extends AbstractDebugTest implements ILaunchListener {
 	/**
 	 * test launch notification
 	 */
-	public void testLaunchNotification() throws CoreException {
+	public void testLaunchNotification() throws CoreException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String typeName = "Breakpoints";		 //$NON-NLS-1$
 		ILaunchConfiguration configuration = getLaunchConfiguration(typeName);
 		getLaunchManager().addLaunchListener(this);
-		HashSet<String> set = new HashSet<>();
+		HashSet<String> set = new HashSet<>(); //FLLDCIM: MARK — M03 M3_SET_LANES NEW
 		set.add(ILaunchManager.DEBUG_MODE);
 		ensurePreferredDelegate(configuration, set);
 		ILaunch launch = configuration.launch(ILaunchManager.DEBUG_MODE, null);
@@ -111,7 +111,7 @@ public class LaunchTests extends AbstractDebugTest implements ILaunchListener {
 		assertTrue("Launch should have been added", added); //$NON-NLS-1$
 
 		synchronized (this) {
-			for (int i= 0; i < 300; i++) {
+			for (int i= 0; i < 300; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				if (launch.isTerminated()) {
 					terminated= true;
 					break;

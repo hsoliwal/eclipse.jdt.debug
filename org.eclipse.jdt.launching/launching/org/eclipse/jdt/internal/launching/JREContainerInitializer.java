@@ -49,12 +49,12 @@ public class JREContainerInitializer extends ClasspathContainerInitializer {
 	/**
 	 * @see ClasspathContainerInitializer#initialize(IPath, IJavaProject)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public void initialize(IPath containerPath, IJavaProject project) throws CoreException {
 		if (LaunchingPlugin.DEBUG_JRE_CONTAINER) {
 			LaunchingPlugin.trace("<JRE_CONTAINER> initialize()"); //$NON-NLS-1$
-			LaunchingPlugin.trace("\tPath: " + containerPath.toString()); //$NON-NLS-1$
-			LaunchingPlugin.trace("\tProj: " + project.getProject().getName()); //$NON-NLS-1$
+			LaunchingPlugin.trace("\tPath: " + containerPath.toString()); //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
+			LaunchingPlugin.trace("\tProj: " + project.getProject().getName()); //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		}
 		int size = containerPath.segmentCount();
 		if (size > 0) {
@@ -63,7 +63,7 @@ public class JREContainerInitializer extends ClasspathContainerInitializer {
 				JREContainer container = null;
 				if (vm != null) {
 					if (LaunchingPlugin.DEBUG_JRE_CONTAINER) {
-						LaunchingPlugin.trace("\tResolved VM: " + vm.getName()); //$NON-NLS-1$
+						LaunchingPlugin.trace("\tResolved VM: " + vm.getName()); //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 					}
 					container = new JREContainer(vm, containerPath, project);
 				} else {
@@ -91,7 +91,7 @@ public class JREContainerInitializer extends ClasspathContainerInitializer {
 	 * @param projects projects set the container on
 	 * @throws CoreException on failure
 	 */
-	public void initialize(IPath containerPath, IJavaProject[] projects) throws CoreException {
+	public void initialize(IPath containerPath, IJavaProject[] projects) throws CoreException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		int size = containerPath.segmentCount();
 		if (size > 0) {
 			if (containerPath.segment(0).equals(JavaRuntime.JRE_CONTAINER)) {
@@ -100,9 +100,9 @@ public class JREContainerInitializer extends ClasspathContainerInitializer {
 				IClasspathContainer[] containers = new JREContainer[length];
 				if (vm != null) {
 					if (LaunchingPlugin.DEBUG_JRE_CONTAINER) {
-						LaunchingPlugin.trace("\tResolved VM: " + vm.getName()); //$NON-NLS-1$
+						LaunchingPlugin.trace("\tResolved VM: " + vm.getName()); //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 					}
-					for (int i=0; i<length; i++) {
+					for (int i=0; i<length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 						containers[i] = new JREContainer(vm, containerPath, projects[i]);
 					}
 				} else {
@@ -129,7 +129,7 @@ public class JREContainerInitializer extends ClasspathContainerInitializer {
 	 * @param containerPath the path to the container
 	 * @return the {@link IVMInstall} or <code>null</code>
 	 */
-	public static IVMInstall resolveVM(IPath containerPath) {
+	public static IVMInstall resolveVM(IPath containerPath) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IVMInstall vm = null;
 		if (containerPath.segmentCount() > 1) {
 			// specific JRE
@@ -137,7 +137,7 @@ public class JREContainerInitializer extends ClasspathContainerInitializer {
 			if (id != null) {
 				if (LaunchingPlugin.DEBUG_JRE_CONTAINER) {
 					LaunchingPlugin.trace("<JRE_CONTAINER> resolveVM(IPath)"); //$NON-NLS-1$
-					LaunchingPlugin.trace("\tEE: " + id); //$NON-NLS-1$
+					LaunchingPlugin.trace("\tEE: " + id); //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 				}
 				IExecutionEnvironmentsManager manager = JavaRuntime.getExecutionEnvironmentsManager();
 				IExecutionEnvironment environment = manager.getEnvironment(id);
@@ -171,7 +171,7 @@ public class JREContainerInitializer extends ClasspathContainerInitializer {
 	 * @return VM install or <code>null</code>
 	 * @since 3.2
 	 */
-	public static IVMInstall resolveVM(IExecutionEnvironment environment) {
+	public static IVMInstall resolveVM(IExecutionEnvironment environment) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		if (LaunchingPlugin.DEBUG_JRE_CONTAINER) {
 			LaunchingPlugin.trace("<JRE_CONTAINER> resolveVM(IExecutionEnvironment)"); //$NON-NLS-1$
 		}
@@ -180,20 +180,20 @@ public class JREContainerInitializer extends ClasspathContainerInitializer {
 			vm = environment.getCompatibleVM();
 			if (vm == null) {
 				if (LaunchingPlugin.DEBUG_JRE_CONTAINER) {
-					LaunchingPlugin.trace("\t*** NO COMPATIBLE VMS *** for " + environment.getId()); //$NON-NLS-1$
+					LaunchingPlugin.trace("\t*** NO COMPATIBLE VMS *** for " + environment.getId()); //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 				}
 				return null;
 			}
 			if (LaunchingPlugin.DEBUG_JRE_CONTAINER) {
 				if (environment.isStrictlyCompatible(vm)) {
-					LaunchingPlugin.trace("\tPerfect Match: " + vm.getName()); //$NON-NLS-1$
+					LaunchingPlugin.trace("\tPerfect Match: " + vm.getName()); //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 				} else {
-					LaunchingPlugin.trace("\tUse compatible VM: " + vm.getName()); //$NON-NLS-1$
+					LaunchingPlugin.trace("\tUse compatible VM: " + vm.getName()); //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 				}
 			}
 		} else {
 			if (LaunchingPlugin.DEBUG_JRE_CONTAINER) {
-				LaunchingPlugin.trace("\tUser Default VM: " + vm.getName()); //$NON-NLS-1$
+				LaunchingPlugin.trace("\tUser Default VM: " + vm.getName()); //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 			}
 		}
 		return vm;
@@ -317,7 +317,7 @@ public class JREContainerInitializer extends ClasspathContainerInitializer {
 	/**
 	 * @see org.eclipse.jdt.core.ClasspathContainerInitializer#requestClasspathContainerUpdate(org.eclipse.core.runtime.IPath, org.eclipse.jdt.core.IJavaProject, org.eclipse.jdt.core.IClasspathContainer)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public void requestClasspathContainerUpdate(IPath containerPath, IJavaProject project, IClasspathContainer containerSuggestion) throws CoreException {
 		IVMInstall vm = resolveVM(containerPath);
 		if (vm == null) {
@@ -328,7 +328,7 @@ public class JREContainerInitializer extends ClasspathContainerInitializer {
 
 		IClasspathEntry[] entries = containerSuggestion.getClasspathEntries();
 		LibraryLocation[] libs = new LibraryLocation[entries.length];
-		for (int i = 0; i < entries.length; i++) {
+		for (int i = 0; i < entries.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			IClasspathEntry entry = entries[i];
 			if (entry.getEntryKind() == IClasspathEntry.CPE_LIBRARY) {
 				IPath path = entry.getPath();
@@ -345,7 +345,7 @@ public class JREContainerInitializer extends ClasspathContainerInitializer {
 					URL javadocLocation = null;
 					IPath externalAnnotations = null;
 					IClasspathAttribute[] extraAttributes = entry.getExtraAttributes();
-					for (int j = 0; j < extraAttributes.length; j++) {
+					for (int j = 0; j < extraAttributes.length; j++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 						IClasspathAttribute attribute = extraAttributes[j];
 						if (attribute.getName().equals(IClasspathAttribute.JAVADOC_LOCATION_ATTRIBUTE_NAME)) {
 							String url = attribute.getValue();

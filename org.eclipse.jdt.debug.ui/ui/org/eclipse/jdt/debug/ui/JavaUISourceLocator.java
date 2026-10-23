@@ -78,7 +78,7 @@ public class JavaUISourceLocator implements IPersistableSourceLocator {
 	 * (value <code>"org.eclipse.jdt.debug.ui.javaSourceLocator"</code>).
 	 */
 	@Deprecated
-	public static final String ID_PROMPTING_JAVA_SOURCE_LOCATOR = IJavaDebugUIConstants.PLUGIN_ID + ".javaSourceLocator"; //$NON-NLS-1$
+	public static final String ID_PROMPTING_JAVA_SOURCE_LOCATOR = IJavaDebugUIConstants.PLUGIN_ID + ".javaSourceLocator"; //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 	/**
 	 * Launch configuration attribute indicating that this source locator should
@@ -88,7 +88,7 @@ public class JavaUISourceLocator implements IPersistableSourceLocator {
 	 * @since 2.1
 	 */
 	@Deprecated
-	public static final String ATTR_FIND_ALL_SOURCE_ELEMENTS = IJavaDebugUIConstants.PLUGIN_ID + ".ATTR_FIND_ALL_SOURCE_ELEMENTS"; //$NON-NLS-1$
+	public static final String ATTR_FIND_ALL_SOURCE_ELEMENTS = IJavaDebugUIConstants.PLUGIN_ID + ".ATTR_FIND_ALL_SOURCE_ELEMENTS"; //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 	/**
 	 * The project being debugged.
@@ -189,7 +189,7 @@ public class JavaUISourceLocator implements IPersistableSourceLocator {
 		return res;
 	}
 
-	private Object findSourceElement(IStackFrame stackFrame) {
+	private Object findSourceElement(IStackFrame stackFrame) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		if (isFindAllSourceElements()) {
 			Object[] sourceElements = fSourceLocator.getSourceElements(stackFrame);
 			if (sourceElements == null || sourceElements.length == 0) {
@@ -238,7 +238,7 @@ public class JavaUISourceLocator implements IPersistableSourceLocator {
 
 	private void cacheSourceElement(Object sourceElement, IJavaReferenceType type) {
 		if (fTypesToSource == null) {
-			fTypesToSource = new HashMap<>();
+			fTypesToSource = new HashMap<>(); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
 		}
 		fTypesToSource.put(type, sourceElement);
 	}
@@ -251,9 +251,9 @@ public class JavaUISourceLocator implements IPersistableSourceLocator {
 	 * @param frame the stack frame to show source for
 	 *  could not be located
 	 */
-	private void showDebugSourcePage(final IJavaStackFrame frame) {
+	private void showDebugSourcePage(final IJavaStackFrame frame) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		Runnable prompter = new Runnable() {
-			@Override
+			@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 			public void run() {
 				try {
 					String message = NLS.bind(LauncherMessages.JavaUISourceLocator_selectprojects_message, frame.getDeclaringTypeName());
@@ -280,7 +280,7 @@ public class JavaUISourceLocator implements IPersistableSourceLocator {
 				}
 			}
 		};
-		JDIDebugUIPlugin.getStandardDisplay().syncExec(prompter);
+		JDIDebugUIPlugin.getStandardDisplay().syncExec(prompter); //FLLDCIM: MARK — T08 UI_THREAD_SYNCHRONIZER CALL
 	}
 
 	/**
@@ -293,14 +293,14 @@ public class JavaUISourceLocator implements IPersistableSourceLocator {
 		String handle = fJavaProject.getHandleIdentifier();
 		String findAll = Boolean.toString(isFindAllSourceElements());
 
-		StringBuilder buffer = new StringBuilder();
-		buffer.append("<project>"); //$NON-NLS-1$
-		buffer.append(handle);
-		buffer.append("</project>"); //$NON-NLS-1$
-		buffer.append("<findAll>"); //$NON-NLS-1$
-		buffer.append(findAll);
-		buffer.append("</findAll>"); //$NON-NLS-1$
-		buffer.append(memento);
+		StringBuilder buffer = new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
+		buffer.append("<project>"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+		buffer.append(handle); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+		buffer.append("</project>"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+		buffer.append("<findAll>"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+		buffer.append(findAll); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+		buffer.append("</findAll>"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+		buffer.append(memento); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		return buffer.toString();
 	}
 
@@ -320,7 +320,7 @@ public class JavaUISourceLocator implements IPersistableSourceLocator {
 	/**
 	 * @see IPersistableSourceLocator#initializeFromMemento(String)
 	 */
-	@Deprecated
+	@Deprecated //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	@Override
 	public void initializeFromMemento(String memento) throws CoreException {
 		if (memento.startsWith("<project>")) { //$NON-NLS-1$

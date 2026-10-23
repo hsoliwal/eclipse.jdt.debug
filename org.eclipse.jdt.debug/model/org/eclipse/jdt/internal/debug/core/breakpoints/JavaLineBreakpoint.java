@@ -63,7 +63,7 @@ import com.sun.jdi.request.BreakpointRequest;
 import com.sun.jdi.request.EventRequest;
 import com.sun.jdi.request.EventRequestManager;
 
-public class JavaLineBreakpoint extends JavaBreakpoint implements
+public class JavaLineBreakpoint extends JavaBreakpoint implements //FLLDCIM: MARK — T27  IMPLEMENTS
 		IJavaLineBreakpoint {
 
 	/**
@@ -98,25 +98,25 @@ public class JavaLineBreakpoint extends JavaBreakpoint implements
 	/**
 	 * Maps suspended threads to the suspend event that suspended them
 	 */
-	private final Map<IJavaThread, ICompiledExpression> fSuspendEvents = new HashMap<>();
+	private final Map<IJavaThread, ICompiledExpression> fSuspendEvents = new HashMap<>(); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
 	/**
 	 * The map of cached compiled expressions (ICompiledExpression) for this
 	 * breakpoint, keyed by thread. This value must be cleared every time the
 	 * breakpoint is added to a target.
 	 */
-	private final Map<IJavaThread, ICompiledExpression> fCompiledExpressions = new HashMap<>();
+	private final Map<IJavaThread, ICompiledExpression> fCompiledExpressions = new HashMap<>(); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
 
 	/**
 	 * Cache of projects for stack frames to avoid repetitive project resolution
 	 * on conditional breakpoints.
 	 */
-	private final Map<IJavaStackFrame, IJavaProject> fProjectsByFrame = new HashMap<>();
+	private final Map<IJavaStackFrame, IJavaProject> fProjectsByFrame = new HashMap<>(); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
 
 	/**
 	 * The map of the result value of the condition (IValue) for this
 	 * breakpoint, keyed by debug target.
 	 */
-	private final Map<IDebugTarget, IValue> fConditionValues = new HashMap<>();
+	private final Map<IDebugTarget, IValue> fConditionValues = new HashMap<>(); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
 
 	/**
 	 * Status code indicating that a request to create a breakpoint in a type
@@ -143,7 +143,7 @@ public class JavaLineBreakpoint extends JavaBreakpoint implements
 			final int charEnd, final int hitCount, final boolean add,
 			final Map<String, Object> attributes, final String markerType)
 			throws DebugException {
-		IWorkspaceRunnable wr = unused -> {
+		IWorkspaceRunnable wr = unused -> { //FLLDCIM: MARK — T09  LAMBDA
 
 			// add attributes
 			addLineBreakpointAttributes(attributes, getModelIdentifier(),
@@ -198,17 +198,17 @@ public class JavaLineBreakpoint extends JavaBreakpoint implements
 
 	private void removeCachedThreads(Map<IJavaThread, ICompiledExpression> map, JDIDebugTarget target) {
 		Set<IJavaThread> threads = map.keySet();
-		List<IJavaThread> threadsToRemove = new ArrayList<>();
+		List<IJavaThread> threadsToRemove = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 		Iterator<IJavaThread> iter = threads.iterator();
 		JDIThread thread;
-		while (iter.hasNext()) {
+		while (iter.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			thread = (JDIThread) iter.next();
 			if (thread.getDebugTarget() == target) {
 				threadsToRemove.add(thread);
 			}
 		}
 		iter = threadsToRemove.iterator();
-		while (iter.hasNext()) {
+		while (iter.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			map.remove(iter.next());
 		}
 	}
@@ -217,23 +217,23 @@ public class JavaLineBreakpoint extends JavaBreakpoint implements
 	 * Removes all compiled expressions which are currently being cached for
 	 * threads in the given target.
 	 */
-	protected void clearCachedExpressionFor(JDIDebugTarget target) {
+	protected void clearCachedExpressionFor(JDIDebugTarget target) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		removeCachedThreads(fCompiledExpressions, target);
 
 		// clean up cached projects for stack frames
 		synchronized (fProjectsByFrame) {
 			Set<IJavaStackFrame> frames = fProjectsByFrame.keySet();
-			List<IJavaStackFrame> framesToRemove = new ArrayList<>();
+			List<IJavaStackFrame> framesToRemove = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 			Iterator<IJavaStackFrame> iter = frames.iterator();
 			JDIStackFrame frame;
-			while (iter.hasNext()) {
+			while (iter.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				frame = (JDIStackFrame) iter.next();
 				if (frame.getDebugTarget() == target) {
 					framesToRemove.add(frame);
 				}
 			}
 			iter = framesToRemove.iterator();
-			while (iter.hasNext()) {
+			while (iter.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				fProjectsByFrame.remove(iter.next());
 			}
 		}
@@ -285,7 +285,7 @@ public class JavaLineBreakpoint extends JavaBreakpoint implements
 	 * (org.eclipse.jdt.internal.debug.core.model.JDIDebugTarget,
 	 * com.sun.jdi.ReferenceType)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	protected EventRequest[] newRequests(JDIDebugTarget target,
 			ReferenceType type) throws CoreException {
 		int lineNumber = getLineNumber();
@@ -301,7 +301,7 @@ public class JavaLineBreakpoint extends JavaBreakpoint implements
 		}
 		EventRequest[] requests = new EventRequest[locations.size()];
 		int i = 0;
-		for(Location location : locations) {
+		for(Location location : locations) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			requests[i] = createLineBreakpointRequest(location, target);
 			i++;
 		}
@@ -313,7 +313,7 @@ public class JavaLineBreakpoint extends JavaBreakpoint implements
 	 *
 	 * @return non null list with filtered locations
 	 */
-	protected List<Location> filterLocations(List<Location> locations) {
+	protected List<Location> filterLocations(List<Location> locations) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		if (locations.size() <= 1) {
 			return locations;
 		}
@@ -325,8 +325,8 @@ public class JavaLineBreakpoint extends JavaBreakpoint implements
 		if (!hasCondition()) {
 			return locations;
 		}
-		List<Location> result = new ArrayList<>();
-		for (Location location : locations) {
+		List<Location> result = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
+		for (Location location : locations) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			Method method = location.method();
 			if (!method.isSynthetic()) {
 				result.add(location);
@@ -342,7 +342,7 @@ public class JavaLineBreakpoint extends JavaBreakpoint implements
 	/**
 	 * Creates, installs, and returns a line breakpoint request at the given location for this breakpoint.
 	 */
-	protected BreakpointRequest createLineBreakpointRequest(Location location,
+	protected BreakpointRequest createLineBreakpointRequest(Location location, //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 			JDIDebugTarget target) throws CoreException {
 		BreakpointRequest request = null;
 		EventRequestManager manager = target.getEventRequestManager();
@@ -380,7 +380,7 @@ public class JavaLineBreakpoint extends JavaBreakpoint implements
 	 * Returns a list of locations of the given line number in the given type.
 	 * Returns <code>null</code> if locations cannot be determined.
 	 */
-	protected List<Location> determineLocations(int lineNumber, ReferenceType type,
+	protected List<Location> determineLocations(int lineNumber, ReferenceType type, //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 			JDIDebugTarget target) {
 		List<Location> locations = null;
 		try {
@@ -538,15 +538,15 @@ public class JavaLineBreakpoint extends JavaBreakpoint implements
 
 	protected String getMarkerMessage(boolean conditionEnabled,
 			String condition, int hitCount, int suspendPolicy, int lineNumber) {
-		StringBuilder message = new StringBuilder(super.getMarkerMessage(
+		StringBuilder message = new StringBuilder(super.getMarkerMessage( //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 				hitCount, suspendPolicy));
 		if (lineNumber != -1) {
-			message.append(MessageFormat
+			message.append(MessageFormat //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 					.format(JDIDebugBreakpointMessages.JavaLineBreakpoint___line___0___1,
 							new Object[] { Integer.toString(lineNumber) }));
 		}
 		if (conditionEnabled && condition != null) {
-			message.append(MessageFormat
+			message.append(MessageFormat //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 					.format(JDIDebugBreakpointMessages.JavaLineBreakpoint___Condition___0___2,
 							new Object[] { condition }));
 		}

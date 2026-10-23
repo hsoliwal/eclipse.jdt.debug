@@ -32,12 +32,12 @@ import org.eclipse.osgi.util.NLS;
 /**
  * Launch configuration delegate for a remote Java application.
  */
-public class JavaRemoteApplicationLaunchConfigurationDelegate extends AbstractJavaLaunchConfigurationDelegate {
+public class JavaRemoteApplicationLaunchConfigurationDelegate extends AbstractJavaLaunchConfigurationDelegate { //FLLDCIM: MARK — T27  IMPLEMENTS
 
 	/* (non-Javadoc)
 	 * @see org.eclipse.debug.core.model.ILaunchConfigurationDelegate#launch(org.eclipse.debug.core.ILaunchConfiguration, java.lang.String, org.eclipse.debug.core.ILaunch, org.eclipse.core.runtime.IProgressMonitor)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public void launch(ILaunchConfiguration configuration, String mode, ILaunch launch, IProgressMonitor monitor) throws CoreException {
 
 		if (monitor == null) {
@@ -90,7 +90,7 @@ public class JavaRemoteApplicationLaunchConfigurationDelegate extends AbstractJa
 			// check for cancellation
 			if (monitor.isCanceled()) {
 				IDebugTarget[] debugTargets = launch.getDebugTargets();
-	            for (int i = 0; i < debugTargets.length; i++) {
+	            for (int i = 0; i < debugTargets.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 	                IDebugTarget target = debugTargets[i];
 	                if (target.canDisconnect()) {
 	                    target.disconnect();

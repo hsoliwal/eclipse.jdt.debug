@@ -68,7 +68,7 @@ public class ArgumentTests extends AbstractDebugTest {
 		 */
 		@Override
 		public void init(IConsole console) {
-			buffer = new StringBuilder();
+			buffer = new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 			document = console.getDocument();
 		}
 
@@ -82,7 +82,7 @@ public class ArgumentTests extends AbstractDebugTest {
                 assertNotNull("buffer is null", buffer);
                 String text = document.get(line.getOffset(), line.getLength());
 				if (!JavaOutputHelpers.isKnownExtraneousOutput(text)) {
-					buffer.append(text);
+					buffer.append(text); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				}
 			} catch (BadLocationException e) {
 				e.printStackTrace();
@@ -103,7 +103,7 @@ public class ArgumentTests extends AbstractDebugTest {
 		/**
 		 * @return the output
 		 */
-		public String getOutput() {
+		public String getOutput() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 			// wait to be closed
 		    synchronized (fLock) {
 		    	if (!closed) {
@@ -118,7 +118,7 @@ public class ArgumentTests extends AbstractDebugTest {
 				if (buffer != null) {
 				    System.out.println();
 				    System.out.println(ArgumentTests.this.getName());
-				    System.out.println("\treceived " + buffer.length() + " chars: " + buffer.toString());
+				    System.out.println("\treceived " + buffer.length() + " chars: " + buffer.toString()); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 				}
 		    }
 		    assertNotNull("Line tracker did not receive init notification", buffer);
@@ -325,7 +325,7 @@ public class ArgumentTests extends AbstractDebugTest {
 	 * @param programArgs the program arguments to specify
 	 * @param outputValue the expected output
 	 */
-	private void testOutput(String mainTypeName, String vmArgs, String programArgs, String outputValue) throws CoreException {
+	private void testOutput(String mainTypeName, String vmArgs, String programArgs, String outputValue) throws CoreException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		ILaunchConfigurationWorkingCopy workingCopy = newConfiguration(null, "config1");
 
 		workingCopy.setAttribute(IJavaLaunchConfigurationConstants.ATTR_PROJECT_NAME, get14Project().getProject().getName());
@@ -350,7 +350,7 @@ public class ArgumentTests extends AbstractDebugTest {
 		//workingCopy.setAttribute(IJavaLaunchConfigurationConstants.ATTR_JRE_CONTAINER_PATH, JavaRuntime.newJREContainerPath(vm).toPortableString());
 
 		// use 'java' instead of 'javaw' to launch tests (javaw is problematic on JDK1.4.2)
-		Map<String, String> map = new HashMap<>(1);
+		Map<String, String> map = new HashMap<>(1); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
 		map.put(IJavaLaunchConfigurationConstants.ATTR_JAVA_COMMAND, "java");
 		workingCopy.setAttribute(IJavaLaunchConfigurationConstants.ATTR_VM_INSTALL_TYPE_SPECIFIC_ATTRS_MAP, map);
 
@@ -360,7 +360,7 @@ public class ArgumentTests extends AbstractDebugTest {
 		ILaunch launch = null;
 		String commandLine = null;
 		try {
-			HashSet<String> set = new HashSet<>();
+			HashSet<String> set = new HashSet<>(); //FLLDCIM: MARK — M03 M3_SET_LANES NEW
 			set.add(ILaunchManager.RUN_MODE);
 			ensurePreferredDelegate(workingCopy, set);
 			launch = workingCopy.launch(ILaunchManager.RUN_MODE, null);
@@ -381,11 +381,11 @@ public class ArgumentTests extends AbstractDebugTest {
 			if (!outputValue.equals(output)) {
 			    System.out.println();
 			    System.out.println(getName());
-				System.out.println("\tExpected:     " + outputValue);
-				System.out.println("\tActual:       " + output);
-				System.out.println("\tCommand Line: " + commandLine);
+				System.out.println("\tExpected:     " + outputValue); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
+				System.out.println("\tActual:       " + output); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
+				System.out.println("\tCommand Line: " + commandLine); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 				if (fUseArgfile) {
-					System.out.println("\tArgfile:      "
+					System.out.println("\tArgfile:      " //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 							+ readArgfile(commandLine).stream().collect(joining("\n\t              ")));
 					System.out.println();
 				}
@@ -406,11 +406,11 @@ public class ArgumentTests extends AbstractDebugTest {
 		String[] arguments = DebugPlugin.parseArguments(commandLine);
 		assertEquals("command line too long, only command @argfile expected", 2, arguments.length);
 		String argfile = arguments[1];
-		assertTrue("wrong command line, expected @argfile at index 1: " + commandLine, argfile != null && argfile.startsWith("@"));
+		assertTrue("wrong command line, expected @argfile at index 1: " + commandLine, argfile != null && argfile.startsWith("@")); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		try {
 			return Files.readAllLines(Path.of(argfile.substring(1)));
 		} catch (IOException e) {
-			throw new IllegalStateException("Error reading @argfile: " + argfile, e);
+			throw new IllegalStateException("Error reading @argfile: " + argfile, e); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		}
 	}
 

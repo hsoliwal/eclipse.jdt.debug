@@ -119,7 +119,7 @@ public abstract class ReferenceTypeImpl extends TypeImpl implements
 			fFileId = fileId;
 			fFileName = fileName;
 			fAbsoluteFileName = absoluteFileName;
-			fLineInfo = new HashMap<>();
+			fLineInfo = new HashMap<>(); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
 		}
 
 		/**
@@ -140,7 +140,7 @@ public abstract class ReferenceTypeImpl extends TypeImpl implements
 			Integer key = Integer.valueOf(inputLine);
 			List<int[]> outputLines = fLineInfo.get(key);
 			if (outputLines == null) {
-				outputLines = new ArrayList<>();
+				outputLines = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 				fLineInfo.put(key, outputLines);
 			}
 			outputLines.add(new int[] { outputStartLine, outputLineRange });
@@ -155,16 +155,16 @@ public abstract class ReferenceTypeImpl extends TypeImpl implements
 		 * @return a List of int[2].
 		 */
 		public List<Integer> getOutputLinesForLine(int lineNumber) {
-			List<Integer> list = new ArrayList<>();
+			List<Integer> list = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 			List<int[]> outputLines = fLineInfo.get(Integer.valueOf(lineNumber));
 			if (outputLines != null) {
-				for (int[] info : outputLines) {
+				for (int[] info : outputLines) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 					int outputLineNumber = info[0];
 					int length = info[1];
 					if (length == 0) {
 						length = length + 1;
 					}
-					for (int i = 0; i < length; i++) {
+					for (int i = 0; i < length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 						list.add(Integer.valueOf(outputLineNumber++));
 					}
 				}
@@ -219,8 +219,8 @@ public abstract class ReferenceTypeImpl extends TypeImpl implements
 		 */
 		public Stratum(String id) {
 			fId = id;
-			fFileInfos = new ArrayList<>();
-			fOutputLineToInputLine = new HashMap<>();
+			fFileInfos = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
+			fOutputLineToInputLine = new HashMap<>(); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
 			fPrimaryFileId = -1;
 		}
 
@@ -274,12 +274,12 @@ public abstract class ReferenceTypeImpl extends TypeImpl implements
 		 * @param outputLineIncrement
 		 *            number of line to increment at each iteration.
 		 */
-		public void addLineInfo(int inputStartLine, int lineFileId,
+		public void addLineInfo(int inputStartLine, int lineFileId, //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 				int repeatCount, int outputStartLine, int outputLineIncrement)
 				throws AbsentInformationException {
 			FileInfo fileInfo = null;
 			// get the FileInfo object
-			for (FileInfo element : fFileInfos) {
+			for (FileInfo element : fFileInfos) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				if (element.fFileId == lineFileId) {
 					fileInfo = element;
 				}
@@ -290,7 +290,7 @@ public abstract class ReferenceTypeImpl extends TypeImpl implements
 						Integer.toString(lineFileId)));
 			}
 			// add the data to the different hash maps.
-			for (int i = 0; i < repeatCount; i++, inputStartLine++) {
+			for (int i = 0; i < repeatCount; i++, inputStartLine++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				fileInfo.addLineInfo(inputStartLine, outputStartLine,
 						outputLineIncrement);
 				if (outputLineIncrement == 0) {
@@ -298,7 +298,7 @@ public abstract class ReferenceTypeImpl extends TypeImpl implements
 					addLineInfoToMap(inputStartLine, lineFileId,
 							outputStartLine);
 				} else {
-					for (int j = 0; j < outputLineIncrement; j++, outputStartLine++) {
+					for (int j = 0; j < outputLineIncrement; j++, outputStartLine++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 						addLineInfoToMap(inputStartLine, lineFileId,
 								outputStartLine);
 					}
@@ -314,7 +314,7 @@ public abstract class ReferenceTypeImpl extends TypeImpl implements
 			Integer key = Integer.valueOf(outputStartLine);
 			List<int[]> inputLines = fOutputLineToInputLine.get(key);
 			if (inputLines == null) {
-				inputLines = new ArrayList<>();
+				inputLines = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 				fOutputLineToInputLine.put(key, inputLines);
 			}
 			inputLines.add(new int[] { lineFileId, inputStartLine });
@@ -329,7 +329,7 @@ public abstract class ReferenceTypeImpl extends TypeImpl implements
 		 *            the source name to search.
 		 */
 		public FileInfo getFileInfo(String sourceName) {
-			for (FileInfo fileInfo : fFileInfos) {
+			for (FileInfo fileInfo : fFileInfos) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				if (fileInfo.fFileName.equals(sourceName)) {
 					return fileInfo;
 				}
@@ -417,10 +417,10 @@ public abstract class ReferenceTypeImpl extends TypeImpl implements
 	/**
 	 * Flushes all stored Jdwp results.
 	 */
-	public void flushStoredJdwpResults() {
+	public void flushStoredJdwpResults() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		// Flush Methods.
 		if (fMethods != null) {
-			for (Method method : fMethods) {
+			for (Method method : fMethods) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				((MethodImpl)method).flushStoredJdwpResults();
 			}
 			fMethods = null;
@@ -429,7 +429,7 @@ public abstract class ReferenceTypeImpl extends TypeImpl implements
 
 		// Flush Fields.
 		if (fFields != null) {
-			for (Field field : fFields) {
+			for (Field field : fFields) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				((FieldImpl)field).flushStoredJdwpResults();
 			}
 			fFields = null;
@@ -468,7 +468,7 @@ public abstract class ReferenceTypeImpl extends TypeImpl implements
 	 *         Interfaces indirectly implemented (extended by the implemented
 	 *         interface or implemented by a superclass) are not included.
 	 */
-	public List<InterfaceType> allInterfaces() {
+	public List<InterfaceType> allInterfaces() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		if (fAllInterfaces != null) {
 			return fAllInterfaces;
 		}
@@ -481,12 +481,12 @@ public abstract class ReferenceTypeImpl extends TypeImpl implements
 		// The interfaces are maintained in a set, to avoid duplicates.
 		// The interfaces of its own (own interfaces() command) are first
 		// inserted.
-		HashSet<InterfaceType> allInterfacesSet = new HashSet<>(interfaces());
+		HashSet<InterfaceType> allInterfacesSet = new HashSet<>(interfaces()); //FLLDCIM: MARK — M03 M3_SET_LANES NEW
 
 		// All interfaces of the interfaces it implements.
 		Iterator<InterfaceType> interfaces = interfaces().iterator();
 		InterfaceType inter;
-		while (interfaces.hasNext()) {
+		while (interfaces.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			inter = interfaces.next();
 			allInterfacesSet.addAll(((InterfaceTypeImpl)inter).allInterfaces());
 		}
@@ -499,7 +499,7 @@ public abstract class ReferenceTypeImpl extends TypeImpl implements
 			}
 		}
 
-		fAllInterfaces = new ArrayList<>(allInterfacesSet);
+		fAllInterfaces = new ArrayList<>(allInterfacesSet); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 		return fAllInterfaces;
 	}
 
@@ -513,7 +513,7 @@ public abstract class ReferenceTypeImpl extends TypeImpl implements
 	/**
 	 * @return Returns modifier bits.
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public int modifiers() {
 		if (fModifierBits != -1) {
 			return fModifierBits;
@@ -543,9 +543,9 @@ public abstract class ReferenceTypeImpl extends TypeImpl implements
 	private void addVisibleMethods(List<Method> inheritedMethods, Set<String> nameAndSignatures, List<Method> resultMethods) {
 		Iterator<Method> iter = inheritedMethods.iterator();
 		Method inheritedMethod;
-		while (iter.hasNext()) {
+		while (iter.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			inheritedMethod = iter.next();
-			if (!nameAndSignatures.contains(inheritedMethod.name()
+			if (!nameAndSignatures.contains(inheritedMethod.name() //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 					+ inheritedMethod.signature())) {
 				resultMethods.add(inheritedMethod);
 			}
@@ -556,7 +556,7 @@ public abstract class ReferenceTypeImpl extends TypeImpl implements
 	 * @return Returns a list containing each visible and unambiguous Method in
 	 *         this type.
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public List<Method> visibleMethods() {
 		if (fVisibleMethods != null) {
 			return fVisibleMethods;
@@ -569,20 +569,20 @@ public abstract class ReferenceTypeImpl extends TypeImpl implements
 		 */
 		// The name+signature combinations of methods are maintained in a set,
 		// to avoid including methods that have been overridden.
-		Set<String> namesAndSignatures = new HashSet<>();
-		List<Method> visibleMethods = new ArrayList<>();
+		Set<String> namesAndSignatures = new HashSet<>(); //FLLDCIM: MARK — M03 M3_SET_LANES NEW
+		List<Method> visibleMethods = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 
 		// The methods of its own (own methods() command).
-		for (Method m : methods()) {
+		for (Method m : methods()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			MethodImpl method = (MethodImpl) m;
-			namesAndSignatures.add(method.name() + method.signature());
+			namesAndSignatures.add(method.name() + method.signature()); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 			visibleMethods.add(method);
 		}
 
 		// All methods of the interfaces it implements.
 		Iterator<InterfaceType> interfaces = interfaces().iterator();
 		InterfaceType inter;
-		while (interfaces.hasNext()) {
+		while (interfaces.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			inter = interfaces.next();
 			addVisibleMethods(inter.visibleMethods(), namesAndSignatures,
 					visibleMethods);
@@ -606,7 +606,7 @@ public abstract class ReferenceTypeImpl extends TypeImpl implements
 	 *         its super-classes, implemented interfaces, and/or
 	 *         super-interfaces.
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public List<Method> allMethods() {
 		if (fAllMethods != null) {
 			return fAllMethods;
@@ -618,7 +618,7 @@ public abstract class ReferenceTypeImpl extends TypeImpl implements
 		 * methods of it's superclass.
 		 */
 		// The name+signature combinations of methods are maintained in a set.
-		HashSet<Method> resultSet = new HashSet<>();
+		HashSet<Method> resultSet = new HashSet<>(); //FLLDCIM: MARK — M03 M3_SET_LANES NEW
 
 		// The methods of its own (own methods() command).
 		resultSet.addAll(methods());
@@ -626,7 +626,7 @@ public abstract class ReferenceTypeImpl extends TypeImpl implements
 		// All methods of the interfaces it implements.
 		Iterator<InterfaceType> interfaces = interfaces().iterator();
 		InterfaceType inter;
-		while (interfaces.hasNext()) {
+		while (interfaces.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			inter = interfaces.next();
 			resultSet.addAll(inter.allMethods());
 		}
@@ -639,7 +639,7 @@ public abstract class ReferenceTypeImpl extends TypeImpl implements
 			}
 		}
 
-		fAllMethods = new ArrayList<>(resultSet);
+		fAllMethods = new ArrayList<>(resultSet); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 		return fAllMethods;
 	}
 
@@ -648,7 +648,7 @@ public abstract class ReferenceTypeImpl extends TypeImpl implements
 	 *         Interfaces indirectly implemented (extended by the implemented
 	 *         interface or implemented by a superclass) are not included.
 	 */
-	public List<InterfaceType> interfaces() {
+	public List<InterfaceType> interfaces() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		if (fInterfaces != null) {
 			return fInterfaces;
 		}
@@ -666,9 +666,9 @@ public abstract class ReferenceTypeImpl extends TypeImpl implements
 				defaultReplyErrorHandler(replyPacket.errorCode());
 			}
 			DataInputStream replyData = replyPacket.dataInStream();
-			List<InterfaceType> elements = new ArrayList<>();
+			List<InterfaceType> elements = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 			int nrOfElements = readInt("elements", replyData); //$NON-NLS-1$
-			for (int i = 0; i < nrOfElements; i++) {
+			for (int i = 0; i < nrOfElements; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				InterfaceTypeImpl ref = InterfaceTypeImpl.read(this, replyData);
 				if (ref == null) {
 					continue;
@@ -692,7 +692,7 @@ public abstract class ReferenceTypeImpl extends TypeImpl implements
 	private void addVisibleFields(List<Field> newFields, Set<String> names, List<Field> resultFields) {
 		Iterator<Field> iter = newFields.iterator();
 		FieldImpl field;
-		while (iter.hasNext()) {
+		while (iter.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			field = (FieldImpl) iter.next();
 			String name = field.name();
 			if (!names.contains(name)) {
@@ -706,7 +706,7 @@ public abstract class ReferenceTypeImpl extends TypeImpl implements
 	 * @return Returns a list containing each visible and unambiguous Field in
 	 *         this type.
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public List<Field> visibleFields() {
 		if (fVisibleFields != null) {
 			return fVisibleFields;
@@ -719,16 +719,16 @@ public abstract class ReferenceTypeImpl extends TypeImpl implements
 		 */
 		// The names of fields are maintained in a set, to avoid including
 		// fields that have been overridden.
-		HashSet<String> fieldNames = new HashSet<>();
+		HashSet<String> fieldNames = new HashSet<>(); //FLLDCIM: MARK — M03 M3_SET_LANES NEW
 
 		// The fields of its own (own fields() command).
-		List<Field> visibleFields = new ArrayList<>();
+		List<Field> visibleFields = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 		addVisibleFields(fields(), fieldNames, visibleFields);
 
 		// All fields of the interfaces it implements.
 		Iterator<InterfaceType> interfaces = interfaces().iterator();
 		InterfaceType inter;
-		while (interfaces.hasNext()) {
+		while (interfaces.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			inter = interfaces.next();
 			addVisibleFields(inter.visibleFields(), fieldNames, visibleFields);
 		}
@@ -751,7 +751,7 @@ public abstract class ReferenceTypeImpl extends TypeImpl implements
 	 *         its super-classes, implemented interfaces, and/or
 	 *         super-interfaces.
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public List<Field> allFields() {
 		if (fAllFields != null) {
 			return fAllFields;
@@ -764,7 +764,7 @@ public abstract class ReferenceTypeImpl extends TypeImpl implements
 		 */
 		// The names of fields are maintained in a set, to avoid including
 		// fields that have been inherited double.
-		HashSet<Field> resultSet = new HashSet<>();
+		HashSet<Field> resultSet = new HashSet<>(); //FLLDCIM: MARK — M03 M3_SET_LANES NEW
 
 		// The fields of its own (own fields() command).
 		resultSet.addAll(fields());
@@ -772,7 +772,7 @@ public abstract class ReferenceTypeImpl extends TypeImpl implements
 		// All fields of the interfaces it implements.
 		Iterator<InterfaceType> interfaces = interfaces().iterator();
 		InterfaceType inter;
-		while (interfaces.hasNext()) {
+		while (interfaces.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			inter = interfaces.next();
 			resultSet.addAll(inter.allFields());
 		}
@@ -785,7 +785,7 @@ public abstract class ReferenceTypeImpl extends TypeImpl implements
 			}
 		}
 
-		fAllFields = new ArrayList<>(resultSet);
+		fAllFields = new ArrayList<>(resultSet); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 		return fAllFields;
 	}
 
@@ -793,7 +793,7 @@ public abstract class ReferenceTypeImpl extends TypeImpl implements
 	 * @return Returns the class loader object which loaded the class
 	 *         corresponding to this type.
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public ClassLoaderReference classLoader() {
 		if (fClassLoader != null) {
 			return fClassLoader;
@@ -819,7 +819,7 @@ public abstract class ReferenceTypeImpl extends TypeImpl implements
 	 * @return Returns the class object that corresponds to this type in the
 	 *         target VM.
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public ClassObjectReference classObject() {
 		if (fClassObject != null) {
 			return fClassObject;
@@ -900,7 +900,7 @@ public abstract class ReferenceTypeImpl extends TypeImpl implements
 	@Override
 	public Field fieldByName(String name) {
 		Iterator<Field> iter = visibleFields().iterator();
-		while (iter.hasNext()) {
+		while (iter.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			FieldImpl field = (FieldImpl) iter.next();
 			if (field.name().equals(name)) {
 				return field;
@@ -912,7 +912,7 @@ public abstract class ReferenceTypeImpl extends TypeImpl implements
 	/**
 	 * @return Returns a list containing each Field declared in this type.
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public List<Field> fields() {
 		if (fFields != null) {
 			return fFields;
@@ -930,9 +930,9 @@ public abstract class ReferenceTypeImpl extends TypeImpl implements
 			JdwpReplyPacket replyPacket = requestVM(jdwpCommand, this);
 			defaultReplyErrorHandler(replyPacket.errorCode());
 			DataInputStream replyData = replyPacket.dataInStream();
-			List<Field> elements = new ArrayList<>();
+			List<Field> elements = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 			int nrOfElements = readInt("elements", replyData); //$NON-NLS-1$
-			for (int i = 0; i < nrOfElements; i++) {
+			for (int i = 0; i < nrOfElements; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				FieldImpl elt = FieldImpl.readWithNameSignatureModifiers(this,
 						this, withGenericSignature, replyData);
 				if (elt == null) {
@@ -956,7 +956,7 @@ public abstract class ReferenceTypeImpl extends TypeImpl implements
 	 */
 	public FieldImpl findField(JdwpFieldID fieldID) {
 		Iterator<Field> iter = fields().iterator();
-		while (iter.hasNext()) {
+		while (iter.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			FieldImpl field = (FieldImpl) iter.next();
 			if (field.getFieldID().equals(fieldID)) {
 				return field;
@@ -969,7 +969,7 @@ public abstract class ReferenceTypeImpl extends TypeImpl implements
 	 * @return Returns MethodImpl of a method in the reference specified by a
 	 *         given methodID, or null if not found.
 	 */
-	public Method findMethod(JdwpMethodID methodID) {
+	public Method findMethod(JdwpMethodID methodID) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		if (methodID.value() == 0) {
 			return new MethodImpl(virtualMachineImpl(), this, methodID,
 					JDIMessages.ReferenceTypeImpl_Obsolete_method_1,
@@ -977,9 +977,9 @@ public abstract class ReferenceTypeImpl extends TypeImpl implements
 		}
 		if (fMethodTable == null) {
 			// 509259 use temporary variable to workaround fMethodTable lazy initialization race
-			Map<JdwpMethodID, Method> methodTable = new HashMap<>();
+			Map<JdwpMethodID, Method> methodTable = new HashMap<>(); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
 			Iterator<Method> iter = methods().iterator();
-			while (iter.hasNext()) {
+			while (iter.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				MethodImpl method = (MethodImpl) iter.next();
 				methodTable.put(method.getMethodID(), method);
 			}
@@ -993,7 +993,7 @@ public abstract class ReferenceTypeImpl extends TypeImpl implements
 	 */
 	@Override
 	public Value getValue(Field field) {
-		ArrayList<Field> list = new ArrayList<>(1);
+		ArrayList<Field> list = new ArrayList<>(1); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 		list.add(field);
 		return getValues(list).get(field);
 	}
@@ -1001,11 +1001,11 @@ public abstract class ReferenceTypeImpl extends TypeImpl implements
 	/**
 	 * @return a Map of the requested static Field objects with their Value.
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public Map<Field, Value> getValues(List<? extends Field> fields) {
 		// if the field list is empty, nothing to do
 		if (fields.isEmpty()) {
-			return new HashMap<>();
+			return new HashMap<>(); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
 		}
 		// Note that this information should not be cached.
 		initJdwpRequest();
@@ -1015,7 +1015,7 @@ public abstract class ReferenceTypeImpl extends TypeImpl implements
 			int fieldsSize = fields.size();
 			write(this, outData);
 			writeInt(fieldsSize, "size", outData); //$NON-NLS-1$
-			for (int i = 0; i < fieldsSize; i++) {
+			for (int i = 0; i < fieldsSize; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				FieldImpl field = (FieldImpl) fields.get(i);
 				checkVM(field);
 				field.getFieldID().write(outData);
@@ -1026,14 +1026,14 @@ public abstract class ReferenceTypeImpl extends TypeImpl implements
 			defaultReplyErrorHandler(replyPacket.errorCode());
 
 			DataInputStream replyData = replyPacket.dataInStream();
-			HashMap<Field, Value> map = new HashMap<>();
+			HashMap<Field, Value> map = new HashMap<>(); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
 			int nrOfElements = readInt("elements", replyData); //$NON-NLS-1$
 			if (nrOfElements != fieldsSize) {
 				throw new InternalError(
 						JDIMessages.ReferenceTypeImpl_Retrieved_a_different_number_of_values_from_the_VM_than_requested_3);
 			}
 
-			for (int i = 0; i < nrOfElements; i++) {
+			for (int i = 0; i < nrOfElements; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				map.put(fields.get(i), ValueImpl.readWithTag(this, replyData));
 			}
 			return map;
@@ -1117,7 +1117,7 @@ public abstract class ReferenceTypeImpl extends TypeImpl implements
 	 * @return Returns a list containing each Method declared directly in this
 	 *         type.
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public List<Method> methods() {
 		// Note that ArrayReference overwrites this method by returning an empty
 		// list.
@@ -1137,9 +1137,9 @@ public abstract class ReferenceTypeImpl extends TypeImpl implements
 			JdwpReplyPacket replyPacket = requestVM(jdwpCommand, this);
 			defaultReplyErrorHandler(replyPacket.errorCode());
 			DataInputStream replyData = replyPacket.dataInStream();
-			List<Method> elements = new ArrayList<>();
+			List<Method> elements = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 			int nrOfElements = readInt("elements", replyData); //$NON-NLS-1$
-			for (int i = 0; i < nrOfElements; i++) {
+			for (int i = 0; i < nrOfElements; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				MethodImpl elt = MethodImpl.readWithNameSignatureModifiers(
 						this, this, withGenericSignature, replyData);
 				if (elt == null) {
@@ -1163,9 +1163,9 @@ public abstract class ReferenceTypeImpl extends TypeImpl implements
 	 */
 	@Override
 	public List<Method> methodsByName(String name) {
-		List<Method> elements = new ArrayList<>();
+		List<Method> elements = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 		Iterator<Method> iter = visibleMethods().iterator();
-		while (iter.hasNext()) {
+		while (iter.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			Method method = iter.next();
 			if (method.name().equals(name)) {
 				elements.add(method);
@@ -1180,9 +1180,9 @@ public abstract class ReferenceTypeImpl extends TypeImpl implements
 	 */
 	@Override
 	public List<Method> methodsByName(String name, String signature) {
-		List<Method> elements = new ArrayList<>();
+		List<Method> elements = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 		Iterator<Method> iter = visibleMethods().iterator();
-		while (iter.hasNext()) {
+		while (iter.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			MethodImpl method = (MethodImpl) iter.next();
 			if (method.name().equals(name) && method.signature().equals(signature)) {
 				elements.add(method);
@@ -1206,7 +1206,7 @@ public abstract class ReferenceTypeImpl extends TypeImpl implements
 	/**
 	 * @return Returns the JNI-style signature for this type.
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public String signature() {
 		if (fSignature != null) {
 			return fSignature;
@@ -1231,14 +1231,14 @@ public abstract class ReferenceTypeImpl extends TypeImpl implements
 	 * @return Returns a List containing each ReferenceType declared within this
 	 *         type.
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public List<ReferenceType> nestedTypes() {
 		// Note that the VM gives an empty reply on RT_NESTED_TYPES, therefore
 		// we search for the
 		// nested types in the loaded types.
-		List<ReferenceType> result = new ArrayList<>();
+		List<ReferenceType> result = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 		Iterator<ReferenceType> itr = virtualMachineImpl().allRefTypes();
-		while (itr.hasNext()) {
+		while (itr.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			try {
 				ReferenceTypeImpl refType = (ReferenceTypeImpl) itr.next();
 				String refName = refType.name();
@@ -1271,7 +1271,7 @@ public abstract class ReferenceTypeImpl extends TypeImpl implements
 	 * @return Returns the CRC-32 of the given reference type, undefined if
 	 *         unknown.
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public int getClassFileVersion() {
 		virtualMachineImpl().checkHCRSupported();
 		if (fGotClassFileVersion) {
@@ -1369,7 +1369,7 @@ public abstract class ReferenceTypeImpl extends TypeImpl implements
 			return InterfaceTypeImpl.read(target, in);
 		}
 		throw new InternalException(
-				JDIMessages.ReferenceTypeImpl_Invalid_ReferenceTypeID_tag_encountered___8
+				JDIMessages.ReferenceTypeImpl_Invalid_ReferenceTypeID_tag_encountered___8 //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 						+ typeTag);
 	}
 
@@ -1384,7 +1384,7 @@ public abstract class ReferenceTypeImpl extends TypeImpl implements
 	/**
 	 * @return Reads JDWP representation and returns new or cached instance.
 	 */
-	public static ReferenceTypeImpl readWithTypeTagAndSignature(
+	public static ReferenceTypeImpl readWithTypeTagAndSignature( //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 			MirrorImpl target, boolean withGenericSignature, DataInputStream in)
 			throws IOException {
 		byte typeTag = target.readByte("type tag", JdwpID.typeTagMap(), in); //$NON-NLS-1$
@@ -1402,7 +1402,7 @@ public abstract class ReferenceTypeImpl extends TypeImpl implements
 					withGenericSignature, in);
 		}
 		throw new InternalException(
-				JDIMessages.ReferenceTypeImpl_Invalid_ReferenceTypeID_tag_encountered___8
+				JDIMessages.ReferenceTypeImpl_Invalid_ReferenceTypeID_tag_encountered___8 //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 						+ typeTag);
 	}
 
@@ -1412,13 +1412,13 @@ public abstract class ReferenceTypeImpl extends TypeImpl implements
 	 *             when the ReferenceType has not been loaded by the specified
 	 *             class loader.
 	 */
-	public static TypeImpl create(VirtualMachineImpl vmImpl, String signature,
+	public static TypeImpl create(VirtualMachineImpl vmImpl, String signature, //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 			ClassLoaderReference classLoader) throws ClassNotLoadedException {
 		ReferenceTypeImpl refTypeBootstrap = null;
 		List<ReferenceType> classes = vmImpl.classesBySignature(signature);
 		ReferenceTypeImpl type;
 		Iterator<ReferenceType> iter = classes.iterator();
-		while (iter.hasNext()) {
+		while (iter.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			// First pass. Look for a class loaded by the given class loader
 			type = (ReferenceTypeImpl) iter.next();
 			if (type.classLoader() == null) { // bootstrap classloader
@@ -1440,13 +1440,13 @@ public abstract class ReferenceTypeImpl extends TypeImpl implements
 
 		List<ReferenceType> visibleTypes;
 		iter = classes.iterator();
-		while (iter.hasNext()) {
+		while (iter.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			// Second pass. Look for a class that is visible to
 			// the given class loader
 			type = (ReferenceTypeImpl) iter.next();
 			visibleTypes = classLoader.visibleClasses();
 			Iterator<ReferenceType> visibleIter = visibleTypes.iterator();
-			while (visibleIter.hasNext()) {
+			while (visibleIter.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				if (type.equals(visibleIter.next())) {
 					return type;
 				}
@@ -1460,7 +1460,7 @@ public abstract class ReferenceTypeImpl extends TypeImpl implements
 	/**
 	 * Retrieves constant mappings.
 	 */
-	public static void getConstantMaps() {
+	public static void getConstantMaps() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		if (fgClassStatusStrings != null) {
 			return;
 		}
@@ -1469,7 +1469,7 @@ public abstract class ReferenceTypeImpl extends TypeImpl implements
 				.getDeclaredFields();
 		fgClassStatusStrings = new String[32];
 
-		for (java.lang.reflect.Field field : fields) {
+		for (java.lang.reflect.Field field : fields) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			if ((field.getModifiers() & Modifier.PUBLIC) == 0
 					|| (field.getModifiers() & Modifier.STATIC) == 0
 					|| (field.getModifiers() & Modifier.FINAL) == 0) {
@@ -1486,7 +1486,7 @@ public abstract class ReferenceTypeImpl extends TypeImpl implements
 			try {
 				int value = field.getInt(null);
 
-				for (int j = 0; j < fgClassStatusStrings.length; j++) {
+				for (int j = 0; j < fgClassStatusStrings.length; j++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 					if ((1 << j & value) != 0) {
 						fgClassStatusStrings[j] = name;
 						break;
@@ -1521,9 +1521,9 @@ public abstract class ReferenceTypeImpl extends TypeImpl implements
 	/**
 	 * @see ReferenceType#sourceNames(String)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public List<String> sourceNames(String stratumId) throws AbsentInformationException {
-		List<String> list = new ArrayList<>();
+		List<String> list = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 		Stratum stratum = getStratum(stratumId);
 		if (stratum != null) {
 			// return the source names defined for this stratum in the SMAP.
@@ -1532,7 +1532,7 @@ public abstract class ReferenceTypeImpl extends TypeImpl implements
 				throw new AbsentInformationException(
 						JDIMessages.ReferenceTypeImpl_30);
 			}
-			for (FileInfo fileInfo : stratum.fFileInfos) {
+			for (FileInfo fileInfo : stratum.fFileInfos) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				list.add(fileInfo.fFileName);
 			}
 			return list;
@@ -1548,13 +1548,13 @@ public abstract class ReferenceTypeImpl extends TypeImpl implements
 	/**
 	 * @see ReferenceType#sourcePaths(String)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public List<String> sourcePaths(String stratumId) throws AbsentInformationException {
-		List<String> list = new ArrayList<>();
+		List<String> list = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 		Stratum stratum = getStratum(stratumId);
 		if (stratum != null) {
 			// return the source paths defined for this stratum in the SMAP.
-			for (FileInfo fileInfo : stratum.fFileInfos) {
+			for (FileInfo fileInfo : stratum.fFileInfos) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				String path = fileInfo.fAbsoluteFileName;
 				if (path == null) {
 					path = getPath(fileInfo.fFileName);
@@ -1588,7 +1588,7 @@ public abstract class ReferenceTypeImpl extends TypeImpl implements
 	/* (non-Javadoc)
 	 * @see com.sun.jdi.ReferenceType#allLineLocations(java.lang.String, java.lang.String)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public List<Location> allLineLocations(String stratum, String sourceName) throws AbsentInformationException {
 		Iterator<Method> allMethods = methods().iterator();
 		if (stratum == null) { // if stratum not defined use the default stratum
@@ -1598,24 +1598,24 @@ public abstract class ReferenceTypeImpl extends TypeImpl implements
 		Map<String, List<Location>> sourceNameAllLineLocations = null;
 		if (fStratumAllLineLocations == null) { // the stratum map doesn't
 												// exist, create it
-			fStratumAllLineLocations = new HashMap<>();
+			fStratumAllLineLocations = new HashMap<>(); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
 		} else {
 			// get the source name map
 			sourceNameAllLineLocations = fStratumAllLineLocations.get(stratum);
 		}
 		if (sourceNameAllLineLocations == null) { // the source name map doesn't
 													// exist, create it
-			sourceNameAllLineLocations = new HashMap<>();
+			sourceNameAllLineLocations = new HashMap<>(); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
 			fStratumAllLineLocations.put(stratum, sourceNameAllLineLocations);
 		} else {
 			// get the line locations
 			allLineLocations = sourceNameAllLineLocations.get(sourceName);
 		}
 		if (allLineLocations == null) { // the line locations are not known, compute and store them
-			allLineLocations = new ArrayList<>();
+			allLineLocations = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 			boolean hasLineInformation = false;
 			AbsentInformationException exception = null;
-			while (allMethods.hasNext()) {
+			while (allMethods.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				MethodImpl method = (MethodImpl) allMethods.next();
 				if (method.isAbstract() || method.isNative()) {
 					continue;
@@ -1638,13 +1638,13 @@ public abstract class ReferenceTypeImpl extends TypeImpl implements
 	/* (non-Javadoc)
 	 * @see com.sun.jdi.ReferenceType#locationsOfLine(java.lang.String, java.lang.String, int)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public List<Location> locationsOfLine(String stratum, String sourceName, int lineNumber) throws AbsentInformationException {
 		Iterator<Method> allMethods = methods().iterator();
-		List<Location> locations = new ArrayList<>();
+		List<Location> locations = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 		boolean hasLineInformation = false;
 		AbsentInformationException exception = null;
-		while (allMethods.hasNext()) {
+		while (allMethods.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			MethodImpl method = (MethodImpl) allMethods.next();
 			if (method.isAbstract() || method.isNative()) {
 				continue;
@@ -1670,7 +1670,7 @@ public abstract class ReferenceTypeImpl extends TypeImpl implements
 	 */
 	@Override
 	public List<String> availableStrata() {
-		List<String> list = new ArrayList<>();
+		List<String> list = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 		// The strata defined in the SMAP.
 		if (isSourceDebugExtensionAvailable()) {
 			list.addAll(fStrata.keySet());
@@ -1705,7 +1705,7 @@ public abstract class ReferenceTypeImpl extends TypeImpl implements
 		if (lastDotOffset == -1) {
 			return sourceName;
 		}
-		return name.substring(0, lastDotOffset).replace('.', File.separatorChar) + File.separatorChar + sourceName;
+		return name.substring(0, lastDotOffset).replace('.', File.separatorChar) + File.separatorChar + sourceName; //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 	}
 
 	/**
@@ -1731,7 +1731,7 @@ public abstract class ReferenceTypeImpl extends TypeImpl implements
 	/**
 	 * Get the source debug extension from the VM.
 	 */
-	private void getSourceDebugExtension() throws AbsentInformationException {
+	private void getSourceDebugExtension() throws AbsentInformationException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		initJdwpRequest();
 		try {
 			JdwpReplyPacket replyPacket = requestVM(
@@ -1758,14 +1758,14 @@ public abstract class ReferenceTypeImpl extends TypeImpl implements
 					JDIMessages.ReferenceTypeImpl_31);
 		}
 		// parse the source map.
-		fStrata = new HashMap<>();
+		fStrata = new HashMap<>(); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
 		SourceDebugExtensionParser.parse(fSmap, this);
 	}
 
 	/**
 	 * Get the name of the Java source file from the VM.
 	 */
-	private void getSourceName() throws AbsentInformationException {
+	private void getSourceName() throws AbsentInformationException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		if (fSourceName != null || isSourceDebugExtensionAvailable()) {
 			return;
 		}
@@ -1796,7 +1796,7 @@ public abstract class ReferenceTypeImpl extends TypeImpl implements
 	 * <code>true</code> indicates that the source debug extension is available
 	 * and the information has been parsed and stored in the maps and lists.
 	 */
-	private synchronized boolean isSourceDebugExtensionAvailable() {
+	private synchronized boolean isSourceDebugExtensionAvailable() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		if (!fSourceDebugExtensionAvailable) {
 			return false;
 		}
@@ -1876,7 +1876,7 @@ public abstract class ReferenceTypeImpl extends TypeImpl implements
 	 * @param method
 	 *            the method where is the code.
 	 */
-	private FileInfo fileInfo(long codeIndex, MethodImpl method, Stratum stratum) {
+	private FileInfo fileInfo(long codeIndex, MethodImpl method, Stratum stratum) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		int fileId = stratum.fPrimaryFileId;
 		if (stratum.fFileInfos.size() > 1) {
 			List<int[]> lineInfos = null;
@@ -1889,7 +1889,7 @@ public abstract class ReferenceTypeImpl extends TypeImpl implements
 				fileId = lineInfos.get(0)[0];
 			}
 		}
-		for (FileInfo fileInfo : stratum.fFileInfos) {
+		for (FileInfo fileInfo : stratum.fFileInfos) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			if (fileInfo.fFileId == fileId) {
 				return fileInfo;
 			}
@@ -1932,7 +1932,7 @@ public abstract class ReferenceTypeImpl extends TypeImpl implements
 	 * @param method
 	 *            the method where is the code.
 	 */
-	protected String sourcePath(long codeIndex, MethodImpl method,
+	protected String sourcePath(long codeIndex, MethodImpl method, //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 			String stratumId) throws AbsentInformationException {
 		Stratum stratum = getStratum(stratumId);
 		if (stratum != null) {
@@ -1961,7 +1961,7 @@ public abstract class ReferenceTypeImpl extends TypeImpl implements
 	 * @param method
 	 *            the method where is the code.
 	 */
-	protected int lineNumber(long codeIndex, MethodImpl method, String stratumId) {
+	protected int lineNumber(long codeIndex, MethodImpl method, String stratumId) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		Stratum stratum = getStratum(stratumId);
 		try {
 			if (stratum != null) {
@@ -1997,12 +1997,12 @@ public abstract class ReferenceTypeImpl extends TypeImpl implements
 	 * @throws AbsentInformationException
 	 *             if the specified sourceName is not valid.
 	 */
-	public List<Location> locationsOfLine(String stratumId, String sourceName, int lineNumber, MethodImpl method)	throws AbsentInformationException {
+	public List<Location> locationsOfLine(String stratumId, String sourceName, int lineNumber, MethodImpl method)	throws AbsentInformationException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		Stratum stratum = getStratum(stratumId);
-		List<Integer> javaLines = new ArrayList<>();
+		List<Integer> javaLines = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 		if (stratum != null) {
 			boolean found = false;
-			for (Iterator<FileInfo> iter = stratum.fFileInfos.iterator(); iter.hasNext() && !found;) {
+			for (Iterator<FileInfo> iter = stratum.fFileInfos.iterator(); iter.hasNext() && !found;) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				FileInfo fileInfo = iter.next();
 				if (sourceName == null || (found = sourceName.equals(fileInfo.fFileName))) {
 					javaLines.addAll(fileInfo.getOutputLinesForLine(lineNumber));
@@ -2034,7 +2034,7 @@ public abstract class ReferenceTypeImpl extends TypeImpl implements
 	 *            the list of line numbers in the java stratum for the method,
 	 *            as get from the VM/JDWP
 	 */
-	public List<Location> allLineLocations(String stratumId, String sourceName,
+	public List<Location> allLineLocations(String stratumId, String sourceName, //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 			MethodImpl method, long[] codeIndexTable,
 			int[] javaStratumLineNumberTable) throws AbsentInformationException {
 		Stratum stratum = getStratum(stratumId);
@@ -2042,7 +2042,7 @@ public abstract class ReferenceTypeImpl extends TypeImpl implements
 			int[][] lineInfoTable = new int[codeIndexTable.length][];
 			if (sourceName == null) {
 				int lastIndex = 0;
-				for (int i = 0, length = javaStratumLineNumberTable.length; i < length; i++) {
+				for (int i = 0, length = javaStratumLineNumberTable.length; i < length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 					// for each executable line in the java source, get the
 					// associated lines in the stratum source
 					List<int[]> lineInfos = stratum.getInputLineInfos(javaStratumLineNumberTable[i]);
@@ -2061,10 +2061,10 @@ public abstract class ReferenceTypeImpl extends TypeImpl implements
 				}
 				int fileId = fileInfo.fFileId;
 				int lastIndex = 0;
-				for (int i = 0, length = javaStratumLineNumberTable.length; i < length; i++) {
+				for (int i = 0, length = javaStratumLineNumberTable.length; i < length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 					List<int[]> lineInfos = stratum.getInputLineInfos(javaStratumLineNumberTable[i]);
 					if (lineInfos != null) {
-						for (int[] lineInfo : lineInfos) {
+						for (int[] lineInfo : lineInfos) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 							if (lineInfo[0] == fileId) {
 								if (!Arrays.equals(lineInfo, lineInfoTable[lastIndex])) {
 									lineInfoTable[i] = lineInfo;
@@ -2076,8 +2076,8 @@ public abstract class ReferenceTypeImpl extends TypeImpl implements
 					}
 				}
 			}
-			List<Location> locations = new ArrayList<>();
-			for (int i = 0, length = lineInfoTable.length; i < length; i++) {
+			List<Location> locations = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
+			for (int i = 0, length = lineInfoTable.length; i < length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				if (lineInfoTable[i] != null) {
 					locations.add(new LocationImpl(virtualMachineImpl(), method, codeIndexTable[i]));
 				}
@@ -2085,8 +2085,8 @@ public abstract class ReferenceTypeImpl extends TypeImpl implements
 			return locations;
 		}
 		// Java stratum
-		List<Location> result = new ArrayList<>();
-		for (long element : codeIndexTable) {
+		List<Location> result = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
+		for (long element : codeIndexTable) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			result.add(new LocationImpl(virtualMachineImpl(), method, element));
 		}
 		return result;
@@ -2097,7 +2097,7 @@ public abstract class ReferenceTypeImpl extends TypeImpl implements
 	 *
 	 * @since java 1.5
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public String genericSignature() {
 		if (fGenericSignatureKnown) {
 			return fGenericSignature;
@@ -2154,7 +2154,7 @@ public abstract class ReferenceTypeImpl extends TypeImpl implements
 	/* (non-Javadoc)
 	 * @see com.sun.jdi.ReferenceType#instances(long)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public List<ObjectReference> instances(long maxInstances) {
 		try {
 			int max = (int) maxInstances;
@@ -2189,8 +2189,8 @@ public abstract class ReferenceTypeImpl extends TypeImpl implements
 			if (max > 0 && elements > max) {
 				elements = max;
 			}
-			ArrayList<ObjectReference> list = new ArrayList<>();
-			for (int i = 0; i < elements; i++) {
+			ArrayList<ObjectReference> list = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
+			for (int i = 0; i < elements; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				list.add((ObjectReference) ValueImpl.readWithTag(this, replyData));
 			}
 			return list;
@@ -2206,7 +2206,7 @@ public abstract class ReferenceTypeImpl extends TypeImpl implements
 	 * @see com.sun.jdi.ReferenceType#majorVersion()
 	 * @since 3.3
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public int majorVersion() {
 		try {
 			ByteArrayOutputStream outBytes = new ByteArrayOutputStream();
@@ -2244,7 +2244,7 @@ public abstract class ReferenceTypeImpl extends TypeImpl implements
 	 * @see com.sun.jdi.ReferenceType#minorVersion()
 	 * @since 3.3
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public int minorVersion() {
 		try {
 			ByteArrayOutputStream outBytes = new ByteArrayOutputStream();
@@ -2283,7 +2283,7 @@ public abstract class ReferenceTypeImpl extends TypeImpl implements
 	 * @see com.sun.jdi.ReferenceType#constantPoolCount()
 	 * @since 3.3
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public int constantPoolCount() {
 		try {
 			ByteArrayOutputStream outBytes = new ByteArrayOutputStream();
@@ -2321,7 +2321,7 @@ public abstract class ReferenceTypeImpl extends TypeImpl implements
 	 * @see com.sun.jdi.ReferenceType#constantPool()
 	 * @since 3.3
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public byte[] constantPool() {
 		try {
 			ByteArrayOutputStream outBytes = new ByteArrayOutputStream();
@@ -2349,7 +2349,7 @@ public abstract class ReferenceTypeImpl extends TypeImpl implements
 			readInt("pool count", replyData); //$NON-NLS-1$
 			int bytes = readInt("byte count", replyData); //$NON-NLS-1$
 			byte[] array = new byte[bytes];
-			for (int i = 0; i < bytes; i++) {
+			for (int i = 0; i < bytes; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				array[i] = readByte("byte read", replyData); //$NON-NLS-1$
 			}
 			return array;
@@ -2387,7 +2387,7 @@ public abstract class ReferenceTypeImpl extends TypeImpl implements
 	 * @throws IncompatibleThreadStateException if the specified thread has not been suspended
 	 * @throws InvocationException if the method invocation resulted in an exception
 	 */
-	protected Value invokeMethod(ThreadReference thread, Method method, List<? extends Value> arguments, int options, int command) throws InvalidTypeException,
+	protected Value invokeMethod(ThreadReference thread, Method method, List<? extends Value> arguments, int options, int command) throws InvalidTypeException, //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 			ClassNotLoadedException, IncompatibleThreadStateException,
 			InvocationException {
 		checkVM(thread);
@@ -2423,7 +2423,7 @@ public abstract class ReferenceTypeImpl extends TypeImpl implements
 
 			writeInt(checkedArguments.size(), "size", outData); //$NON-NLS-1$
 			Iterator<Value> iter = checkedArguments.iterator();
-			while (iter.hasNext()) {
+			while (iter.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				Value elt = iter.next();
 				if (elt instanceof ValueImpl) {
 					((ValueImpl)elt).writeWithTag(this, outData);

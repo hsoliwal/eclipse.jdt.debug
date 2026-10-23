@@ -164,7 +164,7 @@ public class VirtualMachineImpl extends MirrorImpl implements VirtualMachine,
 	/**
 	 * Creates a new Virtual Machine.
 	 */
-	public VirtualMachineImpl(Connection connection) {
+	public VirtualMachineImpl(Connection connection) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		super("VirtualMachine"); //$NON-NLS-1$
 		fEventReqMgr = new EventRequestManagerImpl(this);
 		fEventQueue = new EventQueueImpl(this);
@@ -258,7 +258,7 @@ public class VirtualMachineImpl extends MirrorImpl implements VirtualMachine,
 	public void flushStoredJdwpResults() {
 		// All known classes also become invalid.
 		Iterator<Object> iter = fCachedReftypes.values().iterator();
-		while (iter.hasNext()) {
+		while (iter.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			ReferenceTypeImpl refType = (ReferenceTypeImpl) iter.next();
 			refType.flushStoredJdwpResults();
 		}
@@ -273,7 +273,7 @@ public class VirtualMachineImpl extends MirrorImpl implements VirtualMachine,
 	 * received its ReferenceTypeID and we have not received an unload event for
 	 * it.
 	 */
-	public final void removeKnownRefType(String signature) {
+	public final void removeKnownRefType(String signature) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		List<ReferenceType> refTypeList = classesBySignature(signature);
 		if (refTypeList.isEmpty()) {
 			return;
@@ -292,7 +292,7 @@ public class VirtualMachineImpl extends MirrorImpl implements VirtualMachine,
 		// We have more than one known class for the signature, let's find the
 		// unloaded one(s).
 		Iterator<ReferenceType> iter = refTypeList.iterator();
-		while (iter.hasNext()) {
+		while (iter.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			ReferenceTypeImpl refType = (ReferenceTypeImpl) iter.next();
 			boolean prepared = false;
 			try {
@@ -336,7 +336,7 @@ public class VirtualMachineImpl extends MirrorImpl implements VirtualMachine,
 	/*
 	 * @return Returns Manager for sending packets to the Virtual Machine.
 	 */
-	public final PacketSendManager packetSendManager() {
+	public final PacketSendManager packetSendManager() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		/*
 		 * Before we send out first bytes to the VM by JDI calls, we need some
 		 * initial requests: - Get the sizes of the IDs (fieldID, method ID
@@ -365,7 +365,7 @@ public class VirtualMachineImpl extends MirrorImpl implements VirtualMachine,
 	 * loaded type in the target VM a ReferenceType will be placed in the
 	 * returned list.
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public List<ReferenceType> allClasses() {
 		// Note that this information should not be cached.
 		initJdwpRequest();
@@ -378,8 +378,8 @@ public class VirtualMachineImpl extends MirrorImpl implements VirtualMachine,
 			defaultReplyErrorHandler(replyPacket.errorCode());
 			DataInputStream replyData = replyPacket.dataInStream();
 			int nrOfElements = readInt("elements", replyData); //$NON-NLS-1$
-			List<ReferenceType> elements = new ArrayList<>(nrOfElements);
-			for (int i = 0; i < nrOfElements; i++) {
+			List<ReferenceType> elements = new ArrayList<>(nrOfElements); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
+			for (int i = 0; i < nrOfElements; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				ReferenceTypeImpl elt = ReferenceTypeImpl
 						.readWithTypeTagAndSignature(this,
 								withGenericSignature, replyData);
@@ -418,7 +418,7 @@ public class VirtualMachineImpl extends MirrorImpl implements VirtualMachine,
 	 * in the target VM, a ThreadReference that mirrors it is placed in the
 	 * list.
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public List<ThreadReference> allThreads() {
 		// Note that this information should not be cached.
 		initJdwpRequest();
@@ -427,8 +427,8 @@ public class VirtualMachineImpl extends MirrorImpl implements VirtualMachine,
 			defaultReplyErrorHandler(replyPacket.errorCode());
 			DataInputStream replyData = replyPacket.dataInStream();
 			int nrOfElements = readInt("elements", replyData); //$NON-NLS-1$
-			List<ThreadReference> elements = new ArrayList<>(nrOfElements);
-			for (int i = 0; i < nrOfElements; i++) {
+			List<ThreadReference> elements = new ArrayList<>(nrOfElements); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
+			for (int i = 0; i < nrOfElements; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				ThreadReferenceImpl elt = ThreadReferenceImpl.read(this,
 						replyData);
 				if (elt == null) {
@@ -448,7 +448,7 @@ public class VirtualMachineImpl extends MirrorImpl implements VirtualMachine,
 	/**
 	 * Retrieve this VM's capabilities.
 	 */
-	public void getCapabilities() {
+	public void getCapabilities() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		if (fGotCapabilities) {
 			return;
 		}
@@ -646,7 +646,7 @@ public class VirtualMachineImpl extends MirrorImpl implements VirtualMachine,
 	/**
 	 * @return Returns the loaded reference types that match a given signature.
 	 */
-	public List<ReferenceType> classesBySignature(String signature) {
+	public List<ReferenceType> classesBySignature(String signature) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		// Note that this information should not be cached.
 		initJdwpRequest();
 		try {
@@ -659,8 +659,8 @@ public class VirtualMachineImpl extends MirrorImpl implements VirtualMachine,
 			defaultReplyErrorHandler(replyPacket.errorCode());
 			DataInputStream replyData = replyPacket.dataInStream();
 			int nrOfElements = readInt("elements", replyData); //$NON-NLS-1$
-			List<ReferenceType> elements = new ArrayList<>(nrOfElements);
-			for (int i = 0; i < nrOfElements; i++) {
+			List<ReferenceType> elements = new ArrayList<>(nrOfElements); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
+			for (int i = 0; i < nrOfElements; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				ReferenceTypeImpl elt = ReferenceTypeImpl.readWithTypeTag(this,
 						replyData);
 				readInt("status", ReferenceTypeImpl.classStatusStrings(), replyData); //$NON-NLS-1$
@@ -816,7 +816,7 @@ public class VirtualMachineImpl extends MirrorImpl implements VirtualMachine,
 	/* (non-Javadoc)
 	 * @see com.sun.jdi.VirtualMachine#mirrorOf(java.lang.String)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public StringReference mirrorOf(String value) {
 		initJdwpRequest();
 		try {
@@ -903,7 +903,7 @@ public class VirtualMachineImpl extends MirrorImpl implements VirtualMachine,
 	/* (non-Javadoc)
 	 * @see com.sun.jdi.VirtualMachine#topLevelThreadGroups()
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public List<ThreadGroupReference> topLevelThreadGroups() {
 		// Note that this information should not be cached.
 		initJdwpRequest();
@@ -913,8 +913,8 @@ public class VirtualMachineImpl extends MirrorImpl implements VirtualMachine,
 
 			DataInputStream replyData = replyPacket.dataInStream();
 			int nrGroups = readInt("nr of groups", replyData); //$NON-NLS-1$
-			ArrayList<ThreadGroupReference> result = new ArrayList<>(nrGroups);
-			for (int i = 0; i < nrGroups; i++) {
+			ArrayList<ThreadGroupReference> result = new ArrayList<>(nrGroups); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
+			for (int i = 0; i < nrGroups; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				ThreadGroupReferenceImpl threadGroup = ThreadGroupReferenceImpl.read(this, replyData);
 				result.add(threadGroup);
 			}
@@ -960,7 +960,7 @@ public class VirtualMachineImpl extends MirrorImpl implements VirtualMachine,
 	private void resetThreadEventFlags() {
 		Iterator<ThreadReference> iter = allThreads().iterator();
 		ThreadReferenceImpl thread;
-		while (iter.hasNext()) {
+		while (iter.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			thread = (ThreadReferenceImpl) iter.next();
 			thread.resetEventFlags();
 		}
@@ -969,7 +969,7 @@ public class VirtualMachineImpl extends MirrorImpl implements VirtualMachine,
 	/**
 	 * Request and fetch ID sizes of Virtual Machine.
 	 */
-	private void getIDSizes() {
+	private void getIDSizes() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		if (fGotIDSizes) {
 			return;
 		}
@@ -1007,7 +1007,7 @@ public class VirtualMachineImpl extends MirrorImpl implements VirtualMachine,
 	/**
 	 * Retrieves version info of the VM.
 	 */
-	public void getVersionInfo() {
+	public void getVersionInfo() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		if (fVersionDescription != null) {
 			return;
 		}
@@ -1041,7 +1041,7 @@ public class VirtualMachineImpl extends MirrorImpl implements VirtualMachine,
 	/**
 	 * Retrieves the HCR capabilities of the VM.
 	 */
-	public void getHCRCapabilities() {
+	public void getHCRCapabilities() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		if (fHcrCapabilities != null) {
 			return;
 		}
@@ -1069,7 +1069,7 @@ public class VirtualMachineImpl extends MirrorImpl implements VirtualMachine,
 				handledJdwpRequest();
 			}
 		} else {
-			for (int i = 0; i < fHcrCapabilities.length; i++) {
+			for (int i = 0; i < fHcrCapabilities.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				fHcrCapabilities[i] = false;
 			}
 		}
@@ -1130,7 +1130,7 @@ public class VirtualMachineImpl extends MirrorImpl implements VirtualMachine,
 	/* (non-Javadoc)
 	 * @see org.eclipse.jdi.hcr.VirtualMachine#classesHaveChanged(java.lang.String[])
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public int classesHaveChanged(String[] names) {
 		checkHCRSupported();
 		// We convert the class/interface names to signatures.
@@ -1141,7 +1141,7 @@ public class VirtualMachineImpl extends MirrorImpl implements VirtualMachine,
 			ByteArrayOutputStream outBytes = new ByteArrayOutputStream();
 			DataOutputStream outData = new DataOutputStream(outBytes);
 			writeInt(names.length, "length", outData); //$NON-NLS-1$
-			for (int i = 0; i < names.length; i++) {
+			for (int i = 0; i < names.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				signatures[i] = TypeImpl.classNameToSignature(names[i]);
 				writeString(signatures[i], "signature", outData); //$NON-NLS-1$
 			}
@@ -1161,7 +1161,7 @@ public class VirtualMachineImpl extends MirrorImpl implements VirtualMachine,
 				return RELOAD_IGNORED;
 			}
 			throw new InternalError(
-					JDIMessages.VirtualMachineImpl_Invalid_result_flag_in_Classes_Have_Changed_response___3
+					JDIMessages.VirtualMachineImpl_Invalid_result_flag_in_Classes_Have_Changed_response___3 //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 							+ resultFlag + JDIMessages.VirtualMachineImpl__4); //
 		} catch (IOException e) {
 			defaultIOExceptionHandler(e);
@@ -1186,14 +1186,14 @@ public class VirtualMachineImpl extends MirrorImpl implements VirtualMachine,
 	/**
 	 * Retrieves constant mappings.
 	 */
-	public static void getConstantMaps() {
+	public static void getConstantMaps() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		if (fgHCRResultMap != null) {
 			return;
 		}
 
 		Field[] fields = VirtualMachineImpl.class.getDeclaredFields();
-		fgHCRResultMap = new HashMap<>();
-		for (Field field : fields) {
+		fgHCRResultMap = new HashMap<>(); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
+		for (Field field : fields) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			if ((field.getModifiers() & Modifier.PUBLIC) == 0
 					|| (field.getModifiers() & Modifier.STATIC) == 0
 					|| (field.getModifiers() & Modifier.FINAL) == 0) {
@@ -1254,7 +1254,7 @@ public class VirtualMachineImpl extends MirrorImpl implements VirtualMachine,
 				|| (fJdwpMajorVersion == major && fJdwpMinorVersion >= minor);
 	}
 
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public void redefineClasses(Map<? extends ReferenceType, byte[]> typesToBytes) {
 		if (!canRedefineClasses()) {
 			throw new UnsupportedOperationException();
@@ -1268,12 +1268,12 @@ public class VirtualMachineImpl extends MirrorImpl implements VirtualMachine,
 
 			Set<? extends ReferenceType> types = typesToBytes.keySet();
 			Iterator<? extends ReferenceType> iter = types.iterator();
-			while (iter.hasNext()) {
+			while (iter.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				ReferenceTypeImpl type = (ReferenceTypeImpl) iter.next();
 				type.write(this, outData);
 				byte[] bytes = typesToBytes.get(type);
 				writeInt(bytes.length, "classfile", outData); //$NON-NLS-1$
-				for (byte b : bytes) {
+				for (byte b : bytes) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 					writeByte(b, "classByte", outData); //$NON-NLS-1$
 				}
 				fCachedReftypes.remove(type.getRefTypeID()); // flush local
@@ -1404,7 +1404,7 @@ public class VirtualMachineImpl extends MirrorImpl implements VirtualMachine,
 	/*
 	 * @see VirtualMachine#setDefaultStratum(String)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public void setDefaultStratum(String stratum) {
 		fDefaultStratum = stratum;
 
@@ -1444,7 +1444,7 @@ public class VirtualMachineImpl extends MirrorImpl implements VirtualMachine,
 	/* (non-Javadoc)
 	 * @see com.sun.jdi.VirtualMachine#instanceCounts(java.util.List)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public long[] instanceCounts(List<? extends ReferenceType> refTypes) {
 		if (refTypes == null) {
 			throw new NullPointerException(JDIMessages.VirtualMachineImpl_2);
@@ -1460,7 +1460,7 @@ public class VirtualMachineImpl extends MirrorImpl implements VirtualMachine,
 			ByteArrayOutputStream outBytes = new ByteArrayOutputStream();
 			DataOutputStream outData = new DataOutputStream(outBytes);
 			writeInt(size, "size", outData); //$NON-NLS-1$
-			for (int i = 0; i < size; i++) {
+			for (int i = 0; i < size; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				((ReferenceTypeImpl) refTypes.get(i)).getRefTypeID().write(
 						outData);
 			}
@@ -1488,7 +1488,7 @@ public class VirtualMachineImpl extends MirrorImpl implements VirtualMachine,
 				throw new InternalError(JDIMessages.VirtualMachineImpl_3);
 			}
 			long[] ret = new long[counts];
-			for (int i = 0; i < counts; i++) {
+			for (int i = 0; i < counts; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				ret[i] = readLong("ref count", replyData); //$NON-NLS-1$
 			}
 			return ret;

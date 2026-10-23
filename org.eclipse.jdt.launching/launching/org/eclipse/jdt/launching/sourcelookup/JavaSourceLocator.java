@@ -103,7 +103,7 @@ public class JavaSourceLocator implements IPersistableSourceLocator {
 	 * (value <code>"org.eclipse.jdt.launching.javaSourceLocator"</code>).
 	 */
 	@Deprecated
-	public static final String ID_JAVA_SOURCE_LOCATOR = LaunchingPlugin.getUniqueIdentifier() + ".javaSourceLocator"; //$NON-NLS-1$
+	public static final String ID_JAVA_SOURCE_LOCATOR = LaunchingPlugin.getUniqueIdentifier() + ".javaSourceLocator"; //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 	/**
 	 * A collection of the source locations to search
@@ -128,10 +128,10 @@ public class JavaSourceLocator implements IPersistableSourceLocator {
 	 * 	as well
 	 * @throws CoreException if a new locator fails to be created
 	 */
-	@Deprecated
+	@Deprecated //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public JavaSourceLocator(IJavaProject[] projects, boolean includeRequired) throws CoreException {
-		ArrayList<IJavaProject> requiredProjects = new ArrayList<>();
-		for (int i= 0; i < projects.length; i++) {
+		ArrayList<IJavaProject> requiredProjects = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
+		for (int i= 0; i < projects.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			if (includeRequired) {
 				collectRequiredProjects(projects[i], requiredProjects);
 			} else {
@@ -142,14 +142,14 @@ public class JavaSourceLocator implements IPersistableSourceLocator {
 		}
 
 		// only add external entries with the same location once
-		HashMap<IPath, IPath> external = new HashMap<>();
-		ArrayList<PackageFragmentRootSourceLocation> list = new ArrayList<>();
+		HashMap<IPath, IPath> external = new HashMap<>(); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
+		ArrayList<PackageFragmentRootSourceLocation> list = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 		// compute the default locations for each project, and add unique ones
 		Iterator<IJavaProject> iter = requiredProjects.iterator();
-		while (iter.hasNext()) {
+		while (iter.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			IJavaProject p = iter.next();
 			IPackageFragmentRoot[] roots = p.getPackageFragmentRoots();
-			for (int i = 0; i < roots.length; i++) {
+			for (int i = 0; i < roots.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				if (roots[i].isExternal()) {
 					IPath location = roots[i].getPath();
 					if (external.get(location) == null) {
@@ -223,7 +223,7 @@ public class JavaSourceLocator implements IPersistableSourceLocator {
 	 * the given stack frame, or <code>null</code> if none
 	 * @since 2.1
 	 */
-	@Deprecated
+	@Deprecated //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public Object[] getSourceElements(IStackFrame stackFrame) {
 		if (stackFrame instanceof IJavaStackFrame frame) {
 			String name = null;
@@ -239,9 +239,9 @@ public class JavaSourceLocator implements IPersistableSourceLocator {
 				}
 				return null;
 			}
-			List<Object> list = new ArrayList<>();
+			List<Object> list = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 			IJavaSourceLocation[] locations = getSourceLocations();
-			for (int i = 0; i < locations.length; i++) {
+			for (int i = 0; i < locations.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				try {
 					Object sourceElement = locations[i].findSourceElement(name);
 					if (sourceElement != null) {
@@ -260,7 +260,7 @@ public class JavaSourceLocator implements IPersistableSourceLocator {
 	/* (non-Javadoc)
 	 * @see org.eclipse.debug.core.model.ISourceLocator#getSourceElement(org.eclipse.debug.core.model.IStackFrame)
 	 */
-	@Deprecated
+	@Deprecated //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	@Override
 	public Object getSourceElement(IStackFrame stackFrame) {
 		if (stackFrame instanceof IJavaStackFrame frame) {
@@ -278,7 +278,7 @@ public class JavaSourceLocator implements IPersistableSourceLocator {
 				return null;
 			}
 			IJavaSourceLocation[] locations = getSourceLocations();
-			for (int i = 0; i < locations.length; i++) {
+			for (int i = 0; i < locations.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				try {
 					Object sourceElement = locations[i].findSourceElement(name);
 					if (sourceElement != null) {
@@ -293,7 +293,7 @@ public class JavaSourceLocator implements IPersistableSourceLocator {
 		return null;
 	}
 
-	private String getFullyQualfiedName(IJavaStackFrame frame) throws CoreException {
+	private String getFullyQualfiedName(IJavaStackFrame frame) throws CoreException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String name = null;
 		if (frame.isObsolete()) {
 			return null;
@@ -340,7 +340,7 @@ public class JavaSourceLocator implements IPersistableSourceLocator {
 	 * @param res the list to add all required projects too
 	 * @throws JavaModelException if there is a problem with the backing Java model
 	 */
-	@Deprecated
+	@Deprecated //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	protected static void collectRequiredProjects(IJavaProject proj, ArrayList<IJavaProject> res) throws JavaModelException {
 		if (!res.contains(proj)) {
 			res.add(proj);
@@ -348,7 +348,7 @@ public class JavaSourceLocator implements IPersistableSourceLocator {
 			IJavaModel model= proj.getJavaModel();
 
 			IClasspathEntry[] entries= proj.getRawClasspath();
-			for (int i= 0; i < entries.length; i++) {
+			for (int i= 0; i < entries.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				IClasspathEntry curr= entries[i];
 				if (curr.getEntryKind() == IClasspathEntry.CPE_PROJECT) {
 					IJavaProject ref= model.getJavaProject(curr.getPath().segment(0));
@@ -393,7 +393,7 @@ public class JavaSourceLocator implements IPersistableSourceLocator {
 		doc.appendChild(node);
 
 		IJavaSourceLocation[] locations = getSourceLocations();
-		for (int i = 0; i < locations.length; i++) {
+		for (int i = 0; i < locations.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			Element child = doc.createElement("javaSourceLocation"); //$NON-NLS-1$
 			child.setAttribute("class", locations[i].getClass().getName()); //$NON-NLS-1$
 			child.setAttribute("memento", locations[i].getMemento()); //$NON-NLS-1$
@@ -416,7 +416,7 @@ public class JavaSourceLocator implements IPersistableSourceLocator {
 	/* (non-Javadoc)
 	 * @see org.eclipse.debug.core.model.IPersistableSourceLocator#initializeFromMemento(java.lang.String)
 	 */
-	@Deprecated
+	@Deprecated //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	@Override
 	public void initializeFromMemento(String memento) throws CoreException {
 		Exception ex = null;
@@ -434,12 +434,12 @@ public class JavaSourceLocator implements IPersistableSourceLocator {
 				abort(LaunchingMessages.JavaSourceLocator_Unable_to_restore_Java_source_locator___invalid_format__6, null);
 			}
 
-			List<IJavaSourceLocation> sourceLocations = new ArrayList<>();
+			List<IJavaSourceLocation> sourceLocations = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 			Bundle bundle = LaunchingPlugin.getDefault().getBundle();
 
 			NodeList list = root.getChildNodes();
 			int length = list.getLength();
-			for (int i = 0; i < length; ++i) {
+			for (int i = 0; i < length; ++i) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				Node node = list.item(i);
 				short type = node.getNodeType();
 				if (type == Node.ELEMENT_NODE) {
@@ -488,9 +488,9 @@ public class JavaSourceLocator implements IPersistableSourceLocator {
 	 * @param entries the entries to compute source locations for
 	 * @return the array of {@link IJavaSourceLocation}
 	 */
-	private static IJavaSourceLocation[] getSourceLocations(IRuntimeClasspathEntry[] entries) {
-		List<IJavaSourceLocation> locations = new ArrayList<>(entries.length);
-		for (int i = 0; i < entries.length; i++) {
+	private static IJavaSourceLocation[] getSourceLocations(IRuntimeClasspathEntry[] entries) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
+		List<IJavaSourceLocation> locations = new ArrayList<>(entries.length); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
+		for (int i = 0; i < entries.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			IRuntimeClasspathEntry entry = entries[i];
 			IJavaSourceLocation location = null;
 			switch (entry.getType()) {
@@ -594,7 +594,7 @@ public class JavaSourceLocator implements IPersistableSourceLocator {
 	 * @param entry archive runtime classpath entry
 	 * @return IJavaSourceLocation or <code>null</code>
 	 */
-	private static IJavaSourceLocation getArchiveSourceLocation(IRuntimeClasspathEntry entry) {
+	private static IJavaSourceLocation getArchiveSourceLocation(IRuntimeClasspathEntry entry) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IResource resource = entry.getResource();
 		if (resource == null) {
 			// Check all package fragment roots for case of external archive.
@@ -603,9 +603,9 @@ public class JavaSourceLocator implements IPersistableSourceLocator {
 			IJavaModel model = JavaCore.create(ResourcesPlugin.getWorkspace().getRoot());
 			try {
 				IJavaProject[] jps = model.getJavaProjects();
-				for (int i = 0; i < jps.length; i++) {
+				for (int i = 0; i < jps.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 					IPackageFragmentRoot[] allRoots = jps[i].getPackageFragmentRoots();
-					for (int j = 0; j < allRoots.length; j++) {
+					for (int j = 0; j < allRoots.length; j++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 						IPackageFragmentRoot root = allRoots[j];
 						if (root.isExternal() && root.getPath().equals(new Path(entry.getLocation()))) {
 							if (isSourceAttachmentEqual(root, entry)) {
@@ -626,7 +626,7 @@ public class JavaSourceLocator implements IPersistableSourceLocator {
 				if (jp != null && jp.exists()) {
 					IPackageFragmentRoot root = jp.getPackageFragmentRoot(resource);
 					IPackageFragmentRoot[] allRoots = jp.getPackageFragmentRoots();
-					for (int j = 0; j < allRoots.length; j++) {
+					for (int j = 0; j < allRoots.length; j++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 						if (allRoots[j].equals(root)) {
 							// ensure source attachment paths match
 							if (isSourceAttachmentEqual(root, entry)) {
@@ -641,9 +641,9 @@ public class JavaSourceLocator implements IPersistableSourceLocator {
 				// the archive
 				IJavaModel model = JavaCore.create(ResourcesPlugin.getWorkspace().getRoot());
 				IJavaProject[] jps = model.getJavaProjects();
-				for (int i = 0; i < jps.length; i++) {
+				for (int i = 0; i < jps.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 					IPackageFragmentRoot[] allRoots = jps[i].getPackageFragmentRoots();
-					for (int j = 0; j < allRoots.length; j++) {
+					for (int j = 0; j < allRoots.length; j++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 						IPackageFragmentRoot root = allRoots[j];
 						if (!root.isExternal() && root.getPath().equals(entry.getPath())) {
 							if (isSourceAttachmentEqual(root, entry)) {

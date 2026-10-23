@@ -87,7 +87,7 @@ public class NestedTypeTestGenerator extends TestGenerator {
 		 2, 1, 2, 2, 2, 1, 2, 2, 2, 1,
 		 1, 2, 2, 2, 2, 2, 2};
 
-	public static void main(String[] args) throws Exception {
+	public static void main(String[] args) throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		gen_AA_aa();
 		gen_AA_aaStatic();
 		gen_AB_ab();
@@ -122,8 +122,8 @@ public class NestedTypeTestGenerator extends TestGenerator {
 		System.out.println("done");
 	}
 
-	public static void gen_AA_aa() throws Exception {
-		StringBuilder code= new StringBuilder();
+	public static void gen_AA_aa() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
+		StringBuilder code= new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 
 		createTest('b', 2, code);
 		createTest('c', 2, code);
@@ -145,7 +145,7 @@ public class NestedTypeTestGenerator extends TestGenerator {
 	}
 
 	public static void gen_AA_aaStatic() throws Exception {
-		StringBuilder code= new StringBuilder();
+		StringBuilder code= new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 
 		createTest('b', 2, code);
 		createTest('d', 2, code);
@@ -157,8 +157,8 @@ public class NestedTypeTestGenerator extends TestGenerator {
 		createJavaFile(code, 69, 4);
 	}
 
-	public static void gen_AB_ab() throws Exception {
-		StringBuilder code= new StringBuilder();
+	public static void gen_AB_ab() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
+		StringBuilder code= new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 
 		createTest('b', 2, code);
 		createTest('c', 2, code);
@@ -185,7 +185,7 @@ public class NestedTypeTestGenerator extends TestGenerator {
 	}
 
 	public static void gen_AC_ac() throws Exception {
-		StringBuilder code= new StringBuilder();
+		StringBuilder code= new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 
 		createTest('b', 2, code);
 		createTest('g', 2, code);
@@ -200,7 +200,7 @@ public class NestedTypeTestGenerator extends TestGenerator {
 	}
 
 	public static void gen_AD_ad() throws Exception {
-		StringBuilder code= new StringBuilder();
+		StringBuilder code= new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 
 		createTest('b', 2, code);
 		createTest('g', 2, code);
@@ -214,8 +214,8 @@ public class NestedTypeTestGenerator extends TestGenerator {
 		createJavaFile(code, 145, 4);
 	}
 
-	public static void gen_A_a() throws Exception {
-		StringBuilder code= new StringBuilder();
+	public static void gen_A_a() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
+		StringBuilder code= new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 
 		createTest('b', 1, code);
 		createTest('c', 1, code);
@@ -239,7 +239,7 @@ public class NestedTypeTestGenerator extends TestGenerator {
 	}
 
 	public static void gen_AE_ae() throws Exception {
-		StringBuilder code= new StringBuilder();
+		StringBuilder code= new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 
 		createTest('b', 2, code);
 		createTest('h', 2, code);
@@ -249,7 +249,7 @@ public class NestedTypeTestGenerator extends TestGenerator {
 	}
 
 	public static void gen_AF_af() throws Exception {
-		StringBuilder code= new StringBuilder();
+		StringBuilder code= new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 
 		createTest('b', 2, code);
 		createTest('h', 2, code);
@@ -259,7 +259,7 @@ public class NestedTypeTestGenerator extends TestGenerator {
 	}
 
 	public static void gen_A_aStatic() throws Exception {
-		StringBuilder code= new StringBuilder();
+		StringBuilder code= new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 
 		createTest('b', 1, code);
 		createTest('d', 1, code);
@@ -276,8 +276,8 @@ public class NestedTypeTestGenerator extends TestGenerator {
 		createJavaFile(code, 214, 3);
 	}
 
-	public static void gen_BB_bb() throws Exception {
-		StringBuilder code= new StringBuilder();
+	public static void gen_BB_bb() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
+		StringBuilder code= new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 
 		createTest('a', 2, code);
 		createTest('b', 2, code);
@@ -310,8 +310,8 @@ public class NestedTypeTestGenerator extends TestGenerator {
 		createJavaFile(code, 252, 4);
 	}
 
-	public static void gen_BC_bc() throws Exception {
-		StringBuilder code= new StringBuilder();
+	public static void gen_BC_bc() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
+		StringBuilder code= new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 
 		createTest('a', 2, code);
 		createTest('b', 2, code);
@@ -332,8 +332,8 @@ public class NestedTypeTestGenerator extends TestGenerator {
 		createJavaFile(code, 279, 4);
 	}
 
-	public static void gen_BD_bd() throws Exception {
-		StringBuilder code= new StringBuilder();
+	public static void gen_BD_bd() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
+		StringBuilder code= new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 
 		createTest('a', 2, code);
 		createTest('b', 2, code);
@@ -354,8 +354,8 @@ public class NestedTypeTestGenerator extends TestGenerator {
 		createJavaFile(code, 304, 4);
 	}
 
-	public static void gen_B_b() throws Exception {
-		StringBuilder code= new StringBuilder();
+	public static void gen_B_b() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
+		StringBuilder code= new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 
 		createTest('a', 1, code);
 		createTest('b', 1, code);
@@ -387,7 +387,7 @@ public class NestedTypeTestGenerator extends TestGenerator {
 	}
 
 	public static void gen_CB_cb() throws Exception {
-		StringBuilder code= new StringBuilder();
+		StringBuilder code= new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 
 		createTest('a', 2, code);
 		createTest('b', 2, code);
@@ -403,7 +403,7 @@ public class NestedTypeTestGenerator extends TestGenerator {
 	}
 
 	public static void gen_CC_cc() throws Exception {
-		StringBuilder code= new StringBuilder();
+		StringBuilder code= new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 
 		createTest('a', 2, code);
 		createTest('b', 2, code);
@@ -419,7 +419,7 @@ public class NestedTypeTestGenerator extends TestGenerator {
 	}
 
 	public static void gen_CD_cd() throws Exception {
-		StringBuilder code= new StringBuilder();
+		StringBuilder code= new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 
 		createTest('a', 2, code);
 		createTest('b', 2, code);
@@ -435,7 +435,7 @@ public class NestedTypeTestGenerator extends TestGenerator {
 	}
 
 	public static void gen_C_c() throws Exception {
-		StringBuilder code= new StringBuilder();
+		StringBuilder code= new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 
 		createTest('a', 1, code);
 		createTest('b', 1, code);
@@ -453,7 +453,7 @@ public class NestedTypeTestGenerator extends TestGenerator {
 	}
 
 	public static void gen_DB_db() throws Exception {
-		StringBuilder code= new StringBuilder();
+		StringBuilder code= new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 
 		createTest('a', 2, code);
 		createTest('b', 2, code);
@@ -469,7 +469,7 @@ public class NestedTypeTestGenerator extends TestGenerator {
 	}
 
 	public static void gen_DC_dc() throws Exception {
-		StringBuilder code= new StringBuilder();
+		StringBuilder code= new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 
 		createTest('a', 2, code);
 		createTest('b', 2, code);
@@ -485,7 +485,7 @@ public class NestedTypeTestGenerator extends TestGenerator {
 	}
 
 	public static void gen_DD_dd() throws Exception {
-		StringBuilder code= new StringBuilder();
+		StringBuilder code= new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 
 		createTest('a', 2, code);
 		createTest('b', 2, code);
@@ -501,7 +501,7 @@ public class NestedTypeTestGenerator extends TestGenerator {
 	}
 
 	public static void gen_D_d() throws Exception {
-		StringBuilder code= new StringBuilder();
+		StringBuilder code= new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 
 		createTest('a', 1, code);
 		createTest('b', 1, code);
@@ -518,8 +518,8 @@ public class NestedTypeTestGenerator extends TestGenerator {
 		createJavaFile(code, 517, 3);
 	}
 
-	public static void gen_evalNestedTypeTest() throws Exception {
-		StringBuilder code= new StringBuilder();
+	public static void gen_evalNestedTypeTest() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
+		StringBuilder code= new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 
 
 		createTest('a', 0, code);
@@ -550,7 +550,7 @@ public class NestedTypeTestGenerator extends TestGenerator {
 	}
 
 	public static void gen_EB_eb() throws Exception {
-		StringBuilder code= new StringBuilder();
+		StringBuilder code= new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 
 		createTest('b', 2, code);
 		createTestsStaticFields(code);
@@ -559,7 +559,7 @@ public class NestedTypeTestGenerator extends TestGenerator {
 	}
 
 	public static void gen_EC_ec() throws Exception {
-		StringBuilder code= new StringBuilder();
+		StringBuilder code= new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 
 		createTest('b', 2, code);
 		createTestsStaticFields(code);
@@ -568,7 +568,7 @@ public class NestedTypeTestGenerator extends TestGenerator {
 	}
 
 	public static void gen_ED_ed() throws Exception {
-		StringBuilder code= new StringBuilder();
+		StringBuilder code= new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 
 		createTest('b', 2, code);
 		createTestsStaticFields(code);
@@ -577,7 +577,7 @@ public class NestedTypeTestGenerator extends TestGenerator {
 	}
 
 	public static void gen_E_e() throws Exception {
-		StringBuilder code= new StringBuilder();
+		StringBuilder code= new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 
 		createTest('b', 1, code);
 		createTest('f', 1, code);
@@ -587,7 +587,7 @@ public class NestedTypeTestGenerator extends TestGenerator {
 	}
 
 	public static void gen_FB_fb() throws Exception {
-		StringBuilder code= new StringBuilder();
+		StringBuilder code= new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 
 		createTest('b', 2, code);
 		createTestsStaticFields(code);
@@ -596,7 +596,7 @@ public class NestedTypeTestGenerator extends TestGenerator {
 	}
 
 	public static void gen_FC_fc() throws Exception {
-		StringBuilder code= new StringBuilder();
+		StringBuilder code= new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 
 		createTest('b', 2, code);
 		createTestsStaticFields(code);
@@ -605,7 +605,7 @@ public class NestedTypeTestGenerator extends TestGenerator {
 	}
 
 	public static void gen_FD_fd() throws Exception {
-		StringBuilder code= new StringBuilder();
+		StringBuilder code= new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 
 		createTest('b', 2, code);
 		createTestsStaticFields(code);
@@ -614,7 +614,7 @@ public class NestedTypeTestGenerator extends TestGenerator {
 	}
 
 	public static void gen_F_f() throws Exception {
-		StringBuilder code= new StringBuilder();
+		StringBuilder code= new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 
 		createTest('b', 1, code);
 		createTest('f', 1, code);
@@ -623,8 +623,8 @@ public class NestedTypeTestGenerator extends TestGenerator {
 		createJavaFile(code, 724, 3);
 	}
 
-	public static void gen_evalNestedTypeTestStatic() throws Exception {
-		StringBuilder code= new StringBuilder();
+	public static void gen_evalNestedTypeTestStatic() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
+		StringBuilder code= new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 
 		createTest('b', 0, code);
 		createTest('d', 0, code);
@@ -651,7 +651,7 @@ public class NestedTypeTestGenerator extends TestGenerator {
 	}
 
 	public static void gen_main() throws Exception {
-		StringBuilder code= new StringBuilder();
+		StringBuilder code= new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 
 		createTestsStaticFields(code);
 
@@ -660,7 +660,7 @@ public class NestedTypeTestGenerator extends TestGenerator {
 
 	// ------------------------------
 
-	public static void createTestsStaticFields(StringBuilder code) {
+	public static void createTestsStaticFields(StringBuilder code) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		createTestQualifier(T_T, 'b', code);
 		createTestQualifier(T_T, 'd', code);
 		createTestQualifier(T_T, 'f', code);
@@ -712,102 +712,102 @@ public class NestedTypeTestGenerator extends TestGenerator {
 	// ------------------------------
 
 	public static void createTest(char variable, int level, StringBuilder code) {
-		code.append("\tpublic void testEvalNestedTypeTest_" + variable + "() throws Throwable {\n");
+		code.append("\tpublic void testEvalNestedTypeTest_" + variable + "() throws Throwable {\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		tryBlockBegin(code);
 
-		genCodeEval(IInternalDebugCoreConstants.EMPTY_STRING + variable + "Int", true, code);
-		genCodeReturnTypeCheck(IInternalDebugCoreConstants.EMPTY_STRING + variable, "int", true, code);
-		genCodeReturnValueCheckPrimitiveType(IInternalDebugCoreConstants.EMPTY_STRING + variable, "int", "Int", variable + "IntValue_" + level, true, code);
-		code.append("\n");
+		genCodeEval(IInternalDebugCoreConstants.EMPTY_STRING + variable + "Int", true, code); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
+		genCodeReturnTypeCheck(IInternalDebugCoreConstants.EMPTY_STRING + variable, "int", true, code); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
+		genCodeReturnValueCheckPrimitiveType(IInternalDebugCoreConstants.EMPTY_STRING + variable, "int", "Int", variable + "IntValue_" + level, true, code); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
+		code.append("\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 
-		genCodeEval(IInternalDebugCoreConstants.EMPTY_STRING + variable + "String", false, code);
-		genCodeReturnTypeCheck(IInternalDebugCoreConstants.EMPTY_STRING + variable, "java.lang.String", false, code);
-		genCodeReturnValueCheckStringType(IInternalDebugCoreConstants.EMPTY_STRING + variable, variable + "StringValue_" + level, true, code);
+		genCodeEval(IInternalDebugCoreConstants.EMPTY_STRING + variable + "String", false, code); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
+		genCodeReturnTypeCheck(IInternalDebugCoreConstants.EMPTY_STRING + variable, "java.lang.String", false, code); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
+		genCodeReturnValueCheckStringType(IInternalDebugCoreConstants.EMPTY_STRING + variable, variable + "StringValue_" + level, true, code); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 		tryBlockEnd(code);
-		code.append("\t}\n\n");
+		code.append("\t}\n\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 	}
 
 	public static void createTestThis(char variable, int level, StringBuilder code) {
-		code.append("\tpublic void testEvalNestedTypeTest_this_" + variable + "() throws Throwable {\n");
+		code.append("\tpublic void testEvalNestedTypeTest_this_" + variable + "() throws Throwable {\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		tryBlockBegin(code);
 
-		genCodeEval("THIS + " + variable + "Int", true, code);
-		genCodeReturnTypeCheck(IInternalDebugCoreConstants.EMPTY_STRING + variable, "int", true, code);
-		genCodeReturnValueCheckPrimitiveType(IInternalDebugCoreConstants.EMPTY_STRING + variable, "int", "Int", variable + "IntValue_" + level, true, code);
-		code.append("\n");
+		genCodeEval("THIS + " + variable + "Int", true, code); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
+		genCodeReturnTypeCheck(IInternalDebugCoreConstants.EMPTY_STRING + variable, "int", true, code); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
+		genCodeReturnValueCheckPrimitiveType(IInternalDebugCoreConstants.EMPTY_STRING + variable, "int", "Int", variable + "IntValue_" + level, true, code); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
+		code.append("\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 
-		genCodeEval("THIS + " + variable + "String", false, code);
-		genCodeReturnTypeCheck(IInternalDebugCoreConstants.EMPTY_STRING + variable, "java.lang.String", false, code);
-		genCodeReturnValueCheckStringType(IInternalDebugCoreConstants.EMPTY_STRING + variable, variable + "StringValue_" + level, true, code);
+		genCodeEval("THIS + " + variable + "String", false, code); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
+		genCodeReturnTypeCheck(IInternalDebugCoreConstants.EMPTY_STRING + variable, "java.lang.String", false, code); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
+		genCodeReturnValueCheckStringType(IInternalDebugCoreConstants.EMPTY_STRING + variable, variable + "StringValue_" + level, true, code); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 		tryBlockEnd(code);
-		code.append("\t}\n\n");
+		code.append("\t}\n\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 	}
 
 
 
 	public static void createTestQualifier(int qualifier, char variable, StringBuilder code) {
 		String strQualifier= qualifiers[qualifier];
-		code.append("\tpublic void testEvalNestedTypeTest_" + strQualifier + "_" + variable + "() throws Throwable {\n");
+		code.append("\tpublic void testEvalNestedTypeTest_" + strQualifier + "_" + variable + "() throws Throwable {\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		tryBlockBegin(code);
 
-		genCodeEval(strQualifier + " + " + variable + "Int", true, code);
-		genCodeReturnTypeCheck(IInternalDebugCoreConstants.EMPTY_STRING + strQualifier + "_" + variable, "int", true, code);
-		genCodeReturnValueCheckPrimitiveType(IInternalDebugCoreConstants.EMPTY_STRING + strQualifier + "_" + variable, "int", "Int", variable + "IntValue_" + qualifiersLevel[qualifier], true, code);
-		code.append("\n");
+		genCodeEval(strQualifier + " + " + variable + "Int", true, code); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
+		genCodeReturnTypeCheck(IInternalDebugCoreConstants.EMPTY_STRING + strQualifier + "_" + variable, "int", true, code); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
+		genCodeReturnValueCheckPrimitiveType(IInternalDebugCoreConstants.EMPTY_STRING + strQualifier + "_" + variable, "int", "Int", variable + "IntValue_" + qualifiersLevel[qualifier], true, code); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
+		code.append("\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 
-		genCodeEval(strQualifier + " + " + variable + "String", false, code);
-		genCodeReturnTypeCheck(IInternalDebugCoreConstants.EMPTY_STRING + strQualifier + "_" + variable, "java.lang.String", false, code);
-		genCodeReturnValueCheckStringType(IInternalDebugCoreConstants.EMPTY_STRING + strQualifier + "_" + variable, variable + "StringValue_" + qualifiersLevel[qualifier], true, code);
+		genCodeEval(strQualifier + " + " + variable + "String", false, code); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
+		genCodeReturnTypeCheck(IInternalDebugCoreConstants.EMPTY_STRING + strQualifier + "_" + variable, "java.lang.String", false, code); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
+		genCodeReturnValueCheckStringType(IInternalDebugCoreConstants.EMPTY_STRING + strQualifier + "_" + variable, variable + "StringValue_" + qualifiersLevel[qualifier], true, code); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 		tryBlockEnd(code);
-		code.append("\t}\n\n");
+		code.append("\t}\n\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 	}
 
 	//---------------------
 
-	public static void createJavaFile(StringBuilder tests, int lineNumber, int numberFrames) throws Exception {
+	public static void createJavaFile(StringBuilder tests, int lineNumber, int numberFrames) throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 
-		StringBuilder code= new StringBuilder();
+		StringBuilder code= new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 
-		code.append("/*******************************************************************************\n");
-		code.append(" * Copyright (c) 2002, 2003 IBM Corporation and others.\n");
-		code.append(" * \n");
-		code.append("This program and the accompanying materials \n");
-		code.append(" * are made available under the terms of the Eclipse Public License 2.0\n");
-		code.append(" * which accompanies this distribution, and is available at\n");
-		code.append(" * https://www.eclipse.org/legal/epl-2.0/");
-		code.append(" * \n");
-		code.append(" * SPDX-License-Identifier: EPL-2.0\n");
-		code.append(" * \n");
-		code.append(" * Contributors:\n");
-		code.append(" *     IBM Corporation - initial API and implementation\n");
-		code.append(" *******************************************************************************/\n");
-		code.append("package org.eclipse.jdt.debug.tests.eval;\n\n");
-		code.append("import org.eclipse.jdt.debug.core.IJavaPrimitiveValue;\n\n");
-		code.append("import org.eclipse.debug.core.model.IValue;\n");
-		code.append("import org.eclipse.jdt.internal.debug.core.model.JDIObjectValue;\n\n");
-		code.append("public class NestedTypeFieldValue_" + lineNumber + " extends Tests {\n");
-		code.append("\t/**\n");
-		code.append("\t * Constructor for NestedTypeFieldValue.\n");
-		code.append("\t * @param name\n");
-		code.append("\t */\n");
-		code.append("\tpublic NestedTypeFieldValue_" + lineNumber + "(String name) {\n");
-		code.append("\t\tsuper(name);\n");
-		code.append("\t}\n\n");
-		code.append("\tpublic void init() throws Exception {\n");
-		code.append("\t\tinitializeFrame(\"EvalNestedTypeTests\", " + lineNumber + ", " + numberFrames + ");\n");
-		code.append("\t}\n\n");
-		code.append("\tprotected void end() throws Exception {\n");
-		code.append("\t\tdestroyFrame();\n");
-		code.append("\t}\n\n");
+		code.append("/*******************************************************************************\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+		code.append(" * Copyright (c) 2002, 2003 IBM Corporation and others.\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+		code.append(" * \n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+		code.append("This program and the accompanying materials \n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+		code.append(" * are made available under the terms of the Eclipse Public License 2.0\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+		code.append(" * which accompanies this distribution, and is available at\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+		code.append(" * https://www.eclipse.org/legal/epl-2.0/"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+		code.append(" * \n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+		code.append(" * SPDX-License-Identifier: EPL-2.0\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+		code.append(" * \n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+		code.append(" * Contributors:\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+		code.append(" *     IBM Corporation - initial API and implementation\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+		code.append(" *******************************************************************************/\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+		code.append("package org.eclipse.jdt.debug.tests.eval;\n\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+		code.append("import org.eclipse.jdt.debug.core.IJavaPrimitiveValue;\n\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+		code.append("import org.eclipse.debug.core.model.IValue;\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+		code.append("import org.eclipse.jdt.internal.debug.core.model.JDIObjectValue;\n\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+		code.append("public class NestedTypeFieldValue_" + lineNumber + " extends Tests {\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+		code.append("\t/**\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+		code.append("\t * Constructor for NestedTypeFieldValue.\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+		code.append("\t * @param name\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+		code.append("\t */\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+		code.append("\tpublic NestedTypeFieldValue_" + lineNumber + "(String name) {\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+		code.append("\t\tsuper(name);\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+		code.append("\t}\n\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+		code.append("\tpublic void init() throws Exception {\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+		code.append("\t\tinitializeFrame(\"EvalNestedTypeTests\", " + lineNumber + ", " + numberFrames + ");\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+		code.append("\t}\n\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+		code.append("\tprotected void end() throws Exception {\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+		code.append("\t\tdestroyFrame();\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+		code.append("\t}\n\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 
-		code.append(tests.toString());
+		code.append(tests.toString()); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 
-		code.append("}\n");
+		code.append("}\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 
-		try (Writer file = new FileWriter(new File("NestedTypeFieldValue_" + lineNumber + ".java").getAbsoluteFile())) {
+		try (Writer file = new FileWriter(new File("NestedTypeFieldValue_" + lineNumber + ".java").getAbsoluteFile())) { //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 			file.write(code.toString());
 		}
 

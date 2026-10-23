@@ -70,7 +70,7 @@ public class JDIReferenceListValue extends JDIObjectValue implements
 	/**
 	 * @return all references to the root object as an array of IJavaObjects
 	 */
-	protected synchronized IJavaObject[] getReferences() {
+	protected synchronized IJavaObject[] getReferences() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 			int max = HeapWalkingManager.getDefault()
 					.getAllReferencesMaxCount();
@@ -112,7 +112,7 @@ public class JDIReferenceListValue extends JDIObjectValue implements
 	 *
 	 * @see org.eclipse.jdt.internal.debug.core.model.JDIValue#getVariables()
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public IVariable[] getVariables() throws DebugException {
 		IJavaObject[] elements = getReferences();
 		IVariable[] vars = new JDIPlaceholderVariable[elements.length];
@@ -124,7 +124,7 @@ public class JDIReferenceListValue extends JDIObjectValue implements
 					elements[length]);
 		}
 
-		for (int i = 0; i < length; i++) {
+		for (int i = 0; i < length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			vars[i] = new JDIReferenceListEntryVariable(MessageFormat.format(
 					JDIDebugModelMessages.JDIReferenceListValue_0,
 					Integer.toString(i)), elements[i]);
@@ -216,11 +216,11 @@ public class JDIReferenceListValue extends JDIObjectValue implements
 	 * @return a string representation of this value to display in the detail
 	 *         pane
 	 */
-	public String getDetailString() {
-		StringBuilder buf = new StringBuilder();
+	public String getDetailString() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
+		StringBuilder buf = new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 		Object[] elements = getReferences();
 		if (elements.length == 0) {
-			buf.append(JDIDebugModelMessages.JDIReferenceListValue_2);
+			buf.append(JDIDebugModelMessages.JDIReferenceListValue_2); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		} else {
 			String length = null;
 			if (fIsMoreThanPreference) {
@@ -231,16 +231,16 @@ public class JDIReferenceListValue extends JDIObjectValue implements
 				length = Integer.toString(elements.length);
 			}
 			if (elements.length == 1) {
-				buf.append(MessageFormat.format(
+				buf.append(MessageFormat.format( //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 						JDIDebugModelMessages.JDIReferenceListValue_3,
 						length));
 			} else {
-				buf.append(MessageFormat.format(
+				buf.append(MessageFormat.format( //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 						JDIDebugModelMessages.JDIReferenceListValue_4,
 						length));
 			}
-			for (Object element : elements) {
-				buf.append(element + "\n"); //$NON-NLS-1$
+			for (Object element : elements) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
+				buf.append(element + "\n"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			}
 		}
 		return buf.toString();

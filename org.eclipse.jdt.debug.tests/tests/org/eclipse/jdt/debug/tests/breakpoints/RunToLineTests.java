@@ -114,7 +114,7 @@ public class RunToLineTests extends AbstractDebugTest {
 	 *  the target line number if the option to skip breakpoints is off).
 	 * @param skipBreakpoints preference value for "skip breakpoints during run to line"
 	 */
-	public void runToLine(final int lineNumber, int expectedLineNumber, boolean skipBreakpoints) throws Exception {
+	public void runToLine(final int lineNumber, int expectedLineNumber, boolean skipBreakpoints) throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String typeName = "Breakpoints";
 		IJavaLineBreakpoint breakpoint = createLineBreakpoint(55, typeName);
 
@@ -133,7 +133,7 @@ public class RunToLineTests extends AbstractDebugTest {
                 }
             };
             Display display = DebugUIPlugin.getStandardDisplay();
-            display.syncExec(closeAll);
+            display.syncExec(closeAll); //FLLDCIM: MARK — T08 UI_THREAD_SYNCHRONIZER CALL
 
 			thread= launchToLineBreakpoint(typeName, breakpoint);
 			// wait for editor to open
@@ -149,18 +149,18 @@ public class RunToLineTests extends AbstractDebugTest {
 						IWorkbenchWindow activeWorkbenchWindow = PlatformUI.getWorkbench().getActiveWorkbenchWindow();
 	                    IEditorPart activeEditor = activeWorkbenchWindow.getActivePage().getActiveEditor();
                         if (activeEditor != null) {
-                            System.out.println("ACTIVE: " + activeEditor.getTitle());
+                            System.out.println("ACTIVE: " + activeEditor.getTitle()); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
                         }
 					}
 				};
-				display.syncExec(r);
+				display.syncExec(r); //FLLDCIM: MARK — T08 UI_THREAD_SYNCHRONIZER CALL
 			}
 			assertNotNull("Editor did not open", fEditor);
 
 			final Exception[] exs = new Exception[1];
 			final IJavaThread suspendee = thread;
 			Runnable r = new Runnable() {
-                @Override
+                @Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 				public void run() {
                     ITextEditor editor = (ITextEditor) fEditor;
 					IRunToLineTarget adapter = editor.getAdapter(IRunToLineTarget.class);
@@ -183,7 +183,7 @@ public class RunToLineTests extends AbstractDebugTest {
                 }
             };
             DebugElementEventWaiter waiter = new DebugElementEventWaiter(DebugEvent.SUSPEND, thread);
-            DebugUIPlugin.getStandardDisplay().syncExec(r);
+            DebugUIPlugin.getStandardDisplay().syncExec(r); //FLLDCIM: MARK — T08 UI_THREAD_SYNCHRONIZER CALL
             waiter.waitForEvent();
             IStackFrame topStackFrame = thread.getTopStackFrame();
             assertEquals("wrong line", expectedLineNumber, topStackFrame.getLineNumber());
@@ -199,7 +199,7 @@ public class RunToLineTests extends AbstractDebugTest {
                 }
             };
             Display display = DebugUIPlugin.getStandardDisplay();
-            display.syncExec(cleanup);
+            display.syncExec(cleanup); //FLLDCIM: MARK — T08 UI_THREAD_SYNCHRONIZER CALL
 		}
 	}
 }

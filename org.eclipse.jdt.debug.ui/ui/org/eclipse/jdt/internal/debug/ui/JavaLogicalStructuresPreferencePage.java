@@ -64,28 +64,28 @@ import org.eclipse.ui.PlatformUI;
 /**
  * The preference page for creating/modifying logical structures
  */
-public class JavaLogicalStructuresPreferencePage extends PreferencePage implements IWorkbenchPreferencePage, ISelectionChangedListener, Listener {
+public class JavaLogicalStructuresPreferencePage extends PreferencePage implements IWorkbenchPreferencePage, ISelectionChangedListener, Listener { //FLLDCIM: MARK — T04  IMPLEMENTS
 
 	public class LogicalStructuresListViewerLabelProvider extends LabelProvider implements ITableLabelProvider {
 
-        @Override
+        @Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		public String getColumnText(Object element, int columnIndex) {
             JavaLogicalStructure logicalStructure= (JavaLogicalStructure) element;
-            StringBuilder buffer= new StringBuilder();
+            StringBuilder buffer= new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
             if (columnIndex == 0) {
                 String qualifiedName= logicalStructure.getQualifiedTypeName();
                 int index= qualifiedName.lastIndexOf('.') + 1;
                 String simpleName= qualifiedName.substring(index);
-                buffer.append(simpleName);
+                buffer.append(simpleName); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
                 if (index > 0) {
-                    buffer.append(" (").append(logicalStructure.getQualifiedTypeName()).append(')'); //$NON-NLS-1$
+                    buffer.append(" (").append(logicalStructure.getQualifiedTypeName()).append(')'); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
                 }
             }
             else if (columnIndex == 1) {
-                buffer.append(logicalStructure.getDescription());
+                buffer.append(logicalStructure.getDescription()); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
                 String pluginId= logicalStructure.getContributingPluginId();
                 if (pluginId != null) {
-					buffer.append(NLS.bind(DebugUIMessages.JavaLogicalStructuresPreferencePage_8, pluginId));
+					buffer.append(NLS.bind(DebugUIMessages.JavaLogicalStructuresPreferencePage_8, pluginId)); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
                 }
             }
             return buffer.toString();
@@ -102,9 +102,9 @@ public class JavaLogicalStructuresPreferencePage extends PreferencePage implemen
         private final List<JavaLogicalStructure> fLogicalStructures;
 
         LogicalStructuresListViewerContentProvider() {
-			fLogicalStructures = new ArrayList<>();
+			fLogicalStructures = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 			JavaLogicalStructure[] logicalStructures= JavaLogicalStructures.getJavaLogicalStructures();
-			for (int i= 0; i < logicalStructures.length; i++) {
+			for (int i= 0; i < logicalStructures.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				add(logicalStructures[i]);
 			}
 		}
@@ -127,7 +127,7 @@ public class JavaLogicalStructuresPreferencePage extends PreferencePage implemen
 		 * @param logicalStructure the new structure
 		 */
 		public void add(JavaLogicalStructure logicalStructure) {
-			for (int i= 0, length= fLogicalStructures.size(); i < length; i++) {
+			for (int i= 0, length= fLogicalStructures.size(); i < length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				if (!greaterThan(logicalStructure, fLogicalStructures.get(i))) {
 					fLogicalStructures.add(i, logicalStructure);
 					return;
@@ -173,8 +173,8 @@ public class JavaLogicalStructuresPreferencePage extends PreferencePage implemen
 		}
 
 		public void saveUserDefinedJavaLogicalStructures() {
-			List<JavaLogicalStructure> logicalStructures = new ArrayList<>();
-			for (Iterator<JavaLogicalStructure> iter = fLogicalStructures.iterator(); iter.hasNext();) {
+			List<JavaLogicalStructure> logicalStructures = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
+			for (Iterator<JavaLogicalStructure> iter = fLogicalStructures.iterator(); iter.hasNext();) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				JavaLogicalStructure logicalStructure= iter.next();
 				if (!logicalStructure.isContributed()) {
 					logicalStructures.add(logicalStructure);
@@ -218,9 +218,9 @@ public class JavaLogicalStructuresPreferencePage extends PreferencePage implemen
 	public void applyData(Object data) {
 		if (data instanceof String) {
 			Object[] logicalStructures = fLogicalStructuresContentProvider.getElements(null);
-			for (int i = 0, length = logicalStructures.length; i < length; i++) {
+			for (int i = 0, length = logicalStructures.length; i < length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				JavaLogicalStructure javaLogicalStructure = ((JavaLogicalStructure) logicalStructures[i]);
-				if (((String) data).compareToIgnoreCase(javaLogicalStructure.getId() + javaLogicalStructure.getDescription()
+				if (((String) data).compareToIgnoreCase(javaLogicalStructure.getId() + javaLogicalStructure.getDescription() //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 						+ javaLogicalStructure.hashCode()) == 0) {
 					fLogicalStructuresViewer.setSelection(new StructuredSelection(logicalStructures[i]));
 					return;
@@ -251,7 +251,7 @@ public class JavaLogicalStructuresPreferencePage extends PreferencePage implemen
      * Creates the source viewer
      * @param parent the parent to add the viewer to
      */
-    public void createSourceViewer(Composite parent) {
+    public void createSourceViewer(Composite parent) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
     	SWTFactory.createWrapLabel(parent, DebugUIMessages.JavaLogicalStructuresPreferencePage_12, 2, 300);
 
         fCodeViewer = new JDISourceViewer(parent,  null, SWT.BORDER | SWT.V_SCROLL | SWT.H_SCROLL | SWT.LEFT_TO_RIGHT);
@@ -279,13 +279,13 @@ public class JavaLogicalStructuresPreferencePage extends PreferencePage implemen
 		Composite buttonContainer = SWTFactory.createComposite(container, container.getFont(), 1, 1, GridData.VERTICAL_ALIGN_BEGINNING, 1, 0);
        // add button
 		fAddLogicalStructureButton = SWTFactory.createPushButton(buttonContainer, DebugUIMessages.JavaLogicalStructuresPreferencePage_2, DebugUIMessages.JavaLogicalStructuresPreferencePage_3, null);
-        fAddLogicalStructureButton.addListener(SWT.Selection, this);
+        fAddLogicalStructureButton.addListener(SWT.Selection, this); //FLLDCIM: MARK — T13 SWT_TYPED_EVENT CALL
        // edit button
 		fEditLogicalStructureButton = SWTFactory.createPushButton(buttonContainer, DebugUIMessages.JavaLogicalStructuresPreferencePage_4, DebugUIMessages.JavaLogicalStructuresPreferencePage_5, null);
-        fEditLogicalStructureButton.addListener(SWT.Selection, this);
+        fEditLogicalStructureButton.addListener(SWT.Selection, this); //FLLDCIM: MARK — T13 SWT_TYPED_EVENT CALL
        // remove button
 		fRemoveLogicalStructureButton = SWTFactory.createPushButton(buttonContainer, DebugUIMessages.JavaLogicalStructuresPreferencePage_6, DebugUIMessages.JavaLogicalStructuresPreferencePage_7, null);
-        fRemoveLogicalStructureButton.addListener(SWT.Selection, this);
+        fRemoveLogicalStructureButton.addListener(SWT.Selection, this); //FLLDCIM: MARK — T13 SWT_TYPED_EVENT CALL
         // initialize the buttons state
 		selectionChanged((IStructuredSelection)fLogicalStructuresViewer.getSelection());
     }
@@ -293,7 +293,7 @@ public class JavaLogicalStructuresPreferencePage extends PreferencePage implemen
     /**
      * @param parent the parent widget
      */
-    private void createTable(Composite parent) {
+    private void createTable(Composite parent) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
     	SWTFactory.createWrapLabel(parent, DebugUIMessages.JavaLogicalStructuresPreferencePage_1, 2, 300);
 
         // logical structures list
@@ -311,7 +311,7 @@ public class JavaLogicalStructuresPreferencePage extends PreferencePage implemen
 
         // create table columns
         fLogicalStructuresViewer.setColumnProperties(fTableColumnProperties);
-        for (int i = 0; i < fTableColumnHeaders.length; i++) {
+        for (int i = 0; i < fTableColumnHeaders.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
             tableLayout.addColumnData(fTableColumnLayouts[i]);
             TableColumn column = new TableColumn(table, SWT.NONE, i);
             column.setResizable(fTableColumnLayouts[i].resizable);
@@ -320,10 +320,10 @@ public class JavaLogicalStructuresPreferencePage extends PreferencePage implemen
 
         fLogicalStructuresContentProvider= new LogicalStructuresListViewerContentProvider();
         fLogicalStructuresViewer.setContentProvider(fLogicalStructuresContentProvider);
-        fLogicalStructuresViewer.setLabelProvider(new LogicalStructuresListViewerLabelProvider());
-        fLogicalStructuresViewer.addSelectionChangedListener(this);
-        fLogicalStructuresViewer.setInput(this);
-        fLogicalStructuresViewer.addDoubleClickListener(new IDoubleClickListener() {
+        fLogicalStructuresViewer.setLabelProvider(new LogicalStructuresListViewerLabelProvider()); //FLLDCIM: MARK — T24 LABEL_DELTA CALL
+        fLogicalStructuresViewer.addSelectionChangedListener(this); //FLLDCIM: MARK — T04 VIEWER_SELECTION_DELTA CALL
+        fLogicalStructuresViewer.setInput(this); //FLLDCIM: MARK — M21 FULL_REBUILD_TO_DELTA CALL
+        fLogicalStructuresViewer.addDoubleClickListener(new IDoubleClickListener() { //FLLDCIM: MARK — T05 VIEWER_OPEN CALL
             @Override
 			public void doubleClick(DoubleClickEvent event) {
                 IStructuredSelection selection= ((IStructuredSelection) fLogicalStructuresViewer.getSelection());
@@ -332,7 +332,7 @@ public class JavaLogicalStructuresPreferencePage extends PreferencePage implemen
                 }
             }
         });
-        table.addKeyListener(new KeyAdapter() {
+        table.addKeyListener(new KeyAdapter() { //FLLDCIM: MARK — T12 INPUT_EVENT CALL
             @Override
 			public void keyPressed(KeyEvent event) {
                 if (event.character == SWT.DEL && event.stateMask == 0 && fRemoveLogicalStructureButton.isEnabled()) {
@@ -341,7 +341,7 @@ public class JavaLogicalStructuresPreferencePage extends PreferencePage implemen
             }
         });
         fLogicalStructuresViewer.setComparator(new ViewerComparator() {
-            @Override
+            @Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 			public int compare(Viewer iViewer, Object e1, Object e2) {
                 if (e1 == null) {
                     return -1;
@@ -379,7 +379,7 @@ public class JavaLogicalStructuresPreferencePage extends PreferencePage implemen
 	 * Modify the state of the button from the selection.
 	 * @param structuredSelection the selection that changed
 	 */
-	private void selectionChanged(IStructuredSelection structuredSelection) {
+	private void selectionChanged(IStructuredSelection structuredSelection) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		int size= structuredSelection.size();
 		if (size == 0) {
 			fEditLogicalStructureButton.setEnabled(false);
@@ -389,7 +389,7 @@ public class JavaLogicalStructuresPreferencePage extends PreferencePage implemen
 			JavaLogicalStructure structure = (JavaLogicalStructure)structuredSelection.getFirstElement();
             fEditLogicalStructureButton.setEnabled(size == 1 && !structure.isContributed());
 			boolean removeEnabled= true;
-			for (Iterator<JavaLogicalStructure> iter= structuredSelection.iterator(); iter.hasNext();) {
+			for (Iterator<JavaLogicalStructure> iter= structuredSelection.iterator(); iter.hasNext();) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				if (iter.next().isContributed()) {
 					removeEnabled= false;
 				}
@@ -403,20 +403,20 @@ public class JavaLogicalStructuresPreferencePage extends PreferencePage implemen
 	 * Refreshes the code viewer after an edit has taken place
 	 * @param structure the logical structure that was modified
 	 */
-	private void refreshCodeViewer(JavaLogicalStructure structure){
-		StringBuilder buffer= new StringBuilder();
+	private void refreshCodeViewer(JavaLogicalStructure structure){ //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
+		StringBuilder buffer= new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 	    if (structure != null){
 	    	String snippet= structure.getValue();
 	    	if (snippet != null) {
-	    		buffer.append(snippet);
+	    		buffer.append(snippet); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 	    	} else {
 	    		String[][] variables = structure.getVariables();
-	    		for (int i = 0; i < variables.length; i++) {
-	    			buffer.append(variables[i][0]);
-	    			buffer.append(" = "); //$NON-NLS-1$
-	    			buffer.append(variables[i][1]);
+	    		for (int i = 0; i < variables.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
+	    			buffer.append(variables[i][0]); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+	    			buffer.append(" = "); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+	    			buffer.append(variables[i][1]); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 	    			if (buffer.charAt(buffer.length() - 1) != '\n') {
-	    				buffer.append('\n');
+	    				buffer.append('\n'); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 	    			}
 	    		}
 	    	}
@@ -445,7 +445,7 @@ public class JavaLogicalStructuresPreferencePage extends PreferencePage implemen
 		JavaLogicalStructure logicalStructure= new JavaLogicalStructure("", true, "", "", new String[0][]); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 		if (new EditLogicalStructureDialog(getShell(), logicalStructure).open() == Window.OK) {
 			fLogicalStructuresContentProvider.add(logicalStructure);
-			fLogicalStructuresViewer.refresh();
+			fLogicalStructuresViewer.refresh(); //FLLDCIM: MARK — M21 FULL_REBUILD_TO_DELTA CALL
 			fLogicalStructuresViewer.setSelection(new StructuredSelection(logicalStructure));
 		}
 	}
@@ -459,7 +459,7 @@ public class JavaLogicalStructuresPreferencePage extends PreferencePage implemen
 			JavaLogicalStructure logicalStructure= (JavaLogicalStructure)structuredSelection.getFirstElement();
 			new EditLogicalStructureDialog(getShell(), logicalStructure).open();
 			fLogicalStructuresContentProvider.refresh(logicalStructure);
-			fLogicalStructuresViewer.refresh();
+			fLogicalStructuresViewer.refresh(); //FLLDCIM: MARK — M21 FULL_REBUILD_TO_DELTA CALL
 			refreshCodeViewer(logicalStructure);
 		}
 	}
@@ -467,13 +467,13 @@ public class JavaLogicalStructuresPreferencePage extends PreferencePage implemen
 	/**
 	 * Performs the remove button operation
 	 */
-	protected void removeLogicalStrutures() {
+	protected void removeLogicalStrutures() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IStructuredSelection selection= (IStructuredSelection)fLogicalStructuresViewer.getSelection();
 		if (selection.size() > 0) {
 			List<JavaLogicalStructure> selectedElements= selection.toList();
 			Object[] elements= fLogicalStructuresContentProvider.getElements(null);
 			Object newSelectedElement= null;
-			for (int i= 0; i < elements.length; i++) {
+			for (int i= 0; i < elements.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				if (!selectedElements.contains(elements[i])) {
 					newSelectedElement= elements[i];
 				} else {
@@ -481,7 +481,7 @@ public class JavaLogicalStructuresPreferencePage extends PreferencePage implemen
 				}
 			}
 			fLogicalStructuresContentProvider.remove(((IStructuredSelection) fLogicalStructuresViewer.getSelection()).toList());
-			fLogicalStructuresViewer.refresh();
+			fLogicalStructuresViewer.refresh(); //FLLDCIM: MARK — M21 FULL_REBUILD_TO_DELTA CALL
 			if (newSelectedElement == null) {
 				Object[] newElements= fLogicalStructuresContentProvider.getElements(null);
 				if (newElements.length > 0) {

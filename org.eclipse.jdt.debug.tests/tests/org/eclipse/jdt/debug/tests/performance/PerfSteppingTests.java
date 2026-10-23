@@ -51,7 +51,7 @@ public class PerfSteppingTests extends AbstractDebugPerformanceTest {
 		 */
 		@Override
 		public DebugEvent[] filterDebugEvents(DebugEvent[] events) {
-			for (int i = 0; i < events.length; i++) {
+			for (int i = 0; i < events.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				DebugEvent event = events[i];
 				if (event.getSource() == fThread) {
 					if (event.getKind() == DebugEvent.SUSPEND && event.getDetail() == DebugEvent.STEP_END) {
@@ -89,7 +89,7 @@ public class PerfSteppingTests extends AbstractDebugPerformanceTest {
 	/**
 	 * Tests stepping over without taking into account event processing in the UI.
 	 */
-	public void testBareStepOver() throws Exception {
+	public void testBareStepOver() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String typeName = "PerfLoop";
 		createLineBreakpoint(23, typeName);
 
@@ -102,8 +102,8 @@ public class PerfSteppingTests extends AbstractDebugPerformanceTest {
 			MyFilter filter = new MyFilter(thread, lock);
 			DebugPlugin.getDefault().addDebugEventFilter(filter);
 			thread.getTopStackFrame();
-			for (int n= 0; n < 10; n++) {
-				for (int i = 0; i < 100; i++) {
+			for (int n= 0; n < 10; n++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
+				for (int i = 0; i < 100; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 					filter.step();
 				}
 			}
@@ -115,9 +115,9 @@ public class PerfSteppingTests extends AbstractDebugPerformanceTest {
 			DebugPlugin.getDefault().addDebugEventFilter(filter);
 
 			thread.getTopStackFrame();
-			for (int n= 0; n < 150; n++) {
+			for (int n= 0; n < 150; n++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				startMeasuring();
-				for (int i = 0; i < 500; i++) {
+				for (int i = 0; i < 500; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 					filter.step();
 				}
 				stopMeasuring();

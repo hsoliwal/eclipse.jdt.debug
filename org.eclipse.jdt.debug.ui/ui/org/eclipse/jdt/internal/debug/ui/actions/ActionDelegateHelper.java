@@ -34,7 +34,7 @@ import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.texteditor.ITextEditor;
 
-public class ActionDelegateHelper implements IPartListener, IWindowListener {
+public class ActionDelegateHelper implements IPartListener, IWindowListener { //FLLDCIM: MARK — T20  IMPLEMENTS
 
 	private static ActionDelegateHelper fgDefault;
 	private IMember fMember= null;
@@ -119,7 +119,7 @@ public class ActionDelegateHelper implements IPartListener, IWindowListener {
 		}
 	}
 
-	public IMember getCurrentMember(ITextSelection currentSelection) {
+	public IMember getCurrentMember(ITextSelection currentSelection) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		if (currentSelection == getCurrentSelection()) {
 			return getMember();
 		}

@@ -42,7 +42,7 @@ import org.eclipse.jface.viewers.Viewer;
 /**
  * @since 3.2
  */
-public class JavaDebugTargetProxy extends DebugTargetProxy {
+public class JavaDebugTargetProxy extends DebugTargetProxy { //FLLDCIM: MARK — T27  IMPLEMENTS
 
 	private JavaThreadEventHandler fThreadEventHandler;
 
@@ -75,7 +75,7 @@ public class JavaDebugTargetProxy extends DebugTargetProxy {
 				new StackFrameEventHandler(this, fThreadEventHandler)};
 	}
 
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public void installed(Viewer viewer) {
 		if (fIsScrapbook) {
 			// don't auto expand scrap books
@@ -106,7 +106,7 @@ public class JavaDebugTargetProxy extends DebugTargetProxy {
 	/**
 	 * @param viewer the viewer
 	 */
-	private void doInstalled(Viewer viewer) {
+	private void doInstalled(Viewer viewer) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
         // select any thread that is already suspended after installation
         IDebugTarget target = fDebugTarget;
 

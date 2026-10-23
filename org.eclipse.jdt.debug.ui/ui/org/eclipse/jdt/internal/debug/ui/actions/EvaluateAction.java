@@ -98,7 +98,7 @@ import com.sun.jdi.ObjectReference;
  * is done in the UI thread and the expression and result are
  * displayed using the IDataDisplay.
  */
-public abstract class EvaluateAction implements IEvaluationListener, IWorkbenchWindowActionDelegate, IObjectActionDelegate, IEditorActionDelegate, IPartListener, IViewActionDelegate, ISnippetStateChangedListener {
+public abstract class EvaluateAction implements IEvaluationListener, IWorkbenchWindowActionDelegate, IObjectActionDelegate, IEditorActionDelegate, IPartListener, IViewActionDelegate, ISnippetStateChangedListener { //FLLDCIM: MARK — T20  IMPLEMENTS
 
 	private IAction fAction;
 	private IWorkbenchPart fTargetPart;
@@ -134,7 +134,7 @@ public abstract class EvaluateAction implements IEvaluationListener, IWorkbenchW
 	 *
 	 * @return Java object or <code>null</code>
 	 */
-	protected IJavaObject getObjectContext() {
+	protected IJavaObject getObjectContext() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IWorkbenchPage page= JDIDebugUIPlugin.getActivePage();
 		if (page != null) {
 			IWorkbenchPart activePart= page.getActivePart();
@@ -219,7 +219,7 @@ public abstract class EvaluateAction implements IEvaluationListener, IWorkbenchW
 	 */
 	abstract protected void displayResult(IEvaluationResult result);
 
-	protected void run() {
+	protected void run() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		// eval in context of object or stack frame
 		final IJavaObject object = getObjectContext();
 		final IJavaStackFrame stackFrame= getStackFrameContext();
@@ -237,8 +237,8 @@ public abstract class EvaluateAction implements IEvaluationListener, IWorkbenchW
 
 		setNewTargetPart(getTargetPart());
 
-        IRunnableWithProgress runnable = new IRunnableWithProgress() {
-            @Override
+        IRunnableWithProgress runnable = new IRunnableWithProgress() { //FLLDCIM: MARK — T09  ANONYMOUS
+            @Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 			public void run(IProgressMonitor monitor) throws InvocationTargetException, InterruptedException {
                 if (stackFrame.isSuspended()) {
 					IJavaProject project = getJavaProject(stackFrame);
@@ -327,7 +327,7 @@ public abstract class EvaluateAction implements IEvaluationListener, IWorkbenchW
 	 * Resolves the selected object in the target part, or <code>null</code>
 	 * if there is no selection.
 	 */
-	protected void resolveSelectedObject() {
+	protected void resolveSelectedObject() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		Object selectedObject= null;
 		fRegion = null;
 		ISelection selection= getTargetSelection();
@@ -362,7 +362,7 @@ public abstract class EvaluateAction implements IEvaluationListener, IWorkbenchW
 				} else {
 					IStructuredSelection ss= (IStructuredSelection)selection;
 					Iterator<?> elements = ss.iterator();
-					while (elements.hasNext()) {
+					while (elements.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 						if (!(elements.next() instanceof IJavaVariable)) {
 							setSelectedObject(null);
 							return;
@@ -404,7 +404,7 @@ public abstract class EvaluateAction implements IEvaluationListener, IWorkbenchW
 	 * argument, and return whether it's equal to the editor input for the
 	 * editor that owns this action.
 	 */
-	protected boolean compareToEditorInput(IStackFrame stackFrame) {
+	protected boolean compareToEditorInput(IStackFrame stackFrame) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		ILaunch launch = stackFrame.getLaunch();
 		if (launch == null) {
 			return false;
@@ -433,7 +433,7 @@ public abstract class EvaluateAction implements IEvaluationListener, IWorkbenchW
 		return JDIDebugUIPlugin.getActiveWorkbenchShell();
 	}
 
-	protected IDataDisplay getDataDisplay() {
+	protected IDataDisplay getDataDisplay() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IDataDisplay display= getDirectDataDisplay();
 		if (display != null) {
 			return display;
@@ -462,7 +462,7 @@ public abstract class EvaluateAction implements IEvaluationListener, IWorkbenchW
 		return null;
 	}
 
-	protected IDataDisplay getDirectDataDisplay() {
+	protected IDataDisplay getDirectDataDisplay() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IWorkbenchPart part= getTargetPart();
 		if (part != null) {
 			IDataDisplay display= part.getAdapter(IDataDisplay.class);
@@ -496,7 +496,7 @@ public abstract class EvaluateAction implements IEvaluationListener, IWorkbenchW
 		if (text != null) {
 			int length= text.length();
 			if (length > 0) {
-				for (int i= 0; i < length; i++) {
+				for (int i= 0; i < length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 					if (Character.isLetterOrDigit(text.charAt(i))) {
 						return true;
 					}
@@ -529,18 +529,18 @@ public abstract class EvaluateAction implements IEvaluationListener, IWorkbenchW
 	}
 
 	private String format(String message) {
-		StringBuilder result= new StringBuilder();
+		StringBuilder result= new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 		int index= 0, pos;
-		while ((pos= message.indexOf('\n', index)) != -1) {
-			result.append("\t\t").append(message.substring(index, index= pos + 1)); //$NON-NLS-1$
+		while ((pos= message.indexOf('\n', index)) != -1) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
+			result.append("\t\t").append(message.substring(index, index= pos + 1)); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		}
 		if (index < message.length()) {
-			result.append("\t\t").append(message.substring(index)); //$NON-NLS-1$
+			result.append("\t\t").append(message.substring(index)); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		}
 		return result.toString();
 	}
 
-	public static String getExceptionMessage(Throwable exception) {
+	public static String getExceptionMessage(Throwable exception) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		if (exception instanceof CoreException) {
 			CoreException ce = (CoreException)exception;
 			Throwable throwable= ce.getStatus().getException();
@@ -578,7 +578,7 @@ public abstract class EvaluateAction implements IEvaluationListener, IWorkbenchW
 
 	protected String getErrorMessage(String[] errors) {
 		String message = Util.ZERO_LENGTH_STRING;
-		for (int i= 0; i < errors.length; i++) {
+		for (int i= 0; i < errors.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			String msg= errors[i];
 			if (i == 0) {
 				message= msg;

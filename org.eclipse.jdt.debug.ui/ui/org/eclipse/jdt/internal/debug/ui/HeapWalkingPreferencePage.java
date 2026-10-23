@@ -51,7 +51,7 @@ public class HeapWalkingPreferencePage extends PreferencePage implements IWorkbe
 	 */
 	@Override
 	public void init(IWorkbench workbench) {
-		fErrorMessages = new HashMap<>();
+		fErrorMessages = new HashMap<>(); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
 	}
 
 	/* (non-Javadoc)
@@ -67,7 +67,7 @@ public class HeapWalkingPreferencePage extends PreferencePage implements IWorkbe
 	/* (non-Javadoc)
 	 * @see org.eclipse.jface.preference.PreferencePage#createContents(org.eclipse.swt.widgets.Composite)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	protected Control createContents(Composite parent) {
 
 		Composite comp = SWTFactory.createComposite(parent, parent.getFont(), 1, 1, GridData.FILL_BOTH);
@@ -83,7 +83,7 @@ public class HeapWalkingPreferencePage extends PreferencePage implements IWorkbe
 
 		SWTFactory.createLabel(group, DebugUIMessages.HeapWalkingPreferencePage_1, 1);
 		fAllInstancesMaxCount = SWTFactory.createSingleText(group, 1);
-		fAllInstancesMaxCount.addModifyListener(new ModifyListener(){
+		fAllInstancesMaxCount.addModifyListener(new ModifyListener(){ //FLLDCIM: MARK — T02 TEXT_INPUT_DEBOUNCE CALL
 			@Override
 			public void modifyText(ModifyEvent e) {
 				try{
@@ -97,11 +97,11 @@ public class HeapWalkingPreferencePage extends PreferencePage implements IWorkbe
 				}
 			}
 		});
-		fAllInstancesMaxCount.setText("" + HeapWalkingManager.getDefault().getAllInstancesMaxCount()); //$NON-NLS-1$
+		fAllInstancesMaxCount.setText("" + HeapWalkingManager.getDefault().getAllInstancesMaxCount()); //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 		SWTFactory.createLabel(group, DebugUIMessages.HeapWalkingPreferencePage_2, 1);
 		fAllReferencesMaxCount = SWTFactory.createSingleText(group, 1);
-		fAllReferencesMaxCount.addModifyListener(new ModifyListener(){
+		fAllReferencesMaxCount.addModifyListener(new ModifyListener(){ //FLLDCIM: MARK — T02 TEXT_INPUT_DEBOUNCE CALL
 			@Override
 			public void modifyText(ModifyEvent e) {
 				try{
@@ -115,7 +115,7 @@ public class HeapWalkingPreferencePage extends PreferencePage implements IWorkbe
 				}
 			}
 		});
-		fAllReferencesMaxCount.setText("" + HeapWalkingManager.getDefault().getAllReferencesMaxCount()); //$NON-NLS-1$
+		fAllReferencesMaxCount.setText("" + HeapWalkingManager.getDefault().getAllReferencesMaxCount()); //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 		return comp;
 	}
@@ -123,7 +123,7 @@ public class HeapWalkingPreferencePage extends PreferencePage implements IWorkbe
 	/* (non-Javadoc)
 	 * @see org.eclipse.jface.preference.PreferencePage#performOk()
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public boolean performOk() {
 		boolean result = super.performOk();
 		if (result){

@@ -75,7 +75,7 @@ public class FieldImpl extends TypeComponentImpl implements Field {
 	/* (non-Javadoc)
 	 * @see java.lang.Comparable#compareTo(java.lang.Object)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public int compareTo(Field object) {
 		if (object == null || !object.getClass().equals(this.getClass()))
 			throw new ClassCastException(JDIMessages.FieldImpl_Can__t_compare_field_to_given_object_1);
@@ -167,7 +167,7 @@ public class FieldImpl extends TypeComponentImpl implements Field {
 	/**
 	 * @return Reads JDWP representation and returns new instance.
 	 */
-	public static FieldImpl readWithReferenceTypeWithTag(MirrorImpl target,
+	public static FieldImpl readWithReferenceTypeWithTag(MirrorImpl target, //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 			DataInputStream in) throws IOException {
 		VirtualMachineImpl vmImpl = target.virtualMachineImpl();
 		// See Events FIELD_ACCESS and FIELD_MODIFICATION (refTypeTag + typeID +
@@ -194,7 +194,7 @@ public class FieldImpl extends TypeComponentImpl implements Field {
 	/**
 	 * @return Reads JDWP representation and returns new instance.
 	 */
-	public static FieldImpl readWithNameSignatureModifiers(
+	public static FieldImpl readWithNameSignatureModifiers( //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 			ReferenceTypeImpl target, ReferenceTypeImpl referenceType,
 			boolean withGenericSignature, DataInputStream in)
 			throws IOException {

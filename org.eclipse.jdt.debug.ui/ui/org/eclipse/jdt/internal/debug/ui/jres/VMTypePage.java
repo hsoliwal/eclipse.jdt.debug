@@ -56,7 +56,7 @@ public class VMTypePage extends WizardPage {
 	/**
 	 * Keep track of pages created, so we can dispose of them.
 	 */
-	private final Set<AbstractVMInstallPage> fPages = new HashSet<>();
+	private final Set<AbstractVMInstallPage> fPages = new HashSet<>(); //FLLDCIM: MARK — M03 M3_SET_LANES NEW
 
 	/**
 	 * Label provider for VM types
@@ -93,7 +93,7 @@ public class VMTypePage extends WizardPage {
 	public void dispose() {
 		super.dispose();
 		Iterator<AbstractVMInstallPage> iterator = fPages.iterator();
-		while (iterator.hasNext()) {
+		while (iterator.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			AbstractVMInstallPage page = iterator.next();
 			page.dispose();
 		}
@@ -103,7 +103,7 @@ public class VMTypePage extends WizardPage {
 	/* (non-Javadoc)
 	 * @see org.eclipse.jface.dialogs.IDialogPage#createControl(org.eclipse.swt.widgets.Composite)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public void createControl(Composite parent) {
 		Composite composite = SWTFactory.createComposite(parent, 1, 1, GridData.FILL_BOTH);
 
@@ -116,9 +116,9 @@ public class VMTypePage extends WizardPage {
         fTypesViewer.getControl().setFont(composite.getFont());
         fTypesViewer.getControl().setLayoutData(data);
         fTypesViewer.setContentProvider(ArrayContentProvider.getInstance());
-        fTypesViewer.setLabelProvider(new TypeLabelProvider());
+        fTypesViewer.setLabelProvider(new TypeLabelProvider()); //FLLDCIM: MARK — T24 LABEL_DELTA CALL
 		fTypesViewer.setComparator(new ViewerComparator());
-		fTypesViewer.addDoubleClickListener(new IDoubleClickListener() {
+		fTypesViewer.addDoubleClickListener(new IDoubleClickListener() { //FLLDCIM: MARK — T05 VIEWER_OPEN CALL
 			@Override
 			public void doubleClick(DoubleClickEvent event) {
 				setPageComplete(true);
@@ -126,7 +126,7 @@ public class VMTypePage extends WizardPage {
 				getWizard().getContainer().showPage(getNextPage());
 			}
 		});
-		fTypesViewer.addSelectionChangedListener(new ISelectionChangedListener() {
+		fTypesViewer.addSelectionChangedListener(new ISelectionChangedListener() { //FLLDCIM: MARK — T04 VIEWER_SELECTION_DELTA CALL
 			@Override
 			public void selectionChanged(org.eclipse.jface.viewers.SelectionChangedEvent event) {
 				if (event.getSelection().isEmpty()){
@@ -137,7 +137,7 @@ public class VMTypePage extends WizardPage {
 				}
 			}
 		});
-		fTypesViewer.setInput(JavaRuntime.getVMInstallTypes());
+		fTypesViewer.setInput(JavaRuntime.getVMInstallTypes()); //FLLDCIM: MARK — M21 FULL_REBUILD_TO_DELTA CALL
 		setControl(composite);
 		fTypesViewer.setSelection(new StructuredSelection(JavaRuntime.getVMInstallType(StandardVMType.ID_STANDARD_VM_TYPE)));
 		updateNextPage();

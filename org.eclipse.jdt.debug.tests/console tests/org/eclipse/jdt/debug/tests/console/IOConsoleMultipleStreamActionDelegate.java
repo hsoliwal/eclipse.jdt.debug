@@ -72,7 +72,7 @@ public class IOConsoleMultipleStreamActionDelegate implements IActionDelegate2, 
     /**
      * Actually runs the test
      */
-    public void runTest() {
+    public void runTest() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
         ended = false;
 
         final IOConsole console = new IOConsole("IO Test Console", null, DebugUITools.getImageDescriptor(IDebugUIConstants.IMG_ACT_RUN)); //$NON-NLS-1$
@@ -85,7 +85,7 @@ public class IOConsoleMultipleStreamActionDelegate implements IActionDelegate2, 
         final Display display = Display.getDefault();
         final IOConsoleInputStream in = console.getInputStream();
         final IOConsoleOutputStream echo = console.newOutputStream();
-        display.asyncExec(new Runnable() {
+        display.asyncExec(new Runnable() { //FLLDCIM: MARK — T08 UI_THREAD_SYNCHRONIZER CALL
             @Override
 			public void run() {
                 in.setColor(display.getSystemColor(SWT.COLOR_BLUE));
@@ -98,16 +98,16 @@ public class IOConsoleMultipleStreamActionDelegate implements IActionDelegate2, 
         startOutputThread(out);
     }
 
-    private void startOutputThread(final IOConsoleOutputStream out) {
+    private void startOutputThread(final IOConsoleOutputStream out) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
         new Thread(new Runnable() {
             @Override
 			public void run() {
                 int i = 1;
                 PrintStream ps = new PrintStream(out);
                 ps.println("Enter 'XXX' to stop"); //$NON-NLS-1$
-                while(!ended){
+                while(!ended){ //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
                     try {
-                        ps.println("TESTING("+i+")"); //$NON-NLS-1$//$NON-NLS-2$
+                        ps.println("TESTING("+i+")"); //$NON-NLS-1$//$NON-NLS-2$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
                         Thread.sleep(1000);
                         i++;
                     } catch (Exception e) {
@@ -118,13 +118,13 @@ public class IOConsoleMultipleStreamActionDelegate implements IActionDelegate2, 
         }, "OUTPUT").start(); //$NON-NLS-1$
     }
 
-    private void startInputReadThread(final InputStream in, final OutputStream out) {
+    private void startInputReadThread(final InputStream in, final OutputStream out) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
        new Thread(new Runnable() {
            @Override
 		public void run() {
 	           try {
 		           byte b[] = new byte[1024];
-		           while(!ended) {
+		           while(!ended) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			           int read = in.read(b);
 			           String string = new String(b, 0, read);
 			           ended = string.startsWith("XXX") ? true : false; //$NON-NLS-1$

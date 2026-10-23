@@ -94,7 +94,7 @@ public class StepIntoSelectionUtils {
 	 */
 	private static IMethod resolveMethod(int offset, int length, ICodeAssist codeAssist) throws JavaModelException {
 		IJavaElement[] elements = codeAssist.codeSelect(offset, length);
-		for (int i = 0; i < elements.length; i++) {
+		for (int i = 0; i < elements.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			if (elements[i] instanceof IMethod) {
 				return (IMethod)elements[i];
 			}
@@ -105,7 +105,7 @@ public class StepIntoSelectionUtils {
 	/**
 	 * @return the first method found at or after <code>offset</code> on the same line
 	 */
-	@SuppressWarnings("deprecation")
+	@SuppressWarnings("deprecation") //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public static IMethod getFirstMethodOnLine(int offset, IEditorPart activeEditor, IJavaElement element) throws JavaModelException {
 		if (! (activeEditor instanceof ITextEditor editor) || ! (element instanceof ICodeAssist)) {
 			return null;
@@ -125,7 +125,7 @@ public class StepIntoSelectionUtils {
 			scanner.setSource(line.toCharArray());
 			scanner.resetTo(offset - lineInfo.getOffset(), lineInfo.getLength());
 			int token = scanner.getNextToken();
-			while (token != ITerminalSymbols.TokenNameEOF) {
+			while (token != ITerminalSymbols.TokenNameEOF) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				if (token == ITerminalSymbols.TokenNameIdentifier) {
 					int methodStart = scanner.getCurrentTokenStartPosition();
 					token = scanner.getNextToken();
@@ -155,7 +155,7 @@ public class StepIntoSelectionUtils {
 	 *
 	 * @since 3.6.200
 	 */
-	public static void stepIntoSelection(ITextSelection selection) {
+	public static void stepIntoSelection(ITextSelection selection) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IWorkbenchPage page = JDIDebugUIPlugin.getActiveWorkbenchWindow().getActivePage();
 		if(page != null) {
 			IEditorPart editor = page.getActiveEditor();
@@ -208,7 +208,7 @@ public class StepIntoSelectionUtils {
 	 * the currently executing one, first perform a "run to line" to get to
 	 * the desired location, then perform a "step into selection."
 	 */
-	static void runToLineBeforeStepIn(final IEditorPart editor, final String typeName, ITextSelection textSelection, final IThread thread, final IMethod method) {
+	static void runToLineBeforeStepIn(final IEditorPart editor, final String typeName, ITextSelection textSelection, final IThread thread, final IMethod method) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		final int line = textSelection.getStartLine() + 1;
 		if (typeName == null || line == -1) {
 			return;
@@ -228,13 +228,13 @@ public class StepIntoSelectionUtils {
 		if (runToLineAction == null) {
 		  runToLineAction = new RunToLineAdapter();
 		}
-		final IDebugEventSetListener listener = new IDebugEventSetListener() {
+		final IDebugEventSetListener listener = new IDebugEventSetListener() { //FLLDCIM: MARK — T27  ANONYMOUS
 			/**
 			 * @see IDebugEventSetListener#handleDebugEvents(DebugEvent[])
 			 */
 			@Override
 			public void handleDebugEvents(DebugEvent[] events) {
-				for (int i = 0; i < events.length; i++) {
+				for (int i = 0; i < events.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 					DebugEvent event = events[i];
 					switch (event.getKind()) {
 						case DebugEvent.SUSPEND :
@@ -253,7 +253,7 @@ public class StepIntoSelectionUtils {
 			 * suspends at the correct location, perform a "step into selection"
 			 * @param event the debug event
 			 */
-			private void handleSuspendEvent(DebugEvent event) {
+			private void handleSuspendEvent(DebugEvent event) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 				Object source = event.getSource();
 				if (source instanceof IJavaThread) {
 					try {
@@ -261,7 +261,7 @@ public class StepIntoSelectionUtils {
 						if (isExpectedFrame(frame)) {
 							DebugPlugin plugin = DebugPlugin.getDefault();
 							plugin.removeDebugEventListener(this);
-							plugin.asyncExec(new Runnable() {
+							plugin.asyncExec(new Runnable() { //FLLDCIM: MARK — T08 UI_THREAD_SYNCHRONIZER CALL
 								@Override
 								public void run() {
 									try {
@@ -300,7 +300,7 @@ public class StepIntoSelectionUtils {
 				}
 			}
 		};
-		DebugPlugin.getDefault().addDebugEventListener(listener);
+		DebugPlugin.getDefault().addDebugEventListener(listener); //FLLDCIM: MARK — T27 DEBUG_EVENT_ADAPTER CALL
 		try {
 			runToLineAction.runToLine(editor, textSelection, thread);
 		} catch (CoreException e) {

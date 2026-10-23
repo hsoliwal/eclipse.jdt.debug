@@ -72,7 +72,7 @@ public class StackFrameImpl extends MirrorImpl implements StackFrame, Locatable 
 	public Value getValue(LocalVariable variable)
 			throws IllegalArgumentException, InvalidStackFrameException,
 			VMMismatchException {
-		ArrayList<LocalVariable> list = new ArrayList<>(1);
+		ArrayList<LocalVariable> list = new ArrayList<>(1); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 		list.add(variable);
 		return getValues(list).get(variable);
 	}
@@ -80,11 +80,11 @@ public class StackFrameImpl extends MirrorImpl implements StackFrame, Locatable 
 	/* (non-Javadoc)
 	 * @see com.sun.jdi.StackFrame#getValues(java.util.List)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public Map<LocalVariable, Value> getValues(List<? extends LocalVariable> variables) throws IllegalArgumentException,
 			InvalidStackFrameException, VMMismatchException {
 		// Note that this information should not be cached.
-		Map<LocalVariable, Value> map = new HashMap<>(variables.size());
+		Map<LocalVariable, Value> map = new HashMap<>(variables.size()); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
 		// if the variable list is empty, nothing to do
 		if (variables.isEmpty()) {
 			return map;
@@ -97,7 +97,7 @@ public class StackFrameImpl extends MirrorImpl implements StackFrame, Locatable 
 		int sizeAll = variables.size();
 		int sizeThis = 0;
 		boolean[] isThisValue = new boolean[sizeAll];
-		for (int i = 0; i < sizeAll; i++) {
+		for (int i = 0; i < sizeAll; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			LocalVariableImpl var = (LocalVariableImpl) variables.get(i);
 			isThisValue[i] = var.isThis();
 			if (isThisValue[i]) {
@@ -108,7 +108,7 @@ public class StackFrameImpl extends MirrorImpl implements StackFrame, Locatable 
 
 		if (sizeThis > 0) {
 			Value thisValue = thisObject();
-			for (int i = 0; i < sizeAll; i++) {
+			for (int i = 0; i < sizeAll; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				if (isThisValue[i]) {
 					map.put(variables.get(i), thisValue);
 				}
@@ -127,7 +127,7 @@ public class StackFrameImpl extends MirrorImpl implements StackFrame, Locatable 
 			DataOutputStream outData = new DataOutputStream(outBytes);
 			writeWithThread(this, outData);
 			writeInt(sizeNotThis, "size", outData); //$NON-NLS-1$
-			for (int i = 0; i < sizeAll; i++) {
+			for (int i = 0; i < sizeAll; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				if (!isThisValue[i]) {
 					LocalVariableImpl var = (LocalVariableImpl) variables
 							.get(i);
@@ -146,7 +146,7 @@ public class StackFrameImpl extends MirrorImpl implements StackFrame, Locatable 
 				throw new InternalError(
 						JDIMessages.StackFrameImpl_Retrieved_a_different_number_of_values_from_the_VM_than_requested_1);
 
-			for (int i = 0, j = 0; i < sizeAll; i++) {
+			for (int i = 0, j = 0; i < sizeAll; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				if (!isThisValue[i])
 					map.put(variables.get(j++),
 							ValueImpl.readWithTag(this, replyData));
@@ -163,7 +163,7 @@ public class StackFrameImpl extends MirrorImpl implements StackFrame, Locatable 
 	/* (non-Javadoc)
 	 * @see com.sun.jdi.StackFrame#getArgumentValues()
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public List<Value> getArgumentValues() throws InvalidStackFrameException {
 		if (!thread().isSuspended()) {
 			throw new InvalidStackFrameException(
@@ -171,9 +171,9 @@ public class StackFrameImpl extends MirrorImpl implements StackFrame, Locatable 
 		}
 		try {
 			List<LocalVariable> list = location().method().variables();
-			ArrayList<Value> ret = new ArrayList<>();
+			ArrayList<Value> ret = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 			LocalVariable var = null;
-			for (Iterator<LocalVariable> iter = list.iterator(); iter.hasNext();) {
+			for (Iterator<LocalVariable> iter = list.iterator(); iter.hasNext();) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				var = iter.next();
 				if (var.isArgument()) {
 					ret.add(getValue(var));
@@ -197,7 +197,7 @@ public class StackFrameImpl extends MirrorImpl implements StackFrame, Locatable 
 	/* (non-Javadoc)
 	 * @see com.sun.jdi.StackFrame#setValue(com.sun.jdi.LocalVariable, com.sun.jdi.Value)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public void setValue(LocalVariable var, Value value)
 			throws InvalidTypeException, ClassNotLoadedException {
 		// Note that this information should not be cached.
@@ -239,7 +239,7 @@ public class StackFrameImpl extends MirrorImpl implements StackFrame, Locatable 
 	/* (non-Javadoc)
 	 * @see com.sun.jdi.StackFrame#thisObject()
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public ObjectReference thisObject() throws InvalidStackFrameException {
 		// Note that this information should not be cached.
 		initJdwpRequest();
@@ -279,7 +279,7 @@ public class StackFrameImpl extends MirrorImpl implements StackFrame, Locatable 
 	public LocalVariable visibleVariableByName(String name)
 			throws AbsentInformationException {
 		Iterator<LocalVariable> iter = visibleVariables().iterator();
-		while (iter.hasNext()) {
+		while (iter.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			LocalVariableImpl var = (LocalVariableImpl) iter.next();
 			if (var.name().equals(name)) {
 				return var;
@@ -296,8 +296,8 @@ public class StackFrameImpl extends MirrorImpl implements StackFrame, Locatable 
 	public List<LocalVariable> visibleVariables() throws AbsentInformationException {
 		List<LocalVariable> variables = fLocation.method().variables();
 		Iterator<LocalVariable> iter = variables.iterator();
-		List<LocalVariable> visibleVars = new ArrayList<>(variables.size());
-		while (iter.hasNext()) {
+		List<LocalVariable> visibleVars = new ArrayList<>(variables.size()); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
+		while (iter.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			LocalVariableImpl var = (LocalVariableImpl) iter.next();
 			// Only return local variables other than the this pointer.
 			if (var.isVisible(this) && !var.isThis()) {
@@ -350,7 +350,7 @@ public class StackFrameImpl extends MirrorImpl implements StackFrame, Locatable 
 	/**
 	 * @return Reads JDWP representation and returns new instance.
 	 */
-	public static StackFrameImpl readWithLocation(MirrorImpl target,
+	public static StackFrameImpl readWithLocation(MirrorImpl target, //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 			ThreadReferenceImpl thread, DataInputStream in) throws IOException {
 		VirtualMachineImpl vmImpl = target.virtualMachineImpl();
 		JdwpFrameID ID = new JdwpFrameID(vmImpl);

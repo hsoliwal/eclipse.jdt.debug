@@ -33,7 +33,7 @@ import com.sun.jdi.ReferenceType;
 import com.sun.jdi.VMDisconnectedException;
 import com.sun.jdi.VirtualMachine;
 
-public class JavaTargetPatternBreakpoint extends JavaLineBreakpoint implements
+public class JavaTargetPatternBreakpoint extends JavaLineBreakpoint implements //FLLDCIM: MARK — T27  IMPLEMENTS
 		IJavaTargetPatternBreakpoint {
 
 	private static final String TARGET_PATTERN_BREAKPOINT = "org.eclipse.jdt.debug.javaTargetPatternBreakpointMarker"; //$NON-NLS-1$
@@ -62,7 +62,7 @@ public class JavaTargetPatternBreakpoint extends JavaLineBreakpoint implements
 			final int charEnd, final int hitCount, final boolean add,
 			final Map<String, Object> attributes, final String markerType)
 			throws DebugException {
-		IWorkspaceRunnable wr = monitor -> {
+		IWorkspaceRunnable wr = monitor -> { //FLLDCIM: MARK — T09  LAMBDA
 
 			// add attributes
 			addLineBreakpointAttributes(attributes, getModelIdentifier(),
@@ -84,7 +84,7 @@ public class JavaTargetPatternBreakpoint extends JavaLineBreakpoint implements
 	 * <li>Respond to the breakpoint being hit</li>
 	 * </ul>
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public void addToTarget(JDIDebugTarget target) throws CoreException {
 
 		// pre-notification
@@ -99,7 +99,7 @@ public class JavaTargetPatternBreakpoint extends JavaLineBreakpoint implements
 		// create request to listen to class loads
 		// name may only be partially resolved
 		if (!referenceTypeName.endsWith("*")) { //$NON-NLS-1$
-			classPrepareTypeName = classPrepareTypeName + '*';
+			classPrepareTypeName = classPrepareTypeName + '*'; //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		}
 		registerRequest(target.createClassPrepareRequest(classPrepareTypeName),
 				target);
@@ -110,7 +110,7 @@ public class JavaTargetPatternBreakpoint extends JavaLineBreakpoint implements
 			List<ReferenceType> classes = vm.allClasses();
 			if (classes != null) {
 				String typeName = null;
-				for(ReferenceType type : classes) {
+				for(ReferenceType type : classes) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 					typeName = type.name();
 					if (typeName != null && typeName.startsWith(referenceTypeName)) {
 						createRequest(target, type);
@@ -140,7 +140,7 @@ public class JavaTargetPatternBreakpoint extends JavaLineBreakpoint implements
 	/**
 	 * @see JavaBreakpoint#installableReferenceType(ReferenceType, JDIDebugTarget)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	protected boolean installableReferenceType(ReferenceType type,
 			JDIDebugTarget target) throws CoreException {
 		// if the source name attribute is specified, check for a match with the
@@ -230,7 +230,7 @@ public class JavaTargetPatternBreakpoint extends JavaLineBreakpoint implements
 	public void setPattern(IJavaDebugTarget target, String pattern)
 			throws CoreException {
 		if (fPatterns == null) {
-			fPatterns = new HashMap<>(2);
+			fPatterns = new HashMap<>(2); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
 		}
 		// if pattern is changing then remove and re-add
 		String oldPattern = getPattern(target);

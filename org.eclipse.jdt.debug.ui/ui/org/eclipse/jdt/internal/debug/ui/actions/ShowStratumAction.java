@@ -87,12 +87,12 @@ public class ShowStratumAction implements IObjectActionDelegate, IMenuCreator {
 	public Menu getMenu(Menu parent) {
 		//Create the new menu. The menu will get filled when it is about to be shown. see fillMenu(Menu).
 		Menu menu = new Menu(parent);
-		menu.addMenuListener(new MenuAdapter() {
+		menu.addMenuListener(new MenuAdapter() { //FLLDCIM: MARK — T16 MENU_TRAVERSE CALL
 			@Override
 			public void menuShown(MenuEvent e) {
 				Menu m = (Menu)e.widget;
 				MenuItem[] items = m.getItems();
-				for (int i=0; i < items.length; i++) {
+				for (int i=0; i < items.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 					items[i].dispose();
 				}
 				fillMenu(m);
@@ -104,7 +104,7 @@ public class ShowStratumAction implements IObjectActionDelegate, IMenuCreator {
     /**
      * Fills the given menu with available stratum.
      */
-    private void fillMenu(Menu m) {
+    private void fillMenu(Menu m) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
         IStackFrame frame = (IStackFrame) fSelection.getFirstElement();
 		final IJavaStackFrame javaStackFrame = frame.getAdapter(IJavaStackFrame.class);
         if (javaStackFrame != null) {
@@ -113,7 +113,7 @@ public class ShowStratumAction implements IObjectActionDelegate, IMenuCreator {
 	            final IJavaDebugTarget target = (IJavaDebugTarget) javaStackFrame.getDebugTarget();
 	            String currentStratum = target.getDefaultStratum();
 	            String[] strata = declaringType.getAvailableStrata();
-	            for (int i = 0; i < strata.length; i++) {
+	            for (int i = 0; i < strata.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 	                final String stratum = strata[i];
 	                MenuItem item = createMenuItem(m, stratum, javaStackFrame, target);
 	                item.setSelection(stratum.equals(currentStratum));
@@ -125,14 +125,14 @@ public class ShowStratumAction implements IObjectActionDelegate, IMenuCreator {
         }
     }
 
-    private MenuItem createMenuItem(Menu m, final String stratum, final IJavaStackFrame frame, final IJavaDebugTarget target) {
+    private MenuItem createMenuItem(Menu m, final String stratum, final IJavaStackFrame frame, final IJavaDebugTarget target) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
         MenuItem item = new MenuItem(m, SWT.CHECK);
         if (stratum == null) {
             item.setText(ActionMessages.ShowStratumAction_0);
         } else {
             item.setText(stratum);
         }
-        item.addSelectionListener(new SelectionAdapter() {
+        item.addSelectionListener(new SelectionAdapter() { //FLLDCIM: MARK — T03 SELECTION_LANE CALL
             @Override
 			public void widgetSelected(SelectionEvent e) {
                 if (((MenuItem)e.getSource()).getSelection()) {

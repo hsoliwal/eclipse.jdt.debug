@@ -104,7 +104,7 @@ public class PerfConsoleTests extends AbstractDebugPerformanceTest implements IC
 
         warmupRun(workingCopy);
 
-        for (int i = 0; i < repeatTest; i++) {
+        for (int i = 0; i < repeatTest; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
             launchWorkingCopyAndWait(workingCopy);
             assertTrue("Never received 'start' notification", fStarted);
             assertTrue("Never received 'stopped' notification", fStopped);
@@ -117,7 +117,7 @@ public class PerfConsoleTests extends AbstractDebugPerformanceTest implements IC
     /*
      * prints (2*prints)+2 lines
      */
-    protected void runStackTrace(int prints, int repeatTest) throws Exception {
+    protected void runStackTrace(int prints, int repeatTest) throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
         String typeName = "ConsoleStackTrace";
         ILaunchConfiguration configuration = getLaunchConfiguration(typeName);
         ILaunchConfigurationWorkingCopy workingCopy = configuration.getWorkingCopy();
@@ -125,7 +125,7 @@ public class PerfConsoleTests extends AbstractDebugPerformanceTest implements IC
 
         warmupRun(workingCopy);
 
-        for (int i = 0; i < repeatTest; i++) {
+        for (int i = 0; i < repeatTest; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
             launchWorkingCopyAndWait(workingCopy);
             assertTrue("Never received 'start' notification", fStarted);
             assertTrue("Never received 'stopped' notification", fStopped);
@@ -139,7 +139,7 @@ public class PerfConsoleTests extends AbstractDebugPerformanceTest implements IC
     /*
      * prints (4*prints)+2 lines
      */
-    protected void runVariableLength(int prints, int repeatTest) throws Exception {
+    protected void runVariableLength(int prints, int repeatTest) throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
         String typeName = "ConsoleVariableLineLength";
         ILaunchConfiguration configuration = getLaunchConfiguration(typeName);
         ILaunchConfigurationWorkingCopy workingCopy = configuration.getWorkingCopy();
@@ -151,7 +151,7 @@ public class PerfConsoleTests extends AbstractDebugPerformanceTest implements IC
 
             warmupRun(workingCopy);
 
-            for (int i = 0; i < repeatTest; i++) {
+            for (int i = 0; i < repeatTest; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
                 launchWorkingCopyAndWait(workingCopy);
                 assertTrue("Never received 'start' notification", fStarted);
                 assertTrue("Never received 'stopped' notification", fStopped);
@@ -169,7 +169,7 @@ public class PerfConsoleTests extends AbstractDebugPerformanceTest implements IC
      */
     protected void warmupRun(ILaunchConfigurationWorkingCopy workingCopy) throws Exception {
         fWarmingUp = true;
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 5; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
             launchWorkingCopyAndWait(workingCopy);
             fStopped = false;
         }

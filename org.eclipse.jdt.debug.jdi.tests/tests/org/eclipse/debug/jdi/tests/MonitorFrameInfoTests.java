@@ -51,7 +51,7 @@ public class MonitorFrameInfoTests extends AbstractJDITest {
 	 * test to make sure the proper frames and monitors are collected for the corresponding thread ref.
 	 * this test has no effect in a non-1.6VM
 	 */
-	public void testOwnedMonitorsAndFrames() {
+	public void testOwnedMonitorsAndFrames() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		if(!fVM.canGetMonitorFrameInfo()) {
 			return;
 		}

@@ -43,8 +43,8 @@ public abstract class AbstractToggleBreakpointsTarget extends AbstractDebugTest 
 
 	class Listener implements IBreakpointListener {
 
-		List<IBreakpoint> added = new ArrayList<>();
-		List<IBreakpoint> removed = new ArrayList<>();
+		List<IBreakpoint> added = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
+		List<IBreakpoint> removed = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 
 		@Override
 		public void breakpointAdded(IBreakpoint breakpoint) {
@@ -112,9 +112,9 @@ public abstract class AbstractToggleBreakpointsTarget extends AbstractDebugTest 
 	 * @param line line number (1 based)
 	 * @throws Exception on failure
 	 */
-	protected void toggleBreakpoint(final IPath externalFile, final int line) throws Exception {
+	protected void toggleBreakpoint(final IPath externalFile, final int line) throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		final Exception[] exs = new Exception[1];
-		DebugUIPlugin.getStandardDisplay().syncExec(new Runnable() {
+		DebugUIPlugin.getStandardDisplay().syncExec(new Runnable() { //FLLDCIM: MARK — T08 UI_THREAD_SYNCHRONIZER CALL
 			@Override
 			public void run() {
 				try {

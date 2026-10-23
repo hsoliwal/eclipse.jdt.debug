@@ -89,14 +89,14 @@ public class BreakpointMethodLocator extends ASTVisitor {
 		return startPosition <= fPosition && fPosition <= endPosition;
 	}
 
-	private String computeMethodSignature(MethodDeclaration node) {
+	private String computeMethodSignature(MethodDeclaration node) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		if (node.getExtraDimensions() != 0 || Modifier.isAbstract(node.getModifiers())) {
 			return null;
 		}
-		StringBuilder signature= new StringBuilder();
-		signature.append('(');
+		StringBuilder signature= new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
+		signature.append('('); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		List<SingleVariableDeclaration> parameters = node.parameters();
-		for (Iterator<SingleVariableDeclaration> iter = parameters.iterator(); iter.hasNext();) {
+		for (Iterator<SingleVariableDeclaration> iter = parameters.iterator(); iter.hasNext();) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			Type type = iter.next().getType();
 			if (type instanceof PrimitiveType) {
 				appendTypeLetter(signature, (PrimitiveType)type);
@@ -104,7 +104,7 @@ public class BreakpointMethodLocator extends ASTVisitor {
 				return null;
 			}
 		}
-		signature.append(')');
+		signature.append(')'); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		Type returnType;
 		returnType= node.getReturnType2();
 		if (returnType instanceof PrimitiveType) {
@@ -115,26 +115,26 @@ public class BreakpointMethodLocator extends ASTVisitor {
 		return signature.toString();
 	}
 
-	private void appendTypeLetter(StringBuilder signature, PrimitiveType type) {
+	private void appendTypeLetter(StringBuilder signature, PrimitiveType type) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		PrimitiveType.Code code= type.getPrimitiveTypeCode();
 		if (code == PrimitiveType.BYTE) {
-			signature.append('B');
+			signature.append('B'); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		} else if (code == PrimitiveType.CHAR) {
-			signature.append('C');
+			signature.append('C'); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		} else if (code == PrimitiveType.DOUBLE) {
-			signature.append('D');
+			signature.append('D'); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		} else if (code == PrimitiveType.FLOAT) {
-			signature.append('F');
+			signature.append('F'); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		} else if (code == PrimitiveType.INT) {
-			signature.append('I');
+			signature.append('I'); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		} else if (code == PrimitiveType.LONG) {
-			signature.append('J');
+			signature.append('J'); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		} else if (code == PrimitiveType.SHORT) {
-			signature.append('S');
+			signature.append('S'); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		} else if (code == PrimitiveType.VOID) {
-			signature.append('V');
+			signature.append('V'); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		} else if (code == PrimitiveType.BOOLEAN) {
-			signature.append('Z');
+			signature.append('Z'); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		}
 	}
 
@@ -145,7 +145,7 @@ public class BreakpointMethodLocator extends ASTVisitor {
 	public boolean visit(CompilationUnit node) {
 		// visit only the type declarations
 		List<TypeDeclaration> types = node.types();
-		for (Iterator<TypeDeclaration> iter = types.iterator(); iter.hasNext() && !fFound;) {
+		for (Iterator<TypeDeclaration> iter = types.iterator(); iter.hasNext() && !fFound;) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			iter.next().accept(this);
 		}
 		return false;
@@ -177,13 +177,13 @@ public class BreakpointMethodLocator extends ASTVisitor {
 		if (containsPosition(node)) {
 			// visit the methode declarations
 			MethodDeclaration[] methods = node.getMethods();
-			for (int i = 0, length = methods.length; i < length && !fFound; i++) {
+			for (int i = 0, length = methods.length; i < length && !fFound; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				methods[i].accept(this);
 			}
 			if (!fFound) {
 				// visit inner types
 				TypeDeclaration[] types = node.getTypes();
-				for (int i = 0, length = types.length; i < length && !fFound; i++) {
+				for (int i = 0, length = types.length; i < length && !fFound; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 					types[i].accept(this);
 				}
 			}
@@ -195,16 +195,16 @@ public class BreakpointMethodLocator extends ASTVisitor {
 	 * Compute the name of the type which contains this node.
 	 * Result will be the name of the type or the inner type which contains this node, but not of the local or anonymous type.
 	 */
-	private String computeTypeName(ASTNode node) {
+	private String computeTypeName(ASTNode node) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String typeName = null;
 		ASTNode newnode = node;
-		while (!(newnode instanceof CompilationUnit)) {
+		while (!(newnode instanceof CompilationUnit)) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			if (newnode instanceof AbstractTypeDeclaration) {
 				String identifier= ((AbstractTypeDeclaration)newnode).getName().getIdentifier();
 				if (typeName == null) {
 					typeName= identifier;
 				} else {
-					typeName= identifier + "$" + typeName; //$NON-NLS-1$
+					typeName= identifier + "$" + typeName; //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 				}
 			}
 			newnode= newnode.getParent();
@@ -213,13 +213,13 @@ public class BreakpointMethodLocator extends ASTVisitor {
 		String packageIdentifier= ""; //$NON-NLS-1$
 		if (packageDecl != null) {
 			Name packageName= packageDecl.getName();
-			while (packageName.isQualifiedName()) {
+			while (packageName.isQualifiedName()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				QualifiedName qualifiedName= (QualifiedName) packageName;
-				packageIdentifier= qualifiedName.getName().getIdentifier() + "." + packageIdentifier; //$NON-NLS-1$
+				packageIdentifier= qualifiedName.getName().getIdentifier() + "." + packageIdentifier; //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 				packageName= qualifiedName.getQualifier();
 			}
-			packageIdentifier= ((SimpleName)packageName).getIdentifier() + "." + packageIdentifier; //$NON-NLS-1$
+			packageIdentifier= ((SimpleName)packageName).getIdentifier() + "." + packageIdentifier; //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		}
-		return packageIdentifier + typeName;
+		return packageIdentifier + typeName; //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 	}
 }

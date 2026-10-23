@@ -72,7 +72,7 @@ public class RemoteEvaluator {
 		this.variableNames = variableNames;
 	}
 
-	private IJavaClassObject loadTheClasses(IJavaThread theThread) throws DebugException {
+	private IJavaClassObject loadTheClasses(IJavaThread theThread) throws DebugException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 
 		if (loadedClass != null) {
 			return loadedClass;
@@ -84,7 +84,7 @@ public class RemoteEvaluator {
 		IJavaReferenceType surroundingClass = findType(this.enclosingTypeName, debugTarget);
 		classloader = surroundingClass.getClassLoaderObject();
 
-		for (Map.Entry<String, byte[]> entry : classFiles.entrySet()) {
+		for (Map.Entry<String, byte[]> entry : classFiles.entrySet()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			String className = entry.getKey();
 
 			IJavaReferenceType existingClass = tryLoadType(className, debugTarget);
@@ -117,7 +117,7 @@ public class RemoteEvaluator {
 		IJavaArray byteArray = ((IJavaArrayType) byteArrayType).newInstance(classBytes.length);
 
 		IJavaValue[] debugClassBytes = new IJavaValue[classBytes.length];
-		for (int ix = 0; ix < classBytes.length; ++ix) {
+		for (int ix = 0; ix < classBytes.length; ++ix) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			debugClassBytes[ix] = ((JDIDebugTarget) theThread.getDebugTarget()).newValue(classBytes[ix]);
 		}
 		byteArray.setValues(debugClassBytes);
@@ -164,8 +164,8 @@ public class RemoteEvaluator {
 			throw new DebugException(new Status(IStatus.ERROR, JDIDebugModel.getPluginIdentifier(), DebugException.REQUEST_FAILED, EvaluationMessages.LocalEvaluationEngine_Evaluation_failed___unable_to_initialize_local_variables__4, null));
 		}
 
-		for (int i = 0; i < boundValues.length; ++i) {
-			IJavaVariable field = object.getField(new String(LOCAL_VAR_PREFIX) + this.variableNames.get(i), false);
+		for (int i = 0; i < boundValues.length; ++i) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
+			IJavaVariable field = object.getField(new String(LOCAL_VAR_PREFIX) + this.variableNames.get(i), false); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 			if (field != null) {
 				IJavaValue bound = boundValues[i];
 				field.setValue(bound);
@@ -184,7 +184,7 @@ public class RemoteEvaluator {
 	 * @exception DebugException
 	 *                if creation fails
 	 */
-	protected IJavaObject newInstance(IJavaThread theThread) throws DebugException {
+	protected IJavaObject newInstance(IJavaThread theThread) throws DebugException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IJavaDebugTarget debugTarget = ((IJavaDebugTarget) theThread.getDebugTarget());
 
 		IJavaObject object = null;
@@ -238,7 +238,7 @@ public class RemoteEvaluator {
 	 *            the value of the result, to be interpreted based on resultType
 	 * @return the result of running the code snippet class file
 	 */
-	protected IJavaValue convertResult(IJavaDebugTarget debugTarget, IJavaClassObject resultType,
+	protected IJavaValue convertResult(IJavaDebugTarget debugTarget, IJavaClassObject resultType, //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 			IJavaValue result) throws DebugException {
 		if (resultType == null) {
 			// there was an exception or compilation problem - no result
@@ -262,7 +262,7 @@ public class RemoteEvaluator {
 			// signature of the result type we are looking for
 			IVariable[] vars = result.getVariables();
 			IJavaVariable var = null;
-			for (IVariable var2 : vars) {
+			for (IVariable var2 : vars) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				IJavaVariable jv = (IJavaVariable) var2;
 				if (!jv.isStatic() && jv.getSignature().equals(sig)) {
 					var = jv;
@@ -295,7 +295,7 @@ public class RemoteEvaluator {
 		return codeSnippetClassName;
 	}
 
-	public IJavaValue evaluate(IJavaThread theThread, IJavaValue[] args) throws DebugException {
+	public IJavaValue evaluate(IJavaThread theThread, IJavaValue[] args) throws DebugException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IJavaObject codeSnippetInstance = null;
 		IJavaDebugTarget debugTarget = ((IJavaDebugTarget) theThread.getDebugTarget());
 		try {
@@ -307,7 +307,7 @@ public class RemoteEvaluator {
 			IVariable[] fields = codeSnippetInstance.getVariables();
 			IJavaVariable resultValue = null;
 			IJavaVariable resultType = null;
-			for (IVariable field : fields) {
+			for (IVariable field : fields) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				if (field.getName().equals(ICodeSnippetRequestor.RESULT_TYPE_FIELD)) {
 					resultType = (IJavaVariable) field;
 				}

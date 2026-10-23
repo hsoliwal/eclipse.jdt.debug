@@ -115,7 +115,7 @@ public abstract class BreakpointMoveParticipant extends MoveParticipant {
 	 */
 	@Override
 	public Change createChange(IProgressMonitor pm) throws CoreException, OperationCanceledException {
-		List<Change> changes = new ArrayList<>();
+		List<Change> changes = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 		IResource resource = getBreakpointContainer();
 		IMarker[] markers= resource.findMarkers(IBreakpoint.BREAKPOINT_MARKER, true, IResource.DEPTH_INFINITE);
 		gatherChanges(markers, changes);
@@ -189,7 +189,7 @@ public abstract class BreakpointMoveParticipant extends MoveParticipant {
 	 */
 	protected boolean isContained(IJavaElement container, IType type) {
 		IJavaElement parent = type;
-		while (parent != null) {
+		while (parent != null) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			if (parent.equals(container)) {
 				return true;
 			}

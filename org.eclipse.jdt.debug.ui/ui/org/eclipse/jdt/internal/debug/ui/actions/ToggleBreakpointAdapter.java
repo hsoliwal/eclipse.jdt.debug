@@ -169,7 +169,7 @@ public class ToggleBreakpointAdapter implements IToggleBreakpointsTargetExtensio
      * @param selection the current text selection
      * @return the <code>IType</code> for the text selection or <code>null</code>
      */
-	protected static IType getType(ITextSelection selection) {
+	protected static IType getType(ITextSelection selection) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
         IMember member = ActionDelegateHelper.getDefault().getCurrentMember(selection);
         IType type = null;
         if (member instanceof IType) {
@@ -181,7 +181,7 @@ public class ToggleBreakpointAdapter implements IToggleBreakpointsTargetExtensio
         // unit,
         // we are getting 'not-always-correct' names for them.
         try {
-            while (type != null && !type.isBinary() && type.isLocal()) {
+            while (type != null && !type.isBinary() && type.isLocal()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
                 type = type.getDeclaringType();
             }
 		} catch (JavaModelException e) {
@@ -244,7 +244,7 @@ public class ToggleBreakpointAdapter implements IToggleBreakpointsTargetExtensio
         return selection instanceof ITextSelection;
     }
 
-    @Override
+    @Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public void toggleMethodBreakpoints(final IWorkbenchPart part, final ISelection finalSelection) {
         Job job = new Job("Toggle Method Breakpoints") { //$NON-NLS-1$
             @Override
@@ -266,7 +266,7 @@ public class ToggleBreakpointAdapter implements IToggleBreakpointsTargetExtensio
         job.schedule();
     }
 
-	public void toggleLambdaMethodBreakpoints(final IWorkbenchPart part, final ISelection finalSelection, final ValidBreakpointLocationLocator loc) {
+	public void toggleLambdaMethodBreakpoints(final IWorkbenchPart part, final ISelection finalSelection, final ValidBreakpointLocationLocator loc) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		Job job = new Job("Toggle Lambda Method Breakpoints") { //$NON-NLS-1$
 			@Override
 			protected IStatus run(IProgressMonitor monitor) {
@@ -287,7 +287,7 @@ public class ToggleBreakpointAdapter implements IToggleBreakpointsTargetExtensio
 		job.schedule();
 	}
 
-	static void toggleLambdaEntryMethodBreakpoints(final IWorkbenchPart part, final ISelection finalSelection, final String lambdaMethodName, final String lambdaMethodSignature, final LambdaProperties lambdaProperties) {
+	static void toggleLambdaEntryMethodBreakpoints(final IWorkbenchPart part, final ISelection finalSelection, final String lambdaMethodName, final String lambdaMethodSignature, final LambdaProperties lambdaProperties) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		Job job = new Job("Toggle Lambda Entry Method Breakpoints") { //$NON-NLS-1$
 			@Override
 			protected IStatus run(IProgressMonitor monitor) {
@@ -308,7 +308,7 @@ public class ToggleBreakpointAdapter implements IToggleBreakpointsTargetExtensio
 		job.schedule();
 	}
 
-	static IStatus doToggleLambdaEntryMethodBreakpoints(IWorkbenchPart part, ISelection selection, String lambdaMethodName, String lambdaMethodSignature, LambdaProperties lambdaProperties, IProgressMonitor monitor) throws CoreException {
+	static IStatus doToggleLambdaEntryMethodBreakpoints(IWorkbenchPart part, ISelection selection, String lambdaMethodName, String lambdaMethodSignature, LambdaProperties lambdaProperties, IProgressMonitor monitor) throws CoreException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		ITextEditor textEditor = getTextEditor(part);
 		if (textEditor == null || !(selection instanceof ITextSelection textSelection)) {
 			return Status.OK_STATUS;
@@ -341,7 +341,7 @@ public class ToggleBreakpointAdapter implements IToggleBreakpointsTargetExtensio
 	}
 
 
-	static IStatus doToggleLambdaMethodBreakpoints(IWorkbenchPart part, ISelection selection, ValidBreakpointLocationLocator loc, IProgressMonitor monitor) throws CoreException {
+	static IStatus doToggleLambdaMethodBreakpoints(IWorkbenchPart part, ISelection selection, ValidBreakpointLocationLocator loc, IProgressMonitor monitor) throws CoreException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		ITextEditor textEditor = getTextEditor(part);
 		if (textEditor == null || !(selection instanceof ITextSelection textSelection)) {
 			return Status.OK_STATUS;
@@ -379,7 +379,7 @@ public class ToggleBreakpointAdapter implements IToggleBreakpointsTargetExtensio
 		}
 		return Status.OK_STATUS;
 	}
-	static IStatus doToggleMethodBreakpoints(IWorkbenchPart part, ISelection finalSelection, IProgressMonitor monitor) throws CoreException {
+	static IStatus doToggleMethodBreakpoints(IWorkbenchPart part, ISelection finalSelection, IProgressMonitor monitor) throws CoreException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		BreakpointToggleUtils.report(null, part);
 		ISelection selection = finalSelection;
 		if (!(selection instanceof IStructuredSelection)) {
@@ -399,7 +399,7 @@ public class ToggleBreakpointAdapter implements IToggleBreakpointsTargetExtensio
 			}
 			return Status.OK_STATUS;
 		}
-		for (IMethod member : members) {
+		for (IMethod member : members) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			doToggleMethodBreakpoint(member, part, finalSelection, monitor);
 		}
 		return Status.OK_STATUS;
@@ -409,7 +409,7 @@ public class ToggleBreakpointAdapter implements IToggleBreakpointsTargetExtensio
 		doToggleMethodBreakpoint(member, null, null, null, part, finalSelection, monitor);
 	}
 
-	private static void doToggleMethodBreakpoint(IMethod member, String lambdaMethodName, String lambdaMethodSignature, LambdaProperties lambdaProperties, IWorkbenchPart part, ISelection finalSelection, IProgressMonitor monitor) throws CoreException {
+	private static void doToggleMethodBreakpoint(IMethod member, String lambdaMethodName, String lambdaMethodSignature, LambdaProperties lambdaProperties, IWorkbenchPart part, ISelection finalSelection, IProgressMonitor monitor) throws CoreException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		int lambdaPosition = 0;
 		if (lambdaProperties != null) {
 			lambdaPosition = lambdaProperties.lambdaPosition();
@@ -435,7 +435,7 @@ public class ToggleBreakpointAdapter implements IToggleBreakpointsTargetExtensio
 			start = range.getOffset();
 			end = start + range.getLength();
 		}
-		Map<String, Object> attributes = new HashMap<>(10);
+		Map<String, Object> attributes = new HashMap<>(10); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
 		BreakpointUtils.addJavaBreakpointAttributes(attributes, member);
 		IType type = member.getDeclaringType();
 		String mname = Optional.ofNullable(lambdaMethodName).orElse(member.getElementName());
@@ -443,7 +443,7 @@ public class ToggleBreakpointAdapter implements IToggleBreakpointsTargetExtensio
 		if (member.isConstructor()) {
 			mname = "<init>"; //$NON-NLS-1$
 			if (type.isEnum()) {
-				signature = "(Ljava.lang.String;I" + signature.substring(1); //$NON-NLS-1$
+				signature = "(Ljava.lang.String;I" + signature.substring(1); //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 			}
 		}
 		if (!type.isBinary() && lambdaMethodName == null) {
@@ -505,7 +505,7 @@ public class ToggleBreakpointAdapter implements IToggleBreakpointsTargetExtensio
 	 * @return the status of the toggle
 	 * @since 3.8
 	 */
-	static IStatus doLineBreakpointToggle(ISelection selection, IWorkbenchPart part, ValidBreakpointLocationLocator locator, boolean bestMatch, IProgressMonitor monitor) {
+	static IStatus doLineBreakpointToggle(ISelection selection, IWorkbenchPart part, ValidBreakpointLocationLocator locator, boolean bestMatch, IProgressMonitor monitor) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		ITextEditor editor = getTextEditor(part);
 		if (editor == null || !(selection instanceof ITextSelection)) {
 			return Status.CANCEL_STATUS;
@@ -536,7 +536,7 @@ public class ToggleBreakpointAdapter implements IToggleBreakpointsTargetExtensio
 			}
 			if (type == null) {
 				IStatus status = new Status(IStatus.INFO, DebugUIPlugin.getUniqueIdentifier(), ActionMessages.ToggleBreakpointAdapter_ErrorMessage);
-				Display.getDefault().asyncExec(() -> ErrorDialog.openError(JDIDebugUIPlugin.getShell(), ActionMessages.ToggleBreakpointAdapter_ErrorTitle, null, status));
+				Display.getDefault().asyncExec(() -> ErrorDialog.openError(JDIDebugUIPlugin.getShell(), ActionMessages.ToggleBreakpointAdapter_ErrorTitle, null, status)); //FLLDCIM: MARK — T08 UI_THREAD_SYNCHRONIZER CALL
 				return status;
 			}
 			if (locator == null && BreakpointToggleUtils.isToggleTracepoint()) {
@@ -572,7 +572,7 @@ public class ToggleBreakpointAdapter implements IToggleBreakpointsTargetExtensio
 				}
 				return Status.OK_STATUS;
 			}
-			Map<String, Object> attributes = new HashMap<>(10);
+			Map<String, Object> attributes = new HashMap<>(10); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
 			IDocumentProvider documentProvider = editor.getDocumentProvider();
 			if (documentProvider == null) {
 				return Status.CANCEL_STATUS;
@@ -633,7 +633,7 @@ public class ToggleBreakpointAdapter implements IToggleBreakpointsTargetExtensio
      * @param selection the current selection
      * @since 3.3
      */
-	public static void toggleClassBreakpoints(final IWorkbenchPart part, final ISelection selection) {
+	public static void toggleClassBreakpoints(final IWorkbenchPart part, final ISelection selection) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
     	Job job = new Job("Toggle Class Load Breakpoints") { //$NON-NLS-1$
 			@Override
 			protected IStatus run(IProgressMonitor monitor) {
@@ -652,7 +652,7 @@ public class ToggleBreakpointAdapter implements IToggleBreakpointsTargetExtensio
     	job.schedule();
     }
 
-	static IStatus doToggleClassBreakpoints(IWorkbenchPart part, ISelection selection, IProgressMonitor monitor) throws CoreException {
+	static IStatus doToggleClassBreakpoints(IWorkbenchPart part, ISelection selection, IProgressMonitor monitor) throws CoreException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		BreakpointToggleUtils.report(null, part);
 		ISelection sel = selection;
 		if (!(selection instanceof IStructuredSelection)) {
@@ -673,7 +673,7 @@ public class ToggleBreakpointAdapter implements IToggleBreakpointsTargetExtensio
 			deleteBreakpoint(existing, part, monitor);
 			return Status.OK_STATUS;
 		}
-		HashMap<String, Object> map = new HashMap<>(10);
+		HashMap<String, Object> map = new HashMap<>(10); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
 		BreakpointUtils.addJavaBreakpointAttributes(map, type);
 		ISourceRange range = type.getNameRange();
 		int start = -1;
@@ -710,7 +710,7 @@ public class ToggleBreakpointAdapter implements IToggleBreakpointsTargetExtensio
      */
 	protected static IJavaBreakpoint getClassLoadBreakpoint(IType type) throws CoreException {
     	IBreakpoint[] breakpoints = DebugPlugin.getDefault().getBreakpointManager().getBreakpoints(JDIDebugModel.getPluginIdentifier());
-    	for (int i = 0; i < breakpoints.length; i++) {
+    	for (int i = 0; i < breakpoints.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			IJavaBreakpoint breakpoint= (IJavaBreakpoint)breakpoints[i];
 			if (breakpoint instanceof IJavaClassPrepareBreakpoint && getQualifiedName(type).equals(breakpoint.getTypeName())) {
 				return breakpoint;
@@ -727,7 +727,7 @@ public class ToggleBreakpointAdapter implements IToggleBreakpointsTargetExtensio
      * @return the binary name for the given {@link IType}
      * @since 3.6
      */
-	static String getQualifiedName(IType type) throws JavaModelException {
+	static String getQualifiedName(IType type) throws JavaModelException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
     	IJavaProject project = type.getJavaProject();
 		if (project == null || !project.isOnClasspath(type) || !needsBindings(type)) {
 			return createQualifiedTypeName(type);
@@ -761,14 +761,14 @@ public class ToggleBreakpointAdapter implements IToggleBreakpointsTargetExtensio
      * @return <code>true</code> if the type or a parent type are a local type
      * @since 3.6
      */
-	static boolean needsBindings(IType type) throws JavaModelException {
+	static boolean needsBindings(IType type) throws JavaModelException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
     	if(type.isMember()) {
     		if(type.isLocal() && !type.isAnonymous()) {
     			return true;
     		}
     		IJavaElement parent = type.getParent();
     		IType ptype = null;
-    		while(parent != null) {
+    		while(parent != null) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
     			if(parent.getElementType() == IJavaElement.TYPE) {
     				ptype = (IType) parent;
     				if(ptype.isLocal() && !ptype.isAnonymous()) {
@@ -788,7 +788,7 @@ public class ToggleBreakpointAdapter implements IToggleBreakpointsTargetExtensio
      * @return the package qualified name
      * @since 3.3
      */
-	static String createQualifiedTypeName(IType type) {
+	static String createQualifiedTypeName(IType type) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
     	String tname = pruneAnonymous(type);
     	try {
     		String packName = null;
@@ -801,7 +801,7 @@ public class ToggleBreakpointAdapter implements IToggleBreakpointsTargetExtensio
 				}
     		}
 			if(packName != null && !packName.equals(EMPTY_STRING)) {
-				tname =  packName+"."+tname; //$NON-NLS-1$
+				tname =  packName+"."+tname; //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 			}
     	}
     	catch (JavaModelException e) {}
@@ -814,10 +814,10 @@ public class ToggleBreakpointAdapter implements IToggleBreakpointsTargetExtensio
      * @return the compiled type name from the given {@link IType} with all occurrences of anonymous inner types removed
      * @since 3.4
      */
-	private static String pruneAnonymous(IType type) {
-    	StringBuilder buffer = new StringBuilder();
+	private static String pruneAnonymous(IType type) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
+    	StringBuilder buffer = new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
     	IJavaElement parent = type;
-    	while(parent != null) {
+    	while(parent != null) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
     		if(parent.getElementType() == IJavaElement.TYPE){
     			IType atype = (IType) parent;
     			try {
@@ -900,13 +900,13 @@ public class ToggleBreakpointAdapter implements IToggleBreakpointsTargetExtensio
      * @param selection the selection to get the methods from
      * @return an array of the methods from the selection or an empty array
      */
-	protected static IMethod[] getMethods(IStructuredSelection selection, boolean isInterace) {
+	protected static IMethod[] getMethods(IStructuredSelection selection, boolean isInterace) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
         if (selection.isEmpty()) {
             return new IMethod[0];
         }
-        List<IMethod> methods = new ArrayList<>(selection.size());
+        List<IMethod> methods = new ArrayList<>(selection.size()); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
         Iterator<?> iterator = selection.iterator();
-        while (iterator.hasNext()) {
+        while (iterator.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
             Object thing = iterator.next();
             try {
                 if (thing instanceof IMethod method) {
@@ -930,13 +930,13 @@ public class ToggleBreakpointAdapter implements IToggleBreakpointsTargetExtensio
      * @param selection the selection to get the methods from
      * @return an array of the methods from the selection or an empty array
      */
-	protected static IMethod[] getInterfaceMethods(IStructuredSelection selection) {
+	protected static IMethod[] getInterfaceMethods(IStructuredSelection selection) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
         if (selection.isEmpty()) {
             return new IMethod[0];
         }
-        List<IMethod> methods = new ArrayList<>(selection.size());
+        List<IMethod> methods = new ArrayList<>(selection.size()); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
         Iterator<?> iterator = selection.iterator();
-        while (iterator.hasNext()) {
+        while (iterator.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
             Object thing = iterator.next();
             try {
                 if (thing instanceof IMethod method) {
@@ -956,7 +956,7 @@ public class ToggleBreakpointAdapter implements IToggleBreakpointsTargetExtensio
      * @param part the associated workbench part
      * @return true if the selection is a valid method, false otherwise
      */
-	private static boolean isMethod(ITextSelection selection, IWorkbenchPart part) {
+	private static boolean isMethod(ITextSelection selection, IWorkbenchPart part) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		ITextEditor editor = getTextEditor(part);
 		if (editor != null) {
 			IJavaElement element = getJavaElement(editor.getEditorInput());
@@ -991,13 +991,13 @@ public class ToggleBreakpointAdapter implements IToggleBreakpointsTargetExtensio
      *
      * @return list of <code>IField</code> and <code>IJavaFieldVariable</code>, possibly empty
      */
-	protected static List<Object> getFields(IStructuredSelection selection) throws CoreException {
+	protected static List<Object> getFields(IStructuredSelection selection) throws CoreException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
         if (selection.isEmpty()) {
             return Collections.EMPTY_LIST;
         }
-        List<Object> fields = new ArrayList<>(selection.size());
+        List<Object> fields = new ArrayList<>(selection.size()); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
         Iterator<?> iterator = selection.iterator();
-        while (iterator.hasNext()) {
+        while (iterator.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
             Object thing = iterator.next();
             if (thing instanceof IField) {
                 fields.add(thing);
@@ -1019,7 +1019,7 @@ public class ToggleBreakpointAdapter implements IToggleBreakpointsTargetExtensio
      * @return true if the selection is part of an interface, false otherwise
      * @since 3.2
      */
-	private static boolean isInterface(ISelection selection, IWorkbenchPart part) {
+	private static boolean isInterface(ISelection selection, IWorkbenchPart part) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 			ISelection sel = selection;
 			if(!(sel instanceof IStructuredSelection)) {
@@ -1052,7 +1052,7 @@ public class ToggleBreakpointAdapter implements IToggleBreakpointsTargetExtensio
      * @return true if the text selection is a valid field for a watchpoint, false otherwise
      * @since 3.3
      */
-	private static boolean isField(ITextSelection selection, IWorkbenchPart part) {
+	private static boolean isField(ITextSelection selection, IWorkbenchPart part) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		ITextEditor editor = getTextEditor(part);
     	if(editor != null) {
 			IJavaElement element = getJavaElement(editor.getEditorInput());
@@ -1078,13 +1078,13 @@ public class ToggleBreakpointAdapter implements IToggleBreakpointsTargetExtensio
      * @param selection the current selection
      * @return true if the selection is a field false otherwise
      */
-	private static boolean isFields(IStructuredSelection selection) {
+	private static boolean isFields(IStructuredSelection selection) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		if (selection.isEmpty()) {
 			return false;
         }
 		try {
 			Iterator<?> iterator = selection.iterator();
-			while (iterator.hasNext()) {
+			while (iterator.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				Object thing = iterator.next();
 				if (thing instanceof IField) {
 					int flags = ((IField) thing).getFlags();
@@ -1099,7 +1099,7 @@ public class ToggleBreakpointAdapter implements IToggleBreakpointsTargetExtensio
         return false;
     }
 
-    @Override
+    @Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public void toggleWatchpoints(final IWorkbenchPart part, final ISelection finalSelection) {
         Job job = new Job("Toggle Watchpoints") { //$NON-NLS-1$
             @Override
@@ -1119,7 +1119,7 @@ public class ToggleBreakpointAdapter implements IToggleBreakpointsTargetExtensio
         job.schedule();
     }
 
-	static IStatus doToggleWatchpoints(IWorkbenchPart part, ISelection finalSelection, IProgressMonitor monitor) throws CoreException {
+	static IStatus doToggleWatchpoints(IWorkbenchPart part, ISelection finalSelection, IProgressMonitor monitor) throws CoreException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		BreakpointToggleUtils.report(null, part);
 		ISelection selection = finalSelection;
 		if (!(selection instanceof IStructuredSelection)) {
@@ -1144,7 +1144,7 @@ public class ToggleBreakpointAdapter implements IToggleBreakpointsTargetExtensio
 		String typeName = null;
 		String fieldName = null;
 
-		for (Object element : fields) {
+		for (Object element : fields) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			if (element instanceof IField) {
 				javaField = (IField) element;
 				IType type = javaField.getDeclaringType();
@@ -1175,7 +1175,7 @@ public class ToggleBreakpointAdapter implements IToggleBreakpointsTargetExtensio
 			}
 			int start = -1;
 			int end = -1;
-			Map<String, Object> attributes = new HashMap<>(10);
+			Map<String, Object> attributes = new HashMap<>(10); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
 			IResource resource;
 			if (javaField == null) {
 				resource = ResourcesPlugin.getWorkspace().getRoot();
@@ -1219,7 +1219,7 @@ public class ToggleBreakpointAdapter implements IToggleBreakpointsTargetExtensio
 	private static IJavaWatchpoint getWatchpoint(String typeName, String fieldName) throws CoreException {
         IBreakpointManager breakpointManager = DebugPlugin.getDefault().getBreakpointManager();
         IBreakpoint[] breakpoints = breakpointManager.getBreakpoints(JDIDebugModel.getPluginIdentifier());
-        for (int i = 0; i < breakpoints.length; i++) {
+        for (int i = 0; i < breakpoints.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
             IBreakpoint breakpoint = breakpoints[i];
             if (breakpoint instanceof IJavaWatchpoint watchpoint) {
                 if (typeName.equals(watchpoint.getTypeName()) && fieldName.equals(watchpoint.getFieldName())) {
@@ -1241,7 +1241,7 @@ public class ToggleBreakpointAdapter implements IToggleBreakpointsTargetExtensio
         String[] parameterTypes = Signature.getParameterTypes(signature);
         int length = parameterTypes.length;
         String[] resolvedParameterTypes = new String[length];
-        for (int i = 0; i < length; i++) {
+        for (int i = 0; i < length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
             resolvedParameterTypes[i] = resolveTypeSignature(method, parameterTypes[i]);
             if (resolvedParameterTypes[i] == null) {
                 return null;
@@ -1262,7 +1262,7 @@ public class ToggleBreakpointAdapter implements IToggleBreakpointsTargetExtensio
      * @param typeSignature the type signature to resolve
      * @return the resolved type signature
      */
-    private static String resolveTypeSignature(IMethod method, String typeSignature) throws JavaModelException {
+    private static String resolveTypeSignature(IMethod method, String typeSignature) throws JavaModelException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
         int count = Signature.getArrayCount(typeSignature);
         String elementTypeSignature = Signature.getElementType(typeSignature);
         if (elementTypeSignature.length() == 1) {
@@ -1331,12 +1331,12 @@ public class ToggleBreakpointAdapter implements IToggleBreakpointsTargetExtensio
      *            the editor containing the method
      * @return handle or <code>null</code>
      */
-	protected static IMethod getMethodHandle(IEditorPart editorPart, String typeName, String methodName, String signature) throws CoreException {
+	protected static IMethod getMethodHandle(IEditorPart editorPart, String typeName, String methodName, String signature) throws CoreException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
         IJavaElement element = editorPart.getEditorInput().getAdapter(IJavaElement.class);
         IType type = null;
         if (element instanceof ICompilationUnit) {
             IType[] types = ((ICompilationUnit) element).getAllTypes();
-            for (int i = 0; i < types.length; i++) {
+            for (int i = 0; i < types.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
                 if (types[i].getFullyQualifiedName().equals(typeName)) {
                     type = types[i];
                     break;
@@ -1361,14 +1361,14 @@ public class ToggleBreakpointAdapter implements IToggleBreakpointsTargetExtensio
 	 *            the position of the lambda expression in the line (if any)
 	 * @return the current breakpoint from the element or <code>null</code>
 	 */
-	@SuppressWarnings("restriction")
+	@SuppressWarnings("restriction") //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	protected static IJavaBreakpoint getMethodBreakpoint(IMember element, int lambdaPosition) {
 		if (!(element instanceof IMethod method)) {
 			return null;
 		}
         IBreakpointManager breakpointManager = DebugPlugin.getDefault().getBreakpointManager();
         IBreakpoint[] breakpoints = breakpointManager.getBreakpoints(JDIDebugModel.getPluginIdentifier());
-		for (IBreakpoint breakpoint : breakpoints) {
+		for (IBreakpoint breakpoint : breakpoints) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			if (!(breakpoint instanceof IJavaMethodBreakpoint methodBreakpoint)) {
 				continue;
 			}
@@ -1450,7 +1450,7 @@ public class ToggleBreakpointAdapter implements IToggleBreakpointsTargetExtensio
      * @exception CoreException
      *                if an exception occurs
      */
-	protected static ISelection translateToMembers(IWorkbenchPart part, ISelection selection) throws CoreException {
+	protected static ISelection translateToMembers(IWorkbenchPart part, ISelection selection) throws CoreException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
     	ITextEditor textEditor = getTextEditor(part);
 		if (textEditor == null || !(selection instanceof ITextSelection textSelection)) {
 			return selection;
@@ -1466,7 +1466,7 @@ public class ToggleBreakpointAdapter implements IToggleBreakpointsTargetExtensio
 			try {
 				IRegion region = document.getLineInformationOfOffset(offset);
 				int end = region.getOffset() + region.getLength();
-				while (Character.isWhitespace(document.getChar(offset)) && offset < end) {
+				while (Character.isWhitespace(document.getChar(offset)) && offset < end) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 					offset++;
 				}
 			} catch (BadLocationException e) {
@@ -1520,7 +1520,7 @@ public class ToggleBreakpointAdapter implements IToggleBreakpointsTargetExtensio
      * Return the associated IField (Java model) for the given
      * IJavaFieldVariable (JDI model)
      */
-	private static IField getField(IJavaFieldVariable variable) throws CoreException {
+	private static IField getField(IJavaFieldVariable variable) throws CoreException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
         String varName = null;
         try {
             varName = variable.getName();
@@ -1540,7 +1540,7 @@ public class ToggleBreakpointAdapter implements IToggleBreakpointsTargetExtensio
         return null;
     }
 
-    @Override
+    @Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public void toggleBreakpoints(IWorkbenchPart part, ISelection selection) throws CoreException {
 		ISelection sel = translateToMembers(part, selection);
 		if (!(sel instanceof IStructuredSelection)) {
@@ -1563,7 +1563,7 @@ public class ToggleBreakpointAdapter implements IToggleBreakpointsTargetExtensio
 		}
 	}
 
-	public static IJavaLineBreakpoint findExistingBreakpoint(ITextEditor editor, ITextSelection ts) {
+	public static IJavaLineBreakpoint findExistingBreakpoint(ITextEditor editor, ITextSelection ts) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IDocumentProvider documentProvider = editor.getDocumentProvider();
 		if (documentProvider == null) {
 			return null;
@@ -1578,7 +1578,7 @@ public class ToggleBreakpointAdapter implements IToggleBreakpointsTargetExtensio
 			return null;
 		}
 		Iterator<Annotation> iterator = annotationModel.getAnnotationIterator();
-		while (iterator.hasNext()) {
+		while (iterator.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			Object object = iterator.next();
 			if (!(object instanceof SimpleMarkerAnnotation markerAnnotation)) {
 				continue;
@@ -1604,7 +1604,7 @@ public class ToggleBreakpointAdapter implements IToggleBreakpointsTargetExtensio
 		return null;
 	}
 
-	private void toggleFieldOrMethodBreakpoints(IWorkbenchPart part, ISelection selection) throws CoreException {
+	private void toggleFieldOrMethodBreakpoints(IWorkbenchPart part, ISelection selection) throws CoreException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		if (!(selection instanceof ITextSelection ts)) {
 			return;
 		}
@@ -1639,7 +1639,7 @@ public class ToggleBreakpointAdapter implements IToggleBreakpointsTargetExtensio
 		// no breakpoint found: we create new one
 		CompilationUnit unit = parseCompilationUnit(editor);
 		if (unit == null) {
-			JDIDebugUIPlugin.log("Failed to parse CU for: " + editor.getTitle(), new IllegalStateException()); //$NON-NLS-1$
+			JDIDebugUIPlugin.log("Failed to parse CU for: " + editor.getTitle(), new IllegalStateException()); //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 			return;
 		}
 		ValidBreakpointLocationLocator loc = null;
@@ -1678,7 +1678,7 @@ public class ToggleBreakpointAdapter implements IToggleBreakpointsTargetExtensio
 		}
 	}
 
-	private static void toggleLambdaBreakpoint(IWorkbenchPart part, ITextSelection ts, ITextEditor editor) throws CoreException {
+	private static void toggleLambdaBreakpoint(IWorkbenchPart part, ITextSelection ts, ITextEditor editor) throws CoreException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IDocumentProvider documentProvider = editor.getDocumentProvider();
 		if (documentProvider == null) {
 			BreakpointToggleUtils.report(ActionMessages.LambdaEntryBreakpointToggleAction_Unavailable, part);
@@ -1735,7 +1735,7 @@ public class ToggleBreakpointAdapter implements IToggleBreakpointsTargetExtensio
 		LambdaCollector lambdas = new LambdaCollector(region.getOffset(), region.getOffset() + region.getLength());
 		CompilationUnit unitForLambdas = parseCompilationUnit(editor);
 		if (unitForLambdas == null) {
-			JDIDebugUIPlugin.log("Failed to parse CU for: " + editor.getTitle(), new IllegalStateException()); //$NON-NLS-1$
+			JDIDebugUIPlugin.log("Failed to parse CU for: " + editor.getTitle(), new IllegalStateException()); //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 			return List.of();
 		}
 		unitForLambdas.accept(lambdas);
@@ -1746,10 +1746,10 @@ public class ToggleBreakpointAdapter implements IToggleBreakpointsTargetExtensio
 	 * Additional diagnosis info for bug 528321
 	 */
 	private static void logBadAnnotation(SimpleMarkerAnnotation annotation, CoreException e) {
-		StringBuilder message = new StringBuilder("Editor annotation with non existing marker found: "); //$NON-NLS-1$
-		message.append("text: ").append(annotation.getText()); //$NON-NLS-1$
-		message.append(", type: ").append(annotation.getType()); //$NON-NLS-1$
-		message.append(", ").append(annotation.getMarker()); //$NON-NLS-1$
+		StringBuilder message = new StringBuilder("Editor annotation with non existing marker found: "); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
+		message.append("text: ").append(annotation.getText()); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+		message.append(", type: ").append(annotation.getType()); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+		message.append(", ").append(annotation.getMarker()); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		JDIDebugUIPlugin.log(message.toString(), e);
 	}
 
@@ -1761,7 +1761,7 @@ public class ToggleBreakpointAdapter implements IToggleBreakpointsTargetExtensio
 	 * @param monitor  the progress monitor
 	 * @throws CoreException if the deletion fails
 	 */
-	public static void deleteBreakpoint(IJavaBreakpoint breakpoint, IWorkbenchPart part, IProgressMonitor monitor) throws CoreException {
+	public static void deleteBreakpoint(IJavaBreakpoint breakpoint, IWorkbenchPart part, IProgressMonitor monitor) throws CoreException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		final Shell shell = part != null ? part.getSite().getShell() : null;
 		final boolean[] result = new boolean[] { true };
 
@@ -1770,7 +1770,7 @@ public class ToggleBreakpointAdapter implements IToggleBreakpointsTargetExtensio
 		if (prompt && breakpoint instanceof IJavaLineBreakpoint && ((IJavaLineBreakpoint) breakpoint).getCondition() != null) {
 			Display display = shell != null && !shell.isDisposed() ? shell.getDisplay() : PlatformUI.getWorkbench().getDisplay();
 			if (!display.isDisposed()) {
-				display.syncExec(new Runnable() {
+				display.syncExec(new Runnable() { //FLLDCIM: MARK — T08 UI_THREAD_SYNCHRONIZER CALL
 					@Override
 					public void run() {
 						MessageDialogWithToggle dialog = MessageDialogWithToggle.openOkCancelConfirm(shell, ActionMessages.ToggleBreakpointAdapter_confirmDeleteTitle, ActionMessages.ToggleBreakpointAdapter_confirmDeleteMessage, ActionMessages.ToggleBreakpointAdapter_confirmDeleteShowAgain, false, null, null);
@@ -1787,7 +1787,7 @@ public class ToggleBreakpointAdapter implements IToggleBreakpointsTargetExtensio
 		}
 	}
 
-	private static void deleteTracepoint(IJavaBreakpoint breakpoint, IWorkbenchPart part, IProgressMonitor monitor) throws CoreException {
+	private static void deleteTracepoint(IJavaBreakpoint breakpoint, IWorkbenchPart part, IProgressMonitor monitor) throws CoreException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		final Shell shell = part != null ? part.getSite().getShell() : null;
 		final IEclipsePreferences prefs = InstanceScope.INSTANCE.getNode(JDIDebugUIPlugin.getUniqueIdentifier());
 		boolean prompt = prefs.getBoolean(IJDIPreferencesConstants.PREF_PROMPT_DELETE_CONDITIONAL_BREAKPOINT, true);
@@ -1817,7 +1817,7 @@ public class ToggleBreakpointAdapter implements IToggleBreakpointsTargetExtensio
 		if (conditionChanged && condition != null) {
 			Display display = shell != null && !shell.isDisposed() ? shell.getDisplay() : PlatformUI.getWorkbench().getDisplay();
 			if (!display.isDisposed()) {
-				display.syncExec(new Runnable() {
+				display.syncExec(new Runnable() { //FLLDCIM: MARK — T08 UI_THREAD_SYNCHRONIZER CALL
 					@Override
 					public void run() {
 						MessageDialogWithToggle dialog = MessageDialogWithToggle.openOkCancelConfirm(shell, ActionMessages.ToggleBreakpointAdapter_confirmDeleteTitle, ActionMessages.ToggleBreakpointAdapter_confirmDeleteMessage, ActionMessages.ToggleBreakpointAdapter_confirmDeleteShowAgain, false, null, null);
@@ -1843,7 +1843,7 @@ public class ToggleBreakpointAdapter implements IToggleBreakpointsTargetExtensio
         return canToggleLineBreakpoints(part, selection);
     }
 
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public void toggleBreakpointsWithEvent(IWorkbenchPart part, ISelection selection, Event event) throws CoreException {
 		if (event == null) {
 			toggleBreakpoints(part, selection);
@@ -1895,11 +1895,11 @@ public class ToggleBreakpointAdapter implements IToggleBreakpointsTargetExtensio
 		}
 		TemplateContextType contextType = JavaPlugin.getDefault().getTemplateContextRegistry().getContextType(JavaContextType.ID_STATEMENTS);
 		final AtomicReference<String> templateBuffer = new AtomicReference<>();
-		Display.getDefault().syncExec(() -> doGetCodeTemplate(textSelection, part, viewer, contextType, templateBuffer));
+		Display.getDefault().syncExec(() -> doGetCodeTemplate(textSelection, part, viewer, contextType, templateBuffer)); //FLLDCIM: MARK — T08 UI_THREAD_SYNCHRONIZER CALL
 		return templateBuffer.get();
 	}
 
-	private static void doGetCodeTemplate(ITextSelection textSelection, JavaEditor part, ITextViewer viewer, TemplateContextType contextType, AtomicReference<String> templateBuffer) {
+	private static void doGetCodeTemplate(ITextSelection textSelection, JavaEditor part, ITextViewer viewer, TemplateContextType contextType, AtomicReference<String> templateBuffer) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		ITextEditor editor = getTextEditor(part);
 		if (editor == null) {
 			return;
@@ -1920,7 +1920,7 @@ public class ToggleBreakpointAdapter implements IToggleBreakpointsTargetExtensio
 			Point selectedRange = new Point(textSelection.getOffset(), textSelection.getLength());
 			statementEngine.complete(viewer, selectedRange, line.getOffset(), cunit);
 			TemplateProposal[] templateProposals = statementEngine.getResults();
-			for (TemplateProposal templateProposal : templateProposals) {
+			for (TemplateProposal templateProposal : templateProposals) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				Template template = templateProposal.getTemplate();
 				if (template.getName().equals("systrace")) { //$NON-NLS-1$
 					CompilationUnitContextType cuContextType = (CompilationUnitContextType) JavaPlugin.getDefault().getTemplateContextRegistry().getContextType(template.getContextTypeId());
@@ -1954,8 +1954,8 @@ public class ToggleBreakpointAdapter implements IToggleBreakpointsTargetExtensio
 		return JavaCore.createCompilationUnitFrom(file);
 	}
 
-	static int selectLambda(List<LambdaExpression> lambdaExps) {
-		Map<String, Integer> seen = new HashMap<>();
+	static int selectLambda(List<LambdaExpression> lambdaExps) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
+		Map<String, Integer> seen = new HashMap<>(); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
 		// Generate unique labels used also as keys for lambda expressions. Note that two identical
 		// lambda expressions in different locations should still have different names
 		// otherwise the selection dialog cannot distinguish them.
@@ -1965,7 +1965,7 @@ public class ToggleBreakpointAdapter implements IToggleBreakpointsTargetExtensio
 			if (count == 0) {
 				return name;
 			}
-			return name + ZERO_WIDTH_SPACE.repeat(count);
+			return name + ZERO_WIDTH_SPACE.repeat(count); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		}).toList();
 		LambdaLabelProvider lambdaLabelProvider = new LambdaLabelProvider(lambdaExps, lambdaNames);
 		ElementListSelectionDialog dialog = new LambdaSelectionDialog(DebugUIPlugin.getShellForModalDialog(), lambdaLabelProvider, lambdaExps, lambdaNames);
@@ -1991,13 +1991,13 @@ public class ToggleBreakpointAdapter implements IToggleBreakpointsTargetExtensio
 			this.lambdaNames = lambdaNames;
 		}
 
-		@Override
+		@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		protected FilteredList createFilteredList(Composite parent) {
 			FilteredList filteredList = super.createFilteredList(parent);
 			// Disable default sorting to keep the original order
 			filteredList.setComparator(new LambdaPositionComparator(lambdaNames));
 			// Add selection listener to highlight selected lambda in the editor
-			filteredList.addSelectionListener(new SelectionAdapter() {
+			filteredList.addSelectionListener(new SelectionAdapter() { //FLLDCIM: MARK — T03 SELECTION_LANE CALL
 				@Override
 				public void widgetSelected(SelectionEvent e) {
 					int index = filteredList.getSelectionIndex();
@@ -2076,28 +2076,28 @@ public class ToggleBreakpointAdapter implements IToggleBreakpointsTargetExtensio
 	 *            non null
 	 * @return shortened and flattened lambda expression
 	 */
-	static String shortenLambdaExpression(String input) {
+	static String shortenLambdaExpression(String input) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		input = input.strip();
-		StringBuilder result = new StringBuilder();
+		StringBuilder result = new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 		if (!input.contains("\n")) { //$NON-NLS-1$
 			if (input.length() > MAX_TOTAL_LAMBDA_LINE_LENGTH) {
-				result.append(input, 0, MAX_TOTAL_LAMBDA_LINE_LENGTH).append(TRUNCATION_SIGN);
+				result.append(input, 0, MAX_TOTAL_LAMBDA_LINE_LENGTH).append(TRUNCATION_SIGN); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			} else {
-				result.append(input);
+				result.append(input); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			}
 			return result.toString();
 		}
 		boolean shortened = false;
-		for (String line : input.split("\n")) { //$NON-NLS-1$
+		for (String line : input.split("\n")) { //$NON-NLS-1$ //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			if (result.length() > 0) {
-				result.append(LAMBDA_SEPARATOR);
+				result.append(LAMBDA_SEPARATOR); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			}
 			line = line.strip();
 			if (line.length() > MAX_LAMBDA_LINE_LENGTH) {
-				line = line.substring(0, MAX_LAMBDA_LINE_LENGTH) + TRUNCATION_SIGN;
+				line = line.substring(0, MAX_LAMBDA_LINE_LENGTH) + TRUNCATION_SIGN; //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 				shortened = true;
 			}
-			result.append(line);
+			result.append(line); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			if (result.length() > MAX_TOTAL_LAMBDA_LINE_LENGTH) {
 				shortened = true;
 				break;
@@ -2106,7 +2106,7 @@ public class ToggleBreakpointAdapter implements IToggleBreakpointsTargetExtensio
 
 		if (shortened) {
 			if (result.lastIndexOf(TRUNCATION_SIGN) != result.length() - TRUNCATION_SIGN.length()) {
-				result.append(TRUNCATION_SIGN);
+				result.append(TRUNCATION_SIGN); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			}
 		}
 		return result.toString().trim();

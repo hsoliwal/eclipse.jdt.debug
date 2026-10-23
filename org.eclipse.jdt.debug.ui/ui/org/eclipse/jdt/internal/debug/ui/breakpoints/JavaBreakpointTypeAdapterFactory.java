@@ -38,15 +38,15 @@ import org.eclipse.osgi.util.NLS;
  */
 public class JavaBreakpointTypeAdapterFactory implements IAdapterFactory {
 
-    private final Map<String, Object> fStratumTypes = new HashMap<>();
+    private final Map<String, Object> fStratumTypes = new HashMap<>(); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
 
     // map of breakpoint type names to breakpoint type categories
-    private final Map<String, IBreakpointTypeCategory> fOtherTypes = new HashMap<>();
+    private final Map<String, IBreakpointTypeCategory> fOtherTypes = new HashMap<>(); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
 
     /* (non-Javadoc)
      * @see org.eclipse.core.runtime.IAdapterFactory#getAdapter(java.lang.Object, java.lang.Class)
      */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	@SuppressWarnings("unchecked")
 	public <T> T getAdapter(Object adaptableObject, Class<T> adapterType) {
         if (adapterType.equals(IBreakpointTypeCategory.class)) {

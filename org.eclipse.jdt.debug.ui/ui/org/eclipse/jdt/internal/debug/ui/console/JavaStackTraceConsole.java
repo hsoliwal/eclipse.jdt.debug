@@ -76,14 +76,14 @@ public class JavaStackTraceConsole extends TextConsole {
     }
 
     public final static String CONSOLE_TYPE = "javaStackTraceConsole"; //$NON-NLS-1$
-    public final static String FILE_NAME = JDIDebugUIPlugin.getDefault().getStateLocation().toOSString() + File.separator + "stackTraceConsole.txt"; //$NON-NLS-1$
+    public final static String FILE_NAME = JDIDebugUIPlugin.getDefault().getStateLocation().toOSString() + File.separator + "stackTraceConsole.txt"; //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 	private static final String NL = "\n"; //$NON-NLS-1$
 	private static final String INDENT_STR = "    "; //$NON-NLS-1$
 	private static final int INDENT_WIDTH = 4;
 
     private final JavaStackTraceConsolePartitioner partitioner = new JavaStackTraceConsolePartitioner();
-    private final IPropertyChangeListener propertyListener = new IPropertyChangeListener() {
+    private final IPropertyChangeListener propertyListener = new IPropertyChangeListener() { //FLLDCIM: MARK — T06  ANONYMOUS
         @Override
 		public void propertyChange(PropertyChangeEvent event) {
             String property = event.getProperty();
@@ -95,7 +95,7 @@ public class JavaStackTraceConsole extends TextConsole {
 	/** Memorize if stack trace console is showing the initial "How to use" text at the moment. */
 	boolean showsUsageHint = false;
 	/** Document listener to recognize if initial "How to use" text is changed programmatically. Removes itself after first document change. */
-	private final IDocumentListener documentsFirstChangeListener = new IDocumentListener() {
+	private final IDocumentListener documentsFirstChangeListener = new IDocumentListener() { //FLLDCIM: MARK — T28  ANONYMOUS
 		@Override
 		public void documentAboutToBeChanged(DocumentEvent event) {
 		}
@@ -140,7 +140,7 @@ public class JavaStackTraceConsole extends TextConsole {
      */
     @Override
 	protected void init() {
-        JFaceResources.getFontRegistry().addListener(propertyListener);
+        JFaceResources.getFontRegistry().addListener(propertyListener); //FLLDCIM: MARK — T13 SWT_TYPED_EVENT CALL
     }
 
     /**
@@ -201,7 +201,7 @@ public class JavaStackTraceConsole extends TextConsole {
      * performs the formatting of the stacktrace console
      */
     public void format() {
-    	WorkbenchJob job = new WorkbenchJob(ConsoleMessages.JavaStackTraceConsole_1) {
+    	WorkbenchJob job = new WorkbenchJob(ConsoleMessages.JavaStackTraceConsole_1) { //FLLDCIM: MARK — T09  ANONYMOUS
 			@Override
 			public IStatus runInUIThread(IProgressMonitor monitor) {
 	            IDocument document = getDocument();
@@ -225,9 +225,9 @@ public class JavaStackTraceConsole extends TextConsole {
 	 *            the stack trace to format
 	 * @return the formatted stack trace for this console
 	 */
-	private String format(String trace) {
+	private String format(String trace) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		StringTokenizer tokenizer = new StringTokenizer(trace, " \t\n\r\f", true); //$NON-NLS-1$
-		StringBuilder formattedTrace = new StringBuilder(trace.length());
+		StringBuilder formattedTrace = new StringBuilder(trace.length()); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 
 		boolean insideAt = false;
 		boolean newLine = true;
@@ -238,9 +238,9 @@ public class JavaStackTraceConsole extends TextConsole {
 		// In combination with Suppressed the correct indentation can be ambiguous.
 		// Map has indentation in number of spaces of a previous block as key and formated
 		// indentation depth used for this block as value.
-		Map<Integer, Integer> blockDepth = new HashMap<>(3);
+		Map<Integer, Integer> blockDepth = new HashMap<>(3); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
 
-		while (tokenizer.hasMoreTokens()) {
+		while (tokenizer.hasMoreTokens()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			String token = tokenizer.nextToken();
 			if (token.isEmpty()) {
 				continue; // paranoid
@@ -277,7 +277,7 @@ public class JavaStackTraceConsole extends TextConsole {
 			// token "at", "-", "...", "Caused by:", "Suppressed:" and "[CIRCULAR".
 			if (newLine) {
 				if (c == '\"') { // leading thread name, e.g. "Worker-124" prio=5
-					formattedTrace.append(NL + NL); // print 2 lines to break between threads
+					formattedTrace.append(NL + NL); // print 2 lines to break between threads //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				} else if (c == '-' // - locked <address>
 						|| "...".equals(token)) { //$NON-NLS-1$ ... xx more
 					applyIndentedToken(formattedTrace, depth, token, antTrace);
@@ -294,9 +294,9 @@ public class JavaStackTraceConsole extends TextConsole {
 						pendingSpaces = 0;
 					} else {
 						if (antTrace) {
-							formattedTrace.append(NL);
+							formattedTrace.append(NL); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 						}
-						formattedTrace.append(token);
+						formattedTrace.append(token); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 						pendingSpaces = 0;
 						antTrace = true;
 					}
@@ -306,7 +306,7 @@ public class JavaStackTraceConsole extends TextConsole {
 					// block is moved to the left until it aligns with a previous Suppressed
 					// block or hit the line begin.
 					depth = 0;
-					for (Map.Entry<Integer, Integer> block : blockDepth.entrySet()) {
+					for (Map.Entry<Integer, Integer> block : blockDepth.entrySet()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 						if (block.getKey() <= pendingSpaces && block.getValue() > depth) {
 							depth = block.getValue();
 						}
@@ -328,12 +328,12 @@ public class JavaStackTraceConsole extends TextConsole {
 				newLine = false;
 			}
 			if (pendingSpaces > 0) {
-				for (int i = 0; i < pendingSpaces; i++) {
-					formattedTrace.append(' ');
+				for (int i = 0; i < pendingSpaces; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
+					formattedTrace.append(' '); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				}
 				pendingSpaces = 0;
 			}
-			formattedTrace.append(token);
+			formattedTrace.append(token); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			insideAt = false;
 		}
 		return formattedTrace.toString();
@@ -341,13 +341,13 @@ public class JavaStackTraceConsole extends TextConsole {
 
 	private void applyIndentedToken(StringBuilder formattedTrace, int depth, String token, boolean antTrace) {
 		if (antTrace) {
-			formattedTrace.append(' ');
+			formattedTrace.append(' '); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		} else {
-			formattedTrace.append(NL);
+			formattedTrace.append(NL); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		}
-		for (int i = 0; i < depth; i++) {
-			formattedTrace.append(INDENT_STR);
+		for (int i = 0; i < depth; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
+			formattedTrace.append(INDENT_STR); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		}
-		formattedTrace.append(token);
+		formattedTrace.append(token); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 	}
 }

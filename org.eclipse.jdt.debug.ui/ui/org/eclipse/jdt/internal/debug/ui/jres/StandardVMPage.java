@@ -71,7 +71,7 @@ public class StandardVMPage extends AbstractVMInstallPage {
 
 	public StandardVMPage() {
 		super(JREMessages.StandardVMPage_0);
-		for (int i = 0; i < fFieldStatus.length; i++) {
+		for (int i = 0; i < fFieldStatus.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			fFieldStatus[i] = Status.OK_STATUS;
 		}
 	}
@@ -87,7 +87,7 @@ public class StandardVMPage extends AbstractVMInstallPage {
 	/* (non-Javadoc)
 	 * @see org.eclipse.jface.dialogs.IDialogPage#createControl(org.eclipse.swt.widgets.Composite)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public void createControl(Composite p) {
 		// create a composite with standard margins and spacing
 		Composite composite = new Composite(p, SWT.NONE);
@@ -123,19 +123,19 @@ public class StandardVMPage extends AbstractVMInstallPage {
 
 
 	//add the listeners now to prevent them from monkeying with initialized settings
-		fVMName.addModifyListener(new ModifyListener() {
+		fVMName.addModifyListener(new ModifyListener() { //FLLDCIM: MARK — T02 TEXT_INPUT_DEBOUNCE CALL
 			@Override
 			public void modifyText(ModifyEvent e) {
 				validateVMName(false);
 			}
 		});
-		fJRERoot.addModifyListener(new ModifyListener() {
+		fJRERoot.addModifyListener(new ModifyListener() { //FLLDCIM: MARK — T02 TEXT_INPUT_DEBOUNCE CALL
 			@Override
 			public void modifyText(ModifyEvent e) {
 				validateJRELocation(false);
 			}
 		});
-		folders.addSelectionListener(new SelectionListener() {
+		folders.addSelectionListener(new SelectionListener() { //FLLDCIM: MARK — T03 SELECTION_LANE CALL
 			@Override
 			public void widgetDefaultSelected(SelectionEvent e) {}
 			@Override
@@ -154,7 +154,7 @@ public class StandardVMPage extends AbstractVMInstallPage {
 				}
 			}
 		});
-		variables.addSelectionListener(new SelectionAdapter() {
+		variables.addSelectionListener(new SelectionAdapter() { //FLLDCIM: MARK — T03 SELECTION_LANE CALL
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				StringVariableSelectionDialog dialog = new StringVariableSelectionDialog(getShell());
@@ -177,7 +177,7 @@ public class StandardVMPage extends AbstractVMInstallPage {
 	 * @param init <code>true</code> if page is getting initialized else <code>false</code>
 	 * @return the status after validating the JRE location
 	 */
-	private void validateJRELocation(boolean init) {
+	private void validateJRELocation(boolean init) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String locationName = fJRERoot.getText();
 		IStatus s = null;
 		File file = null;
@@ -360,7 +360,7 @@ public class StandardVMPage extends AbstractVMInstallPage {
 	 */
 	protected static String createUniqueId(IVMInstallType vmType) {
 		String id = null;
-		do {
+		do { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			id = String.valueOf(System.currentTimeMillis());
 		} while (vmType.findVMInstall(id) != null);
 		return id;
@@ -369,7 +369,7 @@ public class StandardVMPage extends AbstractVMInstallPage {
 	/**
 	 * Initialize the dialogs fields
 	 */
-	private void initializeFields() {
+	private void initializeFields() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		fLibraryBlock.setSelection(fVM);
 		if (fVMName.getText() != null && fVMName.getText().length() == 0) {
 			if (fVM.getName().length() != 0) {

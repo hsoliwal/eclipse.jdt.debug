@@ -206,7 +206,7 @@ public final class ExecutionEnvironmentDescription {
 	 * @since 3.21
 	 */
 	public ExecutionEnvironmentDescription(Map<String, String> eeProperties) {
-		this.fProperties = resolveEEHome(new LinkedHashMap<>(eeProperties)); // defensive copy
+		this.fProperties = resolveEEHome(new LinkedHashMap<>(eeProperties)); // defensive copy //FLLDCIM: MARK — M04 M3_ORDERED_LANES NEW
 	}
 
 	/**
@@ -245,8 +245,8 @@ public final class ExecutionEnvironmentDescription {
 	 *
 	 * @return library locations, possibly empty
 	 */
-	public LibraryLocation[] getLibraryLocations() {
-		List<LibraryLocation> allLibs = new ArrayList<>();
+	public LibraryLocation[] getLibraryLocations() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
+		List<LibraryLocation> allLibs = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 
 		String dirs = getProperty(ENDORSED_DIRS);
 		if (dirs != null) {
@@ -258,11 +258,11 @@ public final class ExecutionEnvironmentDescription {
 		dirs = getProperty(BOOT_CLASS_PATH);
 		if (dirs != null) {
 			String[] bootpath = resolvePaths(dirs);
-			List<LibraryLocation> boot = new ArrayList<>(bootpath.length);
+			List<LibraryLocation> boot = new ArrayList<>(bootpath.length); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 			IPath src = getSourceLocation();
 			URL url = getJavadocLocation();
 			URL indexurl = getIndexLocation();
-			for (int i = 0; i < bootpath.length; i++) {
+			for (int i = 0; i < bootpath.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				IPath path = IPath.fromOSString(bootpath[i]);
 				File lib = path.toFile();
 				if (lib.exists() && lib.isFile()) {
@@ -287,7 +287,7 @@ public final class ExecutionEnvironmentDescription {
 
 
 		// remove duplicates
-		Set<String> set = new HashSet<>();
+		Set<String> set = new HashSet<>(); //FLLDCIM: MARK — M03 M3_SET_LANES NEW
 		allLibs.removeIf(lib -> !set.add(lib.getSystemLibraryPath().toOSString()));
 
 		// If the ee.src.map property is specified, use it to associate source locations with the libraries
@@ -304,23 +304,23 @@ public final class ExecutionEnvironmentDescription {
 	 *
 	 * @return VM arguments or <code>null</code> if none
 	 */
-	public String getVMArguments() {
-		StringBuilder arguments = new StringBuilder();
+	public String getVMArguments() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
+		StringBuilder arguments = new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 		Optional<String> eeHome = getEEHomePath();
 		fProperties.forEach((key, value) -> {
 			boolean appendArgument = !key.startsWith(EE_ARG_FILTER);
 			if (appendArgument) {
-				arguments.append(key);
+				arguments.append(key); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				if (!value.isEmpty()) {
-					arguments.append('=');
+					arguments.append('='); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 					value = resolveHome(value, eeHome); // TODO: remove once getProperties() has been removed
 					if (value.indexOf(' ') > -1) {
-						arguments.append('"').append(value).append('"');
+						arguments.append('"').append(value).append('"'); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 					} else {
-						arguments.append(value);
+						arguments.append(value); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 					}
 				}
-				arguments.append(' ');
+				arguments.append(' '); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			}
 		});
 		if (arguments.charAt(arguments.length()-1) == ' '){
@@ -369,8 +369,8 @@ public final class ExecutionEnvironmentDescription {
 	 * @param eeFile the EE file
 	 * @exception CoreException if unable to read the file
 	 */
-	private static Map<String, String> loadProperties(File eeFile) throws CoreException {
-		Map<String, String> properties = new LinkedHashMap<>();
+	private static Map<String, String> loadProperties(File eeFile) throws CoreException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
+		Map<String, String> properties = new LinkedHashMap<>(); //FLLDCIM: MARK — M04 M3_ORDERED_LANES NEW
 		try (Stream<String> lines = Files.lines(eeFile.toPath(), Charset.defaultCharset())) {
 			lines.filter(l -> !l.startsWith("#") && !l.isBlank()).forEach(line -> { //$NON-NLS-1$
 				int eq = line.indexOf('=');
@@ -406,21 +406,21 @@ public final class ExecutionEnvironmentDescription {
 	 * @param value string to process
 	 * @return resolved string
 	 */
-	private static String resolveHome(String value, Optional<String> eeHome) {
+	private static String resolveHome(String value, Optional<String> eeHome) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		int start = 0;
 		int index = value.indexOf(VAR_EE_HOME, start);
 		StringBuilder replaced = null;
-		while (index >= 0) {
+		while (index >= 0) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			if (replaced == null) {
-				replaced = new StringBuilder();
+				replaced = new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 			}
-			replaced.append(value.substring(start, index));
-			replaced.append(eeHome.orElseThrow());
+			replaced.append(value.substring(start, index)); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+			replaced.append(eeHome.orElseThrow()); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			start = index + VAR_EE_HOME.length();
 			index = value.indexOf(VAR_EE_HOME, start);
 		}
 		if (replaced != null) {
-			replaced.append(value.substring(start));
+			replaced.append(value.substring(start)); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			return replaced.toString();
 		}
 		return value;
@@ -436,7 +436,7 @@ public final class ExecutionEnvironmentDescription {
 	private String[] resolvePaths(String paths) {
 		String[] strings = paths.split(File.pathSeparator, -1);
 		Optional<String> root = getEEHomePath();
-		for (int i = 0; i < strings.length; i++) {
+		for (int i = 0; i < strings.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			strings[i] = makePathAbsolute(strings[i], root);
 		}
 		return strings;
@@ -477,13 +477,13 @@ public final class ExecutionEnvironmentDescription {
 	 *
 	 * @return map containing regexs mapping library locations to their source locations
 	 */
-	private Map<String, String> getSourceMap(){
+	private Map<String, String> getSourceMap(){ //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String srcMapString = getProperty(SOURCE_MAP);
-		Map<String, String> srcMap = new HashMap<>();
+		Map<String, String> srcMap = new HashMap<>(); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
 		if (srcMapString != null){
 			// Entries must be separated by the file separator and have an equals splitting the lib location from the src location
 			String[] entries = srcMapString.split(File.pathSeparator);
-			for (int i = 0; i < entries.length; i++) {
+			for (int i = 0; i < entries.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				int index = entries[i].indexOf('=');
 				if (index > 0 && index < entries[i].length()-1){
 					Optional<String> root = getEEHomePath();
@@ -492,34 +492,34 @@ public final class ExecutionEnvironmentDescription {
 					key = makePathAbsolute(key, root);
 					value = makePathAbsolute(value, root);
 
-					List<Character> wildcards = new ArrayList<>();
-					StringBuilder keyBuffer = new StringBuilder();
+					List<Character> wildcards = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
+					StringBuilder keyBuffer = new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 				    char [] chars = key.toCharArray();
 				    // Convert lib location to a regex, replace wildcards with grouped equivalents, keep track of used wildcards, allow '\' and '/' to be used, escape special chars
-					for (int j = 0; j < chars.length; j++) {
+					for (int j = 0; j < chars.length; j++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 						if (chars[j] == WILDCARD_MULTI_CHAR.charValue()) {
 							wildcards.add(WILDCARD_MULTI_CHAR);
-							keyBuffer.append("(.*)"); //$NON-NLS-1$
+							keyBuffer.append("(.*)"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 						} else if (chars[j] == WILDCARD_SINGLE_CHAR.charValue()) {
 							wildcards.add(WILDCARD_SINGLE_CHAR);
-							keyBuffer.append("(.)"); //$NON-NLS-1$
+							keyBuffer.append("(.)"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 						} else if (REGEX_SPECIAL_CHARS.indexOf(chars[j]) != -1) {
-							keyBuffer.append('\\').append(chars[j]);
+							keyBuffer.append('\\').append(chars[j]); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 						} else {
-						    keyBuffer.append(chars[j]);
+						    keyBuffer.append(chars[j]); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 						}
 					}
 
 					int currentWild = 0;
-					StringBuilder valueBuffer = new StringBuilder();
+					StringBuilder valueBuffer = new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 					chars = value.toCharArray();
 					// Convert src location to a regex, replace wildcards with their group number, allow '\' and '/' to be used, escape special chars
-					for (int j = 0; j < chars.length; j++) {
+					for (int j = 0; j < chars.length; j++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 						if (chars[j] == WILDCARD_MULTI_CHAR.charValue() || chars[j] == WILDCARD_SINGLE_CHAR.charValue()) {
 							if (currentWild < wildcards.size()){
 								Character wild = wildcards.get(currentWild);
 								if (chars[j] == wild.charValue()) {
-									valueBuffer.append('$').append(currentWild+1);
+									valueBuffer.append('$').append(currentWild+1); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 									currentWild++;
 								} else {
 									LaunchingPlugin.log(NLS.bind(LaunchingMessages.EEVMType_5, new String[]{entries[i]}));
@@ -530,9 +530,9 @@ public final class ExecutionEnvironmentDescription {
 								break;
 							}
 						} else if (REGEX_SPECIAL_CHARS.indexOf(chars[j]) != -1) {
-							valueBuffer.append('\\').append(chars[j]);
+							valueBuffer.append('\\').append(chars[j]); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 						} else {
-							valueBuffer.append(chars[j]);
+							valueBuffer.append(chars[j]); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 						}
 					}
 
@@ -555,12 +555,12 @@ public final class ExecutionEnvironmentDescription {
 	 * @param libraries list of {@link LibraryLocation} objects to update with source locations
 	 * @see #getSourceMap()
 	 */
-	private void addSourceLocationsToLibraries(Map<String, String> srcMap, List<LibraryLocation> libraries){
+	private void addSourceLocationsToLibraries(Map<String, String> srcMap, List<LibraryLocation> libraries){ //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		srcMap.forEach((currentKey, value) -> {
 			// Try each library regex pattern and see what libraries apply.
 			Pattern currentPattern = Pattern.compile(currentKey);
-			Matcher matcher = currentPattern.matcher(""); //$NON-NLS-1$
-			for (LibraryLocation currentLibrary : libraries) {
+			Matcher matcher = currentPattern.matcher(""); //$NON-NLS-1$ //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
+			for (LibraryLocation currentLibrary : libraries) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				matcher.reset(currentLibrary.getSystemLibraryPath().toOSString());
 				if (matcher.find()) {
 					// Found a file that the pattern applies to, use the map to get the source location

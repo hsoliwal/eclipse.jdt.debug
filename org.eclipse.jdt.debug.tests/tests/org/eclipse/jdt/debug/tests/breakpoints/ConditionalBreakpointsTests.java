@@ -39,7 +39,7 @@ public class ConditionalBreakpointsTests extends AbstractDebugTest {
 	/**
 	 * Tests a breakpoint with a simple condition
 	 */
-	public void testSimpleConditionalBreakpoint() throws Exception {
+	public void testSimpleConditionalBreakpoint() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String typeName = "HitCountLooper";
 		IJavaLineBreakpoint bp = createConditionalLineBreakpoint(19, typeName, "i == 3", true);
 
@@ -54,7 +54,7 @@ public class ConditionalBreakpointsTests extends AbstractDebugTest {
 			IJavaPrimitiveValue value = (IJavaPrimitiveValue)var.getValue();
 			assertNotNull("variable 'i' has no value", value);
 			int iValue = value.getIntValue();
-			assertEquals("value of 'i' should be '3', but was " + iValue, 3, iValue);
+			assertEquals("value of 'i' should be '3', but was " + iValue, 3, iValue); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 			bp.delete();
 		} finally {
@@ -66,7 +66,7 @@ public class ConditionalBreakpointsTests extends AbstractDebugTest {
 	/**
 	 * Tests a static method call that has a conditional breakpoint on it
 	 */
-	public void testStaticMethodCallConditionalBreakpoint() throws Exception {
+	public void testStaticMethodCallConditionalBreakpoint() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String typeName = "HitCountLooper";
 		IJavaLineBreakpoint bp = createConditionalLineBreakpoint(19, typeName, "ArgumentsTests.fact(i) == 24", true);
 
@@ -81,7 +81,7 @@ public class ConditionalBreakpointsTests extends AbstractDebugTest {
 			IJavaPrimitiveValue value = (IJavaPrimitiveValue)var.getValue();
 			assertNotNull("variable 'i' has no value", value);
 			int iValue = value.getIntValue();
-			assertEquals("value of 'i' should be '4', but was " + iValue, 4, iValue);
+			assertEquals("value of 'i' should be '4', but was " + iValue, 4, iValue); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 			bp.delete();
 		} finally {
@@ -93,7 +93,7 @@ public class ConditionalBreakpointsTests extends AbstractDebugTest {
 	/**
 	 * Tests a simple conditional breakpoint that gets hit when a change is made
 	 */
-	public void testSimpleConditionalBreakpointSuspendOnChange() throws Exception {
+	public void testSimpleConditionalBreakpointSuspendOnChange() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String typeName = "HitCountLooper";
 		IJavaLineBreakpoint bp = createConditionalLineBreakpoint(19, typeName, "i != 9", false);
 
@@ -153,7 +153,7 @@ public class ConditionalBreakpointsTests extends AbstractDebugTest {
 	 * Tests a breakpoint condition *is* evaluated when it coincides with a step end.
 	 * See bug 265714.
 	 */
-	public void testEvalConditionOnStep() throws Exception {
+	public void testEvalConditionOnStep() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String typeName = "HitCountLooper";
 		IJavaLineBreakpoint bp = createLineBreakpoint(19, typeName);
 		IJavaLineBreakpoint bp2 = createConditionalLineBreakpoint(20, typeName, "i = 3; return true;", true);
@@ -188,7 +188,7 @@ public class ConditionalBreakpointsTests extends AbstractDebugTest {
 	/**
 	 * Tests that a thread can be suspended when executing a long-running condition.
 	 */
-	public void testSuspendLongRunningCondition() throws Exception {
+	public void testSuspendLongRunningCondition() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String typeName = "MethodCall";
 		IJavaLineBreakpoint first = createLineBreakpoint(22, typeName);
 		createConditionalLineBreakpoint(30, typeName, "for (int x = 0; x < 1000; x++) { System.out.println(x);} Thread.sleep(1000); return true;", true);
@@ -201,7 +201,7 @@ public class ConditionalBreakpointsTests extends AbstractDebugTest {
 			thread.resume();
 			// wait for evaluation to start
 			long timeoutNanos = System.nanoTime() + DEFAULT_TIMEOUT * 1_000_000L;
-			while (!thread.isPerformingEvaluation() && System.nanoTime() < timeoutNanos) {
+			while (!thread.isPerformingEvaluation() && System.nanoTime() < timeoutNanos) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				Thread.sleep(1);
 			}
 			assertTrue("Expected evaluation for second breakpoint", thread.isPerformingEvaluation());

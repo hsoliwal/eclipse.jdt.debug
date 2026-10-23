@@ -52,7 +52,7 @@ import org.eclipse.ui.texteditor.AbstractTextEditor;
  * viewer obeys the font and color preferences specified in
  * the Java UI plugin.
  */
-public class JDISourceViewer extends SourceViewer implements IPropertyChangeListener {
+public class JDISourceViewer extends SourceViewer implements IPropertyChangeListener { //FLLDCIM: MARK — T06  IMPLEMENTS
 
 	/**
 	 * BIDI delimtiers.
@@ -93,7 +93,7 @@ public class JDISourceViewer extends SourceViewer implements IPropertyChangeList
 	/**
 	 * Updates the viewer's font to match the preferences.
 	 */
-	private void updateViewerFont() {
+	private void updateViewerFont() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IPreferenceStore store= getPreferenceStore();
 		if (store != null) {
 			FontData data= null;
@@ -139,7 +139,7 @@ public class JDISourceViewer extends SourceViewer implements IPropertyChangeList
 	 *
 	 * @param font the font
 	 */
-	private void applyFont(Font font) {
+	private void applyFont(Font font) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IDocument doc= getDocument();
 		if (doc != null && doc.getLength() > 0) {
 			Point selection= getSelectedRange();
@@ -235,7 +235,7 @@ public class JDISourceViewer extends SourceViewer implements IPropertyChangeList
 	/**
 	 * @see IPropertyChangeListener#propertyChange(PropertyChangeEvent)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public void propertyChange(PropertyChangeEvent event) {
 		IContentAssistant assistant= getContentAssistant();
 		if (assistant instanceof ContentAssistant) {
@@ -324,7 +324,7 @@ public class JDISourceViewer extends SourceViewer implements IPropertyChangeList
 	 * @return the line's Bidi segmentation
 	 * @throws BadLocationException in case lineOffset is not valid in document
 	 */
-	protected static int[] getBidiLineSegments(IDocument document, int baseLevel, int lineStart, String lineText) throws BadLocationException {
+	protected static int[] getBidiLineSegments(IDocument document, int baseLevel, int lineStart, String lineText) throws BadLocationException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 
 		if (lineText == null || document == null) {
 			return null;
@@ -358,7 +358,7 @@ public class JDISourceViewer extends SourceViewer implements IPropertyChangeList
 		int segmentIndex= 1;
 		int[] segments= new int[lineLength + 1];
 		int nPartitions= linePartitioning.length;
-		for (int partitionIndex= 0; partitionIndex < nPartitions; partitionIndex++) {
+		for (int partitionIndex= 0; partitionIndex < nPartitions; partitionIndex++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 
 			ITypedRegion partition= linePartitioning[partitionIndex];
 			int lineOffset= partition.getOffset() - lineStart;
@@ -375,7 +375,7 @@ public class JDISourceViewer extends SourceViewer implements IPropertyChangeList
 			}
 			if (IDocument.DEFAULT_CONTENT_TYPE.equals(partition.getType())) {
 				int partitionEnd= Math.min(lineLength, lineOffset + partition.getLength());
-				while (++lineOffset < partitionEnd) {
+				while (++lineOffset < partitionEnd) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 					if (isMismatchingLevel(bidi.getLevelAt(lineOffset), baseLevel)
 							&& String.valueOf(lineText.charAt(lineOffset)).matches(BIDI_DELIMITERS)) {
 						// For default content types, indicate a segment before

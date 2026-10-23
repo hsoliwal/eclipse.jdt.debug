@@ -54,7 +54,7 @@ public class SyntheticVariableTests extends AbstractDebugUiTests {
 	private IDebugContextProvider debugContextProvider;
 	private IJavaProject project;
 
-	public SyntheticVariableTests(String name) {
+	public SyntheticVariableTests(String name) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		super(name);
 		debugContextProvider = new IDebugContextProvider() {
 			@Override
@@ -98,7 +98,7 @@ public class SyntheticVariableTests extends AbstractDebugUiTests {
 		}
 	}
 
-	public void testCompleteMethodParameter_DeepInTwoNestedClasses() throws Exception {
+	public void testCompleteMethodParameter_DeepInTwoNestedClasses() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		if (Platform.OS.isMac()) {
 			return;
 		}
@@ -132,7 +132,7 @@ public class SyntheticVariableTests extends AbstractDebugUiTests {
 				return comp.computeCompletionProposals(viewer, completionIndex);
 			}
 		});
-		assertNull(String.format("Has errors : %s", comp.getErrorMessage()), comp.getErrorMessage());
+		assertNull(String.format("Has errors : %s", comp.getErrorMessage()), comp.getErrorMessage()); //FLLDCIM: MARK — M11 FORMAT_PRECOMPUTE CALL
 		assertNotNull("proposals are null", proposals);
 
 		return Arrays.asList(proposals);

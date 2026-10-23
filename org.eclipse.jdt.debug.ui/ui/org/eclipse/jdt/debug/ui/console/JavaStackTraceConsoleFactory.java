@@ -29,7 +29,7 @@ public class JavaStackTraceConsoleFactory implements IConsoleFactory {
 	private IConsoleManager fConsoleManager = null;
 	private JavaStackTraceConsole fConsole = null;
 
-	public JavaStackTraceConsoleFactory() {
+	public JavaStackTraceConsoleFactory() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		fConsoleManager = ConsolePlugin.getDefault().getConsoleManager();
 		fConsoleManager.addConsoleListener(new IConsoleListener() {
 			@Override
@@ -38,7 +38,7 @@ public class JavaStackTraceConsoleFactory implements IConsoleFactory {
 
 			@Override
 			public void consolesRemoved(IConsole[] consoles) {
-				for (int i = 0; i < consoles.length; i++) {
+				for (int i = 0; i < consoles.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 					if (consoles[i] == fConsole) {
 						fConsole.saveDocument();
 						fConsole = null;
