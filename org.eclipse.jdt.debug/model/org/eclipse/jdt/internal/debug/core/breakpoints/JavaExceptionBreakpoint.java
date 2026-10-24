@@ -57,6 +57,9 @@ import com.sun.jdi.request.ExceptionRequest;
 
 public class JavaExceptionBreakpoint extends JavaBreakpoint implements //FLLDCIM: MARK — T27  IMPLEMENTS
 		IJavaExceptionBreakpoint {
+	private static final Pattern FILTER_DOT_PATTERN = Pattern.compile("\\."); //$NON-NLS-1$
+	private static final Pattern FILTER_STAR_PATTERN = Pattern.compile("\\*"); //$NON-NLS-1$
+
 
 	public static final String JAVA_EXCEPTION_BREAKPOINT = "org.eclipse.jdt.debug.javaExceptionBreakpointMarker"; //$NON-NLS-1$
 
@@ -518,8 +521,8 @@ public class JavaExceptionBreakpoint extends JavaBreakpoint implements //FLLDCIM
 				return true;
 			}
 
-			filter = filter.replaceAll("\\.", "\\\\."); //$NON-NLS-1$//$NON-NLS-2$ //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
-			filter = filter.replaceAll("\\*", "\\.\\*"); //$NON-NLS-1$//$NON-NLS-2$ //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
+			filter = FILTER_DOT_PATTERN.matcher(filter).replaceAll("\\\\."); //$NON-NLS-1$//$NON-NLS-2$ //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
+			filter = FILTER_STAR_PATTERN.matcher(filter).replaceAll("\\.\\*"); //$NON-NLS-1$//$NON-NLS-2$ //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
 			Pattern pattern = Pattern.compile(filter); //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
 			if (pattern.matcher(typeName).find()) { //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
 				return true;
