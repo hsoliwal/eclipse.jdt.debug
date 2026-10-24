@@ -1446,7 +1446,7 @@ public class JDIModelPresentation extends LabelProvider implements IDebugModelPr
 		return detail[0];
 	}
 
-	private static final Pattern SNIPPET_PATTERN = Pattern.compile("[\n\r\t]+");
+	private static final Pattern SNIPPET_PATTERN = Pattern.compile("[\n\r\t]+"); //$NON-NLS-1$
 
 	protected String getExpressionText(IExpression expression) throws DebugException {
 		boolean showTypes= isShowVariableTypeNames();
@@ -1484,7 +1484,7 @@ public class JDIModelPresentation extends LabelProvider implements IDebugModelPr
 			snippetBuffer.append(snippet);
 		}
 		snippetBuffer.append('"');
-		snippet = SNIPPET_PATTERN.matcher(snippetBuffer.toString()).replaceAll(" ");  //$NON-NLS-1$//$NON-NLS-2$
+		snippet = SNIPPET_PATTERN.matcher(snippetBuffer.toString()).replaceAll(" ");  //$NON-NLS-1$
 		buff.append(snippet);
 
 		if (javaValue != null) {

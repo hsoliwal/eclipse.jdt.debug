@@ -410,7 +410,7 @@ public class ToggleBreakpointAdapter implements IToggleBreakpointsTargetExtensio
 		doToggleMethodBreakpoint(member, null, null, null, part, finalSelection, monitor);
 	}
 
-	private static final Pattern DO_TOGGLE_METHOD_BREAKPOINT_PATTERN = Pattern.compile("\\\t");
+	private static final Pattern DO_TOGGLE_METHOD_BREAKPOINT_PATTERN = Pattern.compile("\\\t"); //$NON-NLS-1$
 
 	private static void doToggleMethodBreakpoint(IMethod member, String lambdaMethodName, String lambdaMethodSignature, LambdaProperties lambdaProperties, IWorkbenchPart part, ISelection finalSelection, IProgressMonitor monitor) throws CoreException {
 		int lambdaPosition = 0;
@@ -463,7 +463,7 @@ public class ToggleBreakpointAdapter implements IToggleBreakpointsTargetExtensio
 			String pattern = getCodeTemplate((ITextSelection) finalSelection, (JavaEditor) part);
 			if (pattern != null) {
 				pattern = pattern.trim();
-				pattern = DO_TOGGLE_METHOD_BREAKPOINT_PATTERN.matcher(pattern).replaceAll(""); //$NON-NLS-1$//$NON-NLS-2$
+				pattern = DO_TOGGLE_METHOD_BREAKPOINT_PATTERN.matcher(pattern).replaceAll(""); //$NON-NLS-1$
 				methodBreakpoint.setCondition(pattern);
 				methodBreakpoint.setConditionEnabled(true);
 				methodBreakpoint.setConditionSuspendOnTrue(true);
@@ -596,7 +596,7 @@ public class ToggleBreakpointAdapter implements IToggleBreakpointsTargetExtensio
 					String pattern = getCodeTemplate((ITextSelection) selection, (JavaEditor) part);
 					if (pattern != null) {
 						pattern = pattern.trim();
-						pattern = DO_TOGGLE_METHOD_BREAKPOINT_PATTERN.matcher(pattern).replaceAll(""); //$NON-NLS-1$//$NON-NLS-2$
+						pattern = DO_TOGGLE_METHOD_BREAKPOINT_PATTERN.matcher(pattern).replaceAll(""); //$NON-NLS-1$
 						breakpoint.setCondition(pattern);
 						breakpoint.setConditionEnabled(true);
 						breakpoint.setConditionSuspendOnTrue(true);

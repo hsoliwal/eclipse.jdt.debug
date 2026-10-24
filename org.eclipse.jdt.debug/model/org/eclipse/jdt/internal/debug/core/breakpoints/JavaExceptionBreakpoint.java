@@ -499,8 +499,8 @@ public class JavaExceptionBreakpoint extends JavaBreakpoint implements
 		return false;
 	}
 
-	private static final Pattern FILTER_PATTERN = Pattern.compile("\\.");
-	private static final Pattern FILTER_PATTERN_2 = Pattern.compile("\\*");
+	private static final Pattern FILTER_PATTERN = Pattern.compile("\\."); //$NON-NLS-1$
+	private static final Pattern FILTER_PATTERN_2 = Pattern.compile("\\*"); //$NON-NLS-1$
 
 	/**
 	 * Returns whether the given type is in the given filter set.
@@ -521,8 +521,8 @@ public class JavaExceptionBreakpoint extends JavaBreakpoint implements
 				return true;
 			}
 
-			filter = FILTER_PATTERN.matcher(filter).replaceAll("\\\\."); //$NON-NLS-1$//$NON-NLS-2$
-			filter = FILTER_PATTERN_2.matcher(filter).replaceAll("\\.\\*"); //$NON-NLS-1$//$NON-NLS-2$
+			filter = FILTER_PATTERN.matcher(filter).replaceAll("\\\\."); //$NON-NLS-1$
+			filter = FILTER_PATTERN_2.matcher(filter).replaceAll("\\.\\*"); //$NON-NLS-1$
 			Pattern pattern = Pattern.compile(filter);
 			if (pattern.matcher(typeName).find()) {
 				return true;
