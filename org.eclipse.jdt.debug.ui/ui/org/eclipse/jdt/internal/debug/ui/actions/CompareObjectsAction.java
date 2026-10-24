@@ -478,11 +478,7 @@ public class CompareObjectsAction extends ObjectActionDelegate implements IWorkb
 	 */
 	@SuppressWarnings("nls")
 	private String printListContents(String Selection, List<String> list, int displayLimit) {
-		StringBuilder content = new StringBuilder();
-		content.append("[");
-		content.append(list.stream().limit(displayLimit).collect(Collectors.joining(",")));
-		content.append("......]");
-		String message = NLS.bind(DebugUIMessages.DialogBoxMapMissingKey, new Object[] { Selection, content.toString() });
+		String message = NLS.bind(DebugUIMessages.DialogBoxMapMissingKey, new Object[] { Selection, "[" + list.stream().limit(displayLimit).collect(Collectors.joining(",")) + "......]" });
 		return message;
 	}
 

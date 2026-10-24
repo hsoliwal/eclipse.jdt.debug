@@ -1619,9 +1619,7 @@ public class JDIModelPresentation extends LabelProvider implements IDebugModelPr
 			if (suffix == null) {
 				return label;
 			}
-			StringBuilder buffer = new StringBuilder(label);
-			buffer.append(suffix);
-			return buffer.toString();
+			return label + suffix;
 	    } catch (CoreException e) {
 	    	// if the breakpoint has been deleted, don't log exception
 	    	IMarker marker = breakpoint.getMarker();

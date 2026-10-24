@@ -173,9 +173,7 @@ public class JavaVariableLabelProvider extends VariableLabelProvider implements 
 			if (value instanceof JDIObjectValue objectValue) {
 				long uniqueId = objectValue.getUniqueId();
 				if (uniqueId >= 0) {
-					StringBuilder buffer = new StringBuilder();
-					buffer.append(uniqueId);
-					return buffer.toString();
+					return "" + uniqueId;
 				}
 			}
 			return ""; //$NON-NLS-1$
@@ -191,9 +189,7 @@ public class JavaVariableLabelProvider extends VariableLabelProvider implements 
 					if (count == -1) {
 						return DebugUIMessages.JavaVariableLabelProvider_0;
 					}
-					StringBuilder buffer = new StringBuilder();
-					buffer.append(count);
-					return buffer.toString();
+					return "" + count;
 				}
 			}
 			return ""; //$NON-NLS-1$
