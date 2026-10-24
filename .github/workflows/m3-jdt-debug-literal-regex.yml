@@ -1,0 +1,33 @@
+name: M3 JDT Debug Literal Regex Parity
+on:
+  pull_request:
+    paths:
+      - 'org.eclipse.jdt.debug.ui/**'
+      - 'org.eclipse.jdt.debug/**'
+      - 'tools/m3/LiteralDebugRegexParity.java'
+      - '.github/workflows/m3-jdt-debug-literal-regex.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Diff hygiene
+        run: git diff --check origin/master...HEAD
+      - name: Java 21 differential test
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/literal-regex"
+          javac --release 21 -encoding UTF-8 -Xlint:all -Werror \
+            -d "$RUNNER_TEMP/literal-regex" tools/m3/LiteralDebugRegexParity.java
+          java -cp "$RUNNER_TEMP/literal-regex" LiteralDebugRegexParity
