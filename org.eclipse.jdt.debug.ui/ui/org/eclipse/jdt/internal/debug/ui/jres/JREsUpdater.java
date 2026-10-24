@@ -47,9 +47,9 @@ public class JREsUpdater {
 		}
 
 		IVMInstallType[] types = JavaRuntime.getVMInstallTypes();
-		for (int i = 0; i < types.length; i++) {
+		for (int i = 0; i < types.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			IVMInstall[] vms = types[i].getVMInstalls();
-			for (int j = 0; j < vms.length; j++) {
+			for (int j = 0; j < vms.length; j++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				fOriginalVMs.addVM(vms[j]);
 			}
 		}
@@ -62,7 +62,7 @@ public class JREsUpdater {
 	 * @param defaultJRE new default VM
 	 * @return whether the update was successful
 	 */
-	public boolean updateJRESettings(IVMInstall[] jres, IVMInstall defaultJRE) {
+	public boolean updateJRESettings(IVMInstall[] jres, IVMInstall defaultJRE) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 
 		// Create a VM definition container
 		VMDefinitionsContainer vmContainer = new VMDefinitionsContainer();
@@ -72,7 +72,7 @@ public class JREsUpdater {
 		vmContainer.setDefaultVMInstallCompositeID(defaultVMId);
 
 		// Set the VMs on the container
-		for (int i = 0; i < jres.length; i++) {
+		for (int i = 0; i < jres.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			vmContainer.addVM(jres[i]);
 		}
 
@@ -83,9 +83,9 @@ public class JREsUpdater {
 		return true;
 	}
 
-	private void saveVMDefinitions(final VMDefinitionsContainer container) {
-		IRunnableWithProgress runnable = new IRunnableWithProgress() {
-			@Override
+	private void saveVMDefinitions(final VMDefinitionsContainer container) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
+		IRunnableWithProgress runnable = new IRunnableWithProgress() { //FLLDCIM: MARK — T09  ANONYMOUS
+			@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 			public void run(IProgressMonitor monitor) throws InvocationTargetException, InterruptedException {
 				try {
 					monitor.beginTask(JREMessages.JREsUpdater_0, 100);

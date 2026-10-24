@@ -270,7 +270,7 @@ public class LogicalObjectStructureValue implements IJavaObject {
 	public void enableCollection() throws DebugException {
 		fObject.enableCollection();
 
-		for (JDIPlaceholderVariable variable : fVariables) {
+		for (JDIPlaceholderVariable variable : fVariables) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			IValue variableValue = variable.getValue();
 			if (variableValue instanceof IJavaObject) {
 				((IJavaObject) variableValue).enableCollection();

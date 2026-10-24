@@ -37,7 +37,7 @@ public class RemoteOperator extends CompoundInstruction {
 		int variableCount = fEvaluator.getVariableCount();
 		IJavaValue[] args = new IJavaValue[variableCount];
 		// args are in reverse order
-		for (int i = variableCount - 1; i >= 0; i--) {
+		for (int i = variableCount - 1; i >= 0; i--) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			args[i] = popValue();
 		}
 		IJavaValue result = fEvaluator.evaluate(this.getContext().getThread(), args);
@@ -46,7 +46,7 @@ public class RemoteOperator extends CompoundInstruction {
 
 	@Override
 	public String toString() {
-		return InstructionsEvaluationMessages.Run_Remote_1
+		return InstructionsEvaluationMessages.Run_Remote_1 //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 				+ fSignature;
 	}
 

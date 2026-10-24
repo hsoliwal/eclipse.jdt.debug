@@ -57,13 +57,13 @@ public class Interpreter {
 	public Interpreter(InstructionSequence instructions, IRuntimeContext context) {
 		fInstructions = instructions.getInstructions();
 		fContext = context;
-		fInternalVariables = new HashMap<>();
+		fInternalVariables = new HashMap<>(); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
 	}
 
-	public void execute(boolean disableGcOnResult) throws CoreException {
+	public void execute(boolean disableGcOnResult) throws CoreException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 			reset();
-			while (fInstructionCounter < fInstructions.length && !fStopped) {
+			while (fInstructionCounter < fInstructions.length && !fStopped) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				Instruction instruction = fInstructions[fInstructionCounter++];
 				instruction.setInterpreter(this);
 				instruction.execute();
@@ -115,7 +115,7 @@ public class Interpreter {
 	 */
 	private void disableCollection(IJavaObject value) {
 		if (fPermStorage == null) {
-			fPermStorage = new ArrayList<>(5);
+			fPermStorage = new ArrayList<>(5); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 		}
 		try {
 			value.disableCollection();
@@ -132,11 +132,11 @@ public class Interpreter {
 	/**
 	 * Re-enable garbage collection if interim results.
 	 */
-	private void releaseObjects(boolean disableGcOnResult) {
+	private void releaseObjects(boolean disableGcOnResult) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		if (fPermStorage != null) {
 			IJavaValue result = getResult();
 			Iterator<IJavaObject> iterator = fPermStorage.iterator();
-			while (iterator.hasNext()) {
+			while (iterator.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				IJavaObject object = iterator.next();
 				try {
 					if (!disableGcOnResult || object != result) {
@@ -175,7 +175,7 @@ public class Interpreter {
 		return fContext;
 	}
 
-	public IJavaValue getResult() {
+	public IJavaValue getResult() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		if (fStack == null || fStack.isEmpty()) {
 			if (fLastValue == null) {
 				return getContext().getVM().voidValue();

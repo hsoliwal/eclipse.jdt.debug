@@ -70,7 +70,7 @@ public class InstructionPointerManagerTests extends AbstractDebugTest {
 	private MyPerspectiveListener fPerspectiveListener;
 	private MyAnnotationListener fAnnotationListener;
 	private IPartListener2 fPartListener;
-	private final Set<IAnnotationModel> fAnnotationModelsWithListeners = new HashSet<>();
+	private final Set<IAnnotationModel> fAnnotationModelsWithListeners = new HashSet<>(); //FLLDCIM: MARK — M03 M3_SET_LANES NEW
 
 	private static final String typeThreadStack = "org.eclipse.debug.tests.targets.ThreadStack";
 	private static final String typeClassOne = "org.eclipse.debug.tests.targets.ClassOne";
@@ -87,7 +87,7 @@ public class InstructionPointerManagerTests extends AbstractDebugTest {
 		super(name);
 	}
 
-	public void testManagerWithEditorReuse() throws Exception{
+	public void testManagerWithEditorReuse() throws Exception{ //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		boolean restore = DebugUIPlugin.getDefault().getPreferenceStore().getBoolean(IDebugUIConstants.PREF_REUSE_EDITOR);
 		DebugUIPlugin.getDefault().getPreferenceStore().setValue(IDebugUIConstants.PREF_REUSE_EDITOR, true);
 
@@ -102,7 +102,7 @@ public class InstructionPointerManagerTests extends AbstractDebugTest {
 				terminateAndRemove(target2);
 			}
 			Iterator<IAnnotationModel> annModels = fAnnotationModelsWithListeners.iterator();
-			while (annModels.hasNext()) {
+			while (annModels.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				IAnnotationModel currentModel = annModels.next();
 				currentModel.removeAnnotationModelListener(getAnnotationListener());
 			}
@@ -115,11 +115,11 @@ public class InstructionPointerManagerTests extends AbstractDebugTest {
                     activeWorkbenchWindow.removePerspectiveListener(getPerspectiveListener());
                 }
             };
-            DebugUIPlugin.getStandardDisplay().asyncExec(cleanup);
+            DebugUIPlugin.getStandardDisplay().asyncExec(cleanup); //FLLDCIM: MARK — T08 UI_THREAD_SYNCHRONIZER CALL
 		}
 	}
 
-	public void testManagerWithNoEditorReuse() throws Exception{
+	public void testManagerWithNoEditorReuse() throws Exception{ //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		boolean restore = DebugUIPlugin.getDefault().getPreferenceStore().getBoolean(IDebugUIConstants.PREF_REUSE_EDITOR);
 		DebugUIPlugin.getDefault().getPreferenceStore().setValue(IDebugUIConstants.PREF_REUSE_EDITOR, false);
 
@@ -134,7 +134,7 @@ public class InstructionPointerManagerTests extends AbstractDebugTest {
 				terminateAndRemove(target2);
 			}
 			Iterator<IAnnotationModel> annModels = fAnnotationModelsWithListeners.iterator();
-			while (annModels.hasNext()) {
+			while (annModels.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				IAnnotationModel currentModel = annModels.next();
 				currentModel.removeAnnotationModelListener(getAnnotationListener());
 			}
@@ -147,7 +147,7 @@ public class InstructionPointerManagerTests extends AbstractDebugTest {
                     activeWorkbenchWindow.removePerspectiveListener(getPerspectiveListener());
                 }
             };
-            DebugUIPlugin.getStandardDisplay().asyncExec(cleanup);
+            DebugUIPlugin.getStandardDisplay().asyncExec(cleanup); //FLLDCIM: MARK — T08 UI_THREAD_SYNCHRONIZER CALL
 		}
 	}
 
@@ -180,7 +180,7 @@ public class InstructionPointerManagerTests extends AbstractDebugTest {
 	 * @param expectedIPCCounts array of expected values for IPC count at each step as marked above, length must be 8
 	 * @param expectedMappingCounts array of expected values for editor mapping count at each step as marked above, length must be 8
 	 */
-	private void addAndRemoveAnnotations(int[] expectedIPCCounts, int[] expectedMappingCounts) throws Exception{
+	private void addAndRemoveAnnotations(int[] expectedIPCCounts, int[] expectedMappingCounts) throws Exception{ //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		assertEquals("Incorrect number of expected counts", 8, expectedIPCCounts.length);
 		assertEquals("Incorrect number of expected counts", 8, expectedMappingCounts.length);
 
@@ -193,7 +193,7 @@ public class InstructionPointerManagerTests extends AbstractDebugTest {
                 activeWorkbenchWindow.addPerspectiveListener(getPerspectiveListener());
             }
         };
-        DebugUIPlugin.getStandardDisplay().syncExec(closeAll);
+        DebugUIPlugin.getStandardDisplay().syncExec(closeAll); //FLLDCIM: MARK — T08 UI_THREAD_SYNCHRONIZER CALL
         assertEquals("Instruction pointer count was incorrect", 0, InstructionPointerManager.getDefault().getInstructionPointerCount());
         assertEquals("Editor mapping count was incorrect", 0, InstructionPointerManager.getDefault().getEditorMappingCount());
 
@@ -213,7 +213,7 @@ public class InstructionPointerManagerTests extends AbstractDebugTest {
 
         // Find and select the top stack frame of the other thread
         Runnable openParent = new Runnable() {
-            @Override
+            @Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 			public void run() {
                 IDebugView debugView = (IDebugView)PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().findView("org.eclipse.debug.ui.DebugView");
                 Object[] newSegments = new Object[4];
@@ -221,7 +221,7 @@ public class InstructionPointerManagerTests extends AbstractDebugTest {
             	newSegments[1] = target1;
             	try{
                 	IThread[] threads = ((IJavaDebugTarget)newSegments[1]).getThreads();
-                	for (int i = 0; i < threads.length; i++) {
+                	for (int i = 0; i < threads.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 						if (threads[i].isSuspended() && !threads[i].equals(thread1)){
 							thread2 = (IJavaThread)threads[i];
 							newSegments[2] = threads[i];
@@ -230,13 +230,13 @@ public class InstructionPointerManagerTests extends AbstractDebugTest {
 					}
                 	((InternalTreeModelViewer)debugView.getViewer()).setSelection(new TreeSelection(new TreePath(newSegments)), true, true);
             	} catch (DebugException e){
-            		fail("Exception: " + e.getMessage());
+            		fail("Exception: " + e.getMessage()); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
             	}
             }
         };
         fAddedAnnotation = null;
         getPerspectiveListener().setTitle(typeClassOne);
-        DebugUIPlugin.getStandardDisplay().syncExec(openParent);
+        DebugUIPlugin.getStandardDisplay().syncExec(openParent); //FLLDCIM: MARK — T08 UI_THREAD_SYNCHRONIZER CALL
         waitForAnnotationToBeAdded();
         assertNotNull("Thread not selected",thread2);
         assertEquals("Instruction pointer count was incorrect", expectedIPCCounts[1], InstructionPointerManager.getDefault().getInstructionPointerCount());
@@ -254,14 +254,14 @@ public class InstructionPointerManagerTests extends AbstractDebugTest {
             	try {
             		newSegments[3] = thread2.getTopStackFrame();
             	} catch (DebugException e) {
-					fail("Exception: " + e.getMessage());
+					fail("Exception: " + e.getMessage()); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 				}
                 ((InternalTreeModelViewer)debugView.getViewer()).setSelection(new TreeSelection(new TreePath(newSegments)), true, true);
             }
         };
         fAddedAnnotation = null;
         getPerspectiveListener().setTitle(typeClassOne);
-        DebugUIPlugin.getStandardDisplay().syncExec(selectSameStackFrame);
+        DebugUIPlugin.getStandardDisplay().syncExec(selectSameStackFrame); //FLLDCIM: MARK — T08 UI_THREAD_SYNCHRONIZER CALL
         waitForAnnotationToBeAdded();
         assertEquals("Instruction pointer count was incorrect", expectedIPCCounts[1], InstructionPointerManager.getDefault().getInstructionPointerCount());
         assertEquals("Editor mapping count was incorrect", expectedMappingCounts[1], InstructionPointerManager.getDefault().getEditorMappingCount());
@@ -278,14 +278,14 @@ public class InstructionPointerManagerTests extends AbstractDebugTest {
             	try{
             		newSegments[3] = thread2.getStackFrames()[1];  // Select the next stack frame
             	} catch (DebugException e){
-            		fail("Exception: " + e.getMessage());
+            		fail("Exception: " + e.getMessage()); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
             	}
             	((InternalTreeModelViewer)debugView.getViewer()).setSelection(new TreeSelection(new TreePath(newSegments)), true, true);
             }
         };
         fAddedAnnotation = null;
         getPerspectiveListener().setTitle(typeThreadStack);
-        DebugUIPlugin.getStandardDisplay().syncExec(selectSecondStackFrame);
+        DebugUIPlugin.getStandardDisplay().syncExec(selectSecondStackFrame); //FLLDCIM: MARK — T08 UI_THREAD_SYNCHRONIZER CALL
         waitForAnnotationToBeAdded();
         // Failure here, reuse, expected 1 but was 2, also with no reuse, expected 3 but was 2
         assertEquals("Instruction pointer count was incorrect", expectedIPCCounts[2], InstructionPointerManager.getDefault().getInstructionPointerCount());
@@ -302,18 +302,18 @@ public class InstructionPointerManagerTests extends AbstractDebugTest {
 
        // Select the stack frame from the new debug target displaying ThreadStack
        Runnable openOtherDebugTarget = new Runnable() {
-            @Override
+            @Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 			public void run() {
                 IDebugView debugView = (IDebugView)PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().findView("org.eclipse.debug.ui.DebugView");
                 ILaunch[] launches = DebugPlugin.getDefault().getLaunchManager().getLaunches();
                 Object[] newSegments = new Object[4];
-                for (int i = 0; i < launches.length; i++) {
+                for (int i = 0; i < launches.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 					if (target2.equals(launches[i].getDebugTarget())){
 						newSegments[0] = launches[i];
 						newSegments[1] = target2;
 						try{
 							IThread[] threads = target2.getThreads();
-							for (int j = 0; j < threads.length; j++) {
+							for (int j = 0; j < threads.length; j++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 								if (threads[j].isSuspended()){
 									if (typeThreadStack.equals(((IJavaStackFrame)threads[j].getTopStackFrame()).getDeclaringTypeName())){
 										thread3 = (IJavaThread)threads[j];
@@ -324,7 +324,7 @@ public class InstructionPointerManagerTests extends AbstractDebugTest {
 								}
 							}
 						} catch (DebugException e){
-							fail("Exception: " + e.getMessage());
+							fail("Exception: " + e.getMessage()); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 						}
 						break;
 					}
@@ -334,7 +334,7 @@ public class InstructionPointerManagerTests extends AbstractDebugTest {
        };
        fAddedAnnotation = null;
        getPerspectiveListener().setTitle(typeThreadStack);
-       DebugUIPlugin.getStandardDisplay().syncExec(openOtherDebugTarget);
+       DebugUIPlugin.getStandardDisplay().syncExec(openOtherDebugTarget); //FLLDCIM: MARK — T08 UI_THREAD_SYNCHRONIZER CALL
        assertNotNull("Thread was not selected",thread3);
        waitForAnnotationToBeAdded();
        assertEquals("Instruction pointer count was incorrect", expectedIPCCounts[3], InstructionPointerManager.getDefault().getInstructionPointerCount());
@@ -342,7 +342,7 @@ public class InstructionPointerManagerTests extends AbstractDebugTest {
 
        // Select the other thread from the new target displaying ClassTwo
        Runnable openOtherThread = new Runnable() {
-            @Override
+            @Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 			public void run() {
             	IDebugView debugView = (IDebugView)PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().findView("org.eclipse.debug.ui.DebugView");
                 Object[] newSegments = new Object[4];
@@ -350,7 +350,7 @@ public class InstructionPointerManagerTests extends AbstractDebugTest {
             	newSegments[1] = target2;
             	try{
                 	IThread[] threads = target2.getThreads();
-                	for (int i = 0; i < threads.length; i++) {
+                	for (int i = 0; i < threads.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 						if (threads[i].isSuspended() && !threads[i].equals(thread3)){
 							thread4 = (IJavaThread)threads[i];
 							newSegments[2] = threads[i];
@@ -359,13 +359,13 @@ public class InstructionPointerManagerTests extends AbstractDebugTest {
 					}
                 	((InternalTreeModelViewer)debugView.getViewer()).setSelection(new TreeSelection(new TreePath(newSegments)), true, true);
             	} catch (DebugException e){
-            		fail("Exception: " + e.getMessage());
+            		fail("Exception: " + e.getMessage()); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
             	}
             }
        };
        fAddedAnnotation = null;
        getPerspectiveListener().setTitle(typeClassTwo);
-       DebugUIPlugin.getStandardDisplay().syncExec(openOtherThread);
+       DebugUIPlugin.getStandardDisplay().syncExec(openOtherThread); //FLLDCIM: MARK — T08 UI_THREAD_SYNCHRONIZER CALL
        assertNotNull("Thread was not selected",thread4);
        waitForAnnotationToBeAdded();
        assertEquals("Instruction pointer count was incorrect", expectedIPCCounts[4], InstructionPointerManager.getDefault().getInstructionPointerCount());
@@ -395,7 +395,7 @@ public class InstructionPointerManagerTests extends AbstractDebugTest {
 		public void run() {
                IWorkbenchWindow activeWorkbenchWindow = PlatformUI.getWorkbench().getActiveWorkbenchWindow();
                IEditorReference[] editors = activeWorkbenchWindow.getActivePage().getEditorReferences();
-               for (int i = 0; i < editors.length; i++) {
+               for (int i = 0; i < editors.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
             	   if (editors[i].getTitle().equals("ThreadStack.java")){
             		   activeWorkbenchWindow.getActivePage().closeEditors(new IEditorReference[]{editors[i]},false);
             		   fRemovedAnnotation = null;  // Clear the removed annotation so the test waits for the annotation to be removed
@@ -406,7 +406,7 @@ public class InstructionPointerManagerTests extends AbstractDebugTest {
 	   };
 	   // fRemovedAnnotation is used here to check if the editor has been found and closed successfully.  It is set to a annotation object, and will only be reset to null (causing the wait to occur) if the editor is closed.
        fRemovedAnnotation = new Annotation(true);
-       DebugUIPlugin.getStandardDisplay().syncExec(closeEditor2);
+       DebugUIPlugin.getStandardDisplay().syncExec(closeEditor2); //FLLDCIM: MARK — T08 UI_THREAD_SYNCHRONIZER CALL
        waitForAnnotationToBeRemoved();
        assertEquals("Instruction pointer count was incorrect", expectedIPCCounts[7], InstructionPointerManager.getDefault().getInstructionPointerCount());
        assertEquals("Editor mapping count was incorrect", expectedMappingCounts[7], InstructionPointerManager.getDefault().getEditorMappingCount());
@@ -420,7 +420,7 @@ public class InstructionPointerManagerTests extends AbstractDebugTest {
 			}
 	   };
        fRemovedAnnotation = null;
-       DebugUIPlugin.getStandardDisplay().syncExec(closeAllEditors);
+       DebugUIPlugin.getStandardDisplay().syncExec(closeAllEditors); //FLLDCIM: MARK — T08 UI_THREAD_SYNCHRONIZER CALL
        waitForAnnotationToBeRemoved();
        assertEquals("Instruction pointer count was incorrect", 0, InstructionPointerManager.getDefault().getInstructionPointerCount());
        assertEquals("Editor mapping count was incorrect", 0, InstructionPointerManager.getDefault().getEditorMappingCount());
@@ -465,7 +465,7 @@ public class InstructionPointerManagerTests extends AbstractDebugTest {
 				// Do nothing, just waiting for the UI thread to finish annotations
 			}
 		};
-		DebugUIPlugin.getStandardDisplay().syncExec(runner);
+		DebugUIPlugin.getStandardDisplay().syncExec(runner); //FLLDCIM: MARK — T08 UI_THREAD_SYNCHRONIZER CALL
 	}
 
 	private void waitForAnnotationToBeRemoved() throws Exception{
@@ -483,7 +483,7 @@ public class InstructionPointerManagerTests extends AbstractDebugTest {
 				// Do nothing, just waiting for the UI thread to finish annotations
 			}
 		};
-		DebugUIPlugin.getStandardDisplay().syncExec(runner);
+		DebugUIPlugin.getStandardDisplay().syncExec(runner); //FLLDCIM: MARK — T08 UI_THREAD_SYNCHRONIZER CALL
 	}
 
 	class MyPerspectiveListener implements IPerspectiveListener2 {
@@ -499,7 +499,7 @@ public class InstructionPointerManagerTests extends AbstractDebugTest {
 		/* (non-Javadoc)
 		 * @see org.eclipse.ui.IPerspectiveListener2#perspectiveChanged(org.eclipse.ui.IWorkbenchPage, org.eclipse.ui.IPerspectiveDescriptor, org.eclipse.ui.IWorkbenchPartReference, java.lang.String)
 		 */
-		@Override
+		@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		public void perspectiveChanged(IWorkbenchPage page, IPerspectiveDescriptor perspective, IWorkbenchPartReference partRef, String changeId) {
             if (partRef.getTitle().equals(fTitle) && changeId == IWorkbenchPage.CHANGE_EDITOR_OPEN) {
             	IEditorPart editor = (IEditorPart) partRef.getPart(true);
@@ -527,9 +527,9 @@ public class InstructionPointerManagerTests extends AbstractDebugTest {
 			fTypeName = typeName;
 			int index = typeName.lastIndexOf('.');
 			if (index >= 0){
-				fTitle = typeName.substring(index+1) + ".java";
+				fTitle = typeName.substring(index+1) + ".java"; //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 			} else {
-				fTitle = typeName + ".java";
+				fTitle = typeName + ".java"; //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 			}
 		}
 
@@ -538,7 +538,7 @@ public class InstructionPointerManagerTests extends AbstractDebugTest {
 		}
 	}
 
-	class MyPartListener implements IPartListener2{
+	class MyPartListener implements IPartListener2{ //FLLDCIM: MARK — T20  IMPLEMENTS
 		@Override
 		public void partActivated(IWorkbenchPartReference partRef) {}
 		@Override
@@ -576,21 +576,21 @@ public class InstructionPointerManagerTests extends AbstractDebugTest {
 
 	class MyAnnotationListener implements IAnnotationModelListener, IAnnotationModelListenerExtension{
 
-		@Override
+		@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		public void modelChanged(AnnotationModelEvent event) {
 			Annotation[] annotations = event.getAddedAnnotations();
-			for (int i = 0; i < annotations.length; i++) {
+			for (int i = 0; i < annotations.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				if (annotations[i] instanceof InstructionPointerAnnotation){
 					synchronized (fLock) {
 						fAddedAnnotation = annotations[i];
 						fLock.notifyAll();
-						System.out.println("Annotation added to editor: " + fAddedAnnotation + " (" + this + ")" + event.getAnnotationModel());
+						System.out.println("Annotation added to editor: " + fAddedAnnotation + " (" + this + ")" + event.getAnnotationModel()); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 					}
 				}
 			}
 			annotations = event.getRemovedAnnotations();
-			for (int i = 0; i < annotations.length; i++) {
+			for (int i = 0; i < annotations.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				if (annotations[i] instanceof InstructionPointerAnnotation){
 					synchronized (fLock) {
 						fRemovedAnnotation = annotations[i];

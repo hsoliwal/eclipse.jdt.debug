@@ -52,7 +52,7 @@ public class ForceEarlyReturnTests extends AbstractJDITest {
 	/**
 	 * test for the specifying the return type for a forced return to make sure the new return value works
 	 */
-	public void testForceEarlyReturnIntType() {
+	public void testForceEarlyReturnIntType() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		if(!fVM.canForceEarlyReturn()) {
 			return;
 		}

@@ -77,7 +77,7 @@ public class SocketTransportService extends TransportService {
 	// for listening or accepting connectors
 	private ServerSocket fServerSocket;
 
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public Connection accept(ListenKey listenKey, long attachTimeout,
 			long handshakeTimeout) throws IOException {
 		if (attachTimeout > 0) {
@@ -103,7 +103,7 @@ public class SocketTransportService extends TransportService {
 	@Override
 	public Connection attach(String address, long attachTimeout,
 			long handshakeTimeout) throws IOException {
-		String[] strings = address.split(":"); //$NON-NLS-1$
+		String[] strings = address.split(":"); //$NON-NLS-1$ //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
 		String host = "localhost"; //$NON-NLS-1$
 		int port = 0;
 		if (strings.length == 2) {
@@ -116,7 +116,7 @@ public class SocketTransportService extends TransportService {
 		return attach(host, port, attachTimeout, handshakeTimeout);
 	}
 
-	public Connection attach(final String host, final int port,
+	public Connection attach(final String host, final int port, //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 			long attachTimeout, final long handshakeTimeout) throws IOException {
 		if (attachTimeout > 0) {
 			if (attachTimeout > Integer.MAX_VALUE) {
@@ -127,7 +127,7 @@ public class SocketTransportService extends TransportService {
 		final IOException[] ex = new IOException[1];
 		final SocketConnection[] result = new SocketConnection[1];
 		Thread attachThread = new Thread(new Runnable() {
-			@Override
+			@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 			public void run() {
 				try {
 					Socket socket = new Socket(host, port);
@@ -166,19 +166,19 @@ public class SocketTransportService extends TransportService {
 				throw new TimeoutException();
 			}
 		} catch (InterruptedException e) {
-			String message = String.format("Interrupted while trying to attach to %s:%s (attach timeout %s, handshake timeout %s)", host, port, attachTimeout, handshakeTimeout); //$NON-NLS-1$
+			String message = String.format("Interrupted while trying to attach to %s:%s (attach timeout %s, handshake timeout %s)", host, port, attachTimeout, handshakeTimeout); //$NON-NLS-1$ //FLLDCIM: MARK — M11 FORMAT_PRECOMPUTE CALL
 			JDIDebugPlugin.logError(message, e);
 		}
 
 		if (ex[0] != null) {
-			String message = String.format("Failed to attach to %s:%s (attach timeout %s, handshake timeout %s)", host, port, attachTimeout, handshakeTimeout); //$NON-NLS-1$
+			String message = String.format("Failed to attach to %s:%s (attach timeout %s, handshake timeout %s)", host, port, attachTimeout, handshakeTimeout); //$NON-NLS-1$ //FLLDCIM: MARK — M11 FORMAT_PRECOMPUTE CALL
 			throw new IOException(message, ex[0]);
 		}
 
 		return result[0];
 	}
 
-	void performHandshake(final InputStream in, final OutputStream out,
+	void performHandshake(final InputStream in, final OutputStream out, //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 			final long timeout) throws IOException {
 		final IOException[] ex = new IOException[1];
 		final boolean[] handshakeCompleted = new boolean[1];
@@ -264,14 +264,14 @@ public class SocketTransportService extends TransportService {
 		return startListening(null);
 	}
 
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public ListenKey startListening(String address) throws IOException {
 		String host = null;
 		int port = -1;
 		if (address != null) {
 			// jdt debugger will always specify an address in
 			// the form localhost:port
-			String[] strings = address.split(":"); //$NON-NLS-1$
+			String[] strings = address.split(":"); //$NON-NLS-1$ //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
 			host = "localhost"; //$NON-NLS-1$
 			if (strings.length == 2) {
 				host = strings[0];
@@ -281,7 +281,7 @@ public class SocketTransportService extends TransportService {
 			}
 		}
 		if (port == -1) {
-			throw new IOException("Unable to decode port from address: " + address); //$NON-NLS-1$
+			throw new IOException("Unable to decode port from address: " + address); //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		}
 		if (host == null) {
 			host = "localhost"; //$NON-NLS-1$
@@ -289,7 +289,7 @@ public class SocketTransportService extends TransportService {
 
 		fServerSocket = new ServerSocket(port);
 		port = fServerSocket.getLocalPort();
-		ListenKey listenKey = new SocketListenKey(host + ":" + port); //$NON-NLS-1$
+		ListenKey listenKey = new SocketListenKey(host + ":" + port); //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		return listenKey;
 	}
 

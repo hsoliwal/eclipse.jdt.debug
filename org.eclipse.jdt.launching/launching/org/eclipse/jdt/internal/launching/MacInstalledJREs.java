@@ -86,12 +86,12 @@ public class MacInstalledJREs {
 	 * @return array of {@link VMStandin}s installed in the OS
 	 * @exception CoreException if unable to parse the output or the executable does not exist
 	 */
-	public static VMStandin[] getInstalledJREs(IProgressMonitor monitor) throws CoreException {
+	public static VMStandin[] getInstalledJREs(IProgressMonitor monitor) throws CoreException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		SubMonitor smonitor = SubMonitor.convert(monitor);
 		try {
 			// locate the "java_home" executable
 			File javaHome = new File(JAVA_HOME_PLIST);
-			if (!javaHome.exists()) {
+			if (!javaHome.exists()) { //FLLDCIM: MARK — M31 M3FILE_IO CALL
 				throw new CoreException(Status.warning("The java_home executable does not exist")); //$NON-NLS-1$
 			}
 			String[] cmdLine = new String[] {JAVA_HOME_PLIST, "-X"}; //$NON-NLS-1$
@@ -99,7 +99,7 @@ public class MacInstalledJREs {
 			try {
 				p = DebugPlugin.exec(cmdLine, null);
 				IProcess process = DebugPlugin.newProcess(new Launch(null, ILaunchManager.RUN_MODE, null), p, "JRE Install Detection"); //$NON-NLS-1$
-				for (int i= 0; i < 600; i++) {
+				for (int i= 0; i < 600; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 					// Wait no more than 30 seconds (600 * 50 milliseconds)
 					if (process.isTerminated()) {
 						break;
@@ -153,7 +153,7 @@ public class MacInstalledJREs {
 	 * @return the array of {@link VMStandin}s or an empty array never <code>null</code>
 	 * @since 3.8
 	 */
-	public static VMStandin[] parseJREInfo(InputStream stream, IProgressMonitor monitor) {
+	public static VMStandin[] parseJREInfo(InputStream stream, IProgressMonitor monitor) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		SubMonitor smonitor = SubMonitor.convert(monitor, LaunchingMessages.MacInstalledJREs_0, 10);
 		try {
 			Object result = new PListParser().parse(stream);
@@ -166,7 +166,7 @@ public class MacInstalledJREs {
 					mactype = new MacOSXVMInstallType();
 				}
 				if(mactype != null) {
-					for (Object entry : maps) {
+					for (Object entry : maps) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 						if(smonitor.isCanceled()) {
 							///stop processing and return what we found
 							return jres.toArray(new VMStandin[jres.size()]);
@@ -179,7 +179,7 @@ public class MacInstalledJREs {
 							File loc = new File(home);
 							// 10.8.2+ can have more than one of the same VM, which will have the same name
 							// augment it with the version to make it easier to distinguish
-							String vmName = name + " [" + version + "]"; //$NON-NLS-1$//$NON-NLS-2$
+							String vmName = name + " [" + version + "]"; //$NON-NLS-1$//$NON-NLS-2$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 							MacVMStandin vm = new MacVMStandin(mactype, loc, vmName, version, computeId(map, version));
 							vm.setJavadocLocation(mactype.getDefaultJavadocLocation(loc));
 							vm.setLibraryLocations(mactype.getDefaultLibraryLocations(loc));

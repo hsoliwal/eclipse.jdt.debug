@@ -44,10 +44,10 @@ public class JavaThreadEventHandlerTests extends AbstractDebugTest {
 	/**
 	 * Tests that we can compute frame index for arbitrary frames, see bug 515696
 	 */
-	public void testComputeFrameIndexOnSecondFrameAndMonitorsOn() throws Exception {
+	public void testComputeFrameIndexOnSecondFrameAndMonitorsOn() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		final String typeName = "DropTests";
 		final int expectedFramesCount = 5;
-		IJavaBreakpoint bp = createMethodBreakpoint(typeName, "method" + (expectedFramesCount - 1), "()V", true, false);
+		IJavaBreakpoint bp = createMethodBreakpoint(typeName, "method" + (expectedFramesCount - 1), "()V", true, false); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		bp.setSuspendPolicy(IJavaBreakpoint.SUSPEND_VM);
 
 		IJavaThread thread = null;
@@ -72,7 +72,7 @@ public class JavaThreadEventHandlerTests extends AbstractDebugTest {
 
 			// They are all off by one, because we have one monitor installed
 			int monitorCount = 1;
-			for (int i = 0; i < frames.length; i++) {
+			for (int i = 0; i < frames.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				int index = eventHandler.indexOf(frames[i]);
 				assertEquals(i + monitorCount, index);
 			}
@@ -86,10 +86,10 @@ public class JavaThreadEventHandlerTests extends AbstractDebugTest {
 	/**
 	 * Tests that we can compute frame index for arbitrary frames, see bug 515696
 	 */
-	public void testComputeFrameIndexOnSecondFrameAndMonitorsOff() throws Exception {
+	public void testComputeFrameIndexOnSecondFrameAndMonitorsOff() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		final String typeName = "DropTests";
 		final int expectedFramesCount = 5;
-		IJavaBreakpoint bp = createMethodBreakpoint(typeName, "method" + (expectedFramesCount - 1), "()V", true, false);
+		IJavaBreakpoint bp = createMethodBreakpoint(typeName, "method" + (expectedFramesCount - 1), "()V", true, false); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		bp.setSuspendPolicy(IJavaBreakpoint.SUSPEND_VM);
 
 		IJavaThread thread = null;
@@ -112,7 +112,7 @@ public class JavaThreadEventHandlerTests extends AbstractDebugTest {
 			IStackFrame[] frames = frame.getThread().getStackFrames();
 			assertEquals(expectedFramesCount, frames.length);
 
-			for (int i = 0; i < frames.length; i++) {
+			for (int i = 0; i < frames.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				int index = eventHandler.indexOf(frames[i]);
 				assertEquals(i, index);
 			}
@@ -126,10 +126,10 @@ public class JavaThreadEventHandlerTests extends AbstractDebugTest {
 	/**
 	 * Tests that we can (or can't) compute frame index during evaluation
 	 */
-	public void testComputeFrameIndexDuringEvaluation() throws Exception {
+	public void testComputeFrameIndexDuringEvaluation() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String typeName = "DropTests";
 		final int expectedFramesCount = 5;
-		IJavaBreakpoint bp = createMethodBreakpoint(typeName, "method" + (expectedFramesCount - 1), "()V", true, false);
+		IJavaBreakpoint bp = createMethodBreakpoint(typeName, "method" + (expectedFramesCount - 1), "()V", true, false); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		bp.setSuspendPolicy(IJavaBreakpoint.SUSPEND_VM);
 
 		IJavaThread thread = null;
@@ -141,9 +141,9 @@ public class JavaThreadEventHandlerTests extends AbstractDebugTest {
 			assertTrue("breakpoint was not a method breakpoint", hit instanceof IJavaMethodBreakpoint);
 
 			final int sleepTimeMillis = 750;
-			String snippet = "java.lang.Thread.sleep(" + sleepTimeMillis + "); return true;";
+			String snippet = "java.lang.Thread.sleep(" + sleepTimeMillis + "); return true;"; //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 			TaskOnFrame task = new TaskOnFrame() {
-				@Override
+				@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 				public void performChecks(IJavaThread thread, IStackFrame[] frames, MyJavaThreadEventHandler eventHandler) throws Exception {
 					assertEquals(expectedFramesCount, frames.length);
 
@@ -153,7 +153,7 @@ public class JavaThreadEventHandlerTests extends AbstractDebugTest {
 					assertTrue(thread.isPerformingEvaluation());
 
 					// indexOf method waits for evaluation and computes the right result
-					for (int i = 0; i < expectedFramesCount; i++) {
+					for (int i = 0; i < expectedFramesCount; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 						int index = eventHandler.indexOf(frames[i]);
 						if (index == -1) {
 							throw new TestAgainException("Evaluation took too long");
@@ -166,7 +166,7 @@ public class JavaThreadEventHandlerTests extends AbstractDebugTest {
 				}
 			};
 			IValue value = doEvalAndRunInParallel(thread, snippet, task);
-			assertTrue("The result of '" + snippet + "') should be true", Boolean.parseBoolean(value.getValueString()));
+			assertTrue("The result of '" + snippet + "') should be true", Boolean.parseBoolean(value.getValueString())); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		}
 		finally {
 			terminateAndRemove(thread);
@@ -174,7 +174,7 @@ public class JavaThreadEventHandlerTests extends AbstractDebugTest {
 		}
 	}
 
-	private IValue doEvalAndRunInParallel(IJavaThread thread, String snippet, TaskOnFrame task) throws Exception {
+	private IValue doEvalAndRunInParallel(IJavaThread thread, String snippet, TaskOnFrame task) throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		class Listener implements IEvaluationListener {
 			IEvaluationResult fResult;
 
@@ -201,7 +201,7 @@ public class JavaThreadEventHandlerTests extends AbstractDebugTest {
 			assertTrue(thread.isSuspended());
 			engine.evaluate(snippet, frame, listener, DebugEvent.EVALUATION_IMPLICIT, false);
 			long timeoutNanos = System.nanoTime() + 5000 * 1_000_000L;
-			while (thread.isSuspended() && System.nanoTime() < timeoutNanos) {
+			while (thread.isSuspended() && System.nanoTime() < timeoutNanos) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				Thread.sleep(1);
 			}
 
@@ -216,10 +216,10 @@ public class JavaThreadEventHandlerTests extends AbstractDebugTest {
 			// Checck post-conditions
 			IEvaluationResult result = listener.getResult();
 			assertNotNull("The evaluation should have result: ", result);
-			assertNull("The evaluation should not have exception : " + result.getException(), result.getException());
+			assertNull("The evaluation should not have exception : " + result.getException(), result.getException()); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 			String firstError = result.hasErrors() ? result.getErrorMessages()[0] : "";
-			assertFalse("The evaluation should not have errors : " + firstError, result.hasErrors());
+			assertFalse("The evaluation should not have errors : " + firstError, result.hasErrors()); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 			return listener.getResult().getValue();
 		}
 		finally {
@@ -228,7 +228,7 @@ public class JavaThreadEventHandlerTests extends AbstractDebugTest {
 		}
 	}
 
-	static class MyJavaThreadEventHandler extends JavaThreadEventHandler {
+	static class MyJavaThreadEventHandler extends JavaThreadEventHandler { //FLLDCIM: MARK — T06  IMPLEMENTS
 		boolean displayMonitors;
 
 		public MyJavaThreadEventHandler(AbstractModelProxy proxy) {

@@ -33,7 +33,7 @@ public class AssignmentOperator extends CompoundInstruction {
 	/*
 	 * @see Instruction#execute()
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public void execute() throws CoreException {
 		IJavaValue value = popValue();
 		Object val = pop();

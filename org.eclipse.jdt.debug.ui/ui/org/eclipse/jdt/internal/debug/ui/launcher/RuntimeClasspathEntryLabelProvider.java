@@ -61,7 +61,7 @@ public class RuntimeClasspathEntryLabelProvider extends LabelProvider {
 	/* (non-Javadoc)
 	 * @see org.eclipse.jface.viewers.ILabelProvider#getImage(java.lang.Object)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public Image getImage(Object element) {
 		IRuntimeClasspathEntry entry = (IRuntimeClasspathEntry)element;
 		IResource resource = entry.getResource();
@@ -85,7 +85,7 @@ public class RuntimeClasspathEntryLabelProvider extends LabelProvider {
 					{
 						//TODO: check for invalid paths and change image
 						File file = path.toFile();
-						if (file.exists() && file.isDirectory()) {
+						if (file.exists() && file.isDirectory()) { //FLLDCIM: MARK — M31 M3FILE_IO CALL
 							key = ISharedImages.IMG_OBJS_PACKFRAG_ROOT;
 						} else if (source) {
 	                        key = ISharedImages.IMG_OBJS_EXTERNAL_ARCHIVE_WITH_SOURCE;
@@ -126,7 +126,7 @@ public class RuntimeClasspathEntryLabelProvider extends LabelProvider {
 	/* (non-Javadoc)
 	 * @see org.eclipse.jface.viewers.ILabelProvider#getText(java.lang.Object)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public String getText(Object element) {
 		IRuntimeClasspathEntry entry = (IRuntimeClasspathEntry)element;
 		switch (entry.getType()) {
@@ -146,42 +146,42 @@ public class RuntimeClasspathEntryLabelProvider extends LabelProvider {
 					return NLS.bind(LauncherMessages.RuntimeClasspathEntryLabelProvider_Invalid_path, path.toOSString());
 				}
 				String[] segments = path.segments();
-				StringBuilder displayPath = new StringBuilder();
+				StringBuilder displayPath = new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 				if (segments.length > 0) {
-					displayPath.append(segments[segments.length - 1]);
-					displayPath.append(" - "); //$NON-NLS-1$
+					displayPath.append(segments[segments.length - 1]); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+					displayPath.append(" - "); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 					String device = path.getDevice();
 					if (device != null) {
-						displayPath.append(device);
+						displayPath.append(device); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 					}
-					displayPath.append(File.separator);
-					for (int i = 0; i < segments.length - 1; i++) {
-						displayPath.append(segments[i]).append(File.separator);
+					displayPath.append(File.separator); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+					for (int i = 0; i < segments.length - 1; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
+						displayPath.append(segments[i]).append(File.separator); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 					}
 				} else {
-					displayPath.append(path.toOSString());
+					displayPath.append(path.toOSString()); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				}
 				return displayPath.toString();
 			case IRuntimeClasspathEntry.VARIABLE:
 				path = entry.getPath();
 				IPath srcPath = entry.getSourceAttachmentPath();
-				StringBuilder buf = new StringBuilder(path.toString());
+				StringBuilder buf = new StringBuilder(path.toString()); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 				if (srcPath != null) {
-					buf.append(" ["); //$NON-NLS-1$
-					buf.append(srcPath.toString());
+					buf.append(" ["); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+					buf.append(srcPath.toString()); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 					IPath rootPath = entry.getSourceAttachmentRootPath();
 					if (rootPath != null) {
-						buf.append(IPath.SEPARATOR);
-						buf.append(rootPath.toString());
+						buf.append(IPath.SEPARATOR); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+						buf.append(rootPath.toString()); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 					}
-					buf.append(']');
+					buf.append(']'); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				}
 				// append JRE name if we can compute it
 				if (path.equals(new Path(JavaRuntime.JRELIB_VARIABLE)) && fLaunchConfiguration != null) {
 					try {
 						IVMInstall vm = JavaRuntime.computeVMInstall(fLaunchConfiguration);
-						buf.append(" - "); //$NON-NLS-1$
-						buf.append(vm.getName());
+						buf.append(" - "); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+						buf.append(vm.getName()); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 					} catch (CoreException e) {
 					}
 				}

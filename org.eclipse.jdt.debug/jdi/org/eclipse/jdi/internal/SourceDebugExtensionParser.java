@@ -83,7 +83,7 @@ public class SourceDebugExtensionParser {
 			return fChar;
 		}
 
-		private void startWith() throws AbsentInformationException {
+		private void startWith() throws AbsentInformationException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 			switch (fChar) {
 			case '\n':
 			case '\r':
@@ -129,7 +129,7 @@ public class SourceDebugExtensionParser {
 		}
 
 		private void nonAsteriskString(int lexemStart) {
-			while (fChar != '\n' && fChar != '\r' && !fEOF) {
+			while (fChar != '\n' && fChar != '\r' && !fEOF) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				nextChar();
 			}
 			int length = fPointer - lexemStart;
@@ -144,7 +144,7 @@ public class SourceDebugExtensionParser {
 		}
 
 		private void number(int lexemStart) {
-			while (fChar >= '0' && fChar <= '9') {
+			while (fChar >= '0' && fChar <= '9') { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				nextChar();
 			}
 			consumeWhiteSpace();
@@ -154,7 +154,7 @@ public class SourceDebugExtensionParser {
 			System.arraycopy(fSmap, lexemStart, fLexem, 0, length);
 		}
 
-		private void startWithAsterisk() throws AbsentInformationException {
+		private void startWithAsterisk() throws AbsentInformationException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 			nextChar();
 			if (fEOF) {
 				throw new AbsentInformationException(
@@ -206,7 +206,7 @@ public class SourceDebugExtensionParser {
 		}
 
 		private void consumeWhiteSpace() {
-			while (fChar == ' ' || fChar == '\t') {
+			while (fChar == ' ' || fChar == '\t') { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				nextChar();
 			}
 		}
@@ -250,7 +250,7 @@ public class SourceDebugExtensionParser {
 	 */
 	private SourceDebugExtensionParser(ReferenceTypeImpl referenceType) {
 		fReferenceType = referenceType;
-		fDefinedStrata = new ArrayList<>();
+		fDefinedStrata = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 		fDefinedStrata.add(VirtualMachineImpl.JAVA_STRATUM_NAME);
 	}
 
@@ -264,7 +264,7 @@ public class SourceDebugExtensionParser {
 		}
 	}
 
-	private void parseHeader(Lexer lexer) throws AbsentInformationException {
+	private void parseHeader(Lexer lexer) throws AbsentInformationException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		int lexemType = lexer.nextLexem();
 		if (lexemType != Lexer.SMAP) {
 			throw new AbsentInformationException(
@@ -287,12 +287,12 @@ public class SourceDebugExtensionParser {
 	}
 
 	private void parseSections(Lexer lexer) throws AbsentInformationException {
-		while (lexer.lexemType() != Lexer.ASTERISK_E) {
+		while (lexer.lexemType() != Lexer.ASTERISK_E) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			parseStratumSection(lexer);
 		}
 	}
 
-	private void parseStratumSection(Lexer lexer)
+	private void parseStratumSection(Lexer lexer) //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 			throws AbsentInformationException {
 		if (lexer.lexemType() != Lexer.ASTERISK_S) {
 			throw new AbsentInformationException(
@@ -312,7 +312,7 @@ public class SourceDebugExtensionParser {
 		fFileSectionDefinedForCurrentStratum = false;
 		fLineSectionDefinedForCurrentStratum = false;
 		int lexemType = lexer.lexemType();
-		while (lexemType != Lexer.ASTERISK_E && lexemType != Lexer.ASTERISK_S) {
+		while (lexemType != Lexer.ASTERISK_E && lexemType != Lexer.ASTERISK_S) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			switch (lexemType) {
 			case Lexer.ASTERISK_F:
 				if (fFileSectionDefinedForCurrentStratum) {
@@ -367,12 +367,12 @@ public class SourceDebugExtensionParser {
 					new String(lexer.lexem())));
 		}
 		lexer.nextLexem();
-		while (!isAsteriskLexem(lexer.lexemType())) {
+		while (!isAsteriskLexem(lexer.lexemType())) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			parseFileInfo(lexer);
 		}
 	}
 
-	private void parseFileInfo(Lexer lexer) throws AbsentInformationException {
+	private void parseFileInfo(Lexer lexer) throws AbsentInformationException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		int lexemType = lexer.lexemType();
 		switch (lexemType) {
 			case Lexer.NUMBER:
@@ -414,12 +414,12 @@ public class SourceDebugExtensionParser {
 					new String(lexer.lexem())));
 		}
 		lexer.nextLexem();
-		while (!isAsteriskLexem(lexer.lexemType())) {
+		while (!isAsteriskLexem(lexer.lexemType())) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			parseLineInfo(lexer);
 		}
 	}
 
-	private void parseLineInfo(Lexer lexer) throws AbsentInformationException {
+	private void parseLineInfo(Lexer lexer) throws AbsentInformationException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		if (lexer.lexemType() != Lexer.NUMBER) {
 			throw new AbsentInformationException(
 					JDIMessages.SourceDebugExtensionParser_22);
@@ -483,7 +483,7 @@ public class SourceDebugExtensionParser {
 					new String(lexer.lexem())));
 		}
 		lexer.nextLexem();
-		while (!isAsteriskLexem(lexer.lexemType())) {
+		while (!isAsteriskLexem(lexer.lexemType())) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			// do nothing in this case, just consume the lexems.
 			getNonAsteriskString(lexer);
 		}
@@ -497,7 +497,7 @@ public class SourceDebugExtensionParser {
 					new String(lexer.lexem())));
 		}
 		lexer.nextLexem();
-		while (!isAsteriskLexem(lexer.lexemType())) {
+		while (!isAsteriskLexem(lexer.lexemType())) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			// do nothing in this case, just consume the lexems.
 			getNonAsteriskString(lexer);
 		}
@@ -505,17 +505,17 @@ public class SourceDebugExtensionParser {
 
 	private String getNonAsteriskString(Lexer lexer)
 			throws AbsentInformationException {
-		StringBuilder string = new StringBuilder();
+		StringBuilder string = new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 		int lexemType = lexer.lexemType();
-		while (lexemType != Lexer.CR) {
-			string.append(lexer.lexem());
+		while (lexemType != Lexer.CR) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
+			string.append(lexer.lexem()); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			lexemType = lexer.nextLexem();
 		}
 		lexer.nextLexem();
 		// remove the leading white spaces
 		int i = -1, length = string.length();
 		char c;
-		while (++i < length && ((c = string.charAt(i)) == ' ' || c == '\t')) {
+		while (++i < length && ((c = string.charAt(i)) == ' ' || c == '\t')) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			//continue until we chew up all the whitespace or hit the end of the line
 		}
 		return string.delete(0, i).toString();
@@ -524,11 +524,11 @@ public class SourceDebugExtensionParser {
 	private int integerValue(char[] lexem) {
 		int i = 0;
 		char c = lexem[0];
-		while (c == ' ' || c == '\t') {
+		while (c == ' ' || c == '\t') { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			c = lexem[++i];
 		}
 		int value = 0;
-		while (c >= '0' && c <= '9') {
+		while (c >= '0' && c <= '9') { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			value = value * 10 + c - '0';
 			if (++i == lexem.length) {
 				break;

@@ -88,7 +88,7 @@ public class ClassFileEditorHighlightingTest extends AbstractDebugUiTests {
 		}
 	}
 
-	public void testDisplaySourceWithClassFileEditorHighlightsLine() throws Exception {
+	public void testDisplaySourceWithClassFileEditorHighlightsLine() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IJavaProject project = createProjectWithNoSources(CLASS_NAME, CLASS_CONTENTS, true);
 		IJavaThread thread = null;
 		try {
@@ -111,10 +111,10 @@ public class ClassFileEditorHighlightingTest extends AbstractDebugUiTests {
 		}
 	}
 
-	public void testContinueAfterEditorClosed() throws Exception {
+	public void testContinueAfterEditorClosed() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IJavaProject project = createProjectWithNoSources(CLASS_NAME, CLASS_CONTENTS, true);
 		IJavaThread thread = null;
-		List<IStatus> errors = Collections.synchronizedList(new ArrayList<>());
+		List<IStatus> errors = Collections.synchronizedList(new ArrayList<>()); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 		ILogListener logListener = new ILogListener() {
 			@Override
 			public void logging(IStatus status, String plugin) {
@@ -143,7 +143,7 @@ public class ClassFileEditorHighlightingTest extends AbstractDebugUiTests {
 		}
 	}
 
-	public void testConstructorInPackage() throws Exception {
+	public void testConstructorInPackage() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IJavaProject project = createProjectWithNoSources("ClassOne", """
 				public class ClassOne {
 
@@ -178,7 +178,7 @@ public class ClassFileEditorHighlightingTest extends AbstractDebugUiTests {
 		}
 	}
 
-	public void testDisplaySourceWithClassFileEditorHighlightsLineInConstructor() throws Exception {
+	public void testDisplaySourceWithClassFileEditorHighlightsLineInConstructor() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IJavaProject project = createProjectWithNoSources("MethodCall", """
 				public class MethodCall {
 
@@ -212,7 +212,7 @@ public class ClassFileEditorHighlightingTest extends AbstractDebugUiTests {
 		}
 	}
 
-	public void testClassFileWithoutDebuggingInformation() throws Exception {
+	public void testClassFileWithoutDebuggingInformation() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IJavaProject project = createProjectWithNoSources(CLASS_NAME, CLASS_CONTENTS);
 		IJavaThread thread = null;
 		try {
@@ -233,7 +233,7 @@ public class ClassFileEditorHighlightingTest extends AbstractDebugUiTests {
 					     "    17  return",
 			};
 
-			for (int i = 0; i < expectedHighlights.length; i++) {
+			for (int i = 0; i < expectedHighlights.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				expectHighlightedText(expectedHighlights[i], TIMEOUT);
 
 				if (i < expectedHighlights.length - 1) {
@@ -251,15 +251,15 @@ public class ClassFileEditorHighlightingTest extends AbstractDebugUiTests {
 		return createProjectWithNoSources(className, contents, false);
 	}
 
-	private IJavaProject createProjectWithNoSources(String className, String contents, boolean generateLineInfo) throws Exception {
+	private IJavaProject createProjectWithNoSources(String className, String contents, boolean generateLineInfo) throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IJavaProject javaProject = JavaProjectHelper.createJavaProject("ClassFileEditorHighlightingTest", JavaProjectHelper.BIN_DIR);
 		IProject project = javaProject.getProject();
 		project.getFolder(LAUNCHCONFIGURATIONS).create(true, true, null);
 
-		IFile classFile = project.getFile(className + ".class");
+		IFile classFile = project.getFile(className + ".class"); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 		String debug = generateLineInfo ? "lines" : "none";
-		compileWithJavac(className, contents, List.of("-g:" + debug, "-d", project.getLocation().toString(), "--release", "8"));
+		compileWithJavac(className, contents, List.of("-g:" + debug, "-d", project.getLocation().toString(), "--release", "8")); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		classFile.refreshLocal(IResource.DEPTH_ONE, null);
 
 		IFile lib = project.getFile("lib.jar");
@@ -270,7 +270,7 @@ public class ClassFileEditorHighlightingTest extends AbstractDebugUiTests {
 		return javaProject;
 	}
 
-	private static void jarClassFile(IFile jar, IFile classFile) {
+	private static void jarClassFile(IFile jar, IFile classFile) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		JarPackageData data = new JarPackageData();
 		data.setJarLocation(jar.getLocation());
 		data.setBuildIfNeeded(true);
@@ -285,13 +285,13 @@ public class ClassFileEditorHighlightingTest extends AbstractDebugUiTests {
 			return op.getStatus();
 		});
 		if (status.getSeverity() == IStatus.ERROR) {
-			fail("Creating jar failed: " + status.getMessage());
+			fail("Creating jar failed: " + status.getMessage()); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		}
 	}
 
 	private static void expectHighlightedText(String expectedHighlightedText, long timeout) throws InterruptedException {
 		long s = System.currentTimeMillis();
-		while (System.currentTimeMillis() - s < timeout) {
+		while (System.currentTimeMillis() - s < timeout) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			List<String> highlighted = callInUi(ClassFileEditorHighlightingTest::getClassEditorHighlightedText);
 			if (List.of(expectedHighlightedText).equals(highlighted)) {
 				break;
@@ -305,7 +305,7 @@ public class ClassFileEditorHighlightingTest extends AbstractDebugUiTests {
 
 	private static void expectNothingHighlighted(long timeout) throws InterruptedException {
 		long s = System.currentTimeMillis();
-		while (System.currentTimeMillis() - s < timeout) {
+		while (System.currentTimeMillis() - s < timeout) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			List<String> highlighted = callInUi(ClassFileEditorHighlightingTest::getClassEditorHighlightedText);
 			if (highlighted.isEmpty()) {
 				break;
@@ -318,7 +318,7 @@ public class ClassFileEditorHighlightingTest extends AbstractDebugUiTests {
 	}
 
 	private static List<String> getClassEditorHighlightedText() {
-		List<String> highlighted = new ArrayList<>();
+		List<String> highlighted = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 		StyledText noSourceTextWidget = null;
 		ClassFileEditor editor = (ClassFileEditor) getActivePage().getActiveEditor();
 		if (editor != null) {
@@ -327,7 +327,7 @@ public class ClassFileEditorHighlightingTest extends AbstractDebugUiTests {
 		if (noSourceTextWidget != null) {
 			StyleRange[] styleRanges = noSourceTextWidget.getStyleRanges();
 			StyledTextContent content = noSourceTextWidget.getContent();
-			for (StyleRange styleRange : styleRanges) {
+			for (StyleRange styleRange : styleRanges) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				String highlightedText = content.getTextRange(styleRange.start, styleRange.length);
 				highlighted.add(highlightedText);
 			}
@@ -353,7 +353,7 @@ public class ClassFileEditorHighlightingTest extends AbstractDebugUiTests {
 		private final String code;
 
 		protected SourceJavaFileObject(String name, String code) {
-			super(URI.create("string:///" + name.replace('.', '/') + Kind.SOURCE.extension), Kind.SOURCE);
+			super(URI.create("string:///" + name.replace('.', '/') + Kind.SOURCE.extension), Kind.SOURCE); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 			this.code = code;
 		}
 

@@ -103,7 +103,7 @@ public class VMStandin extends AbstractVMInstall {
 	 *
 	 * @return IVMInstall the 'real' corresponding to this stand-in VM
 	 */
-	@SuppressWarnings("deprecation")
+	@SuppressWarnings("deprecation") //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public IVMInstall convertToRealVM() {
 		IVMInstallType vmType= getVMInstallType();
 		IVMInstall realVM= vmType.findVMInstall(getId());

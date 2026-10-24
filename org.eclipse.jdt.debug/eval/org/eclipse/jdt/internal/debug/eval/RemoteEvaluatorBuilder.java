@@ -49,13 +49,13 @@ public class RemoteEvaluatorBuilder {
 	private final String packageName;
 	private final boolean isStatic;
 	private final boolean isConstructor;
-	private final List<String> argumentNames = new ArrayList<>();
-	private final List<String> argumentTypeNames = new ArrayList<>();
+	private final List<String> argumentNames = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
+	private final List<String> argumentTypeNames = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 
 	/**
 	 * The names and bytecodes of the code snippet class to instantiate
 	 */
-	private final LinkedHashMap<String, byte[]> classFiles = new LinkedHashMap<>();
+	private final LinkedHashMap<String, byte[]> classFiles = new LinkedHashMap<>(); //FLLDCIM: MARK — M04 M3_ORDERED_LANES NEW
 
 	/**
 	 * The name of the code snippet class to instantiate
@@ -90,8 +90,8 @@ public class RemoteEvaluatorBuilder {
 	private void acceptFunctionalExpression(Expression node, ITypeBinding expectedResult) {
 		FunctionalEvalVisitor visitor = new FunctionalEvalVisitor();
 		node.accept(visitor);
-		String castExpression = "(" + expectedResult.getQualifiedName() + ")"; //$NON-NLS-1$//$NON-NLS-2$
-		this.snippet = castExpression + "(" + visitor.buffer.toString() + ")"; //$NON-NLS-1$//$NON-NLS-2$
+		String castExpression = "(" + expectedResult.getQualifiedName() + ")"; //$NON-NLS-1$//$NON-NLS-2$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
+		this.snippet = castExpression + "(" + visitor.buffer.toString() + ")"; //$NON-NLS-1$//$NON-NLS-2$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 	}
 
 	public String getSnippet() {
@@ -100,12 +100,12 @@ public class RemoteEvaluatorBuilder {
 
 	private static Object EVALUATE_CODE_SNIPPET_LOCK = new Object();
 
-	public RemoteEvaluator build() throws JavaModelException, DebugException {
+	public RemoteEvaluator build() throws JavaModelException, DebugException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 
 		List<String> boundVariableNames = getVariableNames();
 		List<String> boundVariableTypeNames = getVariableTypeNames();
 
-		List<String> errors = new ArrayList<>();
+		List<String> errors = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 		IType enclosingType = this.javaProject.findType(enclosingTypeName);
 
 		if (enclosingType == null) {
@@ -133,7 +133,7 @@ public class RemoteEvaluatorBuilder {
 
 				@Override
 				public boolean acceptClassFiles(byte[][] classFileBytes, String[][] classFileCompoundNames, String mainCodeSnippetClassName) {
-					for (int i = 0; i < classFileCompoundNames.length; ++i) {
+					for (int i = 0; i < classFileCompoundNames.length; ++i) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 						String className = makeClassName(classFileCompoundNames[i]);
 						classFiles.put(className, classFileBytes[i]);
 					}
@@ -169,7 +169,7 @@ public class RemoteEvaluatorBuilder {
 	}
 
 	public String allocateNewVariable(ITypeBinding binding, String hint) {
-		String varName = hint + "$" + argumentNames.size(); //$NON-NLS-1$
+		String varName = hint + "$" + argumentNames.size(); //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		argumentNames.add(varName);
 		argumentTypeNames.add(binding.getQualifiedName());
 		return varName;
@@ -236,11 +236,11 @@ public class RemoteEvaluatorBuilder {
 		/**
 		 * The string buffer into which the serialized representation of the AST is written.
 		 */
-		protected StringBuilder buffer = new StringBuilder();
+		protected StringBuilder buffer = new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 
 		private int indent = 2;
 
-		private final Map<IBinding, String> localBindings = new HashMap<>();
+		private final Map<IBinding, String> localBindings = new HashMap<>(); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
 
 		public FunctionalEvalVisitor() {
 		}
@@ -266,8 +266,8 @@ public class RemoteEvaluatorBuilder {
 		}
 
 		void printIndent() {
-			for (int i = 0; i < indent; i++) {
-				buffer.append("  ");//$NON-NLS-1$
+			for (int i = 0; i < indent; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
+				buffer.append("  ");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			}
 		}
 
@@ -327,39 +327,39 @@ public class RemoteEvaluatorBuilder {
 		 * @param modifiers
 		 *            the modifier flags
 		 */
-		void printModifiers(int modifiers) {
+		void printModifiers(int modifiers) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 			if (Modifier.isPublic(modifiers)) {
-				buffer.append("public ");//$NON-NLS-1$
+				buffer.append("public ");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			}
 			if (Modifier.isProtected(modifiers)) {
-				buffer.append("protected ");//$NON-NLS-1$
+				buffer.append("protected ");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			}
 			if (Modifier.isPrivate(modifiers)) {
-				buffer.append("private ");//$NON-NLS-1$
+				buffer.append("private ");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			}
 			if (Modifier.isStatic(modifiers)) {
-				buffer.append("static ");//$NON-NLS-1$
+				buffer.append("static ");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			}
 			if (Modifier.isAbstract(modifiers)) {
-				buffer.append("abstract ");//$NON-NLS-1$
+				buffer.append("abstract ");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			}
 			if (Modifier.isFinal(modifiers)) {
-				buffer.append("final ");//$NON-NLS-1$
+				buffer.append("final ");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			}
 			if (Modifier.isSynchronized(modifiers)) {
-				buffer.append("synchronized ");//$NON-NLS-1$
+				buffer.append("synchronized ");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			}
 			if (Modifier.isVolatile(modifiers)) {
-				buffer.append("volatile ");//$NON-NLS-1$
+				buffer.append("volatile ");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			}
 			if (Modifier.isNative(modifiers)) {
-				buffer.append("native ");//$NON-NLS-1$
+				buffer.append("native ");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			}
 			if (Modifier.isStrictfp(modifiers)) {
-				buffer.append("strictfp ");//$NON-NLS-1$
+				buffer.append("strictfp ");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			}
 			if (Modifier.isTransient(modifiers)) {
-				buffer.append("transient ");//$NON-NLS-1$
+				buffer.append("transient ");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			}
 		}
 
@@ -370,20 +370,20 @@ public class RemoteEvaluatorBuilder {
 		 *            the list of modifier and annotation nodes (element type: <code>IExtendedModifiers</code>)
 		 */
 		void printModifiers(List ext) {
-			for (Iterator it = ext.iterator(); it.hasNext();) {
+			for (Iterator it = ext.iterator(); it.hasNext();) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				ASTNode p = (ASTNode) it.next();
 				p.accept(this);
-				buffer.append(" ");//$NON-NLS-1$
+				buffer.append(" ");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			}
 		}
 
 		private void printTypes(List<Type> types, String prefix) {
 			if (types.size() > 0) {
-				buffer.append(" " + prefix + " ");//$NON-NLS-1$ //$NON-NLS-2$
+				buffer.append(" " + prefix + " ");//$NON-NLS-1$ //$NON-NLS-2$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				Type type = types.get(0);
 				type.accept(this);
-				for (int i = 1, l = types.size(); i < l; ++i) {
-					buffer.append(","); //$NON-NLS-1$
+				for (int i = 1, l = types.size(); i < l; ++i) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
+					buffer.append(","); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 					type = types.get(0);
 					type.accept(this);
 				}
@@ -397,17 +397,17 @@ public class RemoteEvaluatorBuilder {
 		 *            list of type arguments
 		 */
 		private void visitReferenceTypeArguments(List typeArguments) {
-			buffer.append("::");//$NON-NLS-1$
+			buffer.append("::");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			if (!typeArguments.isEmpty()) {
-				buffer.append('<');
-				for (Iterator it = typeArguments.iterator(); it.hasNext();) {
+				buffer.append('<'); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+				for (Iterator it = typeArguments.iterator(); it.hasNext();) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 					Type t = (Type) it.next();
 					t.accept(this);
 					if (it.hasNext()) {
-						buffer.append(',');
+						buffer.append(','); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 					}
 				}
-				buffer.append('>');
+				buffer.append('>'); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			}
 		}
 
@@ -418,10 +418,10 @@ public class RemoteEvaluatorBuilder {
 		}
 
 		private void visitAnnotationsList(List annotations) {
-			for (Iterator it = annotations.iterator(); it.hasNext();) {
+			for (Iterator it = annotations.iterator(); it.hasNext();) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				Annotation annotation = (Annotation) it.next();
 				annotation.accept(this);
-				buffer.append(' ');
+				buffer.append(' '); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			}
 		}
 
@@ -443,14 +443,14 @@ public class RemoteEvaluatorBuilder {
 			}
 			printIndent();
 			printModifiers(node.modifiers());
-			buffer.append("@interface ");//$NON-NLS-1$
+			buffer.append("@interface ");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			node.getName().accept(this);
-			buffer.append(" {");//$NON-NLS-1$
-			for (Iterator it = node.bodyDeclarations().iterator(); it.hasNext();) {
+			buffer.append(" {");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+			for (Iterator it = node.bodyDeclarations().iterator(); it.hasNext();) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				BodyDeclaration d = (BodyDeclaration) it.next();
 				d.accept(this);
 			}
-			buffer.append("}\n");//$NON-NLS-1$
+			buffer.append("}\n");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			return false;
 		}
 
@@ -462,57 +462,57 @@ public class RemoteEvaluatorBuilder {
 			printIndent();
 			printModifiers(node.modifiers());
 			node.getType().accept(this);
-			buffer.append(" ");//$NON-NLS-1$
+			buffer.append(" ");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			node.getName().accept(this);
-			buffer.append("()");//$NON-NLS-1$
+			buffer.append("()");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			if (node.getDefault() != null) {
-				buffer.append(" default ");//$NON-NLS-1$
+				buffer.append(" default ");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				node.getDefault().accept(this);
 			}
-			buffer.append(";\n");//$NON-NLS-1$
+			buffer.append(";\n");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			return false;
 		}
 
 		@Override
 		public boolean visit(AnonymousClassDeclaration node) {
-			buffer.append("{\n");//$NON-NLS-1$
+			buffer.append("{\n");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			indent++;
-			for (Iterator it = node.bodyDeclarations().iterator(); it.hasNext();) {
+			for (Iterator it = node.bodyDeclarations().iterator(); it.hasNext();) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				BodyDeclaration b = (BodyDeclaration) it.next();
 				b.accept(this);
 			}
 			indent--;
 			printIndent();
-			buffer.append("}\n");//$NON-NLS-1$
+			buffer.append("}\n");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			return false;
 		}
 
 		@Override
 		public boolean visit(ArrayAccess node) {
 			node.getArray().accept(this);
-			buffer.append("[");//$NON-NLS-1$
+			buffer.append("[");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			node.getIndex().accept(this);
-			buffer.append("]");//$NON-NLS-1$
+			buffer.append("]");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			return false;
 		}
 
-		@Override
+		@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		public boolean visit(ArrayCreation node) {
-			buffer.append("new ");//$NON-NLS-1$
+			buffer.append("new ");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			ArrayType at = node.getType();
 			int dims = at.getDimensions();
 			Type elementType = at.getElementType();
 			elementType.accept(this);
-			for (Iterator it = node.dimensions().iterator(); it.hasNext();) {
-				buffer.append("[");//$NON-NLS-1$
+			for (Iterator it = node.dimensions().iterator(); it.hasNext();) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
+				buffer.append("[");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				Expression e = (Expression) it.next();
 				e.accept(this);
-				buffer.append("]");//$NON-NLS-1$
+				buffer.append("]");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				dims--;
 			}
 			// add empty "[]" for each extra array dimension
-			for (int i = 0; i < dims; i++) {
-				buffer.append("[]");//$NON-NLS-1$
+			for (int i = 0; i < dims; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
+				buffer.append("[]");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			}
 			if (node.getInitializer() != null) {
 				node.getInitializer().accept(this);
@@ -522,15 +522,15 @@ public class RemoteEvaluatorBuilder {
 
 		@Override
 		public boolean visit(ArrayInitializer node) {
-			buffer.append("{");//$NON-NLS-1$
-			for (Iterator it = node.expressions().iterator(); it.hasNext();) {
+			buffer.append("{");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+			for (Iterator it = node.expressions().iterator(); it.hasNext();) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				Expression e = (Expression) it.next();
 				e.accept(this);
 				if (it.hasNext()) {
-					buffer.append(",");//$NON-NLS-1$
+					buffer.append(",");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				}
 			}
-			buffer.append("}");//$NON-NLS-1$
+			buffer.append("}");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			return false;
 		}
 
@@ -538,12 +538,12 @@ public class RemoteEvaluatorBuilder {
 		public boolean visit(ArrayType node) {
 			if (node.getAST().apiLevel() < JLS8) {
 				visitComponentType(node);
-				buffer.append("[]");//$NON-NLS-1$
+				buffer.append("[]");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			} else {
 				node.getElementType().accept(this);
 				List dimensions = node.dimensions();
 				int size = dimensions.size();
-				for (int i = 0; i < size; i++) {
+				for (int i = 0; i < size; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 					Dimension aDimension = (Dimension) dimensions.get(i);
 					aDimension.accept(this);
 				}
@@ -554,51 +554,51 @@ public class RemoteEvaluatorBuilder {
 		@Override
 		public boolean visit(AssertStatement node) {
 			printIndent();
-			buffer.append("assert ");//$NON-NLS-1$
+			buffer.append("assert ");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			node.getExpression().accept(this);
 			if (node.getMessage() != null) {
-				buffer.append(" : ");//$NON-NLS-1$
+				buffer.append(" : ");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				node.getMessage().accept(this);
 			}
-			buffer.append(";\n");//$NON-NLS-1$
+			buffer.append(";\n");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			return false;
 		}
 
 		@Override
 		public boolean visit(Assignment node) {
 			node.getLeftHandSide().accept(this);
-			buffer.append(node.getOperator().toString());
+			buffer.append(node.getOperator().toString()); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			node.getRightHandSide().accept(this);
 			return false;
 		}
 
 		@Override
 		public boolean visit(Block node) {
-			buffer.append("{\n");//$NON-NLS-1$
+			buffer.append("{\n");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			indent++;
-			for (Iterator it = node.statements().iterator(); it.hasNext();) {
+			for (Iterator it = node.statements().iterator(); it.hasNext();) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				Statement s = (Statement) it.next();
 				s.accept(this);
 			}
 			indent--;
 			printIndent();
-			buffer.append("}\n");//$NON-NLS-1$
+			buffer.append("}\n");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			return false;
 		}
 
 		@Override
 		public boolean visit(BlockComment node) {
 			printIndent();
-			buffer.append("/* */");//$NON-NLS-1$
+			buffer.append("/* */");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			return false;
 		}
 
 		@Override
 		public boolean visit(BooleanLiteral node) {
 			if (node.booleanValue() == true) {
-				buffer.append("true");//$NON-NLS-1$
+				buffer.append("true");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			} else {
-				buffer.append("false");//$NON-NLS-1$
+				buffer.append("false");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			}
 			return false;
 		}
@@ -606,79 +606,79 @@ public class RemoteEvaluatorBuilder {
 		@Override
 		public boolean visit(BreakStatement node) {
 			printIndent();
-			buffer.append("break");//$NON-NLS-1$
+			buffer.append("break");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			if (node.getLabel() != null) {
-				buffer.append(" ");//$NON-NLS-1$
+				buffer.append(" ");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				node.getLabel().accept(this);
 			}
-			buffer.append(";\n");//$NON-NLS-1$
+			buffer.append(";\n");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			return false;
 		}
 
 		@Override
 		public boolean visit(CastExpression node) {
-			buffer.append("(");//$NON-NLS-1$
+			buffer.append("(");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			node.getType().accept(this);
-			buffer.append(")");//$NON-NLS-1$
+			buffer.append(")");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			node.getExpression().accept(this);
 			return false;
 		}
 
 		@Override
 		public boolean visit(CatchClause node) {
-			buffer.append("catch (");//$NON-NLS-1$
+			buffer.append("catch (");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			node.getException().accept(this);
-			buffer.append(") ");//$NON-NLS-1$
+			buffer.append(") ");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			node.getBody().accept(this);
 			return false;
 		}
 
 		@Override
 		public boolean visit(CharacterLiteral node) {
-			buffer.append(node.getEscapedValue());
+			buffer.append(node.getEscapedValue()); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			return false;
 		}
 
-		@Override
+		@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		public boolean visit(ClassInstanceCreation node) {
 			if (node.getExpression() != null) {
 				node.getExpression().accept(this);
-				buffer.append(".");//$NON-NLS-1$
+				buffer.append(".");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			}
-			buffer.append("new ");//$NON-NLS-1$
+			buffer.append("new ");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			if (node.getAST().apiLevel() == JLS2) {
 				getName(node).accept(this);
 			}
 			if (node.getAST().apiLevel() >= JLS3) {
 				if (!node.typeArguments().isEmpty()) {
-					buffer.append("<");//$NON-NLS-1$
-					for (Iterator it = node.typeArguments().iterator(); it.hasNext();) {
+					buffer.append("<");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+					for (Iterator it = node.typeArguments().iterator(); it.hasNext();) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 						Type t = (Type) it.next();
 						t.accept(this);
 						if (it.hasNext()) {
-							buffer.append(",");//$NON-NLS-1$
+							buffer.append(",");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 						}
 					}
-					buffer.append(">");//$NON-NLS-1$
+					buffer.append(">");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				}
 				node.getType().accept(this);
 			}
-			buffer.append("(");//$NON-NLS-1$
-			for (Iterator it = node.arguments().iterator(); it.hasNext();) {
+			buffer.append("(");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+			for (Iterator it = node.arguments().iterator(); it.hasNext();) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				Expression e = (Expression) it.next();
 				e.accept(this);
 				if (it.hasNext()) {
-					buffer.append(",");//$NON-NLS-1$
+					buffer.append(",");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				}
 			}
-			buffer.append(")");//$NON-NLS-1$
+			buffer.append(")");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			if (node.getAnonymousClassDeclaration() != null) {
 				node.getAnonymousClassDeclaration().accept(this);
 			}
 			return false;
 		}
 
-		@Override
+		@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		public boolean visit(CompilationUnit node) {
 			if (node.getAST().apiLevel() >= JLS9) {
 				if (node.getModule() != null) {
@@ -688,11 +688,11 @@ public class RemoteEvaluatorBuilder {
 			if (node.getPackage() != null) {
 				node.getPackage().accept(this);
 			}
-			for (Iterator it = node.imports().iterator(); it.hasNext();) {
+			for (Iterator it = node.imports().iterator(); it.hasNext();) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				ImportDeclaration d = (ImportDeclaration) it.next();
 				d.accept(this);
 			}
-			for (Iterator it = node.types().iterator(); it.hasNext();) {
+			for (Iterator it = node.types().iterator(); it.hasNext();) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				AbstractTypeDeclaration d = (AbstractTypeDeclaration) it.next();
 				d.accept(this);
 			}
@@ -702,50 +702,50 @@ public class RemoteEvaluatorBuilder {
 		@Override
 		public boolean visit(ConditionalExpression node) {
 			node.getExpression().accept(this);
-			buffer.append(" ? ");//$NON-NLS-1$
+			buffer.append(" ? ");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			node.getThenExpression().accept(this);
-			buffer.append(" : ");//$NON-NLS-1$
+			buffer.append(" : ");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			node.getElseExpression().accept(this);
 			return false;
 		}
 
-		@Override
+		@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		public boolean visit(ConstructorInvocation node) {
 			printIndent();
 			if (node.getAST().apiLevel() >= JLS3) {
 				if (!node.typeArguments().isEmpty()) {
-					buffer.append("<");//$NON-NLS-1$
-					for (Iterator it = node.typeArguments().iterator(); it.hasNext();) {
+					buffer.append("<");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+					for (Iterator it = node.typeArguments().iterator(); it.hasNext();) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 						Type t = (Type) it.next();
 						t.accept(this);
 						if (it.hasNext()) {
-							buffer.append(",");//$NON-NLS-1$
+							buffer.append(",");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 						}
 					}
-					buffer.append(">");//$NON-NLS-1$
+					buffer.append(">");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				}
 			}
-			buffer.append("this(");//$NON-NLS-1$
-			for (Iterator it = node.arguments().iterator(); it.hasNext();) {
+			buffer.append("this(");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+			for (Iterator it = node.arguments().iterator(); it.hasNext();) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				Expression e = (Expression) it.next();
 				e.accept(this);
 				if (it.hasNext()) {
-					buffer.append(",");//$NON-NLS-1$
+					buffer.append(",");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				}
 			}
-			buffer.append(");\n");//$NON-NLS-1$
+			buffer.append(");\n");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			return false;
 		}
 
 		@Override
 		public boolean visit(ContinueStatement node) {
 			printIndent();
-			buffer.append("continue");//$NON-NLS-1$
+			buffer.append("continue");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			if (node.getLabel() != null) {
-				buffer.append(" ");//$NON-NLS-1$
+				buffer.append(" ");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				node.getLabel().accept(this);
 			}
-			buffer.append(";\n");//$NON-NLS-1$
+			buffer.append(";\n");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			return false;
 		}
 
@@ -753,7 +753,7 @@ public class RemoteEvaluatorBuilder {
 		public boolean visit(CreationReference node) {
 			node.getType().accept(this);
 			visitReferenceTypeArguments(node.typeArguments());
-			buffer.append("new");//$NON-NLS-1$
+			buffer.append("new");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			return false;
 		}
 
@@ -761,44 +761,44 @@ public class RemoteEvaluatorBuilder {
 		public boolean visit(Dimension node) {
 			List annotations = node.annotations();
 			if (annotations.size() > 0) {
-				buffer.append(' ');
+				buffer.append(' '); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			}
 			visitAnnotationsList(annotations);
-			buffer.append("[]"); //$NON-NLS-1$
+			buffer.append("[]"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			return false;
 		}
 
 		@Override
 		public boolean visit(DoStatement node) {
 			printIndent();
-			buffer.append("do ");//$NON-NLS-1$
+			buffer.append("do ");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			node.getBody().accept(this);
-			buffer.append(" while (");//$NON-NLS-1$
+			buffer.append(" while (");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			node.getExpression().accept(this);
-			buffer.append(");\n");//$NON-NLS-1$
+			buffer.append(");\n");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			return false;
 		}
 
 		@Override
 		public boolean visit(EmptyStatement node) {
 			printIndent();
-			buffer.append(";\n");//$NON-NLS-1$
+			buffer.append(";\n");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			return false;
 		}
 
 		@Override
 		public boolean visit(EnhancedForStatement node) {
 			printIndent();
-			buffer.append("for (");//$NON-NLS-1$
+			buffer.append("for (");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			node.getParameter().accept(this);
-			buffer.append(" : ");//$NON-NLS-1$
+			buffer.append(" : ");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			node.getExpression().accept(this);
-			buffer.append(") ");//$NON-NLS-1$
+			buffer.append(") ");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			node.getBody().accept(this);
 			return false;
 		}
 
-		@Override
+		@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		public boolean visit(EnumConstantDeclaration node) {
 			if (node.getJavadoc() != null) {
 				node.getJavadoc().accept(this);
@@ -807,15 +807,15 @@ public class RemoteEvaluatorBuilder {
 			printModifiers(node.modifiers());
 			node.getName().accept(this);
 			if (!node.arguments().isEmpty()) {
-				buffer.append("(");//$NON-NLS-1$
-				for (Iterator it = node.arguments().iterator(); it.hasNext();) {
+				buffer.append("(");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+				for (Iterator it = node.arguments().iterator(); it.hasNext();) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 					Expression e = (Expression) it.next();
 					e.accept(this);
 					if (it.hasNext()) {
-						buffer.append(",");//$NON-NLS-1$
+						buffer.append(",");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 					}
 				}
-				buffer.append(")");//$NON-NLS-1$
+				buffer.append(")");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			}
 			if (node.getAnonymousClassDeclaration() != null) {
 				node.getAnonymousClassDeclaration().accept(this);
@@ -823,46 +823,46 @@ public class RemoteEvaluatorBuilder {
 			return false;
 		}
 
-		@Override
+		@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		public boolean visit(EnumDeclaration node) {
 			if (node.getJavadoc() != null) {
 				node.getJavadoc().accept(this);
 			}
 			printIndent();
 			printModifiers(node.modifiers());
-			buffer.append("enum ");//$NON-NLS-1$
+			buffer.append("enum ");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			node.getName().accept(this);
-			buffer.append(" ");//$NON-NLS-1$
+			buffer.append(" ");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			if (!node.superInterfaceTypes().isEmpty()) {
-				buffer.append("implements ");//$NON-NLS-1$
-				for (Iterator it = node.superInterfaceTypes().iterator(); it.hasNext();) {
+				buffer.append("implements ");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+				for (Iterator it = node.superInterfaceTypes().iterator(); it.hasNext();) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 					Type t = (Type) it.next();
 					t.accept(this);
 					if (it.hasNext()) {
-						buffer.append(", ");//$NON-NLS-1$
+						buffer.append(", ");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 					}
 				}
-				buffer.append(" ");//$NON-NLS-1$
+				buffer.append(" ");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			}
-			buffer.append("{");//$NON-NLS-1$
-			for (Iterator it = node.enumConstants().iterator(); it.hasNext();) {
+			buffer.append("{");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+			for (Iterator it = node.enumConstants().iterator(); it.hasNext();) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				EnumConstantDeclaration d = (EnumConstantDeclaration) it.next();
 				d.accept(this);
 				// enum constant declarations do not include punctuation
 				if (it.hasNext()) {
 					// enum constant declarations are separated by commas
-					buffer.append(", ");//$NON-NLS-1$
+					buffer.append(", ");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				}
 			}
 			if (!node.bodyDeclarations().isEmpty()) {
-				buffer.append("; ");//$NON-NLS-1$
-				for (Iterator it = node.bodyDeclarations().iterator(); it.hasNext();) {
+				buffer.append("; ");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+				for (Iterator it = node.bodyDeclarations().iterator(); it.hasNext();) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 					BodyDeclaration d = (BodyDeclaration) it.next();
 					d.accept(this);
 					// other body declarations include trailing punctuation
 				}
 			}
-			buffer.append("}\n");//$NON-NLS-1$
+			buffer.append("}\n");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			return false;
 		}
 
@@ -883,7 +883,7 @@ public class RemoteEvaluatorBuilder {
 		public boolean visit(ExpressionStatement node) {
 			printIndent();
 			node.getExpression().accept(this);
-			buffer.append(";\n");//$NON-NLS-1$
+			buffer.append(";\n");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			return false;
 		}
 
@@ -893,17 +893,17 @@ public class RemoteEvaluatorBuilder {
 			ITypeBinding instanceType = node.getExpression().resolveTypeBinding();
 			if (instanceType.isAssignmentCompatible(RemoteEvaluatorBuilder.this.enclosingClass)) {
 				node.getExpression().accept(this);
-				buffer.append(".");//$NON-NLS-1$ */
-				buffer.append(node.getName().getIdentifier());
+				buffer.append(".");//$NON-NLS-1$ */ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+				buffer.append(node.getName().getIdentifier()); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				return false;
 			}
 			node.getExpression().accept(this);
-			buffer.append(".");//$NON-NLS-1$
+			buffer.append(".");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			node.getName().accept(this);
 			return false;
 		}
 
-		@Override
+		@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		public boolean visit(FieldDeclaration node) {
 			if (node.getJavadoc() != null) {
 				node.getJavadoc().accept(this);
@@ -916,42 +916,42 @@ public class RemoteEvaluatorBuilder {
 				printModifiers(node.modifiers());
 			}
 			node.getType().accept(this);
-			buffer.append(" ");//$NON-NLS-1$
-			for (Iterator it = node.fragments().iterator(); it.hasNext();) {
+			buffer.append(" ");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+			for (Iterator it = node.fragments().iterator(); it.hasNext();) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				VariableDeclarationFragment f = (VariableDeclarationFragment) it.next();
 				f.accept(this);
 				if (it.hasNext()) {
-					buffer.append(", ");//$NON-NLS-1$
+					buffer.append(", ");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				}
 			}
-			buffer.append(";\n");//$NON-NLS-1$
+			buffer.append(";\n");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			return false;
 		}
 
-		@Override
+		@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		public boolean visit(ForStatement node) {
 			printIndent();
-			buffer.append("for (");//$NON-NLS-1$
-			for (Iterator it = node.initializers().iterator(); it.hasNext();) {
+			buffer.append("for (");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+			for (Iterator it = node.initializers().iterator(); it.hasNext();) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				Expression e = (Expression) it.next();
 				e.accept(this);
 				if (it.hasNext()) {
-					buffer.append(", ");//$NON-NLS-1$
+					buffer.append(", ");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				}
 			}
-			buffer.append("; ");//$NON-NLS-1$
+			buffer.append("; ");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			if (node.getExpression() != null) {
 				node.getExpression().accept(this);
 			}
-			buffer.append("; ");//$NON-NLS-1$
-			for (Iterator it = node.updaters().iterator(); it.hasNext();) {
+			buffer.append("; ");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+			for (Iterator it = node.updaters().iterator(); it.hasNext();) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				Expression e = (Expression) it.next();
 				e.accept(this);
 				if (it.hasNext()) {
-					buffer.append(", ");//$NON-NLS-1$
+					buffer.append(", ");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				}
 			}
-			buffer.append(") ");//$NON-NLS-1$
+			buffer.append(") ");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			node.getBody().accept(this);
 			return false;
 		}
@@ -959,12 +959,12 @@ public class RemoteEvaluatorBuilder {
 		@Override
 		public boolean visit(IfStatement node) {
 			printIndent();
-			buffer.append("if (");//$NON-NLS-1$
+			buffer.append("if (");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			node.getExpression().accept(this);
-			buffer.append(") ");//$NON-NLS-1$
+			buffer.append(") ");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			node.getThenStatement().accept(this);
 			if (node.getElseStatement() != null) {
-				buffer.append(" else ");//$NON-NLS-1$
+				buffer.append(" else ");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				node.getElseStatement().accept(this);
 			}
 			return false;
@@ -973,32 +973,32 @@ public class RemoteEvaluatorBuilder {
 		@Override
 		public boolean visit(ImportDeclaration node) {
 			printIndent();
-			buffer.append("import ");//$NON-NLS-1$
+			buffer.append("import ");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			if (node.getAST().apiLevel() >= JLS3) {
 				if (node.isStatic()) {
-					buffer.append("static ");//$NON-NLS-1$
+					buffer.append("static ");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				}
 			}
 			node.getName().accept(this);
 			if (node.isOnDemand()) {
-				buffer.append(".*");//$NON-NLS-1$
+				buffer.append(".*");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			}
-			buffer.append(";\n");//$NON-NLS-1$
+			buffer.append(";\n");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			return false;
 		}
 
 		@Override
 		public boolean visit(InfixExpression node) {
 			node.getLeftOperand().accept(this);
-			buffer.append(' '); // for cases like x= i - -1; or x= i++ + ++i;
-			buffer.append(node.getOperator().toString());
-			buffer.append(' ');
+			buffer.append(' '); // for cases like x= i - -1; or x= i++ + ++i; //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+			buffer.append(node.getOperator().toString()); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+			buffer.append(' '); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			node.getRightOperand().accept(this);
 			final List extendedOperands = node.extendedOperands();
 			if (extendedOperands.size() != 0) {
-				buffer.append(' ');
-				for (Iterator it = extendedOperands.iterator(); it.hasNext();) {
-					buffer.append(node.getOperator().toString()).append(' ');
+				buffer.append(' '); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+				for (Iterator it = extendedOperands.iterator(); it.hasNext();) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
+					buffer.append(node.getOperator().toString()).append(' '); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 					Expression e = (Expression) it.next();
 					e.accept(this);
 				}
@@ -1024,18 +1024,18 @@ public class RemoteEvaluatorBuilder {
 		@Override
 		public boolean visit(InstanceofExpression node) {
 			node.getLeftOperand().accept(this);
-			buffer.append(" instanceof ");//$NON-NLS-1$
+			buffer.append(" instanceof ");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			node.getRightOperand().accept(this);
 			return false;
 		}
 
 		@Override
 		public boolean visit(IntersectionType node) {
-			for (Iterator it = node.types().iterator(); it.hasNext();) {
+			for (Iterator it = node.types().iterator(); it.hasNext();) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				Type t = (Type) it.next();
 				t.accept(this);
 				if (it.hasNext()) {
-					buffer.append(" & "); //$NON-NLS-1$
+					buffer.append(" & "); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				}
 			}
 			return false;
@@ -1044,12 +1044,12 @@ public class RemoteEvaluatorBuilder {
 		@Override
 		public boolean visit(Javadoc node) {
 			printIndent();
-			buffer.append("/** ");//$NON-NLS-1$
-			for (Iterator it = node.tags().iterator(); it.hasNext();) {
+			buffer.append("/** ");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+			for (Iterator it = node.tags().iterator(); it.hasNext();) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				ASTNode e = (ASTNode) it.next();
 				e.accept(this);
 			}
-			buffer.append("\n */\n");//$NON-NLS-1$
+			buffer.append("\n */\n");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			return false;
 		}
 
@@ -1057,41 +1057,41 @@ public class RemoteEvaluatorBuilder {
 		public boolean visit(LabeledStatement node) {
 			printIndent();
 			node.getLabel().accept(this);
-			buffer.append(": ");//$NON-NLS-1$
+			buffer.append(": ");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			node.getBody().accept(this);
 			return false;
 		}
 
-		@Override
+		@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		public boolean visit(LambdaExpression node) {
 			boolean hasParentheses = node.hasParentheses();
 			if (hasParentheses) {
-				buffer.append('(');
+				buffer.append('('); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			}
-			for (Iterator it = node.parameters().iterator(); it.hasNext();) {
+			for (Iterator it = node.parameters().iterator(); it.hasNext();) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				VariableDeclaration v = (VariableDeclaration) it.next();
 				v.accept(this);
 				if (it.hasNext()) {
-					buffer.append(",");//$NON-NLS-1$
+					buffer.append(",");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				}
 			}
 			if (hasParentheses) {
-				buffer.append(')');
+				buffer.append(')'); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			}
-			buffer.append(" -> "); //$NON-NLS-1$
+			buffer.append(" -> "); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			node.getBody().accept(this);
 			return false;
 		}
 
 		@Override
 		public boolean visit(LineComment node) {
-			buffer.append("//\n");//$NON-NLS-1$
+			buffer.append("//\n");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			return false;
 		}
 
 		@Override
 		public boolean visit(MarkerAnnotation node) {
-			buffer.append("@");//$NON-NLS-1$
+			buffer.append("@");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			node.getTypeName().accept(this);
 			return false;
 		}
@@ -1101,7 +1101,7 @@ public class RemoteEvaluatorBuilder {
 			if (node.getQualifier() != null) {
 				node.getQualifier().accept(this);
 			}
-			buffer.append("#");//$NON-NLS-1$
+			buffer.append("#");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			node.getName().accept(this);
 			return false;
 		}
@@ -1109,12 +1109,12 @@ public class RemoteEvaluatorBuilder {
 		@Override
 		public boolean visit(MemberValuePair node) {
 			node.getName().accept(this);
-			buffer.append("=");//$NON-NLS-1$
+			buffer.append("=");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			node.getValue().accept(this);
 			return false;
 		}
 
-		@Override
+		@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		public boolean visit(MethodDeclaration node) {
 			if (node.getJavadoc() != null) {
 				node.getJavadoc().accept(this);
@@ -1126,15 +1126,15 @@ public class RemoteEvaluatorBuilder {
 			if (node.getAST().apiLevel() >= JLS3) {
 				printModifiers(node.modifiers());
 				if (!node.typeParameters().isEmpty()) {
-					buffer.append("<");//$NON-NLS-1$
-					for (Iterator it = node.typeParameters().iterator(); it.hasNext();) {
+					buffer.append("<");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+					for (Iterator it = node.typeParameters().iterator(); it.hasNext();) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 						TypeParameter t = (TypeParameter) it.next();
 						t.accept(this);
 						if (it.hasNext()) {
-							buffer.append(",");//$NON-NLS-1$
+							buffer.append(",");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 						}
 					}
-					buffer.append(">");//$NON-NLS-1$
+					buffer.append(">");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				}
 			}
 			if (!node.isConstructor()) {
@@ -1145,116 +1145,116 @@ public class RemoteEvaluatorBuilder {
 						node.getReturnType2().accept(this);
 					} else {
 						// methods really ought to have a return type
-						buffer.append("void");//$NON-NLS-1$
+						buffer.append("void");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 					}
 				}
-				buffer.append(" ");//$NON-NLS-1$
+				buffer.append(" ");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			}
 			node.getName().accept(this);
-			buffer.append("(");//$NON-NLS-1$
+			buffer.append("(");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			if (node.getAST().apiLevel() >= JLS8) {
 				Type receiverType = node.getReceiverType();
 				if (receiverType != null) {
 					receiverType.accept(this);
-					buffer.append(' ');
+					buffer.append(' '); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 					SimpleName qualifier = node.getReceiverQualifier();
 					if (qualifier != null) {
 						qualifier.accept(this);
-						buffer.append('.');
+						buffer.append('.'); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 					}
-					buffer.append("this"); //$NON-NLS-1$
+					buffer.append("this"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 					if (node.parameters().size() > 0) {
-						buffer.append(',');
+						buffer.append(','); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 					}
 				}
 			}
-			for (Iterator it = node.parameters().iterator(); it.hasNext();) {
+			for (Iterator it = node.parameters().iterator(); it.hasNext();) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				SingleVariableDeclaration v = (SingleVariableDeclaration) it.next();
 				v.accept(this);
 				if (it.hasNext()) {
-					buffer.append(",");//$NON-NLS-1$
+					buffer.append(",");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				}
 			}
-			buffer.append(")");//$NON-NLS-1$
+			buffer.append(")");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			int size = node.getExtraDimensions();
 			if (node.getAST().apiLevel() >= JLS8) {
 				List dimensions = node.extraDimensions();
-				for (int i = 0; i < size; i++) {
+				for (int i = 0; i < size; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 					visit((Dimension) dimensions.get(i));
 				}
 			} else {
-				for (int i = 0; i < size; i++) {
-					buffer.append("[]"); //$NON-NLS-1$
+				for (int i = 0; i < size; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
+					buffer.append("[]"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				}
 			}
 			if (node.getAST().apiLevel() < JLS8) {
 				if (!thrownExceptions(node).isEmpty()) {
-					buffer.append(" throws ");//$NON-NLS-1$
-					for (Iterator it = thrownExceptions(node).iterator(); it.hasNext();) {
+					buffer.append(" throws ");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+					for (Iterator it = thrownExceptions(node).iterator(); it.hasNext();) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 						Name n = (Name) it.next();
 						n.accept(this);
 						if (it.hasNext()) {
-							buffer.append(", ");//$NON-NLS-1$
+							buffer.append(", ");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 						}
 					}
-					buffer.append(" ");//$NON-NLS-1$
+					buffer.append(" ");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				}
 			} else {
 				if (!node.thrownExceptionTypes().isEmpty()) {
-					buffer.append(" throws ");//$NON-NLS-1$
-					for (Iterator it = node.thrownExceptionTypes().iterator(); it.hasNext();) {
+					buffer.append(" throws ");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+					for (Iterator it = node.thrownExceptionTypes().iterator(); it.hasNext();) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 						Type n = (Type) it.next();
 						n.accept(this);
 						if (it.hasNext()) {
-							buffer.append(", ");//$NON-NLS-1$
+							buffer.append(", ");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 						}
 					}
-					buffer.append(" ");//$NON-NLS-1$
+					buffer.append(" ");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				}
 			}
 			if (node.getBody() == null) {
-				buffer.append(";\n");//$NON-NLS-1$
+				buffer.append(";\n");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			} else {
 				node.getBody().accept(this);
 			}
 			return false;
 		}
 
-		@Override
+		@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		public boolean visit(MethodInvocation node) {
 			if (node.getExpression() != null) {
 				node.getExpression().accept(this);
-				buffer.append(".");//$NON-NLS-1$
+				buffer.append(".");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			} else {
-				String newVarName = new String(LOCAL_VAR_PREFIX) + allocateNewVariable(node.resolveMethodBinding().getDeclaringClass(), "this"); //$NON-NLS-1$
+				String newVarName = new String(LOCAL_VAR_PREFIX) + allocateNewVariable(node.resolveMethodBinding().getDeclaringClass(), "this"); //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 				binder.bindThis(RemoteEvaluatorBuilder.this.enclosingClass, newVarName);
 				// buffer.append("this."); //$NON-NLS-1$
-				buffer.append(newVarName);
-				buffer.append(".");//$NON-NLS-1$
+				buffer.append(newVarName); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+				buffer.append(".");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			}
 			if (node.getAST().apiLevel() >= JLS3) {
 				if (!node.typeArguments().isEmpty()) {
-					buffer.append("<");//$NON-NLS-1$
-					for (Iterator it = node.typeArguments().iterator(); it.hasNext();) {
+					buffer.append("<");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+					for (Iterator it = node.typeArguments().iterator(); it.hasNext();) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 						Type t = (Type) it.next();
 						t.accept(this);
 						if (it.hasNext()) {
-							buffer.append(",");//$NON-NLS-1$
+							buffer.append(",");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 						}
 					}
-					buffer.append(">");//$NON-NLS-1$
+					buffer.append(">");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				}
 			}
 			node.getName().accept(this);
-			buffer.append("(");//$NON-NLS-1$
-			for (Iterator it = node.arguments().iterator(); it.hasNext();) {
+			buffer.append("(");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+			for (Iterator it = node.arguments().iterator(); it.hasNext();) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				Expression e = (Expression) it.next();
 				e.accept(this);
 				if (it.hasNext()) {
-					buffer.append(",");//$NON-NLS-1$
+					buffer.append(",");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				}
 			}
-			buffer.append(")");//$NON-NLS-1$
+			buffer.append(")");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			return false;
 		}
 
@@ -1263,17 +1263,17 @@ public class RemoteEvaluatorBuilder {
 			if (node.getQualifier() != null) {
 				node.getQualifier().accept(this);
 			}
-			buffer.append("#");//$NON-NLS-1$
+			buffer.append("#");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			node.getName().accept(this);
-			buffer.append("(");//$NON-NLS-1$
-			for (Iterator it = node.parameters().iterator(); it.hasNext();) {
+			buffer.append("(");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+			for (Iterator it = node.parameters().iterator(); it.hasNext();) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				MethodRefParameter e = (MethodRefParameter) it.next();
 				e.accept(this);
 				if (it.hasNext()) {
-					buffer.append(",");//$NON-NLS-1$
+					buffer.append(",");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				}
 			}
-			buffer.append(")");//$NON-NLS-1$
+			buffer.append(")");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			return false;
 		}
 
@@ -1282,11 +1282,11 @@ public class RemoteEvaluatorBuilder {
 			node.getType().accept(this);
 			if (node.getAST().apiLevel() >= JLS3) {
 				if (node.isVarargs()) {
-					buffer.append("...");//$NON-NLS-1$
+					buffer.append("...");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				}
 			}
 			if (node.getName() != null) {
-				buffer.append(" ");//$NON-NLS-1$
+				buffer.append(" ");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				node.getName().accept(this);
 			}
 			return false;
@@ -1294,29 +1294,29 @@ public class RemoteEvaluatorBuilder {
 
 		@Override
 		public boolean visit(Modifier node) {
-			buffer.append(node.getKeyword().toString());
+			buffer.append(node.getKeyword().toString()); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			return false;
 		}
 
-		@Override
+		@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		public boolean visit(ModuleDeclaration node) {
 			if (node.getJavadoc() != null) {
 				node.getJavadoc().accept(this);
 			}
 			printModifiers(node.annotations());
 			if (node.isOpen()) {
-				buffer.append("open "); //$NON-NLS-1$
+				buffer.append("open "); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			}
-			buffer.append("module"); //$NON-NLS-1$
-			buffer.append(" "); //$NON-NLS-1$
+			buffer.append("module"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+			buffer.append(" "); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			node.getName().accept(this);
-			buffer.append(" {\n"); //$NON-NLS-1$
+			buffer.append(" {\n"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			indent++;
-			for (ModuleDirective stmt : (List<ModuleDirective>) node.moduleStatements()) {
+			for (ModuleDirective stmt : (List<ModuleDirective>) node.moduleStatements()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				stmt.accept(this);
 			}
 			indent--;
-			buffer.append("}"); //$NON-NLS-1$
+			buffer.append("}"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			return false;
 		}
 
@@ -1327,24 +1327,24 @@ public class RemoteEvaluatorBuilder {
 		 * @since 3.14
 		 */
 		public boolean visit(ModuleModifier node) {
-			buffer.append(node.getKeyword().toString());
+			buffer.append(node.getKeyword().toString()); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			return false;
 		}
 
 		private boolean visit(ModulePackageAccess node, String keyword) {
 			printIndent();
-			buffer.append(keyword);
-			buffer.append(" ");//$NON-NLS-1$
+			buffer.append(keyword); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+			buffer.append(" ");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			node.getName().accept(this);
 			printTypes(node.modules(), "to"); //$NON-NLS-1$
-			buffer.append(";\n");//$NON-NLS-1$
+			buffer.append(";\n");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			return false;
 		}
 
 		@Override
 		public boolean visit(NameQualifiedType node) {
 			node.getQualifier().accept(this);
-			buffer.append('.');
+			buffer.append('.'); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			visitTypeAnnotations(node);
 			node.getName().accept(this);
 			return false;
@@ -1352,29 +1352,29 @@ public class RemoteEvaluatorBuilder {
 
 		@Override
 		public boolean visit(NormalAnnotation node) {
-			buffer.append("@");//$NON-NLS-1$
+			buffer.append("@");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			node.getTypeName().accept(this);
-			buffer.append("(");//$NON-NLS-1$
-			for (Iterator it = node.values().iterator(); it.hasNext();) {
+			buffer.append("(");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+			for (Iterator it = node.values().iterator(); it.hasNext();) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				MemberValuePair p = (MemberValuePair) it.next();
 				p.accept(this);
 				if (it.hasNext()) {
-					buffer.append(",");//$NON-NLS-1$
+					buffer.append(",");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				}
 			}
-			buffer.append(")");//$NON-NLS-1$
+			buffer.append(")");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			return false;
 		}
 
 		@Override
 		public boolean visit(NullLiteral node) {
-			buffer.append("null");//$NON-NLS-1$
+			buffer.append("null");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			return false;
 		}
 
 		@Override
 		public boolean visit(NumberLiteral node) {
-			buffer.append(node.getToken());
+			buffer.append(node.getToken()); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			return false;
 		}
 
@@ -1389,52 +1389,52 @@ public class RemoteEvaluatorBuilder {
 				if (node.getJavadoc() != null) {
 					node.getJavadoc().accept(this);
 				}
-				for (Iterator it = node.annotations().iterator(); it.hasNext();) {
+				for (Iterator it = node.annotations().iterator(); it.hasNext();) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 					Annotation p = (Annotation) it.next();
 					p.accept(this);
-					buffer.append(" ");//$NON-NLS-1$
+					buffer.append(" ");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				}
 			}
 			printIndent();
-			buffer.append("package ");//$NON-NLS-1$
+			buffer.append("package ");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			node.getName().accept(this);
-			buffer.append(";\n");//$NON-NLS-1$
+			buffer.append(";\n");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			return false;
 		}
 
 		@Override
 		public boolean visit(ParameterizedType node) {
 			node.getType().accept(this);
-			buffer.append("<");//$NON-NLS-1$
-			for (Iterator it = node.typeArguments().iterator(); it.hasNext();) {
+			buffer.append("<");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+			for (Iterator it = node.typeArguments().iterator(); it.hasNext();) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				Type t = (Type) it.next();
 				t.accept(this);
 				if (it.hasNext()) {
-					buffer.append(",");//$NON-NLS-1$
+					buffer.append(",");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				}
 			}
-			buffer.append(">");//$NON-NLS-1$
+			buffer.append(">");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			return false;
 		}
 
 		@Override
 		public boolean visit(ParenthesizedExpression node) {
-			buffer.append("(");//$NON-NLS-1$
+			buffer.append("(");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			node.getExpression().accept(this);
-			buffer.append(")");//$NON-NLS-1$
+			buffer.append(")");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			return false;
 		}
 
 		@Override
 		public boolean visit(PostfixExpression node) {
 			node.getOperand().accept(this);
-			buffer.append(node.getOperator().toString());
+			buffer.append(node.getOperator().toString()); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			return false;
 		}
 
 		@Override
 		public boolean visit(PrefixExpression node) {
-			buffer.append(node.getOperator().toString());
+			buffer.append(node.getOperator().toString()); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			node.getOperand().accept(this);
 			return false;
 		}
@@ -1442,25 +1442,25 @@ public class RemoteEvaluatorBuilder {
 		@Override
 		public boolean visit(PrimitiveType node) {
 			visitTypeAnnotations(node);
-			buffer.append(node.getPrimitiveTypeCode().toString());
+			buffer.append(node.getPrimitiveTypeCode().toString()); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			return false;
 		}
 
 		@Override
 		public boolean visit(ProvidesDirective node) {
 			printIndent();
-			buffer.append("provides");//$NON-NLS-1$
-			buffer.append(" ");//$NON-NLS-1$
+			buffer.append("provides");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+			buffer.append(" ");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			node.getName().accept(this);
 			printTypes(node.implementations(), "with"); //$NON-NLS-1$
-			buffer.append(";\n");//$NON-NLS-1$
+			buffer.append(";\n");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			return false;
 		}
 
 		@Override
 		public boolean visit(QualifiedName node) {
 			node.getQualifier().accept(this);
-			buffer.append(".");//$NON-NLS-1$
+			buffer.append(".");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			node.getName().accept(this);
 			return false;
 		}
@@ -1468,7 +1468,7 @@ public class RemoteEvaluatorBuilder {
 		@Override
 		public boolean visit(QualifiedType node) {
 			node.getQualifier().accept(this);
-			buffer.append(".");//$NON-NLS-1$
+			buffer.append(".");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			visitTypeAnnotations(node);
 			node.getName().accept(this);
 			return false;
@@ -1477,23 +1477,23 @@ public class RemoteEvaluatorBuilder {
 		@Override
 		public boolean visit(RequiresDirective node) {
 			printIndent();
-			buffer.append("requires");//$NON-NLS-1$
-			buffer.append(" ");//$NON-NLS-1$
+			buffer.append("requires");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+			buffer.append(" ");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			printModifiers(node.modifiers());
 			node.getName().accept(this);
-			buffer.append(";\n");//$NON-NLS-1$
+			buffer.append(";\n");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			return false;
 		}
 
 		@Override
 		public boolean visit(ReturnStatement node) {
 			printIndent();
-			buffer.append("return");//$NON-NLS-1$
+			buffer.append("return");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			if (node.getExpression() != null) {
-				buffer.append(" ");//$NON-NLS-1$
+				buffer.append(" ");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				node.getExpression().accept(this);
 			}
-			buffer.append(";\n");//$NON-NLS-1$
+			buffer.append(";\n");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			return false;
 		}
 
@@ -1503,7 +1503,7 @@ public class RemoteEvaluatorBuilder {
 			}
 			return true;
 		}
-		@Override
+		@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		public boolean visit(SimpleName node) {
 			IBinding binding = node.resolveBinding();
 			// when having code like arr.length the length is identified as a field variable. But since the arr is
@@ -1516,11 +1516,11 @@ public class RemoteEvaluatorBuilder {
 						if (Modifier.isStatic(vb.getModifiers())) {
 							if (needToQualify(node)) {
 								ITypeBinding declaringClass = vb.getDeclaringClass();
-								buffer.append(declaringClass.getQualifiedName());
-								buffer.append("."); //$NON-NLS-1$
+								buffer.append(declaringClass.getQualifiedName()); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+								buffer.append("."); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 							}
 
-							buffer.append(node.getIdentifier());
+							buffer.append(node.getIdentifier()); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 
 						} else {
 							// TODO: Fix this to use same method as visit(FieldAccess)
@@ -1528,21 +1528,21 @@ public class RemoteEvaluatorBuilder {
 							String newVarName = allocateNewVariable(declaringClass, LOCAL_VAR_PREFIX.concat("this")); //$NON-NLS-1$
 							binder.bindThis(declaringClass, newVarName);
 							// buffer.append("this."); //$NON-NLS-1$
-							buffer.append(newVarName);
-							buffer.append("."); //$NON-NLS-1$
-							buffer.append(node.getIdentifier());
+							buffer.append(newVarName); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+							buffer.append("."); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+							buffer.append(node.getIdentifier()); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 						}
 					} else {
-						String newVarName = new String(LOCAL_VAR_PREFIX) + allocateNewVariable(vb.getType(), node.getIdentifier());
+						String newVarName = new String(LOCAL_VAR_PREFIX) + allocateNewVariable(vb.getType(), node.getIdentifier()); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 						binder.bind((IVariableBinding) binding, newVarName);
 						// buffer.append("this."); //$NON-NLS-1$
-						buffer.append(newVarName);
+						buffer.append(newVarName); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 					}
 					return false;
 				}
 			}
 
-			buffer.append(node.getIdentifier());
+			buffer.append(node.getIdentifier()); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			return false;
 		}
 
@@ -1555,15 +1555,15 @@ public class RemoteEvaluatorBuilder {
 
 		@Override
 		public boolean visit(SingleMemberAnnotation node) {
-			buffer.append("@");//$NON-NLS-1$
+			buffer.append("@");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			node.getTypeName().accept(this);
-			buffer.append("(");//$NON-NLS-1$
+			buffer.append("(");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			node.getValue().accept(this);
-			buffer.append(")");//$NON-NLS-1$
+			buffer.append(")");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			return false;
 		}
 
-		@Override
+		@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		public boolean visit(SingleVariableDeclaration node) {
 			printIndent();
 			if (node.getAST().apiLevel() == JLS2) {
@@ -1578,28 +1578,28 @@ public class RemoteEvaluatorBuilder {
 					if (node.getAST().apiLevel() >= JLS8) {
 						List annotations = node.varargsAnnotations();
 						if (annotations.size() > 0) {
-							buffer.append(' ');
+							buffer.append(' '); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 						}
 						visitAnnotationsList(annotations);
 					}
-					buffer.append("...");//$NON-NLS-1$
+					buffer.append("...");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				}
 			}
-			buffer.append(" ");//$NON-NLS-1$
+			buffer.append(" ");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			node.getName().accept(this);
 			int size = node.getExtraDimensions();
 			if (node.getAST().apiLevel() >= JLS8) {
 				List dimensions = node.extraDimensions();
-				for (int i = 0; i < size; i++) {
+				for (int i = 0; i < size; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 					visit((Dimension) dimensions.get(i));
 				}
 			} else {
-				for (int i = 0; i < size; i++) {
-					buffer.append("[]"); //$NON-NLS-1$
+				for (int i = 0; i < size; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
+					buffer.append("[]"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				}
 			}
 			if (node.getInitializer() != null) {
-				buffer.append("=");//$NON-NLS-1$
+				buffer.append("=");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				node.getInitializer().accept(this);
 			}
 			return false;
@@ -1607,39 +1607,39 @@ public class RemoteEvaluatorBuilder {
 
 		@Override
 		public boolean visit(StringLiteral node) {
-			buffer.append(node.getEscapedValue());
+			buffer.append(node.getEscapedValue()); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			return false;
 		}
 
-		@Override
+		@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		public boolean visit(SuperConstructorInvocation node) {
 			printIndent();
 			if (node.getExpression() != null) {
 				node.getExpression().accept(this);
-				buffer.append(".");//$NON-NLS-1$
+				buffer.append(".");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			}
 			if (node.getAST().apiLevel() >= JLS3) {
 				if (!node.typeArguments().isEmpty()) {
-					buffer.append("<");//$NON-NLS-1$
-					for (Iterator it = node.typeArguments().iterator(); it.hasNext();) {
+					buffer.append("<");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+					for (Iterator it = node.typeArguments().iterator(); it.hasNext();) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 						Type t = (Type) it.next();
 						t.accept(this);
 						if (it.hasNext()) {
-							buffer.append(",");//$NON-NLS-1$
+							buffer.append(",");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 						}
 					}
-					buffer.append(">");//$NON-NLS-1$
+					buffer.append(">");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				}
 			}
-			buffer.append("super(");//$NON-NLS-1$
-			for (Iterator it = node.arguments().iterator(); it.hasNext();) {
+			buffer.append("super(");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+			for (Iterator it = node.arguments().iterator(); it.hasNext();) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				Expression e = (Expression) it.next();
 				e.accept(this);
 				if (it.hasNext()) {
-					buffer.append(",");//$NON-NLS-1$
+					buffer.append(",");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				}
 			}
-			buffer.append(");\n");//$NON-NLS-1$
+			buffer.append(");\n");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			return false;
 		}
 
@@ -1647,43 +1647,43 @@ public class RemoteEvaluatorBuilder {
 		public boolean visit(SuperFieldAccess node) {
 			if (node.getQualifier() != null) {
 				node.getQualifier().accept(this);
-				buffer.append(".");//$NON-NLS-1$
+				buffer.append(".");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			}
-			buffer.append("super.");//$NON-NLS-1$
+			buffer.append("super.");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			node.getName().accept(this);
 			return false;
 		}
 
-		@Override
+		@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		public boolean visit(SuperMethodInvocation node) {
 			if (node.getQualifier() != null) {
 				node.getQualifier().accept(this);
-				buffer.append(".");//$NON-NLS-1$
+				buffer.append(".");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			}
-			buffer.append("super.");//$NON-NLS-1$
+			buffer.append("super.");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			if (node.getAST().apiLevel() >= JLS3) {
 				if (!node.typeArguments().isEmpty()) {
-					buffer.append("<");//$NON-NLS-1$
-					for (Iterator it = node.typeArguments().iterator(); it.hasNext();) {
+					buffer.append("<");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+					for (Iterator it = node.typeArguments().iterator(); it.hasNext();) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 						Type t = (Type) it.next();
 						t.accept(this);
 						if (it.hasNext()) {
-							buffer.append(",");//$NON-NLS-1$
+							buffer.append(",");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 						}
 					}
-					buffer.append(">");//$NON-NLS-1$
+					buffer.append(">");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				}
 			}
 			node.getName().accept(this);
-			buffer.append("(");//$NON-NLS-1$
-			for (Iterator it = node.arguments().iterator(); it.hasNext();) {
+			buffer.append("(");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+			for (Iterator it = node.arguments().iterator(); it.hasNext();) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				Expression e = (Expression) it.next();
 				e.accept(this);
 				if (it.hasNext()) {
-					buffer.append(",");//$NON-NLS-1$
+					buffer.append(",");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				}
 			}
-			buffer.append(")");//$NON-NLS-1$
+			buffer.append(")");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			return false;
 		}
 
@@ -1696,36 +1696,36 @@ public class RemoteEvaluatorBuilder {
 		public boolean visit(SuperMethodReference node) {
 			if (node.getQualifier() != null) {
 				node.getQualifier().accept(this);
-				buffer.append('.');
+				buffer.append('.'); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			}
-			buffer.append("super");//$NON-NLS-1$
+			buffer.append("super");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			visitReferenceTypeArguments(node.typeArguments());
 			node.getName().accept(this);
 			return false;
 		}
 
-		@Override
+		@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		public boolean visit(SwitchCase node) {
 			if ((node.getAST().isPreviewEnabled())) {
 				if (node.isDefault()) {
-					buffer.append("default");//$NON-NLS-1$
-					buffer.append(node.isSwitchLabeledRule() ? " ->" : ":");//$NON-NLS-1$ //$NON-NLS-2$
+					buffer.append("default");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+					buffer.append(node.isSwitchLabeledRule() ? " ->" : ":");//$NON-NLS-1$ //$NON-NLS-2$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				} else {
-					buffer.append("case ");//$NON-NLS-1$
-					for (Iterator it = node.expressions().iterator(); it.hasNext();) {
+					buffer.append("case ");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+					for (Iterator it = node.expressions().iterator(); it.hasNext();) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 						Expression t = (Expression) it.next();
 						t.accept(this);
-						buffer.append(it.hasNext() ? ", " : //$NON-NLS-1$
+						buffer.append(it.hasNext() ? ", " : //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 								node.isSwitchLabeledRule() ? " ->" : ":");//$NON-NLS-1$ //$NON-NLS-2$
 					}
 				}
 			} else {
 				if (node.isDefault()) {
-					buffer.append("default :\n");//$NON-NLS-1$
+					buffer.append("default :\n");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				} else {
-					buffer.append("case ");//$NON-NLS-1$
+					buffer.append("case ");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 					getSwitchExpression(node).accept(this);
-					buffer.append(":\n");//$NON-NLS-1$
+					buffer.append(":\n");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				}
 			}
 			indent++; // decremented in visit(SwitchStatement)
@@ -1740,24 +1740,24 @@ public class RemoteEvaluatorBuilder {
 			return node.getExpression();
 		}
 
-		private void visitSwitchNode(ASTNode node) {
-			buffer.append("switch (");//$NON-NLS-1$
+		private void visitSwitchNode(ASTNode node) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
+			buffer.append("switch (");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			if (node instanceof SwitchExpression) {
 				((SwitchExpression) node).getExpression().accept(this);
 			} else if (node instanceof SwitchStatement) {
 				((SwitchStatement) node).getExpression().accept(this);
 			}
-			buffer.append(") ");//$NON-NLS-1$
-			buffer.append("{\n");//$NON-NLS-1$
+			buffer.append(") ");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+			buffer.append("{\n");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			indent++;
 			if (node instanceof SwitchExpression) {
-				for (Iterator it = ((SwitchExpression) node).statements().iterator(); it.hasNext();) {
+				for (Iterator it = ((SwitchExpression) node).statements().iterator(); it.hasNext();) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 					Statement s = (Statement) it.next();
 					s.accept(this);
 					indent--; // incremented in visit(SwitchCase)
 				}
 			} else if (node instanceof SwitchStatement) {
-				for (Iterator it = ((SwitchStatement) node).statements().iterator(); it.hasNext();) {
+				for (Iterator it = ((SwitchStatement) node).statements().iterator(); it.hasNext();) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 					Statement s = (Statement) it.next();
 					s.accept(this);
 					indent--; // incremented in visit(SwitchCase)
@@ -1765,7 +1765,7 @@ public class RemoteEvaluatorBuilder {
 			}
 			indent--;
 			printIndent();
-			buffer.append("}\n");//$NON-NLS-1$
+			buffer.append("}\n");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 
 		}
 
@@ -1783,9 +1783,9 @@ public class RemoteEvaluatorBuilder {
 
 		@Override
 		public boolean visit(SynchronizedStatement node) {
-			buffer.append("synchronized (");//$NON-NLS-1$
+			buffer.append("synchronized (");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			node.getExpression().accept(this);
-			buffer.append(") ");//$NON-NLS-1$
+			buffer.append(") ");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			node.getBody().accept(this);
 			return false;
 		}
@@ -1797,13 +1797,13 @@ public class RemoteEvaluatorBuilder {
 
 		@Override
 		public boolean visit(TextBlock node) {
-			buffer.append(node.getEscapedValue());
+			buffer.append(node.getEscapedValue()); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			return false;
 		}
 
 		@Override
 		public boolean visit(TextElement node) {
-			buffer.append(node.getText());
+			buffer.append(node.getText()); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			return false;
 		}
 
@@ -1814,51 +1814,51 @@ public class RemoteEvaluatorBuilder {
 			String newVarName = allocateNewVariable(thisType, LOCAL_VAR_PREFIX.concat("this")); //$NON-NLS-1$
 			binder.bindThis(thisType, newVarName);
 			// buffer.append("this."); //$NON-NLS-1$
-			buffer.append(newVarName);
+			buffer.append(newVarName); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			return false;
 		}
 
 		@Override
 		public boolean visit(ThrowStatement node) {
 			printIndent();
-			buffer.append("throw ");//$NON-NLS-1$
+			buffer.append("throw ");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			node.getExpression().accept(this);
-			buffer.append(";\n");//$NON-NLS-1$
+			buffer.append(";\n");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			return false;
 		}
 
-		@Override
+		@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		public boolean visit(TryStatement node) {
 			printIndent();
-			buffer.append("try ");//$NON-NLS-1$
+			buffer.append("try ");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			if (node.getAST().apiLevel() >= JLS4) {
 				List resources = node.resources();
 				if (!resources.isEmpty()) {
-					buffer.append('(');
-					for (Iterator it = resources.iterator(); it.hasNext();) {
+					buffer.append('('); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+					for (Iterator it = resources.iterator(); it.hasNext();) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 						Expression variable = (Expression) it.next();
 						variable.accept(this);
 						if (it.hasNext()) {
-							buffer.append(';');
+							buffer.append(';'); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 						}
 					}
-					buffer.append(')');
+					buffer.append(')'); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				}
 			}
 			node.getBody().accept(this);
-			buffer.append(" ");//$NON-NLS-1$
-			for (Iterator it = node.catchClauses().iterator(); it.hasNext();) {
+			buffer.append(" ");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+			for (Iterator it = node.catchClauses().iterator(); it.hasNext();) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				CatchClause cc = (CatchClause) it.next();
 				cc.accept(this);
 			}
 			if (node.getFinally() != null) {
-				buffer.append(" finally ");//$NON-NLS-1$
+				buffer.append(" finally ");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				node.getFinally().accept(this);
 			}
 			return false;
 		}
 
-		@Override
+		@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		public boolean visit(TypeDeclaration node) {
 			if (node.getJavadoc() != null) {
 				node.getJavadoc().accept(this);
@@ -1869,67 +1869,67 @@ public class RemoteEvaluatorBuilder {
 			if (node.getAST().apiLevel() >= JLS3) {
 				printModifiers(node.modifiers());
 			}
-			buffer.append(node.isInterface() ? "interface " : "class ");//$NON-NLS-2$//$NON-NLS-1$
+			buffer.append(node.isInterface() ? "interface " : "class ");//$NON-NLS-2$//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			node.getName().accept(this);
 			if (node.getAST().apiLevel() >= JLS3) {
 				if (!node.typeParameters().isEmpty()) {
-					buffer.append("<");//$NON-NLS-1$
-					for (Iterator it = node.typeParameters().iterator(); it.hasNext();) {
+					buffer.append("<");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+					for (Iterator it = node.typeParameters().iterator(); it.hasNext();) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 						TypeParameter t = (TypeParameter) it.next();
 						t.accept(this);
 						if (it.hasNext()) {
-							buffer.append(",");//$NON-NLS-1$
+							buffer.append(",");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 						}
 					}
-					buffer.append(">");//$NON-NLS-1$
+					buffer.append(">");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				}
 			}
-			buffer.append(" ");//$NON-NLS-1$
+			buffer.append(" ");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			if (node.getAST().apiLevel() == JLS2) {
 				if (getSuperclass(node) != null) {
-					buffer.append("extends ");//$NON-NLS-1$
+					buffer.append("extends ");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 					getSuperclass(node).accept(this);
-					buffer.append(" ");//$NON-NLS-1$
+					buffer.append(" ");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				}
 				if (!superInterfaces(node).isEmpty()) {
-					buffer.append(node.isInterface() ? "extends " : "implements ");//$NON-NLS-2$//$NON-NLS-1$
-					for (Iterator it = superInterfaces(node).iterator(); it.hasNext();) {
+					buffer.append(node.isInterface() ? "extends " : "implements ");//$NON-NLS-2$//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+					for (Iterator it = superInterfaces(node).iterator(); it.hasNext();) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 						Name n = (Name) it.next();
 						n.accept(this);
 						if (it.hasNext()) {
-							buffer.append(", ");//$NON-NLS-1$
+							buffer.append(", ");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 						}
 					}
-					buffer.append(" ");//$NON-NLS-1$
+					buffer.append(" ");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				}
 			}
 			if (node.getAST().apiLevel() >= JLS3) {
 				if (node.getSuperclassType() != null) {
-					buffer.append("extends ");//$NON-NLS-1$
+					buffer.append("extends ");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 					node.getSuperclassType().accept(this);
-					buffer.append(" ");//$NON-NLS-1$
+					buffer.append(" ");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				}
 				if (!node.superInterfaceTypes().isEmpty()) {
-					buffer.append(node.isInterface() ? "extends " : "implements ");//$NON-NLS-2$//$NON-NLS-1$
-					for (Iterator it = node.superInterfaceTypes().iterator(); it.hasNext();) {
+					buffer.append(node.isInterface() ? "extends " : "implements ");//$NON-NLS-2$//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+					for (Iterator it = node.superInterfaceTypes().iterator(); it.hasNext();) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 						Type t = (Type) it.next();
 						t.accept(this);
 						if (it.hasNext()) {
-							buffer.append(", ");//$NON-NLS-1$
+							buffer.append(", ");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 						}
 					}
-					buffer.append(" ");//$NON-NLS-1$
+					buffer.append(" ");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				}
 			}
-			buffer.append("{\n");//$NON-NLS-1$
+			buffer.append("{\n");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			indent++;
-			for (Iterator it = node.bodyDeclarations().iterator(); it.hasNext();) {
+			for (Iterator it = node.bodyDeclarations().iterator(); it.hasNext();) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				BodyDeclaration d = (BodyDeclaration) it.next();
 				d.accept(this);
 			}
 			indent--;
 			printIndent();
-			buffer.append("}\n");//$NON-NLS-1$
+			buffer.append("}\n");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			return false;
 		}
 
@@ -1947,7 +1947,7 @@ public class RemoteEvaluatorBuilder {
 		@Override
 		public boolean visit(TypeLiteral node) {
 			node.getType().accept(this);
-			buffer.append(".class");//$NON-NLS-1$
+			buffer.append(".class");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			return false;
 		}
 
@@ -1971,12 +1971,12 @@ public class RemoteEvaluatorBuilder {
 			}
 			node.getName().accept(this);
 			if (!node.typeBounds().isEmpty()) {
-				buffer.append(" extends ");//$NON-NLS-1$
-				for (Iterator it = node.typeBounds().iterator(); it.hasNext();) {
+				buffer.append(" extends ");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+				for (Iterator it = node.typeBounds().iterator(); it.hasNext();) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 					Type t = (Type) it.next();
 					t.accept(this);
 					if (it.hasNext()) {
-						buffer.append(" & ");//$NON-NLS-1$
+						buffer.append(" & ");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 					}
 				}
 			}
@@ -1985,11 +1985,11 @@ public class RemoteEvaluatorBuilder {
 
 		@Override
 		public boolean visit(UnionType node) {
-			for (Iterator it = node.types().iterator(); it.hasNext();) {
+			for (Iterator it = node.types().iterator(); it.hasNext();) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				Type t = (Type) it.next();
 				t.accept(this);
 				if (it.hasNext()) {
-					buffer.append('|');
+					buffer.append('|'); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				}
 			}
 			return false;
@@ -1998,14 +1998,14 @@ public class RemoteEvaluatorBuilder {
 		@Override
 		public boolean visit(UsesDirective node) {
 			printIndent();
-			buffer.append("uses");//$NON-NLS-1$
-			buffer.append(" ");//$NON-NLS-1$
+			buffer.append("uses");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+			buffer.append(" ");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			node.getName().accept(this);
-			buffer.append(";\n");//$NON-NLS-1$
+			buffer.append(";\n");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			return false;
 		}
 
-		@Override
+		@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		public boolean visit(VariableDeclarationExpression node) {
 			if (node.getAST().apiLevel() == JLS2) {
 				printModifiers(node.getModifiers());
@@ -2014,41 +2014,41 @@ public class RemoteEvaluatorBuilder {
 				printModifiers(node.modifiers());
 			}
 			node.getType().accept(this);
-			buffer.append(" ");//$NON-NLS-1$
-			for (Iterator it = node.fragments().iterator(); it.hasNext();) {
+			buffer.append(" ");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+			for (Iterator it = node.fragments().iterator(); it.hasNext();) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				VariableDeclarationFragment f = (VariableDeclarationFragment) it.next();
 				f.accept(this);
 				if (it.hasNext()) {
-					buffer.append(", ");//$NON-NLS-1$
+					buffer.append(", ");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				}
 			}
 			return false;
 		}
 
-		@Override
+		@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		public boolean visit(VariableDeclarationFragment node) {
 			addLocalBinding(node.resolveBinding(), node.getName().getIdentifier());
 
-			buffer.append(node.getName().getIdentifier());
+			buffer.append(node.getName().getIdentifier()); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			int size = node.getExtraDimensions();
 			if (node.getAST().apiLevel() >= JLS8) {
 				List dimensions = node.extraDimensions();
-				for (int i = 0; i < size; i++) {
+				for (int i = 0; i < size; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 					visit((Dimension) dimensions.get(i));
 				}
 			} else {
-				for (int i = 0; i < size; i++) {
-					buffer.append("[]");//$NON-NLS-1$
+				for (int i = 0; i < size; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
+					buffer.append("[]");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				}
 			}
 			if (node.getInitializer() != null) {
-				buffer.append("=");//$NON-NLS-1$
+				buffer.append("=");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				node.getInitializer().accept(this);
 			}
 			return false;
 		}
 
-		@Override
+		@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		public boolean visit(VariableDeclarationStatement node) {
 			printIndent();
 			if (node.getAST().apiLevel() == JLS2) {
@@ -2058,24 +2058,24 @@ public class RemoteEvaluatorBuilder {
 				printModifiers(node.modifiers());
 			}
 			node.getType().accept(this);
-			buffer.append(" ");//$NON-NLS-1$
-			for (Iterator it = node.fragments().iterator(); it.hasNext();) {
+			buffer.append(" ");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+			for (Iterator it = node.fragments().iterator(); it.hasNext();) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				VariableDeclarationFragment f = (VariableDeclarationFragment) it.next();
 				f.accept(this);
 				if (it.hasNext()) {
-					buffer.append(", ");//$NON-NLS-1$
+					buffer.append(", ");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				}
 			}
-			buffer.append(";\n");//$NON-NLS-1$
+			buffer.append(";\n");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			return false;
 		}
 
 		@Override
 		public boolean visit(WhileStatement node) {
 			printIndent();
-			buffer.append("while (");//$NON-NLS-1$
+			buffer.append("while (");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			node.getExpression().accept(this);
-			buffer.append(") ");//$NON-NLS-1$
+			buffer.append(") ");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			node.getBody().accept(this);
 			return false;
 		}
@@ -2083,13 +2083,13 @@ public class RemoteEvaluatorBuilder {
 		@Override
 		public boolean visit(WildcardType node) {
 			visitTypeAnnotations(node);
-			buffer.append("?");//$NON-NLS-1$
+			buffer.append("?");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			Type bound = node.getBound();
 			if (bound != null) {
 				if (node.isUpperBound()) {
-					buffer.append(" extends ");//$NON-NLS-1$
+					buffer.append(" extends ");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				} else {
-					buffer.append(" super ");//$NON-NLS-1$
+					buffer.append(" super ");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				}
 				bound.accept(this);
 			}
@@ -2102,12 +2102,12 @@ public class RemoteEvaluatorBuilder {
 				return false;
 			}
 			printIndent();
-			buffer.append("yield"); //$NON-NLS-1$
+			buffer.append("yield"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			if (node.getExpression() != null) {
-				buffer.append(" ");//$NON-NLS-1$
+				buffer.append(" ");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				node.getExpression().accept(this);
 			}
-			buffer.append(";\n");//$NON-NLS-1$
+			buffer.append(";\n");//$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			return false;
 		}
 

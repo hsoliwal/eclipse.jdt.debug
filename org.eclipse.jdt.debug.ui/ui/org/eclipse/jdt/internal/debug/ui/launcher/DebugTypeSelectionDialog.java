@@ -54,9 +54,9 @@ public class DebugTypeSelectionDialog extends FilteredItemsSelectionDialog {
 	 * Main list label provider
 	 */
 	public class DebugTypeLabelProvider implements ILabelProvider {
-		HashMap<ImageDescriptor, Image> fImageMap = new HashMap<>();
+		HashMap<ImageDescriptor, Image> fImageMap = new HashMap<>(); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
 
-		@Override
+		@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		public Image getImage(Object element) {
 			if(element instanceof IAdaptable) {
 				IWorkbenchAdapter adapter = ((IAdaptable) element).getAdapter(IWorkbenchAdapter.class);
@@ -82,10 +82,10 @@ public class DebugTypeSelectionDialog extends FilteredItemsSelectionDialog {
 		@Override
 		public String getText(Object element) {
 			if (element instanceof IType type) {
-				StringBuilder label = new StringBuilder().append(type.getTypeQualifiedName());
+				StringBuilder label = new StringBuilder().append(type.getTypeQualifiedName()); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				String container = getDeclaringContainerName(type);
 				if(container != null && !"".equals(container)) { //$NON-NLS-1$
-					label.append(" - ").append(container); //$NON-NLS-1$
+					label.append(" - ").append(container); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				}
 				return label.toString();
 			}
@@ -141,7 +141,7 @@ public class DebugTypeSelectionDialog extends FilteredItemsSelectionDialog {
 	 * Provides a label and image for the details area of the dialog
 	 */
 	class DebugTypeDetailsLabelProvider extends DebugTypeLabelProvider {
-		@Override
+		@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		public String getText(Object element) {
 			if(element instanceof IType) {
 				IType type = (IType) element;
@@ -151,7 +151,7 @@ public class DebugTypeSelectionDialog extends FilteredItemsSelectionDialog {
 						IJavaProject project = type.getJavaProject();
 						if(project != null) {
 							try {
-								return project.getOutputLocation().toOSString().substring(1)+" - "+name; //$NON-NLS-1$
+								return project.getOutputLocation().toOSString().substring(1)+" - "+name; //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 							}
 							catch (JavaModelException e) {JDIDebugUIPlugin.log(e);}
 						}
@@ -206,7 +206,7 @@ public class DebugTypeSelectionDialog extends FilteredItemsSelectionDialog {
 		}
 	}
 
-	private static final String SETTINGS_ID = JDIDebugUIPlugin.getUniqueIdentifier() + ".MAIN_METHOD_SELECTION_DIALOG"; //$NON-NLS-1$
+	private static final String SETTINGS_ID = JDIDebugUIPlugin.getUniqueIdentifier() + ".MAIN_METHOD_SELECTION_DIALOG"; //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 	private IType[] fTypes = null;
 
 	/**
@@ -294,7 +294,7 @@ public class DebugTypeSelectionDialog extends FilteredItemsSelectionDialog {
 	@Override
 	protected void fillContentProvider(AbstractContentProvider contentProvider, ItemsFilter itemsFilter, IProgressMonitor progressMonitor) throws CoreException {
 		if(fTypes != null && fTypes.length > 0) {
-			for (IType type : fTypes) {
+			for (IType type : fTypes) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				if (itemsFilter.isConsistentItem(type)) {
 					contentProvider.add(type, itemsFilter);
 				}

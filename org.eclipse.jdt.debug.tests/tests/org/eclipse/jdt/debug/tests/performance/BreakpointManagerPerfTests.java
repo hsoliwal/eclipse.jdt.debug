@@ -47,13 +47,13 @@ public class BreakpointManagerPerfTests extends AbstractDebugPerformanceTest {
 	 *
 	 * @return the collection of breakpoints
 	 */
-	IBreakpoint[] generateBreakpoints(int count) throws Exception {
+	IBreakpoint[] generateBreakpoints(int count) throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IType type = getType(fgTypeName);
-		assertNotNull("the type "+fgTypeName+" should exist", type);
-		assertEquals("The type " + fgTypeName + " must be a file", IResource.FILE, type.getResource().getType());
+		assertNotNull("the type "+fgTypeName+" should exist", type); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
+		assertEquals("The type " + fgTypeName + " must be a file", IResource.FILE, type.getResource().getType()); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		IEditorPart editor = openEditor((IFile)type.getResource());
-		assertNotNull("the editor for "+fgTypeName+" should have been created", editor);
-		ArrayList<IBreakpoint> bps = new ArrayList<>(count);
+		assertNotNull("the editor for "+fgTypeName+" should have been created", editor); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
+		ArrayList<IBreakpoint> bps = new ArrayList<>(count); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 		IBreakpoint bp = createClassPrepareBreakpoint(type);
 		if(bp != null) {
 			bps.add(bp);
@@ -63,20 +63,20 @@ public class BreakpointManagerPerfTests extends AbstractDebugPerformanceTest {
 			bps.add(bp);
 		}
 		int end = 12 + count;
-		for (int i = 14; i < end; i++) {
+		for (int i = 14; i < end; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			bp = createLineBreakpoint(i, fgTypeName);
 			if(bp != null) {
 				bps.add(bp);
 			}
 		}
-		assertEquals("the should have been "+count+" breakpoints created", count, bps.size());
+		assertEquals("the should have been "+count+" breakpoints created", count, bps.size()); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		return bps.toArray(new IBreakpoint[bps.size()]);
 	}
 
 	/**
 	 * Tests the time required to start the {@link BreakpointManager}
 	 */
-	public void testStartup200Breakpoints() throws Exception {
+	public void testStartup200Breakpoints() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		tagAsSummary("Start Breakpoint Manager - 200 BPs", Dimension.ELAPSED_PROCESS);
 		try {
 			IBreakpoint[] bps = generateBreakpoints(200);
@@ -84,7 +84,7 @@ public class BreakpointManagerPerfTests extends AbstractDebugPerformanceTest {
 			BreakpointManager mgr = (BreakpointManager) getBreakpointManager();
 			//clean it up before starting
 			mgr.shutdown();
-			for(int i = 0; i < 6500; i++) {
+			for(int i = 0; i < 6500; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				try {
 					startMeasuring();
 					mgr.ensureInitialized();
@@ -105,7 +105,7 @@ public class BreakpointManagerPerfTests extends AbstractDebugPerformanceTest {
 	/**
 	 * Tests the time required to start the {@link BreakpointManager}
 	 */
-	public void testStartup50Breakpoints() throws Exception {
+	public void testStartup50Breakpoints() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		tagAsSummary("Start Breakpoint Manager - 50 BPs", Dimension.ELAPSED_PROCESS);
 		try {
 			IBreakpoint[] bps = generateBreakpoints(50);
@@ -113,7 +113,7 @@ public class BreakpointManagerPerfTests extends AbstractDebugPerformanceTest {
 			BreakpointManager mgr = (BreakpointManager) getBreakpointManager();
 			//clean it up before starting
 			mgr.shutdown();
-			for(int i = 0; i < 6500; i++) {
+			for(int i = 0; i < 6500; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				try {
 					startMeasuring();
 					mgr.ensureInitialized();
@@ -134,7 +134,7 @@ public class BreakpointManagerPerfTests extends AbstractDebugPerformanceTest {
 	/**
 	 * Tests the time required to start the {@link BreakpointManager}
 	 */
-	public void testStartup100Breakpoints() throws Exception {
+	public void testStartup100Breakpoints() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		tagAsSummary("Start Breakpoint Manager - 100 BPs", Dimension.ELAPSED_PROCESS);
 		try {
 			IBreakpoint[] bps = generateBreakpoints(100);
@@ -142,7 +142,7 @@ public class BreakpointManagerPerfTests extends AbstractDebugPerformanceTest {
 			BreakpointManager mgr = (BreakpointManager) getBreakpointManager();
 			//clean it up before starting
 			mgr.shutdown();
-			for(int i = 0; i < 6500; i++) {
+			for(int i = 0; i < 6500; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				try {
 					startMeasuring();
 					mgr.ensureInitialized();

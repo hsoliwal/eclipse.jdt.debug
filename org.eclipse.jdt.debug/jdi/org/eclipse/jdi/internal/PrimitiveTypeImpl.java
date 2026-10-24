@@ -32,7 +32,7 @@ public abstract class PrimitiveTypeImpl extends TypeImpl implements
 	/**
 	 * Creates new instance based on primitive signature.
 	 */
-	public static PrimitiveTypeImpl create(VirtualMachineImpl vmImpl,
+	public static PrimitiveTypeImpl create(VirtualMachineImpl vmImpl, //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 			String signature) {
 		// Notice that Primitive Types are not stored or cached because they
 		// don't 'remember' any information.
@@ -57,7 +57,7 @@ public abstract class PrimitiveTypeImpl extends TypeImpl implements
 			return new DoubleTypeImpl(vmImpl);
 		}
 		throw new InternalError(
-				JDIMessages.PrimitiveTypeImpl_Invalid_primitive_signature____1
+				JDIMessages.PrimitiveTypeImpl_Invalid_primitive_signature____1 //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 						+ signature + JDIMessages.PrimitiveTypeImpl___2); //
 	}
 

@@ -128,26 +128,26 @@ public abstract class TypeImpl extends AccessibleImpl implements Type {
 	/**
 	 * Converts a class name to a JNI signature.
 	 */
-	public static String classNameToSignature(String qualifiedName) {
+	public static String classNameToSignature(String qualifiedName) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		// L<classname>; : fully-qualified-class
 		/*
 		 * JNI signature examples: int[][] -> [[I long[] -> [J java.lang.String
 		 * -> Ljava/lang/String; java.lang.String[] -> [Ljava/lang/String;
 		 */
-		StringBuilder signature = new StringBuilder();
+		StringBuilder signature = new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 
 		int firstBrace = qualifiedName.indexOf('[');
 		if (firstBrace < 0) {
 			// Not an array type. Must be class type.
-			signature.append('L');
-			signature.append(qualifiedName.replace('.', '/'));
-			signature.append(';');
+			signature.append('L'); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+			signature.append(qualifiedName.replace('.', '/')); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+			signature.append(';'); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			return signature.toString();
 		}
 
 		int index = 0;
-		while ((index = (qualifiedName.indexOf('[', index) + 1)) > 0) {
-			signature.append('[');
+		while ((index = (qualifiedName.indexOf('[', index) + 1)) > 0) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
+			signature.append('['); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		}
 
 		String name = qualifiedName.substring(0, firstBrace);
@@ -155,54 +155,54 @@ public abstract class TypeImpl extends AccessibleImpl implements Type {
 		// Check for primitive array type
 		case 'b':
 			if (name.equals("byte")) { //$NON-NLS-1$
-				signature.append('B');
+				signature.append('B'); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				return signature.toString();
 			} else if (name.equals("boolean")) { //$NON-NLS-1$
-				signature.append('Z');
+				signature.append('Z'); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				return signature.toString();
 			}
 			break;
 		case 'i':
 			if (name.equals("int")) { //$NON-NLS-1$
-				signature.append('I');
+				signature.append('I'); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				return signature.toString();
 			}
 			break;
 		case 'd':
 			if (name.equals("double")) { //$NON-NLS-1$
-				signature.append('D');
+				signature.append('D'); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				return signature.toString();
 			}
 			break;
 		case 's':
 			if (name.equals("short")) { //$NON-NLS-1$
-				signature.append('S');
+				signature.append('S'); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				return signature.toString();
 			}
 			break;
 		case 'c':
 			if (name.equals("char")) { //$NON-NLS-1$
-				signature.append('C');
+				signature.append('C'); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				return signature.toString();
 			}
 			break;
 		case 'l':
 			if (name.equals("long")) { //$NON-NLS-1$
-				signature.append('J');
+				signature.append('J'); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				return signature.toString();
 			}
 			break;
 		case 'f':
 			if (name.equals("float")) { //$NON-NLS-1$
-				signature.append('F');
+				signature.append('F'); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				return signature.toString();
 			}
 			break;
 		}
 		// Class type array
-		signature.append('L');
-		signature.append(name.replace('.', '/'));
-		signature.append(';');
+		signature.append('L'); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+		signature.append(name.replace('.', '/')); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+		signature.append(';'); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		return signature.toString();
 	}
 
@@ -217,29 +217,29 @@ public abstract class TypeImpl extends AccessibleImpl implements Type {
 	/**
 	 * Converts a JNI array signature to a name.
 	 */
-	public static String arraySignatureToName(String signature) {
+	public static String arraySignatureToName(String signature) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		// [<type> : array of type <type>
 		if (signature.indexOf('[') < 0) {
 			return signature;
 		}
-		StringBuilder name = new StringBuilder();
+		StringBuilder name = new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 		String type = signature.substring(signature.lastIndexOf('[') + 1);
 		if (type.length() == 1 && isPrimitiveSignature(type)) {
-			name.append(getPrimitiveSignatureToName(type.charAt(0)));
+			name.append(getPrimitiveSignatureToName(type.charAt(0))); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		} else {
-			name.append(classSignatureToName(type));
+			name.append(classSignatureToName(type)); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		}
 		int index = 0;
-		while ((index = (signature.indexOf('[', index) + 1)) > 0) {
-			name.append('[').append(']');
+		while ((index = (signature.indexOf('[', index) + 1)) > 0) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
+			name.append('[').append(']'); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		}
-		return signatureToName(signature.substring(1)) + "[]"; //$NON-NLS-1$
+		return signatureToName(signature.substring(1)) + "[]"; //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 	}
 
 	/**
 	 * @return Returns Type Name, converted from a JNI signature.
 	 */
-	public static String signatureToName(String signature) {
+	public static String signatureToName(String signature) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		// See JNI 1.1 Specification, Table 3-2 Java VM Type Signatures.
 		String primitive = getPrimitiveSignatureToName(signature.charAt(0));
 		if (primitive != null) {
@@ -256,11 +256,11 @@ public abstract class TypeImpl extends AccessibleImpl implements Type {
 			throw new InternalError(
 					JDIMessages.TypeImpl_Can__t_convert_method_signature_to_name_2);
 		}
-		throw new InternalError(JDIMessages.TypeImpl_Invalid_signature____10
+		throw new InternalError(JDIMessages.TypeImpl_Invalid_signature____10 //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 				+ signature + JDIMessages.TypeImpl___11); //
 	}
 
-	private static String getPrimitiveSignatureToName(char signature) {
+	private static String getPrimitiveSignatureToName(char signature) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		switch (signature) {
 		case 'Z':
 			return "boolean"; //$NON-NLS-1$
@@ -286,7 +286,7 @@ public abstract class TypeImpl extends AccessibleImpl implements Type {
 	/**
 	 * @return Returns Jdwp Tag, converted from a JNI signature.
 	 */
-	public static byte signatureToTag(String signature) {
+	public static byte signatureToTag(String signature) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		switch (signature.charAt(0)) {
 		case 'Z':
 			return BooleanValueImpl.tag;
@@ -312,10 +312,10 @@ public abstract class TypeImpl extends AccessibleImpl implements Type {
 			return ArrayReferenceImpl.tag;
 		case '(':
 			throw new InternalError(
-					JDIMessages.TypeImpl_Can__t_covert_method_signature_to_tag___9
+					JDIMessages.TypeImpl_Can__t_covert_method_signature_to_tag___9 //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 							+ signature);
 		}
-		throw new InternalError(JDIMessages.TypeImpl_Invalid_signature____10
+		throw new InternalError(JDIMessages.TypeImpl_Invalid_signature____10 //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 				+ signature + JDIMessages.TypeImpl___11); //
 	}
 

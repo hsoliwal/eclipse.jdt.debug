@@ -43,7 +43,7 @@ import com.sun.jdi.VirtualMachine;
  *
  * @since 3.0
  */
-public class JavaStratumLineBreakpoint extends JavaLineBreakpoint implements
+public class JavaStratumLineBreakpoint extends JavaLineBreakpoint implements //FLLDCIM: MARK — T27  IMPLEMENTS
 		IJavaStratumLineBreakpoint {
 	private static final String PATTERN = "org.eclipse.jdt.debug.pattern"; //$NON-NLS-1$
 	protected static final String STRATUM = "org.eclipse.jdt.debug.stratum"; //$NON-NLS-1$
@@ -109,13 +109,13 @@ public class JavaStratumLineBreakpoint extends JavaLineBreakpoint implements
 				STRATUM_BREAKPOINT);
 	}
 
-	protected JavaStratumLineBreakpoint(final IResource resource,
+	protected JavaStratumLineBreakpoint(final IResource resource, //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 			final String stratum, final String sourceName,
 			final String sourcePath, final String classNamePattern,
 			final int lineNumber, final int charStart, final int charEnd,
 			final int hitCount, final boolean register, final Map<String, Object> attributes,
 			final String markerType) throws DebugException {
-		IWorkspaceRunnable wr = monitor -> {
+		IWorkspaceRunnable wr = monitor -> { //FLLDCIM: MARK — T09  LAMBDA
 
 			// modify pattern
 			String pattern = classNamePattern;
@@ -164,7 +164,7 @@ public class JavaStratumLineBreakpoint extends JavaLineBreakpoint implements
 	 * installableReferenceType(com.sun.jdi.ReferenceType,
 	 * org.eclipse.jdt.internal.debug.core.model.JDIDebugTarget)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	protected boolean installableReferenceType(ReferenceType type,
 			JDIDebugTarget target) throws CoreException {
 
@@ -215,7 +215,7 @@ public class JavaStratumLineBreakpoint extends JavaLineBreakpoint implements
 	}
 
 	private boolean containsMatch(List<String> strings, String key) {
-		for (String string : strings) {
+		for (String string : strings) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			if (string.equals(key)) {
 				return true;
 			}
@@ -223,10 +223,10 @@ public class JavaStratumLineBreakpoint extends JavaLineBreakpoint implements
 		return false;
 	}
 
-	private boolean validType(String typeName) throws CoreException {
+	private boolean validType(String typeName) throws CoreException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 
 		String[] patterns = getTypeNamePatterns();
-		for (int i = 0; i < patterns.length; i++) {
+		for (int i = 0; i < patterns.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			if (fSuffix[i] != null) {
 				// pattern starting with '*'
 				if (fSuffix[i].length() == 0) {
@@ -254,7 +254,7 @@ public class JavaStratumLineBreakpoint extends JavaLineBreakpoint implements
 	 * Returns a list of locations for the given line number in the given type.
 	 * Returns <code>null</code> if a location cannot be determined.
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	protected List<Location> determineLocations(int lineNumber, ReferenceType type,
 			JDIDebugTarget target) {
 		List<Location> locations;
@@ -301,7 +301,7 @@ public class JavaStratumLineBreakpoint extends JavaLineBreakpoint implements
 				return locations;
 			}
 		} else {
-			for(Location location : locations) {
+			for(Location location : locations) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				try {
 					if (!sourcePath.equals(location.sourcePath())) {
 						locations.remove(location);
@@ -360,7 +360,7 @@ public class JavaStratumLineBreakpoint extends JavaLineBreakpoint implements
 		return (String) ensureMarker().getAttribute(SOURCE_PATH);
 	}
 
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	protected void createRequests(JDIDebugTarget target) throws CoreException {
 		if (target.isTerminated() || shouldSkipBreakpoint()) {
 			return;
@@ -375,7 +375,7 @@ public class JavaStratumLineBreakpoint extends JavaLineBreakpoint implements
 		}
 
 		String sourceName = getSourceName();
-		for (String classPrepareTypeName : patterns) {
+		for (String classPrepareTypeName : patterns) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			// create request to listen to class loads
 			// name may only be partially resolved
 			registerRequest(target.createClassPrepareRequest(
@@ -398,7 +398,7 @@ public class JavaStratumLineBreakpoint extends JavaLineBreakpoint implements
 		}
 		if (classes != null) {
 			Iterator<ReferenceType> iter = classes.iterator();
-			while (iter.hasNext()) {
+			while (iter.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				ReferenceType type = iter.next();
 				if (installableReferenceType(type, target)) {
 					createRequest(target, type);
@@ -407,7 +407,7 @@ public class JavaStratumLineBreakpoint extends JavaLineBreakpoint implements
 		}
 	}
 
-	public synchronized String[] getTypeNamePatterns() throws CoreException {
+	public synchronized String[] getTypeNamePatterns() throws CoreException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		if (fTypeNamePatterns != null) {
 			return fTypeNamePatterns;
 		}
@@ -415,10 +415,10 @@ public class JavaStratumLineBreakpoint extends JavaLineBreakpoint implements
 		String patterns = getPattern();
 
 		// delimit by ","
-		fTypeNamePatterns = patterns.split(","); //$NON-NLS-1$
+		fTypeNamePatterns = patterns.split(","); //$NON-NLS-1$ //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
 		fSuffix = new String[fTypeNamePatterns.length];
 		fPrefix = new String[fTypeNamePatterns.length];
-		for (int i = 0; i < fTypeNamePatterns.length; i++) {
+		for (int i = 0; i < fTypeNamePatterns.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			fTypeNamePatterns[i] = fTypeNamePatterns[i].trim();
 			String pattern = fTypeNamePatterns[i];
 			if (pattern.charAt(0) == '*') {

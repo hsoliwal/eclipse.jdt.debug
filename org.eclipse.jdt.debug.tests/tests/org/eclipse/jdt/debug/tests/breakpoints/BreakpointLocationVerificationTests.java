@@ -59,7 +59,7 @@ public class BreakpointLocationVerificationTests extends AbstractDebugTest {
 	/**
 	 * Tests that the predefined location is locatable in the specified type
 	 */
-	private void testLocation(int lineToTry, int expectedLineNumber, String baseTypeName, String expectedTypeName, boolean bestmatch) throws JavaModelException {
+	private void testLocation(int lineToTry, int expectedLineNumber, String baseTypeName, String expectedTypeName, boolean bestmatch) throws JavaModelException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IType type= get14Project().findType(baseTypeName);
 		assertNotNull("Cannot find type", type);
 		CompilationUnit compilationUnit= parseCompilationUnit(type.getCompilationUnit());
@@ -69,7 +69,7 @@ public class BreakpointLocationVerificationTests extends AbstractDebugTest {
 		assertEquals("Wrong line number", expectedLineNumber, lineNumber);
 		String typeName= locator.getFullyQualifiedTypeName();
 		if (typeName != null) {
-			typeName = typeName.replaceAll("\\$", ".");
+			typeName = typeName.replaceAll("\\$", "."); //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
 		}
         if (lineNumber == -1) {
 			assertNull("Wrong type name", typeName);

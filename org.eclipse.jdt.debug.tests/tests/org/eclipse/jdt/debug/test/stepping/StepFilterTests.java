@@ -43,8 +43,8 @@ public class StepFilterTests extends AbstractDebugTest {
 	/**
 	 * Tests a simple step filter
 	 */
-	public void testSimpleStepFilter() throws Exception {
-		getPrefStore().setValue(IJDIPreferencesConstants.PREF_ACTIVE_FILTERS_LIST, fOriginalActiveFilters + ",StepFilterTwo," + fOriginalInactiveFilters);
+	public void testSimpleStepFilter() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
+		getPrefStore().setValue(IJDIPreferencesConstants.PREF_ACTIVE_FILTERS_LIST, fOriginalActiveFilters + ",StepFilterTwo," + fOriginalInactiveFilters); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = "StepFilterOne";
 		ILineBreakpoint bp = createLineBreakpoint(26, typeName);
 		bp.setEnabled(true);
@@ -69,8 +69,8 @@ public class StepFilterTests extends AbstractDebugTest {
 	/**
 	 * Tests a simple step filter
 	 */
-	public void testDontStepThruStepFilters() throws Exception {
-		getPrefStore().setValue(IJDIPreferencesConstants.PREF_ACTIVE_FILTERS_LIST, fOriginalActiveFilters + ",StepFilterTwo," + fOriginalInactiveFilters);
+	public void testDontStepThruStepFilters() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
+		getPrefStore().setValue(IJDIPreferencesConstants.PREF_ACTIVE_FILTERS_LIST, fOriginalActiveFilters + ",StepFilterTwo," + fOriginalInactiveFilters); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = "StepFilterOne";
 		ILineBreakpoint bp = createLineBreakpoint(27, typeName);
 		bp.setEnabled(true);
@@ -95,8 +95,8 @@ public class StepFilterTests extends AbstractDebugTest {
 	/**
 	 * Tests a step filter that is not active
 	 */
-	public void testInactiveStepFilter() throws Exception {
-		getPrefStore().setValue(IJDIPreferencesConstants.PREF_INACTIVE_FILTERS_LIST, fOriginalActiveFilters + ",StepFilterTwo");
+	public void testInactiveStepFilter() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
+		getPrefStore().setValue(IJDIPreferencesConstants.PREF_INACTIVE_FILTERS_LIST, fOriginalActiveFilters + ",StepFilterTwo"); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = "StepFilterOne";
 		ILineBreakpoint bp = createLineBreakpoint(26, typeName);
 		bp.setEnabled(true);
@@ -122,8 +122,8 @@ public class StepFilterTests extends AbstractDebugTest {
 	 * Tests a deep step filter, i.e. a step filter that is more than one stack frame deep on the current
 	 * suspended thread
 	 */
-	public void testDeepStepFilter() throws Exception {
-		getPrefStore().setValue(IJDIPreferencesConstants.PREF_ACTIVE_FILTERS_LIST, fOriginalActiveFilters + ",StepFilterTwo," + fOriginalInactiveFilters);
+	public void testDeepStepFilter() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
+		getPrefStore().setValue(IJDIPreferencesConstants.PREF_ACTIVE_FILTERS_LIST, fOriginalActiveFilters + ",StepFilterTwo," + fOriginalInactiveFilters); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = "StepFilterOne";
 		ILineBreakpoint bp = createLineBreakpoint(27, typeName);
 		bp.setEnabled(true);
@@ -148,8 +148,8 @@ public class StepFilterTests extends AbstractDebugTest {
 	/**
 	 * Tests a simple step return filter
 	 */
-	public void testStepReturnFilter() throws Exception {
-		getPrefStore().setValue(IJDIPreferencesConstants.PREF_ACTIVE_FILTERS_LIST, fOriginalActiveFilters + ",StepFilterTwo," + fOriginalInactiveFilters);
+	public void testStepReturnFilter() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
+		getPrefStore().setValue(IJDIPreferencesConstants.PREF_ACTIVE_FILTERS_LIST, fOriginalActiveFilters + ",StepFilterTwo," + fOriginalInactiveFilters); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = "StepFilterOne";
 		ILineBreakpoint bp = createLineBreakpoint(22, "StepFilterThree");
 		bp.setEnabled(true);
@@ -174,8 +174,8 @@ public class StepFilterTests extends AbstractDebugTest {
 	/**
 	 * Tests a simple step over filter
 	 */
-	public void testStepOverFilter() throws Exception {
-		getPrefStore().setValue(IJDIPreferencesConstants.PREF_ACTIVE_FILTERS_LIST, fOriginalActiveFilters + ",StepFilterTwo,StepFilterThree," + fOriginalInactiveFilters);
+	public void testStepOverFilter() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
+		getPrefStore().setValue(IJDIPreferencesConstants.PREF_ACTIVE_FILTERS_LIST, fOriginalActiveFilters + ",StepFilterTwo,StepFilterThree," + fOriginalInactiveFilters); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = "StepFilterOne";
 		ILineBreakpoint bp = createLineBreakpoint(22, "StepFilterThree");
 		bp.setEnabled(true);
@@ -200,7 +200,7 @@ public class StepFilterTests extends AbstractDebugTest {
 	/**
 	 * Tests filtering of getter methods
 	 */
-	public void testGetterFilters() throws Exception {
+	public void testGetterFilters() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		getPrefStore().setValue(IJDIPreferencesConstants.PREF_FILTER_GETTERS, true);
 		getPrefStore().setValue(IJDIPreferencesConstants.PREF_FILTER_SETTERS, false);
 		String typeName = "StepFilterFour";
@@ -234,7 +234,7 @@ public class StepFilterTests extends AbstractDebugTest {
 	/**
 	 * Tests filtering of setter methods
 	 */
-	public void testSetterFilters() throws Exception {
+	public void testSetterFilters() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		getPrefStore().setValue(IJDIPreferencesConstants.PREF_FILTER_GETTERS, false);
 		getPrefStore().setValue(IJDIPreferencesConstants.PREF_FILTER_SETTERS, true);
 		String typeName = "StepFilterFour";
@@ -270,9 +270,9 @@ public class StepFilterTests extends AbstractDebugTest {
 	 *
 	 * @since 3.8.300
 	 */
-	public void testContributedFilter1() throws Exception {
+	public void testContributedFilter1() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String typeName = "TestContributedStepFilterClass";
-		getPrefStore().setValue(IJDIPreferencesConstants.PREF_ACTIVE_FILTERS_LIST, fOriginalActiveFilters + ",StepFilterTwo,"
+		getPrefStore().setValue(IJDIPreferencesConstants.PREF_ACTIVE_FILTERS_LIST, fOriginalActiveFilters + ",StepFilterTwo," //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 				+ fOriginalInactiveFilters);
 		ILineBreakpoint bp = createLineBreakpoint(20, typeName);
 		bp.setEnabled(true);

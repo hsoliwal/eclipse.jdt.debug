@@ -35,7 +35,7 @@ public class PackageSelectionDialog extends ElementListSelectionDialog {
 	 * @return String
 	 */
 	protected String getDialogSettingsSectionName() {
-		return IJavaDebugUIConstants.PLUGIN_ID + ".PACKAGE_SELECTION_DIALOG_SECTION"; //$NON-NLS-1$
+		return IJavaDebugUIConstants.PLUGIN_ID + ".PACKAGE_SELECTION_DIALOG_SECTION"; //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 	}
 
 	 /* (non-Javadoc)

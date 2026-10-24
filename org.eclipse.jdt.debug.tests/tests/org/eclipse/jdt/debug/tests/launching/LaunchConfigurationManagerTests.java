@@ -47,16 +47,16 @@ public class LaunchConfigurationManagerTests extends AbstractDebugTest {
 	 * @param shortcuts the complete list of shortcuts of type {@link LaunchShortcutExtension}
 	 */
 	void assertShortcuts(String[] ids, List<LaunchShortcutExtension> shortcuts) {
-		for (int i = 0; i < ids.length; i++) {
+		for (int i = 0; i < ids.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			boolean found = false;
-			for (Iterator<LaunchShortcutExtension> iter = shortcuts.iterator(); iter.hasNext();) {
+			for (Iterator<LaunchShortcutExtension> iter = shortcuts.iterator(); iter.hasNext();) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				LaunchShortcutExtension ext = iter.next();
 				if(ids[i].equals(ext.getId())) {
 					found = true;
 					break;
 				}
 			}
-			assertTrue("the launch shortcut "+ids[i]+" was not found", found);
+			assertTrue("the launch shortcut "+ids[i]+" was not found", found); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		}
 	}
 
@@ -66,15 +66,15 @@ public class LaunchConfigurationManagerTests extends AbstractDebugTest {
 	 * @param types the list of {@link ILaunchConfigurationType} identifiers to look it
 	 */
 	void assertTypes(String[] ids, String[] types) {
-		for (int i = 0; i < ids.length; i++) {
+		for (int i = 0; i < ids.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			boolean found = false;
-			for (int j = 0; j < types.length; j++) {
+			for (int j = 0; j < types.length; j++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				if(ids[i].equals(types[j])) {
 					found = true;
 					break;
 				}
 			}
-			assertTrue("the launch configuration type "+ids[i]+" was not found", found);
+			assertTrue("the launch configuration type "+ids[i]+" was not found", found); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		}
 	}
 

@@ -23,7 +23,7 @@ import org.eclipse.jdt.debug.tests.AbstractDebugTest;
 /**
  * Tests launch notification plural
  */
-public class LaunchesTests extends AbstractDebugTest implements ILaunchesListener2 {
+public class LaunchesTests extends AbstractDebugTest implements ILaunchesListener2 { //FLLDCIM: MARK — T27  IMPLEMENTS
 
 	private boolean added = false;
 	private boolean removed = false;
@@ -63,7 +63,7 @@ public class LaunchesTests extends AbstractDebugTest implements ILaunchesListene
 		doMode(ILaunchManager.RUN_MODE);
 	}
 
-	protected void doMode(String mode) throws CoreException {
+	protected void doMode(String mode) throws CoreException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String typeName = "Breakpoints";		 //$NON-NLS-1$
 		ILaunchConfiguration configuration = getLaunchConfiguration(typeName);
 		getLaunchManager().addLaunchListener(this);

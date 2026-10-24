@@ -26,7 +26,7 @@ import org.eclipse.ui.texteditor.ITextEditor;
 
 public class RulerToggleHitBreakpointActionDelegate extends AbstractRulerToggleBreakpointActionDelegate {
 
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	protected boolean doWork(ITextEditor editor, ITextSelection selection) {
 		IJavaLineBreakpoint jlp = ToggleBreakpointAdapter.findExistingBreakpoint(currentEditor, selection);
 
@@ -46,7 +46,7 @@ public class RulerToggleHitBreakpointActionDelegate extends AbstractRulerToggleB
 		}
 	}
 
-	private void hitCountDialog() {
+	private void hitCountDialog() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String title = ActionMessages.BreakpointHitCountAction_Set_Breakpoint_Hit_Count_2;
 		String message = ActionMessages.BreakpointHitCountAction__Enter_the_new_hit_count_for_the_breakpoint__3;
 		IInputValidator validator = new IInputValidator() {

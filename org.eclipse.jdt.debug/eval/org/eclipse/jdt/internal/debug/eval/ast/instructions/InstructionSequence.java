@@ -30,13 +30,13 @@ public class InstructionSequence implements ICompiledExpression {
 	private final List<String> fErrors;
 	private final String fSnippet;
 	private CoreException fException;
-	private final List<Integer> fProblemIDs;
+	private final List<Integer> fProblemIDs; //FLLDCIM: MARK — M10 M3_PRIMITIVE_LANES FIELD
 
 	public InstructionSequence(String snippet) {
-		fInstructions = new ArrayList<>(10);
-		fErrors = new ArrayList<>();
+		fInstructions = new ArrayList<>(10); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
+		fErrors = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 		fSnippet = snippet;
-		fProblemIDs = new ArrayList<>();
+		fProblemIDs = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 	}
 
 	/**
@@ -80,7 +80,7 @@ public class InstructionSequence implements ICompiledExpression {
 	public Message[] getErrors() {
 		Message[] messages = new Message[fErrors.size()];
 		int i = 0;
-		for (String errorMsg : fErrors) {
+		for (String errorMsg : fErrors) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			messages[i++] = new Message(errorMsg, -1);
 		}
 		return messages;

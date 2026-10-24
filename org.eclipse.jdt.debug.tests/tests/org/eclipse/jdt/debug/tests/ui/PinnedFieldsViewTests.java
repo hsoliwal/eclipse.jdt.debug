@@ -130,15 +130,15 @@ public class PinnedFieldsViewTests extends AbstractDebugUiTests {
 	 * Fails if an error caused by the "Pin to Top" contributions was logged during the test.
 	 */
 	private void assertNoPinError() {
-		for (IStatus status : fLoggedErrors) {
+		for (IStatus status : fLoggedErrors) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			StringWriter text = new StringWriter();
 			text.append(status.getMessage());
 			if (status.getException() != null) {
 				status.getException().printStackTrace(new PrintWriter(text));
 			}
-			for (String marker : PIN_ERROR_MARKERS) {
+			for (String marker : PIN_ERROR_MARKERS) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				if (text.toString().contains(marker)) {
-					fail("Error logged: " + text);
+					fail("Error logged: " + text); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 				}
 			}
 		}
@@ -149,15 +149,15 @@ public class PinnedFieldsViewTests extends AbstractDebugUiTests {
 		return true;
 	}
 
-	public void testPinToTop() throws Exception {
+	public void testPinToTop() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		TreeViewer viewer = launchAndShowThis(IDebugUIConstants.ID_VARIABLE_VIEW);
 		List<String> initial = waitForChildren(viewer);
-		assertTrue("privStr should not be the first field: " + initial, initial.indexOf("privStr") > 0);
+		assertTrue("privStr should not be the first field: " + initial, initial.indexOf("privStr") > 0); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		Image unpinnedImage = getChildImage(viewer, "privStr");
 
 		withContextMenu(viewer, children(viewer, "privStr"), menu -> {
 			MenuItem pin = findItem(menu, PIN_TO_TOP);
-			assertNotNull("Missing 'Pin to Top' in " + itemTexts(menu), pin);
+			assertNotNull("Missing 'Pin to Top' in " + itemTexts(menu), pin); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 			assertTrue("'Pin to Top' should be enabled", pin.isEnabled());
 			assertFalse("'Pin to Top' should not be checked", pin.getSelection());
 			assertNull("'Move Pin Up' should be hidden for an unpinned field", findItem(menu, MOVE_PIN_UP));
@@ -169,7 +169,7 @@ public class PinnedFieldsViewTests extends AbstractDebugUiTests {
 
 		withContextMenu(viewer, children(viewer, "privStr"), menu -> {
 			MenuItem pin = findItem(menu, PIN_TO_TOP);
-			assertNotNull("Missing 'Pin to Top' in " + itemTexts(menu), pin);
+			assertNotNull("Missing 'Pin to Top' in " + itemTexts(menu), pin); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 			assertTrue("'Pin to Top' should be checked for a pinned field", pin.getSelection());
 			MenuItem moveUp = findItem(menu, MOVE_PIN_UP);
 			assertNotNull("'Move Pin Up' should be shown for a pinned field", moveUp);
@@ -177,11 +177,11 @@ public class PinnedFieldsViewTests extends AbstractDebugUiTests {
 			click(pin);
 		});
 
-		waitFor("Unpinned field should be back to its place: " + initial, () -> initial.equals(getChildNames(viewer)), () -> getChildNames(viewer));
+		waitFor("Unpinned field should be back to its place: " + initial, () -> initial.equals(getChildNames(viewer)), () -> getChildNames(viewer)); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		assertFalse(PinnedFieldsManager.getDefault().hasPinnedFields(fViewId));
 	}
 
-	public void testMovePin() throws Exception {
+	public void testMovePin() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		TreeViewer viewer = launchAndShowThis(IDebugUIConstants.ID_VARIABLE_VIEW);
 		waitForChildren(viewer);
 
@@ -209,16 +209,16 @@ public class PinnedFieldsViewTests extends AbstractDebugUiTests {
 
 		withContextMenu(viewer, children(viewer, "pubStr"), menu -> {
 			MenuItem unpinAll = findItem(menu, UNPIN_ALL);
-			assertNotNull("Missing 'Unpin All Fields' in " + itemTexts(menu), unpinAll);
+			assertNotNull("Missing 'Unpin All Fields' in " + itemTexts(menu), unpinAll); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 			assertTrue("'Unpin All Fields' should be enabled", unpinAll.isEnabled());
 			click(unpinAll);
 		});
 
-		waitFor("Fields should be back to their place: " + initial, () -> initial.equals(getChildNames(viewer)), () -> getChildNames(viewer));
+		waitFor("Fields should be back to their place: " + initial, () -> initial.equals(getChildNames(viewer)), () -> getChildNames(viewer)); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		withContextMenu(viewer, children(viewer, "pubStr"), menu -> assertFalse("'Unpin All Fields' should be disabled", findItem(menu, UNPIN_ALL).isEnabled()));
 	}
 
-	public void testMultipleSelection() throws Exception {
+	public void testMultipleSelection() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		TreeViewer viewer = launchAndShowThis(IDebugUIConstants.ID_VARIABLE_VIEW);
 		waitForChildren(viewer);
 		pinFromContextMenu(viewer, "date");
@@ -227,7 +227,7 @@ public class PinnedFieldsViewTests extends AbstractDebugUiTests {
 		// mixed selection: the command pins all the selected fields
 		withContextMenu(viewer, children(viewer, "date", "privStr"), menu -> {
 			MenuItem pin = findItem(menu, PIN_TO_TOP);
-			assertNotNull("Missing 'Pin to Top' in " + itemTexts(menu), pin);
+			assertNotNull("Missing 'Pin to Top' in " + itemTexts(menu), pin); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 			assertFalse("'Pin to Top' should not be checked for a mixed selection", pin.getSelection());
 			assertNull("'Move Pin Up' should be hidden for a multiple selection", findItem(menu, MOVE_PIN_UP));
 			click(pin);
@@ -266,11 +266,11 @@ public class PinnedFieldsViewTests extends AbstractDebugUiTests {
 		assertNoPinError();
 	}
 
-	public void testMovePinOfStaticFieldsInStaticFrame() throws Exception {
+	public void testMovePinOfStaticFieldsInStaticFrame() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		// in a static method, the static fields of the declaring type are root elements of the Variables view
 		IPreferenceStore store = JDIDebugUIPlugin.getDefault().getPreferenceStore();
-		String showStatics = IDebugUIConstants.ID_VARIABLE_VIEW + "." + IJDIPreferencesConstants.PREF_SHOW_STATIC_VARIABLES;
-		String showConstants = IDebugUIConstants.ID_VARIABLE_VIEW + "." + IJDIPreferencesConstants.PREF_SHOW_CONSTANTS;
+		String showStatics = IDebugUIConstants.ID_VARIABLE_VIEW + "." + IJDIPreferencesConstants.PREF_SHOW_STATIC_VARIABLES; //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
+		String showConstants = IDebugUIConstants.ID_VARIABLE_VIEW + "." + IJDIPreferencesConstants.PREF_SHOW_CONSTANTS; //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		boolean showedStatics = store.getBoolean(showStatics);
 		boolean showedConstants = store.getBoolean(showConstants);
 		store.setValue(showStatics, true);
@@ -292,7 +292,7 @@ public class PinnedFieldsViewTests extends AbstractDebugUiTests {
 
 			withContextMenu(viewer, root(viewer, "CONSTANT"), menu -> {
 				MenuItem moveUp = findItem(menu, MOVE_PIN_UP);
-				assertNotNull("Missing 'Move Pin Up' in " + itemTexts(menu), moveUp);
+				assertNotNull("Missing 'Move Pin Up' in " + itemTexts(menu), moveUp); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 				assertTrue("'Move Pin Up' should be enabled for the last pinned root field", moveUp.isEnabled());
 				click(moveUp);
 			});
@@ -311,7 +311,7 @@ public class PinnedFieldsViewTests extends AbstractDebugUiTests {
 		try {
 			TreeViewer viewer = launchAndShowThis(IDebugUIConstants.ID_EXPRESSION_VIEW);
 			List<String> initial = waitForChildren(viewer);
-			assertTrue("privStr should not be the first field: " + initial, initial.indexOf("privStr") > 0);
+			assertTrue("privStr should not be the first field: " + initial, initial.indexOf("privStr") > 0); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 			pinFromContextMenu(viewer, "privStr");
 
@@ -324,25 +324,25 @@ public class PinnedFieldsViewTests extends AbstractDebugUiTests {
 	/**
 	 * Pins are view specific: pinning or unpinning fields in the Expressions view must not change the Variables view.
 	 */
-	public void testPinsAreViewSpecific() throws Exception {
+	public void testPinsAreViewSpecific() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IExpressionManager expressionManager = DebugPlugin.getDefault().getExpressionManager();
 		IWatchExpression expression = expressionManager.newWatchExpression("this");
 		expressionManager.addExpression(expression);
 		try {
 			TreeViewer variables = launchAndShowThis(IDebugUIConstants.ID_VARIABLE_VIEW);
 			IViewPart variablesPart = fPart;
-			List<String> pinnedInVariables = new ArrayList<>(waitForChildren(variables));
+			List<String> pinnedInVariables = new ArrayList<>(waitForChildren(variables)); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 			pinnedInVariables.remove("privStr");
 			pinnedInVariables.add(0, "privStr");
 			pinFromContextMenu(variables, "privStr");
-			waitFor("Pinned field should be first: " + pinnedInVariables, () -> pinnedInVariables.equals(getChildNames(variables)), () -> getChildNames(variables));
+			waitFor("Pinned field should be first: " + pinnedInVariables, () -> pinnedInVariables.equals(getChildNames(variables)), () -> getChildNames(variables)); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 			// the field pinned in the Variables view is not pinned in the Expressions view
 			TreeViewer expressions = showThis(IDebugUIConstants.ID_EXPRESSION_VIEW);
 			List<String> initial = waitForChildren(expressions);
 			withContextMenu(expressions, children(expressions, "privStr"), menu -> {
 				MenuItem pin = findItem(menu, PIN_TO_TOP);
-				assertNotNull("Missing 'Pin to Top' in " + itemTexts(menu), pin);
+				assertNotNull("Missing 'Pin to Top' in " + itemTexts(menu), pin); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 				assertFalse("'Pin to Top' should not be checked for a field pinned in another view", pin.getSelection());
 				assertNull("'Move Pin Up' should be hidden for a field pinned in another view", findItem(menu, MOVE_PIN_UP));
 				assertFalse("'Unpin All Fields' should be disabled when the fields are pinned in another view", findItem(menu, UNPIN_ALL).isEnabled());
@@ -352,21 +352,21 @@ public class PinnedFieldsViewTests extends AbstractDebugUiTests {
 			pinFromContextMenu(expressions, "date");
 			waitForFirstChildren(expressions, "date");
 			pinFromContextMenu(expressions, "date");
-			waitFor("Unpinned field should be back to its place: " + initial, () -> initial.equals(getChildNames(expressions)), () -> getChildNames(expressions));
+			waitFor("Unpinned field should be back to its place: " + initial, () -> initial.equals(getChildNames(expressions)), () -> getChildNames(expressions)); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 			assertTrue("Field should still be pinned in the Variables view", PinnedFieldsManager.getDefault().hasPinnedFields(IDebugUIConstants.ID_VARIABLE_VIEW));
 
 			// nor does "Unpin All Fields"
 			pinFromContextMenu(expressions, "date");
 			waitForFirstChildren(expressions, "date");
 			withContextMenu(expressions, children(expressions, "pubStr"), menu -> click(findItem(menu, UNPIN_ALL)));
-			waitFor("Fields should be back to their place: " + initial, () -> initial.equals(getChildNames(expressions)), () -> getChildNames(expressions));
+			waitFor("Fields should be back to their place: " + initial, () -> initial.equals(getChildNames(expressions)), () -> getChildNames(expressions)); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 			assertFalse(PinnedFieldsManager.getDefault().hasPinnedFields(IDebugUIConstants.ID_EXPRESSION_VIEW));
 
 			fPart = variablesPart;
 			fViewId = IDebugUIConstants.ID_VARIABLE_VIEW;
 			sync(() -> getActivePage().activate(fPart));
 			// the Variables view was refreshed by the changes of the Expressions view, and still shows its own pin only
-			waitFor("Variables view should still show its own pin only: " + pinnedInVariables, () -> pinnedInVariables.equals(getChildNames(variables)), () -> getChildNames(variables));
+			waitFor("Variables view should still show its own pin only: " + pinnedInVariables, () -> pinnedInVariables.equals(getChildNames(variables)), () -> getChildNames(variables)); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 			withContextMenu(variables, children(variables, "privStr"), menu -> assertTrue("'Pin to Top' should still be checked in the Variables view", findItem(menu, PIN_TO_TOP).getSelection()));
 		} finally {
 			expressionManager.removeExpression(expression);
@@ -396,14 +396,14 @@ public class PinnedFieldsViewTests extends AbstractDebugUiTests {
 		fPart = openView(viewId);
 		TreeViewer viewer = (TreeViewer) fPart.getAdapter(IDebugView.class).getViewer();
 		sync(() -> getActivePage().activate(fPart));
-		waitFor("'this' not shown in " + viewId, () -> findRootItem(viewer) != null);
+		waitFor("'this' not shown in " + viewId, () -> findRootItem(viewer) != null); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		return viewer;
 	}
 
 	private void pinRootFromContextMenu(TreeViewer viewer, String field) throws Exception {
 		withContextMenu(viewer, root(viewer, field), menu -> {
 			MenuItem pin = findItem(menu, PIN_TO_TOP);
-			assertNotNull("Missing 'Pin to Top' in " + itemTexts(menu), pin);
+			assertNotNull("Missing 'Pin to Top' in " + itemTexts(menu), pin); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 			click(pin);
 		});
 	}
@@ -411,7 +411,7 @@ public class PinnedFieldsViewTests extends AbstractDebugUiTests {
 	private void pinFromContextMenu(TreeViewer viewer, String field) throws Exception {
 		withContextMenu(viewer, children(viewer, field), menu -> {
 			MenuItem pin = findItem(menu, PIN_TO_TOP);
-			assertNotNull("Missing 'Pin to Top' in " + itemTexts(menu), pin);
+			assertNotNull("Missing 'Pin to Top' in " + itemTexts(menu), pin); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 			click(pin);
 		});
 	}
@@ -433,8 +433,8 @@ public class PinnedFieldsViewTests extends AbstractDebugUiTests {
 	private Selected children(TreeViewer viewer, String... fields) {
 		return new Selected(List.of(fields).toString(), () -> {
 			TreeItem root = findRootItem(viewer);
-			List<TreePath> paths = new ArrayList<>();
-			for (String field : fields) {
+			List<TreePath> paths = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
+			for (String field : fields) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				TreeItem item = findChildItem(viewer, field);
 				if (root == null || item == null) {
 					return null;
@@ -457,8 +457,8 @@ public class PinnedFieldsViewTests extends AbstractDebugUiTests {
 	 * callback on its items. The selection and the menu are done in the same UI runnable, so that the view cannot
 	 * restore its previous selection (as it does asynchronously after a refresh) before the menu is evaluated.
 	 */
-	private void withContextMenu(TreeViewer viewer, Selected selected, MenuCallback callback) throws Exception {
-		waitFor("Cannot open the context menu on " + selected, () -> {
+	private void withContextMenu(TreeViewer viewer, Selected selected, MenuCallback callback) throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
+		waitFor("Cannot open the context menu on " + selected, () -> { //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 			TreePath[] paths = selected.paths().call();
 			if (paths == null) {
 				// not shown yet
@@ -466,11 +466,11 @@ public class PinnedFieldsViewTests extends AbstractDebugUiTests {
 			}
 			getActivePage().activate(fPart);
 			viewer.setSelection(new TreeSelection(paths), true);
-			Set<Object> expected = new HashSet<>();
-			for (TreePath path : paths) {
+			Set<Object> expected = new HashSet<>(); //FLLDCIM: MARK — M03 M3_SET_LANES NEW
+			for (TreePath path : paths) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				expected.add(path.getLastSegment());
 			}
-			if (!expected.equals(new HashSet<>(Arrays.asList(viewer.getStructuredSelection().toArray())))) {
+			if (!expected.equals(new HashSet<>(Arrays.asList(viewer.getStructuredSelection().toArray())))) { //FLLDCIM: MARK — M03 M3_SET_LANES NEW
 				// the view did not apply the selection yet
 				return false;
 			}
@@ -496,7 +496,7 @@ public class PinnedFieldsViewTests extends AbstractDebugUiTests {
 	}
 
 	private static MenuItem findItem(Menu menu, String text) {
-		for (MenuItem item : menu.getItems()) {
+		for (MenuItem item : menu.getItems()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			if (text.equals(cleanText(item))) {
 				return item;
 			}
@@ -505,8 +505,8 @@ public class PinnedFieldsViewTests extends AbstractDebugUiTests {
 	}
 
 	private static List<String> itemTexts(Menu menu) {
-		List<String> texts = new ArrayList<>();
-		for (MenuItem item : menu.getItems()) {
+		List<String> texts = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
+		for (MenuItem item : menu.getItems()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			texts.add(cleanText(item));
 		}
 		return texts;
@@ -524,12 +524,12 @@ public class PinnedFieldsViewTests extends AbstractDebugUiTests {
 	 */
 	private List<String> waitForChildren(TreeViewer viewer) throws Exception {
 		assertFalse("No field should be pinned yet", PinnedFieldsManager.getDefault().hasPinnedFields(fViewId));
-		List<String> expected = new ArrayList<>();
-		for (Object field : JavaContentProviderFilter.filterVariables(fThis.getVariables(), new PresentationContext(fViewId))) {
+		List<String> expected = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
+		for (Object field : JavaContentProviderFilter.filterVariables(fThis.getVariables(), new PresentationContext(fViewId))) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			expected.add(((IVariable) field).getName());
 		}
-		assertTrue("Unexpected fields: " + expected, expected.indexOf("privStr") > 0 && expected.contains("date"));
-		waitFor("Fields of 'this' not all shown, expected " + expected, () -> {
+		assertTrue("Unexpected fields: " + expected, expected.indexOf("privStr") > 0 && expected.contains("date")); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
+		waitFor("Fields of 'this' not all shown, expected " + expected, () -> { //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 			// the view may be refreshed while it is being populated, so expand until the fields are shown
 			TreeItem root = findRootItem(viewer);
 			if (root != null && !root.getExpanded()) {
@@ -541,7 +541,7 @@ public class PinnedFieldsViewTests extends AbstractDebugUiTests {
 	}
 
 	private void waitForFirstChildren(TreeViewer viewer, String... fields) throws Exception {
-		waitFor("Expected first fields " + List.of(fields), () -> startsWith(getChildNames(viewer), fields), () -> getChildNames(viewer));
+		waitFor("Expected first fields " + List.of(fields), () -> startsWith(getChildNames(viewer), fields), () -> getChildNames(viewer)); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 	}
 
 	private Image getChildImage(TreeViewer viewer, String field) throws Exception {
@@ -557,14 +557,14 @@ public class PinnedFieldsViewTests extends AbstractDebugUiTests {
 	 */
 	private void waitFor(String message, Callable<Boolean> condition, Callable<Object> state) throws Exception {
 		long end = System.currentTimeMillis() + TIMEOUT;
-		while (System.currentTimeMillis() < end) {
+		while (System.currentTimeMillis() < end) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			if (Boolean.TRUE.equals(sync(condition))) {
 				return;
 			}
 			processUiEvents(100);
 		}
 		Object shown = sync(state);
-		fail(shown == null ? message : message + ", shown: " + shown);
+		fail(shown == null ? message : message + ", shown: " + shown); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 	}
 
 	private static TreeItem findRootItem(TreeViewer viewer) throws DebugException {
@@ -572,7 +572,7 @@ public class PinnedFieldsViewTests extends AbstractDebugUiTests {
 	}
 
 	private static TreeItem findRootItem(TreeViewer viewer, String name) throws DebugException {
-		for (TreeItem item : viewer.getTree().getItems()) {
+		for (TreeItem item : viewer.getTree().getItems()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			if (item.getData() instanceof IVariable variable && variable.getName().equals(name)) {
 				return item;
 			}
@@ -586,7 +586,7 @@ public class PinnedFieldsViewTests extends AbstractDebugUiTests {
 	private static TreeItem findChildItem(TreeViewer viewer, String field) throws DebugException {
 		TreeItem root = findRootItem(viewer);
 		if (root != null) {
-			for (TreeItem item : root.getItems()) {
+			for (TreeItem item : root.getItems()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				if (item.getData() instanceof IVariable variable && variable.getName().equals(field)) {
 					return item;
 				}
@@ -600,8 +600,8 @@ public class PinnedFieldsViewTests extends AbstractDebugUiTests {
 	}
 
 	private static List<String> getRootNames(TreeViewer viewer) throws DebugException {
-		List<String> names = new ArrayList<>();
-		for (TreeItem item : viewer.getTree().getItems()) {
+		List<String> names = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
+		for (TreeItem item : viewer.getTree().getItems()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			if (item.getData() instanceof IVariable variable) {
 				names.add(variable.getName());
 			}
@@ -610,10 +610,10 @@ public class PinnedFieldsViewTests extends AbstractDebugUiTests {
 	}
 
 	private static List<String> getChildNames(TreeViewer viewer) throws DebugException {
-		List<String> names = new ArrayList<>();
+		List<String> names = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 		TreeItem root = findRootItem(viewer);
 		if (root != null) {
-			for (TreeItem item : root.getItems()) {
+			for (TreeItem item : root.getItems()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				if (item.getData() instanceof IVariable variable) {
 					names.add(variable.getName());
 				}

@@ -71,7 +71,7 @@ public class SpecialExceptionBreakpointTests extends AbstractDebugTest {
 	public void testCaughtException() throws Exception {
 		caughtException(false);
 	}
-	void caughtException(boolean suspendOnCompErr) throws Exception {
+	void caughtException(boolean suspendOnCompErr) throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		setPreferences(true, suspendOnCompErr, SuspendOnRecurrenceStrategy.SUSPEND_ALWAYS);
 
 		String typeName = "ErrorRecurrence";
@@ -108,7 +108,7 @@ public class SpecialExceptionBreakpointTests extends AbstractDebugTest {
 	public void testCaughtExceptionSkip_uncaught() throws Exception {
 		caughtExceptionSkip_uncaught(false);
 	}
-	void caughtExceptionSkip_uncaught(boolean suspendOnCompErr) throws Exception {
+	void caughtExceptionSkip_uncaught(boolean suspendOnCompErr) throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		setPreferences(true, suspendOnCompErr, SuspendOnRecurrenceStrategy.SKIP_RECURRENCES);
 
 		String typeName = "ErrorRecurrence";
@@ -143,7 +143,7 @@ public class SpecialExceptionBreakpointTests extends AbstractDebugTest {
 	public void testCaughtExceptionSkip() throws Exception {
 		caughtExceptionSkip(false);
 	}
-	void caughtExceptionSkip(boolean suspendOnCompErr) throws Exception {
+	void caughtExceptionSkip(boolean suspendOnCompErr) throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		setPreferences(false, suspendOnCompErr, SuspendOnRecurrenceStrategy.SKIP_RECURRENCES);
 
 		String typeName = "ErrorRecurrence";
@@ -169,7 +169,7 @@ public class SpecialExceptionBreakpointTests extends AbstractDebugTest {
 
 	private void assertExceptionBreakpointHit(IJavaThread thread, IJavaExceptionBreakpoint ex) throws DebugException {
 		IMarker problem = JavaDebugOptionsManager.getDefault().getProblem((IJavaStackFrame) thread.getTopStackFrame());
-		assertNull("unexpected problem marker " + problem, problem);
+		assertNull("unexpected problem marker " + problem, problem); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		IBreakpoint hit = getBreakpoint(thread);
 		assertNotNull("suspended, but not by breakpoint", hit);
 		assertEquals("suspended, but not by expected exception", ex.getExceptionTypeName(), ((IJavaExceptionBreakpoint) hit).getExceptionTypeName());

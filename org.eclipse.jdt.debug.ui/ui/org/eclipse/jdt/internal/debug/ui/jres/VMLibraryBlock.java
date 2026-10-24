@@ -61,7 +61,7 @@ import org.eclipse.swt.widgets.FileDialog;
 /**
  * Control used to edit the libraries associated with a VM install
  */
-public class VMLibraryBlock extends AbstractVMInstallPage implements SelectionListener, ISelectionChangedListener {
+public class VMLibraryBlock extends AbstractVMInstallPage implements SelectionListener, ISelectionChangedListener { //FLLDCIM: MARK — T04  IMPLEMENTS
 
 	/**
 	 * Attribute name for the last path used to open a file/directory chooser
@@ -105,7 +105,7 @@ public class VMLibraryBlock extends AbstractVMInstallPage implements SelectionLi
 	/* (non-Javadoc)
 	 * @see org.eclipse.jface.dialogs.IDialogPage#createControl(org.eclipse.swt.widgets.Composite)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public void createControl(Composite parent) {
 		Font font = parent.getFont();
 
@@ -117,26 +117,26 @@ public class VMLibraryBlock extends AbstractVMInstallPage implements SelectionLi
 		fLibraryViewer.getControl().setLayoutData(gd);
 		fLibraryContentProvider= new LibraryContentProvider();
 		fLibraryViewer.setContentProvider(fLibraryContentProvider);
-		fLibraryViewer.setLabelProvider(new LibraryLabelProvider());
-		fLibraryViewer.setInput(this);
-		fLibraryViewer.addSelectionChangedListener(this);
+		fLibraryViewer.setLabelProvider(new LibraryLabelProvider()); //FLLDCIM: MARK — T24 LABEL_DELTA CALL
+		fLibraryViewer.setInput(this); //FLLDCIM: MARK — M21 FULL_REBUILD_TO_DELTA CALL
+		fLibraryViewer.addSelectionChangedListener(this); //FLLDCIM: MARK — T04 VIEWER_SELECTION_DELTA CALL
 
 		Composite pathButtonComp = SWTFactory.createComposite(comp, font, 1, 1, GridData.VERTICAL_ALIGN_BEGINNING | GridData.HORIZONTAL_ALIGN_FILL, 0, 0);
 		fAddButton = SWTFactory.createPushButton(pathButtonComp, JREMessages.VMLibraryBlock_7, JREMessages.VMLibraryBlock_16, null);
-		fAddButton.addSelectionListener(this);
+		fAddButton.addSelectionListener(this); //FLLDCIM: MARK — T03 SELECTION_LANE CALL
 		fJavadocButton = SWTFactory.createPushButton(pathButtonComp, JREMessages.VMLibraryBlock_3, JREMessages.VMLibraryBlock_17, null);
 		fJavadocButton.setEnabled(false);
-		fJavadocButton.addSelectionListener(this);
+		fJavadocButton.addSelectionListener(this); //FLLDCIM: MARK — T03 SELECTION_LANE CALL
 
 		fSourceButton =  SWTFactory.createPushButton(pathButtonComp, JREMessages.VMLibraryBlock_11, JREMessages.VMLibraryBlock_18, null);
 		fSourceButton.setEnabled(false);
-		fSourceButton.addSelectionListener(this);
+		fSourceButton.addSelectionListener(this); //FLLDCIM: MARK — T03 SELECTION_LANE CALL
 
 		fAnnotationsButton = SWTFactory.createPushButton(pathButtonComp, JREMessages.VMExternalAnnsBlock_3, JREMessages.VMExternalAnnsBlock_4, null);
 		fAnnotationsButton.setEnabled(false);
-		fAnnotationsButton.addSelectionListener(this);
+		fAnnotationsButton.addSelectionListener(this); //FLLDCIM: MARK — T03 SELECTION_LANE CALL
 
-		fLibraryViewer.addDoubleClickListener(new IDoubleClickListener() {
+		fLibraryViewer.addDoubleClickListener(new IDoubleClickListener() { //FLLDCIM: MARK — T05 VIEWER_OPEN CALL
 			@Override
 			public void doubleClick(DoubleClickEvent event) {
 				IStructuredSelection sel = (IStructuredSelection)event.getViewer().getSelection();
@@ -148,15 +148,15 @@ public class VMLibraryBlock extends AbstractVMInstallPage implements SelectionLi
 		});
 		fRemoveButton = SWTFactory.createPushButton(pathButtonComp, JREMessages.VMLibraryBlock_6, JREMessages.VMLibraryBlock_12, null);
 		fRemoveButton.setEnabled(false);
-		fRemoveButton.addSelectionListener(this);
+		fRemoveButton.addSelectionListener(this); //FLLDCIM: MARK — T03 SELECTION_LANE CALL
 		fUpButton = SWTFactory.createPushButton(pathButtonComp, JREMessages.VMLibraryBlock_4, JREMessages.VMLibraryBlock_13, null);
 		fUpButton.setEnabled(false);
-		fUpButton.addSelectionListener(this);
+		fUpButton.addSelectionListener(this); //FLLDCIM: MARK — T03 SELECTION_LANE CALL
 		fDownButton = SWTFactory.createPushButton(pathButtonComp, JREMessages.VMLibraryBlock_5, JREMessages.VMLibraryBlock_14, null);
 		fDownButton.setEnabled(false);
-		fDownButton.addSelectionListener(this);
+		fDownButton.addSelectionListener(this); //FLLDCIM: MARK — T03 SELECTION_LANE CALL
 		fDefaultButton = SWTFactory.createPushButton(pathButtonComp, JREMessages.VMLibraryBlock_9, JREMessages.VMLibraryBlock_15, null);
-		fDefaultButton.addSelectionListener(this);
+		fDefaultButton.addSelectionListener(this); //FLLDCIM: MARK — T03 SELECTION_LANE CALL
 
 		setControl(comp);
 	}
@@ -164,7 +164,7 @@ public class VMLibraryBlock extends AbstractVMInstallPage implements SelectionLi
 	/**
 	 * The "default" button has been toggled
 	 */
-	private void restoreDefaultLibraries() {
+	private void restoreDefaultLibraries() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		LibraryLocation[] libs = null;
 		File installLocation = null;
 		if (fVmInstall != null) {
@@ -200,14 +200,14 @@ public class VMLibraryBlock extends AbstractVMInstallPage implements SelectionLi
 	/**
 	 * Updates buttons and status based on current libraries
 	 */
-	private void update() {
+	private void update() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		updateButtons();
 		IStatus status = Status.OK_STATUS;
 		if (fLibraryContentProvider.getLibraries().length == 0) {
 			status = new Status(IStatus.ERROR, JDIDebugUIPlugin.getUniqueIdentifier(), IJavaDebugUIConstants.INTERNAL_ERROR, JREMessages.VMLibraryBlock_19, null);
 		}
 		LibraryStandin[] standins = fLibraryContentProvider.getStandins();
-		for (int i = 0; i < standins.length; i++) {
+		for (int i = 0; i < standins.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			IStatus st = standins[i].validate();
 			if (!st.isOK()) {
 				status = st;
@@ -235,7 +235,7 @@ public class VMLibraryBlock extends AbstractVMInstallPage implements SelectionLi
 	 * @param vm the virtual machine to check for the default location
 	 * @return true if the current set of locations are the defaults, false otherwise
 	 */
-	protected boolean isDefaultLocations(IVMInstall vm) {
+	protected boolean isDefaultLocations(IVMInstall vm) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		LibraryLocation[] libraryLocations = fLibraryContentProvider.getLibraries();
 
 		if (vm == null || libraryLocations == null) {
@@ -245,7 +245,7 @@ public class VMLibraryBlock extends AbstractVMInstallPage implements SelectionLi
 		if (installLocation != null) {
 			LibraryLocation[] def = vm.getVMInstallType().getDefaultLibraryLocations(installLocation);
 			if (def.length == libraryLocations.length) {
-				for (int i = 0; i < def.length; i++) {
+				for (int i = 0; i < def.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 					if (!def[i].equals(libraryLocations[i])) {
 						return false;
 					}
@@ -259,7 +259,7 @@ public class VMLibraryBlock extends AbstractVMInstallPage implements SelectionLi
 	/* (non-Javadoc)
 	 * @see org.eclipse.swt.events.SelectionListener#widgetSelected(org.eclipse.swt.events.SelectionEvent)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public void widgetSelected(SelectionEvent e) {
 		boolean completed = true;
 		Object source= e.getSource();
@@ -299,7 +299,7 @@ public class VMLibraryBlock extends AbstractVMInstallPage implements SelectionLi
 	 * Adds external libraries to the JRE. Returns <code>true</code> if successful and
 	 * <code>false</code> if canceled.
 	 */
-	private boolean add(IStructuredSelection selection) {
+	private boolean add(IStructuredSelection selection) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IDialogSettings dialogSettings= JDIDebugUIPlugin.getDefault().getDialogSettings();
 		String lastUsedPath= dialogSettings.get(LAST_PATH_SETTING);
 		if (lastUsedPath == null) {
@@ -318,7 +318,7 @@ public class VMLibraryBlock extends AbstractVMInstallPage implements SelectionLi
 
 		IPath filterPath= new Path(dialog.getFilterPath());
 		LibraryLocation[] libs= new LibraryLocation[nChosen];
-		for (int i= 0; i < nChosen; i++) {
+		for (int i= 0; i < nChosen; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			libs[i]= new LibraryLocation(filterPath.append(fileNames[i]).makeAbsolute(), Path.EMPTY, Path.EMPTY);
 		}
 		dialogSettings.put(LAST_PATH_SETTING, filterPath.toOSString());
@@ -331,7 +331,7 @@ public class VMLibraryBlock extends AbstractVMInstallPage implements SelectionLi
 	 * Open the javadoc location dialog or the source location dialog, and set the result
 	 * to the selected libraries.
 	 */
-	private void edit(IStructuredSelection selection, int type) {
+	private void edit(IStructuredSelection selection, int type) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		Object obj = selection.getFirstElement();
 		LibraryStandin standin = null;
 		if(obj instanceof LibraryStandin) {
@@ -381,7 +381,7 @@ public class VMLibraryBlock extends AbstractVMInstallPage implements SelectionLi
 	}
 
 	private static String findClasspathAttribute(IClasspathAttribute[] attributes, String name) {
-		for(int i = attributes.length; --i >= 0;) {
+		for(int i = attributes.length; --i >= 0;) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			if(name.equals(attributes[i].getName())) {
 				return attributes[i].getValue();
 			}
@@ -399,7 +399,7 @@ public class VMLibraryBlock extends AbstractVMInstallPage implements SelectionLi
 	/**
 	 * Refresh the enable/disable state for the buttons.
 	 */
-	private void updateButtons() {
+	private void updateButtons() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IStructuredSelection selection = (IStructuredSelection) fLibraryViewer.getSelection();
 		fRemoveButton.setEnabled(!selection.isEmpty());
 		boolean enableUp = true,
@@ -415,7 +415,7 @@ public class VMLibraryBlock extends AbstractVMInstallPage implements SelectionLi
 		} else {
 			Object first = libraries[0];
 			Object last = libraries[libraries.length - 1];
-			for (Iterator<?> iter= selection.iterator(); iter.hasNext();) {
+			for (Iterator<?> iter= selection.iterator(); iter.hasNext();) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				Object element= iter.next();
 				Object lib;
 				if (element instanceof SubElement subElement) {

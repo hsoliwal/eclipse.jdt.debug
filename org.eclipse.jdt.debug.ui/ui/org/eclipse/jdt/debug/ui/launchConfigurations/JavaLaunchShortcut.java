@@ -109,7 +109,7 @@ public abstract class JavaLaunchShortcut implements ILaunchShortcut2 {
 	 * @param selectTitle prompting title for choosing a type to launch
 	 * @param emptyMessage error message when no types are resolved for launching
 	 */
-	private void searchAndLaunch(Object[] scope, String mode, String selectTitle, String emptyMessage) {
+	private void searchAndLaunch(Object[] scope, String mode, String selectTitle, String emptyMessage) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IType[] types = null;
 		try {
 			types = findTypes(scope, PlatformUI.getWorkbench().getProgressService());
@@ -162,7 +162,7 @@ public abstract class JavaLaunchShortcut implements ILaunchShortcut2 {
 	 * @param mode launch mode
 	 * @since 3.5
 	 */
-	protected void launch(IType type, String mode) {
+	protected void launch(IType type, String mode) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		List<ILaunchConfiguration> configs = getCandidates(type, getConfigurationType());
 		if(configs != null) {
 			ILaunchConfiguration config = null;
@@ -193,12 +193,12 @@ public abstract class JavaLaunchShortcut implements ILaunchShortcut2 {
 	 * @return the list of {@link ILaunchConfiguration}s or an empty list, never <code>null</code>
 	 * @since 3.8
 	 */
-	List<ILaunchConfiguration> getCandidates(IType type, ILaunchConfigurationType ctype) {
+	List<ILaunchConfiguration> getCandidates(IType type, ILaunchConfigurationType ctype) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		List<ILaunchConfiguration> candidateConfigs = Collections.EMPTY_LIST;
 		try {
 			ILaunchConfiguration[] configs = DebugPlugin.getDefault().getLaunchManager().getLaunchConfigurations(ctype);
-			candidateConfigs = new ArrayList<>(configs.length);
-			for (int i = 0; i < configs.length; i++) {
+			candidateConfigs = new ArrayList<>(configs.length); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
+			for (int i = 0; i < configs.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				ILaunchConfiguration config = configs[i];
 				if (config.getAttribute(IJavaLaunchConfigurationConstants.ATTR_MAIN_TYPE_NAME, "").equals(type.getFullyQualifiedName())) { //$NON-NLS-1$
 					if (config.getAttribute(IJavaLaunchConfigurationConstants.ATTR_PROJECT_NAME, "").equals(type.getJavaProject().getElementName())) { //$NON-NLS-1$

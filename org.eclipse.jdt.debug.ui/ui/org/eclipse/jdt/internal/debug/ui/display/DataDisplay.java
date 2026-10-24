@@ -60,7 +60,7 @@ public class DataDisplay implements IDataDisplay {
 		try {
 			// add a cariage return if needed.
 			if (offset != document.getLineInformationOfOffset(offset).getOffset()) {
-				expression= System.lineSeparator() + expression.trim();
+				expression= System.lineSeparator() + expression.trim(); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 			}
 			document.replace(offset, 0, expression);
 			fTextViewer.setSelectedRange(offset + expression.length(), 0);
@@ -75,7 +75,7 @@ public class DataDisplay implements IDataDisplay {
 	 */
 	@Override
 	public void displayExpressionValue(String value) {
-		value= System.lineSeparator() + '\t' + value;
+		value= System.lineSeparator() + '\t' + value; //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		ITextSelection selection= (ITextSelection)fTextViewer.getSelectionProvider().getSelection();
 
 		int offset= selection.getOffset() + selection.getLength();

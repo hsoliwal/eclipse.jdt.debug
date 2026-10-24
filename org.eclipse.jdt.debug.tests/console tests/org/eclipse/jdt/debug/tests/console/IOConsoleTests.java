@@ -41,7 +41,7 @@ public class IOConsoleTests extends AbstractDebugTest implements IPatternMatchLi
     /**
      * Tests that the pattern matcher will find a specific pattern
      */
-    public void testPatternMatchListener() throws Exception {
+    public void testPatternMatchListener() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
         MessageConsole console = new MessageConsole("Test console", null);
         fMatchCount = 0;
         console.addPatternMatchListener(this);
@@ -54,7 +54,7 @@ public class IOConsoleTests extends AbstractDebugTest implements IPatternMatchLi
             stream.print("two foo bar");
 
 			long timeoutNanos = System.nanoTime() + 1500 * 1_000_000L;
-			while (!fDisconnected && System.nanoTime() < timeoutNanos) {
+			while (!fDisconnected && System.nanoTime() < timeoutNanos) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
                 synchronized(this) {
 					wait(1);
                 }

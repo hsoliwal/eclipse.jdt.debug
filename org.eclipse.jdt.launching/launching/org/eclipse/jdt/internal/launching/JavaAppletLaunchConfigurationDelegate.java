@@ -40,14 +40,14 @@ import org.eclipse.jdt.launching.IJavaLaunchConfigurationConstants;
 import org.eclipse.jdt.launching.JavaLaunchDelegate;
 import org.eclipse.jdt.launching.JavaRuntime;
 
-public class JavaAppletLaunchConfigurationDelegate extends JavaLaunchDelegate implements IDebugEventSetListener {
+public class JavaAppletLaunchConfigurationDelegate extends JavaLaunchDelegate implements IDebugEventSetListener { //FLLDCIM: MARK — T27  IMPLEMENTS
 
 	/**
 	 * Mapping of ILaunch objects to File objects that represent the HTML file
 	 * used to initiate the applet launch.  This is used to delete the HTML
 	 * file when the launch terminates.
 	 */
-	private static Map<ILaunch, File> fgLaunchToFileMap = new HashMap<>();
+	private static Map<ILaunch, File> fgLaunchToFileMap = new HashMap<>(); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
 
 	/**
 	 * Used to map temporary file to launch object.
@@ -77,11 +77,11 @@ public class JavaAppletLaunchConfigurationDelegate extends JavaLaunchDelegate im
 	 */
 	public String getJavaPolicyFile(File workingDir) {
 		File file = new File(workingDir, "java.policy.applet");//$NON-NLS-1$
-		if (!file.exists()) {
+		if (!file.exists()) { //FLLDCIM: MARK — M31 M3FILE_IO CALL
 			// copy it to the working directory
 			File test = LaunchingPlugin.getFileInPlugin(new Path("java.policy.applet")); //$NON-NLS-1$
-			try (BufferedOutputStream outputStream = new BufferedOutputStream(new FileOutputStream(file))) {
-				Files.copy(test.toPath(), outputStream);
+			try (BufferedOutputStream outputStream = new BufferedOutputStream(new FileOutputStream(file))) { //FLLDCIM: MARK — M31 M3FILE_IO NEW
+				Files.copy(test.toPath(), outputStream); //FLLDCIM: MARK — M31 M3FILE_IO CALL
 			} catch (IOException e) {
 				return "";//$NON-NLS-1$
 			}
@@ -100,42 +100,42 @@ public class JavaAppletLaunchConfigurationDelegate extends JavaLaunchDelegate im
 	 * @throws CoreException
 	 *             if the file cannot be built
 	 */
-	private File buildHTMLFile(ILaunchConfiguration configuration, File dir) throws CoreException {
+	private File buildHTMLFile(ILaunchConfiguration configuration, File dir) throws CoreException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String name = getAppletMainTypeName(configuration);
-		File tempFile = new File(dir, name + System.currentTimeMillis() + ".html"); //$NON-NLS-1$
-		try (FileOutputStream stream = new FileOutputStream(tempFile)) {
+		File tempFile = new File(dir, name + System.currentTimeMillis() + ".html"); //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
+		try (FileOutputStream stream = new FileOutputStream(tempFile)) { //FLLDCIM: MARK — M31 M3FILE_IO NEW
 			String encoding = getLaunchManager().getEncoding(configuration);
-			StringBuilder buf = new StringBuilder();
-			buf.append("<html>\n"); //$NON-NLS-1$
-			buf.append("<meta http-equiv=\"Content-Type\" content=\"text/html; charset=" + encoding + "\"/>\n"); //$NON-NLS-1$ //$NON-NLS-2$
-			buf.append("<body>\n"); //$NON-NLS-1$
-			buf.append("<applet code="); //$NON-NLS-1$
-			buf.append(name);
-			buf.append(".class "); //$NON-NLS-1$
+			StringBuilder buf = new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
+			buf.append("<html>\n"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+			buf.append("<meta http-equiv=\"Content-Type\" content=\"text/html; charset=" + encoding + "\"/>\n"); //$NON-NLS-1$ //$NON-NLS-2$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+			buf.append("<body>\n"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+			buf.append("<applet code="); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+			buf.append(name); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+			buf.append(".class "); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			String appletName = configuration.getAttribute(IJavaLaunchConfigurationConstants.ATTR_APPLET_NAME, ""); //$NON-NLS-1$
 			if (appletName.length() != 0) {
-				buf.append("NAME =\"" + appletName + "\" "); //$NON-NLS-1$ //$NON-NLS-2$
+				buf.append("NAME =\"" + appletName + "\" "); //$NON-NLS-1$ //$NON-NLS-2$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			}
-			buf.append("width=\""); //$NON-NLS-1$
-			buf.append(Integer.toString(configuration.getAttribute(IJavaLaunchConfigurationConstants.ATTR_APPLET_WIDTH, 200)));
-			buf.append("\" height=\""); //$NON-NLS-1$
-			buf.append(Integer.toString(configuration.getAttribute(IJavaLaunchConfigurationConstants.ATTR_APPLET_HEIGHT, 200)));
-			buf.append("\" >\n"); //$NON-NLS-1$
-			Map<String, String> parameters = configuration.getAttribute(IJavaLaunchConfigurationConstants.ATTR_APPLET_PARAMETERS, new HashMap<>());
+			buf.append("width=\""); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+			buf.append(Integer.toString(configuration.getAttribute(IJavaLaunchConfigurationConstants.ATTR_APPLET_WIDTH, 200))); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+			buf.append("\" height=\""); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+			buf.append(Integer.toString(configuration.getAttribute(IJavaLaunchConfigurationConstants.ATTR_APPLET_HEIGHT, 200))); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+			buf.append("\" >\n"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+			Map<String, String> parameters = configuration.getAttribute(IJavaLaunchConfigurationConstants.ATTR_APPLET_PARAMETERS, new HashMap<>()); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
 			if (!parameters.isEmpty()) {
 				Iterator<Entry<String, String>> iterator = parameters.entrySet().iterator();
-				while (iterator.hasNext()) {
+				while (iterator.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 					Entry<String, String> next = iterator.next();
-					buf.append("<param name="); //$NON-NLS-1$
-					buf.append(getQuotedString(next.getKey()));
-					buf.append(" value="); //$NON-NLS-1$
-					buf.append(getQuotedString(next.getValue()));
-					buf.append(">\n"); //$NON-NLS-1$
+					buf.append("<param name="); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+					buf.append(getQuotedString(next.getKey())); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+					buf.append(" value="); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+					buf.append(getQuotedString(next.getValue())); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+					buf.append(">\n"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				}
 			}
-			buf.append("</applet>\n"); //$NON-NLS-1$
-			buf.append("</body>\n"); //$NON-NLS-1$
-			buf.append("</html>\n"); //$NON-NLS-1$
+			buf.append("</applet>\n"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+			buf.append("</body>\n"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+			buf.append("</html>\n"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 
 			stream.write(buf.toString().getBytes(encoding));
 		} catch(IOException e) {
@@ -149,17 +149,17 @@ public class JavaAppletLaunchConfigurationDelegate extends JavaLaunchDelegate im
 		int singleQuotes = count(string, '\'');
 		int doubleQuotes = count(string, '"');
 		if (doubleQuotes == 0) {
-			return '"' + string + '"';
+			return '"' + string + '"'; //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		} else if (singleQuotes == 0) {
-			return '\'' + string + '\'';
+			return '\'' + string + '\''; //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		} else {
-			return '"' + convertToHTMLContent(string) + '"';
+			return '"' + convertToHTMLContent(string) + '"'; //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		}
 	}
 
 	private static int count(String string, char character) {
 		int count = 0;
-		for (int i = 0; i < string.length(); i++) {
+		for (int i = 0; i < string.length(); i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			if (string.charAt(i) == character) {
 				count++;
 			}
@@ -173,7 +173,7 @@ public class JavaAppletLaunchConfigurationDelegate extends JavaLaunchDelegate im
 		return content;
 	}
 
-	private static String replace(String text, char c, String s) {
+	private static String replace(String text, char c, String s) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 
 		int previous = 0;
 		int current = text.indexOf(c, previous);
@@ -182,14 +182,14 @@ public class JavaAppletLaunchConfigurationDelegate extends JavaLaunchDelegate im
 			return text;
 		}
 
-		StringBuilder buffer = new StringBuilder();
-		while (current > -1) {
-			buffer.append(text.substring(previous, current));
-			buffer.append(s);
+		StringBuilder buffer = new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
+		while (current > -1) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
+			buffer.append(text.substring(previous, current)); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+			buffer.append(s); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			previous = current + 1;
 			current = text.indexOf(c, previous);
 		}
-		buffer.append(text.substring(previous));
+		buffer.append(text.substring(previous)); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 
 		return buffer.toString();
 	}
@@ -197,9 +197,9 @@ public class JavaAppletLaunchConfigurationDelegate extends JavaLaunchDelegate im
 	/* (non-Javadoc)
 	 * @see org.eclipse.debug.core.IDebugEventSetListener#handleDebugEvents(org.eclipse.debug.core.DebugEvent[])
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public void handleDebugEvents(DebugEvent[] events) {
-		for (int i = 0; i < events.length; i++) {
+		for (int i = 0; i < events.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			DebugEvent event = events[i];
 			Object eventSource = event.getSource();
 			switch(event.getKind()) {
@@ -232,7 +232,7 @@ public class JavaAppletLaunchConfigurationDelegate extends JavaLaunchDelegate im
 		if (temp != null) {
 			try {
 				fgLaunchToFileMap.remove(launch);
-				temp.delete();
+				temp.delete(); //FLLDCIM: MARK — M31 M3FILE_IO CALL
 			} finally {
 				if (fgLaunchToFileMap.isEmpty()) {
 					DebugPlugin.getDefault().removeDebugEventListener(this);
@@ -254,7 +254,7 @@ public class JavaAppletLaunchConfigurationDelegate extends JavaLaunchDelegate im
 		}
 		// Add a debug listener if necessary
 		if (fgLaunchToFileMap.isEmpty()) {
-			DebugPlugin.getDefault().addDebugEventListener(this);
+			DebugPlugin.getDefault().addDebugEventListener(this); //FLLDCIM: MARK — T27 DEBUG_EVENT_ADAPTER CALL
 		}
 		// Add a mapping of the launch to the html file
 		fgLaunchToFileMap.put(fLaunch, htmlFile);
@@ -266,11 +266,11 @@ public class JavaAppletLaunchConfigurationDelegate extends JavaLaunchDelegate im
 	 */
 	@Override
 	public String getVMArguments(ILaunchConfiguration configuration) throws CoreException {
-		StringBuilder arguments = new StringBuilder(super.getVMArguments(configuration));
+		StringBuilder arguments = new StringBuilder(super.getVMArguments(configuration)); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 		File workingDir = verifyWorkingDirectory(configuration);
 		String javaPolicyFile = getJavaPolicyFile(workingDir);
-		arguments.append(" "); //$NON-NLS-1$
-		arguments.append(javaPolicyFile);
+		arguments.append(" "); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+		arguments.append(javaPolicyFile); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		return arguments.toString();
 	}
 

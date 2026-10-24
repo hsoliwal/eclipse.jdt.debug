@@ -35,7 +35,7 @@ public class PushPrimitiveType extends SimpleInstruction {
 
 	@Override
 	public String toString() {
-		return "Push Primitive Type: " + fName; //$NON-NLS-1$
+		return "Push Primitive Type: " + fName; //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 	}
 
 }

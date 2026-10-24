@@ -33,16 +33,16 @@ public class ByteOperatorsTests extends Tests {
 
 	// byte + {byte, char, short, int, long, float, double}
 
-	public void testBytePlusByte() throws Throwable {
+	public void testBytePlusByte() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xByte + plusOp + yByte);
+		IValue value = eval(xByte + plusOp + yByte); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("byte plus byte : wrong type : ", "int", typeName);
 		int intValue = ((IJavaPrimitiveValue)value).getIntValue();
 		assertEquals("byte plus byte : wrong result : ", xByteValue + yByteValue, intValue);
 
-		value = eval(yByte + plusOp + xByte);
+		value = eval(yByte + plusOp + xByte); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte plus byte : wrong type : ", "int", typeName);
 		intValue = ((IJavaPrimitiveValue)value).getIntValue();
@@ -52,16 +52,16 @@ public class ByteOperatorsTests extends Tests {
 		}
 	}
 
-	public void testBytePlusChar() throws Throwable {
+	public void testBytePlusChar() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xByte + plusOp + yChar);
+		IValue value = eval(xByte + plusOp + yChar); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("byte plus char : wrong type : ", "int", typeName);
 		int intValue = ((IJavaPrimitiveValue)value).getIntValue();
 		assertEquals("byte plus char : wrong result : ", xByteValue + yCharValue, intValue);
 
-		value = eval(yByte + plusOp + xChar);
+		value = eval(yByte + plusOp + xChar); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte plus char : wrong type : ", "int", typeName);
 		intValue = ((IJavaPrimitiveValue)value).getIntValue();
@@ -71,16 +71,16 @@ public class ByteOperatorsTests extends Tests {
 		}
 	}
 
-	public void testBytePlusShort() throws Throwable {
+	public void testBytePlusShort() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xByte + plusOp + yShort);
+		IValue value = eval(xByte + plusOp + yShort); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("byte plus short : wrong type : ", "int", typeName);
 		int intValue = ((IJavaPrimitiveValue)value).getIntValue();
 		assertEquals("byte plus short : wrong result : ", xByteValue + yShortValue, intValue);
 
-		value = eval(yByte + plusOp + xShort);
+		value = eval(yByte + plusOp + xShort); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte plus short : wrong type : ", "int", typeName);
 		intValue = ((IJavaPrimitiveValue)value).getIntValue();
@@ -90,16 +90,16 @@ public class ByteOperatorsTests extends Tests {
 		}
 	}
 
-	public void testBytePlusInt() throws Throwable {
+	public void testBytePlusInt() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xByte + plusOp + yInt);
+		IValue value = eval(xByte + plusOp + yInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("byte plus int : wrong type : ", "int", typeName);
 		int intValue = ((IJavaPrimitiveValue)value).getIntValue();
 		assertEquals("byte plus int : wrong result : ", xByteValue + yIntValue, intValue);
 
-		value = eval(yByte + plusOp + xInt);
+		value = eval(yByte + plusOp + xInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte plus int : wrong type : ", "int", typeName);
 		intValue = ((IJavaPrimitiveValue)value).getIntValue();
@@ -109,16 +109,16 @@ public class ByteOperatorsTests extends Tests {
 		}
 	}
 
-	public void testBytePlusLong() throws Throwable {
+	public void testBytePlusLong() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xByte + plusOp + yLong);
+		IValue value = eval(xByte + plusOp + yLong); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("byte plus long : wrong type : ", "long", typeName);
 		long longValue = ((IJavaPrimitiveValue)value).getLongValue();
 		assertEquals("byte plus long : wrong result : ", xByteValue + yLongValue, longValue);
 
-		value = eval(yByte + plusOp + xLong);
+		value = eval(yByte + plusOp + xLong); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte plus long : wrong type : ", "long", typeName);
 		longValue = ((IJavaPrimitiveValue)value).getLongValue();
@@ -128,16 +128,16 @@ public class ByteOperatorsTests extends Tests {
 		}
 	}
 
-	public void testBytePlusFloat() throws Throwable {
+	public void testBytePlusFloat() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xByte + plusOp + yFloat);
+		IValue value = eval(xByte + plusOp + yFloat); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("byte plus float : wrong type : ", "float", typeName);
 		float floatValue = ((IJavaPrimitiveValue)value).getFloatValue();
 		assertEquals("byte plus float : wrong result : ", xByteValue + yFloatValue, floatValue, 0);
 
-		value = eval(yByte + plusOp + xFloat);
+		value = eval(yByte + plusOp + xFloat); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte plus float : wrong type : ", "float", typeName);
 		floatValue = ((IJavaPrimitiveValue)value).getFloatValue();
@@ -147,16 +147,16 @@ public class ByteOperatorsTests extends Tests {
 		}
 	}
 
-	public void testBytePlusDouble() throws Throwable {
+	public void testBytePlusDouble() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xByte + plusOp + yDouble);
+		IValue value = eval(xByte + plusOp + yDouble); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("byte plus double : wrong type : ", "double", typeName);
 		double doubleValue = ((IJavaPrimitiveValue)value).getDoubleValue();
 		assertEquals("byte plus double : wrong result : ", xByteValue + yDoubleValue, doubleValue, 0);
 
-		value = eval(yByte + plusOp + xDouble);
+		value = eval(yByte + plusOp + xDouble); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte plus double : wrong type : ", "double", typeName);
 		doubleValue = ((IJavaPrimitiveValue)value).getDoubleValue();
@@ -166,20 +166,20 @@ public class ByteOperatorsTests extends Tests {
 		}
 	}
 
-	public void testBytePlusString() throws Throwable {
+	public void testBytePlusString() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xByte + plusOp + yString);
+		IValue value = eval(xByte + plusOp + yString); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("byte plus java.lang.String : wrong type : ", "java.lang.String", typeName);
 		String stringValue = ((JDIObjectValue)value).getValueString();
-		assertEquals("byte plus java.lang.String : wrong result : ", xByteValue + yStringValue, stringValue);
+		assertEquals("byte plus java.lang.String : wrong result : ", xByteValue + yStringValue, stringValue); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
-		value = eval(yByte + plusOp + xString);
+		value = eval(yByte + plusOp + xString); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte plus java.lang.String : wrong type : ", "java.lang.String", typeName);
 		stringValue = ((JDIObjectValue)value).getValueString();
-		assertEquals("byte plus java.lang.String : wrong result : ", yByteValue + xStringValue, stringValue);
+		assertEquals("byte plus java.lang.String : wrong result : ", yByteValue + xStringValue, stringValue); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		} finally {
 		end();
 		}
@@ -187,16 +187,16 @@ public class ByteOperatorsTests extends Tests {
 
 	// byte - {byte, char, short, int, long, float, double}
 
-	public void testByteMinusByte() throws Throwable {
+	public void testByteMinusByte() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xByte + minusOp + yByte);
+		IValue value = eval(xByte + minusOp + yByte); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("byte minus byte : wrong type : ", "int", typeName);
 		int intValue = ((IJavaPrimitiveValue)value).getIntValue();
 		assertEquals("byte minus byte : wrong result : ", xByteValue - yByteValue, intValue);
 
-		value = eval(yByte + minusOp + xByte);
+		value = eval(yByte + minusOp + xByte); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte minus byte : wrong type : ", "int", typeName);
 		intValue = ((IJavaPrimitiveValue)value).getIntValue();
@@ -206,16 +206,16 @@ public class ByteOperatorsTests extends Tests {
 		}
 	}
 
-	public void testByteMinusChar() throws Throwable {
+	public void testByteMinusChar() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xByte + minusOp + yChar);
+		IValue value = eval(xByte + minusOp + yChar); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("byte minus char : wrong type : ", "int", typeName);
 		int intValue = ((IJavaPrimitiveValue)value).getIntValue();
 		assertEquals("byte minus char : wrong result : ", xByteValue - yCharValue, intValue);
 
-		value = eval(yByte + minusOp + xChar);
+		value = eval(yByte + minusOp + xChar); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte minus char : wrong type : ", "int", typeName);
 		intValue = ((IJavaPrimitiveValue)value).getIntValue();
@@ -225,16 +225,16 @@ public class ByteOperatorsTests extends Tests {
 		}
 	}
 
-	public void testByteMinusShort() throws Throwable {
+	public void testByteMinusShort() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xByte + minusOp + yShort);
+		IValue value = eval(xByte + minusOp + yShort); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("byte minus short : wrong type : ", "int", typeName);
 		int intValue = ((IJavaPrimitiveValue)value).getIntValue();
 		assertEquals("byte minus short : wrong result : ", xByteValue - yShortValue, intValue);
 
-		value = eval(yByte + minusOp + xShort);
+		value = eval(yByte + minusOp + xShort); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte minus short : wrong type : ", "int", typeName);
 		intValue = ((IJavaPrimitiveValue)value).getIntValue();
@@ -244,16 +244,16 @@ public class ByteOperatorsTests extends Tests {
 		}
 	}
 
-	public void testByteMinusInt() throws Throwable {
+	public void testByteMinusInt() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xByte + minusOp + yInt);
+		IValue value = eval(xByte + minusOp + yInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("byte minus int : wrong type : ", "int", typeName);
 		int intValue = ((IJavaPrimitiveValue)value).getIntValue();
 		assertEquals("byte minus int : wrong result : ", xByteValue - yIntValue, intValue);
 
-		value = eval(yByte + minusOp + xInt);
+		value = eval(yByte + minusOp + xInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte minus int : wrong type : ", "int", typeName);
 		intValue = ((IJavaPrimitiveValue)value).getIntValue();
@@ -263,16 +263,16 @@ public class ByteOperatorsTests extends Tests {
 		}
 	}
 
-	public void testByteMinusLong() throws Throwable {
+	public void testByteMinusLong() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xByte + minusOp + yLong);
+		IValue value = eval(xByte + minusOp + yLong); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("byte minus long : wrong type : ", "long", typeName);
 		long longValue = ((IJavaPrimitiveValue)value).getLongValue();
 		assertEquals("byte minus long : wrong result : ", xByteValue - yLongValue, longValue);
 
-		value = eval(yByte + minusOp + xLong);
+		value = eval(yByte + minusOp + xLong); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte minus long : wrong type : ", "long", typeName);
 		longValue = ((IJavaPrimitiveValue)value).getLongValue();
@@ -282,16 +282,16 @@ public class ByteOperatorsTests extends Tests {
 		}
 	}
 
-	public void testByteMinusFloat() throws Throwable {
+	public void testByteMinusFloat() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xByte + minusOp + yFloat);
+		IValue value = eval(xByte + minusOp + yFloat); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("byte minus float : wrong type : ", "float", typeName);
 		float floatValue = ((IJavaPrimitiveValue)value).getFloatValue();
 		assertEquals("byte minus float : wrong result : ", xByteValue - yFloatValue, floatValue, 0);
 
-		value = eval(yByte + minusOp + xFloat);
+		value = eval(yByte + minusOp + xFloat); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte minus float : wrong type : ", "float", typeName);
 		floatValue = ((IJavaPrimitiveValue)value).getFloatValue();
@@ -301,16 +301,16 @@ public class ByteOperatorsTests extends Tests {
 		}
 	}
 
-	public void testByteMinusDouble() throws Throwable {
+	public void testByteMinusDouble() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xByte + minusOp + yDouble);
+		IValue value = eval(xByte + minusOp + yDouble); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("byte minus double : wrong type : ", "double", typeName);
 		double doubleValue = ((IJavaPrimitiveValue)value).getDoubleValue();
 		assertEquals("byte minus double : wrong result : ", xByteValue - yDoubleValue, doubleValue, 0);
 
-		value = eval(yByte + minusOp + xDouble);
+		value = eval(yByte + minusOp + xDouble); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte minus double : wrong type : ", "double", typeName);
 		doubleValue = ((IJavaPrimitiveValue)value).getDoubleValue();
@@ -322,16 +322,16 @@ public class ByteOperatorsTests extends Tests {
 
 	// byte * {byte, char, short, int, long, float, double}
 
-	public void testByteMultiplyByte() throws Throwable {
+	public void testByteMultiplyByte() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xByte + multiplyOp + yByte);
+		IValue value = eval(xByte + multiplyOp + yByte); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("byte multiply byte : wrong type : ", "int", typeName);
 		int intValue = ((IJavaPrimitiveValue)value).getIntValue();
 		assertEquals("byte multiply byte : wrong result : ", xByteValue * yByteValue, intValue);
 
-		value = eval(yByte + multiplyOp + xByte);
+		value = eval(yByte + multiplyOp + xByte); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte multiply byte : wrong type : ", "int", typeName);
 		intValue = ((IJavaPrimitiveValue)value).getIntValue();
@@ -341,16 +341,16 @@ public class ByteOperatorsTests extends Tests {
 		}
 	}
 
-	public void testByteMultiplyChar() throws Throwable {
+	public void testByteMultiplyChar() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xByte + multiplyOp + yChar);
+		IValue value = eval(xByte + multiplyOp + yChar); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("byte multiply char : wrong type : ", "int", typeName);
 		int intValue = ((IJavaPrimitiveValue)value).getIntValue();
 		assertEquals("byte multiply char : wrong result : ", xByteValue * yCharValue, intValue);
 
-		value = eval(yByte + multiplyOp + xChar);
+		value = eval(yByte + multiplyOp + xChar); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte multiply char : wrong type : ", "int", typeName);
 		intValue = ((IJavaPrimitiveValue)value).getIntValue();
@@ -360,16 +360,16 @@ public class ByteOperatorsTests extends Tests {
 		}
 	}
 
-	public void testByteMultiplyShort() throws Throwable {
+	public void testByteMultiplyShort() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xByte + multiplyOp + yShort);
+		IValue value = eval(xByte + multiplyOp + yShort); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("byte multiply short : wrong type : ", "int", typeName);
 		int intValue = ((IJavaPrimitiveValue)value).getIntValue();
 		assertEquals("byte multiply short : wrong result : ", xByteValue * yShortValue, intValue);
 
-		value = eval(yByte + multiplyOp + xShort);
+		value = eval(yByte + multiplyOp + xShort); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte multiply short : wrong type : ", "int", typeName);
 		intValue = ((IJavaPrimitiveValue)value).getIntValue();
@@ -379,16 +379,16 @@ public class ByteOperatorsTests extends Tests {
 		}
 	}
 
-	public void testByteMultiplyInt() throws Throwable {
+	public void testByteMultiplyInt() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xByte + multiplyOp + yInt);
+		IValue value = eval(xByte + multiplyOp + yInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("byte multiply int : wrong type : ", "int", typeName);
 		int intValue = ((IJavaPrimitiveValue)value).getIntValue();
 		assertEquals("byte multiply int : wrong result : ", xByteValue * yIntValue, intValue);
 
-		value = eval(yByte + multiplyOp + xInt);
+		value = eval(yByte + multiplyOp + xInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte multiply int : wrong type : ", "int", typeName);
 		intValue = ((IJavaPrimitiveValue)value).getIntValue();
@@ -398,16 +398,16 @@ public class ByteOperatorsTests extends Tests {
 		}
 	}
 
-	public void testByteMultiplyLong() throws Throwable {
+	public void testByteMultiplyLong() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xByte + multiplyOp + yLong);
+		IValue value = eval(xByte + multiplyOp + yLong); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("byte multiply long : wrong type : ", "long", typeName);
 		long longValue = ((IJavaPrimitiveValue)value).getLongValue();
 		assertEquals("byte multiply long : wrong result : ", xByteValue * yLongValue, longValue);
 
-		value = eval(yByte + multiplyOp + xLong);
+		value = eval(yByte + multiplyOp + xLong); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte multiply long : wrong type : ", "long", typeName);
 		longValue = ((IJavaPrimitiveValue)value).getLongValue();
@@ -417,16 +417,16 @@ public class ByteOperatorsTests extends Tests {
 		}
 	}
 
-	public void testByteMultiplyFloat() throws Throwable {
+	public void testByteMultiplyFloat() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xByte + multiplyOp + yFloat);
+		IValue value = eval(xByte + multiplyOp + yFloat); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("byte multiply float : wrong type : ", "float", typeName);
 		float floatValue = ((IJavaPrimitiveValue)value).getFloatValue();
 		assertEquals("byte multiply float : wrong result : ", xByteValue * yFloatValue, floatValue, 0);
 
-		value = eval(yByte + multiplyOp + xFloat);
+		value = eval(yByte + multiplyOp + xFloat); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte multiply float : wrong type : ", "float", typeName);
 		floatValue = ((IJavaPrimitiveValue)value).getFloatValue();
@@ -436,16 +436,16 @@ public class ByteOperatorsTests extends Tests {
 		}
 	}
 
-	public void testByteMultiplyDouble() throws Throwable {
+	public void testByteMultiplyDouble() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xByte + multiplyOp + yDouble);
+		IValue value = eval(xByte + multiplyOp + yDouble); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("byte multiply double : wrong type : ", "double", typeName);
 		double doubleValue = ((IJavaPrimitiveValue)value).getDoubleValue();
 		assertEquals("byte multiply double : wrong result : ", xByteValue * yDoubleValue, doubleValue, 0);
 
-		value = eval(yByte + multiplyOp + xDouble);
+		value = eval(yByte + multiplyOp + xDouble); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte multiply double : wrong type : ", "double", typeName);
 		doubleValue = ((IJavaPrimitiveValue)value).getDoubleValue();
@@ -457,16 +457,16 @@ public class ByteOperatorsTests extends Tests {
 
 	// byte / {byte, char, short, int, long, float, double}
 
-	public void testByteDivideByte() throws Throwable {
+	public void testByteDivideByte() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xByte + divideOp + yByte);
+		IValue value = eval(xByte + divideOp + yByte); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("byte divide byte : wrong type : ", "int", typeName);
 		int intValue = ((IJavaPrimitiveValue)value).getIntValue();
 		assertEquals("byte divide byte : wrong result : ", xByteValue / yByteValue, intValue);
 
-		value = eval(yByte + divideOp + xByte);
+		value = eval(yByte + divideOp + xByte); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte divide byte : wrong type : ", "int", typeName);
 		intValue = ((IJavaPrimitiveValue)value).getIntValue();
@@ -476,16 +476,16 @@ public class ByteOperatorsTests extends Tests {
 		}
 	}
 
-	public void testByteDivideChar() throws Throwable {
+	public void testByteDivideChar() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xByte + divideOp + yChar);
+		IValue value = eval(xByte + divideOp + yChar); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("byte divide char : wrong type : ", "int", typeName);
 		int intValue = ((IJavaPrimitiveValue)value).getIntValue();
 		assertEquals("byte divide char : wrong result : ", xByteValue / yCharValue, intValue);
 
-		value = eval(yByte + divideOp + xChar);
+		value = eval(yByte + divideOp + xChar); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte divide char : wrong type : ", "int", typeName);
 		intValue = ((IJavaPrimitiveValue)value).getIntValue();
@@ -495,16 +495,16 @@ public class ByteOperatorsTests extends Tests {
 		}
 	}
 
-	public void testByteDivideShort() throws Throwable {
+	public void testByteDivideShort() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xByte + divideOp + yShort);
+		IValue value = eval(xByte + divideOp + yShort); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("byte divide short : wrong type : ", "int", typeName);
 		int intValue = ((IJavaPrimitiveValue)value).getIntValue();
 		assertEquals("byte divide short : wrong result : ", xByteValue / yShortValue, intValue);
 
-		value = eval(yByte + divideOp + xShort);
+		value = eval(yByte + divideOp + xShort); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte divide short : wrong type : ", "int", typeName);
 		intValue = ((IJavaPrimitiveValue)value).getIntValue();
@@ -514,16 +514,16 @@ public class ByteOperatorsTests extends Tests {
 		}
 	}
 
-	public void testByteDivideInt() throws Throwable {
+	public void testByteDivideInt() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xByte + divideOp + yInt);
+		IValue value = eval(xByte + divideOp + yInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("byte divide int : wrong type : ", "int", typeName);
 		int intValue = ((IJavaPrimitiveValue)value).getIntValue();
 		assertEquals("byte divide int : wrong result : ", xByteValue / yIntValue, intValue);
 
-		value = eval(yByte + divideOp + xInt);
+		value = eval(yByte + divideOp + xInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte divide int : wrong type : ", "int", typeName);
 		intValue = ((IJavaPrimitiveValue)value).getIntValue();
@@ -533,16 +533,16 @@ public class ByteOperatorsTests extends Tests {
 		}
 	}
 
-	public void testByteDivideLong() throws Throwable {
+	public void testByteDivideLong() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xByte + divideOp + yLong);
+		IValue value = eval(xByte + divideOp + yLong); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("byte divide long : wrong type : ", "long", typeName);
 		long longValue = ((IJavaPrimitiveValue)value).getLongValue();
 		assertEquals("byte divide long : wrong result : ", xByteValue / yLongValue, longValue);
 
-		value = eval(yByte + divideOp + xLong);
+		value = eval(yByte + divideOp + xLong); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte divide long : wrong type : ", "long", typeName);
 		longValue = ((IJavaPrimitiveValue)value).getLongValue();
@@ -552,16 +552,16 @@ public class ByteOperatorsTests extends Tests {
 		}
 	}
 
-	public void testByteDivideFloat() throws Throwable {
+	public void testByteDivideFloat() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xByte + divideOp + yFloat);
+		IValue value = eval(xByte + divideOp + yFloat); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("byte divide float : wrong type : ", "float", typeName);
 		float floatValue = ((IJavaPrimitiveValue)value).getFloatValue();
 		assertEquals("byte divide float : wrong result : ", xByteValue / yFloatValue, floatValue, 0);
 
-		value = eval(yByte + divideOp + xFloat);
+		value = eval(yByte + divideOp + xFloat); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte divide float : wrong type : ", "float", typeName);
 		floatValue = ((IJavaPrimitiveValue)value).getFloatValue();
@@ -571,16 +571,16 @@ public class ByteOperatorsTests extends Tests {
 		}
 	}
 
-	public void testByteDivideDouble() throws Throwable {
+	public void testByteDivideDouble() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xByte + divideOp + yDouble);
+		IValue value = eval(xByte + divideOp + yDouble); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("byte divide double : wrong type : ", "double", typeName);
 		double doubleValue = ((IJavaPrimitiveValue)value).getDoubleValue();
 		assertEquals("byte divide double : wrong result : ", xByteValue / yDoubleValue, doubleValue, 0);
 
-		value = eval(yByte + divideOp + xDouble);
+		value = eval(yByte + divideOp + xDouble); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte divide double : wrong type : ", "double", typeName);
 		doubleValue = ((IJavaPrimitiveValue)value).getDoubleValue();
@@ -592,16 +592,16 @@ public class ByteOperatorsTests extends Tests {
 
 	// byte % {byte, char, short, int, long, float, double}
 
-	public void testByteRemainderByte() throws Throwable {
+	public void testByteRemainderByte() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xByte + remainderOp + yByte);
+		IValue value = eval(xByte + remainderOp + yByte); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("byte remainder byte : wrong type : ", "int", typeName);
 		int intValue = ((IJavaPrimitiveValue)value).getIntValue();
 		assertEquals("byte remainder byte : wrong result : ", xByteValue % yByteValue, intValue);
 
-		value = eval(yByte + remainderOp + xByte);
+		value = eval(yByte + remainderOp + xByte); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte remainder byte : wrong type : ", "int", typeName);
 		intValue = ((IJavaPrimitiveValue)value).getIntValue();
@@ -611,16 +611,16 @@ public class ByteOperatorsTests extends Tests {
 		}
 	}
 
-	public void testByteRemainderChar() throws Throwable {
+	public void testByteRemainderChar() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xByte + remainderOp + yChar);
+		IValue value = eval(xByte + remainderOp + yChar); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("byte remainder char : wrong type : ", "int", typeName);
 		int intValue = ((IJavaPrimitiveValue)value).getIntValue();
 		assertEquals("byte remainder char : wrong result : ", xByteValue % yCharValue, intValue);
 
-		value = eval(yByte + remainderOp + xChar);
+		value = eval(yByte + remainderOp + xChar); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte remainder char : wrong type : ", "int", typeName);
 		intValue = ((IJavaPrimitiveValue)value).getIntValue();
@@ -630,16 +630,16 @@ public class ByteOperatorsTests extends Tests {
 		}
 	}
 
-	public void testByteRemainderShort() throws Throwable {
+	public void testByteRemainderShort() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xByte + remainderOp + yShort);
+		IValue value = eval(xByte + remainderOp + yShort); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("byte remainder short : wrong type : ", "int", typeName);
 		int intValue = ((IJavaPrimitiveValue)value).getIntValue();
 		assertEquals("byte remainder short : wrong result : ", xByteValue % yShortValue, intValue);
 
-		value = eval(yByte + remainderOp + xShort);
+		value = eval(yByte + remainderOp + xShort); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte remainder short : wrong type : ", "int", typeName);
 		intValue = ((IJavaPrimitiveValue)value).getIntValue();
@@ -649,16 +649,16 @@ public class ByteOperatorsTests extends Tests {
 		}
 	}
 
-	public void testByteRemainderInt() throws Throwable {
+	public void testByteRemainderInt() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xByte + remainderOp + yInt);
+		IValue value = eval(xByte + remainderOp + yInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("byte remainder int : wrong type : ", "int", typeName);
 		int intValue = ((IJavaPrimitiveValue)value).getIntValue();
 		assertEquals("byte remainder int : wrong result : ", xByteValue % yIntValue, intValue);
 
-		value = eval(yByte + remainderOp + xInt);
+		value = eval(yByte + remainderOp + xInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte remainder int : wrong type : ", "int", typeName);
 		intValue = ((IJavaPrimitiveValue)value).getIntValue();
@@ -668,16 +668,16 @@ public class ByteOperatorsTests extends Tests {
 		}
 	}
 
-	public void testByteRemainderLong() throws Throwable {
+	public void testByteRemainderLong() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xByte + remainderOp + yLong);
+		IValue value = eval(xByte + remainderOp + yLong); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("byte remainder long : wrong type : ", "long", typeName);
 		long longValue = ((IJavaPrimitiveValue)value).getLongValue();
 		assertEquals("byte remainder long : wrong result : ", xByteValue % yLongValue, longValue);
 
-		value = eval(yByte + remainderOp + xLong);
+		value = eval(yByte + remainderOp + xLong); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte remainder long : wrong type : ", "long", typeName);
 		longValue = ((IJavaPrimitiveValue)value).getLongValue();
@@ -687,16 +687,16 @@ public class ByteOperatorsTests extends Tests {
 		}
 	}
 
-	public void testByteRemainderFloat() throws Throwable {
+	public void testByteRemainderFloat() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xByte + remainderOp + yFloat);
+		IValue value = eval(xByte + remainderOp + yFloat); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("byte remainder float : wrong type : ", "float", typeName);
 		float floatValue = ((IJavaPrimitiveValue)value).getFloatValue();
 		assertEquals("byte remainder float : wrong result : ", xByteValue % yFloatValue, floatValue, 0);
 
-		value = eval(yByte + remainderOp + xFloat);
+		value = eval(yByte + remainderOp + xFloat); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte remainder float : wrong type : ", "float", typeName);
 		floatValue = ((IJavaPrimitiveValue)value).getFloatValue();
@@ -706,16 +706,16 @@ public class ByteOperatorsTests extends Tests {
 		}
 	}
 
-	public void testByteRemainderDouble() throws Throwable {
+	public void testByteRemainderDouble() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xByte + remainderOp + yDouble);
+		IValue value = eval(xByte + remainderOp + yDouble); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("byte remainder double : wrong type : ", "double", typeName);
 		double doubleValue = ((IJavaPrimitiveValue)value).getDoubleValue();
 		assertEquals("byte remainder double : wrong result : ", xByteValue % yDoubleValue, doubleValue, 0);
 
-		value = eval(yByte + remainderOp + xDouble);
+		value = eval(yByte + remainderOp + xDouble); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte remainder double : wrong type : ", "double", typeName);
 		doubleValue = ((IJavaPrimitiveValue)value).getDoubleValue();
@@ -727,22 +727,22 @@ public class ByteOperatorsTests extends Tests {
 
 	// byte > {byte, char, short, int, long, float, double}
 
-	public void testByteGreaterByte() throws Throwable {
+	public void testByteGreaterByte() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xByte + greaterOp + yByte);
+		IValue value = eval(xByte + greaterOp + yByte); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("byte greater byte : wrong type : ", "boolean", typeName);
 		boolean booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
 		assertEquals("byte greater byte : wrong result : ", xByteValue > yByteValue, booleanValue);
 
-		value = eval(yByte + greaterOp + xByte);
+		value = eval(yByte + greaterOp + xByte); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte greater byte : wrong type : ", "boolean", typeName);
 		booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
 		assertEquals("byte greater byte : wrong result : ", yByteValue > xByteValue, booleanValue);
 
-		value = eval(xByte + greaterOp + xByte);
+		value = eval(xByte + greaterOp + xByte); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte greater byte : wrong type : ", "boolean", typeName);
 		booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
@@ -752,22 +752,22 @@ public class ByteOperatorsTests extends Tests {
 		}
 	}
 
-	public void testByteGreaterChar() throws Throwable {
+	public void testByteGreaterChar() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xByte + greaterOp + yChar);
+		IValue value = eval(xByte + greaterOp + yChar); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("byte greater char : wrong type : ", "boolean", typeName);
 		boolean booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
 		assertEquals("byte greater char : wrong result : ", xByteValue > yCharValue, booleanValue);
 
-		value = eval(yByte + greaterOp + xChar);
+		value = eval(yByte + greaterOp + xChar); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte greater char : wrong type : ", "boolean", typeName);
 		booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
 		assertEquals("byte greater char : wrong result : ", yByteValue > xCharValue, booleanValue);
 
-		value = eval(xByte + greaterOp + xChar);
+		value = eval(xByte + greaterOp + xChar); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte greater char : wrong type : ", "boolean", typeName);
 		booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
@@ -777,22 +777,22 @@ public class ByteOperatorsTests extends Tests {
 		}
 	}
 
-	public void testByteGreaterShort() throws Throwable {
+	public void testByteGreaterShort() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xByte + greaterOp + yShort);
+		IValue value = eval(xByte + greaterOp + yShort); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("byte greater short : wrong type : ", "boolean", typeName);
 		boolean booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
 		assertEquals("byte greater short : wrong result : ", xByteValue > yShortValue, booleanValue);
 
-		value = eval(yByte + greaterOp + xShort);
+		value = eval(yByte + greaterOp + xShort); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte greater short : wrong type : ", "boolean", typeName);
 		booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
 		assertEquals("byte greater short : wrong result : ", yByteValue > xShortValue, booleanValue);
 
-		value = eval(xByte + greaterOp + xShort);
+		value = eval(xByte + greaterOp + xShort); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte greater short : wrong type : ", "boolean", typeName);
 		booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
@@ -802,22 +802,22 @@ public class ByteOperatorsTests extends Tests {
 		}
 	}
 
-	public void testByteGreaterInt() throws Throwable {
+	public void testByteGreaterInt() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xByte + greaterOp + yInt);
+		IValue value = eval(xByte + greaterOp + yInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("byte greater int : wrong type : ", "boolean", typeName);
 		boolean booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
 		assertEquals("byte greater int : wrong result : ", xByteValue > yIntValue, booleanValue);
 
-		value = eval(yByte + greaterOp + xInt);
+		value = eval(yByte + greaterOp + xInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte greater int : wrong type : ", "boolean", typeName);
 		booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
 		assertEquals("byte greater int : wrong result : ", yByteValue > xIntValue, booleanValue);
 
-		value = eval(xByte + greaterOp + xInt);
+		value = eval(xByte + greaterOp + xInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte greater int : wrong type : ", "boolean", typeName);
 		booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
@@ -827,22 +827,22 @@ public class ByteOperatorsTests extends Tests {
 		}
 	}
 
-	public void testByteGreaterLong() throws Throwable {
+	public void testByteGreaterLong() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xByte + greaterOp + yLong);
+		IValue value = eval(xByte + greaterOp + yLong); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("byte greater long : wrong type : ", "boolean", typeName);
 		boolean booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
 		assertEquals("byte greater long : wrong result : ", xByteValue > yLongValue, booleanValue);
 
-		value = eval(yByte + greaterOp + xLong);
+		value = eval(yByte + greaterOp + xLong); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte greater long : wrong type : ", "boolean", typeName);
 		booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
 		assertEquals("byte greater long : wrong result : ", yByteValue > xLongValue, booleanValue);
 
-		value = eval(xByte + greaterOp + xLong);
+		value = eval(xByte + greaterOp + xLong); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte greater long : wrong type : ", "boolean", typeName);
 		booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
@@ -852,22 +852,22 @@ public class ByteOperatorsTests extends Tests {
 		}
 	}
 
-	public void testByteGreaterFloat() throws Throwable {
+	public void testByteGreaterFloat() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xByte + greaterOp + yFloat);
+		IValue value = eval(xByte + greaterOp + yFloat); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("byte greater float : wrong type : ", "boolean", typeName);
 		boolean booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
 		assertEquals("byte greater float : wrong result : ", xByteValue > yFloatValue, booleanValue);
 
-		value = eval(yByte + greaterOp + xFloat);
+		value = eval(yByte + greaterOp + xFloat); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte greater float : wrong type : ", "boolean", typeName);
 		booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
 		assertEquals("byte greater float : wrong result : ", yByteValue > xFloatValue, booleanValue);
 
-		value = eval(xByte + greaterOp + xFloat);
+		value = eval(xByte + greaterOp + xFloat); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte greater float : wrong type : ", "boolean", typeName);
 		booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
@@ -877,22 +877,22 @@ public class ByteOperatorsTests extends Tests {
 		}
 	}
 
-	public void testByteGreaterDouble() throws Throwable {
+	public void testByteGreaterDouble() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xByte + greaterOp + yDouble);
+		IValue value = eval(xByte + greaterOp + yDouble); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("byte greater double : wrong type : ", "boolean", typeName);
 		boolean booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
 		assertEquals("byte greater double : wrong result : ", xByteValue > yDoubleValue, booleanValue);
 
-		value = eval(yByte + greaterOp + xDouble);
+		value = eval(yByte + greaterOp + xDouble); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte greater double : wrong type : ", "boolean", typeName);
 		booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
 		assertEquals("byte greater double : wrong result : ", yByteValue > xDoubleValue, booleanValue);
 
-		value = eval(xByte + greaterOp + xDouble);
+		value = eval(xByte + greaterOp + xDouble); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte greater double : wrong type : ", "boolean", typeName);
 		booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
@@ -904,22 +904,22 @@ public class ByteOperatorsTests extends Tests {
 
 	// byte >= {byte, char, short, int, long, float, double}
 
-	public void testByteGreaterEqualByte() throws Throwable {
+	public void testByteGreaterEqualByte() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xByte + greaterEqualOp + yByte);
+		IValue value = eval(xByte + greaterEqualOp + yByte); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("byte greaterEqual byte : wrong type : ", "boolean", typeName);
 		boolean booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
 		assertEquals("byte greaterEqual byte : wrong result : ", xByteValue >= yByteValue, booleanValue);
 
-		value = eval(yByte + greaterEqualOp + xByte);
+		value = eval(yByte + greaterEqualOp + xByte); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte greaterEqual byte : wrong type : ", "boolean", typeName);
 		booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
 		assertEquals("byte greaterEqual byte : wrong result : ", yByteValue >= xByteValue, booleanValue);
 
-		value = eval(xByte + greaterEqualOp + xByte);
+		value = eval(xByte + greaterEqualOp + xByte); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte greaterEqual byte : wrong type : ", "boolean", typeName);
 		booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
@@ -929,22 +929,22 @@ public class ByteOperatorsTests extends Tests {
 		}
 	}
 
-	public void testByteGreaterEqualChar() throws Throwable {
+	public void testByteGreaterEqualChar() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xByte + greaterEqualOp + yChar);
+		IValue value = eval(xByte + greaterEqualOp + yChar); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("byte greaterEqual char : wrong type : ", "boolean", typeName);
 		boolean booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
 		assertEquals("byte greaterEqual char : wrong result : ", xByteValue >= yCharValue, booleanValue);
 
-		value = eval(yByte + greaterEqualOp + xChar);
+		value = eval(yByte + greaterEqualOp + xChar); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte greaterEqual char : wrong type : ", "boolean", typeName);
 		booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
 		assertEquals("byte greaterEqual char : wrong result : ", yByteValue >= xCharValue, booleanValue);
 
-		value = eval(xByte + greaterEqualOp + xChar);
+		value = eval(xByte + greaterEqualOp + xChar); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte greaterEqual char : wrong type : ", "boolean", typeName);
 		booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
@@ -954,22 +954,22 @@ public class ByteOperatorsTests extends Tests {
 		}
 	}
 
-	public void testByteGreaterEqualShort() throws Throwable {
+	public void testByteGreaterEqualShort() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xByte + greaterEqualOp + yShort);
+		IValue value = eval(xByte + greaterEqualOp + yShort); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("byte greaterEqual short : wrong type : ", "boolean", typeName);
 		boolean booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
 		assertEquals("byte greaterEqual short : wrong result : ", xByteValue >= yShortValue, booleanValue);
 
-		value = eval(yByte + greaterEqualOp + xShort);
+		value = eval(yByte + greaterEqualOp + xShort); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte greaterEqual short : wrong type : ", "boolean", typeName);
 		booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
 		assertEquals("byte greaterEqual short : wrong result : ", yByteValue >= xShortValue, booleanValue);
 
-		value = eval(xByte + greaterEqualOp + xShort);
+		value = eval(xByte + greaterEqualOp + xShort); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte greaterEqual short : wrong type : ", "boolean", typeName);
 		booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
@@ -979,22 +979,22 @@ public class ByteOperatorsTests extends Tests {
 		}
 	}
 
-	public void testByteGreaterEqualInt() throws Throwable {
+	public void testByteGreaterEqualInt() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xByte + greaterEqualOp + yInt);
+		IValue value = eval(xByte + greaterEqualOp + yInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("byte greaterEqual int : wrong type : ", "boolean", typeName);
 		boolean booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
 		assertEquals("byte greaterEqual int : wrong result : ", xByteValue >= yIntValue, booleanValue);
 
-		value = eval(yByte + greaterEqualOp + xInt);
+		value = eval(yByte + greaterEqualOp + xInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte greaterEqual int : wrong type : ", "boolean", typeName);
 		booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
 		assertEquals("byte greaterEqual int : wrong result : ", yByteValue >= xIntValue, booleanValue);
 
-		value = eval(xByte + greaterEqualOp + xInt);
+		value = eval(xByte + greaterEqualOp + xInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte greaterEqual int : wrong type : ", "boolean", typeName);
 		booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
@@ -1004,22 +1004,22 @@ public class ByteOperatorsTests extends Tests {
 		}
 	}
 
-	public void testByteGreaterEqualLong() throws Throwable {
+	public void testByteGreaterEqualLong() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xByte + greaterEqualOp + yLong);
+		IValue value = eval(xByte + greaterEqualOp + yLong); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("byte greaterEqual long : wrong type : ", "boolean", typeName);
 		boolean booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
 		assertEquals("byte greaterEqual long : wrong result : ", xByteValue >= yLongValue, booleanValue);
 
-		value = eval(yByte + greaterEqualOp + xLong);
+		value = eval(yByte + greaterEqualOp + xLong); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte greaterEqual long : wrong type : ", "boolean", typeName);
 		booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
 		assertEquals("byte greaterEqual long : wrong result : ", yByteValue >= xLongValue, booleanValue);
 
-		value = eval(xByte + greaterEqualOp + xLong);
+		value = eval(xByte + greaterEqualOp + xLong); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte greaterEqual long : wrong type : ", "boolean", typeName);
 		booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
@@ -1029,22 +1029,22 @@ public class ByteOperatorsTests extends Tests {
 		}
 	}
 
-	public void testByteGreaterEqualFloat() throws Throwable {
+	public void testByteGreaterEqualFloat() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xByte + greaterEqualOp + yFloat);
+		IValue value = eval(xByte + greaterEqualOp + yFloat); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("byte greaterEqual float : wrong type : ", "boolean", typeName);
 		boolean booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
 		assertEquals("byte greaterEqual float : wrong result : ", xByteValue >= yFloatValue, booleanValue);
 
-		value = eval(yByte + greaterEqualOp + xFloat);
+		value = eval(yByte + greaterEqualOp + xFloat); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte greaterEqual float : wrong type : ", "boolean", typeName);
 		booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
 		assertEquals("byte greaterEqual float : wrong result : ", yByteValue >= xFloatValue, booleanValue);
 
-		value = eval(xByte + greaterEqualOp + xFloat);
+		value = eval(xByte + greaterEqualOp + xFloat); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte greaterEqual float : wrong type : ", "boolean", typeName);
 		booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
@@ -1054,22 +1054,22 @@ public class ByteOperatorsTests extends Tests {
 		}
 	}
 
-	public void testByteGreaterEqualDouble() throws Throwable {
+	public void testByteGreaterEqualDouble() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xByte + greaterEqualOp + yDouble);
+		IValue value = eval(xByte + greaterEqualOp + yDouble); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("byte greaterEqual double : wrong type : ", "boolean", typeName);
 		boolean booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
 		assertEquals("byte greaterEqual double : wrong result : ", xByteValue >= yDoubleValue, booleanValue);
 
-		value = eval(yByte + greaterEqualOp + xDouble);
+		value = eval(yByte + greaterEqualOp + xDouble); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte greaterEqual double : wrong type : ", "boolean", typeName);
 		booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
 		assertEquals("byte greaterEqual double : wrong result : ", yByteValue >= xDoubleValue, booleanValue);
 
-		value = eval(xByte + greaterEqualOp + xDouble);
+		value = eval(xByte + greaterEqualOp + xDouble); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte greaterEqual double : wrong type : ", "boolean", typeName);
 		booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
@@ -1081,22 +1081,22 @@ public class ByteOperatorsTests extends Tests {
 
 	// byte < {byte, char, short, int, long, float, double}
 
-	public void testByteLessByte() throws Throwable {
+	public void testByteLessByte() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xByte + lessOp + yByte);
+		IValue value = eval(xByte + lessOp + yByte); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("byte less byte : wrong type : ", "boolean", typeName);
 		boolean booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
 		assertEquals("byte less byte : wrong result : ", xByteValue < yByteValue, booleanValue);
 
-		value = eval(yByte + lessOp + xByte);
+		value = eval(yByte + lessOp + xByte); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte less byte : wrong type : ", "boolean", typeName);
 		booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
 		assertEquals("byte less byte : wrong result : ", yByteValue < xByteValue, booleanValue);
 
-		value = eval(xByte + lessOp + xByte);
+		value = eval(xByte + lessOp + xByte); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte less byte : wrong type : ", "boolean", typeName);
 		booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
@@ -1106,22 +1106,22 @@ public class ByteOperatorsTests extends Tests {
 		}
 	}
 
-	public void testByteLessChar() throws Throwable {
+	public void testByteLessChar() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xByte + lessOp + yChar);
+		IValue value = eval(xByte + lessOp + yChar); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("byte less char : wrong type : ", "boolean", typeName);
 		boolean booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
 		assertEquals("byte less char : wrong result : ", xByteValue < yCharValue, booleanValue);
 
-		value = eval(yByte + lessOp + xChar);
+		value = eval(yByte + lessOp + xChar); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte less char : wrong type : ", "boolean", typeName);
 		booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
 		assertEquals("byte less char : wrong result : ", yByteValue < xCharValue, booleanValue);
 
-		value = eval(xByte + lessOp + xChar);
+		value = eval(xByte + lessOp + xChar); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte less char : wrong type : ", "boolean", typeName);
 		booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
@@ -1131,22 +1131,22 @@ public class ByteOperatorsTests extends Tests {
 		}
 	}
 
-	public void testByteLessShort() throws Throwable {
+	public void testByteLessShort() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xByte + lessOp + yShort);
+		IValue value = eval(xByte + lessOp + yShort); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("byte less short : wrong type : ", "boolean", typeName);
 		boolean booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
 		assertEquals("byte less short : wrong result : ", xByteValue < yShortValue, booleanValue);
 
-		value = eval(yByte + lessOp + xShort);
+		value = eval(yByte + lessOp + xShort); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte less short : wrong type : ", "boolean", typeName);
 		booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
 		assertEquals("byte less short : wrong result : ", yByteValue < xShortValue, booleanValue);
 
-		value = eval(xByte + lessOp + xShort);
+		value = eval(xByte + lessOp + xShort); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte less short : wrong type : ", "boolean", typeName);
 		booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
@@ -1156,22 +1156,22 @@ public class ByteOperatorsTests extends Tests {
 		}
 	}
 
-	public void testByteLessInt() throws Throwable {
+	public void testByteLessInt() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xByte + lessOp + yInt);
+		IValue value = eval(xByte + lessOp + yInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("byte less int : wrong type : ", "boolean", typeName);
 		boolean booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
 		assertEquals("byte less int : wrong result : ", xByteValue < yIntValue, booleanValue);
 
-		value = eval(yByte + lessOp + xInt);
+		value = eval(yByte + lessOp + xInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte less int : wrong type : ", "boolean", typeName);
 		booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
 		assertEquals("byte less int : wrong result : ", yByteValue < xIntValue, booleanValue);
 
-		value = eval(xByte + lessOp + xInt);
+		value = eval(xByte + lessOp + xInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte less int : wrong type : ", "boolean", typeName);
 		booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
@@ -1181,22 +1181,22 @@ public class ByteOperatorsTests extends Tests {
 		}
 	}
 
-	public void testByteLessLong() throws Throwable {
+	public void testByteLessLong() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xByte + lessOp + yLong);
+		IValue value = eval(xByte + lessOp + yLong); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("byte less long : wrong type : ", "boolean", typeName);
 		boolean booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
 		assertEquals("byte less long : wrong result : ", xByteValue < yLongValue, booleanValue);
 
-		value = eval(yByte + lessOp + xLong);
+		value = eval(yByte + lessOp + xLong); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte less long : wrong type : ", "boolean", typeName);
 		booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
 		assertEquals("byte less long : wrong result : ", yByteValue < xLongValue, booleanValue);
 
-		value = eval(xByte + lessOp + xLong);
+		value = eval(xByte + lessOp + xLong); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte less long : wrong type : ", "boolean", typeName);
 		booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
@@ -1206,22 +1206,22 @@ public class ByteOperatorsTests extends Tests {
 		}
 	}
 
-	public void testByteLessFloat() throws Throwable {
+	public void testByteLessFloat() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xByte + lessOp + yFloat);
+		IValue value = eval(xByte + lessOp + yFloat); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("byte less float : wrong type : ", "boolean", typeName);
 		boolean booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
 		assertEquals("byte less float : wrong result : ", xByteValue < yFloatValue, booleanValue);
 
-		value = eval(yByte + lessOp + xFloat);
+		value = eval(yByte + lessOp + xFloat); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte less float : wrong type : ", "boolean", typeName);
 		booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
 		assertEquals("byte less float : wrong result : ", yByteValue < xFloatValue, booleanValue);
 
-		value = eval(xByte + lessOp + xFloat);
+		value = eval(xByte + lessOp + xFloat); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte less float : wrong type : ", "boolean", typeName);
 		booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
@@ -1231,22 +1231,22 @@ public class ByteOperatorsTests extends Tests {
 		}
 	}
 
-	public void testByteLessDouble() throws Throwable {
+	public void testByteLessDouble() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xByte + lessOp + yDouble);
+		IValue value = eval(xByte + lessOp + yDouble); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("byte less double : wrong type : ", "boolean", typeName);
 		boolean booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
 		assertEquals("byte less double : wrong result : ", xByteValue < yDoubleValue, booleanValue);
 
-		value = eval(yByte + lessOp + xDouble);
+		value = eval(yByte + lessOp + xDouble); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte less double : wrong type : ", "boolean", typeName);
 		booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
 		assertEquals("byte less double : wrong result : ", yByteValue < xDoubleValue, booleanValue);
 
-		value = eval(xByte + lessOp + xDouble);
+		value = eval(xByte + lessOp + xDouble); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte less double : wrong type : ", "boolean", typeName);
 		booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
@@ -1258,22 +1258,22 @@ public class ByteOperatorsTests extends Tests {
 
 	// byte <= {byte, char, short, int, long, float, double}
 
-	public void testByteLessEqualByte() throws Throwable {
+	public void testByteLessEqualByte() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xByte + lessEqualOp + yByte);
+		IValue value = eval(xByte + lessEqualOp + yByte); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("byte lessEqual byte : wrong type : ", "boolean", typeName);
 		boolean booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
 		assertEquals("byte lessEqual byte : wrong result : ", xByteValue <= yByteValue, booleanValue);
 
-		value = eval(yByte + lessEqualOp + xByte);
+		value = eval(yByte + lessEqualOp + xByte); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte lessEqual byte : wrong type : ", "boolean", typeName);
 		booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
 		assertEquals("byte lessEqual byte : wrong result : ", yByteValue <= xByteValue, booleanValue);
 
-		value = eval(xByte + lessEqualOp + xByte);
+		value = eval(xByte + lessEqualOp + xByte); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte lessEqual byte : wrong type : ", "boolean", typeName);
 		booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
@@ -1283,22 +1283,22 @@ public class ByteOperatorsTests extends Tests {
 		}
 	}
 
-	public void testByteLessEqualChar() throws Throwable {
+	public void testByteLessEqualChar() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xByte + lessEqualOp + yChar);
+		IValue value = eval(xByte + lessEqualOp + yChar); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("byte lessEqual char : wrong type : ", "boolean", typeName);
 		boolean booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
 		assertEquals("byte lessEqual char : wrong result : ", xByteValue <= yCharValue, booleanValue);
 
-		value = eval(yByte + lessEqualOp + xChar);
+		value = eval(yByte + lessEqualOp + xChar); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte lessEqual char : wrong type : ", "boolean", typeName);
 		booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
 		assertEquals("byte lessEqual char : wrong result : ", yByteValue <= xCharValue, booleanValue);
 
-		value = eval(xByte + lessEqualOp + xChar);
+		value = eval(xByte + lessEqualOp + xChar); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte lessEqual char : wrong type : ", "boolean", typeName);
 		booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
@@ -1308,22 +1308,22 @@ public class ByteOperatorsTests extends Tests {
 		}
 	}
 
-	public void testByteLessEqualShort() throws Throwable {
+	public void testByteLessEqualShort() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xByte + lessEqualOp + yShort);
+		IValue value = eval(xByte + lessEqualOp + yShort); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("byte lessEqual short : wrong type : ", "boolean", typeName);
 		boolean booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
 		assertEquals("byte lessEqual short : wrong result : ", xByteValue <= yShortValue, booleanValue);
 
-		value = eval(yByte + lessEqualOp + xShort);
+		value = eval(yByte + lessEqualOp + xShort); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte lessEqual short : wrong type : ", "boolean", typeName);
 		booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
 		assertEquals("byte lessEqual short : wrong result : ", yByteValue <= xShortValue, booleanValue);
 
-		value = eval(xByte + lessEqualOp + xShort);
+		value = eval(xByte + lessEqualOp + xShort); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte lessEqual short : wrong type : ", "boolean", typeName);
 		booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
@@ -1333,22 +1333,22 @@ public class ByteOperatorsTests extends Tests {
 		}
 	}
 
-	public void testByteLessEqualInt() throws Throwable {
+	public void testByteLessEqualInt() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xByte + lessEqualOp + yInt);
+		IValue value = eval(xByte + lessEqualOp + yInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("byte lessEqual int : wrong type : ", "boolean", typeName);
 		boolean booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
 		assertEquals("byte lessEqual int : wrong result : ", xByteValue <= yIntValue, booleanValue);
 
-		value = eval(yByte + lessEqualOp + xInt);
+		value = eval(yByte + lessEqualOp + xInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte lessEqual int : wrong type : ", "boolean", typeName);
 		booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
 		assertEquals("byte lessEqual int : wrong result : ", yByteValue <= xIntValue, booleanValue);
 
-		value = eval(xByte + lessEqualOp + xInt);
+		value = eval(xByte + lessEqualOp + xInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte lessEqual int : wrong type : ", "boolean", typeName);
 		booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
@@ -1358,22 +1358,22 @@ public class ByteOperatorsTests extends Tests {
 		}
 	}
 
-	public void testByteLessEqualLong() throws Throwable {
+	public void testByteLessEqualLong() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xByte + lessEqualOp + yLong);
+		IValue value = eval(xByte + lessEqualOp + yLong); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("byte lessEqual long : wrong type : ", "boolean", typeName);
 		boolean booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
 		assertEquals("byte lessEqual long : wrong result : ", xByteValue <= yLongValue, booleanValue);
 
-		value = eval(yByte + lessEqualOp + xLong);
+		value = eval(yByte + lessEqualOp + xLong); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte lessEqual long : wrong type : ", "boolean", typeName);
 		booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
 		assertEquals("byte lessEqual long : wrong result : ", yByteValue <= xLongValue, booleanValue);
 
-		value = eval(xByte + lessEqualOp + xLong);
+		value = eval(xByte + lessEqualOp + xLong); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte lessEqual long : wrong type : ", "boolean", typeName);
 		booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
@@ -1383,22 +1383,22 @@ public class ByteOperatorsTests extends Tests {
 		}
 	}
 
-	public void testByteLessEqualFloat() throws Throwable {
+	public void testByteLessEqualFloat() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xByte + lessEqualOp + yFloat);
+		IValue value = eval(xByte + lessEqualOp + yFloat); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("byte lessEqual float : wrong type : ", "boolean", typeName);
 		boolean booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
 		assertEquals("byte lessEqual float : wrong result : ", xByteValue <= yFloatValue, booleanValue);
 
-		value = eval(yByte + lessEqualOp + xFloat);
+		value = eval(yByte + lessEqualOp + xFloat); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte lessEqual float : wrong type : ", "boolean", typeName);
 		booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
 		assertEquals("byte lessEqual float : wrong result : ", yByteValue <= xFloatValue, booleanValue);
 
-		value = eval(xByte + lessEqualOp + xFloat);
+		value = eval(xByte + lessEqualOp + xFloat); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte lessEqual float : wrong type : ", "boolean", typeName);
 		booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
@@ -1408,22 +1408,22 @@ public class ByteOperatorsTests extends Tests {
 		}
 	}
 
-	public void testByteLessEqualDouble() throws Throwable {
+	public void testByteLessEqualDouble() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xByte + lessEqualOp + yDouble);
+		IValue value = eval(xByte + lessEqualOp + yDouble); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("byte lessEqual double : wrong type : ", "boolean", typeName);
 		boolean booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
 		assertEquals("byte lessEqual double : wrong result : ", xByteValue <= yDoubleValue, booleanValue);
 
-		value = eval(yByte + lessEqualOp + xDouble);
+		value = eval(yByte + lessEqualOp + xDouble); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte lessEqual double : wrong type : ", "boolean", typeName);
 		booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
 		assertEquals("byte lessEqual double : wrong result : ", yByteValue <= xDoubleValue, booleanValue);
 
-		value = eval(xByte + lessEqualOp + xDouble);
+		value = eval(xByte + lessEqualOp + xDouble); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte lessEqual double : wrong type : ", "boolean", typeName);
 		booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
@@ -1435,22 +1435,22 @@ public class ByteOperatorsTests extends Tests {
 
 	// byte == {byte, char, short, int, long, float, double}
 
-	public void testByteEqualEqualByte() throws Throwable {
+	public void testByteEqualEqualByte() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xByte + equalEqualOp + yByte);
+		IValue value = eval(xByte + equalEqualOp + yByte); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("byte equalEqual byte : wrong type : ", "boolean", typeName);
 		boolean booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
 		assertEquals("byte equalEqual byte : wrong result : ", xByteValue == yByteValue, booleanValue);
 
-		value = eval(yByte + equalEqualOp + xByte);
+		value = eval(yByte + equalEqualOp + xByte); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte equalEqual byte : wrong type : ", "boolean", typeName);
 		booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
 		assertEquals("byte equalEqual byte : wrong result : ", yByteValue == xByteValue, booleanValue);
 
-		value = eval(xByte + equalEqualOp + xByte);
+		value = eval(xByte + equalEqualOp + xByte); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte equalEqual byte : wrong type : ", "boolean", typeName);
 		booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
@@ -1460,22 +1460,22 @@ public class ByteOperatorsTests extends Tests {
 		}
 	}
 
-	public void testByteEqualEqualChar() throws Throwable {
+	public void testByteEqualEqualChar() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xByte + equalEqualOp + yChar);
+		IValue value = eval(xByte + equalEqualOp + yChar); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("byte equalEqual char : wrong type : ", "boolean", typeName);
 		boolean booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
 		assertEquals("byte equalEqual char : wrong result : ", xByteValue == yCharValue, booleanValue);
 
-		value = eval(yByte + equalEqualOp + xChar);
+		value = eval(yByte + equalEqualOp + xChar); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte equalEqual char : wrong type : ", "boolean", typeName);
 		booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
 		assertEquals("byte equalEqual char : wrong result : ", yByteValue == xCharValue, booleanValue);
 
-		value = eval(xByte + equalEqualOp + xChar);
+		value = eval(xByte + equalEqualOp + xChar); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte equalEqual char : wrong type : ", "boolean", typeName);
 		booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
@@ -1485,22 +1485,22 @@ public class ByteOperatorsTests extends Tests {
 		}
 	}
 
-	public void testByteEqualEqualShort() throws Throwable {
+	public void testByteEqualEqualShort() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xByte + equalEqualOp + yShort);
+		IValue value = eval(xByte + equalEqualOp + yShort); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("byte equalEqual short : wrong type : ", "boolean", typeName);
 		boolean booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
 		assertEquals("byte equalEqual short : wrong result : ", xByteValue == yShortValue, booleanValue);
 
-		value = eval(yByte + equalEqualOp + xShort);
+		value = eval(yByte + equalEqualOp + xShort); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte equalEqual short : wrong type : ", "boolean", typeName);
 		booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
 		assertEquals("byte equalEqual short : wrong result : ", yByteValue == xShortValue, booleanValue);
 
-		value = eval(xByte + equalEqualOp + xShort);
+		value = eval(xByte + equalEqualOp + xShort); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte equalEqual short : wrong type : ", "boolean", typeName);
 		booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
@@ -1510,22 +1510,22 @@ public class ByteOperatorsTests extends Tests {
 		}
 	}
 
-	public void testByteEqualEqualInt() throws Throwable {
+	public void testByteEqualEqualInt() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xByte + equalEqualOp + yInt);
+		IValue value = eval(xByte + equalEqualOp + yInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("byte equalEqual int : wrong type : ", "boolean", typeName);
 		boolean booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
 		assertEquals("byte equalEqual int : wrong result : ", xByteValue == yIntValue, booleanValue);
 
-		value = eval(yByte + equalEqualOp + xInt);
+		value = eval(yByte + equalEqualOp + xInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte equalEqual int : wrong type : ", "boolean", typeName);
 		booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
 		assertEquals("byte equalEqual int : wrong result : ", yByteValue == xIntValue, booleanValue);
 
-		value = eval(xByte + equalEqualOp + xInt);
+		value = eval(xByte + equalEqualOp + xInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte equalEqual int : wrong type : ", "boolean", typeName);
 		booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
@@ -1535,22 +1535,22 @@ public class ByteOperatorsTests extends Tests {
 		}
 	}
 
-	public void testByteEqualEqualLong() throws Throwable {
+	public void testByteEqualEqualLong() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xByte + equalEqualOp + yLong);
+		IValue value = eval(xByte + equalEqualOp + yLong); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("byte equalEqual long : wrong type : ", "boolean", typeName);
 		boolean booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
 		assertEquals("byte equalEqual long : wrong result : ", xByteValue == yLongValue, booleanValue);
 
-		value = eval(yByte + equalEqualOp + xLong);
+		value = eval(yByte + equalEqualOp + xLong); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte equalEqual long : wrong type : ", "boolean", typeName);
 		booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
 		assertEquals("byte equalEqual long : wrong result : ", yByteValue == xLongValue, booleanValue);
 
-		value = eval(xByte + equalEqualOp + xLong);
+		value = eval(xByte + equalEqualOp + xLong); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte equalEqual long : wrong type : ", "boolean", typeName);
 		booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
@@ -1560,22 +1560,22 @@ public class ByteOperatorsTests extends Tests {
 		}
 	}
 
-	public void testByteEqualEqualFloat() throws Throwable {
+	public void testByteEqualEqualFloat() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xByte + equalEqualOp + yFloat);
+		IValue value = eval(xByte + equalEqualOp + yFloat); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("byte equalEqual float : wrong type : ", "boolean", typeName);
 		boolean booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
 		assertEquals("byte equalEqual float : wrong result : ", xByteValue == yFloatValue, booleanValue);
 
-		value = eval(yByte + equalEqualOp + xFloat);
+		value = eval(yByte + equalEqualOp + xFloat); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte equalEqual float : wrong type : ", "boolean", typeName);
 		booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
 		assertEquals("byte equalEqual float : wrong result : ", yByteValue == xFloatValue, booleanValue);
 
-		value = eval(xByte + equalEqualOp + xFloat);
+		value = eval(xByte + equalEqualOp + xFloat); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte equalEqual float : wrong type : ", "boolean", typeName);
 		booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
@@ -1585,22 +1585,22 @@ public class ByteOperatorsTests extends Tests {
 		}
 	}
 
-	public void testByteEqualEqualDouble() throws Throwable {
+	public void testByteEqualEqualDouble() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xByte + equalEqualOp + yDouble);
+		IValue value = eval(xByte + equalEqualOp + yDouble); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("byte equalEqual double : wrong type : ", "boolean", typeName);
 		boolean booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
 		assertEquals("byte equalEqual double : wrong result : ", xByteValue == yDoubleValue, booleanValue);
 
-		value = eval(yByte + equalEqualOp + xDouble);
+		value = eval(yByte + equalEqualOp + xDouble); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte equalEqual double : wrong type : ", "boolean", typeName);
 		booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
 		assertEquals("byte equalEqual double : wrong result : ", yByteValue == xDoubleValue, booleanValue);
 
-		value = eval(xByte + equalEqualOp + xDouble);
+		value = eval(xByte + equalEqualOp + xDouble); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte equalEqual double : wrong type : ", "boolean", typeName);
 		booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
@@ -1612,22 +1612,22 @@ public class ByteOperatorsTests extends Tests {
 
 	// byte != {byte, char, short, int, long, float, double}
 
-	public void testByteNotEqualByte() throws Throwable {
+	public void testByteNotEqualByte() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xByte + notEqualOp + yByte);
+		IValue value = eval(xByte + notEqualOp + yByte); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("byte notEqual byte : wrong type : ", "boolean", typeName);
 		boolean booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
 		assertEquals("byte notEqual byte : wrong result : ", xByteValue != yByteValue, booleanValue);
 
-		value = eval(yByte + notEqualOp + xByte);
+		value = eval(yByte + notEqualOp + xByte); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte notEqual byte : wrong type : ", "boolean", typeName);
 		booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
 		assertEquals("byte notEqual byte : wrong result : ", yByteValue != xByteValue, booleanValue);
 
-		value = eval(xByte + notEqualOp + xByte);
+		value = eval(xByte + notEqualOp + xByte); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte notEqual byte : wrong type : ", "boolean", typeName);
 		booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
@@ -1637,22 +1637,22 @@ public class ByteOperatorsTests extends Tests {
 		}
 	}
 
-	public void testByteNotEqualChar() throws Throwable {
+	public void testByteNotEqualChar() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xByte + notEqualOp + yChar);
+		IValue value = eval(xByte + notEqualOp + yChar); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("byte notEqual char : wrong type : ", "boolean", typeName);
 		boolean booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
 		assertEquals("byte notEqual char : wrong result : ", xByteValue != yCharValue, booleanValue);
 
-		value = eval(yByte + notEqualOp + xChar);
+		value = eval(yByte + notEqualOp + xChar); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte notEqual char : wrong type : ", "boolean", typeName);
 		booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
 		assertEquals("byte notEqual char : wrong result : ", yByteValue != xCharValue, booleanValue);
 
-		value = eval(xByte + notEqualOp + xChar);
+		value = eval(xByte + notEqualOp + xChar); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte notEqual char : wrong type : ", "boolean", typeName);
 		booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
@@ -1662,22 +1662,22 @@ public class ByteOperatorsTests extends Tests {
 		}
 	}
 
-	public void testByteNotEqualShort() throws Throwable {
+	public void testByteNotEqualShort() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xByte + notEqualOp + yShort);
+		IValue value = eval(xByte + notEqualOp + yShort); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("byte notEqual short : wrong type : ", "boolean", typeName);
 		boolean booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
 		assertEquals("byte notEqual short : wrong result : ", xByteValue != yShortValue, booleanValue);
 
-		value = eval(yByte + notEqualOp + xShort);
+		value = eval(yByte + notEqualOp + xShort); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte notEqual short : wrong type : ", "boolean", typeName);
 		booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
 		assertEquals("byte notEqual short : wrong result : ", yByteValue != xShortValue, booleanValue);
 
-		value = eval(xByte + notEqualOp + xShort);
+		value = eval(xByte + notEqualOp + xShort); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte notEqual short : wrong type : ", "boolean", typeName);
 		booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
@@ -1687,22 +1687,22 @@ public class ByteOperatorsTests extends Tests {
 		}
 	}
 
-	public void testByteNotEqualInt() throws Throwable {
+	public void testByteNotEqualInt() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xByte + notEqualOp + yInt);
+		IValue value = eval(xByte + notEqualOp + yInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("byte notEqual int : wrong type : ", "boolean", typeName);
 		boolean booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
 		assertEquals("byte notEqual int : wrong result : ", xByteValue != yIntValue, booleanValue);
 
-		value = eval(yByte + notEqualOp + xInt);
+		value = eval(yByte + notEqualOp + xInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte notEqual int : wrong type : ", "boolean", typeName);
 		booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
 		assertEquals("byte notEqual int : wrong result : ", yByteValue != xIntValue, booleanValue);
 
-		value = eval(xByte + notEqualOp + xInt);
+		value = eval(xByte + notEqualOp + xInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte notEqual int : wrong type : ", "boolean", typeName);
 		booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
@@ -1712,22 +1712,22 @@ public class ByteOperatorsTests extends Tests {
 		}
 	}
 
-	public void testByteNotEqualLong() throws Throwable {
+	public void testByteNotEqualLong() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xByte + notEqualOp + yLong);
+		IValue value = eval(xByte + notEqualOp + yLong); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("byte notEqual long : wrong type : ", "boolean", typeName);
 		boolean booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
 		assertEquals("byte notEqual long : wrong result : ", xByteValue != yLongValue, booleanValue);
 
-		value = eval(yByte + notEqualOp + xLong);
+		value = eval(yByte + notEqualOp + xLong); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte notEqual long : wrong type : ", "boolean", typeName);
 		booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
 		assertEquals("byte notEqual long : wrong result : ", yByteValue != xLongValue, booleanValue);
 
-		value = eval(xByte + notEqualOp + xLong);
+		value = eval(xByte + notEqualOp + xLong); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte notEqual long : wrong type : ", "boolean", typeName);
 		booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
@@ -1737,22 +1737,22 @@ public class ByteOperatorsTests extends Tests {
 		}
 	}
 
-	public void testByteNotEqualFloat() throws Throwable {
+	public void testByteNotEqualFloat() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xByte + notEqualOp + yFloat);
+		IValue value = eval(xByte + notEqualOp + yFloat); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("byte notEqual float : wrong type : ", "boolean", typeName);
 		boolean booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
 		assertEquals("byte notEqual float : wrong result : ", xByteValue != yFloatValue, booleanValue);
 
-		value = eval(yByte + notEqualOp + xFloat);
+		value = eval(yByte + notEqualOp + xFloat); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte notEqual float : wrong type : ", "boolean", typeName);
 		booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
 		assertEquals("byte notEqual float : wrong result : ", yByteValue != xFloatValue, booleanValue);
 
-		value = eval(xByte + notEqualOp + xFloat);
+		value = eval(xByte + notEqualOp + xFloat); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte notEqual float : wrong type : ", "boolean", typeName);
 		booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
@@ -1762,22 +1762,22 @@ public class ByteOperatorsTests extends Tests {
 		}
 	}
 
-	public void testByteNotEqualDouble() throws Throwable {
+	public void testByteNotEqualDouble() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xByte + notEqualOp + yDouble);
+		IValue value = eval(xByte + notEqualOp + yDouble); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("byte notEqual double : wrong type : ", "boolean", typeName);
 		boolean booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
 		assertEquals("byte notEqual double : wrong result : ", xByteValue != yDoubleValue, booleanValue);
 
-		value = eval(yByte + notEqualOp + xDouble);
+		value = eval(yByte + notEqualOp + xDouble); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte notEqual double : wrong type : ", "boolean", typeName);
 		booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
 		assertEquals("byte notEqual double : wrong result : ", yByteValue != xDoubleValue, booleanValue);
 
-		value = eval(xByte + notEqualOp + xDouble);
+		value = eval(xByte + notEqualOp + xDouble); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte notEqual double : wrong type : ", "boolean", typeName);
 		booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
@@ -1789,16 +1789,16 @@ public class ByteOperatorsTests extends Tests {
 
 	// byte << {byte, char, short, int, long}
 
-	public void testByteLeftShiftByte() throws Throwable {
+	public void testByteLeftShiftByte() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xByte + leftShiftOp + yByte);
+		IValue value = eval(xByte + leftShiftOp + yByte); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("byte leftShift byte : wrong type : ", "int", typeName);
 		int intValue = ((IJavaPrimitiveValue)value).getIntValue();
 		assertEquals("byte leftShift byte : wrong result : ", xByteValue << yByteValue, intValue);
 
-		value = eval(yByte + leftShiftOp + xByte);
+		value = eval(yByte + leftShiftOp + xByte); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte leftShift byte : wrong type : ", "int", typeName);
 		intValue = ((IJavaPrimitiveValue)value).getIntValue();
@@ -1808,16 +1808,16 @@ public class ByteOperatorsTests extends Tests {
 		}
 	}
 
-	public void testByteLeftShiftChar() throws Throwable {
+	public void testByteLeftShiftChar() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xByte + leftShiftOp + yChar);
+		IValue value = eval(xByte + leftShiftOp + yChar); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("byte leftShift char : wrong type : ", "int", typeName);
 		int intValue = ((IJavaPrimitiveValue)value).getIntValue();
 		assertEquals("byte leftShift char : wrong result : ", xByteValue << yCharValue, intValue);
 
-		value = eval(yByte + leftShiftOp + xChar);
+		value = eval(yByte + leftShiftOp + xChar); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte leftShift char : wrong type : ", "int", typeName);
 		intValue = ((IJavaPrimitiveValue)value).getIntValue();
@@ -1827,16 +1827,16 @@ public class ByteOperatorsTests extends Tests {
 		}
 	}
 
-	public void testByteLeftShiftShort() throws Throwable {
+	public void testByteLeftShiftShort() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xByte + leftShiftOp + yShort);
+		IValue value = eval(xByte + leftShiftOp + yShort); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("byte leftShift short : wrong type : ", "int", typeName);
 		int intValue = ((IJavaPrimitiveValue)value).getIntValue();
 		assertEquals("byte leftShift short : wrong result : ", xByteValue << yShortValue, intValue);
 
-		value = eval(yByte + leftShiftOp + xShort);
+		value = eval(yByte + leftShiftOp + xShort); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte leftShift short : wrong type : ", "int", typeName);
 		intValue = ((IJavaPrimitiveValue)value).getIntValue();
@@ -1846,16 +1846,16 @@ public class ByteOperatorsTests extends Tests {
 		}
 	}
 
-	public void testByteLeftShiftInt() throws Throwable {
+	public void testByteLeftShiftInt() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xByte + leftShiftOp + yInt);
+		IValue value = eval(xByte + leftShiftOp + yInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("byte leftShift int : wrong type : ", "int", typeName);
 		int intValue = ((IJavaPrimitiveValue)value).getIntValue();
 		assertEquals("byte leftShift int : wrong result : ", xByteValue << yIntValue, intValue);
 
-		value = eval(yByte + leftShiftOp + xInt);
+		value = eval(yByte + leftShiftOp + xInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte leftShift int : wrong type : ", "int", typeName);
 		intValue = ((IJavaPrimitiveValue)value).getIntValue();
@@ -1865,16 +1865,16 @@ public class ByteOperatorsTests extends Tests {
 		}
 	}
 
-	public void testByteLeftShiftLong() throws Throwable {
+	public void testByteLeftShiftLong() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xByte + leftShiftOp + yLong);
+		IValue value = eval(xByte + leftShiftOp + yLong); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("byte leftShift long : wrong type : ", "int", typeName);
 		int intValue = ((IJavaPrimitiveValue)value).getIntValue();
 		assertEquals("byte leftShift long : wrong result : ", xByteValue << yLongValue, intValue);
 
-		value = eval(yByte + leftShiftOp + xLong);
+		value = eval(yByte + leftShiftOp + xLong); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte leftShift long : wrong type : ", "int", typeName);
 		intValue = ((IJavaPrimitiveValue)value).getIntValue();
@@ -1886,16 +1886,16 @@ public class ByteOperatorsTests extends Tests {
 
 	// byte >> {byte, char, short, int, long}
 
-	public void testByteRightShiftByte() throws Throwable {
+	public void testByteRightShiftByte() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xByte + rightShiftOp + yByte);
+		IValue value = eval(xByte + rightShiftOp + yByte); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("byte rightShift byte : wrong type : ", "int", typeName);
 		int intValue = ((IJavaPrimitiveValue)value).getIntValue();
 		assertEquals("byte rightShift byte : wrong result : ", xByteValue >> yByteValue, intValue);
 
-		value = eval(yByte + rightShiftOp + xByte);
+		value = eval(yByte + rightShiftOp + xByte); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte rightShift byte : wrong type : ", "int", typeName);
 		intValue = ((IJavaPrimitiveValue)value).getIntValue();
@@ -1905,16 +1905,16 @@ public class ByteOperatorsTests extends Tests {
 		}
 	}
 
-	public void testByteRightShiftChar() throws Throwable {
+	public void testByteRightShiftChar() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xByte + rightShiftOp + yChar);
+		IValue value = eval(xByte + rightShiftOp + yChar); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("byte rightShift char : wrong type : ", "int", typeName);
 		int intValue = ((IJavaPrimitiveValue)value).getIntValue();
 		assertEquals("byte rightShift char : wrong result : ", xByteValue >> yCharValue, intValue);
 
-		value = eval(yByte + rightShiftOp + xChar);
+		value = eval(yByte + rightShiftOp + xChar); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte rightShift char : wrong type : ", "int", typeName);
 		intValue = ((IJavaPrimitiveValue)value).getIntValue();
@@ -1924,16 +1924,16 @@ public class ByteOperatorsTests extends Tests {
 		}
 	}
 
-	public void testByteRightShiftShort() throws Throwable {
+	public void testByteRightShiftShort() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xByte + rightShiftOp + yShort);
+		IValue value = eval(xByte + rightShiftOp + yShort); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("byte rightShift short : wrong type : ", "int", typeName);
 		int intValue = ((IJavaPrimitiveValue)value).getIntValue();
 		assertEquals("byte rightShift short : wrong result : ", xByteValue >> yShortValue, intValue);
 
-		value = eval(yByte + rightShiftOp + xShort);
+		value = eval(yByte + rightShiftOp + xShort); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte rightShift short : wrong type : ", "int", typeName);
 		intValue = ((IJavaPrimitiveValue)value).getIntValue();
@@ -1943,16 +1943,16 @@ public class ByteOperatorsTests extends Tests {
 		}
 	}
 
-	public void testByteRightShiftInt() throws Throwable {
+	public void testByteRightShiftInt() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xByte + rightShiftOp + yInt);
+		IValue value = eval(xByte + rightShiftOp + yInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("byte rightShift int : wrong type : ", "int", typeName);
 		int intValue = ((IJavaPrimitiveValue)value).getIntValue();
 		assertEquals("byte rightShift int : wrong result : ", xByteValue >> yIntValue, intValue);
 
-		value = eval(yByte + rightShiftOp + xInt);
+		value = eval(yByte + rightShiftOp + xInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte rightShift int : wrong type : ", "int", typeName);
 		intValue = ((IJavaPrimitiveValue)value).getIntValue();
@@ -1962,16 +1962,16 @@ public class ByteOperatorsTests extends Tests {
 		}
 	}
 
-	public void testByteRightShiftLong() throws Throwable {
+	public void testByteRightShiftLong() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xByte + rightShiftOp + yLong);
+		IValue value = eval(xByte + rightShiftOp + yLong); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("byte rightShift long : wrong type : ", "int", typeName);
 		int intValue = ((IJavaPrimitiveValue)value).getIntValue();
 		assertEquals("byte rightShift long : wrong result : ", xByteValue >> yLongValue, intValue);
 
-		value = eval(yByte + rightShiftOp + xLong);
+		value = eval(yByte + rightShiftOp + xLong); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte rightShift long : wrong type : ", "int", typeName);
 		intValue = ((IJavaPrimitiveValue)value).getIntValue();
@@ -1983,16 +1983,16 @@ public class ByteOperatorsTests extends Tests {
 
 	// byte >>> {byte, char, short, int, long}
 
-	public void testByteUnsignedRightShiftByte() throws Throwable {
+	public void testByteUnsignedRightShiftByte() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xByte + unsignedRightShiftOp + yByte);
+		IValue value = eval(xByte + unsignedRightShiftOp + yByte); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("byte unsignedRightShift byte : wrong type : ", "int", typeName);
 		int intValue = ((IJavaPrimitiveValue)value).getIntValue();
 		assertEquals("byte unsignedRightShift byte : wrong result : ", xByteValue >>> yByteValue, intValue);
 
-		value = eval(yByte + unsignedRightShiftOp + xByte);
+		value = eval(yByte + unsignedRightShiftOp + xByte); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte unsignedRightShift byte : wrong type : ", "int", typeName);
 		intValue = ((IJavaPrimitiveValue)value).getIntValue();
@@ -2002,16 +2002,16 @@ public class ByteOperatorsTests extends Tests {
 		}
 	}
 
-	public void testByteUnsignedRightShiftChar() throws Throwable {
+	public void testByteUnsignedRightShiftChar() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xByte + unsignedRightShiftOp + yChar);
+		IValue value = eval(xByte + unsignedRightShiftOp + yChar); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("byte unsignedRightShift char : wrong type : ", "int", typeName);
 		int intValue = ((IJavaPrimitiveValue)value).getIntValue();
 		assertEquals("byte unsignedRightShift char : wrong result : ", xByteValue >>> yCharValue, intValue);
 
-		value = eval(yByte + unsignedRightShiftOp + xChar);
+		value = eval(yByte + unsignedRightShiftOp + xChar); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte unsignedRightShift char : wrong type : ", "int", typeName);
 		intValue = ((IJavaPrimitiveValue)value).getIntValue();
@@ -2021,16 +2021,16 @@ public class ByteOperatorsTests extends Tests {
 		}
 	}
 
-	public void testByteUnsignedRightShiftShort() throws Throwable {
+	public void testByteUnsignedRightShiftShort() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xByte + unsignedRightShiftOp + yShort);
+		IValue value = eval(xByte + unsignedRightShiftOp + yShort); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("byte unsignedRightShift short : wrong type : ", "int", typeName);
 		int intValue = ((IJavaPrimitiveValue)value).getIntValue();
 		assertEquals("byte unsignedRightShift short : wrong result : ", xByteValue >>> yShortValue, intValue);
 
-		value = eval(yByte + unsignedRightShiftOp + xShort);
+		value = eval(yByte + unsignedRightShiftOp + xShort); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte unsignedRightShift short : wrong type : ", "int", typeName);
 		intValue = ((IJavaPrimitiveValue)value).getIntValue();
@@ -2040,16 +2040,16 @@ public class ByteOperatorsTests extends Tests {
 		}
 	}
 
-	public void testByteUnsignedRightShiftInt() throws Throwable {
+	public void testByteUnsignedRightShiftInt() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xByte + unsignedRightShiftOp + yInt);
+		IValue value = eval(xByte + unsignedRightShiftOp + yInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("byte unsignedRightShift int : wrong type : ", "int", typeName);
 		int intValue = ((IJavaPrimitiveValue)value).getIntValue();
 		assertEquals("byte unsignedRightShift int : wrong result : ", xByteValue >>> yIntValue, intValue);
 
-		value = eval(yByte + unsignedRightShiftOp + xInt);
+		value = eval(yByte + unsignedRightShiftOp + xInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte unsignedRightShift int : wrong type : ", "int", typeName);
 		intValue = ((IJavaPrimitiveValue)value).getIntValue();
@@ -2059,16 +2059,16 @@ public class ByteOperatorsTests extends Tests {
 		}
 	}
 
-	public void testByteUnsignedRightShiftLong() throws Throwable {
+	public void testByteUnsignedRightShiftLong() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xByte + unsignedRightShiftOp + yLong);
+		IValue value = eval(xByte + unsignedRightShiftOp + yLong); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("byte unsignedRightShift long : wrong type : ", "int", typeName);
 		int intValue = ((IJavaPrimitiveValue)value).getIntValue();
 		assertEquals("byte unsignedRightShift long : wrong result : ", xByteValue >>> yLongValue, intValue);
 
-		value = eval(yByte + unsignedRightShiftOp + xLong);
+		value = eval(yByte + unsignedRightShiftOp + xLong); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte unsignedRightShift long : wrong type : ", "int", typeName);
 		intValue = ((IJavaPrimitiveValue)value).getIntValue();
@@ -2080,16 +2080,16 @@ public class ByteOperatorsTests extends Tests {
 
 	// byte | {byte, char, short, int, long}
 
-	public void testByteOrByte() throws Throwable {
+	public void testByteOrByte() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xByte + orOp + yByte);
+		IValue value = eval(xByte + orOp + yByte); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("byte or byte : wrong type : ", "int", typeName);
 		int intValue = ((IJavaPrimitiveValue)value).getIntValue();
 		assertEquals("byte or byte : wrong result : ", xByteValue | yByteValue, intValue);
 
-		value = eval(yByte + orOp + xByte);
+		value = eval(yByte + orOp + xByte); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte or byte : wrong type : ", "int", typeName);
 		intValue = ((IJavaPrimitiveValue)value).getIntValue();
@@ -2099,16 +2099,16 @@ public class ByteOperatorsTests extends Tests {
 		}
 	}
 
-	public void testByteOrChar() throws Throwable {
+	public void testByteOrChar() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xByte + orOp + yChar);
+		IValue value = eval(xByte + orOp + yChar); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("byte or char : wrong type : ", "int", typeName);
 		int intValue = ((IJavaPrimitiveValue)value).getIntValue();
 		assertEquals("byte or char : wrong result : ", xByteValue | yCharValue, intValue);
 
-		value = eval(yByte + orOp + xChar);
+		value = eval(yByte + orOp + xChar); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte or char : wrong type : ", "int", typeName);
 		intValue = ((IJavaPrimitiveValue)value).getIntValue();
@@ -2118,16 +2118,16 @@ public class ByteOperatorsTests extends Tests {
 		}
 	}
 
-	public void testByteOrShort() throws Throwable {
+	public void testByteOrShort() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xByte + orOp + yShort);
+		IValue value = eval(xByte + orOp + yShort); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("byte or short : wrong type : ", "int", typeName);
 		int intValue = ((IJavaPrimitiveValue)value).getIntValue();
 		assertEquals("byte or short : wrong result : ", xByteValue | yShortValue, intValue);
 
-		value = eval(yByte + orOp + xShort);
+		value = eval(yByte + orOp + xShort); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte or short : wrong type : ", "int", typeName);
 		intValue = ((IJavaPrimitiveValue)value).getIntValue();
@@ -2137,16 +2137,16 @@ public class ByteOperatorsTests extends Tests {
 		}
 	}
 
-	public void testByteOrInt() throws Throwable {
+	public void testByteOrInt() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xByte + orOp + yInt);
+		IValue value = eval(xByte + orOp + yInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("byte or int : wrong type : ", "int", typeName);
 		int intValue = ((IJavaPrimitiveValue)value).getIntValue();
 		assertEquals("byte or int : wrong result : ", xByteValue | yIntValue, intValue);
 
-		value = eval(yByte + orOp + xInt);
+		value = eval(yByte + orOp + xInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte or int : wrong type : ", "int", typeName);
 		intValue = ((IJavaPrimitiveValue)value).getIntValue();
@@ -2156,16 +2156,16 @@ public class ByteOperatorsTests extends Tests {
 		}
 	}
 
-	public void testByteOrLong() throws Throwable {
+	public void testByteOrLong() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xByte + orOp + yLong);
+		IValue value = eval(xByte + orOp + yLong); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("byte or long : wrong type : ", "long", typeName);
 		long longValue = ((IJavaPrimitiveValue)value).getLongValue();
 		assertEquals("byte or long : wrong result : ", xByteValue | yLongValue, longValue);
 
-		value = eval(yByte + orOp + xLong);
+		value = eval(yByte + orOp + xLong); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte or long : wrong type : ", "long", typeName);
 		longValue = ((IJavaPrimitiveValue)value).getLongValue();
@@ -2177,16 +2177,16 @@ public class ByteOperatorsTests extends Tests {
 
 	// byte & {byte, char, short, int, long}
 
-	public void testByteAndByte() throws Throwable {
+	public void testByteAndByte() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xByte + andOp + yByte);
+		IValue value = eval(xByte + andOp + yByte); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("byte and byte : wrong type : ", "int", typeName);
 		int intValue = ((IJavaPrimitiveValue)value).getIntValue();
 		assertEquals("byte and byte : wrong result : ", xByteValue & yByteValue, intValue);
 
-		value = eval(yByte + andOp + xByte);
+		value = eval(yByte + andOp + xByte); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte and byte : wrong type : ", "int", typeName);
 		intValue = ((IJavaPrimitiveValue)value).getIntValue();
@@ -2196,16 +2196,16 @@ public class ByteOperatorsTests extends Tests {
 		}
 	}
 
-	public void testByteAndChar() throws Throwable {
+	public void testByteAndChar() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xByte + andOp + yChar);
+		IValue value = eval(xByte + andOp + yChar); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("byte and char : wrong type : ", "int", typeName);
 		int intValue = ((IJavaPrimitiveValue)value).getIntValue();
 		assertEquals("byte and char : wrong result : ", xByteValue & yCharValue, intValue);
 
-		value = eval(yByte + andOp + xChar);
+		value = eval(yByte + andOp + xChar); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte and char : wrong type : ", "int", typeName);
 		intValue = ((IJavaPrimitiveValue)value).getIntValue();
@@ -2215,16 +2215,16 @@ public class ByteOperatorsTests extends Tests {
 		}
 	}
 
-	public void testByteAndShort() throws Throwable {
+	public void testByteAndShort() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xByte + andOp + yShort);
+		IValue value = eval(xByte + andOp + yShort); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("byte and short : wrong type : ", "int", typeName);
 		int intValue = ((IJavaPrimitiveValue)value).getIntValue();
 		assertEquals("byte and short : wrong result : ", xByteValue & yShortValue, intValue);
 
-		value = eval(yByte + andOp + xShort);
+		value = eval(yByte + andOp + xShort); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte and short : wrong type : ", "int", typeName);
 		intValue = ((IJavaPrimitiveValue)value).getIntValue();
@@ -2234,16 +2234,16 @@ public class ByteOperatorsTests extends Tests {
 		}
 	}
 
-	public void testByteAndInt() throws Throwable {
+	public void testByteAndInt() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xByte + andOp + yInt);
+		IValue value = eval(xByte + andOp + yInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("byte and int : wrong type : ", "int", typeName);
 		int intValue = ((IJavaPrimitiveValue)value).getIntValue();
 		assertEquals("byte and int : wrong result : ", xByteValue & yIntValue, intValue);
 
-		value = eval(yByte + andOp + xInt);
+		value = eval(yByte + andOp + xInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte and int : wrong type : ", "int", typeName);
 		intValue = ((IJavaPrimitiveValue)value).getIntValue();
@@ -2253,16 +2253,16 @@ public class ByteOperatorsTests extends Tests {
 		}
 	}
 
-	public void testByteAndLong() throws Throwable {
+	public void testByteAndLong() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xByte + andOp + yLong);
+		IValue value = eval(xByte + andOp + yLong); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("byte and long : wrong type : ", "long", typeName);
 		long longValue = ((IJavaPrimitiveValue)value).getLongValue();
 		assertEquals("byte and long : wrong result : ", xByteValue & yLongValue, longValue);
 
-		value = eval(yByte + andOp + xLong);
+		value = eval(yByte + andOp + xLong); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte and long : wrong type : ", "long", typeName);
 		longValue = ((IJavaPrimitiveValue)value).getLongValue();
@@ -2274,16 +2274,16 @@ public class ByteOperatorsTests extends Tests {
 
 	// byte ^ {byte, char, short, int, long}
 
-	public void testByteXorByte() throws Throwable {
+	public void testByteXorByte() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xByte + xorOp + yByte);
+		IValue value = eval(xByte + xorOp + yByte); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("byte xor byte : wrong type : ", "int", typeName);
 		int intValue = ((IJavaPrimitiveValue)value).getIntValue();
 		assertEquals("byte xor byte : wrong result : ", xByteValue ^ yByteValue, intValue);
 
-		value = eval(yByte + xorOp + xByte);
+		value = eval(yByte + xorOp + xByte); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte xor byte : wrong type : ", "int", typeName);
 		intValue = ((IJavaPrimitiveValue)value).getIntValue();
@@ -2293,16 +2293,16 @@ public class ByteOperatorsTests extends Tests {
 		}
 	}
 
-	public void testByteXorChar() throws Throwable {
+	public void testByteXorChar() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xByte + xorOp + yChar);
+		IValue value = eval(xByte + xorOp + yChar); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("byte xor char : wrong type : ", "int", typeName);
 		int intValue = ((IJavaPrimitiveValue)value).getIntValue();
 		assertEquals("byte xor char : wrong result : ", xByteValue ^ yCharValue, intValue);
 
-		value = eval(yByte + xorOp + xChar);
+		value = eval(yByte + xorOp + xChar); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte xor char : wrong type : ", "int", typeName);
 		intValue = ((IJavaPrimitiveValue)value).getIntValue();
@@ -2312,16 +2312,16 @@ public class ByteOperatorsTests extends Tests {
 		}
 	}
 
-	public void testByteXorShort() throws Throwable {
+	public void testByteXorShort() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xByte + xorOp + yShort);
+		IValue value = eval(xByte + xorOp + yShort); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("byte xor short : wrong type : ", "int", typeName);
 		int intValue = ((IJavaPrimitiveValue)value).getIntValue();
 		assertEquals("byte xor short : wrong result : ", xByteValue ^ yShortValue, intValue);
 
-		value = eval(yByte + xorOp + xShort);
+		value = eval(yByte + xorOp + xShort); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte xor short : wrong type : ", "int", typeName);
 		intValue = ((IJavaPrimitiveValue)value).getIntValue();
@@ -2331,16 +2331,16 @@ public class ByteOperatorsTests extends Tests {
 		}
 	}
 
-	public void testByteXorInt() throws Throwable {
+	public void testByteXorInt() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xByte + xorOp + yInt);
+		IValue value = eval(xByte + xorOp + yInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("byte xor int : wrong type : ", "int", typeName);
 		int intValue = ((IJavaPrimitiveValue)value).getIntValue();
 		assertEquals("byte xor int : wrong result : ", xByteValue ^ yIntValue, intValue);
 
-		value = eval(yByte + xorOp + xInt);
+		value = eval(yByte + xorOp + xInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte xor int : wrong type : ", "int", typeName);
 		intValue = ((IJavaPrimitiveValue)value).getIntValue();
@@ -2350,16 +2350,16 @@ public class ByteOperatorsTests extends Tests {
 		}
 	}
 
-	public void testByteXorLong() throws Throwable {
+	public void testByteXorLong() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xByte + xorOp + yLong);
+		IValue value = eval(xByte + xorOp + yLong); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("byte xor long : wrong type : ", "long", typeName);
 		long longValue = ((IJavaPrimitiveValue)value).getLongValue();
 		assertEquals("byte xor long : wrong result : ", xByteValue ^ yLongValue, longValue);
 
-		value = eval(yByte + xorOp + xLong);
+		value = eval(yByte + xorOp + xLong); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte xor long : wrong type : ", "long", typeName);
 		longValue = ((IJavaPrimitiveValue)value).getLongValue();
@@ -2371,16 +2371,16 @@ public class ByteOperatorsTests extends Tests {
 
 	// + byte
 
-	public void testPlusByte() throws Throwable {
+	public void testPlusByte() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(plusOp + xByte);
+		IValue value = eval(plusOp + xByte); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("plus byte : wrong type : ", "int", typeName);
 		int intValue = ((IJavaPrimitiveValue)value).getIntValue();
 		assertEquals("plus byte : wrong result : ", + xByteValue, intValue);
 
-		value = eval(plusOp + yByte);
+		value = eval(plusOp + yByte); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("plus byte : wrong type : ", "int", typeName);
 		intValue = ((IJavaPrimitiveValue)value).getIntValue();
@@ -2392,16 +2392,16 @@ public class ByteOperatorsTests extends Tests {
 
 	// - byte
 
-	public void testMinusByte() throws Throwable {
+	public void testMinusByte() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(minusOp + xByte);
+		IValue value = eval(minusOp + xByte); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("minus byte : wrong type : ", "int", typeName);
 		int intValue = ((IJavaPrimitiveValue)value).getIntValue();
 		assertEquals("minus byte : wrong result : ", - xByteValue, intValue);
 
-		value = eval(minusOp + yByte);
+		value = eval(minusOp + yByte); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("minus byte : wrong type : ", "int", typeName);
 		intValue = ((IJavaPrimitiveValue)value).getIntValue();
@@ -2413,16 +2413,16 @@ public class ByteOperatorsTests extends Tests {
 
 	// ~ byte
 
-	public void testTwiddleByte() throws Throwable {
+	public void testTwiddleByte() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(twiddleOp + xByte);
+		IValue value = eval(twiddleOp + xByte); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("twiddle byte : wrong type : ", "int", typeName);
 		int intValue = ((IJavaPrimitiveValue)value).getIntValue();
 		assertEquals("twiddle byte : wrong result : ", ~ xByteValue, intValue);
 
-		value = eval(twiddleOp + yByte);
+		value = eval(twiddleOp + yByte); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("twiddle byte : wrong type : ", "int", typeName);
 		intValue = ((IJavaPrimitiveValue)value).getIntValue();

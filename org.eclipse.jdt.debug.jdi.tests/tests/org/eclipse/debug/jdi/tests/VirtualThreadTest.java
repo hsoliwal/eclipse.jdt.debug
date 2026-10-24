@@ -92,7 +92,7 @@ public class VirtualThreadTest extends AbstractJDITest {
 			StringWriter err = new StringWriter();
 			err.append(e.getMessage());
 			e.printStackTrace(new PrintWriter(err));
-			fail("Error in setup: " + err.toString());
+			fail("Error in setup: " + err.toString()); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		}
 		super.setUp();
 	}
@@ -119,22 +119,22 @@ public class VirtualThreadTest extends AbstractJDITest {
 
 	@Override
 	protected String enhanceClasspath(String classPath) {
-		return classPath + File.pathSeparator + tempClassesDirectory;
+		return classPath + File.pathSeparator + tempClassesDirectory; //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 	}
 
 	private static void compileFiles(String sourceFilePath, String outputPath) throws Exception {
 		StandardJavaFileManager fileManager = compiler.getStandardFileManager(null, Locale.ENGLISH, StandardCharsets.UTF_8);
 		Iterable<? extends JavaFileObject> javaFileObjects = fileManager.getJavaFileObjects(new File(sourceFilePath));
 		File outputFolder = new File(outputPath);
-		if (!outputFolder.exists()) {
-			Files.createDirectories(outputFolder.toPath());
+		if (!outputFolder.exists()) { //FLLDCIM: MARK — M31 M3FILE_IO CALL
+			Files.createDirectories(outputFolder.toPath()); //FLLDCIM: MARK — M31 M3FILE_IO CALL
 		}
 		List<String> options = List.of("-d", outputFolder.getAbsolutePath(), "-g", "-proc:none");
 		final StringWriter output = new StringWriter();
 		CompilationTask task = compiler.getTask(output, fileManager, null, options, null, javaFileObjects);
 		boolean result = task.call();
 		if (!result) {
-			throw new IllegalArgumentException("Compilation failed:\n'" + output + "', compiler name: '" + compiler.name()
+			throw new IllegalArgumentException("Compilation failed:\n'" + output + "', compiler name: '" + compiler.name() //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 					+ "', supported source versions: " + compiler.getSourceVersions());
 		}
 
@@ -178,7 +178,7 @@ public class VirtualThreadTest extends AbstractJDITest {
 	 *
 	 * @throws Exception
 	 */
-	public void testJDIPlatformThreadsOnlyFilter() throws Exception {
+	public void testJDIPlatformThreadsOnlyFilter() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		// Make sure the entire VM is not suspended before we start a new thread
 		// (otherwise this new thread will start suspended and we will never get the
 		// ThreadStart event)

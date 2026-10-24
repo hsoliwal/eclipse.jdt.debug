@@ -42,7 +42,7 @@ public class JREPreferenceModifyListener extends PreferenceModifyListener {
 
 	class Visitor implements IPreferenceNodeVisitor {
 
-		@Override
+		@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		public boolean visit(IEclipsePreferences node) throws BackingStoreException {
 			if (node.name().equals(LaunchingPlugin.getUniqueIdentifier())) {
 				String jresXML = node.get(JavaRuntime.PREF_VM_XML, null);
@@ -50,14 +50,14 @@ public class JREPreferenceModifyListener extends PreferenceModifyListener {
 					VMDefinitionsContainer vms = new VMDefinitionsContainer();
 					String pref = InstanceScope.INSTANCE.getNode(LaunchingPlugin.ID_PLUGIN).get(JavaRuntime.PREF_VM_XML, ""); //$NON-NLS-1$
 					// names -> existing vm's
-					Map<String, IVMInstall> names = new HashMap<>();
-					Set<String> ids = new HashSet<>();
+					Map<String, IVMInstall> names = new HashMap<>(); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
+					Set<String> ids = new HashSet<>(); //FLLDCIM: MARK — M03 M3_SET_LANES NEW
 					if (pref.length() > 0) {
 						try {
 							VMDefinitionsContainer container = VMDefinitionsContainer.parseXMLIntoContainer(new ByteArrayInputStream(pref.getBytes(StandardCharsets.UTF_8)));
 							List<IVMInstall> validVMList = container.getValidVMList();
 							Iterator<IVMInstall> iterator = validVMList.iterator();
-							while (iterator.hasNext()) {
+							while (iterator.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 								IVMInstall vm = iterator.next();
 								names.put(vm.getName(), vm);
 								ids.add(vm.getId());
@@ -76,7 +76,7 @@ public class JREPreferenceModifyListener extends PreferenceModifyListener {
 						VMDefinitionsContainer container = VMDefinitionsContainer.parseXMLIntoContainer(inputStream);
 						List<IVMInstall> validVMList = container.getValidVMList();
 						Iterator<IVMInstall> iterator = validVMList.iterator();
-						while (iterator.hasNext()) {
+						while (iterator.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 							IVMInstall vm = iterator.next();
 							IVMInstall existing = names.get(vm.getName());
 							if (existing != null) {
@@ -88,7 +88,7 @@ public class JREPreferenceModifyListener extends PreferenceModifyListener {
 							if (collision) {
 								// conflicting id, create a new one with unique id
 								long unique = System.currentTimeMillis();
-								while(ids.contains(String.valueOf(unique))){
+								while(ids.contains(String.valueOf(unique))){ //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 									unique++;
 								}
 								vm = new VMStandin(vm, String.valueOf(unique));
@@ -100,7 +100,7 @@ public class JREPreferenceModifyListener extends PreferenceModifyListener {
 						String defaultVMInstallCompositeID = container.getDefaultVMInstallCompositeID();
 						validVMList = vms.getValidVMList();
 						iterator = validVMList.iterator();
-						while (iterator.hasNext()) {
+						while (iterator.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 							IVMInstall vm = iterator.next();
 							if (JavaRuntime.getCompositeIdFromVM(vm).equals(defaultVMInstallCompositeID)) {
 								vms.setDefaultVMInstallCompositeID(defaultVMInstallCompositeID);

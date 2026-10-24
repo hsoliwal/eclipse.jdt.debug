@@ -33,7 +33,7 @@ import org.eclipse.swt.widgets.Shell;
  */
 public class JavaVariableValueEditor implements IVariableValueEditor {
 
-    @Override
+    @Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public boolean editVariable(IVariable variable, Shell shell) {
         String signature= null;
         try {
@@ -58,7 +58,7 @@ public class JavaVariableValueEditor implements IVariableValueEditor {
         return editor.editVariable(variable, shell);
     }
 
-    @Override
+    @Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public boolean saveVariable(IVariable variable, String expression, Shell shell) {
 		if (!isAllowedToModifyValue(variable)) {
 			// return true to avoid further processing

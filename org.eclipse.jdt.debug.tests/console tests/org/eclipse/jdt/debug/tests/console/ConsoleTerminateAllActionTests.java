@@ -46,7 +46,7 @@ public class ConsoleTerminateAllActionTests extends AbstractDebugTest {
 		assertNotNull(address);
 
 	}
-	public void testTerminateAll_01() throws Exception{
+	public void testTerminateAll_01() throws Exception{ //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		createLineBreakpoint(18, "TerminateAll_01");
 		createLineBreakpoint(18, "TerminateAll_02");
 		IJavaThread thread1 = null;
@@ -61,7 +61,7 @@ public class ConsoleTerminateAllActionTests extends AbstractDebugTest {
 				TestUtil.waitForJobs(getName(), 100, DEFAULT_TIMEOUT, ProcessConsole.class);
 				ConsoleView view = null;
 				IWorkbenchWindow[] workbenchWindows = PlatformUI.getWorkbench().getWorkbenchWindows();
-				for (int i = 0; i < workbenchWindows.length; i++) {
+				for (int i = 0; i < workbenchWindows.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 					IWorkbenchWindow window = workbenchWindows[i];
 					if (window != null) {
 						IWorkbenchPage page = window.getActivePage();

@@ -57,7 +57,7 @@ class AccessRuleParticipant implements IAccessRuleParticipant {
 			LaunchingPlugin.log(e.getStatus());
 		}
 		IAccessRule[][] rules = new IAccessRule[libraries.length][];
-		for (int i = 0; i < rules.length; i++) {
+		for (int i = 0; i < rules.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			rules[i] = new IAccessRule[0];
 		}
 		return rules;

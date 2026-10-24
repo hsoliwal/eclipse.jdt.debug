@@ -70,7 +70,7 @@ public class JavaBreakpointPage extends PropertyPage {
 	/*
 	 * protected Button fTriggerPointButton; protected Button fTriggerPointButtonActive;
 	 */
-	protected List<String> fErrorMessages= new ArrayList<>();
+	protected List<String> fErrorMessages= new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 	protected String fPrevMessage = null;
 	private AbstractJavaBreakpointEditor fEditor;
 
@@ -78,12 +78,12 @@ public class JavaBreakpointPage extends PropertyPage {
 	 * Attribute used to indicate that a breakpoint should be deleted
 	 * when cancel is pressed.
 	 */
-	public static final String ATTR_DELETE_ON_CANCEL = JDIDebugUIPlugin.getUniqueIdentifier() + ".ATTR_DELETE_ON_CANCEL";  //$NON-NLS-1$
+	public static final String ATTR_DELETE_ON_CANCEL = JDIDebugUIPlugin.getUniqueIdentifier() + ".ATTR_DELETE_ON_CANCEL";  //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 	/**
 	 * Attribute used to indicate resetting the enable attribute if cancel is pressed.
 	 */
-	public static final String ATTR_ENABLED_SETTING_ON_CANCEL = JDIDebugUIPlugin.getUniqueIdentifier() + ".ATTR_ENABLED_SETTING_ON_CANCEL"; //$NON-NLS-1$
+	public static final String ATTR_ENABLED_SETTING_ON_CANCEL = JDIDebugUIPlugin.getUniqueIdentifier() + ".ATTR_ENABLED_SETTING_ON_CANCEL"; //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 	/**
 	 * Constant for the empty string
@@ -94,9 +94,9 @@ public class JavaBreakpointPage extends PropertyPage {
 	 * Store the breakpoint properties.
 	 * @see org.eclipse.jface.preference.IPreferencePage#performOk()
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public boolean performOk() {
-		IWorkspaceRunnable wr = new IWorkspaceRunnable() {
+		IWorkspaceRunnable wr = new IWorkspaceRunnable() { //FLLDCIM: MARK — T09  ANONYMOUS
 			@Override
 			public void run(IProgressMonitor monitor) throws CoreException {
 				IJavaBreakpoint breakpoint = getBreakpoint();
@@ -182,7 +182,7 @@ public class JavaBreakpointPage extends PropertyPage {
 	 * Creates the labels and editors displayed for the breakpoint.
 	 * @see org.eclipse.jface.preference.PreferencePage#createContents(org.eclipse.swt.widgets.Composite)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	protected Control createContents(Composite parent) {
 		noDefaultAndApplyButton();
 		Composite mainComposite = SWTFactory.createComposite(parent, parent.getFont(), 1, 1, GridData.FILL_HORIZONTAL, 0, 0);
@@ -283,16 +283,16 @@ public class JavaBreakpointPage extends PropertyPage {
 	 * breakpoint page.
 	 * @param parent the parent composite
 	 */
-	protected void createTypeSpecificLabels(Composite parent) {
+	protected void createTypeSpecificLabels(Composite parent) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		// Line number
 		IJavaBreakpoint jb = getBreakpoint();
 		if (jb instanceof IJavaLineBreakpoint) {
 			IJavaLineBreakpoint breakpoint = (IJavaLineBreakpoint) jb;
-			StringBuilder lineNumber = new StringBuilder(4);
+			StringBuilder lineNumber = new StringBuilder(4); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 			try {
 				int lNumber = breakpoint.getLineNumber();
 				if (lNumber > 0) {
-					lineNumber.append(lNumber);
+					lineNumber.append(lNumber); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				}
 			} catch (CoreException ce) {
 				JDIDebugUIPlugin.log(ce);
@@ -327,7 +327,7 @@ public class JavaBreakpointPage extends PropertyPage {
 	* breakpoint page.
 	* @param parent the parent composite
 	*/
-   protected void createTypeSpecificEditors(Composite parent) {
+   protected void createTypeSpecificEditors(Composite parent) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	   try {
 		String type = getBreakpoint().getMarker().getType();
 		if (JavaClassPrepareBreakpoint.JAVA_CLASS_PREPARE_BREAKPOINT.equals(type)) {
@@ -354,7 +354,7 @@ public class JavaBreakpointPage extends PropertyPage {
 			fEditor = new StandardJavaBreakpointEditor();
 		}
 		fEditor.createControl(parent);
-		fEditor.addPropertyListener(new IPropertyListener() {
+		fEditor.addPropertyListener(new IPropertyListener() { //FLLDCIM: MARK — T06  ANONYMOUS
 			@Override
 			public void propertyChanged(Object source, int propId) {
 				IStatus status = fEditor.getStatus();

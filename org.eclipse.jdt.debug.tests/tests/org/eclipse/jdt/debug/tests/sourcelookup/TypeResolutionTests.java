@@ -131,7 +131,7 @@ public class TypeResolutionTests extends AbstractDebugTest {
 	 * @param expectedName expected fully qualified name of resolved type
 	 * @throws Exception on failure
 	 */
-	protected void resolve(int line, String expectedName) throws Exception {
+	protected void resolve(int line, String expectedName) throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String typeName = "EvalNestedTypeTests";
 		IJavaLineBreakpoint bp = createLineBreakpoint(line, typeName);
 		IJavaThread thread= null;

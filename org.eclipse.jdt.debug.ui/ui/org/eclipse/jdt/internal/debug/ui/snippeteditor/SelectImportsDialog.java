@@ -40,7 +40,7 @@ public class SelectImportsDialog extends TitleAreaDialog {
 	private JavaFilterTable fJavaFilterTable;
 	private JavaSnippetEditor fEditor;
 
-	public SelectImportsDialog(JavaSnippetEditor editor, String[] imports) {
+	public SelectImportsDialog(JavaSnippetEditor editor, String[] imports) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		super(editor.getShell());
 		fEditor= editor;
 		fJavaFilterTable = new JavaFilterTable(new FilterStorage() {
@@ -51,7 +51,7 @@ public class SelectImportsDialog extends TitleAreaDialog {
 					return new Filter[0];
 				}
 				Filter[] result = new Filter[imports.length];
-				for (int i = 0; i < imports.length; i++) {
+				for (int i = 0; i < imports.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 					result[i] = new Filter(imports[i], true);
 				}
 				return result;
@@ -60,7 +60,7 @@ public class SelectImportsDialog extends TitleAreaDialog {
 			@Override
 			public void setStoredFilters(IPreferenceStore store, Filter[] filters) {
 				String[] newImports = new String[filters.length];
-				for (int i = 0; i < filters.length; i++) {
+				for (int i = 0; i < filters.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 					newImports[i] = filters[i].getName();
 				}
 				fEditor.setImports(newImports);

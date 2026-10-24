@@ -50,7 +50,7 @@ public class WatchExpressionTests extends AbstractDebugTest {
 	/**
 	 * Test a watch expression that is created before a program is executed.
 	 */
-	public void testDeferredExpression() throws Exception {
+	public void testDeferredExpression() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IWatchExpression expression = getExpressionManager().newWatchExpression("((Integer)fVector.get(3)).intValue()");
 		getExpressionManager().addExpression(expression);
 		String typeName = "WatchItemTests";
@@ -85,7 +85,7 @@ public class WatchExpressionTests extends AbstractDebugTest {
      * change events can vary. However, it it attempting to test behavior that
      * does not exist, and is removed from the test suite.
 	 */
-	public void REMOVEDtestNonDeferredExpression() throws Exception {
+	public void REMOVEDtestNonDeferredExpression() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String typeName = "WatchItemTests";
 		createLineBreakpoint(42, typeName);
 		IJavaThread thread= null;
@@ -118,7 +118,7 @@ public class WatchExpressionTests extends AbstractDebugTest {
 	 *
 	 * THIS TEST HAS BEEN DISABLED DUE TO BUG 228400
 	 */
-	public void DisabledtestStepping() throws Exception {
+	public void DisabledtestStepping() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IWatchExpression expression = getExpressionManager().newWatchExpression("i");
 		getExpressionManager().addExpression(expression);
 		String typeName = "WatchItemTests";
@@ -169,7 +169,7 @@ public class WatchExpressionTests extends AbstractDebugTest {
 		}
 	}
 
-	public void testExpressionContext() throws Exception {
+	public void testExpressionContext() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String typeName = "WatchItemContext";
 		createLineBreakpoint(42, typeName);
 		IJavaThread thread = null;
@@ -201,9 +201,9 @@ public class WatchExpressionTests extends AbstractDebugTest {
     private void dumpErrors(IWatchExpression expression) {
         if (expression.hasErrors()) {
             String[] errorMessages = expression.getErrorMessages();
-            for (int i = 0; i < errorMessages.length; i++) {
+            for (int i = 0; i < errorMessages.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
                 String string = errorMessages[i];
-                System.out.println(getName() + ": " + string);
+                System.out.println(getName() + ": " + string); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
             }
         }
     }
@@ -224,7 +224,7 @@ public class WatchExpressionTests extends AbstractDebugTest {
 	protected void setUp() throws Exception {
 		super.setUp();
 		Display display = DebugUIPlugin.getStandardDisplay();
-		display.syncExec(new Runnable() {
+		display.syncExec(new Runnable() { //FLLDCIM: MARK — T08 UI_THREAD_SYNCHRONIZER CALL
 			@Override
 			public void run() {
 				try {

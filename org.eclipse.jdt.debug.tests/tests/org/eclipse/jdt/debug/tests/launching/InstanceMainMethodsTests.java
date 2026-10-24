@@ -64,7 +64,7 @@ public class InstanceMainMethodsTests extends AbstractDebugTest {
 	private static void waitForExit(IProcess process, long timeoutMs) throws Exception {
 		assertNotNull("Missing VM process.", process);
 		long start = System.currentTimeMillis();
-		while (!process.isTerminated() && System.currentTimeMillis() - start < timeoutMs) {
+		while (!process.isTerminated() && System.currentTimeMillis() - start < timeoutMs) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			if (Display.getCurrent() != null) {
 				TestUtil.runEventLoop();
 			}

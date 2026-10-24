@@ -285,14 +285,14 @@ public abstract class AbstractDebugTest extends TestCase implements  IEvaluation
 		}
 	}
 
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	protected void setUp() throws Exception {
 		if (!setupFirstTest) {
 			setupFirstTest = true;
 			TestUtil.logInfo("SETTING UP TESTS");
 			JavaRuntime.addVMInstallChangedListener(new LogVMInstallChanges());
 		}
-		TestUtil.logInfo("SETUP " + getClass().getSimpleName() + "." + getName());
+		TestUtil.logInfo("SETUP " + getClass().getSimpleName() + "." + getName()); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		super.setUp();
 		setPreferences();
 		IProject pro = ResourcesPlugin.getWorkspace().getRoot().getProject(ONE_FOUR_PROJECT_NAME);
@@ -320,7 +320,7 @@ public abstract class AbstractDebugTest extends TestCase implements  IEvaluation
 		assertWelcomeScreenClosed();
 	}
 
-	synchronized void setPreferences() throws BackingStoreException {
+	synchronized void setPreferences() throws BackingStoreException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		if(!loadedPrefs) {
 	        IPreferenceStore debugUIPreferences = DebugUIPlugin.getDefault().getPreferenceStore();
 	        // Don't prompt for perspective switching
@@ -371,9 +371,9 @@ public abstract class AbstractDebugTest extends TestCase implements  IEvaluation
 	/**
 	 * Creates the Java 1.4 compliant project
 	 */
-	synchronized void assert14Project() {
+	synchronized void assert14Project() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IJavaProject jp = null;
-		ArrayList<ILaunchConfiguration> cfgs = new ArrayList<>(1);
+		ArrayList<ILaunchConfiguration> cfgs = new ArrayList<>(1); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
         try {
 	        if (!loaded14) {
 	        	try {
@@ -407,7 +407,7 @@ public abstract class AbstractDebugTest extends TestCase implements  IEvaluation
 		        JavaProjectHelper.addToClasspath(jp, entry);
 
 		        // create launch configurations
-		        for (int i = 0; i < LAUNCH_CONFIG_NAMES_1_4.length; i++) {
+		        for (int i = 0; i < LAUNCH_CONFIG_NAMES_1_4.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 		        	cfgs.add(createLaunchConfiguration(jp, LAUNCH_CONFIG_NAMES_1_4[i]));
 				}
 		        loaded14 = true;
@@ -419,7 +419,7 @@ public abstract class AbstractDebugTest extends TestCase implements  IEvaluation
         		if(jp != null) {
         			jp.getProject().delete(true,  true, null);
         		}
-	        	for (int i = 0; i < cfgs.size(); i++) {
+	        	for (int i = 0; i < cfgs.size(); i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 					cfgs.get(i).delete();
 				}
         	}
@@ -433,9 +433,9 @@ public abstract class AbstractDebugTest extends TestCase implements  IEvaluation
 	/**
 	 * Creates the Java 1.5 compliant project
 	 */
-	void assert15Project() {
+	void assert15Project() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IJavaProject jp = null;
-		ArrayList<ILaunchConfiguration> cfgs = new ArrayList<>(1);
+		ArrayList<ILaunchConfiguration> cfgs = new ArrayList<>(1); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
         try {
 	        if (!loaded15) {
 				jp = createProject(ONE_FIVE_PROJECT_NAME, JavaProjectHelper.TEST_1_5_SRC_DIR.toString(), JavaProjectHelper.JAVA_SE_1_8_EE_NAME, true);
@@ -459,7 +459,7 @@ public abstract class AbstractDebugTest extends TestCase implements  IEvaluation
         	try {
         		if(jp != null) {
 		        	jp.getProject().delete(true,  true, null);
-		        	for (int i = 0; i < cfgs.size(); i++) {
+		        	for (int i = 0; i < cfgs.size(); i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 						cfgs.get(i).delete();
 					}
         		}
@@ -474,9 +474,9 @@ public abstract class AbstractDebugTest extends TestCase implements  IEvaluation
 	/**
 	 * Creates the Java 1.7 compliant project
 	 */
-	synchronized void assert17Project() {
+	synchronized void assert17Project() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IJavaProject jp = null;
-		ArrayList<ILaunchConfiguration> cfgs = new ArrayList<>(1);
+		ArrayList<ILaunchConfiguration> cfgs = new ArrayList<>(1); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
         try {
 	        if (!loaded17) {
 				jp = createProject(ONE_SEVEN_PROJECT_NAME, JavaProjectHelper.TEST_1_7_SRC_DIR.toString(), JavaProjectHelper.JAVA_SE_1_8_EE_NAME, false);
@@ -494,7 +494,7 @@ public abstract class AbstractDebugTest extends TestCase implements  IEvaluation
         	try {
         		if(jp != null) {
 		        	jp.getProject().delete(true,  true, null);
-		        	for (int i = 0; i < cfgs.size(); i++) {
+		        	for (int i = 0; i < cfgs.size(); i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 						cfgs.get(i).delete();
 					}
         		}
@@ -509,9 +509,9 @@ public abstract class AbstractDebugTest extends TestCase implements  IEvaluation
 	/**
 	 * Creates the Java 1.8 compliant project
 	 */
-	synchronized void assert18Project() {
+	synchronized void assert18Project() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IJavaProject jp = null;
-		ArrayList<ILaunchConfiguration> cfgs = new ArrayList<>(1);
+		ArrayList<ILaunchConfiguration> cfgs = new ArrayList<>(1); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
         try {
 	        if (!loaded18) {
 	        	jp = createProject(ONE_EIGHT_PROJECT_NAME, JavaProjectHelper.TEST_1_8_SRC_DIR.toString(), JavaProjectHelper.JAVA_SE_1_8_EE_NAME, false);
@@ -571,7 +571,7 @@ public abstract class AbstractDebugTest extends TestCase implements  IEvaluation
         	try {
         		if(jp != null) {
 		        	jp.getProject().delete(true,  true, null);
-		        	for (int i = 0; i < cfgs.size(); i++) {
+		        	for (int i = 0; i < cfgs.size(); i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 						cfgs.get(i).delete();
 					}
         		}
@@ -586,9 +586,9 @@ public abstract class AbstractDebugTest extends TestCase implements  IEvaluation
 	/**
 	 * Creates the Java 9 compliant project
 	 */
-	synchronized void assert9Project() {
+	synchronized void assert9Project() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IJavaProject jp = null;
-		ArrayList<ILaunchConfiguration> cfgs = new ArrayList<>(1);
+		ArrayList<ILaunchConfiguration> cfgs = new ArrayList<>(1); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 		try {
 			if (!loaded9) {
 				jp = createProject(NINE_PROJECT_NAME, JavaProjectHelper.TEST_9_SRC_DIR.toString(), JavaProjectHelper.JAVA_SE_9_EE_NAME, false);
@@ -601,7 +601,7 @@ public abstract class AbstractDebugTest extends TestCase implements  IEvaluation
 			try {
 				if (jp != null) {
 					jp.getProject().delete(true, true, null);
-					for (int i = 0; i < cfgs.size(); i++) {
+					for (int i = 0; i < cfgs.size(); i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 						cfgs.get(i).delete();
 					}
 				}
@@ -615,9 +615,9 @@ public abstract class AbstractDebugTest extends TestCase implements  IEvaluation
 	/**
 	 * Creates the Java 16 compliant project
 	 */
-	synchronized void assert16_Project() {
+	synchronized void assert16_Project() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IJavaProject jp = null;
-		ArrayList<ILaunchConfiguration> cfgs = new ArrayList<>(1);
+		ArrayList<ILaunchConfiguration> cfgs = new ArrayList<>(1); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 		try {
 			if (!loaded16_) {
 				jp = createProject(ONESIX_PROJECT_NAME, JavaProjectHelper.TEST_16_SRC_DIR.toString(), JavaProjectHelper.JAVA_SE_16_EE_NAME, false);
@@ -629,7 +629,7 @@ public abstract class AbstractDebugTest extends TestCase implements  IEvaluation
 			try {
 				if (jp != null) {
 					jp.getProject().delete(true, true, null);
-					for (int i = 0; i < cfgs.size(); i++) {
+					for (int i = 0; i < cfgs.size(); i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 						cfgs.get(i).delete();
 					}
 				}
@@ -643,9 +643,9 @@ public abstract class AbstractDebugTest extends TestCase implements  IEvaluation
 	/**
 	 * Creates the Java 21 compliant project
 	 */
-	synchronized void assert21Project() {
+	synchronized void assert21Project() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IJavaProject jp = null;
-		ArrayList<ILaunchConfiguration> cfgs = new ArrayList<>(1);
+		ArrayList<ILaunchConfiguration> cfgs = new ArrayList<>(1); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 		try {
 			if (!loaded21) {
 				jp = createProject(TWENTYONE_PROJECT_NAME, JavaProjectHelper.TEST_21_SRC_DIR.toString(), JavaProjectHelper.JAVA_SE_21_EE_NAME, false);
@@ -659,7 +659,7 @@ public abstract class AbstractDebugTest extends TestCase implements  IEvaluation
 			try {
 				if (jp != null) {
 					jp.getProject().delete(true, true, null);
-					for (int i = 0; i < cfgs.size(); i++) {
+					for (int i = 0; i < cfgs.size(); i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 						cfgs.get(i).delete();
 					}
 				}
@@ -670,9 +670,9 @@ public abstract class AbstractDebugTest extends TestCase implements  IEvaluation
 		}
 	}
 
-	synchronized void assertMRProject() {
+	synchronized void assertMRProject() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IJavaProject jp = null;
-		ArrayList<ILaunchConfiguration> cfgs = new ArrayList<>(1);
+		ArrayList<ILaunchConfiguration> cfgs = new ArrayList<>(1); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 		try {
 			if (!loadedMR) {
 				jp = createProject(MR_PROJECT_NAME, JavaProjectHelper.TEST_MR_SRC_DIR.toString(), JavaProjectHelper.JAVA_SE_21_EE_NAME, false);
@@ -693,7 +693,7 @@ public abstract class AbstractDebugTest extends TestCase implements  IEvaluation
 			try {
 				if (jp != null) {
 					jp.getProject().delete(true, true, null);
-					for (int i = 0; i < cfgs.size(); i++) {
+					for (int i = 0; i < cfgs.size(); i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 						cfgs.get(i).delete();
 					}
 				}
@@ -704,9 +704,9 @@ public abstract class AbstractDebugTest extends TestCase implements  IEvaluation
 		}
 	}
 
-	synchronized void assert23Project() {
+	synchronized void assert23Project() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IJavaProject jp = null;
-		ArrayList<ILaunchConfiguration> cfgs = new ArrayList<>(1);
+		ArrayList<ILaunchConfiguration> cfgs = new ArrayList<>(1); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 		try {
 			if (!loaded23) {
 				jp = createProject(TWENTYTHREE_PROJECT_NAME, JavaProjectHelper.TEST_23_SRC_DIR.toString(), JavaProjectHelper.JAVA_SE_23_EE_NAME, false);
@@ -722,7 +722,7 @@ public abstract class AbstractDebugTest extends TestCase implements  IEvaluation
 			try {
 				if (jp != null) {
 					jp.getProject().delete(true, true, null);
-					for (int i = 0; i < cfgs.size(); i++) {
+					for (int i = 0; i < cfgs.size(); i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 						cfgs.get(i).delete();
 					}
 				}
@@ -736,9 +736,9 @@ public abstract class AbstractDebugTest extends TestCase implements  IEvaluation
 	/**
 	 * Creates the Java 24 compliant project
 	 */
-	synchronized void assert24Project() {
+	synchronized void assert24Project() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IJavaProject jp = null;
-		ArrayList<ILaunchConfiguration> cfgs = new ArrayList<>(1);
+		ArrayList<ILaunchConfiguration> cfgs = new ArrayList<>(1); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 		try {
 			if (!loaded24) {
 				jp = createProject(TWENTYFOUR_PROJECT_NAME, JavaProjectHelper.TEST_24_SRC_DIR.toString(), JavaProjectHelper.JAVA_SE_24_EE_NAME, false);
@@ -755,7 +755,7 @@ public abstract class AbstractDebugTest extends TestCase implements  IEvaluation
 			try {
 				if (jp != null) {
 					jp.getProject().delete(true, true, null);
-					for (int i = 0; i < cfgs.size(); i++) {
+					for (int i = 0; i < cfgs.size(); i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 						cfgs.get(i).delete();
 					}
 				}
@@ -769,9 +769,9 @@ public abstract class AbstractDebugTest extends TestCase implements  IEvaluation
 	/**
 	 * Creates the Java 25 compliant project
 	 */
-	synchronized void assert25Project() {
+	synchronized void assert25Project() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IJavaProject jp = null;
-		ArrayList<ILaunchConfiguration> cfgs = new ArrayList<>(1);
+		ArrayList<ILaunchConfiguration> cfgs = new ArrayList<>(1); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 		try {
 			if (!loaded25) {
 				jp = createProject(TWENTYFIVE_PROJECT_NAME, JavaProjectHelper.TEST_25_SRC_DIR.toString(), JavaProjectHelper.JAVA_SE_25_EE_NAME, false);
@@ -789,7 +789,7 @@ public abstract class AbstractDebugTest extends TestCase implements  IEvaluation
 			try {
 				if (jp != null) {
 					jp.getProject().delete(true, true, null);
-					for (int i = 0; i < cfgs.size(); i++) {
+					for (int i = 0; i < cfgs.size(); i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 						cfgs.get(i).delete();
 					}
 				}
@@ -800,9 +800,9 @@ public abstract class AbstractDebugTest extends TestCase implements  IEvaluation
 		}
 	}
 
-	synchronized void assert26Project() {
+	synchronized void assert26Project() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IJavaProject jp = null;
-		ArrayList<ILaunchConfiguration> cfgs = new ArrayList<>(1);
+		ArrayList<ILaunchConfiguration> cfgs = new ArrayList<>(1); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 		try {
 			if (!loaded26) {
 				jp = createProject(TWENTYSIX_PROJECT_NAME, JavaProjectHelper.TEST_26_SRC_DIR.toString(), JavaProjectHelper.JAVA_SE_26_EE_NAME, false);
@@ -820,7 +820,7 @@ public abstract class AbstractDebugTest extends TestCase implements  IEvaluation
 			try {
 				if (jp != null) {
 					jp.getProject().delete(true, true, null);
-					for (int i = 0; i < cfgs.size(); i++) {
+					for (int i = 0; i < cfgs.size(); i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 						cfgs.get(i).delete();
 					}
 				}
@@ -831,9 +831,9 @@ public abstract class AbstractDebugTest extends TestCase implements  IEvaluation
 		}
 	}
 
-	synchronized void assert27Project() {
+	synchronized void assert27Project() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IJavaProject jp = null;
-		ArrayList<ILaunchConfiguration> cfgs = new ArrayList<>(1);
+		ArrayList<ILaunchConfiguration> cfgs = new ArrayList<>(1); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 		try {
 			if (!loaded27) {
 				jp = createProject(TWENTYSEVEN_PROJECT_NAME, JavaProjectHelper.TEST_27_SRC_DIR.toString(), JavaProjectHelper.JAVA_SE_27_EE_NAME, false);
@@ -851,7 +851,7 @@ public abstract class AbstractDebugTest extends TestCase implements  IEvaluation
 			try {
 				if (jp != null) {
 					jp.getProject().delete(true, true, null);
-					for (int i = 0; i < cfgs.size(); i++) {
+					for (int i = 0; i < cfgs.size(); i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 						cfgs.get(i).delete();
 					}
 				}
@@ -864,7 +864,7 @@ public abstract class AbstractDebugTest extends TestCase implements  IEvaluation
 	/**
 	 * Creates the 'BoundJRE' project used for the JRE testing
 	 */
-	synchronized void assertBoundJreProject() {
+	synchronized void assertBoundJreProject() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IJavaProject jp = null;
 		try {
 	        if (!loadedJRE) {
@@ -893,7 +893,7 @@ public abstract class AbstractDebugTest extends TestCase implements  IEvaluation
 	/**
 	 * Creates the 'BoundEE' project for EE testing
 	 */
-	void assertBoundeEeProject() {
+	void assertBoundeEeProject() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IJavaProject jp = null;
 		try {
 	        if(!loadedEE) {
@@ -926,7 +926,7 @@ public abstract class AbstractDebugTest extends TestCase implements  IEvaluation
 	/**
 	 * Creates the 'MultiOutput' project for source / binary output testing
 	 */
-	synchronized void assertMultioutputProject() {
+	synchronized void assertMultioutputProject() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IJavaProject jp = null;
 		try {
 	        if(!loadedMulti) {
@@ -961,7 +961,7 @@ public abstract class AbstractDebugTest extends TestCase implements  IEvaluation
 	 *
 	 * @since 3.8
 	 */
-	protected final void assertWelcomeScreenClosed() throws Exception {
+	protected final void assertWelcomeScreenClosed() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		if(!welcomeClosed && PlatformUI.isWorkbenchRunning()) {
 			final IWorkbench wb = PlatformUI.getWorkbench();
 			if (wb == null) {
@@ -973,7 +973,7 @@ public abstract class AbstractDebugTest extends TestCase implements  IEvaluation
 				return;
 			}
 
-			UIJob job = new UIJob("close welcome screen for debug test suite") {
+			UIJob job = new UIJob("close welcome screen for debug test suite") { //FLLDCIM: MARK — T09  ANONYMOUS
 				@Override
 				public IStatus runInUIThread(IProgressMonitor monitor) {
 					closeIntro(wb);
@@ -1002,10 +1002,10 @@ public abstract class AbstractDebugTest extends TestCase implements  IEvaluation
 		StringWriter buf = new StringWriter();
 		String msg = e.getMessage();
     	if(msg == null) {
-			msg = "could not acquire message for exception class: " + e.getClass();
+			msg = "could not acquire message for exception class: " + e.getClass(); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
     	}
-		buf.write("Failed to create the '" + pname + "' test project.\n");
-		buf.write("'jp' is " + (jp != null ? "not " : "") + " 'null'\n");
+		buf.write("Failed to create the '" + pname + "' test project.\n"); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
+		buf.write("'jp' is " + (jp != null ? "not " : "") + " 'null'\n"); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		buf.write("Stack tace:\n");
 		e.printStackTrace(new PrintWriter(buf));
 		fail(buf.toString());
@@ -1275,7 +1275,7 @@ public abstract class AbstractDebugTest extends TestCase implements  IEvaluation
 	 *            if an existing project should be deleted
 	 * @return the new Java project
 	 */
-	protected IJavaProject createProject(String name, String contentpath, String ee, boolean delete) throws Exception {
+	protected IJavaProject createProject(String name, String contentpath, String ee, boolean delete) throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IProject pro = ResourcesPlugin.getWorkspace().getRoot().getProject(name);
         if (pro.exists() && delete) {
         	try {
@@ -1288,7 +1288,7 @@ public abstract class AbstractDebugTest extends TestCase implements  IEvaluation
         IPackageFragmentRoot src = JavaProjectHelper.addSourceContainer(jp, JavaProjectHelper.SRC_DIR);
         File root = JavaTestPlugin.getDefault().getFileInPlugin(new Path(contentpath));
         File srcInRoot = new File(root, src.getPath().lastSegment());
-        if (srcInRoot.isDirectory()) {
+        if (srcInRoot.isDirectory()) { //FLLDCIM: MARK — M31 M3FILE_IO CALL
             JavaProjectHelper.importFilesFromDirectory(srcInRoot, src.getPath(), null);
         } else {
             JavaProjectHelper.importFilesFromDirectory(root, src.getPath(), null);
@@ -1298,7 +1298,7 @@ public abstract class AbstractDebugTest extends TestCase implements  IEvaluation
         IVMInstall vm = JavaRuntime.getDefaultVMInstall();
         assertNotNull("No default JRE", vm);
         IExecutionEnvironment environment = JavaRuntime.getExecutionEnvironmentsManager().getEnvironment(ee);
-        assertNotNull("The EE ["+ee+"] does not exist", environment);
+        assertNotNull("The EE ["+ee+"] does not exist", environment); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		IPath containerPath = JavaRuntime.newJREContainerPath(environment);
         JavaProjectHelper.addContainerEntry(jp, containerPath);
         pro = jp.getProject();
@@ -1329,9 +1329,9 @@ public abstract class AbstractDebugTest extends TestCase implements  IEvaluation
 	 *            if an existing project should be deleted
 	 * @return the new Java project
 	 */
-	protected IJavaProject createJavaProjectClone(String name, String contentpath, String ee, boolean delete) throws Exception {
+	protected IJavaProject createJavaProjectClone(String name, String contentpath, String ee, boolean delete) throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IProject pro = ResourcesPlugin.getWorkspace().getRoot().getProject(name);
-		String owner = "Creating project: " + name;
+		String owner = "Creating project: " + name; //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
         if (pro.exists() && delete) {
 			pro.delete(true, true, null);
 			TestUtil.waitForJobs(owner, 100, 10000);
@@ -1356,7 +1356,7 @@ public abstract class AbstractDebugTest extends TestCase implements  IEvaluation
         IVMInstall vm = JavaRuntime.getDefaultVMInstall();
         assertNotNull("No default JRE", vm);
         IExecutionEnvironment environment = JavaRuntime.getExecutionEnvironmentsManager().getEnvironment(ee);
-        assertNotNull("The EE ["+ee+"] does not exist", environment);
+        assertNotNull("The EE ["+ee+"] does not exist", environment); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		IPath containerPath = JavaRuntime.newJREContainerPath(environment);
         JavaProjectHelper.addContainerEntry(jp, containerPath);
         pro = jp.getProject();
@@ -1382,9 +1382,9 @@ public abstract class AbstractDebugTest extends TestCase implements  IEvaluation
 	 *            if an existing project should be deleted
 	 * @return the new project
 	 */
-	protected IProject createProjectClone(String name, String contentpath, boolean delete) throws Exception {
+	protected IProject createProjectClone(String name, String contentpath, boolean delete) throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IProject pro = ResourcesPlugin.getWorkspace().getRoot().getProject(name);
-		String owner = "Creating project: " + name;
+		String owner = "Creating project: " + name; //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
         if (pro.exists() && delete) {
 			pro.delete(true, true, null);
 			TestUtil.waitForJobs(owner, 100, 10000);
@@ -1412,7 +1412,7 @@ public abstract class AbstractDebugTest extends TestCase implements  IEvaluation
 	protected LaunchShortcutExtension getLaunchShortcutExtension(String id) {
 		List<?> exts = getLaunchConfigurationManager().getLaunchShortcuts();
 		LaunchShortcutExtension ext = null;
-		for (int i = 0; i < exts.size(); i++) {
+		for (int i = 0; i < exts.size(); i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			ext = (LaunchShortcutExtension) exts.get(i);
 			if(ext.getId().equals(id)) {
 				return ext;
@@ -1447,7 +1447,7 @@ public abstract class AbstractDebugTest extends TestCase implements  IEvaluation
 	protected ILaunchDelegate getDelegateById(String typeId, String delegateId) {
 		LaunchManager lm = (LaunchManager) getLaunchManager();
 		LaunchDelegate[] delegates = lm.getLaunchDelegates(typeId);
-		for(int i = 0; i < delegates.length; i++) {
+		for(int i = 0; i < delegates.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			if(delegates[i].getId().equals(delegateId)) {
 				return delegates[i];
 			}
@@ -1471,7 +1471,7 @@ public abstract class AbstractDebugTest extends TestCase implements  IEvaluation
 	 * or <code>null</code> if the offset does not point to an <code>IHyperLink</code>
 	 * @return the <code>IHyperLink</code> at the given offset or <code>null</code>
 	 */
-	protected IHyperlink getHyperlink(int offset, IDocument doc) {
+	protected IHyperlink getHyperlink(int offset, IDocument doc) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		if (offset >= 0 && doc != null) {
 			Position[] positions = null;
 			try {
@@ -1480,7 +1480,7 @@ public abstract class AbstractDebugTest extends TestCase implements  IEvaluation
 				// no links have been added
 				return null;
 			}
-			for (int i = 0; i < positions.length; i++) {
+			for (int i = 0; i < positions.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				Position position = positions[i];
 				if (offset >= position.getOffset() && offset <= (position.getOffset() + position.getLength())) {
 					return ((ConsoleHyperlinkPosition)position).getHyperLink();
@@ -1540,30 +1540,30 @@ public abstract class AbstractDebugTest extends TestCase implements  IEvaluation
 	 * @throws CoreException
 	 *             if the event is never received.
 	 */
-	protected Object launchAndWait(ILaunchConfiguration configuration, String mode, DebugEventWaiter waiter, boolean register) throws CoreException {
+	protected Object launchAndWait(ILaunchConfiguration configuration, String mode, DebugEventWaiter waiter, boolean register) throws CoreException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		ILaunch launch = launchConfig(configuration, mode, register);
 		Object suspendee= waiter.waitForEvent();
 		if (suspendee == null) {
-			StringBuilder buf = new StringBuilder();
-            buf.append("Test case: "); //$NON-NLS-1$
-            buf.append(getName());
-            buf.append("\n"); //$NON-NLS-1$
-            buf.append("Never received event: "); //$NON-NLS-1$
-            buf.append(waiter.getEventKindName());
-            buf.append("\n"); //$NON-NLS-1$
+			StringBuilder buf = new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
+            buf.append("Test case: "); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+            buf.append(getName()); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+            buf.append("\n"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+            buf.append("Never received event: "); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+            buf.append(waiter.getEventKindName()); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+            buf.append("\n"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
             if (launch.isTerminated()) {
-            	buf.append("Process exit value: "); //$NON-NLS-1$
-            	buf.append(launch.getProcesses()[0].getExitValue());
-                buf.append("\n"); //$NON-NLS-1$
+            	buf.append("Process exit value: "); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+            	buf.append(launch.getProcesses()[0].getExitValue()); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+                buf.append("\n"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
             }
             IConsole console = DebugUITools.getConsole(launch.getProcesses()[0]);
             if (console instanceof TextConsole) {
                 TextConsole textConsole = (TextConsole)console;
                 String string = textConsole.getDocument().get();
-                buf.append("Console output follows:\n"); //$NON-NLS-1$
-                buf.append(string);
+                buf.append("Console output follows:\n"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+                buf.append(string); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
             }
-            buf.append("\n"); //$NON-NLS-1$
+            buf.append("\n"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
             DebugPlugin.log(new Status(IStatus.ERROR, "org.eclipse.jdt.debug.ui.tests", buf.toString())); //$NON-NLS-1$
 			try {
 				launch.terminate();
@@ -1594,7 +1594,7 @@ public abstract class AbstractDebugTest extends TestCase implements  IEvaluation
 	 */
 	protected IJavaThread launchAndSuspend(String mainTypeName) throws Exception {
 		ILaunchConfiguration config = getLaunchConfiguration(mainTypeName);
-		assertNotNull("Could not locate launch configuration for " + mainTypeName, config); //$NON-NLS-1$
+		assertNotNull("Could not locate launch configuration for " + mainTypeName, config); //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		return launchAndSuspend(config);
 	}
 
@@ -1663,7 +1663,7 @@ public abstract class AbstractDebugTest extends TestCase implements  IEvaluation
 	 */
 	protected IJavaThread launchToBreakpoint(IJavaProject project, String mainTypeName, boolean register) throws Exception {
 		ILaunchConfiguration config = getLaunchConfiguration(project, mainTypeName);
-		assertNotNull("Could not locate launch configuration for " + mainTypeName, config); //$NON-NLS-1$
+		assertNotNull("Could not locate launch configuration for " + mainTypeName, config); //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		return launchToBreakpoint(config, register);
 	}
 
@@ -1678,7 +1678,7 @@ public abstract class AbstractDebugTest extends TestCase implements  IEvaluation
 	 */
 	protected IJavaThread launchToBreakpoint(IJavaProject project, String mainTypeName, String launchName, boolean register) throws Exception {
 		ILaunchConfiguration config = getLaunchConfiguration(project, launchName);
-		assertNotNull("Could not locate launch configuration for " + mainTypeName, config); //$NON-NLS-1$
+		assertNotNull("Could not locate launch configuration for " + mainTypeName, config); //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		return launchToBreakpoint(config, register);
 	}
 
@@ -1724,7 +1724,7 @@ public abstract class AbstractDebugTest extends TestCase implements  IEvaluation
 	 */
 	protected IJavaDebugTarget launchAndTerminate(String mainTypeName) throws Exception {
 		ILaunchConfiguration config = getLaunchConfiguration(mainTypeName);
-		assertNotNull("Could not locate launch configuration for " + mainTypeName, config); //$NON-NLS-1$
+		assertNotNull("Could not locate launch configuration for " + mainTypeName, config); //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		return launchAndTerminate(config, DEFAULT_TIMEOUT);
 	}
 
@@ -1789,7 +1789,7 @@ public abstract class AbstractDebugTest extends TestCase implements  IEvaluation
 	 */
 	protected IJavaThread launchToLineBreakpoint(String mainTypeName, ILineBreakpoint bp, boolean register) throws Exception {
 		ILaunchConfiguration config = getLaunchConfiguration(mainTypeName);
-		assertNotNull("Could not locate launch configuration for " + mainTypeName, config); //$NON-NLS-1$
+		assertNotNull("Could not locate launch configuration for " + mainTypeName, config); //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		return launchToLineBreakpoint(config, bp, register);
 	}
 
@@ -1802,7 +1802,7 @@ public abstract class AbstractDebugTest extends TestCase implements  IEvaluation
 	 * @param bp the breakpoint that should cause a suspend event
 	 * @return thread in which the first suspend event occurred
 	 */
-	protected IJavaThread launchToLineBreakpoint(ILaunchConfiguration config, ILineBreakpoint bp, boolean register) throws Exception {
+	protected IJavaThread launchToLineBreakpoint(ILaunchConfiguration config, ILineBreakpoint bp, boolean register) throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		DebugEventWaiter waiter= new DebugElementKindEventDetailWaiter(DebugEvent.SUSPEND, IJavaThread.class, DebugEvent.BREAKPOINT);
 		waiter.setTimeout(DEFAULT_TIMEOUT);
 		waiter.setEnableUIEventLoopProcessing(enableUIEventLoopProcessingInWaiter());
@@ -1885,7 +1885,7 @@ public abstract class AbstractDebugTest extends TestCase implements  IEvaluation
 	 *            thread to resume
 	 * @return thread in which the first suspend event occurs
 	 */
-	protected IJavaThread resumeToLineBreakpoint(IJavaThread resumeThread, ILineBreakpoint bp) throws Exception {
+	protected IJavaThread resumeToLineBreakpoint(IJavaThread resumeThread, ILineBreakpoint bp) throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		DebugEventWaiter waiter= new DebugElementKindEventDetailWaiter(DebugEvent.SUSPEND, IJavaThread.class, DebugEvent.BREAKPOINT);
 		waiter.setTimeout(DEFAULT_TIMEOUT);
 		waiter.setEnableUIEventLoopProcessing(enableUIEventLoopProcessingInWaiter());
@@ -1966,10 +1966,10 @@ public abstract class AbstractDebugTest extends TestCase implements  IEvaluation
 	 * @see ProjectCreationDecorator
 	 */
 	protected ILaunchConfiguration getLaunchConfiguration(IJavaProject project, String mainTypeName) {
-		IFile file = project.getProject().getFolder(LAUNCHCONFIGURATIONS).getFile(mainTypeName + LAUNCH_EXTENSION);
+		IFile file = project.getProject().getFolder(LAUNCHCONFIGURATIONS).getFile(mainTypeName + LAUNCH_EXTENSION); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		ILaunchConfiguration config = getLaunchManager().getLaunchConfiguration(file);
 		assertNotNull("the configuration cannot be null", config);
-		assertTrue("Could not find launch configuration for " + mainTypeName, config.exists()); //$NON-NLS-1$
+		assertTrue("Could not find launch configuration for " + mainTypeName, config.exists()); //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		return config;
 	}
 
@@ -1982,10 +1982,10 @@ public abstract class AbstractDebugTest extends TestCase implements  IEvaluation
 	 * @see ProjectCreationDecorator
 	 */
 	protected ILaunchConfiguration getLaunchConfiguration(IJavaProject project, String containername, String mainTypeName) {
-		IFile file = project.getProject().getFolder(containername).getFile(mainTypeName + LAUNCH_EXTENSION);
+		IFile file = project.getProject().getFolder(containername).getFile(mainTypeName + LAUNCH_EXTENSION); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		ILaunchConfiguration config = getLaunchManager().getLaunchConfiguration(file);
 		assertNotNull("the configuration cannot be null", config);
-		assertTrue("Could not find launch configuration for " + mainTypeName, config.exists()); //$NON-NLS-1$
+		assertTrue("Could not find launch configuration for " + mainTypeName, config.exists()); //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		return config;
 	}
 
@@ -1997,7 +1997,7 @@ public abstract class AbstractDebugTest extends TestCase implements  IEvaluation
 	 * specified name
 	 */
 	protected IResource getBreakpointResource(String typeName) throws Exception {
-		IJavaElement element = getProjectContext().findElement(new Path(typeName + JAVA_EXTENSION));
+		IJavaElement element = getProjectContext().findElement(new Path(typeName + JAVA_EXTENSION)); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		IResource resource = element.getCorrespondingResource();
 		if (resource == null) {
 			resource = getProjectContext().getProject();
@@ -2029,7 +2029,7 @@ public abstract class AbstractDebugTest extends TestCase implements  IEvaluation
 	 */
 	protected IJavaLineBreakpoint createLineBreakpoint(int lineNumber, String typeName) throws Exception {
 		IType type = getType(typeName);
-		assertNotNull("Could not find the requested IType: "+typeName, type);
+		assertNotNull("Could not find the requested IType: "+typeName, type); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		return createLineBreakpoint(type, lineNumber);
 	}
 
@@ -2061,7 +2061,7 @@ public abstract class AbstractDebugTest extends TestCase implements  IEvaluation
 	 */
 	protected IJavaLineBreakpoint createLineBreakpoint(int lineNumber, String packageName, String cuName, String typeName) throws Exception {
 		IType type = getType(packageName, cuName, typeName);
-		assertNotNull("Could not find the requested IType: "+typeName, type);
+		assertNotNull("Could not find the requested IType: "+typeName, type); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		return createLineBreakpoint(type, lineNumber);
 	}
 
@@ -2072,7 +2072,7 @@ public abstract class AbstractDebugTest extends TestCase implements  IEvaluation
 	 * @param lineNumber line number to install the breakpoint at
 	 * @return line breakpoint
 	 */
-	protected IJavaLineBreakpoint createLineBreakpoint(IType type, int lineNumber) throws Exception {
+	protected IJavaLineBreakpoint createLineBreakpoint(IType type, int lineNumber) throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		assertNotNull("You cannot create a line breakpoint for a null IType", type);
 		IMember member = null;
 		IJavaElement sourceElement = null;
@@ -2121,15 +2121,15 @@ public abstract class AbstractDebugTest extends TestCase implements  IEvaluation
 	 * @param typeName simple dot qualified type name, example "Something" or "NonPublic" or "Something.Inner"
 	 * @return associated type or <code>null</code> if none
 	 */
-	protected IType getType(String packageName, String cuName, String typeName) throws Exception {
+	protected IType getType(String packageName, String cuName, String typeName) throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IPackageFragment[] packageFragments = getProjectContext().getPackageFragments();
-		for (int i = 0; i < packageFragments.length; i++) {
+		for (int i = 0; i < packageFragments.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			IPackageFragment fragment = packageFragments[i];
 			if (fragment.getElementName().equals(packageName)) {
 				ICompilationUnit compilationUnit = fragment.getCompilationUnit(cuName);
-				String[] names = typeName.split("\\$"); //$NON-NLS-1$
+				String[] names = typeName.split("\\$"); //$NON-NLS-1$ //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
 				IType type = compilationUnit.getType(names[0]);
-				for (int j = 1; j < names.length; j++) {
+				for (int j = 1; j < names.length; j++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 					type = type.getType(names[j]);
 				}
 				if (type.exists()) {
@@ -2149,7 +2149,7 @@ public abstract class AbstractDebugTest extends TestCase implements  IEvaluation
 	 */
 	protected Map<String, Object> getExtraBreakpointAttributes(IMember element) throws Exception {
 		if (element != null && element.exists()) {
-			Map<String, Object> map = new HashMap<>();
+			Map<String, Object> map = new HashMap<>(); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
 			ISourceRange sourceRange = element.getSourceRange();
 			int start = sourceRange.getOffset();
 			int end = start + sourceRange.getLength();
@@ -2354,7 +2354,7 @@ public abstract class AbstractDebugTest extends TestCase implements  IEvaluation
 	 * @since 3.4
 	 */
 	protected IResource getResource(String name) {
-		return ResourcesPlugin.getWorkspace().getRoot().findMember(new Path("/DebugTests/src/"+name));
+		return ResourcesPlugin.getWorkspace().getRoot().findMember(new Path("/DebugTests/src/"+name)); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 	}
 
 	/**
@@ -2559,8 +2559,8 @@ public abstract class AbstractDebugTest extends TestCase implements  IEvaluation
 	 * NOTE: all breakpoints are removed, all threads are resumed, and then
 	 * the target is terminated. This avoids defunct processes on Linux.
 	 */
-	protected void terminateAndRemove(IJavaDebugTarget debugTarget) {
-		assertNotNull(getName()+" - you cannot terminate and remove a null debug target", debugTarget);
+	protected void terminateAndRemove(IJavaDebugTarget debugTarget) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
+		assertNotNull(getName()+" - you cannot terminate and remove a null debug target", debugTarget); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 	    ILaunch launch = debugTarget.getLaunch();
 		if (!(debugTarget.isTerminated() || debugTarget.isDisconnected())) {
 			IPreferenceStore jdiUIPreferences = JDIDebugUIPlugin.getDefault().getPreferenceStore();
@@ -2571,7 +2571,7 @@ public abstract class AbstractDebugTest extends TestCase implements  IEvaluation
 			try {
 				removeAllBreakpoints();
 				IThread[] threads = debugTarget.getThreads();
-				for (int i = 0; i < threads.length; i++) {
+				for (int i = 0; i < threads.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 					IThread thread = threads[i];
 					try {
 						if (thread.isSuspended()) {
@@ -2629,7 +2629,7 @@ public abstract class AbstractDebugTest extends TestCase implements  IEvaluation
 	 * @param frame stack frame context
 	 * @return evaluation result
 	 */
-	protected IEvaluationResult evaluate(String snippet, IJavaStackFrame frame) throws Exception {
+	protected IEvaluationResult evaluate(String snippet, IJavaStackFrame frame) throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		DebugEventWaiter waiter= new DebugElementKindEventWaiter(DebugEvent.SUSPEND, IJavaThread.class);
 		waiter.setTimeout(DEFAULT_TIMEOUT);
 		waiter.setEnableUIEventLoopProcessing(enableUIEventLoopProcessingInWaiter());
@@ -2640,7 +2640,7 @@ public abstract class AbstractDebugTest extends TestCase implements  IEvaluation
 
 			Object suspendee= waiter.waitForEvent();
 			setEventSet(waiter.getEventSet());
-			tryAgain(() -> assertNotNull("Program did not suspend evaluating: \n\n" + snippet, suspendee)); //$NON-NLS-1$
+			tryAgain(() -> assertNotNull("Program did not suspend evaluating: \n\n" + snippet, suspendee)); //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 			return fEvaluationResult;
 		}
 		finally {
@@ -2655,7 +2655,7 @@ public abstract class AbstractDebugTest extends TestCase implements  IEvaluation
 	 * @return the {@link IEvaluationResult}
 	 * @since 3.1.200
 	 */
-	protected IEvaluationResult evaluate(String snippet, IJavaThread thread) throws Exception {
+	protected IEvaluationResult evaluate(String snippet, IJavaThread thread) throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		class Listener implements IEvaluationListener {
 			volatile IEvaluationResult fResult;
 			@Override
@@ -2670,7 +2670,7 @@ public abstract class AbstractDebugTest extends TestCase implements  IEvaluation
 		try {
 			engine.evaluate(snippet, frame, listener, DebugEvent.EVALUATION_IMPLICIT, false);
 			long timeoutNanos = System.nanoTime() + DEFAULT_TIMEOUT * 1_000_000L;
-			while (listener.fResult == null && System.nanoTime() < timeoutNanos) {
+			while (listener.fResult == null && System.nanoTime() < timeoutNanos) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				Thread.sleep(1);
 			}
 			return listener.fResult;
@@ -2778,7 +2778,7 @@ public abstract class AbstractDebugTest extends TestCase implements  IEvaluation
 	 * @param stepThru
 	 *            whether to step thru or step return from a filtered location
 	 */
-	protected IJavaThread stepIntoWithFilters(IJavaStackFrame frame, boolean stepThru) throws Exception {
+	protected IJavaThread stepIntoWithFilters(IJavaStackFrame frame, boolean stepThru) throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		DebugEventWaiter waiter= new DebugElementKindEventWaiter(DebugEvent.SUSPEND, IJavaThread.class);
 		waiter.setTimeout(DEFAULT_TIMEOUT);
 		waiter.setEnableUIEventLoopProcessing(enableUIEventLoopProcessingInWaiter());
@@ -2809,7 +2809,7 @@ public abstract class AbstractDebugTest extends TestCase implements  IEvaluation
 	 *
 	 * @param frame stack frame to step in
 	 */
-	protected IJavaThread stepReturnWithFilters(IJavaStackFrame frame) throws Exception {
+	protected IJavaThread stepReturnWithFilters(IJavaStackFrame frame) throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		DebugEventWaiter waiter= new DebugElementKindEventWaiter(DebugEvent.SUSPEND, IJavaThread.class);
 		waiter.setTimeout(DEFAULT_TIMEOUT);
 		waiter.setEnableUIEventLoopProcessing(enableUIEventLoopProcessingInWaiter());
@@ -2839,7 +2839,7 @@ public abstract class AbstractDebugTest extends TestCase implements  IEvaluation
 	 *
 	 * @param frame stack frame to step in
 	 */
-	protected IJavaThread stepOverWithFilters(IJavaStackFrame frame) throws Exception {
+	protected IJavaThread stepOverWithFilters(IJavaStackFrame frame) throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		DebugEventWaiter waiter= new DebugElementKindEventWaiter(DebugEvent.SUSPEND, IJavaThread.class);
 		waiter.setTimeout(DEFAULT_TIMEOUT);
 		waiter.setEnableUIEventLoopProcessing(enableUIEventLoopProcessingInWaiter());
@@ -2883,7 +2883,7 @@ public abstract class AbstractDebugTest extends TestCase implements  IEvaluation
      */
     public static void waitForBuild() {
         boolean wasInterrupted = false;
-        do {
+        do { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
             try {
                 Job.getJobManager().join(ResourcesPlugin.FAMILY_AUTO_BUILD, null);
                 Job.getJobManager().join(ResourcesPlugin.FAMILY_MANUAL_BUILD, null);
@@ -2906,25 +2906,25 @@ public abstract class AbstractDebugTest extends TestCase implements  IEvaluation
      * @return the <code>IJavaVariable</code> with the given name or <code>null</code> if it
      * does not exist
      */
-    protected IJavaVariable findVariable(IJavaStackFrame frame, String name) throws DebugException {
+    protected IJavaVariable findVariable(IJavaStackFrame frame, String name) throws DebugException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
         IJavaVariable variable = frame.findVariable(name);
         if (variable == null) {
             // dump visible variables
             IDebugModelPresentation presentation = DebugUIPlugin.getModelPresentation();
-            System.out.println("Could not find variable '" + name + "' in frame: " + presentation.getText(frame)); //$NON-NLS-1$ //$NON-NLS-2$
+            System.out.println("Could not find variable '" + name + "' in frame: " + presentation.getText(frame)); //$NON-NLS-1$ //$NON-NLS-2$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
             System.out.println("Visible variables are:"); //$NON-NLS-1$
             IVariable[] variables = frame.getVariables();
-            for (int i = 0; i < variables.length; i++) {
+            for (int i = 0; i < variables.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
                 IVariable variable2 = variables[i];
-                System.out.println("\t" + presentation.getText(variable2)); //$NON-NLS-1$
+                System.out.println("\t" + presentation.getText(variable2)); //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
             }
 			if (!frame.isStatic() && !frame.isNative()) {
 				IJavaObject ths = frame.getThis();
 				if (ths != null) {
 					variables = ths.getVariables();
-					for (int i = 0; i < variables.length; i++) {
+					for (int i = 0; i < variables.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 						IVariable variable2 = variables[i];
-						System.out.println("\t" + presentation.getText(variable2)); //$NON-NLS-1$
+						System.out.println("\t" + presentation.getText(variable2)); //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 					}
 				}
             }
@@ -2960,22 +2960,22 @@ public abstract class AbstractDebugTest extends TestCase implements  IEvaluation
 	 * @param clone
 	 *            true if the launch config name should be different from the main type name
 	 */
-	protected ILaunchConfiguration createLaunchConfiguration(IJavaProject project, String mainTypeName, boolean clone) throws Exception {
+	protected ILaunchConfiguration createLaunchConfiguration(IJavaProject project, String mainTypeName, boolean clone) throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
         ILaunchConfigurationType type = getLaunchManager().getLaunchConfigurationType(IJavaLaunchConfigurationConstants.ID_JAVA_APPLICATION);
-		String configName = clone ? mainTypeName + CLONE_SUFFIX : mainTypeName;
+		String configName = clone ? mainTypeName + CLONE_SUFFIX : mainTypeName; //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		ILaunchConfigurationWorkingCopy config = type.newInstance(project.getProject().getFolder(LAUNCHCONFIGURATIONS), configName);
         config.setAttribute(IJavaLaunchConfigurationConstants.ATTR_MAIN_TYPE_NAME, mainTypeName);
         config.setAttribute(IJavaLaunchConfigurationConstants.ATTR_PROJECT_NAME, project.getElementName());
         setEnvironment(config);
-		Set<String> modes = new HashSet<>();
+		Set<String> modes = new HashSet<>(); //FLLDCIM: MARK — M03 M3_SET_LANES NEW
 		modes.add(ILaunchManager.RUN_MODE);
 		config.setPreferredLaunchDelegate(modes, LOCAL_JAVA_APPLICATION_TYPE_ID);
-		modes = new HashSet<>();
+		modes = new HashSet<>(); //FLLDCIM: MARK — M03 M3_SET_LANES NEW
 		modes.add(ILaunchManager.DEBUG_MODE);
 		config.setPreferredLaunchDelegate(modes, LOCAL_JAVA_APPLICATION_TYPE_ID);
         // use 'java' instead of 'javaw' to launch tests (javaw is problematic
         // on JDK1.4.2)
-        Map<String, String> map = new HashMap<>(1);
+        Map<String, String> map = new HashMap<>(1); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
         map.put(IJavaLaunchConfigurationConstants.ATTR_JAVA_COMMAND, JAVA);
         config.setAttribute(IJavaLaunchConfigurationConstants.ATTR_VM_INSTALL_TYPE_SPECIFIC_ATTRS_MAP, map);
         return config.doSave();
@@ -2984,21 +2984,21 @@ public abstract class AbstractDebugTest extends TestCase implements  IEvaluation
     /**
      * Creates a shared launch configuration for the type with the given name.
      */
-    protected ILaunchConfiguration createLaunchConfiguration(IJavaProject project, String containername, String mainTypeName) throws Exception {
+    protected ILaunchConfiguration createLaunchConfiguration(IJavaProject project, String containername, String mainTypeName) throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
         ILaunchConfigurationType type = getLaunchManager().getLaunchConfigurationType(IJavaLaunchConfigurationConstants.ID_JAVA_APPLICATION);
         ILaunchConfigurationWorkingCopy config = type.newInstance(project.getProject().getFolder(containername), mainTypeName);
         config.setAttribute(IJavaLaunchConfigurationConstants.ATTR_MAIN_TYPE_NAME, mainTypeName);
         config.setAttribute(IJavaLaunchConfigurationConstants.ATTR_PROJECT_NAME, project.getElementName());
         setEnvironment(config);
-		Set<String> modes = new HashSet<>();
+		Set<String> modes = new HashSet<>(); //FLLDCIM: MARK — M03 M3_SET_LANES NEW
 		modes.add(ILaunchManager.RUN_MODE);
 		config.setPreferredLaunchDelegate(modes, LOCAL_JAVA_APPLICATION_TYPE_ID);
-		modes = new HashSet<>();
+		modes = new HashSet<>(); //FLLDCIM: MARK — M03 M3_SET_LANES NEW
 		modes.add(ILaunchManager.DEBUG_MODE);
 		config.setPreferredLaunchDelegate(modes, LOCAL_JAVA_APPLICATION_TYPE_ID);
         // use 'java' instead of 'javaw' to launch tests (javaw is problematic
         // on JDK1.4.2)
-        Map<String, String> map = new HashMap<>(1);
+        Map<String, String> map = new HashMap<>(1); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
         map.put(IJavaLaunchConfigurationConstants.ATTR_JAVA_COMMAND, JAVA);
         config.setAttribute(IJavaLaunchConfigurationConstants.ATTR_VM_INSTALL_TYPE_SPECIFIC_ATTRS_MAP, map);
         return config.doSave();
@@ -3042,11 +3042,11 @@ public abstract class AbstractDebugTest extends TestCase implements  IEvaluation
 	 *
 	 * @see junit.framework.TestCase#runBare()
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public void runBare() throws Throwable {
 		boolean tryAgain = true;
 		int attempts = 0;
-		while (tryAgain) {
+		while (tryAgain) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			try {
 				attempts++;
 				super.runBare();
@@ -3056,7 +3056,7 @@ public abstract class AbstractDebugTest extends TestCase implements  IEvaluation
 				tryAgain = false;
 				break;
 			} catch (TestAgainException e) {
-				TestUtil.log(IStatus.ERROR, getName(), "Test failed attempt " + attempts + ". Re-testing.", e);
+				TestUtil.log(IStatus.ERROR, getName(), "Test failed attempt " + attempts + ". Re-testing.", e); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 				TestUtil.cleanUp(getName());
 				if (attempts > 4) {
 					// the next attempt will fail
@@ -3072,7 +3072,7 @@ public abstract class AbstractDebugTest extends TestCase implements  IEvaluation
 
 	@Override
 	protected void tearDown() throws Exception {
-		TestUtil.logInfo("TDOWN " + getClass().getSimpleName() + "." + getName());
+		TestUtil.logInfo("TDOWN " + getClass().getSimpleName() + "." + getName()); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		shutdownDebugTargets();
 		TestUtil.cleanUp(getName());
 		super.tearDown();
@@ -3081,7 +3081,7 @@ public abstract class AbstractDebugTest extends TestCase implements  IEvaluation
 	protected void shutdownDebugTargets() {
 		ILaunchManager launchManager = DebugPlugin.getDefault().getLaunchManager();
 		IDebugTarget[] targets = launchManager.getDebugTargets();
-		for (IDebugTarget target : targets) {
+		for (IDebugTarget target : targets) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			if (target instanceof JDIDebugTarget) {
 				((JDIDebugTarget) target).shutdown();
 			}
@@ -3137,7 +3137,7 @@ public abstract class AbstractDebugTest extends TestCase implements  IEvaluation
 	 *            The frame supplier which provides the frame for the evaluation
 	 * @return the result of the evaluation
 	 */
-	protected IValue doEval(IJavaThread thread, StackFrameSupplier frameSupplier, String snippet) throws Exception {
+	protected IValue doEval(IJavaThread thread, StackFrameSupplier frameSupplier, String snippet) throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		class Listener implements IEvaluationListener {
 			volatile IEvaluationResult fResult;
 
@@ -3157,15 +3157,15 @@ public abstract class AbstractDebugTest extends TestCase implements  IEvaluation
 		try {
 			engine.evaluate(snippet, frame, listener, DebugEvent.EVALUATION_IMPLICIT, false);
 			long timeoutNanos = System.nanoTime() + 5000 * 1_000_000L;
-			while (listener.getResult() == null && System.nanoTime() < timeoutNanos) {
+			while (listener.getResult() == null && System.nanoTime() < timeoutNanos) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				Thread.sleep(1);
 			}
 			IEvaluationResult result = listener.getResult();
 			assertNotNull("The evaluation should have result: ", result);
-			assertNull("Evaluation of '" + snippet + "' should not have exception : " + findCause(result.getException()), result.getException());
+			assertNull("Evaluation of '" + snippet + "' should not have exception : " + findCause(result.getException()), result.getException()); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 			String firstError = result.hasErrors() ? result.getErrorMessages()[0] : "";
-			assertFalse("The evaluation of '\" + snippet + \"'  should not have errors : " + firstError, result.hasErrors());
+			assertFalse("The evaluation of '\" + snippet + \"'  should not have errors : " + firstError, result.hasErrors()); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 			return listener.getResult().getValue();
 		}
 		finally {
@@ -3201,7 +3201,7 @@ public abstract class AbstractDebugTest extends TestCase implements  IEvaluation
 	}
 
 	protected void assertNoErrorMarkersExist(IProject[] projects) throws Exception {
-		for (IProject project : projects) {
+		for (IProject project : projects) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			assertNoErrorMarkersExist(project);
 		}
 	}
@@ -3211,7 +3211,7 @@ public abstract class AbstractDebugTest extends TestCase implements  IEvaluation
 			IMarker[] projectMarkers = project.findMarkers(null, false, IResource.DEPTH_INFINITE);
 			List<IMarker> errorMarkers = Arrays.stream(projectMarkers).filter(marker -> isErrorMarker(marker)).collect(Collectors.toList());
 			String projectErrors = toString(errorMarkers);
-			assertEquals("found errors on project " + project + ":" + System.lineSeparator() + projectErrors, Collections.EMPTY_LIST, errorMarkers);
+			assertEquals("found errors on project " + project + ":" + System.lineSeparator() + projectErrors, Collections.EMPTY_LIST, errorMarkers); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		}
 	}
 
@@ -3220,9 +3220,9 @@ public abstract class AbstractDebugTest extends TestCase implements  IEvaluation
 	}
 
 	private static String toString(Collection<IMarker> markers) {
-		StringBuilder markersInfo = new StringBuilder();
-		for (IMarker marker : markers) {
-			markersInfo.append(marker);
+		StringBuilder markersInfo = new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
+		for (IMarker marker : markers) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
+			markersInfo.append(marker); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		}
 		return markersInfo.toString();
 	}
@@ -3241,7 +3241,7 @@ public abstract class AbstractDebugTest extends TestCase implements  IEvaluation
 		IExecutionEnvironment environment = getExecutionEnvironment(environmentId);
 		IVMInstall defaultVM = environment.getDefaultVM();
 		environment.setDefaultVM(vm);
-		TestUtil.logInfo("Set VM \"" + vm.getName() + "\" for execution environments: " + environment.getId());
+		TestUtil.logInfo("Set VM \"" + vm.getName() + "\" for execution environments: " + environment.getId()); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		return defaultVM;
 	}
 
@@ -3254,7 +3254,7 @@ public abstract class AbstractDebugTest extends TestCase implements  IEvaluation
 	protected static void setExecutionEnvironment(String environmentId, IVMInstall defaultVM) {
 		IExecutionEnvironment environment = getExecutionEnvironment(environmentId);
 		environment.setDefaultVM(defaultVM);
-		TestUtil.logInfo("Set default VM for execution environment: " + environment.getId());
+		TestUtil.logInfo("Set default VM for execution environment: " + environment.getId()); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 	}
 
 	private static IExecutionEnvironment getExecutionEnvironment(String environmentId) {
@@ -3268,14 +3268,14 @@ public abstract class AbstractDebugTest extends TestCase implements  IEvaluation
 	}
 
 	private static void logVMChange(String message, IVMInstall vm) {
-		String detailed = message + " " + vm.getName() + ", location: " + vm.getInstallLocation();
+		String detailed = message + " " + vm.getName() + ", location: " + vm.getInstallLocation(); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		IStatus status = new Status(IStatus.INFO, JDIDebugPlugin.getUniqueIdentifier(), detailed, null);
 		JDIDebugPlugin.log(status);
 	}
 
-	private static ILaunch launchConfig(ILaunchConfiguration configuration, String mode, boolean register) throws CoreException {
+	private static ILaunch launchConfig(ILaunchConfiguration configuration, String mode, boolean register) throws CoreException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		ILaunch launch = null;
-		for (int retry = 1; retry <= SOCKET_BIND_ERROR_MAX_RETRIES; ++retry) {
+		for (int retry = 1; retry <= SOCKET_BIND_ERROR_MAX_RETRIES; ++retry) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			try {
 				launch = configuration.launch(mode, new TimeoutMonitor(DEFAULT_TIMEOUT), false, register);
 				break;
@@ -3283,7 +3283,7 @@ public abstract class AbstractDebugTest extends TestCase implements  IEvaluation
 				Throwable cause = e.getStatus().getException();
 				if (retry < SOCKET_BIND_ERROR_MAX_RETRIES && cause instanceof BindException) {
 					// port might be in use between checking for a free port and launching, try a few times
-					DebugPlugin.log(Status.error("Could not bind socket for debugging, retry: " + retry, e));
+					DebugPlugin.log(Status.error("Could not bind socket for debugging, retry: " + retry, e)); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 				} else if (OS.isMac() && retry >= SOCKET_BIND_ERROR_MAX_RETRIES && cause instanceof BindException) {
 					throw new NoSocketAvailableException("Max retries reached without finding an available socket on MacOS");
 				} else {
@@ -3297,19 +3297,19 @@ public abstract class AbstractDebugTest extends TestCase implements  IEvaluation
 		return launch;
 	}
 
-	private static void logProcessConsoleContents() {
+	private static void logProcessConsoleContents() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
-			StringBuilder buf = new StringBuilder();
+			StringBuilder buf = new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 			IConsoleManager manager = ConsolePlugin.getDefault().getConsoleManager();
-			for (IConsole console : manager.getConsoles()) {
+			for (IConsole console : manager.getConsoles()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				if (console instanceof ProcessConsole) {
 					ProcessConsole processConsole = (ProcessConsole) console;
 					String string = processConsole.getDocument().get();
-					buf.append("Console output for \"" + processConsole.getName() + "\" follows:\n"); //$NON-NLS-1$
-					buf.append(string);
+					buf.append("Console output for \"" + processConsole.getName() + "\" follows:\n"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+					buf.append(string); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				}
 			}
-			buf.append("\n"); //$NON-NLS-1$
+			buf.append("\n"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			DebugPlugin.log(new Status(IStatus.INFO, "org.eclipse.jdt.debug.ui.tests", buf.toString())); //$NON-NLS-1$
 		} catch (Throwable t) {
 			DebugPlugin.log(t);

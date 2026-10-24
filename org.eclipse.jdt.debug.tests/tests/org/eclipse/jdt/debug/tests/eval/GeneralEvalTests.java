@@ -448,7 +448,7 @@ public class GeneralEvalTests extends AbstractDebugTest {
 	/**
 	 * https://bugs.eclipse.org/bugs/show_bug.cgi?id=508105
 	 */
-	public void testMultiByteCharacters() throws Exception {
+	public void testMultiByteCharacters() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IJavaThread thread = null;
 		try {
 			String typename = "bug401270";
@@ -485,7 +485,7 @@ public class GeneralEvalTests extends AbstractDebugTest {
 	/**
 	 * https://bugs.eclipse.org/bugs/show_bug.cgi?id=508105
 	 */
-	public void XtestAReturn() throws Exception {
+	public void XtestAReturn() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IJavaThread thread = null;
 		try {
 			String typename = "bug401270";

@@ -23,7 +23,7 @@ public class Bootstrap {
 	public Bootstrap() {
 	}
 
-	public static synchronized com.sun.jdi.VirtualMachineManager virtualMachineManager() {
+	public static synchronized com.sun.jdi.VirtualMachineManager virtualMachineManager() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		if (fVirtualMachineManager != null) {
 			return fVirtualMachineManager;
 		}
@@ -42,7 +42,7 @@ public class Bootstrap {
 				fVirtualMachineManager = (com.sun.jdi.VirtualMachineManager) clazz.getDeclaredConstructor().newInstance();
 			}
 		} catch (Exception e) {
-			throw new RuntimeException("Could not instantiate " + className, e); //$NON-NLS-1$
+			throw new RuntimeException("Could not instantiate " + className, e); //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		}
 
 		if (fVirtualMachineManager == null) {

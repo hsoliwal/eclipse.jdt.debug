@@ -139,7 +139,7 @@ public class JDIModelPresentation extends LabelProvider implements IDebugModelPr
 	 */
 	public final static String DISPLAY_QUALIFIED_NAMES= "DISPLAY_QUALIFIED_NAMES"; //$NON-NLS-1$
 
-	protected HashMap<String, Object> fAttributes= new HashMap<>(3);
+	protected HashMap<String, Object> fAttributes= new HashMap<>(3); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
 
 	static final Point BIG_SIZE= new Point(16, 16);
 
@@ -205,7 +205,7 @@ public class JDIModelPresentation extends LabelProvider implements IDebugModelPr
 	 *            the target in which a thread is required
 	 * @return thread or <code>null</code>
 	 */
-	private static IJavaThread getEvaluationThread(IJavaDebugTarget target) {
+	private static IJavaThread getEvaluationThread(IJavaDebugTarget target) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IJavaStackFrame frame = EvaluationContextManager.getEvaluationContext((IWorkbenchWindow)null);
 		IJavaThread thread = null;
 		if (frame != null) {
@@ -218,7 +218,7 @@ public class JDIModelPresentation extends LabelProvider implements IDebugModelPr
 		if (thread == null) {
 			try {
 				IThread[] threads = target.getThreads();
-				for (int i = 0; i < threads.length; i++) {
+				for (int i = 0; i < threads.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 					if (threads[i].isSuspended()) {
 						thread = (IJavaThread)threads[i];
 						break;
@@ -234,7 +234,7 @@ public class JDIModelPresentation extends LabelProvider implements IDebugModelPr
 	/**
 	 * @see IDebugModelPresentation#getText(Object)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public String getText(Object item) {
 		try {
 			boolean showQualified= isShowQualifiedNames();
@@ -267,23 +267,23 @@ public class JDIModelPresentation extends LabelProvider implements IDebugModelPr
 			} else if (item instanceof NoMonitorInformationElement) {
                 return DebugUIMessages.JDIModelPresentation_5;
             } else {
-				StringBuilder label= new StringBuilder();
+				StringBuilder label= new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 				if (item instanceof IJavaThread) {
-					label.append(getThreadText((IJavaThread) item, showQualified));
+					label.append(getThreadText((IJavaThread) item, showQualified)); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 					if (((IJavaThread)item).isOutOfSynch()) {
-						label.append(DebugUIMessages.JDIModelPresentation___out_of_synch__1);
+						label.append(DebugUIMessages.JDIModelPresentation___out_of_synch__1); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 					} else if (((IJavaThread)item).mayBeOutOfSynch()) {
-						label.append(DebugUIMessages.JDIModelPresentation___may_be_out_of_synch__2);
+						label.append(DebugUIMessages.JDIModelPresentation___may_be_out_of_synch__2); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 					}
 				} else if (item instanceof IJavaDebugTarget) {
-					label.append(getDebugTargetText((IJavaDebugTarget) item));
+					label.append(getDebugTargetText((IJavaDebugTarget) item)); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 					if (((IJavaDebugTarget)item).isOutOfSynch()) {
-						label.append(DebugUIMessages.JDIModelPresentation___out_of_synch__1);
+						label.append(DebugUIMessages.JDIModelPresentation___out_of_synch__1); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 					} else if (((IJavaDebugTarget)item).mayBeOutOfSynch()) {
-						label.append(DebugUIMessages.JDIModelPresentation___may_be_out_of_synch__2);
+						label.append(DebugUIMessages.JDIModelPresentation___may_be_out_of_synch__2); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 					}
 				} else if (item instanceof IJavaValue) {
-					label.append(getValueText((IJavaValue) item));
+					label.append(getValueText((IJavaValue) item)); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				}
 				if (item instanceof ITerminate) {
 					if (((ITerminate) item).isTerminated()) {
@@ -330,42 +330,42 @@ public class JDIModelPresentation extends LabelProvider implements IDebugModelPr
 	/**
 	 * Build the text for an IJavaThread.
 	 */
-	protected String getThreadText(IJavaThread thread, boolean qualified) throws CoreException {
-		StringBuilder key = new StringBuilder("thread_"); //$NON-NLS-1$
+	protected String getThreadText(IJavaThread thread, boolean qualified) throws CoreException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
+		StringBuilder key = new StringBuilder("thread_"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 		String[] args = null;
 		IBreakpoint[] breakpoints= thread.getBreakpoints();
 		if (thread.isDaemon()) {
-			key.append("daemon_"); //$NON-NLS-1$
+			key.append("daemon_"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		}
 		if (thread.isSystemThread()) {
-			key.append("system_"); //$NON-NLS-1$
+			key.append("system_"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		} else if (thread instanceof JDIThread jdi) {
 			if (jdi.isVirtualThread()) {
-				key.append("virtual_"); //$NON-NLS-1$
+				key.append("virtual_"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			}
 		}
 		if (thread.isTerminated()) {
-			key.append("terminated"); //$NON-NLS-1$
+			key.append("terminated"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			args = new String[] {thread.getName()};
 		} else if (thread.isStepping()) {
-			key.append("stepping"); //$NON-NLS-1$
+			key.append("stepping"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			args = new String[] {thread.getName()};
 		} else if ((thread instanceof JDIThread jdi && jdi.isSuspendVoteInProgress()) && !thread.getDebugTarget().isSuspended()
 				&& !jdi.isVirtualThread()) {
 			// show running when listener notification is in progress
-			key.append("running"); //$NON-NLS-1$
+			key.append("running"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			args = new String[] {thread.getName()};
 		} else if (thread.isPerformingEvaluation() && breakpoints.length == 0) {
-			key.append("evaluating"); //$NON-NLS-1$
+			key.append("evaluating"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			args = new String[] {thread.getName()};
 		} else if (!thread.isSuspended()) {
-			key.append("running"); //$NON-NLS-1$
+			key.append("running"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			args = new String[] {thread.getName()};
 		} else {
-			key.append("suspended"); //$NON-NLS-1$
+			key.append("suspended"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			if (breakpoints.length > 0) {
 				IJavaBreakpoint breakpoint= (IJavaBreakpoint)breakpoints[0];
-				for (int i= 0, numBreakpoints= breakpoints.length; i < numBreakpoints; i++) {
+				for (int i= 0, numBreakpoints= breakpoints.length; i < numBreakpoints; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 					if (BreakpointUtils.isProblemBreakpoint(breakpoints[i])) {
 						// If a compilation error breakpoint exists, display it instead of the first breakpoint
 						breakpoint= (IJavaBreakpoint)breakpoints[i];
@@ -380,16 +380,16 @@ public class JDIModelPresentation extends LabelProvider implements IDebugModelPr
 						problem = JavaDebugOptionsManager.getDefault().getProblem(frame);
 					}
 					if (problem != null) {
-						key.append("_problem"); //$NON-NLS-1$
+						key.append("_problem"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 						String message = problem.getAttribute(IMarker.MESSAGE, DebugUIMessages.JDIModelPresentation_Compilation_error_1);
 						args = new String[] {thread.getName(), message};
 					}
 				}
 				// check args == null in case the exception is a compilation error
 				if (breakpoint instanceof IJavaExceptionBreakpoint && args == null) {
-					key.append("_exception"); //$NON-NLS-1$
+					key.append("_exception"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 					if (isUncaughtExceptionsBreakpoint(breakpoint)) {
-						key.append("_uncaught"); //$NON-NLS-1$
+						key.append("_uncaught"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 					}
 					String exName = ((IJavaExceptionBreakpoint)breakpoint).getExceptionTypeName();
 					if (exName == null) {
@@ -405,30 +405,30 @@ public class JDIModelPresentation extends LabelProvider implements IDebugModelPr
 					String fieldName = wp.getFieldName();
 					args = new String[] {thread.getName(), fieldName, typeName};
 					if (wp.isAccessSuspend(thread.getDebugTarget())) {
-						key.append("_fieldaccess"); //$NON-NLS-1$
+						key.append("_fieldaccess"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 					} else {
-						key.append("_fieldmodification"); //$NON-NLS-1$
+						key.append("_fieldmodification"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 					}
 				} else if (breakpoint instanceof IJavaMethodBreakpoint me) {
 					String methodName= me.getMethodName();
 					args = new String[] {thread.getName(), methodName, typeName};
 					if (me.isEntrySuspend(thread.getDebugTarget())) {
-						key.append("_methodentry"); //$NON-NLS-1$
+						key.append("_methodentry"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 					} else {
-						key.append("_methodexit"); //$NON-NLS-1$
+						key.append("_methodexit"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 					}
 				} else if (breakpoint instanceof IJavaLineBreakpoint jlbp) {
 					int lineNumber= jlbp.getLineNumber();
 					if (lineNumber > -1) {
 						args = new String[] {thread.getName(), String.valueOf(lineNumber), typeName};
 						if (BreakpointUtils.isRunToLineBreakpoint(jlbp)) {
-							key.append("_runtoline"); //$NON-NLS-1$
+							key.append("_runtoline"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 						} else {
-							key.append("_linebreakpoint"); //$NON-NLS-1$
+							key.append("_linebreakpoint"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 						}
 					}
 				} else if (breakpoint instanceof IJavaClassPrepareBreakpoint) {
-					key.append("_classprepare"); //$NON-NLS-1$
+					key.append("_classprepare"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 					args = new String[]{thread.getName(), getQualifiedName(breakpoint.getTypeName())};
 				}
 			}
@@ -440,7 +440,7 @@ public class JDIModelPresentation extends LabelProvider implements IDebugModelPr
 		}
 		if (args[0].isEmpty() && thread instanceof JDIThread jdi && jdi.isVirtualThread()) { // Virtual Thread
 			long virtualThreadID = thread.getThreadObject().getUniqueId();
-			String id = "ID#" + virtualThreadID; //$NON-NLS-1$
+			String id = "ID#" + virtualThreadID; //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 			args[0] = id;
 		}
 		try {
@@ -461,7 +461,7 @@ public class JDIModelPresentation extends LabelProvider implements IDebugModelPr
 
 	private boolean isUncaughtExceptionsBreakpoint(IJavaBreakpoint breakpoint) {
 		try {
-			for (String id : breakpoint.getBreakpointListeners()) {
+			for (String id : breakpoint.getBreakpointListeners()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				if (SuspendOnUncaughtExceptionListener.ID_UNCAUGHT_EXCEPTION_LISTENER.equals(id)) {
 					return true;
 				}
@@ -490,7 +490,7 @@ public class JDIModelPresentation extends LabelProvider implements IDebugModelPr
 	 * @return the value string
 	 * @throws DebugException if something happens trying to compute the value string
 	 */
-	public String getValueText(IJavaValue value) throws DebugException {
+	public String getValueText(IJavaValue value) throws DebugException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String refTypeName= value.getReferenceTypeName();
 		String valueString= value.getValueString();
 		boolean isString= refTypeName.equals(fgStringName);
@@ -504,15 +504,15 @@ public class JDIModelPresentation extends LabelProvider implements IDebugModelPr
 		}
 		boolean isObject= isObjectValue(signature);
 		boolean isArray= value instanceof IJavaArray;
-		StringBuilder buffer= new StringBuilder();
+		StringBuilder buffer= new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 		if (value instanceof IJavaObject) {
 			String label = ((IJavaObject) value).getLabel();
 			if (label != null) {
-				buffer.append(NLS.bind(DebugUIMessages.JDIModelPresentation_7, label));
+				buffer.append(NLS.bind(DebugUIMessages.JDIModelPresentation_7, label)); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			}
 		}
 		if(isUnknown(signature)) {
-			buffer.append(signature);
+			buffer.append(signature); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		} else if (isObject && !isString && (refTypeName.length() > 0)) {
 			// Don't show type name for instances and references
 			if (!(value instanceof JDIReferenceListValue || value instanceof JDIAllInstancesValue)){
@@ -520,29 +520,29 @@ public class JDIModelPresentation extends LabelProvider implements IDebugModelPr
 				if (isArray) {
 					qualTypeName= adjustTypeNameForArrayIndex(qualTypeName, ((IJavaArray)value).getLength());
 				}
-				buffer.append(qualTypeName);
-				buffer.append(' ');
+				buffer.append(qualTypeName); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+				buffer.append(' '); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			}
 		}
 		if (buffer.isEmpty() && value instanceof IJavaArray javaArray) {
 			String label = javaArray.getJavaType().getName();
 			label = adjustTypeNameForArrayIndex(label, javaArray.getLength());
 			if (label != null) {
-				buffer.append(label);
-				buffer.append(' ');
+				buffer.append(label); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+				buffer.append(' '); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			}
 		}
 		// Put double quotes around Strings
 		if (valueString != null && (isString || valueString.length() > 0)) {
 			if (isString) {
-				buffer.append('"');
+				buffer.append('"'); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			}
-			buffer.append(DefaultLabelProvider.escapeSpecialChars(valueString));
+			buffer.append(DefaultLabelProvider.escapeSpecialChars(valueString)); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			if (isString) {
-				buffer.append('"');
+				buffer.append('"'); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				if(value instanceof IJavaObject){
-					buffer.append(" "); //$NON-NLS-1$
-					buffer.append(NLS.bind(DebugUIMessages.JDIModelPresentation_118, String.valueOf(((IJavaObject) value).getUniqueId())));
+					buffer.append(" "); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+					buffer.append(NLS.bind(DebugUIMessages.JDIModelPresentation_118, String.valueOf(((IJavaObject) value).getUniqueId()))); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				}
 			}
 
@@ -566,9 +566,9 @@ public class JDIModelPresentation extends LabelProvider implements IDebugModelPr
 	private StringBuilder appendUnsignedText(IJavaValue value, StringBuilder buffer) throws DebugException {
 		String unsignedText= getValueUnsignedText(value);
 		if (unsignedText != null) {
-			buffer.append(" ["); //$NON-NLS-1$
-			buffer.append(unsignedText);
-			buffer.append("]"); //$NON-NLS-1$
+			buffer.append(" ["); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+			buffer.append(unsignedText); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+			buffer.append("]"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		}
 		return buffer;
 	}
@@ -576,9 +576,9 @@ public class JDIModelPresentation extends LabelProvider implements IDebugModelPr
 	protected StringBuilder appendHexText(IJavaValue value, StringBuilder buffer) throws DebugException {
 		String hexText = getValueHexText(value);
 		if (hexText != null) {
-			buffer.append(" ["); //$NON-NLS-1$
-			buffer.append(hexText);
-			buffer.append("]"); //$NON-NLS-1$
+			buffer.append(" ["); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+			buffer.append(hexText); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+			buffer.append("]"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		}
 		return buffer;
 	}
@@ -586,9 +586,9 @@ public class JDIModelPresentation extends LabelProvider implements IDebugModelPr
 	protected StringBuilder appendCharText(IJavaValue value, StringBuilder buffer) throws DebugException {
 		String charText= getValueCharText(value);
 		if (charText != null) {
-			buffer.append(" ["); //$NON-NLS-1$
-			buffer.append(charText);
-			buffer.append("]"); //$NON-NLS-1$
+			buffer.append(" ["); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+			buffer.append(charText); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+			buffer.append("]"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		}
 		return buffer;
 	}
@@ -655,7 +655,7 @@ public class JDIModelPresentation extends LabelProvider implements IDebugModelPr
 	 * Returns the character string of a byte or <code>null</code> if
 	 * the value can not be interpreted as a valid character.
 	 */
-	protected String getValueCharText(IJavaValue value) throws DebugException {
+	protected String getValueCharText(IJavaValue value) throws DebugException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String sig= getPrimitiveValueTypeSignature(value);
 		if (sig == null) {
 			return null;
@@ -690,23 +690,23 @@ public class JDIModelPresentation extends LabelProvider implements IDebugModelPr
 				return null;
 		}
 		char charValue= (char)longValue;
-		StringBuilder charText = new StringBuilder();
+		StringBuilder charText = new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 		if (Character.getType(charValue) == Character.CONTROL) {
 			Character ctrl = Character.valueOf((char) (charValue + 64));
-			charText.append('^');
-			charText.append(ctrl);
+			charText.append('^'); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+			charText.append(ctrl); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			switch (charValue) { // common use
-				case 0: charText.append(" (NUL)"); break; //$NON-NLS-1$
-				case 8: charText.append(" (BS)"); break; //$NON-NLS-1$
-				case 9: charText.append(" (TAB)"); break; //$NON-NLS-1$
-				case 10: charText.append(" (LF)"); break; //$NON-NLS-1$
-				case 13: charText.append(" (CR)"); break; //$NON-NLS-1$
-				case 21: charText.append(" (NL)"); break; //$NON-NLS-1$
-				case 27: charText.append(" (ESC)"); break; //$NON-NLS-1$
-				case 127: charText.append(" (DEL)"); break; //$NON-NLS-1$
+				case 0: charText.append(" (NUL)"); break; //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+				case 8: charText.append(" (BS)"); break; //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+				case 9: charText.append(" (TAB)"); break; //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+				case 10: charText.append(" (LF)"); break; //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+				case 13: charText.append(" (CR)"); break; //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+				case 21: charText.append(" (NL)"); break; //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+				case 27: charText.append(" (ESC)"); break; //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+				case 127: charText.append(" (DEL)"); break; //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			}
 		} else {
-			charText.append(Character.valueOf(charValue));
+			charText.append(Character.valueOf(charValue)); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		}
 		return charText.toString();
 	}
@@ -732,7 +732,7 @@ public class JDIModelPresentation extends LabelProvider implements IDebugModelPr
 	 *
 	 * @see IDebugModelPresentation#getImage(Object)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public Image getImage(Object item) {
 
 		initImageRegistries();
@@ -892,7 +892,7 @@ public class JDIModelPresentation extends LabelProvider implements IDebugModelPr
 		return getDebugImage(JavaUI.getSharedImages().getImageDescriptor(ISharedImages.IMG_OBJS_INTERFACE), flags);
 	}
 
-	protected Image getJavaWatchpointImage(IJavaWatchpoint watchpoint) throws CoreException {
+	protected Image getJavaWatchpointImage(IJavaWatchpoint watchpoint) throws CoreException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		final int flags = computeBreakpointAdornmentFlags(watchpoint);
 		final boolean enabled = (flags & JDIImageDescriptor.ENABLED) != 0;
 		final String imagekey;
@@ -945,7 +945,7 @@ public class JDIModelPresentation extends LabelProvider implements IDebugModelPr
 	 * Returns the image associated with the given element or <code>null</code>
 	 * if none is defined.
 	 */
-	protected Image getDebugElementImage(Object element) {
+	protected Image getDebugElementImage(Object element) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		ImageDescriptor image= null;
 		if (element instanceof IJavaThread thread) {
 			// image also needs to handle suspended quiet
@@ -972,7 +972,7 @@ public class JDIModelPresentation extends LabelProvider implements IDebugModelPr
 	 * ({@link IJavaStackFrame#isOutOfSynch()} or synchronized ({@link IJavaStackFrame#isSynchronized()}). The base image is acquired from the
 	 * {@link StackFramePresentationProvider}.
 	 */
-	private Image getStackFrameImage(IJavaStackFrame stackFrame) {
+	private Image getStackFrameImage(IJavaStackFrame stackFrame) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		var image = getStackFrameProvider().getStackFrameImage(stackFrame);
 		if (image == null) {
 			image = DebugUITools.getDefaultImageDescriptor(stackFrame);
@@ -1016,7 +1016,7 @@ public class JDIModelPresentation extends LabelProvider implements IDebugModelPr
 	 * Returns the adornment flags for the given element. These flags are used to render appropriate overlay icons for the element. It only supports
 	 * {@link IJavaThread} and {@link IJavaDebugTarget}, for other types it always returns 0.
 	 */
-	private int computeJDIAdornmentFlags(Object element) {
+	private int computeJDIAdornmentFlags(Object element) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 			if (element instanceof IJavaThread javaThread) {
 				int flag= 0;
@@ -1050,7 +1050,7 @@ public class JDIModelPresentation extends LabelProvider implements IDebugModelPr
 	 * These flags are used to render appropriate overlay
 	 * icons for the breakpoint.
 	 */
-	private int computeBreakpointAdornmentFlags(IJavaBreakpoint breakpoint)  {
+	private int computeBreakpointAdornmentFlags(IJavaBreakpoint breakpoint)  { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		int flags= 0;
 		try {
 			if (breakpoint.isEnabled()) {
@@ -1095,7 +1095,7 @@ public class JDIModelPresentation extends LabelProvider implements IDebugModelPr
 		return flags;
 	}
 
-	private ImageDescriptor computeBaseImageDescriptor(IAdaptable element) {
+	private ImageDescriptor computeBaseImageDescriptor(IAdaptable element) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IJavaVariable javaVariable= element.getAdapter(IJavaVariable.class);
 		if (javaVariable != null) {
 			try {
@@ -1142,7 +1142,7 @@ public class JDIModelPresentation extends LabelProvider implements IDebugModelPr
 		return flags;
 	}
 
-	private int computeLogicalStructureAdornmentFlags(IAdaptable element) {
+	private int computeLogicalStructureAdornmentFlags(IAdaptable element) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		int flags = 0;
 		if (element instanceof IVariable variable) {
             try {
@@ -1156,7 +1156,7 @@ public class JDIModelPresentation extends LabelProvider implements IDebugModelPr
 					return flags; // no logical structure is enabled for this type
 				}
 				IWorkbenchWindow[] windows = PlatformUI.getWorkbench().getWorkbenchWindows();
-				for (IWorkbenchWindow window : windows) {
+				for (IWorkbenchWindow window : windows) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 					IWorkbenchPage page = window.getActivePage();
 					IViewPart viewPart = page.findView(IDebugUIConstants.ID_VARIABLE_VIEW);
 					if (viewPart instanceof VariablesView) {
@@ -1177,7 +1177,7 @@ public class JDIModelPresentation extends LabelProvider implements IDebugModelPr
 	/**
 	 * @see IDebugModelPresentation#getEditorInput(Object)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public IEditorInput getEditorInput(Object item) {
 		if (item instanceof IMarker marker) {
 			item = getBreakpoint(marker);
@@ -1240,7 +1240,7 @@ public class JDIModelPresentation extends LabelProvider implements IDebugModelPr
 	private static IType findTypeInWorkspace(String typeName) {
 		try {
 			IJavaModel model = JavaCore.create(ResourcesPlugin.getWorkspace().getRoot());
-			for (IJavaProject jp : model.getJavaProjects()) {
+			for (IJavaProject jp : model.getJavaProjects()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				if (!jp.exists()) {
 					continue;
 				}
@@ -1309,7 +1309,7 @@ public class JDIModelPresentation extends LabelProvider implements IDebugModelPr
 		return JDIDebugUIPlugin.getDefault().getPreferenceStore().getBoolean(IJDIPreferencesConstants.PREF_SHOW_UNSIGNED);
 	}
 
-	protected String getVariableText(IJavaVariable var) {
+	protected String getVariableText(IJavaVariable var) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String varLabel= DebugUIMessages.JDIModelPresentation_unknown_name__1;
 		try {
 			varLabel= var.getName();
@@ -1321,16 +1321,16 @@ public class JDIModelPresentation extends LabelProvider implements IDebugModelPr
 			javaValue = (IJavaValue) var.getValue();
 		} catch (DebugException e1) {
 		}
-		StringBuilder buff= new StringBuilder();
+		StringBuilder buff= new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 		appendTypeName(javaValue, buff);
-		buff.append(varLabel);
+		buff.append(varLabel); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 
 		// add declaring type name if required
 		if (var instanceof IJavaFieldVariable field) {
 			if (isDuplicateName(field)) {
 				try {
 					String decl = field.getDeclaringType().getName();
-					buff.append(NLS.bind(" ({0})", getQualifiedName(decl))); //$NON-NLS-1$
+					buff.append(NLS.bind(" ({0})", getQualifiedName(decl))); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				} catch (DebugException e) {
 				}
 			}
@@ -1340,8 +1340,8 @@ public class JDIModelPresentation extends LabelProvider implements IDebugModelPr
 
 		//do not put the equal sign for array partitions
 		if (valueString.length() != 0) {
-			buff.append("= "); //$NON-NLS-1$
-			buff.append(valueString);
+			buff.append("= "); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+			buff.append(valueString); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		}
 		return buff.toString();
 	}
@@ -1358,8 +1358,8 @@ public class JDIModelPresentation extends LabelProvider implements IDebugModelPr
 			}
 		} catch (DebugException exception) {
 		}
-		buff.append(typeName);
-		buff.append(' ');
+		buff.append(typeName); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+		buff.append(' '); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 	}
 
 	/**
@@ -1393,7 +1393,7 @@ public class JDIModelPresentation extends LabelProvider implements IDebugModelPr
 	 *            the variable
 	 * @return whether or not details should be shown in the label of the given variable
 	 */
-	public boolean isShowLabelDetails(IJavaValue value) {
+	public boolean isShowLabelDetails(IJavaValue value) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		boolean showDetails= false;
 		String details= JDIDebugUIPlugin.getDefault().getPreferenceStore().getString(IJDIPreferencesConstants.PREF_SHOW_DETAILS);
 		if (details != null) {
@@ -1418,7 +1418,7 @@ public class JDIModelPresentation extends LabelProvider implements IDebugModelPr
 	 * @param variable the variable to compute the detail for
 	 * @return the detail value for the variable
 	 */
-	private String getVariableDetail(IJavaValue value) {
+	private String getVariableDetail(IJavaValue value) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		final String[] detail= new String[1];
 		final Object lock= new Object();
 		computeDetail(value, new IValueDetailListener() {
@@ -1445,9 +1445,9 @@ public class JDIModelPresentation extends LabelProvider implements IDebugModelPr
 		return detail[0];
 	}
 
-	protected String getExpressionText(IExpression expression) throws DebugException {
+	protected String getExpressionText(IExpression expression) throws DebugException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		boolean showTypes= isShowVariableTypeNames();
-		StringBuilder buff= new StringBuilder();
+		StringBuilder buff= new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 		IJavaValue javaValue= (IJavaValue) expression.getValue();
 		if (javaValue != null) {
 			String typeName=null;
@@ -1464,38 +1464,38 @@ public class JDIModelPresentation extends LabelProvider implements IDebugModelPr
 			if (showTypes ) {
 				typeName= getQualifiedName(typeName);
 				if (typeName.length() > 0) {
-					buff.append(typeName);
-					buff.append(' ');
+					buff.append(typeName); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+					buff.append(' '); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				}
 			}
 		}
 		// Edit the snippet to make it easily viewable in one line
-		StringBuilder snippetBuffer = new StringBuilder();
+		StringBuilder snippetBuffer = new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 		String snippet = expression.getExpressionText().trim();
-		snippetBuffer.append('"');
+		snippetBuffer.append('"'); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		if (snippet.length() > 30){
-			snippetBuffer.append(snippet.substring(0, 15));
-			snippetBuffer.append(SnippetMessages.getString("SnippetEditor.ellipsis")); //$NON-NLS-1$
-			snippetBuffer.append(snippet.substring(snippet.length() - 15));
+			snippetBuffer.append(snippet.substring(0, 15)); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+			snippetBuffer.append(SnippetMessages.getString("SnippetEditor.ellipsis")); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+			snippetBuffer.append(snippet.substring(snippet.length() - 15)); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		} else {
-			snippetBuffer.append(snippet);
+			snippetBuffer.append(snippet); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		}
-		snippetBuffer.append('"');
-		snippet = snippetBuffer.toString().replaceAll("[\n\r\t]+", " ");  //$NON-NLS-1$//$NON-NLS-2$
-		buff.append(snippet);
+		snippetBuffer.append('"'); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+		snippet = snippetBuffer.toString().replaceAll("[\n\r\t]+", " ");  //$NON-NLS-1$//$NON-NLS-2$ //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
+		buff.append(snippet); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 
 		if (javaValue != null) {
 			String valueString= getValueText(javaValue);
 			if (valueString.length() > 0) {
-				buff.append("= "); //$NON-NLS-1$
-				buff.append(valueString);
+				buff.append("= "); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+				buff.append(valueString); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			}
 		}
 		return buff.toString();
 	}
 
 	protected String getWatchExpressionText(IWatchExpression expression) throws DebugException {
-		return getExpressionText(expression) + (expression.isEnabled() ? "" : DebugUIMessages.JDIModelPresentation_116); //$NON-NLS-1$
+		return getExpressionText(expression) + (expression.isEnabled() ? "" : DebugUIMessages.JDIModelPresentation_116); //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 	}
 
 	/**
@@ -1507,12 +1507,12 @@ public class JDIModelPresentation extends LabelProvider implements IDebugModelPr
 		if (firstBracket < 0) {
 			return typeName;
 		}
-		StringBuilder buffer= new StringBuilder(typeName);
+		StringBuilder buffer= new StringBuilder(typeName); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 		buffer.insert(firstBracket + 1, Integer.toString(arrayIndex));
 		return buffer.toString();
 	}
 
-	protected String getValueUnsignedText(IJavaValue value) throws DebugException {
+	protected String getValueUnsignedText(IJavaValue value) throws DebugException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String sig= getPrimitiveValueTypeSignature(value);
 		if (sig == null) {
 			return null;
@@ -1535,13 +1535,13 @@ public class JDIModelPresentation extends LabelProvider implements IDebugModelPr
 		}
 	}
 
-	protected String getValueHexText(IJavaValue value) throws DebugException {
+	protected String getValueHexText(IJavaValue value) throws DebugException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String sig= getPrimitiveValueTypeSignature(value);
 		if (sig == null) {
 			return null;
 		}
 
-		StringBuilder buff= new StringBuilder();
+		StringBuilder buff= new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 		long longValue;
 		char sigValue = sig.charAt(0);
 		try {
@@ -1555,36 +1555,36 @@ public class JDIModelPresentation extends LabelProvider implements IDebugModelPr
 		}
 		switch (sigValue) {
 			case 'B' :
-				buff.append("0x"); //$NON-NLS-1$
+				buff.append("0x"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				// keep only the relevant bits for byte
 				longValue &= 0xFF;
-				buff.append(Long.toHexString(longValue));
+				buff.append(Long.toHexString(longValue)); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				break;
 			case 'I' :
-				buff.append("0x"); //$NON-NLS-1$
+				buff.append("0x"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				// keep only the relevant bits for integer
 				longValue &= 0xFFFFFFFFl;
-				buff.append(Long.toHexString(longValue));
+				buff.append(Long.toHexString(longValue)); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				break;
 			case 'S' :
-				buff.append("0x"); //$NON-NLS-1$
+				buff.append("0x"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				// keep only the relevant bits for short
 				longValue = longValue & 0xFFFF;
-				buff.append(Long.toHexString(longValue));
+				buff.append(Long.toHexString(longValue)); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				break;
 			case 'J' :
-				buff.append("0x"); //$NON-NLS-1$
-				buff.append(Long.toHexString(longValue));
+				buff.append("0x"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+				buff.append(Long.toHexString(longValue)); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				break;
 			case 'C' :
-				buff.append("\\u"); //$NON-NLS-1$
+				buff.append("\\u"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				String hexString= Long.toHexString(longValue);
 				int length= hexString.length();
-				while (length < 4) {
-					buff.append('0');
+				while (length < 4) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
+					buff.append('0'); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 					length++;
 				}
-				buff.append(hexString);
+				buff.append(hexString); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				break;
 			default:
 				return null;
@@ -1592,7 +1592,7 @@ public class JDIModelPresentation extends LabelProvider implements IDebugModelPr
 		return buff.toString();
 	}
 
-	protected String getBreakpointText(IBreakpoint breakpoint) {
+	protected String getBreakpointText(IBreakpoint breakpoint) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	    try {
 	    	String label = null;
 			if (breakpoint instanceof IJavaExceptionBreakpoint exceptionBreakpoint) {
@@ -1619,8 +1619,8 @@ public class JDIModelPresentation extends LabelProvider implements IDebugModelPr
 			if (suffix == null) {
 				return label;
 			}
-			StringBuilder buffer = new StringBuilder(label);
-			buffer.append(suffix);
+			StringBuilder buffer = new StringBuilder(label); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
+			buffer.append(suffix); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			return buffer.toString();
 	    } catch (CoreException e) {
 	    	// if the breakpoint has been deleted, don't log exception
@@ -1633,7 +1633,7 @@ public class JDIModelPresentation extends LabelProvider implements IDebugModelPr
 	    }
 	}
 
-	private String getJavaStratumLineBreakpointText(IJavaStratumLineBreakpoint breakpoint) throws CoreException {
+	private String getJavaStratumLineBreakpointText(IJavaStratumLineBreakpoint breakpoint) throws CoreException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IMember member= BreakpointUtils.getMember(breakpoint);
 		String sourceName = breakpoint.getSourceName();
 		if (sourceName == null) {
@@ -1646,35 +1646,35 @@ public class JDIModelPresentation extends LabelProvider implements IDebugModelPr
 		        }
 		    }
 		}
-		StringBuilder label= new StringBuilder(sourceName);
+		StringBuilder label= new StringBuilder(sourceName); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 		appendLineNumber(breakpoint, label);
 		appendHitCount(breakpoint, label);
 		appendSuspendPolicy(breakpoint,label);
 		appendThreadFilter(breakpoint, label);
 
 		if (member != null) {
-			label.append(" - "); //$NON-NLS-1$
-			label.append(getJavaLabelProvider().getText(member));
+			label.append(" - "); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+			label.append(getJavaLabelProvider().getText(member)); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		}
 
 		return label.toString();
 	}
 
-	protected String getExceptionBreakpointText(IJavaExceptionBreakpoint breakpoint) throws CoreException {
-		StringBuilder buffer = new StringBuilder();
+	protected String getExceptionBreakpointText(IJavaExceptionBreakpoint breakpoint) throws CoreException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
+		StringBuilder buffer = new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 		String typeName = breakpoint.getTypeName();
 		if (typeName != null) {
-			buffer.append(getQualifiedName(typeName));
+			buffer.append(getQualifiedName(typeName)); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		}
 		appendHitCount(breakpoint, buffer);
 		appendSuspendPolicy(breakpoint, buffer);
 		//TODO remove the cast once the API freeze has thawed
 		if(((JavaExceptionBreakpoint)breakpoint).isSuspendOnSubclasses()) {
-			buffer.append(DebugUIMessages.JDIModelPresentation_117);
+			buffer.append(DebugUIMessages.JDIModelPresentation_117); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		}
 		appendThreadFilter(breakpoint, buffer);
 		if (breakpoint.getExclusionFilters().length > 0 || breakpoint.getInclusionFilters().length > 0) {
-			buffer.append(DebugUIMessages.JDIModelPresentation___scoped__1);
+			buffer.append(DebugUIMessages.JDIModelPresentation___scoped__1); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		}
 		appendInstanceFilter(breakpoint, buffer);
 		String state= null;
@@ -1697,12 +1697,12 @@ public class JDIModelPresentation extends LabelProvider implements IDebugModelPr
 		return label;
 	}
 
-	protected String getLineBreakpointText(IJavaLineBreakpoint breakpoint) throws CoreException {
+	protected String getLineBreakpointText(IJavaLineBreakpoint breakpoint) throws CoreException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String typeName= breakpoint.getTypeName();
 		IMember member= BreakpointUtils.getMember(breakpoint);
-		StringBuilder label= new StringBuilder();
+		StringBuilder label= new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 		if (typeName != null) {
-			label.append(getQualifiedName(typeName));
+			label.append(getQualifiedName(typeName)); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		}
 		appendLineNumber(breakpoint, label);
 		appendHitCount(breakpoint, label);
@@ -1712,8 +1712,8 @@ public class JDIModelPresentation extends LabelProvider implements IDebugModelPr
 		appendInstanceFilter(breakpoint, label);
 
 		if (member != null) {
-			label.append(" - "); //$NON-NLS-1$
-			label.append(getJavaLabelProvider().getText(member));
+			label.append(" - "); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+			label.append(getJavaLabelProvider().getText(member)); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		}
 
 		return label.toString();
@@ -1721,9 +1721,9 @@ public class JDIModelPresentation extends LabelProvider implements IDebugModelPr
 
 	protected String getClassPrepareBreakpointText(IJavaClassPrepareBreakpoint breakpoint) throws CoreException {
 		String typeName= breakpoint.getTypeName();
-		StringBuilder label = new StringBuilder();
+		StringBuilder label = new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 		if (typeName != null) {
-			label.append(getQualifiedName(typeName));
+			label.append(getQualifiedName(typeName)); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		}
 		appendHitCount(breakpoint, label);
 		appendSuspendPolicy(breakpoint, label);
@@ -1733,11 +1733,11 @@ public class JDIModelPresentation extends LabelProvider implements IDebugModelPr
 	protected StringBuilder appendLineNumber(IJavaLineBreakpoint breakpoint, StringBuilder label) throws CoreException {
 		int lineNumber= breakpoint.getLineNumber();
 		if (lineNumber > 0) {
-			label.append(" ["); //$NON-NLS-1$
-			label.append(DebugUIMessages.JDIModelPresentation_line__65);
-			label.append(' ');
-			label.append(lineNumber);
-			label.append(']');
+			label.append(" ["); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+			label.append(DebugUIMessages.JDIModelPresentation_line__65); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+			label.append(' '); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+			label.append(lineNumber); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+			label.append(']'); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 
 		}
 		return label;
@@ -1746,11 +1746,11 @@ public class JDIModelPresentation extends LabelProvider implements IDebugModelPr
 	protected StringBuilder appendHitCount(IJavaBreakpoint breakpoint, StringBuilder label) throws CoreException {
 		int hitCount= breakpoint.getHitCount();
 		if (hitCount > 0) {
-			label.append(" ["); //$NON-NLS-1$
-			label.append(DebugUIMessages.JDIModelPresentation_hit_count__67);
-			label.append(' ');
-			label.append(hitCount);
-			label.append(']');
+			label.append(" ["); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+			label.append(DebugUIMessages.JDIModelPresentation_hit_count__67); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+			label.append(' '); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+			label.append(hitCount); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+			label.append(']'); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		}
 		return label;
 	}
@@ -1758,15 +1758,15 @@ public class JDIModelPresentation extends LabelProvider implements IDebugModelPr
 	protected String getJavaPatternBreakpointText(IJavaPatternBreakpoint breakpoint) throws CoreException {
 		IResource resource= breakpoint.getMarker().getResource();
 		IMember member= BreakpointUtils.getMember(breakpoint);
-		StringBuilder label= new StringBuilder(resource.getName());
+		StringBuilder label= new StringBuilder(resource.getName()); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 		appendLineNumber(breakpoint, label);
 		appendHitCount(breakpoint, label);
 		appendSuspendPolicy(breakpoint,label);
 		appendThreadFilter(breakpoint, label);
 
 		if (member != null) {
-			label.append(" - "); //$NON-NLS-1$
-			label.append(getJavaLabelProvider().getText(member));
+			label.append(" - "); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+			label.append(getJavaLabelProvider().getText(member)); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		}
 
 		return label.toString();
@@ -1774,26 +1774,26 @@ public class JDIModelPresentation extends LabelProvider implements IDebugModelPr
 
 	protected String getJavaTargetPatternBreakpointText(IJavaTargetPatternBreakpoint breakpoint) throws CoreException {
 		IMember member= BreakpointUtils.getMember(breakpoint);
-		StringBuilder label= new StringBuilder(breakpoint.getSourceName());
+		StringBuilder label= new StringBuilder(breakpoint.getSourceName()); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 		appendLineNumber(breakpoint, label);
 		appendHitCount(breakpoint, label);
 		appendSuspendPolicy(breakpoint,label);
 		appendThreadFilter(breakpoint, label);
 
 		if (member != null) {
-			label.append(" - "); //$NON-NLS-1$
-			label.append(getJavaLabelProvider().getText(member));
+			label.append(" - "); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+			label.append(getJavaLabelProvider().getText(member)); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		}
 
 		return label.toString();
 	}
 
-	protected String getWatchpointText(IJavaWatchpoint watchpoint) throws CoreException {
+	protected String getWatchpointText(IJavaWatchpoint watchpoint) throws CoreException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String typeName= watchpoint.getTypeName();
 		IMember member= BreakpointUtils.getMember(watchpoint);
-		StringBuilder label= new StringBuilder();
+		StringBuilder label= new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 		if (typeName != null) {
-			label.append(getQualifiedName(typeName));
+			label.append(getQualifiedName(typeName)); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		}
 		appendHitCount(watchpoint, label);
 		appendSuspendPolicy(watchpoint,label);
@@ -1803,29 +1803,29 @@ public class JDIModelPresentation extends LabelProvider implements IDebugModelPr
 		boolean access= watchpoint.isAccess();
 		boolean modification= watchpoint.isModification();
 		if (access && modification) {
-			label.append(DebugUIMessages.JDIModelPresentation_access_and_modification_70);
+			label.append(DebugUIMessages.JDIModelPresentation_access_and_modification_70); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		} else if (access) {
-			label.append(DebugUIMessages.JDIModelPresentation_access_71);
+			label.append(DebugUIMessages.JDIModelPresentation_access_71); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		} else if (modification) {
-			label.append(DebugUIMessages.JDIModelPresentation_modification_72);
+			label.append(DebugUIMessages.JDIModelPresentation_modification_72); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		}
 
-		label.append(" - "); //$NON-NLS-1$
+		label.append(" - "); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		if (member != null) {
-			label.append(getJavaLabelProvider().getText(member));
+			label.append(getJavaLabelProvider().getText(member)); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		} else {
-			label.append(watchpoint.getFieldName());
+			label.append(watchpoint.getFieldName()); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		}
 
 		return label.toString();
 	}
 
-	protected String getMethodBreakpointText(IJavaMethodBreakpoint methodBreakpoint) throws CoreException {
+	protected String getMethodBreakpointText(IJavaMethodBreakpoint methodBreakpoint) throws CoreException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String typeName= methodBreakpoint.getTypeName();
 		IMember member= BreakpointUtils.getMember(methodBreakpoint);
-		StringBuilder label= new StringBuilder();
+		StringBuilder label= new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 		if (typeName != null) {
-			label.append(getQualifiedName(typeName));
+			label.append(getQualifiedName(typeName)); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		}
 		appendHitCount(methodBreakpoint, label);
 		appendSuspendPolicy(methodBreakpoint,label);
@@ -1837,36 +1837,36 @@ public class JDIModelPresentation extends LabelProvider implements IDebugModelPr
 			boolean entry = methodBreakpoint.isEntry();
 			boolean exit = methodBreakpoint.isExit();
 			if (entry && exit) {
-				label.append(DebugUIMessages.JDIModelPresentation_entry_and_exit);
+				label.append(DebugUIMessages.JDIModelPresentation_entry_and_exit); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			} else if (entry) {
-				label.append(DebugUIMessages.JDIModelPresentation_entry);
+				label.append(DebugUIMessages.JDIModelPresentation_entry); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			} else if (exit) {
-				label.append(DebugUIMessages.JDIModelPresentation_exit);
+				label.append(DebugUIMessages.JDIModelPresentation_exit); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			}
 			appendConditional(methodBreakpoint, label);
 
 			if (member != null) {
-				label.append(" - "); //$NON-NLS-1$
-				label.append(getJavaLabelProvider().getText(member));
+				label.append(" - "); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+				label.append(getJavaLabelProvider().getText(member)); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			} else {
 				String methodSig = methodBreakpoint.getMethodSignature();
 				String methodName = methodBreakpoint.getMethodName();
 				if (methodSig != null) {
-					label.append(" - "); //$NON-NLS-1$
-					label.append(Signature.toString(methodSig, methodName, null, false, false));
+					label.append(" - "); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+					label.append(Signature.toString(methodSig, methodName, null, false, false)); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				} else if (methodName != null) {
-					label.append(" - "); //$NON-NLS-1$
-					label.append(methodName);
+					label.append(" - "); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+					label.append(methodName); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				}
 			}
 		}
 		return label.toString();
 	}
 
-	protected String getStackFrameText(IStackFrame stackFrame) throws DebugException {
+	protected String getStackFrameText(IStackFrame stackFrame) throws DebugException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IJavaStackFrame frame= stackFrame.getAdapter(IJavaStackFrame.class);
 		if (frame != null) {
-			StringBuilder label= new StringBuilder();
+			StringBuilder label= new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 
 			String dec= DebugUIMessages.JDIModelPresentation_unknown_declaring_type__4;
 			try {
@@ -1874,9 +1874,9 @@ public class JDIModelPresentation extends LabelProvider implements IDebugModelPr
 			} catch (DebugException exception) {
 			}
 			if (frame.isObsolete()) {
-				label.append(DebugUIMessages.JDIModelPresentation__obsolete_method_in__1);
-				label.append(dec);
-				label.append('>');
+				label.append(DebugUIMessages.JDIModelPresentation__obsolete_method_in__1); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+				label.append(dec); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+				label.append('>'); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				return label.toString();
 			}
 
@@ -1893,73 +1893,73 @@ public class JDIModelPresentation extends LabelProvider implements IDebugModelPr
 					rec= frame.getReceivingTypeName();
 				} catch (DebugException exception) {
 				}
-				label.append(getQualifiedName(rec));
+				label.append(getQualifiedName(rec)); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 
 				// append declaring type name if different
 				if (!dec.equals(rec)) {
-					label.append('(');
-					label.append(getQualifiedName(dec));
-					label.append(')');
+					label.append('('); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+					label.append(getQualifiedName(dec)); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+					label.append(')'); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				}
 				// append a dot separator and method name
-				label.append('.');
+				label.append('.'); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				try {
-					label.append(frame.getMethodName());
+					label.append(frame.getMethodName()); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				} catch (DebugException exception) {
-					label.append(DebugUIMessages.JDIModelPresentation_unknown_method_name__6);
+					label.append(DebugUIMessages.JDIModelPresentation_unknown_method_name__6); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				}
 				try {
 					List<String> args= frame.getArgumentTypeNames();
 					if (args.isEmpty()) {
-						label.append("()"); //$NON-NLS-1$
+						label.append("()"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 					} else {
-						label.append('(');
+						label.append('('); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 						Iterator<String> iter= args.iterator();
-						while (iter.hasNext()) {
-							label.append(getQualifiedName(iter.next()));
+						while (iter.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
+							label.append(getQualifiedName(iter.next())); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 							if (iter.hasNext()) {
-								label.append(", "); //$NON-NLS-1$
+								label.append(", "); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 							} else if (frame.isVarArgs()) {
 								label.replace(label.length() - 2, label.length(), "..."); //$NON-NLS-1$
 							}
 						}
-						label.append(')');
+						label.append(')'); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 					}
 				} catch (DebugException exception) {
-					label.append(DebugUIMessages.JDIModelPresentation__unknown_arguements___7);
+					label.append(DebugUIMessages.JDIModelPresentation__unknown_arguements___7); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				}
 			} else {
 				if (isShowQualifiedNames()) {
-					label.append(frame.getSourcePath());
+					label.append(frame.getSourcePath()); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				} else {
-					label.append(frame.getSourceName());
+					label.append(frame.getSourceName()); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				}
 			}
 
 			try {
 				int lineNumber= frame.getLineNumber();
-				label.append(' ');
-				label.append(DebugUIMessages.JDIModelPresentation_line__76);
-				label.append(' ');
+				label.append(' '); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+				label.append(DebugUIMessages.JDIModelPresentation_line__76); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+				label.append(' '); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				if (lineNumber >= 0) {
-					label.append(lineNumber);
+					label.append(lineNumber); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				} else {
-					label.append(DebugUIMessages.JDIModelPresentation_not_available);
+					label.append(DebugUIMessages.JDIModelPresentation_not_available); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 					if (frame.isNative()) {
-						label.append(' ');
-						label.append(DebugUIMessages.JDIModelPresentation_native_method);
+						label.append(' '); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+						label.append(DebugUIMessages.JDIModelPresentation_native_method); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 					}
 				}
 			} catch (DebugException exception) {
-				label.append(DebugUIMessages.JDIModelPresentation__unknown_line_number__8);
+				label.append(DebugUIMessages.JDIModelPresentation__unknown_line_number__8); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			}
 
 			if (!frame.wereLocalsAvailable()) {
-				label.append(' ');
-				label.append(DebugUIMessages.JDIModelPresentation_local_variables_unavailable);
+				label.append(' '); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+				label.append(DebugUIMessages.JDIModelPresentation_local_variables_unavailable); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			}
 			if (frame.isOutOfSynch()) {
-				label.append(DebugUIMessages.JDIModelPresentation___out_of_synch__1);
+				label.append(DebugUIMessages.JDIModelPresentation___out_of_synch__1); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			}
 
 			return label.toString();
@@ -1978,14 +1978,14 @@ public class JDIModelPresentation extends LabelProvider implements IDebugModelPr
 	/**
 	 * Return the simple generic name from a qualified generic name
 	 */
-	public String removeQualifierFromGenericName(String qualifiedName) {
+	public String removeQualifierFromGenericName(String qualifiedName) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		if (qualifiedName.endsWith("...")) { //$NON-NLS-1$
 			// handle variable argument name
-			return removeQualifierFromGenericName(qualifiedName.substring(0, qualifiedName.length() - 3)) + "..."; //$NON-NLS-1$
+			return removeQualifierFromGenericName(qualifiedName.substring(0, qualifiedName.length() - 3)) + "..."; //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		}
 		if (qualifiedName.endsWith("[]")) { //$NON-NLS-1$
 			// handle array type
-			return removeQualifierFromGenericName(qualifiedName.substring(0, qualifiedName.length() - 2)) + "[]"; //$NON-NLS-1$
+			return removeQualifierFromGenericName(qualifiedName.substring(0, qualifiedName.length() - 2)) + "[]"; //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		}
 		// check if the type has parameters
 		int parameterStart= qualifiedName.indexOf('<');
@@ -1994,16 +1994,16 @@ public class JDIModelPresentation extends LabelProvider implements IDebugModelPr
 		}
 		// get the list of the parameters and generates their simple name
 		List<String> parameters= getNameList(qualifiedName.substring(parameterStart + 1, qualifiedName.length() - 1));
-		StringBuilder name= new StringBuilder(getSimpleName(qualifiedName.substring(0, parameterStart)));
-		name.append('<');
+		StringBuilder name= new StringBuilder(getSimpleName(qualifiedName.substring(0, parameterStart))); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
+		name.append('<'); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		Iterator<String> iterator= parameters.iterator();
 		if (iterator.hasNext()) {
-			name.append(removeQualifierFromGenericName(iterator.next()));
-			while (iterator.hasNext()) {
-				name.append(',').append(removeQualifierFromGenericName(iterator.next()));
+			name.append(removeQualifierFromGenericName(iterator.next())); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+			while (iterator.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
+				name.append(',').append(removeQualifierFromGenericName(iterator.next())); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			}
 		}
-		name.append('>');
+		name.append('>'); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		return name.toString();
 	}
 
@@ -2030,13 +2030,13 @@ public class JDIModelPresentation extends LabelProvider implements IDebugModelPr
 	/**
 	 * Decompose a comma separated list of generic names (String) to a list of generic names (List)
 	 */
-	private List<String> getNameList(String listName) {
-		List<String> names= new ArrayList<>();
+	private List<String> getNameList(String listName) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
+		List<String> names= new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 		StringTokenizer tokenizer= new StringTokenizer(listName, ",<>", true); //$NON-NLS-1$
 		int enclosingLevel= 0;
 		int startPos= 0;
 		int currentPos= 0;
-		while (tokenizer.hasMoreTokens()) {
+		while (tokenizer.hasMoreTokens()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			String token= tokenizer.nextToken();
 			switch (token.charAt(0)) {
 				case ',':
@@ -2078,36 +2078,36 @@ public class JDIModelPresentation extends LabelProvider implements IDebugModelPr
 
 	protected void appendSuspendPolicy(IJavaBreakpoint breakpoint, StringBuilder buffer) throws CoreException {
 		if (breakpoint.getSuspendPolicy() == IJavaBreakpoint.SUSPEND_VM) {
-			buffer.append(' ');
-			buffer.append(DebugUIMessages.JDIModelPresentation_Suspend_VM);
+			buffer.append(' '); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+			buffer.append(DebugUIMessages.JDIModelPresentation_Suspend_VM); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		}
 		if (breakpoint.getSuspendPolicy() == IJavaBreakpoint.RESUME_ON_HIT) {
-			buffer.append(' ');
-			buffer.append(DebugUIMessages.JDIModelPresentation_resume_on_hit);
+			buffer.append(' '); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+			buffer.append(DebugUIMessages.JDIModelPresentation_resume_on_hit); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		}
 	}
 
 	protected void appendThreadFilter(IJavaBreakpoint breakpoint, StringBuilder buffer) throws CoreException {
 		if (breakpoint.getThreadFilters().length != 0) {
-			buffer.append(' ');
-			buffer.append(DebugUIMessages.JDIModelPresentation_thread_filtered);
+			buffer.append(' '); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+			buffer.append(DebugUIMessages.JDIModelPresentation_thread_filtered); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		}
 	}
 
 	protected void appendConditional(IJavaLineBreakpoint breakpoint, StringBuilder buffer) throws CoreException {
 		if (breakpoint.isConditionEnabled() && breakpoint.getCondition() != null) {
-			buffer.append(' ');
-			buffer.append(DebugUIMessages.JDIModelPresentation__conditional__2);
+			buffer.append(' '); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+			buffer.append(DebugUIMessages.JDIModelPresentation__conditional__2); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		}
 	}
 
 	protected void appendInstanceFilter(IJavaBreakpoint breakpoint, StringBuilder buffer) throws CoreException {
 		IJavaObject[] instances = breakpoint.getInstanceFilters();
-		for (int i = 0; i < instances.length; i++) {
+		for (int i = 0; i < instances.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			String instanceText= instances[i].getValueString();
 			if (instanceText != null) {
-				buffer.append(' ');
-				buffer.append(NLS.bind(DebugUIMessages.JDIModelPresentation_instance_1, instanceText));
+				buffer.append(' '); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+				buffer.append(NLS.bind(DebugUIMessages.JDIModelPresentation_instance_1, instanceText)); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			}
 		}
 	}
@@ -2168,12 +2168,12 @@ public class JDIModelPresentation extends LabelProvider implements IDebugModelPr
 	/**
 	 * Returns whether the given field variable has the same name as any variables
 	 */
-	protected boolean isDuplicateName(IJavaFieldVariable variable) {
+	protected boolean isDuplicateName(IJavaFieldVariable variable) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IJavaReferenceType javaType= variable.getReceivingType();
 		try {
 			String[] names = javaType.getAllFieldNames();
 			boolean found= false;
-			for (int i = 0; i < names.length; i++) {
+			for (int i = 0; i < names.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				if (variable.getName().equals(names[i])) {
 					if (found) {
 						return true;
@@ -2190,7 +2190,7 @@ public class JDIModelPresentation extends LabelProvider implements IDebugModelPr
 	/* (non-Javadoc)
 	 * @see org.eclipse.jface.viewers.IColorProvider#getForeground(java.lang.Object)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public Color getForeground(Object element) {
 		if (element instanceof IJavaObject javaObject) {
 			try {
@@ -2261,23 +2261,23 @@ public class JDIModelPresentation extends LabelProvider implements IDebugModelPr
 	/**
 	 * Process custom label for inline lambda breakpoints
 	 */
-	private void processInLineLambdaLabel(IJavaMethodBreakpoint methodBreakpoint, StringBuilder label, IMember member) throws CoreException {
+	private void processInLineLambdaLabel(IJavaMethodBreakpoint methodBreakpoint, StringBuilder label, IMember member) throws CoreException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		appendConditional(methodBreakpoint, label);
 		if (methodBreakpoint.getLambdaName() != null) {
-			label.append(" - [ " + methodBreakpoint.getLambdaName() + " ]"); //$NON-NLS-1$ //$NON-NLS-2$
+			label.append(" - [ " + methodBreakpoint.getLambdaName() + " ]"); //$NON-NLS-1$ //$NON-NLS-2$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		} else {
 			if (member != null) {
-				label.append(" - "); //$NON-NLS-1$
-				label.append(getJavaLabelProvider().getText(member));
+				label.append(" - "); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+				label.append(getJavaLabelProvider().getText(member)); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			} else {
 				String methodSig = methodBreakpoint.getMethodSignature();
 				String methodName = methodBreakpoint.getMethodName();
 				if (methodSig != null) {
-					label.append(" - "); //$NON-NLS-1$
-					label.append(Signature.toString(methodSig, methodName, null, false, false));
+					label.append(" - "); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+					label.append(Signature.toString(methodSig, methodName, null, false, false)); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				} else if (methodName != null) {
-					label.append(" - "); //$NON-NLS-1$
-					label.append(methodName);
+					label.append(" - "); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+					label.append(methodName); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				}
 			}
 		}

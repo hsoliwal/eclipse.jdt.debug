@@ -23,21 +23,21 @@ public class JavaVariableColumnPresentation extends VariableColumnPresentation {
 	/**
 	 * Constant identifier for the Java variable column presentation.
 	 */
-	public final static String JAVA_VARIABLE_COLUMN_PRESENTATION = IJavaDebugUIConstants.PLUGIN_ID + ".VARIALBE_COLUMN_PRESENTATION";  //$NON-NLS-1$
+	public final static String JAVA_VARIABLE_COLUMN_PRESENTATION = IJavaDebugUIConstants.PLUGIN_ID + ".VARIALBE_COLUMN_PRESENTATION";  //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 	/**
 	 * Instance ID column identifier
 	 */
-	public final static String COLUMN_INSTANCE_ID = JAVA_VARIABLE_COLUMN_PRESENTATION + ".COL_INSTANCE_ID"; //$NON-NLS-1$
+	public final static String COLUMN_INSTANCE_ID = JAVA_VARIABLE_COLUMN_PRESENTATION + ".COL_INSTANCE_ID"; //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 	/**
 	 * Instance count column identifier
 	 */
-	public final static String COLUMN_INSTANCE_COUNT = JAVA_VARIABLE_COLUMN_PRESENTATION + ".COL_INSTANCE_COUNT"; //$NON-NLS-1$
+	public final static String COLUMN_INSTANCE_COUNT = JAVA_VARIABLE_COLUMN_PRESENTATION + ".COL_INSTANCE_COUNT"; //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 	/**
 	 * Object label column identifier
 	 */
-	public final static String COLUMN_LABEL = JAVA_VARIABLE_COLUMN_PRESENTATION + ".COL_LABEL"; //$NON-NLS-1$
+	public final static String COLUMN_LABEL = JAVA_VARIABLE_COLUMN_PRESENTATION + ".COL_LABEL"; //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 	/**
 	 * Column ids

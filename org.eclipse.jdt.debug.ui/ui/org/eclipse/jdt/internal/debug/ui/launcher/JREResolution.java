@@ -55,11 +55,11 @@ public abstract class JREResolution implements IMarkerResolution {
 	 */
 	protected static IVMInstall[] getAllVMs() {
 		IVMInstallType[] types = JavaRuntime.getVMInstallTypes();
-		List<IVMInstall> vms = new ArrayList<>();
-		for (int i = 0; i < types.length; i++) {
+		List<IVMInstall> vms = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
+		for (int i = 0; i < types.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			IVMInstallType type = types[i];
 			IVMInstall[] installs = type.getVMInstalls();
-			for (int j = 0; j < installs.length; j++) {
+			for (int j = 0; j < installs.length; j++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				vms.add(installs[j]);
 			}
 		}

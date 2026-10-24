@@ -93,7 +93,7 @@ public abstract class JDIVariable extends JDIDebugElement implements
 	 *
 	 * @see IVariable#getValue()
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public IValue getValue() throws DebugException {
 		Value currentValue = getCurrentValue();
 		if (fValue == null) {

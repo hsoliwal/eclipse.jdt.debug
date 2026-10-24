@@ -28,7 +28,7 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.texteditor.ITextEditor;
 
-public class PopupDisplayAction extends DisplayAction {
+public class PopupDisplayAction extends DisplayAction { //FLLDCIM: MARK — T20  IMPLEMENTS
 
     public static final String ACTION_DEFINITION_ID = "org.eclipse.jdt.debug.ui.commands.Display"; //$NON-NLS-1$
 
@@ -103,7 +103,7 @@ public class PopupDisplayAction extends DisplayAction {
         }
     }
 
-    @Override
+    @Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	protected void displayStringResult(String currentSnippet, String currentResultString) {
         IWorkbenchPart part = getTargetPart();
         if (part instanceof DisplayView) {
@@ -117,7 +117,7 @@ public class PopupDisplayAction extends DisplayAction {
         } else {
             snippet = currentSnippet;
             resultString = currentResultString;
-            Display.getDefault().asyncExec(new Runnable() {
+            Display.getDefault().asyncExec(new Runnable() { //FLLDCIM: MARK — T08 UI_THREAD_SYNCHRONIZER CALL
                 @Override
 				public void run() {
                     showPopup(textWidget);

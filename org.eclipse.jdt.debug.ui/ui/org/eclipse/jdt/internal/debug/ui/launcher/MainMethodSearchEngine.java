@@ -46,7 +46,7 @@ public class MainMethodSearchEngine{
 		private final List<IType> fResult;
 
 		public MethodCollector() {
-			fResult = new ArrayList<>(200);
+			fResult = new ArrayList<>(200); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 		}
 
 		public List<IType> getResult() {
@@ -78,7 +78,7 @@ public class MainMethodSearchEngine{
 	 * @param scope search scope
 	 * @param includeSubtypes whether to consider types that inherit a main method
 	 */
-	public IType[] searchMainMethods(IProgressMonitor pm, IJavaSearchScope scope, boolean includeSubtypes) {
+	public IType[] searchMainMethods(IProgressMonitor pm, IJavaSearchScope scope, boolean includeSubtypes) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		SubMonitor subMon = SubMonitor.convert(pm, LauncherMessages.MainMethodSearchEngine_1, 100);
 		int searchTicks = 100;
 		if (includeSubtypes) {
@@ -112,19 +112,19 @@ public class MainMethodSearchEngine{
 	 * @param scope the scope of elements
 	 * @return as set of all types to consider
 	 */
-	private Set<IType> addSubtypes(List<IType> types, IProgressMonitor monitor, IJavaSearchScope scope) {
+	private Set<IType> addSubtypes(List<IType> types, IProgressMonitor monitor, IJavaSearchScope scope) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		Iterator<IType> iterator = types.iterator();
-		Set<IType> result = new HashSet<>(types.size());
+		Set<IType> result = new HashSet<>(types.size()); //FLLDCIM: MARK — M03 M3_SET_LANES NEW
 		IType type = null;
 		ITypeHierarchy hierarchy = null;
 		IType[] subtypes = null;
-		while (iterator.hasNext()) {
+		while (iterator.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			type = iterator.next();
 			if (result.add(type)) {
 				try {
 					hierarchy = type.newTypeHierarchy(monitor);
 					subtypes = hierarchy.getAllSubtypes(type);
-					for (int i = 0; i < subtypes.length; i++) {
+					for (int i = 0; i < subtypes.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 						if (scope.encloses(subtypes[i])) {
 							result.add(subtypes[i]);
 						}
@@ -156,7 +156,7 @@ public class MainMethodSearchEngine{
 	public IType[] searchMainMethods(IRunnableContext context, final IJavaSearchScope scope, final boolean includeSubtypes) throws InvocationTargetException, InterruptedException  {
 		final IType[][] res= new IType[1][];
 
-		IRunnableWithProgress runnable= new IRunnableWithProgress() {
+		IRunnableWithProgress runnable= new IRunnableWithProgress() { //FLLDCIM: MARK — T09  ANONYMOUS
 			@Override
 			public void run(IProgressMonitor pm) throws InvocationTargetException {
 				res[0]= searchMainMethods(pm, scope, includeSubtypes);

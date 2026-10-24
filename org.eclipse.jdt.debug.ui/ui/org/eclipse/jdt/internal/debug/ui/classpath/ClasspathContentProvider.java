@@ -29,7 +29,7 @@ import org.eclipse.jface.viewers.Viewer;
  * Content provider that maintains a list of classpath entries which are shown in a tree
  * viewer.
  */
-public class ClasspathContentProvider implements ITreeContentProvider {
+public class ClasspathContentProvider implements ITreeContentProvider { //FLLDCIM: MARK — M22  IMPLEMENTS
 	protected TreeViewer treeViewer;
 	protected ClasspathModel model = null;
 	private boolean refreshEnabled = false;
@@ -72,7 +72,7 @@ public class ClasspathContentProvider implements ITreeContentProvider {
 
 	protected void refresh() {
 		if (refreshEnabled) {
-			treeViewer.refresh();
+			treeViewer.refresh(); //FLLDCIM: MARK — M21 FULL_REBUILD_TO_DELTA CALL
 			refreshRequested= false;
 		} else {
 			refreshRequested= true;
@@ -157,7 +157,7 @@ public class ClasspathContentProvider implements ITreeContentProvider {
 	/* (non-Javadoc)
 	 * @see org.eclipse.jface.viewers.ITreeContentProvider#getChildren(java.lang.Object)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public Object[] getChildren(Object parentElement) {
 		if (parentElement instanceof ClasspathGroup) {
 			return ((ClasspathGroup)parentElement).getEntries();
@@ -169,8 +169,8 @@ public class ClasspathContentProvider implements ITreeContentProvider {
 			return ((ClasspathEntry)parentElement).getChildren(fTab.getLaunchConfiguration());
 		}
 		if (parentElement == null) {
-			List<Object> all= new ArrayList<>();
-			for (IClasspathEntry object : model.getEntries()) {
+			List<Object> all= new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
+			for (IClasspathEntry object : model.getEntries()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				if (object instanceof ClasspathEntry) {
 					all.add(object);
 				} else if (object instanceof ClasspathGroup) {
@@ -217,7 +217,7 @@ public class ClasspathContentProvider implements ITreeContentProvider {
 
 	public void setEntries(IRuntimeClasspathEntry[] entries) {
 		model.removeAll();
-		for (IRuntimeClasspathEntry entry : entries) {
+		for (IRuntimeClasspathEntry entry : entries) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			switch (entry.getClasspathProperty()) {
 			case IRuntimeClasspathEntry.USER_CLASSES:
 				model.addEntry(ClasspathModel.USER, entry);

@@ -41,16 +41,16 @@ public class PListParserTests extends AbstractDebugTest {
 	/**
 	 * Tests parsing of a sample installed JREs plist from the Mac.
 	 */
-	public void testParseJREs() throws Exception {
+	public void testParseJREs() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		File file = JavaTestPlugin.getDefault().getFileInPlugin(new Path("testresources/plist.xml"));
 		assertNotNull(file);
-		assertEquals(true, file.exists());
-		Object obj = new PListParser().parse(new FileInputStream(file));
+		assertEquals(true, file.exists()); //FLLDCIM: MARK — M31 M3FILE_IO CALL
+		Object obj = new PListParser().parse(new FileInputStream(file)); //FLLDCIM: MARK — M31 M3FILE_IO NEW
 		if (obj instanceof Object[]) {
 			Object[] jres = (Object[]) obj;
 			assertEquals("Should be 3 entries in the array", 3, jres.length);
 			// the first map
-			HashMap<String, Comparable<?>> map = new HashMap<>();
+			HashMap<String, Comparable<?>> map = new HashMap<>(); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
 			map.put("JVMArch", "i386");
 			map.put("JVMBundleID", "com.apple.javajdk15");
 			map.put("JVMEnabled", Boolean.TRUE);
@@ -63,7 +63,7 @@ public class PListParserTests extends AbstractDebugTest {
 			map.put("testint", Integer.valueOf(42));
 			assertEquals("Incorrect values parsed", map, jres[0]);
 
-			map = new HashMap<>();
+			map = new HashMap<>(); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
 			map.put("JVMArch", "x86_64");
 			map.put("JVMBundleID", "com.apple.javajdk16");
 			map.put("JVMEnabled", Boolean.TRUE);
@@ -74,7 +74,7 @@ public class PListParserTests extends AbstractDebugTest {
 			map.put("JVMVersion", "1.6.0_20");
 			assertEquals("Incorrect values parsed", map, jres[1]);
 
-			map = new HashMap<>();
+			map = new HashMap<>(); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
 			map.put("JVMArch", "x86_64");
 			map.put("JVMBundleID", "com.apple.javajdk15");
 			map.put("JVMEnabled", Boolean.TRUE);
@@ -97,8 +97,8 @@ public class PListParserTests extends AbstractDebugTest {
 	public void testParseLionJREs() throws Exception {
 		File file = JavaTestPlugin.getDefault().getFileInPlugin(new Path("testresources/plist-lion.xml"));
 		assertNotNull(file);
-		assertEquals(true, file.exists());
-		Object obj = new PListParser().parse(new FileInputStream(file));
+		assertEquals(true, file.exists()); //FLLDCIM: MARK — M31 M3FILE_IO CALL
+		Object obj = new PListParser().parse(new FileInputStream(file)); //FLLDCIM: MARK — M31 M3FILE_IO NEW
 		if (obj instanceof Object[]) {
 			Object[] jres = (Object[]) obj;
 			assertEquals("Should be 8 entries in the array", 8, jres.length);
@@ -116,8 +116,8 @@ public class PListParserTests extends AbstractDebugTest {
 	public void testParseSnowLeopardJREs() throws Exception {
 		File file = JavaTestPlugin.getDefault().getFileInPlugin(new Path("testresources/plist-snowleopard.xml"));
 		assertNotNull(file);
-		assertEquals(true, file.exists());
-		Object obj = new PListParser().parse(new FileInputStream(file));
+		assertEquals(true, file.exists()); //FLLDCIM: MARK — M31 M3FILE_IO CALL
+		Object obj = new PListParser().parse(new FileInputStream(file)); //FLLDCIM: MARK — M31 M3FILE_IO NEW
 		if (obj instanceof Object[]) {
 			Object[] jres = (Object[]) obj;
 			assertEquals("Should be 2 entries in the array", 2, jres.length);
@@ -136,8 +136,8 @@ public class PListParserTests extends AbstractDebugTest {
 	public void testParseJREDescriptors() throws Exception {
 		File file = JavaTestPlugin.getDefault().getFileInPlugin(new Path("testresources/plist.xml"));
 		assertNotNull(file);
-		assertEquals(true, file.exists());
-		VMStandin[] desc = MacInstalledJREs.parseJREInfo(new FileInputStream(file), null);
+		assertEquals(true, file.exists()); //FLLDCIM: MARK — M31 M3FILE_IO CALL
+		VMStandin[] desc = MacInstalledJREs.parseJREInfo(new FileInputStream(file), null); //FLLDCIM: MARK — M31 M3FILE_IO NEW
 		assertEquals("There should be 2 JRE descriptions", 2, desc.length);
 	}
 
@@ -150,8 +150,8 @@ public class PListParserTests extends AbstractDebugTest {
 	public void testParseJREDescriptorsSnowLeopard() throws Exception {
 		File file = JavaTestPlugin.getDefault().getFileInPlugin(new Path("testresources/plist-snowleopard.xml"));
 		assertNotNull(file);
-		assertEquals(true, file.exists());
-		VMStandin[] desc = MacInstalledJREs.parseJREInfo(new FileInputStream(file), null);
+		assertEquals(true, file.exists()); //FLLDCIM: MARK — M31 M3FILE_IO CALL
+		VMStandin[] desc = MacInstalledJREs.parseJREInfo(new FileInputStream(file), null); //FLLDCIM: MARK — M31 M3FILE_IO NEW
 		assertEquals("There should be 1 JRE description", 1, desc.length);
 	}
 
@@ -164,8 +164,8 @@ public class PListParserTests extends AbstractDebugTest {
 	public void testParseJREDescriptorsLion() throws Exception {
 		File file = JavaTestPlugin.getDefault().getFileInPlugin(new Path("testresources/plist-lion.xml"));
 		assertNotNull(file);
-		assertEquals(true, file.exists());
-		VMStandin[] desc = MacInstalledJREs.parseJREInfo(new FileInputStream(file), null);
+		assertEquals(true, file.exists()); //FLLDCIM: MARK — M31 M3FILE_IO CALL
+		VMStandin[] desc = MacInstalledJREs.parseJREInfo(new FileInputStream(file), null); //FLLDCIM: MARK — M31 M3FILE_IO NEW
 		assertEquals("There should be 4 JRE descriptions", 4, desc.length);
 	}
 
@@ -181,9 +181,9 @@ public class PListParserTests extends AbstractDebugTest {
 	public void testParseJREDescriptorsBad() throws Exception {
 		File file = JavaTestPlugin.getDefault().getFileInPlugin(new Path("testresources/plist-bad1.xml"));
 		assertNotNull(file);
-		assertEquals(true, file.exists());
+		assertEquals(true, file.exists()); //FLLDCIM: MARK — M31 M3FILE_IO CALL
 		System.out.println("*** EXPECTED SAX EXCEPTION testParseJREDescriptorsBad ***");
-		VMStandin[] desc = MacInstalledJREs.parseJREInfo(new FileInputStream(file), null);
+		VMStandin[] desc = MacInstalledJREs.parseJREInfo(new FileInputStream(file), null); //FLLDCIM: MARK — M31 M3FILE_IO NEW
 		assertEquals("There should be 3 JRE descriptions", 3, desc.length);
 	}
 
@@ -198,9 +198,9 @@ public class PListParserTests extends AbstractDebugTest {
 	public void testParseJREDescriptorsBad2() throws Exception {
 		File file = JavaTestPlugin.getDefault().getFileInPlugin(new Path("testresources/plist-bad2.xml"));
 		assertNotNull(file);
-		assertEquals(true, file.exists());
+		assertEquals(true, file.exists()); //FLLDCIM: MARK — M31 M3FILE_IO CALL
 		System.out.println("*** EXPECTED SAX EXCEPTION testParseJREDescriptorsBad2 ***");
-		VMStandin[] desc = MacInstalledJREs.parseJREInfo(new FileInputStream(file), null);
+		VMStandin[] desc = MacInstalledJREs.parseJREInfo(new FileInputStream(file), null); //FLLDCIM: MARK — M31 M3FILE_IO NEW
 		assertEquals("There should be 3 JRE descriptions", 3, desc.length);
 	}
 
@@ -215,9 +215,9 @@ public class PListParserTests extends AbstractDebugTest {
 	public void testParseJREDescriptorsBad3() throws Exception {
 		File file = JavaTestPlugin.getDefault().getFileInPlugin(new Path("testresources/plist-bad3.xml"));
 		assertNotNull(file);
-		assertEquals(true, file.exists());
+		assertEquals(true, file.exists()); //FLLDCIM: MARK — M31 M3FILE_IO CALL
 		System.out.println("*** EXPECTED SAX EXCEPTION testParseJREDescriptorsBad3 ***");
-		VMStandin[] desc = MacInstalledJREs.parseJREInfo(new FileInputStream(file), null);
+		VMStandin[] desc = MacInstalledJREs.parseJREInfo(new FileInputStream(file), null); //FLLDCIM: MARK — M31 M3FILE_IO NEW
 		assertEquals("There should be 0 JRE descriptions", 0, desc.length);
 	}
 }

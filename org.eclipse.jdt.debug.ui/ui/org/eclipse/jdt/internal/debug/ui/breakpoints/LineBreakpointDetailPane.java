@@ -27,7 +27,7 @@ public class LineBreakpointDetailPane extends AbstractDetailPane {
 	/**
 	 * Identifier for this detail pane editor
 	 */
-	public static final String DETAIL_PANE_LINE_BREAKPOINT = JDIDebugUIPlugin.getUniqueIdentifier() + ".DETAIL_PANE_LINE_BREAKPOINT"; //$NON-NLS-1$
+	public static final String DETAIL_PANE_LINE_BREAKPOINT = JDIDebugUIPlugin.getUniqueIdentifier() + ".DETAIL_PANE_LINE_BREAKPOINT"; //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 	public LineBreakpointDetailPane() {
 		super(BreakpointMessages.BreakpointConditionDetailPane_0, BreakpointMessages.BreakpointConditionDetailPane_0, DETAIL_PANE_LINE_BREAKPOINT);

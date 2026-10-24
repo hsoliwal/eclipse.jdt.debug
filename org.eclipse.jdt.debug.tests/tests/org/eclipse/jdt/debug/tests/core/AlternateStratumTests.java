@@ -43,7 +43,7 @@ public class AlternateStratumTests extends AbstractDebugTest {
 	/**
 	 * Test available strata on a type with alternate strata
 	 */
-	public void testAvailableStrata() throws Exception {
+	public void testAvailableStrata() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String typeName = "HelloWorld";
 		prepareXtendBreakpoint(typeName, 3);
 
@@ -138,7 +138,7 @@ public class AlternateStratumTests extends AbstractDebugTest {
 		}
 	}
 
-	public void testResolveType() throws Exception {
+	public void testResolveType() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String typeName = "HelloWorld";
 		prepareXtendBreakpoint(typeName, 3);
 
@@ -170,12 +170,12 @@ public class AlternateStratumTests extends AbstractDebugTest {
 	private void addXtendClass(String typeName) throws Exception {
 		IPath src = getProjectContext().getPath().append(JavaProjectHelper.SRC_DIR).makeAbsolute();
 		File xtendSources = JavaTestPlugin.getDefault().getFileInPlugin(new Path("testresources/xtend-source"));
-		JavaProjectHelper.importFile(new File(xtendSources, typeName + ".java"), src, null);
-		JavaProjectHelper.importFile(new File(xtendSources, typeName + ".xtend"), src, null);
+		JavaProjectHelper.importFile(new File(xtendSources, typeName + ".java"), src, null); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
+		JavaProjectHelper.importFile(new File(xtendSources, typeName + ".xtend"), src, null); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		createLaunchConfiguration(typeName);
 		waitForBuild();
 		IPath bin = getProjectContext().getPath().append(JavaProjectHelper.BIN_DIR).makeAbsolute();
 		File xtendClasses = JavaTestPlugin.getDefault().getFileInPlugin(new Path("testresources/xtend"));
-		JavaProjectHelper.importFile(new File(xtendClasses, typeName + ".class"), bin, null);
+		JavaProjectHelper.importFile(new File(xtendClasses, typeName + ".class"), bin, null); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 	}
 }

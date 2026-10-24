@@ -47,7 +47,7 @@ public class ClassPrepareRequestTest extends AbstractJDITest {
 	/**
 	 * Test JDI addClassFilter(String).
 	 */
-	public void testJDIAddClassFilterString() {
+	public void testJDIAddClassFilterString() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		EventRequestManager requestManager = fVM.eventRequestManager();
 
 		// Filter is "org.eclipse.debug.jdi.tests.program.*" and loads org.eclipse.debug.jdi.tests.program.TestClass1
@@ -133,7 +133,7 @@ public class ClassPrepareRequestTest extends AbstractJDITest {
 	/**
 	 * Test JDI addClassExclusionFilter(String).
 	 */
-	public void testJDIAddClassExclusionFilterString() {
+	public void testJDIAddClassExclusionFilterString() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		EventRequestManager requestManager = fVM.eventRequestManager();
 
 		// Filter is "org.eclipse.debug.jdi.tests.program.TestClass*" and loads org.eclipse.debug.jdi.tests.program.TestClass7 and org.eclipse.debug.jdi.tests.program.TestClazz8.

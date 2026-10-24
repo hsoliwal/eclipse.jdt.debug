@@ -23,7 +23,7 @@ import org.eclipse.jface.viewers.IStructuredSelection;
 /**
  * Moves selected entries in a runtime classpath viewer up one position.
  */
-public class MoveUpAction extends RuntimeClasspathAction {
+public class MoveUpAction extends RuntimeClasspathAction { //FLLDCIM: MARK — T04  IMPLEMENTS
 
 	public MoveUpAction(IClasspathViewer viewer) {
 		super(ActionMessages.MoveUpAction_Move_U_p_1, viewer);
@@ -33,7 +33,7 @@ public class MoveUpAction extends RuntimeClasspathAction {
 	 * Moves all selected entries up one position (if possible).
 	 * @see org.eclipse.jface.action.Action#run()
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public void run() {
 		List<IRuntimeClasspathEntry> targets = getOrderedSelection();
 		if (targets.isEmpty()) {
@@ -43,7 +43,7 @@ public class MoveUpAction extends RuntimeClasspathAction {
 		int index = 0;
 		List<IRuntimeClasspathEntry> list = getEntriesAsList();
 		Iterator<IRuntimeClasspathEntry> entries = targets.iterator();
-		while (entries.hasNext()) {
+		while (entries.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			IRuntimeClasspathEntry target = entries.next();
 			index = list.indexOf(target);
 			if (index > top) {

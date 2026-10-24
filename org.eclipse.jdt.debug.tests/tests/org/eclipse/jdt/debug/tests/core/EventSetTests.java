@@ -31,9 +31,9 @@ public class EventSetTests extends AbstractDebugTest {
 		super(name);
 	}
 
-	public void testDoubleBreakpoint() throws Exception {
+	public void testDoubleBreakpoint() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String typeName = "Breakpoints";
-		List<IJavaLineBreakpoint> bps = new ArrayList<>();
+		List<IJavaLineBreakpoint> bps = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 		// add two breakpoints at the same location
 		bps.add(createLineBreakpoint(91, typeName));
 		bps.add(createLineBreakpoint(91, typeName));
@@ -43,15 +43,15 @@ public class EventSetTests extends AbstractDebugTest {
 		try {
 			thread= launchToBreakpoint(typeName);
 			assertNotNull("Breakpoint not hit within timeout period", thread);
-			while (!bps.isEmpty()) {
+			while (!bps.isEmpty()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				DebugEvent[] set = getEventSet();
 				assertTrue("Should be two events", set!= null && set.length == 2);
-				for (int i = 0; i < set.length; i++) {
+				for (int i = 0; i < set.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 					assertEquals("should be a breakpoint event", DebugEvent.BREAKPOINT, set[i].getDetail());
 				}
 				IBreakpoint[] hits = thread.getBreakpoints();
 				assertTrue("should be two breakpoints", hits != null && hits.length == 2);
-				for (int i = 0; i < hits.length; i++) {
+				for (int i = 0; i < hits.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 					bps.remove(hits[i]);
 				}
 				assertTrue("breakpoint collection should now be empty", bps.isEmpty());

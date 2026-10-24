@@ -90,14 +90,14 @@ public class EvaluationSourceGenerator {
 	 * Returns the completed codeSnippet by adding required semicolon and
 	 * return
 	 */
-	protected String getCompleteSnippet(String codeSnippet) {
+	protected String getCompleteSnippet(String codeSnippet) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		codeSnippet = codeSnippet.trim(); // remove whitespaces at the end
 		boolean inString = false;
 		char[] chars = codeSnippet.toCharArray();
 
 		int semicolonIndex = -1;
 		int lastSemilcolonIndex = -1;
-		for (int i = 0, numChars = chars.length; i < numChars; i++) {
+		for (int i = 0, numChars = chars.length; i < numChars; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			switch (chars[i]) {
 			case '\\':
 				if (inString) { // skip the char after an escape char
@@ -116,17 +116,17 @@ public class EvaluationSourceGenerator {
 				break;
 			}
 		}
-		StringBuilder wordBuffer = new StringBuilder();
+		StringBuilder wordBuffer = new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 		// if semicolon missing at the end
 		if (lastSemilcolonIndex != chars.length-1) {
 			semicolonIndex = lastSemilcolonIndex;
 		}
 		int i ;
-		for (i=0; i < chars.length; i++) {
+		for (i=0; i < chars.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			// copy everything before the last statement or if whitespace
 			if (i<= semicolonIndex || Character.isWhitespace(chars[i]) || chars[i] == '}'
 					|| (i > 0 && (chars[i - 1] == '}' && (chars[i] == ')' || chars[i] == ',')))) {
-				wordBuffer.append(codeSnippet.charAt(i));
+				wordBuffer.append(codeSnippet.charAt(i)); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			} else {
 				break;
 			}
@@ -138,43 +138,43 @@ public class EvaluationSourceGenerator {
 		if (index == -1){
 			// empty lastSentence means we have statement block above which requires a empty return
 			if (needsReturn(lastSentence)) {
-				wordBuffer.append(returnString);
+				wordBuffer.append(returnString); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			} else if (lastSentence.isBlank()) {
-				wordBuffer.append(returnString + ';');
+				wordBuffer.append(returnString + ';'); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			}
 		}
 		else if (index > i){
 			if (!Character.isWhitespace(chars[index-1]) || !(Character.isWhitespace(chars[index+6]) || chars[index+6] == '}')){
 				if (needsReturn(lastSentence)) {
-					wordBuffer.append(returnString);
+					wordBuffer.append(returnString); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				}
 			}
 		} else if (chars[chars.length -1] !='}' && ( (i+7 > chars.length && lastSentence.length() > 1) || (i + 7 <= chars.length && !codeSnippet.substring(i, i+7).equals(returnString)))){
 			// add return if last statement does not have return
 			if (needsReturn(lastSentence)) {
-				wordBuffer.append(returnString);
+				wordBuffer.append(returnString); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			}
 		}
-		for (; i < chars.length; i++) {
+		for (; i < chars.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			// copy the last statement
-			wordBuffer.append(codeSnippet.charAt(i));
+			wordBuffer.append(codeSnippet.charAt(i)); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		}
 		// add semicolon at the end if missing
 		if (chars.length > 0) {
 			if (chars[chars.length - 1] != ';' && chars[chars.length - 1] != '}') {
-				wordBuffer.append(';');
+				wordBuffer.append(';'); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			} else if (chars[chars.length - 1] != ';' && chars[chars.length - 1] == '}') {
 				int j = lastSentence.lastIndexOf('=');
 				int k = lastSentence.lastIndexOf("=="); //$NON-NLS-1$
 				if (j != -1 && (j != k)) {
-					wordBuffer.append(';');
+					wordBuffer.append(';'); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				}
 			}
 		}
 
 		// make sure last char is not at end of a block before treating this as a statement
 		if (lastSentence.length() <= 1 && needsReturn(wordBuffer.toString())) {
-			wordBuffer.insert(0, returnString).append(' ');
+			wordBuffer.insert(0, returnString).append(' '); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		}
 
 		return wordBuffer.toString();
@@ -186,7 +186,7 @@ public class EvaluationSourceGenerator {
 	 * <code>false</code> if the snippet does not require return to be added.
 	 */
 
-	@SuppressWarnings("deprecation")
+	@SuppressWarnings("deprecation") //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	private boolean needsReturn(String codeSnippet){
 		if ( codeSnippet.length() == 0) {
 			return false;
@@ -202,7 +202,7 @@ public class EvaluationSourceGenerator {
 				return false;
 			}
 			int count = 0;
-			while (token != ITerminalSymbols.TokenNameEOF) {
+			while (token != ITerminalSymbols.TokenNameEOF) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				if (count == 0 && (token == ITerminalSymbols.TokenNameIdentifier || token == ITerminalSymbols.TokenNameint || token == ITerminalSymbols.TokenNamefloat ||
 						token == ITerminalSymbols.TokenNamedouble || token == ITerminalSymbols.TokenNameboolean || token == ITerminalSymbols.TokenNamechar ||
 						token == ITerminalSymbols.TokenNameshort || token == ITerminalSymbols.TokenNamelong)) {
@@ -318,7 +318,7 @@ public class EvaluationSourceGenerator {
 		return fCodeSnippet;
 	}
 
-	private void createEvaluationSourceFromSource(String source, IType type,
+	private void createEvaluationSourceFromSource(String source, IType type, //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 			int line, boolean createInAStaticMethod, IJavaProject project)
 			throws DebugException {
 		ASTParser parser = ASTParser.newParser(AST.getJLSLatest());
@@ -361,9 +361,9 @@ public class EvaluationSourceGenerator {
 	 *            the IJavaProject
 	 * @return compiler options
 	 */
-	public static Map<String, String> getCompilerOptions(IJavaProject project) {
-		Map<String, String> options = new HashMap<>(project.getOptions(true));
-		for (String key : options.keySet()) {
+	public static Map<String, String> getCompilerOptions(IJavaProject project) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
+		Map<String, String> options = new HashMap<>(project.getOptions(true)); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
+		for (String key : options.keySet()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			String value = options.get(key);
 			if (JavaCore.ERROR.equals(value) || JavaCore.WARNING.equals(value) || JavaCore.INFO.equals(value)) {
 				options.put(key, JavaCore.IGNORE);
@@ -450,7 +450,7 @@ public class EvaluationSourceGenerator {
 		return objectToEvaluationSourceMapper;
 	}
 
-	public String getSource(IJavaReferenceType type, int line, IJavaProject javaProject,
+	public String getSource(IJavaReferenceType type, int line, IJavaProject javaProject, //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 			boolean isStatic) throws CoreException {
 		if (fSource == null) {
 			IType iType = JavaDebugUtils.resolveType(type);

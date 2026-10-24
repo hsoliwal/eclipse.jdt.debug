@@ -52,7 +52,7 @@ public class SocketListenConnector implements IVMConnector {
 	protected static ListeningConnector getListeningConnector() throws CoreException {
 		ListeningConnector connector= null;
 		Iterator<ListeningConnector> iter= Bootstrap.virtualMachineManager().listeningConnectors().iterator();
-		while (iter.hasNext()) {
+		while (iter.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			ListeningConnector lc= iter.next();
 			if (lc.name().equals("com.sun.jdi.SocketListen")) { //$NON-NLS-1$
 				connector= lc;
@@ -84,7 +84,7 @@ public class SocketListenConnector implements IVMConnector {
 	/* (non-Javadoc)
 	 * @see org.eclipse.jdt.launching.IVMConnector#connect(java.util.Map, org.eclipse.core.runtime.IProgressMonitor, org.eclipse.debug.core.ILaunch)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public void connect(Map<String, String> arguments, IProgressMonitor monitor, ILaunch launch) throws CoreException {
 		if (monitor == null) {
 			monitor = new NullProgressMonitor();
@@ -140,7 +140,7 @@ public class SocketListenConnector implements IVMConnector {
 	 */
 	@Override
 	public List<String> getArgumentOrder() {
-		List<String> list = new ArrayList<>(1);
+		List<String> list = new ArrayList<>(1); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 		list.add("port"); //$NON-NLS-1$
 		list.add("connectionLimit"); //$NON-NLS-1$
 		return list;

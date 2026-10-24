@@ -27,7 +27,7 @@ public class DependencyModel extends ClasspathModel {
 	private ClasspathGroup classpathEntries;
 
 
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public Object addEntry(int entryType, IRuntimeClasspathEntry entry) {
 		IClasspathEntry entryParent= null;
 		switch (entryType) {
@@ -43,7 +43,7 @@ public class DependencyModel extends ClasspathModel {
 
 		ClasspathEntry newEntry= createEntry(entry, entryParent);
 		Iterator<IClasspathEntry> entries= childEntries.iterator();
-		while (entries.hasNext()) {
+		while (entries.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			Object element = entries.next();
 			if (element instanceof ClasspathGroup) {
 				if(((ClasspathGroup)element).contains(newEntry)) {

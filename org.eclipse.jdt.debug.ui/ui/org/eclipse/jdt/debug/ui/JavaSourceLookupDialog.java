@@ -96,7 +96,7 @@ public class JavaSourceLookupDialog extends Dialog {
 	/* (non-Javadoc)
 	 * @see org.eclipse.jface.dialogs.Dialog#createDialogArea(org.eclipse.swt.widgets.Composite)
 	 */
-	@Deprecated
+	@Deprecated //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	@Override
 	protected Control createDialogArea(Composite parent) {
 		Font font = parent.getFont();

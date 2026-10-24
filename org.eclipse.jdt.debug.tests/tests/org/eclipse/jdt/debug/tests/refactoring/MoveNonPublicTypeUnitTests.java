@@ -36,7 +36,7 @@ public class MoveNonPublicTypeUnitTests extends MoveRefactoringTest {
 	/**
 	 * Tests if a LineBreakPoint was moved appropriately.
 	 */
-	public void testLineBreakPoint() throws Exception {
+	public void testLineBreakPoint() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IJavaProject javaProject = get14Project();
 		ICompilationUnit cunit= getCompilationUnit(javaProject, "src", "a.b.c", "Movee.java");
 		IType type = cunit.getType("NonPublicType");
@@ -61,7 +61,7 @@ public class MoveNonPublicTypeUnitTests extends MoveRefactoringTest {
 	/**
 	 * Tests if a MethodBreakPoint was moved appropriately.
 	 */
-	public void testMethodBreakPoint() throws Exception {
+	public void testMethodBreakPoint() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IJavaProject javaProject = get14Project();
 		ICompilationUnit cunit= getCompilationUnit(javaProject, "src", "a.b.c", "Movee.java");
 		IType type = cunit.getType("NonPublicType");
@@ -85,7 +85,7 @@ public class MoveNonPublicTypeUnitTests extends MoveRefactoringTest {
 	/**
 	 * Tests if a WatchPointBreakPoint was moved appropriately.
 	 */
-	public void testWatchPointBreakPoint() throws Exception {
+	public void testWatchPointBreakPoint() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IJavaProject javaProject = get14Project();
 		ICompilationUnit cunit= getCompilationUnit(javaProject, "src", "a.b.c", "Movee.java");
 		IType type = cunit.getType("NonPublicType");
@@ -110,7 +110,7 @@ public class MoveNonPublicTypeUnitTests extends MoveRefactoringTest {
 	/**
 	 * Tests if a ClassLoadBreakPoint was moved appropriately.
 	 */
-	public void testClassLoadBreakPoint() throws Exception {
+	public void testClassLoadBreakPoint() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IJavaProject javaProject = get14Project();
 		ICompilationUnit cunit= getCompilationUnit(javaProject, "src", "a.b.c", "Movee.java");
 		IType type = cunit.getType("NonPublicType");

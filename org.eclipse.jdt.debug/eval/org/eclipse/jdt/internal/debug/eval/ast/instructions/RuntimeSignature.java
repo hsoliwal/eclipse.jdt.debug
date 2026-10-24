@@ -64,7 +64,7 @@ public class RuntimeSignature {
 		return new String(toCharArray(signature.toCharArray()));
 	}
 
-	public static char[] toCharArray(char[] signature)
+	public static char[] toCharArray(char[] signature) //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 			throws IllegalArgumentException {
 		try {
 			int sigLength = signature.length;
@@ -76,7 +76,7 @@ public class RuntimeSignature {
 			// compute result length
 			int resultLength = 0;
 			int index = -1;
-			while (signature[++index] == C_ARRAY) {
+			while (signature[++index] == C_ARRAY) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				resultLength += 2; // []
 			}
 			switch (signature[index]) {
@@ -138,7 +138,7 @@ public class RuntimeSignature {
 		}
 	}
 
-	public static char[] toCharArray(char[] methodSignature, char[] methodName,
+	public static char[] toCharArray(char[] methodSignature, char[] methodName, //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 			char[][] parameterNames, boolean fullyQualifyTypeNames,
 			boolean includeReturnType) {
 		try {
@@ -155,7 +155,7 @@ public class RuntimeSignature {
 			int paramCount = 0;
 			int lastParen = -1;
 			int resultLength = 0;
-			signature: for (int i = firstParen; i < sigLength; i++) {
+			signature: for (int i = firstParen; i < sigLength; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				switch (methodSignature[i]) {
 				case C_ARRAY:
 					resultLength += 2; // []
@@ -247,7 +247,7 @@ public class RuntimeSignature {
 
 			// parameter names
 			if(parameterNames != null) {
-				for (char[] parameterName : parameterNames) {
+				for (char[] parameterName : parameterNames) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 					resultLength += parameterName.length + 1;
 					// parameter name + space
 				}
@@ -278,7 +278,7 @@ public class RuntimeSignature {
 			// parameters
 			result[index++] = C_PARAM_START;
 			int sigPos = firstParen + 1;
-			for (int i = 0; i < paramCount; i++) {
+			for (int i = 0; i < paramCount; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				long pos = copyType(methodSignature, sigPos, result, index,
 						fullyQualifyTypeNames);
 				index = (int) (pos >>> 32);
@@ -308,10 +308,10 @@ public class RuntimeSignature {
 		}
 	}
 
-	private static long copyType(char[] signature, int sigPos, char[] dest,
+	private static long copyType(char[] signature, int sigPos, char[] dest, //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 			int index, boolean fullyQualifyTypeNames) {
 		int arrayCount = 0;
-		loop: while (true) {
+		loop: while (true) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			switch (signature[sigPos++]) {
 			case C_ARRAY:
 				arrayCount++;
@@ -382,7 +382,7 @@ public class RuntimeSignature {
 				break loop;
 			}
 		}
-		while (arrayCount-- > 0) {
+		while (arrayCount-- > 0) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			dest[index++] = '[';
 			dest[index++] = ']';
 		}

@@ -36,7 +36,7 @@ public class OtherTestsGenerator extends TestGenerator {
 	}
 
 	public static void genTestsOperators1() throws Exception {
-		StringBuilder code= new StringBuilder();
+		StringBuilder code= new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 
 		genTestTypeBinaryOpTypeBinaryPromotion(T_int, Op_plus, T_int, code);
 		genTestTypeBinaryOpTypeBinaryPromotion(T_String, Op_plus, T_String, code);
@@ -47,7 +47,7 @@ public class OtherTestsGenerator extends TestGenerator {
 	}
 
 	public static void genTestsOperators2() throws Exception {
-		StringBuilder code= new StringBuilder();
+		StringBuilder code= new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 
 		genTestLocalVarAssignment(T_int, code);
 		genTestLocalVarAssignment(T_String, code);
@@ -58,7 +58,7 @@ public class OtherTestsGenerator extends TestGenerator {
 	}
 
 	public static void genTestsArray() throws Exception {
-		StringBuilder code= new StringBuilder();
+		StringBuilder code= new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 
 		genTestArrayValue(T_int, code);
 		genTestArrayLength(T_int, code);
@@ -73,8 +73,8 @@ public class OtherTestsGenerator extends TestGenerator {
 		createJavaFile(code, "TestsArrays", "EvalArrayTests", 37, 1, 1);
 	}
 
-	public static void genTestsNestedTypes1() throws Exception {
-		StringBuilder code= new StringBuilder();
+	public static void genTestsNestedTypes1() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
+		StringBuilder code= new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 
 		NestedTypeTestGenerator.createTest('a', 2, code);
 		NestedTypeTestGenerator.createTest('d', 2, code);
@@ -105,8 +105,8 @@ public class OtherTestsGenerator extends TestGenerator {
 		createJavaFile(code, "TestsNestedTypes1", "EvalNestedTypeTests",  252, 4, 1);
 	}
 
-	public static void genTestsNestedTypes2() throws Exception {
-		StringBuilder code= new StringBuilder();
+	public static void genTestsNestedTypes2() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
+		StringBuilder code= new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 
 		NestedTypeTestGenerator.createTest('f', 0, code);
 		NestedTypeTestGenerator.createTestQualifier(NestedTypeTestGenerator.T_T, 'b', code);
@@ -132,8 +132,8 @@ public class OtherTestsGenerator extends TestGenerator {
 	}
 
 
-	public static void genTestsTypeHierarchy1() throws Exception {
-		StringBuilder code= new StringBuilder();
+	public static void genTestsTypeHierarchy1() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
+		StringBuilder code= new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 
 		TypeHierarchyTestsGenerator.createTestQualifier(TypeHierarchyTestsGenerator.IAA, TypeHierarchyTestsGenerator.M1, code);
 		TypeHierarchyTestsGenerator.createTestQualifier(TypeHierarchyTestsGenerator.AA, TypeHierarchyTestsGenerator.M2, code);
@@ -162,7 +162,7 @@ public class OtherTestsGenerator extends TestGenerator {
 	}
 
 	public static void genTestsTypeHierarchy2() throws Exception {
-		StringBuilder code= new StringBuilder();
+		StringBuilder code= new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 
 		TypeHierarchyTestsGenerator.createTest_TestC(code, TypeHierarchyTestsGenerator.CC);
 
@@ -172,8 +172,8 @@ public class OtherTestsGenerator extends TestGenerator {
 	/**
 	 * Method genTestNumberLiteral.
 	 */
-	private static void genTestNumberLiteral() throws Exception {
-		StringBuilder code= new StringBuilder();
+	private static void genTestNumberLiteral() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
+		StringBuilder code= new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 
 		createTestNumberLiteral1("0", T_int, code);
 		createTestNumberLiteral1("00", T_int, code);
@@ -240,13 +240,13 @@ public class OtherTestsGenerator extends TestGenerator {
 	private static void createTestNumberLiteral1(String literal, int type, StringBuilder code) {
 		String tName= fTypeName[type];
 
-		code.append("\tpublic void test" + literal.replace('-', 'N').replace('.', '_').replace('+', 'P') + "() throws Throwable {\n");
+		code.append("\tpublic void test" + literal.replace('-', 'N').replace('.', '_').replace('+', 'P') + "() throws Throwable {\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		tryBlockBegin(code);
-		genCodeEval("\"" + literal + '"', true, code);
+		genCodeEval("\"" + literal + '"', true, code); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		genCodeReturnTypeCheck(literal, tName, true, code);
 		genCodeReturnValueCheckPrimitiveType(literal, tName, typeUpperName[type], literal, true, code);
 		tryBlockEnd(code);
-		code.append("\t}\n\n");
+		code.append("\t}\n\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 	}
 
 	/**
@@ -255,13 +255,13 @@ public class OtherTestsGenerator extends TestGenerator {
 	private static void createTestNumberLiteral2(String literal, int type, StringBuilder code) {
 		String tName= fTypeName[type];
 
-		code.append("\tpublic void test" + literal.replace('-', 'N').replace('.', '_').replace('+', 'P') + "() throws Throwable {\n");
+		code.append("\tpublic void test" + literal.replace('-', 'N').replace('.', '_').replace('+', 'P') + "() throws Throwable {\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		tryBlockBegin(code);
-		genCodeEval("\"" + literal + '"', true, code);
+		genCodeEval("\"" + literal + '"', true, code); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		genCodeReturnTypeCheck(literal, tName, true, code);
 		genCodeReturnValueCheckFloatDoubleType(literal, tName, typeUpperName[type], literal, true, code);
 		tryBlockEnd(code);
-		code.append("\t}\n\n");
+		code.append("\t}\n\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 	}
 
 	public static void genInstanceOfTests() throws Exception {
@@ -272,49 +272,49 @@ public class OtherTestsGenerator extends TestGenerator {
 		createJavaFile(tests, className, testClass, lineNumber, numberFrames, hitCount, true);
 	}
 
-	public static void createJavaFile(StringBuilder tests, String className, String testClass, int lineNumber, int numberFrames, int hitCount, boolean importJDIObjectValue) throws Exception {
+	public static void createJavaFile(StringBuilder tests, String className, String testClass, int lineNumber, int numberFrames, int hitCount, boolean importJDIObjectValue) throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 
-		StringBuilder code= new StringBuilder();
+		StringBuilder code= new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 
-		code.append("/*******************************************************************************\n");
-		code.append(" * Copyright (c) 2002, 2003 IBM Corporation and others.\n");
-		code.append(" * \n");
-		code.append(" This program and the accompanying materials \n");
-		code.append(" * are made available under the terms of the Eclipse Public License 2.0\n");
-		code.append(" * which accompanies this distribution, and is available at\n");
-		code.append(" * https://www.eclipse.org/legal/epl-2.0/");
-		code.append(" * \n");
-		code.append(" * SPDX-License-Identifier: EPL-2.0\n");
-		code.append(" * \n");
-		code.append(" * Contributors:\n");
-		code.append(" *     IBM Corporation - initial API and implementation\n");
-		code.append(" *******************************************************************************/\n");
-		code.append("package org.eclipse.jdt.debug.tests.eval;\n\n");
-		code.append("import org.eclipse.jdt.debug.core.IJavaPrimitiveValue;\n\n");
-		code.append("import org.eclipse.debug.core.model.IValue;\n");
+		code.append("/*******************************************************************************\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+		code.append(" * Copyright (c) 2002, 2003 IBM Corporation and others.\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+		code.append(" * \n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+		code.append(" This program and the accompanying materials \n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+		code.append(" * are made available under the terms of the Eclipse Public License 2.0\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+		code.append(" * which accompanies this distribution, and is available at\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+		code.append(" * https://www.eclipse.org/legal/epl-2.0/"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+		code.append(" * \n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+		code.append(" * SPDX-License-Identifier: EPL-2.0\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+		code.append(" * \n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+		code.append(" * Contributors:\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+		code.append(" *     IBM Corporation - initial API and implementation\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+		code.append(" *******************************************************************************/\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+		code.append("package org.eclipse.jdt.debug.tests.eval;\n\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+		code.append("import org.eclipse.jdt.debug.core.IJavaPrimitiveValue;\n\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+		code.append("import org.eclipse.debug.core.model.IValue;\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		if (importJDIObjectValue) {
-			code.append("import org.eclipse.jdt.internal.debug.core.model.JDIObjectValue;\n\n");
+			code.append("import org.eclipse.jdt.internal.debug.core.model.JDIObjectValue;\n\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		}
-		code.append("public class " + className + " extends Tests {\n");
-		code.append("\t/**\n");
-		code.append("\t * Constructor for TypeHierarchy.\n");
-		code.append("\t * @param name\n");
-		code.append("\t */\n");
-		code.append("\tpublic " + className + "(String name) {\n");
-		code.append("\t\tsuper(name);\n");
-		code.append("\t}\n\n");
-		code.append("\tpublic void init() throws Exception {\n");
-		code.append("\t\tinitializeFrame(\"" + testClass + "\", " + lineNumber + ", " + numberFrames + ", " + hitCount + ");\n");
-		code.append("\t}\n\n");
-		code.append("\tprotected void end() throws Exception {\n");
-		code.append("\t\tdestroyFrame();\n");
-		code.append("\t}\n\n");
+		code.append("public class " + className + " extends Tests {\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+		code.append("\t/**\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+		code.append("\t * Constructor for TypeHierarchy.\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+		code.append("\t * @param name\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+		code.append("\t */\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+		code.append("\tpublic " + className + "(String name) {\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+		code.append("\t\tsuper(name);\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+		code.append("\t}\n\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+		code.append("\tpublic void init() throws Exception {\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+		code.append("\t\tinitializeFrame(\"" + testClass + "\", " + lineNumber + ", " + numberFrames + ", " + hitCount + ");\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+		code.append("\t}\n\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+		code.append("\tprotected void end() throws Exception {\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+		code.append("\t\tdestroyFrame();\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+		code.append("\t}\n\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 
-		code.append(tests.toString());
+		code.append(tests.toString()); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 
-		code.append("}\n");
+		code.append("}\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 
-		try (Writer file = new FileWriter(new File(className + ".java").getAbsoluteFile())) {
+		try (Writer file = new FileWriter(new File(className + ".java").getAbsoluteFile())) { //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT //FLLDCIM: MARK — M31 M3FILE_IO NEW
 			file.write(code.toString());
 		}
 

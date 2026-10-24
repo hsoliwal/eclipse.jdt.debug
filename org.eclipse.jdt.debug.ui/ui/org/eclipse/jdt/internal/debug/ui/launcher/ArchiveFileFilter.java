@@ -30,7 +30,7 @@ import org.eclipse.jface.viewers.ViewerFilter;
  * Archives are files with file extension 'jar' and 'zip'.
  * The filter is not case sensitive.
  */
-public class ArchiveFileFilter extends ViewerFilter {
+public class ArchiveFileFilter extends ViewerFilter { //FLLDCIM: MARK — T23  IMPLEMENTS
 
 	private static final String[] fgArchiveExtensions= { "jar", "zip" }; //$NON-NLS-1$ //$NON-NLS-2$
 
@@ -51,7 +51,7 @@ public class ArchiveFileFilter extends ViewerFilter {
 	/*
 	 * @see ViewerFilter#select
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public boolean select(Viewer viewer, Object parent, Object element) {
 		if (element instanceof IFile) {
 			if (fExcludes != null && fExcludes.contains(element)) {
@@ -60,7 +60,7 @@ public class ArchiveFileFilter extends ViewerFilter {
 			return isArchivePath(((IFile)element).getFullPath());
 		} else if (element instanceof IContainer) { // IProject, IFolder
 			try {
-				for (IResource resource : ((IContainer) element).members()) {
+				for (IResource resource : ((IContainer) element).members()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 					// recursive! Only show containers that contain an archive
 					if (select(viewer, parent, resource)) {
 						return true;
@@ -76,7 +76,7 @@ public class ArchiveFileFilter extends ViewerFilter {
 	public static boolean isArchivePath(IPath path) {
 		String ext= path.getFileExtension();
 		if (ext != null && ext.length() != 0) {
-			for (String archiveExtension : fgArchiveExtensions) {
+			for (String archiveExtension : fgArchiveExtensions) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				if (ext.equalsIgnoreCase(archiveExtension)) {
 					return true;
 				}

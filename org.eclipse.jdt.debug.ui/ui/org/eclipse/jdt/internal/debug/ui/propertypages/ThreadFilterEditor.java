@@ -66,24 +66,24 @@ public class ThreadFilterEditor {
 		GridData data= new GridData(GridData.FILL_BOTH);
 		data.heightHint= 100;
 		fThreadViewer= new CheckboxTreeViewer(parent, SWT.BORDER);
-		fThreadViewer.addCheckStateListener(fCheckHandler);
+		fThreadViewer.addCheckStateListener(fCheckHandler); //FLLDCIM: MARK — T21 CHECK_STATE_LANE CALL
 		fThreadViewer.getTree().setLayoutData(data);
 		fThreadViewer.getTree().setFont(parent.getFont());
 		fThreadViewer.setContentProvider(fContentProvider);
-		fThreadViewer.setLabelProvider(DebugUITools.newDebugModelPresentation());
-		fThreadViewer.setInput(DebugPlugin.getDefault().getLaunchManager());
+		fThreadViewer.setLabelProvider(DebugUITools.newDebugModelPresentation()); //FLLDCIM: MARK — T24 LABEL_DELTA CALL
+		fThreadViewer.setInput(DebugPlugin.getDefault().getLaunchManager()); //FLLDCIM: MARK — M21 FULL_REBUILD_TO_DELTA CALL
 		setInitialCheckedState();
 	}
 
-	protected void doStore() {
+	protected void doStore() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IJavaDebugTarget target;
 		IJavaThread thread;
-		for (IDebugTarget debugTarget : getDebugTargets()) {
+		for (IDebugTarget debugTarget : getDebugTargets()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			target = debugTarget.getAdapter(IJavaDebugTarget.class);
 			if (target != null) {
 				try {
 					if (fThreadViewer.getChecked(target)) {
-						for (IThread targetThread : target.getThreads()) {
+						for (IThread targetThread : target.getThreads()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 							thread= (IJavaThread)targetThread;
 							if (fThreadViewer.getChecked(thread)) {
 								// thread selected for filtering
@@ -110,7 +110,7 @@ public class ThreadFilterEditor {
 	 */
 	protected void setInitialCheckedState() {
 		try {
-			for (IDebugTarget debugTarget : getDebugTargets()) {
+			for (IDebugTarget debugTarget : getDebugTargets()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				IJavaDebugTarget target = debugTarget.getAdapter(IJavaDebugTarget.class);
 				if (target != null) {
 					IJavaThread filteredThread= fPage.getBreakpoint().getThreadFilter(target);
@@ -135,7 +135,7 @@ public class ThreadFilterEditor {
 		return launchManager.getDebugTargets();
 	}
 
-	class CheckHandler implements ICheckStateListener {
+	class CheckHandler implements ICheckStateListener { //FLLDCIM: MARK — T21  IMPLEMENTS
 		@Override
 		public void checkStateChanged(CheckStateChangedEvent event) {
 			Object element= event.getElement();
@@ -154,7 +154,7 @@ public class ThreadFilterEditor {
 		 * When a debug target is unchecked, uncheck all
 		 * its threads.
 		 */
-		protected void checkTarget(IDebugTarget target, boolean checked) {
+		protected void checkTarget(IDebugTarget target, boolean checked) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 			fThreadViewer.setChecked(target, checked);
 			if (checked) {
 				fThreadViewer.expandToLevel(target, AbstractTreeViewer.ALL_LEVELS);
@@ -168,7 +168,7 @@ public class ThreadFilterEditor {
 				IThread thread;
 				boolean checkedThread= false;
 				// Try to check the "main" thread by default
-				for (IThread targetThread : threads) {
+				for (IThread targetThread : threads) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 					thread= targetThread;
 					String name= null;
 					try {
@@ -183,7 +183,7 @@ public class ThreadFilterEditor {
 				// If the main thread couldn't be checked, check the first
 				// available thread
 				if (!checkedThread) {
-					for (IThread targetThread : threads) {
+					for (IThread targetThread : threads) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 						if (fThreadViewer.setChecked(targetThread, true)) {
 							break;
 						}
@@ -197,7 +197,7 @@ public class ThreadFilterEditor {
 					JDIDebugUIPlugin.log(exception);
 					return;
 				}
-				for (IThread thread : threads) {
+				for (IThread thread : threads) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 					fThreadViewer.setChecked(thread, false);
 				}
 			}
@@ -210,7 +210,7 @@ public class ThreadFilterEditor {
 		 * When a thread is unchecked, uncheck its debug
 		 * target.
 		 */
-		protected void checkThread(IThread thread, boolean checked) {
+		protected void checkThread(IThread thread, boolean checked) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 			fThreadViewer.setChecked(thread, checked);
 			IDebugTarget target= (thread).getDebugTarget();
 			if (checked) {
@@ -227,7 +227,7 @@ public class ThreadFilterEditor {
 					JDIDebugUIPlugin.log(exception);
 					return;
 				}
-				for (IThread targetThread : threads) {
+				for (IThread targetThread : threads) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 					if (targetThread != thread) {
 						// Uncheck all threads other than the selected thread
 						fThreadViewer.setChecked(targetThread, false);
@@ -244,12 +244,12 @@ public class ThreadFilterEditor {
 		 * If the user selects a debug target, they must select
 		 * a thread.
 		 */
-		protected void verifyCheckedState() {
+		protected void verifyCheckedState() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 			IDebugTarget[] targets= getDebugTargets();
 			IDebugTarget target;
 			IThread[] threads;
 			boolean checkedThread;
-			for (IDebugTarget debugTarget : targets) {
+			for (IDebugTarget debugTarget : targets) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				target= debugTarget;
 				if (!fThreadViewer.getChecked(target)) {
 					continue;
@@ -261,7 +261,7 @@ public class ThreadFilterEditor {
 					continue;
 				}
 				checkedThread= false;
-				for (IThread thread : threads) {
+				for (IThread thread : threads) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 					if (fThreadViewer.getChecked(thread)) {
 						checkedThread= true;
 						break;
@@ -277,11 +277,11 @@ public class ThreadFilterEditor {
 
 	}
 
-	class ThreadFilterContentProvider implements ITreeContentProvider {
+	class ThreadFilterContentProvider implements ITreeContentProvider { //FLLDCIM: MARK — M22  IMPLEMENTS
 		/**
 		 * @see ITreeContentProvider#getChildren(Object)
 		 */
-		@Override
+		@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		public Object[] getChildren(Object parent) {
 			if (parent instanceof IDebugTarget) {
 				IJavaDebugTarget target = ((IDebugTarget)parent).getAdapter(IJavaDebugTarget.class);
@@ -294,13 +294,13 @@ public class ThreadFilterEditor {
 				}
 			}
 			if (parent instanceof ILaunchManager) {
-				List<IJavaDebugTarget> children= new ArrayList<>();
+				List<IJavaDebugTarget> children= new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 				ILaunch[] launches= ((ILaunchManager) parent).getLaunches();
 				IDebugTarget[] targets;
 				IJavaDebugTarget target;
-				for (ILaunch launch : launches) {
+				for (ILaunch launch : launches) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 					targets= launch.getDebugTargets();
-					for (IDebugTarget debugTarget : targets) {
+					for (IDebugTarget debugTarget : targets) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 						target= debugTarget.getAdapter(IJavaDebugTarget.class);
 						if (target != null && !target.isDisconnected() && !target.isTerminated()) {
 							children.add(target);

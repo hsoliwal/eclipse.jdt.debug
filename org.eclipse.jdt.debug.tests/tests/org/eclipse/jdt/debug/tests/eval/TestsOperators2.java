@@ -34,10 +34,10 @@ public class TestsOperators2 extends Tests {
 		destroyFrame();
 	}
 
-	public void testInt() throws Throwable {
+	public void testInt() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xVarInt + equalOp +xInt);
+		IValue value = eval(xVarInt + equalOp +xInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("int local variable assignment : wrong type : ", "int", typeName);
 		int intValue = ((IJavaPrimitiveValue)value).getIntValue();
@@ -48,7 +48,7 @@ public class TestsOperators2 extends Tests {
 		intValue = ((IJavaPrimitiveValue)value).getIntValue();
 		assertEquals("int local variable value : wrong result : ", xIntValue, intValue);
 
-		value = eval(xVarInt + equalOp +yInt);
+		value = eval(xVarInt + equalOp +yInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("int local variable assignment : wrong type : ", "int", typeName);
 		intValue = ((IJavaPrimitiveValue)value).getIntValue();
@@ -59,7 +59,7 @@ public class TestsOperators2 extends Tests {
 		intValue = ((IJavaPrimitiveValue)value).getIntValue();
 		assertEquals("int local variable value : wrong result : ", yIntValue, intValue);
 
-		value = eval(yVarInt + equalOp +xInt);
+		value = eval(yVarInt + equalOp +xInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("int local variable assignment : wrong type : ", "int", typeName);
 		intValue = ((IJavaPrimitiveValue)value).getIntValue();
@@ -70,7 +70,7 @@ public class TestsOperators2 extends Tests {
 		intValue = ((IJavaPrimitiveValue)value).getIntValue();
 		assertEquals("int local variable value : wrong result : ", xIntValue, intValue);
 
-		value = eval(yVarInt + equalOp +yInt);
+		value = eval(yVarInt + equalOp +yInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("int local variable assignment : wrong type : ", "int", typeName);
 		intValue = ((IJavaPrimitiveValue)value).getIntValue();
@@ -85,10 +85,10 @@ public class TestsOperators2 extends Tests {
 		}
 	}
 
-	public void testString() throws Throwable {
+	public void testString() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xVarString + equalOp +xString);
+		IValue value = eval(xVarString + equalOp +xString); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("java.lang.String local variable assignment : wrong type : ", "java.lang.String", typeName);
 		String stringValue = ((JDIObjectValue)value).getValueString();
@@ -99,7 +99,7 @@ public class TestsOperators2 extends Tests {
 		stringValue = ((JDIObjectValue)value).getValueString();
 		assertEquals("java.lang.String local variable value : wrong result : ", xStringValue, stringValue);
 
-		value = eval(xVarString + equalOp +yString);
+		value = eval(xVarString + equalOp +yString); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("java.lang.String local variable assignment : wrong type : ", "java.lang.String", typeName);
 		stringValue = ((JDIObjectValue)value).getValueString();
@@ -110,7 +110,7 @@ public class TestsOperators2 extends Tests {
 		stringValue = ((JDIObjectValue)value).getValueString();
 		assertEquals("java.lang.String local variable value : wrong result : ", yStringValue, stringValue);
 
-		value = eval(yVarString + equalOp +xString);
+		value = eval(yVarString + equalOp +xString); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("java.lang.String local variable assignment : wrong type : ", "java.lang.String", typeName);
 		stringValue = ((JDIObjectValue)value).getValueString();
@@ -121,7 +121,7 @@ public class TestsOperators2 extends Tests {
 		stringValue = ((JDIObjectValue)value).getValueString();
 		assertEquals("java.lang.String local variable value : wrong result : ", xStringValue, stringValue);
 
-		value = eval(yVarString + equalOp +yString);
+		value = eval(yVarString + equalOp +yString); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("java.lang.String local variable assignment : wrong type : ", "java.lang.String", typeName);
 		stringValue = ((JDIObjectValue)value).getValueString();
@@ -136,12 +136,12 @@ public class TestsOperators2 extends Tests {
 		}
 	}
 
-	public void testIntPlusAssignmentInt() throws Throwable {
+	public void testIntPlusAssignmentInt() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
 		int tmpxVar = xVarIntValue;
 		tmpxVar += xIntValue;
-		IValue value = eval(xVarInt + plusAssignmentOp + xInt);
+		IValue value = eval(xVarInt + plusAssignmentOp + xInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("int plusAssignment int : wrong type : ", "int", typeName);
 		int intValue = ((IJavaPrimitiveValue)value).getIntValue();
@@ -153,7 +153,7 @@ public class TestsOperators2 extends Tests {
 		assertEquals("int local variable value : wrong result : ", tmpxVar, intValue);
 
 		tmpxVar += yIntValue;
-		value = eval(xVarInt + plusAssignmentOp + yInt);
+		value = eval(xVarInt + plusAssignmentOp + yInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("int plusAssignment int : wrong type : ", "int", typeName);
 		intValue = ((IJavaPrimitiveValue)value).getIntValue();
@@ -166,7 +166,7 @@ public class TestsOperators2 extends Tests {
 
 		int tmpyVar = yVarIntValue;
 		tmpyVar += xIntValue;
-		value = eval(yVarInt + plusAssignmentOp + xInt);
+		value = eval(yVarInt + plusAssignmentOp + xInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("int plusAssignment int : wrong type : ", "int", typeName);
 		intValue = ((IJavaPrimitiveValue)value).getIntValue();
@@ -178,7 +178,7 @@ public class TestsOperators2 extends Tests {
 		assertEquals("int local variable value : wrong result : ", tmpyVar, intValue);
 
 		tmpyVar += yIntValue;
-		value = eval(yVarInt + plusAssignmentOp + yInt);
+		value = eval(yVarInt + plusAssignmentOp + yInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("int plusAssignment int : wrong type : ", "int", typeName);
 		intValue = ((IJavaPrimitiveValue)value).getIntValue();
@@ -193,12 +193,12 @@ public class TestsOperators2 extends Tests {
 		}
 	}
 
-	public void testStringPlusAssignmentString() throws Throwable {
+	public void testStringPlusAssignmentString() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
 		java.lang.String tmpxVar = xVarStringValue;
 		tmpxVar += xStringValue;
-		IValue value = eval(xVarString + plusAssignmentOp + xString);
+		IValue value = eval(xVarString + plusAssignmentOp + xString); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("java.lang.String plusAssignment java.lang.String : wrong type : ", "java.lang.String", typeName);
 		String stringValue = ((JDIObjectValue)value).getValueString();
@@ -210,7 +210,7 @@ public class TestsOperators2 extends Tests {
 		assertEquals("java.lang.String local variable value : wrong result : ", tmpxVar, stringValue);
 
 		tmpxVar += yStringValue;
-		value = eval(xVarString + plusAssignmentOp + yString);
+		value = eval(xVarString + plusAssignmentOp + yString); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("java.lang.String plusAssignment java.lang.String : wrong type : ", "java.lang.String", typeName);
 		stringValue = ((JDIObjectValue)value).getValueString();
@@ -223,7 +223,7 @@ public class TestsOperators2 extends Tests {
 
 		java.lang.String tmpyVar = yVarStringValue;
 		tmpyVar += xStringValue;
-		value = eval(yVarString + plusAssignmentOp + xString);
+		value = eval(yVarString + plusAssignmentOp + xString); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("java.lang.String plusAssignment java.lang.String : wrong type : ", "java.lang.String", typeName);
 		stringValue = ((JDIObjectValue)value).getValueString();
@@ -235,7 +235,7 @@ public class TestsOperators2 extends Tests {
 		assertEquals("java.lang.String local variable value : wrong result : ", tmpyVar, stringValue);
 
 		tmpyVar += yStringValue;
-		value = eval(yVarString + plusAssignmentOp + yString);
+		value = eval(yVarString + plusAssignmentOp + yString); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("java.lang.String plusAssignment java.lang.String : wrong type : ", "java.lang.String", typeName);
 		stringValue = ((JDIObjectValue)value).getValueString();

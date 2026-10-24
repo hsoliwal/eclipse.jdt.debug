@@ -45,7 +45,7 @@ import com.sun.jdi.request.EventRequest;
  *
  * @since 3.0
  */
-public class JavaClassPrepareBreakpoint extends JavaBreakpoint implements
+public class JavaClassPrepareBreakpoint extends JavaBreakpoint implements //FLLDCIM: MARK — T27  IMPLEMENTS
 		IJavaClassPrepareBreakpoint {
 
 	public static final String JAVA_CLASS_PREPARE_BREAKPOINT = "org.eclipse.jdt.debug.javaClassPrepareBreakpointMarker"; //$NON-NLS-1$
@@ -85,11 +85,11 @@ public class JavaClassPrepareBreakpoint extends JavaBreakpoint implements
 	 *                if unable to create the associated marker due to a lower
 	 *                level exception.
 	 */
-	public JavaClassPrepareBreakpoint(final IResource resource,
+	public JavaClassPrepareBreakpoint(final IResource resource, //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 			final String typeName, final int memberType, final int charStart,
 			final int charEnd, final boolean add, final Map<String, Object> attributes)
 			throws DebugException {
-		IWorkspaceRunnable wr = unused -> {
+		IWorkspaceRunnable wr = unused -> { //FLLDCIM: MARK — T09  LAMBDA
 			// add attributes
 			attributes.put(IBreakpoint.ID, getModelIdentifier());
 			attributes.put(IMarker.CHAR_START, Integer.valueOf(charStart));
@@ -202,19 +202,19 @@ public class JavaClassPrepareBreakpoint extends JavaBreakpoint implements
 	 * handleClassPrepareEvent(com.sun.jdi.event.ClassPrepareEvent,
 	 * org.eclipse.jdt.internal.debug.core.model.JDIDebugTarget)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public boolean handleClassPrepareEvent(ClassPrepareEvent event,
 			JDIDebugTarget target, boolean suspendVote) {
 		try {
 			if (pattern == null){
 				 String typeName = ".*";//$NON-NLS-1$
 				 String breakpointName = ensureMarker().getAttribute(TYPE_NAME, null);
-				 typeName = typeName + breakpointName.replaceAll("\\.", "\\\\.");  //$NON-NLS-1$//$NON-NLS-2$
-				 typeName = typeName.replaceAll("\\$", "\\\\\\$");  //$NON-NLS-1$//$NON-NLS-2$
+				 typeName = typeName + breakpointName.replaceAll("\\.", "\\\\.");  //$NON-NLS-1$//$NON-NLS-2$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
+				 typeName = typeName.replaceAll("\\$", "\\\\\\$");  //$NON-NLS-1$//$NON-NLS-2$ //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
 				 typeName = typeName.concat(".*"); //$NON-NLS-1$
-				 pattern = Pattern.compile(typeName);
+				 pattern = Pattern.compile(typeName); //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
 			}
-			if (isEnabled() && pattern.matcher(event.referenceType().name()).find()){
+			if (isEnabled() && pattern.matcher(event.referenceType().name()).find()){ //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
 				ThreadReference threadRef = event.thread();
 				JDIThread thread = target.findThread(threadRef);
 				if (thread == null || thread.isIgnoringBreakpoints()) {

@@ -42,7 +42,7 @@ import com.sun.jdi.Method;
 public class LambdaUtils {
 
 	private static final String LAMBDA_METHOD_PREFIX = "lambda$"; //$NON-NLS-1$
-	private static final Pattern LAMBDA_TYPE_PATTERN = Pattern.compile(".*\\$\\$Lambda[\\$,\\.].*"); //$NON-NLS-1$
+	private static final Pattern LAMBDA_TYPE_PATTERN = Pattern.compile(".*\\$\\$Lambda[\\$,\\.].*"); //$NON-NLS-1$ //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
 
 	/**
 	 * Inspects the top stack frame of the context; if that frame is a lambda frame, looks for a variable with the specified name in that frame and
@@ -61,7 +61,7 @@ public class LambdaUtils {
 		IStackFrame stackFrame = context.getFrame();
 		if (stackFrame != null) {
 			List<IVariable> variables = getLambdaFrameVariables(stackFrame);
-			for (IVariable variable : variables) {
+			for (IVariable variable : variables) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				if (variable.getName().equals(variableName)) {
 					return variable;
 				}
@@ -111,15 +111,15 @@ public class LambdaUtils {
 	 *             If accessing the top stack frame or the local variables on stack frames fails, due to failure to communicate with the debug target.
 	 */
 	private static List<IVariable> collectVariablesFromLambdaFrame(IStackFrame frame) throws DebugException {
-		List<IVariable> variables = new ArrayList<>();
+		List<IVariable> variables = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 		IThread thread = frame.getThread();
 		// look for two frames below the frame which is provided instead starting from first frame.
 		List<IStackFrame> stackFrames = Stream.of(thread.getStackFrames()).dropWhile(f -> f != frame)
 				.limit(3).collect(Collectors.toUnmodifiableList());
-		for (IStackFrame stackFrame : stackFrames) {
+		for (IStackFrame stackFrame : stackFrames) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			IVariable[] stackFrameVariables = stackFrame.getVariables();
 			variables.addAll(Arrays.asList(stackFrameVariables));
-			for (IVariable frameVariable : stackFrameVariables) {
+			for (IVariable frameVariable : stackFrameVariables) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				if (isLambdaObjectVariable(frameVariable)) {
 					variables.addAll(extractVariablesFromLambda(frameVariable));
 				}
@@ -131,8 +131,8 @@ public class LambdaUtils {
 	/**
 	 * Collect variables from all enclosing frames starting from the provided frame.
 	 */
-	private static List<IVariable> collectVariablesFromEnclosingFrames(IStackFrame frame) throws DebugException {
-		List<IVariable> variables = new ArrayList<>();
+	private static List<IVariable> collectVariablesFromEnclosingFrames(IStackFrame frame) throws DebugException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
+		List<IVariable> variables = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 		IThread thread = frame.getThread();
 		List<IStackFrame> stackFrames = Stream.of(thread.getStackFrames()).dropWhile(f -> f != frame)
 				.collect(Collectors.toUnmodifiableList());
@@ -140,7 +140,7 @@ public class LambdaUtils {
 		String pausedSourceName = ((IJavaStackFrame) frame).getSourceName();
 		String pausedSourcePath = ((IJavaStackFrame) frame).getSourcePath();
 		boolean isFocusFrame = true;
-		for (IStackFrame stackFrame : stackFrames) {
+		for (IStackFrame stackFrame : stackFrames) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			JDIStackFrame jdiFrame = (JDIStackFrame) stackFrame;
 			if (isFocusFrame) {
 				isFocusFrame = false;
@@ -166,7 +166,7 @@ public class LambdaUtils {
 			}
 			IVariable[] stackFrameVariables = jdiFrame.getVariables();
 			variables.addAll(Arrays.asList(stackFrameVariables));
-			for (IVariable frameVariable : stackFrameVariables) {
+			for (IVariable frameVariable : stackFrameVariables) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				if (isLambdaObjectVariable(frameVariable)) {
 					variables.addAll(extractVariablesFromLambda(frameVariable));
 				}
@@ -208,7 +208,7 @@ public class LambdaUtils {
 	 */
 	public static boolean isLambdaField(IVariable variable) throws DebugException {
 		return (variable instanceof IJavaFieldVariable) && 
-			LAMBDA_TYPE_PATTERN.matcher(((IJavaFieldVariable) variable).getDeclaringType().getName()).matches();
+			LAMBDA_TYPE_PATTERN.matcher(((IJavaFieldVariable) variable).getDeclaringType().getName()).matches(); //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
 	}
 
 	/**

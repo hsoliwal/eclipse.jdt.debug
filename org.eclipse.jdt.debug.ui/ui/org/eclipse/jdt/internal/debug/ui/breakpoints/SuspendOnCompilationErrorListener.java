@@ -36,7 +36,7 @@ import org.eclipse.jdt.internal.debug.ui.JavaDebugOptionsManager;
  */
 public class SuspendOnCompilationErrorListener implements IJavaBreakpointListener {
 
-	public static final String ID_COMPILATION_ERROR_LISTENER = JDIDebugUIPlugin.getUniqueIdentifier() + ".compilationErrorListener"; //$NON-NLS-1$
+	public static final String ID_COMPILATION_ERROR_LISTENER = JDIDebugUIPlugin.getUniqueIdentifier() + ".compilationErrorListener"; //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 	/* (non-Javadoc)
 	 * @see org.eclipse.jdt.debug.core.IJavaBreakpointListener#addingBreakpoint(org.eclipse.jdt.debug.core.IJavaDebugTarget, org.eclipse.jdt.debug.core.IJavaBreakpoint)
@@ -62,7 +62,7 @@ public class SuspendOnCompilationErrorListener implements IJavaBreakpointListene
 	/* (non-Javadoc)
 	 * @see org.eclipse.jdt.debug.core.IJavaBreakpointListener#breakpointHit(org.eclipse.jdt.debug.core.IJavaThread, org.eclipse.jdt.debug.core.IJavaBreakpoint)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public int breakpointHit(IJavaThread thread, IJavaBreakpoint breakpoint) {
 		IJavaExceptionBreakpoint exception = (IJavaExceptionBreakpoint) breakpoint;
 		if (exception.getExceptionTypeName().equals("java.lang.Error")) { //$NON-NLS-1$

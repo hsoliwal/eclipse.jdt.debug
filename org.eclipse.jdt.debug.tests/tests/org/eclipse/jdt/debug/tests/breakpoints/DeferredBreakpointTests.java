@@ -42,9 +42,9 @@ public class DeferredBreakpointTests extends AbstractDebugUiTests {
 	/**
 	 * Tests deferring several breakpoints
 	 */
-	public void testDeferredBreakpoints() throws Exception {
+	public void testDeferredBreakpoints() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String typeName = "Breakpoints";
-		List<IBreakpoint> bps = new ArrayList<>();
+		List<IBreakpoint> bps = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 		int[] lines = new int[]{
 				46, // anonymous class
 				105, // blocks
@@ -73,7 +73,7 @@ public class DeferredBreakpointTests extends AbstractDebugUiTests {
 			// do not register launch - see bug 130911
 			thread= launchToBreakpoint(typeName, false);
 			assertNotNull("Breakpoint not hit within timeout period", thread);
-			while (!bps.isEmpty()) {
+			while (!bps.isEmpty()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				IBreakpoint hit = getBreakpoint(thread);
 				assertNotNull("suspended, but not by breakpoint", hit);
 				assertTrue("hit un-registered breakpoint", bps.contains(hit));
@@ -100,7 +100,7 @@ public class DeferredBreakpointTests extends AbstractDebugUiTests {
 		IResource resource = type.getResource();
 		assertTrue(resource instanceof IFile);
 		IEditorPart editor = openEditor((IFile) resource);
-		for (int i = 0; i < lineNumbers.length; i++) {
+		for (int i = 0; i < lineNumbers.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			IBreakpoint breakpoint = toggleBreakpoint(editor, lineNumbers[i]);
 			assertTrue("Wrong kind of breakpoint", breakpoint instanceof IJavaLineBreakpoint);
 			breakpoints.add(breakpoint);

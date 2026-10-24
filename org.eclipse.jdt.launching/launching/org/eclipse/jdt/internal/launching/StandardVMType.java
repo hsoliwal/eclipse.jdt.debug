@@ -109,7 +109,7 @@ public class StandardVMType extends AbstractVMInstallType {
 	 * Map of the install path for which we were unable to generate
 	 * the library info during this session.
 	 */
-	private static Map<String, LibraryInfo> fgFailedInstallPath = new HashMap<>();
+	private static Map<String, LibraryInfo> fgFailedInstallPath = new HashMap<>(); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
 
 	/**
 	 * Cache for default library locations. See {@link #getDefaultLibraryLocations(File)}
@@ -118,7 +118,7 @@ public class StandardVMType extends AbstractVMInstallType {
 	 *
 	 * @since 3.7
 	 */
-	private static Map<String, List<LibraryLocation>> fgDefaultLibLocs = new HashMap<>();
+	private static Map<String, List<LibraryLocation>> fgDefaultLibLocs = new HashMap<>(); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
 
 	/**
 	 * The list of locations in which to look for the java executable in candidate
@@ -137,20 +137,20 @@ public class StandardVMType extends AbstractVMInstallType {
 	 * @param vmInstallLocation the {@link File} location to look in
 	 * @return the {@link File} for the Java executable or <code>null</code>
 	 */
-	public static File findJavaExecutable(File vmInstallLocation) {
+	public static File findJavaExecutable(File vmInstallLocation) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		// Try each candidate in order.  The first one found wins.  Thus, the order
 		// of fgCandidateJavaLocations and fgCandidateJavaFiles is significant.
 
 		Path filePath = vmInstallLocation.toPath();
 		boolean isBin = filePath.endsWith(BIN);
-		for (Path exeName : CANDIDATE_JAVA_FILES) {
-			for (int j = 0; j < CANDIDATE_JAVA_LOCATIONS.length; j++) {
+		for (Path exeName : CANDIDATE_JAVA_FILES) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
+			for (int j = 0; j < CANDIDATE_JAVA_LOCATIONS.length; j++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				if (!isBin && j == 0) {
 					// search in "." only under bin for java executables for Java 9 and above
 					continue;
 				}
 				Path javaFile = filePath.resolve(CANDIDATE_JAVA_LOCATIONS[j]).resolve(exeName);
-				if (Files.isRegularFile(javaFile)) {
+				if (Files.isRegularFile(javaFile)) { //FLLDCIM: MARK — M31 M3FILE_IO CALL
 					return javaFile.toFile();
 				}
 			}
@@ -164,15 +164,15 @@ public class StandardVMType extends AbstractVMInstallType {
 	 * @return the known list of {@link ILibraryLocationResolver}s
 	 * @since 3.7.0
 	 */
-	private static ILibraryLocationResolver[] getLibraryLocationResolvers() {
+	private static ILibraryLocationResolver[] getLibraryLocationResolvers() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		if( fgLibraryLocationResolvers == null ) {
 			IExtensionPoint extensionPoint = Platform.getExtensionRegistry().getExtensionPoint(LaunchingPlugin.ID_PLUGIN, JavaRuntime.EXTENSION_POINT_LIBRARY_LOCATION_RESOLVERS);
 			IConfigurationElement[] configs = extensionPoint.getConfigurationElements();
 			// The "libraryLocationResolvers" extension point doesn't have any conflict resolution.
 			// Sorting by namespace at least makes makes the order predictable.
 			Arrays.sort(configs, Comparator.comparing(IConfigurationElement::getNamespaceIdentifier));
-			List<ILibraryLocationResolver> resolvers = new ArrayList<>(configs.length);
-			for (IConfigurationElement e : configs) {
+			List<ILibraryLocationResolver> resolvers = new ArrayList<>(configs.length); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
+			for (IConfigurationElement e : configs) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				try {
 					resolvers.add((ILibraryLocationResolver) e.createExecutableExtension("class")); //$NON-NLS-1$
 				}
@@ -209,7 +209,7 @@ public class StandardVMType extends AbstractVMInstallType {
 	 * @param javaExecutable the Java executable file
 	 * @return the {@link LibraryInfo} for the home and executable path or an empty object, never <code>null</code>
 	 */
-	protected synchronized LibraryInfo getLibraryInfo(File javaHome, File javaExecutable) {
+	protected synchronized LibraryInfo getLibraryInfo(File javaHome, File javaExecutable) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String installPath = javaHome.getAbsolutePath();
 		LibraryInfo info = LaunchingPlugin.getLibraryInfo(installPath);
 		if (info == null || LaunchingPlugin.timeStampChanged(installPath)) {
@@ -286,7 +286,7 @@ public class StandardVMType extends AbstractVMInstallType {
 	 *
 	 * @since 3.7
 	 */
-	protected File getJavaHomeLocation() {
+	protected File getJavaHomeLocation() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		// Retrieve the 'java.home' system property.  If that directory doesn't exist,
 		// return null.
 		File javaHome;
@@ -296,7 +296,7 @@ public class StandardVMType extends AbstractVMInstallType {
 			LaunchingPlugin.log(e);
 			return null;
 		}
-		if (!javaHome.exists()) {
+		if (!javaHome.exists()) { //FLLDCIM: MARK — M31 M3FILE_IO CALL
 			return null;
 		}
 
@@ -338,7 +338,7 @@ public class StandardVMType extends AbstractVMInstallType {
 	protected IPath getDefaultSystemLibrary(File javaHome) {
 		IPath home = IPath.fromFile(javaHome);
 		IPath jreLibPath = home.append(LIB).append(RT_JAR);
-		if (jreLibPath.toFile().isFile()) {
+		if (jreLibPath.toFile().isFile()) { //FLLDCIM: MARK — M31 M3FILE_IO CALL
 			return jreLibPath;
 		}
 		return home.append(JRE).append(LIB).append(RT_JAR);
@@ -352,16 +352,16 @@ public class StandardVMType extends AbstractVMInstallType {
 	 * @return a path to the source attachment for the given library, or
 	 *  an empty path if none
 	 */
-	protected IPath getDefaultSystemLibrarySource(File libLocation) {
+	protected IPath getDefaultSystemLibrarySource(File libLocation) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		File parent= libLocation.getParentFile();
-		while (parent != null) {
+		while (parent != null) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			File parentsrc= new File(parent, SRC_JAR);
-			if (parentsrc.isFile()) {
+			if (parentsrc.isFile()) { //FLLDCIM: MARK — M31 M3FILE_IO CALL
 				setDefaultRootPath(SRC);
 				return IPath.fromFile(parentsrc);
 			}
 			parentsrc= new File(parent, SRC_ZIP);
-			if (parentsrc.isFile()) {
+			if (parentsrc.isFile()) { //FLLDCIM: MARK — M31 M3FILE_IO CALL
 				setDefaultRootPath(""); //$NON-NLS-1$
 				return IPath.fromFile(parentsrc);
 			}
@@ -379,12 +379,12 @@ public class StandardVMType extends AbstractVMInstallType {
 		if (extension != null) {
 			IPath srcPath = IPath.fromFile(libLocation);
 			srcPath = srcPath.removeLastSegments(1);
-			StringBuilder buf = new StringBuilder();
-			buf.append(prefix);
-			buf.append("-src."); //$NON-NLS-1$
-			buf.append(extension);
+			StringBuilder buf = new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
+			buf.append(prefix); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+			buf.append("-src."); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+			buf.append(extension); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			srcPath = srcPath.append(buf.toString());
-			if (srcPath.toFile().exists()) {
+			if (srcPath.toFile().exists()) { //FLLDCIM: MARK — M31 M3FILE_IO CALL
 				return srcPath;
 			}
 		}
@@ -399,15 +399,15 @@ public class StandardVMType extends AbstractVMInstallType {
 		String name = libLocation.getName();
 		if (name.equalsIgnoreCase("classes.zip")) { //$NON-NLS-1$
 			File source = new File(parent, "source/source.zip"); //$NON-NLS-1$
-			return source.isFile() ? IPath.fromFile(source) : IPath.EMPTY;
+			return source.isFile() ? IPath.fromFile(source) : IPath.EMPTY; //FLLDCIM: MARK — M31 M3FILE_IO CALL
 		}
 		if (name.equalsIgnoreCase("locale.zip")) { //$NON-NLS-1$
 			File source = new File(parent, "source/locale-src.zip"); //$NON-NLS-1$
-			return source.isFile() ? IPath.fromFile(source) : IPath.EMPTY;
+			return source.isFile() ? IPath.fromFile(source) : IPath.EMPTY; //FLLDCIM: MARK — M31 M3FILE_IO CALL
 		}
 		if (name.equalsIgnoreCase("charconv.zip")) { //$NON-NLS-1$
 			File source = new File(parent, "charconv-src.zip"); //$NON-NLS-1$
-			return source.isFile() ? IPath.fromFile(source) : IPath.EMPTY;
+			return source.isFile() ? IPath.fromFile(source) : IPath.EMPTY; //FLLDCIM: MARK — M31 M3FILE_IO CALL
 		}
 		return null;
 	}
@@ -424,7 +424,7 @@ public class StandardVMType extends AbstractVMInstallType {
 	/* (non-Javadoc)
 	 * @see org.eclipse.jdt.launching.IVMInstallType#getDefaultLibraryLocations(java.io.File)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public LibraryLocation[] getDefaultLibraryLocations(File installLocation) {
 		//NOTE: We do not add libraries from the "endorsed" directory explicitly, as
 		//the bootpath contains these entries already (if they exist).
@@ -442,7 +442,7 @@ public class StandardVMType extends AbstractVMInstallType {
 			}
 
 			// Add all endorsed libraries - they are first, as they replace
-			allLibs = new ArrayList<>(gatherAllLibraries(libInfo.getEndorsedDirs()));
+			allLibs = new ArrayList<>(gatherAllLibraries(libInfo.getEndorsedDirs())); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 			URL url = getDefaultJavadocLocation(installLocation);
 			if (libInfo.getBootpath().length == 0) {
 				// TODO: Bug 489207: Temporary workaround for Jigsaw-previews that don't declare a bootpath.
@@ -452,22 +452,22 @@ public class StandardVMType extends AbstractVMInstallType {
 				// src zip moved to lib folder from JDK 9 EA Build 151
 				IPath path = IPath.fromFile(installLocation.getAbsoluteFile()).append(LIB).append(SRC_ZIP);
 				File lib = path.toFile();
-				if (lib.exists() && lib.isFile()) {
+				if (lib.exists() && lib.isFile()) { //FLLDCIM: MARK — M31 M3FILE_IO CALL
 					sourceRootPath = getDefaultSystemLibrarySource(lib); // To attach source if available
 				} else {
 					path = IPath.fromFile(installLocation.getAbsoluteFile()).append(SRC_ZIP);
 					lib = path.toFile();
-					if (lib.exists() && lib.isFile()) {
+					if (lib.exists() && lib.isFile()) { //FLLDCIM: MARK — M31 M3FILE_IO CALL
 						sourceRootPath = getDefaultSystemLibrarySource(lib); // To attach source if available
 					}
 				}
 				IPath pathName = IPath.fromFile(installLocation.getAbsoluteFile()).append(LIB).append(JRT_FS_JAR);
 				// From Java 9 149 version, we see that jrt-fs.jar is moved to lib directory so we need to look at both places
 				File jrtfsJar = pathName.toFile();
-				boolean exists = jrtfsJar.exists();
+				boolean exists = jrtfsJar.exists(); //FLLDCIM: MARK — M31 M3FILE_IO CALL
 				if (!exists) {
 					pathName = IPath.fromFile(installLocation.getAbsoluteFile()).append(JRT_FS_JAR);
-					exists = pathName.toFile().exists();
+					exists = pathName.toFile().exists(); //FLLDCIM: MARK — M31 M3FILE_IO CALL
 				}
 
 				if (exists) {
@@ -478,12 +478,12 @@ public class StandardVMType extends AbstractVMInstallType {
 
 			// next is the boot path libraries
 			String[] bootpath = libInfo.getBootpath();
-			List<LibraryLocation> boot = new ArrayList<>(bootpath.length);
+			List<LibraryLocation> boot = new ArrayList<>(bootpath.length); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 
-			for (String element : bootpath) {
+			for (String element : bootpath) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				IPath path = IPath.fromOSString(element);
 				File lib = path.toFile();
-				if (lib.exists() && lib.isFile()) {
+				if (lib.exists() && lib.isFile()) { //FLLDCIM: MARK — M31 M3FILE_IO CALL
 					LibraryLocation libraryLocation = new LibraryLocation(path,
 									getDefaultSystemLibrarySource(lib),
 									getDefaultPackageRootPath(),
@@ -497,9 +497,9 @@ public class StandardVMType extends AbstractVMInstallType {
 			allLibs.addAll(gatherAllLibraries(libInfo.getExtensionDirs()));
 
 			//remove duplicates
-			HashSet<String> set = new HashSet<>();
+			HashSet<String> set = new HashSet<>(); //FLLDCIM: MARK — M03 M3_SET_LANES NEW
 			LibraryLocation lib = null;
-			for(ListIterator<LibraryLocation> liter = allLibs.listIterator(); liter.hasNext();) {
+			for(ListIterator<LibraryLocation> liter = allLibs.listIterator(); liter.hasNext();) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				lib = liter.next();
 				IPath systemLibraryPath = lib.getSystemLibraryPath();
 				String device = systemLibraryPath.getDevice();
@@ -523,7 +523,7 @@ public class StandardVMType extends AbstractVMInstallType {
 	 * @param installLocation the VM install location
 	 * @return LibraryInfo
 	 */
-	protected LibraryInfo getDefaultLibraryInfo(File installLocation) {
+	protected LibraryInfo getDefaultLibraryInfo(File installLocation) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IPath rtjar = getDefaultSystemLibrary(installLocation);
 		File extDir = getDefaultExtensionDirectory(installLocation);
 		File endDir = getDefaultEndorsedDirectory(installLocation);
@@ -548,23 +548,23 @@ public class StandardVMType extends AbstractVMInstallType {
 	 * @param dirPaths a list of absolute paths of directories to search
 	 * @return List of all zip's and jars
 	 */
-	public static List<LibraryLocation> gatherAllLibraries(String[] dirPaths) {
-		List<LibraryLocation> libraries = new ArrayList<>();
-		for (String dirPath : dirPaths) {
+	public static List<LibraryLocation> gatherAllLibraries(String[] dirPaths) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
+		List<LibraryLocation> libraries = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
+		for (String dirPath : dirPaths) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			File extDir = new File(dirPath);
-			if (extDir.isDirectory()) {
-				String[] names = extDir.list(fgArchiveFilter);
+			if (extDir.isDirectory()) { //FLLDCIM: MARK — M31 M3FILE_IO CALL
+				String[] names = extDir.list(fgArchiveFilter); //FLLDCIM: MARK — M31 M3FILE_IO CALL
 				if (names != null) {
-					for (String name : names) {
+					for (String name : names) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 						File jar = new File(extDir, name);
-						if (jar.isFile()) {
+						if (jar.isFile()) { //FLLDCIM: MARK — M31 M3FILE_IO CALL
 							try {
 								IPath libPath = IPath.fromFile(jar.getCanonicalFile());
 								IPath sourcePath = IPath.EMPTY;
 								IPath packageRoot = IPath.EMPTY;
 								URL javadocLocation = null;
 								URL indexLocation = null;
-								for (ILibraryLocationResolver resolver : getLibraryLocationResolvers()) {
+								for (ILibraryLocationResolver resolver : getLibraryLocationResolvers()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 									try {
 										sourcePath = resolver.getSourcePath(libPath);
 										packageRoot = resolver.getPackageRoot(libPath);
@@ -659,17 +659,17 @@ public class StandardVMType extends AbstractVMInstallType {
 	 *
 	 * @return library info or <code>null</code> if none
 	 */
-	protected LibraryInfo generateLibraryInfo(File javaHome, File javaExecutable) {
+	protected LibraryInfo generateLibraryInfo(File javaHome, File javaExecutable) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		LibraryInfo info = null;
 
 		// if this is 1.1.X, the properties will not exist
 		IPath classesZip = IPath.fromFile(javaHome.getAbsoluteFile()).append(LIB).append("classes.zip"); //$NON-NLS-1$
-		if (classesZip.toFile().exists()) {
+		if (classesZip.toFile().exists()) { //FLLDCIM: MARK — M31 M3FILE_IO CALL
 			return new LibraryInfo("1.1.x", new String[] {classesZip.toOSString()}, new String[0], new String[0]); //$NON-NLS-1$
 		}
 		//locate the launching support jar - it contains the main program to run
 		File file = LaunchingPlugin.getFileInPlugin(IPath.fromPortableString("lib/launchingsupport.jar")); //$NON-NLS-1$
-		if (file != null && file.exists()) {
+		if (file != null && file.exists()) { //FLLDCIM: MARK — M31 M3FILE_IO CALL
 			String javaExecutablePath = javaExecutable.getAbsolutePath();
 			String[] cmdLine = new String[] { javaExecutablePath, MIN_VM_SIZE,
 					"-classpath", file.getAbsolutePath(), "org.eclipse.jdt.internal.launching.support.LibraryDetector" }; //$NON-NLS-1$ //$NON-NLS-2$
@@ -681,8 +681,8 @@ public class StandardVMType extends AbstractVMInstallType {
 					if (map.remove(StandardVMDebugger.JAVA_JVM_VERSION) != null) {
 						envp = new String[map.size()];
 						int i = 0;
-						for (Entry<String, String> entry : map.entrySet()) {
-							envp[i] = entry.getKey() + "=" + entry.getValue(); //$NON-NLS-1$
+						for (Entry<String, String> entry : map.entrySet()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
+							envp[i] = entry.getKey() + "=" + entry.getValue(); //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 							i++;
 						}
 					}
@@ -691,7 +691,7 @@ public class StandardVMType extends AbstractVMInstallType {
 				IProcess process = DebugPlugin.newProcess(new Launch(null, ILaunchManager.RUN_MODE, null), p, "Library Detection"); //$NON-NLS-1$
 				process.setAttribute(IProcess.ATTR_CMDLINE, String.join(" ", cmdLine)); //$NON-NLS-1$
 				IStreamMonitor outputStreamMonitor = process.getStreamsProxy().getOutputStreamMonitor();
-				for (int i= 0; i < 600; i++) {
+				for (int i= 0; i < 600; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 					// Wait no more than 30 seconds (600 * 50 milliseconds),
 					// also ensure we are done reading the process stream, if we have a OutputStreamMonitor
 					if (process.isTerminated() && isReadingDone(outputStreamMonitor)) {
@@ -733,7 +733,7 @@ public class StandardVMType extends AbstractVMInstallType {
 	 * @param process the backing {@link IProcess} that was run
 	 * @return the new {@link LibraryInfo} object or <code>null</code>
 	 */
-	protected LibraryInfo parseLibraryInfo(IProcess process) {
+	protected LibraryInfo parseLibraryInfo(IProcess process) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IStreamsProxy streamsProxy = process.getStreamsProxy();
 		String text = null;
 		if (streamsProxy != null) {
@@ -766,7 +766,7 @@ public class StandardVMType extends AbstractVMInstallType {
 	}
 
 	protected String[] parsePaths(String paths) {
-		return paths.split(File.pathSeparator);
+		return paths.split(File.pathSeparator); //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
 	}
 
 	/* (non-Javadoc)
@@ -806,7 +806,7 @@ public class StandardVMType extends AbstractVMInstallType {
 	 * @param version language version such as "1.4"
 	 * @return URL to default Javadoc location, or <code>null</code>
 	 */
-	public static URL getDefaultJavadocLocation(String version) {
+	public static URL getDefaultJavadocLocation(String version) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 			if (version.startsWith(JavaCore.VERSION_28)) {
 				// Java 28 docs aren't published yet
@@ -875,7 +875,7 @@ public class StandardVMType extends AbstractVMInstallType {
 		if (Files.notExists(releaseFile)) {
 			return version;
 		}
-		try (Stream<String> lines = Files.lines(releaseFile, Charset.defaultCharset())) {
+		try (Stream<String> lines = Files.lines(releaseFile, Charset.defaultCharset())) { //FLLDCIM: MARK — M24 M3FILE_STREAMS CALL
 			version = lines.filter(s -> s.contains(JAVA_VERSION)).findFirst() //
 					.map(line -> line.substring(JAVA_VERSION.length() + 2, line.length() - 1)) // actual version in JAVA_VERSION="9"
 					.orElse(""); //$NON-NLS-1$
@@ -888,7 +888,7 @@ public class StandardVMType extends AbstractVMInstallType {
 	/*
 	 * Logs an error if the process is not yet done, or if the process exited with an error code.
 	 */
-	private static void checkProcessResult(IProcess process) throws DebugException {
+	private static void checkProcessResult(IProcess process) throws DebugException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		boolean isTerminated = process.isTerminated();
 		if (!isTerminated) {
 			String output = getOutput(process);

@@ -54,7 +54,7 @@ public class TestLogicalStructures extends AbstractDebugTest {
 	/**
 	 * Test the logical structure for a list.
 	 */
-	public void testListLogicalStructure() throws Exception {
+	public void testListLogicalStructure() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String typeName = "LogicalStructures";
 		createLineBreakpoint(32, typeName);
 		IJavaThread thread= null;
@@ -91,7 +91,7 @@ public class TestLogicalStructures extends AbstractDebugTest {
 	/**
 	 * Test the logical structure for a map.
 	 */
-	public void testMapLogicalStructure() throws Exception {
+	public void testMapLogicalStructure() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String typeName = "LogicalStructures";
 		createLineBreakpoint(32, typeName);
 		IJavaThread thread= null;
@@ -128,7 +128,7 @@ public class TestLogicalStructures extends AbstractDebugTest {
 	/**
 	 * Test the logical structure for a map entry.
 	 */
-	public void testEntryLogicalStructure() throws Exception {
+	public void testEntryLogicalStructure() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String typeName = "LogicalStructures";
 		createLineBreakpoint(32, typeName);
 		IJavaThread thread= null;
@@ -172,24 +172,24 @@ public class TestLogicalStructures extends AbstractDebugTest {
 	private static class EvaluationListener implements IEvaluationListener {
 
 		private final AtomicBoolean done = new AtomicBoolean(false);
-		private final StringBuilder errors = new StringBuilder();
+		private final StringBuilder errors = new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 
-		@Override
+		@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		public void evaluationComplete(IEvaluationResult result) {
 			if (result.hasErrors()) {
-				errors.append("Evaluation resulted in errors:");
-				errors.append(System.lineSeparator());
-				for (String error : result.getErrorMessages()) {
-					errors.append(error);
-					errors.append(System.lineSeparator());
+				errors.append("Evaluation resulted in errors:"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+				errors.append(System.lineSeparator()); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+				for (String error : result.getErrorMessages()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
+					errors.append(error); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+					errors.append(System.lineSeparator()); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				}
 				DebugException exception = result.getException();
 				if (exception != null) {
 					StringWriter sw = new StringWriter();
 					PrintWriter pw = new PrintWriter(sw);
 					exception.printStackTrace(pw);
-					errors.append(sw.getBuffer().toString());
-					errors.append(System.lineSeparator());
+					errors.append(sw.getBuffer().toString()); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+					errors.append(System.lineSeparator()); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				}
 			}
 			done.set(true);
@@ -198,7 +198,7 @@ public class TestLogicalStructures extends AbstractDebugTest {
 
 		private void await() throws InterruptedException {
 			long start = System.currentTimeMillis();
-			while (!done.get() && System.currentTimeMillis() - start <= DEFAULT_TIMEOUT) {
+			while (!done.get() && System.currentTimeMillis() - start <= DEFAULT_TIMEOUT) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				Thread.sleep(10);
 			}
 			if (!done.get()) {

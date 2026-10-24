@@ -195,7 +195,7 @@ public class AutomatedSuite extends DebugSuite {
 	/**
 	 * Construct the test suite.
 	 */
-	public AutomatedSuite() {
+	public AutomatedSuite() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		addTest(new TestSuite(ProjectCreationDecorator.class));
 		addTest(new TestSuite(DebugSuiteTests.class));
 

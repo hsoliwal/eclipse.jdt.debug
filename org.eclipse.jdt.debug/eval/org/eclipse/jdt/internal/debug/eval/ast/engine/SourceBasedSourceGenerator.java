@@ -195,7 +195,7 @@ public class SourceBasedSourceGenerator extends ASTVisitor {
 	 * @param sourceLevel
 	 *            the desired source level
 	 */
-	public SourceBasedSourceGenerator(IType type,
+	public SourceBasedSourceGenerator(IType type, //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 			int line, boolean createInAStaticMethod, String[] localTypesNames,
 			String[] localVariables, String codeSnippet, String sourceLevel) {
 		fRightTypeFound = false;
@@ -270,37 +270,37 @@ public class SourceBasedSourceGenerator extends ASTVisitor {
 		return fError;
 	}
 
-	private StringBuilder buildRunMethod(List<BodyDeclaration> bodyDeclarations) {
-		StringBuilder buffer = new StringBuilder();
+	private StringBuilder buildRunMethod(List<BodyDeclaration> bodyDeclarations) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
+		StringBuilder buffer = new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 
 		if (fCreateInAStaticMethod) {
-			buffer.append("static "); //$NON-NLS-1$
+			buffer.append("static "); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		}
 
 		adddTypeParameters(buffer);
 
-		buffer.append("void "); //$NON-NLS-1$
-		buffer.append(getUniqueMethodName(RUN_METHOD_NAME, bodyDeclarations));
-		buffer.append('(');
-		for (int i = 0, length = fLocalVariableNames.length; i < length; i++) {
-			buffer.append(getDotName(fLocalVariableTypeNames[i]));
-			buffer.append(' ');
-			buffer.append(fLocalVariableNames[i]);
+		buffer.append("void "); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+		buffer.append(getUniqueMethodName(RUN_METHOD_NAME, bodyDeclarations)); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+		buffer.append('('); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+		for (int i = 0, length = fLocalVariableNames.length; i < length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
+			buffer.append(getDotName(fLocalVariableTypeNames[i])); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+			buffer.append(' '); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+			buffer.append(fLocalVariableNames[i]); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			if (i + 1 < length)
 			 {
-				buffer.append(", "); //$NON-NLS-1$
+				buffer.append(", "); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			}
 		}
-		buffer.append(") throws Throwable {"); //$NON-NLS-1$
-		buffer.append('\n');
+		buffer.append(") throws Throwable {"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+		buffer.append('\n'); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		fSnippetStartPosition = buffer.length() - 2;
 		fRunMethodStartOffset = fSnippetStartPosition;
 		String codeSnippet = new String(fCodeSnippet).trim();
 
-		buffer.append(codeSnippet);
+		buffer.append(codeSnippet); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 
-		buffer.append('\n');
-		buffer.append('}').append('\n');
+		buffer.append('\n'); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+		buffer.append('}').append('\n'); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		fRunMethodLength = buffer.length();
 		return buffer;
 	}
@@ -314,23 +314,23 @@ public class SourceBasedSourceGenerator extends ASTVisitor {
 	 *
 	 * @since 3.8.0
 	 */
-	void adddTypeParameters(StringBuilder buffer) {
+	void adddTypeParameters(StringBuilder buffer) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		if (isSourceLevelGreaterOrEqual(1, 5)) {
 			Collection<String> activeTypeParameters = Optional.ofNullable(fMatchingTypeParameters)
 					.map(Map::values).orElse(Collections.emptyList());
 
 			if (!activeTypeParameters.isEmpty()) {
 				Iterator<String> iterator = activeTypeParameters.iterator();
-				buffer.append(Signature.C_GENERIC_START);
-				while (iterator.hasNext()) {
+				buffer.append(Signature.C_GENERIC_START); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+				while (iterator.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 					String name = iterator.next();
-					buffer.append(name);
+					buffer.append(name); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 					if (iterator.hasNext()) {
-						buffer.append(", "); //$NON-NLS-1$
+						buffer.append(", "); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 					}
 				}
-				buffer.append(Signature.C_GENERIC_END);
-				buffer.append(' ');
+				buffer.append(Signature.C_GENERIC_END); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+				buffer.append(' '); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			}
 		}
 	}
@@ -344,7 +344,7 @@ public class SourceBasedSourceGenerator extends ASTVisitor {
 	 * @return true if the parent type of the given node matches the current
 	 *         type name context, false otherwise
 	 */
-	private boolean isRightType(ASTNode node) {
+	private boolean isRightType(ASTNode node) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 			switch(node.getNodeType()) {
 				case ASTNode.ANNOTATION_TYPE_DECLARATION:
@@ -374,38 +374,38 @@ public class SourceBasedSourceGenerator extends ASTVisitor {
 	}
 
 	private StringBuilder buildTypeBody(StringBuilder buffer, List<BodyDeclaration> list) {
-		StringBuilder source = new StringBuilder();
+		StringBuilder source = new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 
-		source.append('{').append('\n');
+		source.append('{').append('\n'); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 
 		if (buffer != null) {
 			fSnippetStartPosition += source.length();
 		}
 
-		source.append(buildBody(buffer, list));
-		source.append('}').append('\n');
+		source.append(buildBody(buffer, list)); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+		source.append('}').append('\n'); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 
 		return source;
 	}
 
-	private StringBuilder buildEnumBody(StringBuilder buffer,
+	private StringBuilder buildEnumBody(StringBuilder buffer, //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 			List<EnumConstantDeclaration> constantDeclarations, List<BodyDeclaration> bodyDeclarations) {
-		StringBuilder source = new StringBuilder();
+		StringBuilder source = new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 
-		source.append('{').append('\n');
+		source.append('{').append('\n'); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		if (constantDeclarations.isEmpty()) {
-			source.append(';').append('\n');
+			source.append(';').append('\n'); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		} else {
-			for (Iterator<EnumConstantDeclaration> iter = constantDeclarations.iterator(); iter
+			for (Iterator<EnumConstantDeclaration> iter = constantDeclarations.iterator(); iter //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 					.hasNext();) {
-				source.append(iter.next().getName()
+				source.append(iter.next().getName() //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 						.getIdentifier());
 				if (iter.hasNext()) {
-					source.append(',');
+					source.append(','); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				} else {
-					source.append(';');
+					source.append(';'); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				}
-				source.append('\n');
+				source.append('\n'); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			}
 		}
 
@@ -413,8 +413,8 @@ public class SourceBasedSourceGenerator extends ASTVisitor {
 			fSnippetStartPosition += source.length();
 		}
 
-		source.append(buildBody(buffer, bodyDeclarations));
-		source.append('}').append('\n');
+		source.append(buildBody(buffer, bodyDeclarations)); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+		source.append('}').append('\n'); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 
 		return source;
 
@@ -430,131 +430,131 @@ public class SourceBasedSourceGenerator extends ASTVisitor {
 	 *            the list of {@link BodyDeclaration}s
 	 * @return the new source buffer
 	 */
-	private StringBuilder buildBody(StringBuilder buffer, List<BodyDeclaration> list) {
-		StringBuilder source = new StringBuilder();
+	private StringBuilder buildBody(StringBuilder buffer, List<BodyDeclaration> list) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
+		StringBuilder source = new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 		if (buffer != null) {
 			fSnippetStartPosition += source.length();
-			source.append(buffer.toString());
+			source.append(buffer.toString()); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		}
-		for (BodyDeclaration bodyDeclaration : list) {
+		for (BodyDeclaration bodyDeclaration : list) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			if (bodyDeclaration instanceof FieldDeclaration) {
-				source.append(buildFieldDeclaration((FieldDeclaration) bodyDeclaration));
+				source.append(buildFieldDeclaration((FieldDeclaration) bodyDeclaration)); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			} else if (bodyDeclaration instanceof MethodDeclaration) {
-				source.append(buildMethodDeclaration((MethodDeclaration) bodyDeclaration));
+				source.append(buildMethodDeclaration((MethodDeclaration) bodyDeclaration)); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			} else if (bodyDeclaration instanceof TypeDeclaration typeDeclaration) {
 				if (!typeDeclaration.getName().getIdentifier()
 						.equals(fLastTypeName)) {
-					source.append(buildTypeDeclaration(null, typeDeclaration));
+					source.append(buildTypeDeclaration(null, typeDeclaration)); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				}
 			} else if (bodyDeclaration instanceof EnumDeclaration enumDeclaration) {
 				if (!enumDeclaration.getName().getIdentifier()
 						.equals(fLastTypeName)) {
-					source.append(buildEnumDeclaration(null, enumDeclaration));
+					source.append(buildEnumDeclaration(null, enumDeclaration)); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				}
 			} else if (bodyDeclaration instanceof RecordDeclaration recordDeclaration) {
 				if (!recordDeclaration.getName().getIdentifier().equals(fLastTypeName)) {
-					source.append(buildRecordDeclaration(null, recordDeclaration));
+					source.append(buildRecordDeclaration(null, recordDeclaration)); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				}
 			}
 		}
 		return source;
 	}
 
-	private StringBuilder buildFieldDeclaration(FieldDeclaration fieldDeclaration) {
-		StringBuilder source = new StringBuilder();
+	private StringBuilder buildFieldDeclaration(FieldDeclaration fieldDeclaration) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
+		StringBuilder source = new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 
-		source.append(Flags.toString(fieldDeclaration.getModifiers()));
-		source.append(' ');
-		source.append(getDotName(getTypeName(fieldDeclaration.getType())));
-		source.append(' ');
+		source.append(Flags.toString(fieldDeclaration.getModifiers())); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+		source.append(' '); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+		source.append(getDotName(getTypeName(fieldDeclaration.getType()))); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+		source.append(' '); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 
 		boolean first = true;
-		for (Iterator<VariableDeclarationFragment> iterator = fieldDeclaration.fragments().iterator(); iterator
+		for (Iterator<VariableDeclarationFragment> iterator = fieldDeclaration.fragments().iterator(); iterator //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				.hasNext();) {
 			VariableDeclarationFragment variableDeclarationFragment = iterator
 					.next();
 			if (first) {
 				first = false;
 			} else {
-				source.append(',');
+				source.append(','); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			}
-			source.append(variableDeclarationFragment.getName().getIdentifier());
-			for (int i = 0, dim = variableDeclarationFragment
+			source.append(variableDeclarationFragment.getName().getIdentifier()); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+			for (int i = 0, dim = variableDeclarationFragment //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 					.getExtraDimensions(); i < dim; i++) {
-				source.append('[').append(']');
+				source.append('[').append(']'); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			}
 		}
 
-		source.append(';').append('\n');
+		source.append(';').append('\n'); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 
 		return source;
 	}
 
-	private StringBuilder buildMethodDeclaration(
+	private StringBuilder buildMethodDeclaration( //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 			MethodDeclaration methodDeclaration) {
-		StringBuilder source = new StringBuilder();
+		StringBuilder source = new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 		int modifiers = methodDeclaration.getModifiers();
-		source.append(Flags.toString(modifiers));
-		source.append(' ');
+		source.append(Flags.toString(modifiers)); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+		source.append(' '); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 
 		appendTypeParameters(source, methodDeclaration.typeParameters());
 
 		boolean isConstructor = methodDeclaration.isConstructor();
 		if (!isConstructor) {
-			source.append(getDotName(getTypeName(methodDeclaration
+			source.append(getDotName(getTypeName(methodDeclaration //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 					.getReturnType2())));
-			source.append(' ');
+			source.append(' '); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		}
 
-		source.append(methodDeclaration.getName().getIdentifier());
-		source.append(' ').append('(');
+		source.append(methodDeclaration.getName().getIdentifier()); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+		source.append(' ').append('('); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 
 		boolean first = true;
-		for (Iterator<SingleVariableDeclaration> iterator = methodDeclaration.parameters().iterator(); iterator
+		for (Iterator<SingleVariableDeclaration> iterator = methodDeclaration.parameters().iterator(); iterator //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				.hasNext();) {
 			SingleVariableDeclaration singleVariableDeclaration = iterator
 					.next();
 			if (first) {
 				first = false;
 			} else {
-				source.append(',');
+				source.append(','); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			}
-			source.append(getDotName(getTypeName(singleVariableDeclaration
+			source.append(getDotName(getTypeName(singleVariableDeclaration //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 					.getType())));
 			if (singleVariableDeclaration.isVarargs()) {
-				source.append("..."); //$NON-NLS-1$
+				source.append("..."); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			}
-			source.append(' ');
-			source.append(singleVariableDeclaration.getName().getIdentifier());
+			source.append(' '); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+			source.append(singleVariableDeclaration.getName().getIdentifier()); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			appendExtraDimensions(source,
 					singleVariableDeclaration.getExtraDimensions());
 		}
 
-		source.append(')');
+		source.append(')'); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 
 		appendExtraDimensions(source, methodDeclaration.getExtraDimensions());
 
 		first = true;
-		for (Object exceptionType : methodDeclaration.thrownExceptionTypes()) {
+		for (Object exceptionType : methodDeclaration.thrownExceptionTypes()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			if (first) {
 				first = false;
-				source.append(" throws "); //$NON-NLS-1$
+				source.append(" throws "); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			} else {
-				source.append(',');
+				source.append(','); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			}
-			source.append(getTypeName((Type) exceptionType));
+			source.append(getTypeName((Type) exceptionType)); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		}
 
 		if (Flags.isAbstract(modifiers) || Flags.isNative(modifiers)) {
 			// No body for abstract and native methods
-			source.append(";\n"); //$NON-NLS-1$
+			source.append(";\n"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		} else {
-			source.append('{').append('\n');
+			source.append('{').append('\n'); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			if (!isConstructor) {
-				source.append(getReturnExpression(methodDeclaration
+				source.append(getReturnExpression(methodDeclaration //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 						.getReturnType2()));
 			}
-			source.append('}').append('\n');
+			source.append('}').append('\n'); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		}
 
 		return source;
@@ -562,59 +562,59 @@ public class SourceBasedSourceGenerator extends ASTVisitor {
 
 	private void appendExtraDimensions(StringBuilder source, int extraDimension) {
 		if (extraDimension > 0) {
-			source.append(' ');
-			for (int i = 0; i < extraDimension; i++) {
-				source.append("[]"); //$NON-NLS-1$
+			source.append(' '); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+			for (int i = 0; i < extraDimension; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
+				source.append("[]"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			}
 		}
 	}
 
-	private StringBuilder buildEnumDeclaration(StringBuilder buffer,
+	private StringBuilder buildEnumDeclaration(StringBuilder buffer, //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 			EnumDeclaration enumDeclaration) {
-		StringBuilder source = new StringBuilder();
-		source.append(Flags.toString(enumDeclaration.getModifiers()));
-		source.append(" enum "); //$NON-NLS-1$
+		StringBuilder source = new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
+		source.append(Flags.toString(enumDeclaration.getModifiers())); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+		source.append(" enum "); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 
-		source.append(enumDeclaration.getName().getIdentifier());
+		source.append(enumDeclaration.getName().getIdentifier()); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 
 		Iterator<Type> iterator = enumDeclaration.superInterfaceTypes().iterator();
 		if (iterator.hasNext()) {
-			source.append(" implements "); //$NON-NLS-1$
-			source.append(getTypeName(iterator.next()));
-			while (iterator.hasNext()) {
-				source.append(',');
-				source.append(getTypeName(iterator.next()));
+			source.append(" implements "); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+			source.append(getTypeName(iterator.next())); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+			while (iterator.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
+				source.append(','); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+				source.append(getTypeName(iterator.next())); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			}
 		}
 
 		if (buffer != null) {
 			fSnippetStartPosition += source.length();
 		}
-		source.append(buildEnumBody(buffer, enumDeclaration.enumConstants(),
+		source.append(buildEnumBody(buffer, enumDeclaration.enumConstants(), //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				enumDeclaration.bodyDeclarations()));
 
 		return source;
 	}
 
-	private StringBuilder buildTypeDeclaration(StringBuilder buffer,
+	private StringBuilder buildTypeDeclaration(StringBuilder buffer, //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 			TypeDeclaration typeDeclaration) {
 
-		StringBuilder source = new StringBuilder();
-		source.append(Flags.toString(typeDeclaration.getModifiers()));
+		StringBuilder source = new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
+		source.append(Flags.toString(typeDeclaration.getModifiers())); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		if (typeDeclaration.isInterface()) {
-			source.append(" interface "); //$NON-NLS-1$
+			source.append(" interface "); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		} else {
-			source.append(" class "); //$NON-NLS-1$
+			source.append(" class "); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		}
 
-		source.append(typeDeclaration.getName().getIdentifier());
+		source.append(typeDeclaration.getName().getIdentifier()); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 
 		buildTypeParameterList(source, typeDeclaration.typeParameters());
 
 		Type superClass = typeDeclaration.getSuperclassType();
 		if (superClass != null) {
-			source.append(" extends "); //$NON-NLS-1$
-			source.append(getTypeName(superClass));
+			source.append(" extends "); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+			source.append(getTypeName(superClass)); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		}
 
 		buildSuperInterfaceTypeList(source, typeDeclaration.superInterfaceTypes().iterator(), typeDeclaration.isInterface());
@@ -622,7 +622,7 @@ public class SourceBasedSourceGenerator extends ASTVisitor {
 		if (buffer != null) {
 			fSnippetStartPosition += source.length();
 		}
-		source.append(buildTypeBody(buffer, typeDeclaration.bodyDeclarations()));
+		source.append(buildTypeBody(buffer, typeDeclaration.bodyDeclarations())); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 
 		return source;
 	}
@@ -630,114 +630,114 @@ public class SourceBasedSourceGenerator extends ASTVisitor {
 	void buildSuperInterfaceTypeList(StringBuilder source, Iterator<Type> superInterfaceTypes, boolean isTypeInterface) {
 		if (superInterfaceTypes.hasNext()) {
 			if (isTypeInterface) {
-				source.append(" extends "); //$NON-NLS-1$
+				source.append(" extends "); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			} else {
-				source.append(" implements "); //$NON-NLS-1$
+				source.append(" implements "); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			}
-			source.append(getTypeName(superInterfaceTypes.next()));
-			while (superInterfaceTypes.hasNext()) {
-				source.append(',');
-				source.append(getTypeName(superInterfaceTypes.next()));
+			source.append(getTypeName(superInterfaceTypes.next())); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+			while (superInterfaceTypes.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
+				source.append(','); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+				source.append(getTypeName(superInterfaceTypes.next())); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			}
 		}
 	}
 
-	private StringBuilder buildRecordDeclaration(StringBuilder buffer, RecordDeclaration typeDeclaration) {
+	private StringBuilder buildRecordDeclaration(StringBuilder buffer, RecordDeclaration typeDeclaration) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 
-		StringBuilder source = new StringBuilder();
-		source.append(Flags.toString(typeDeclaration.getModifiers()));
-		source.append(" record "); //$NON-NLS-1$
+		StringBuilder source = new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
+		source.append(Flags.toString(typeDeclaration.getModifiers())); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+		source.append(" record "); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 
-		source.append(typeDeclaration.getName().getIdentifier());
+		source.append(typeDeclaration.getName().getIdentifier()); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 
 		buildTypeParameterList(source, typeDeclaration.typeParameters());
 
 		boolean first = true;
-		source.append('(');
-		for (SingleVariableDeclaration field : (List<SingleVariableDeclaration>) typeDeclaration.recordComponents()) {
+		source.append('('); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+		for (SingleVariableDeclaration field : (List<SingleVariableDeclaration>) typeDeclaration.recordComponents()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			if (first) {
 				first = false;
 			} else {
-				source.append(',');
+				source.append(','); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			}
-			source.append(getTypeName(field.getType())).append(' ').append(field.getName());
+			source.append(getTypeName(field.getType())).append(' ').append(field.getName()); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		}
-		source.append(')');
+		source.append(')'); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		buildSuperInterfaceTypeList(source, typeDeclaration.superInterfaceTypes().iterator(), false);
 
 		if (buffer != null) {
 			fSnippetStartPosition += source.length();
 		}
-		source.append(buildTypeBody(buffer, typeDeclaration.bodyDeclarations()));
+		source.append(buildTypeBody(buffer, typeDeclaration.bodyDeclarations())); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 
 		return source;
 	}
 
-	void buildTypeParameterList(StringBuilder source, List<TypeParameter> typeParameters) {
+	void buildTypeParameterList(StringBuilder source, List<TypeParameter> typeParameters) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		if (!typeParameters.isEmpty() && isSourceLevelGreaterOrEqual(1, 5)) {
-			source.append('<');
+			source.append('<'); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			Iterator<TypeParameter> iter = typeParameters.iterator();
 			TypeParameter typeParameter = iter.next();
-			source.append(typeParameter.getName().getIdentifier());
+			source.append(typeParameter.getName().getIdentifier()); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			List<Type> typeBounds = typeParameter.typeBounds();
 			if (!typeBounds.isEmpty()) {
-				source.append(" extends "); //$NON-NLS-1$
+				source.append(" extends "); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				Iterator<Type> iter2 = typeBounds.iterator();
-				source.append(getTypeName(iter2.next()));
-				while (iter2.hasNext()) {
-					source.append('&');
-					source.append(getTypeName(iter2.next()));
+				source.append(getTypeName(iter2.next())); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+				while (iter2.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
+					source.append('&'); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+					source.append(getTypeName(iter2.next())); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				}
 			}
-			while (iter.hasNext()) {
-				source.append(',');
+			while (iter.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
+				source.append(','); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				typeParameter = iter.next();
-				source.append(typeParameter.getName().getIdentifier());
+				source.append(typeParameter.getName().getIdentifier()); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				typeBounds = typeParameter.typeBounds();
 				if (!typeBounds.isEmpty()) {
-					source.append(" extends "); //$NON-NLS-1$
+					source.append(" extends "); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 					Iterator<Type> iter2 = typeBounds.iterator();
-					source.append(getTypeName(iter2.next()));
-					while (iter2.hasNext()) {
-						source.append('&');
-						source.append(getTypeName(iter2.next()));
+					source.append(getTypeName(iter2.next())); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+					while (iter2.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
+						source.append('&'); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+						source.append(getTypeName(iter2.next())); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 					}
 				}
 			}
-			source.append('>');
+			source.append('>'); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		}
 	}
 
-	private StringBuilder buildCompilationUnit(StringBuilder buffer,
+	private StringBuilder buildCompilationUnit(StringBuilder buffer, //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 			CompilationUnit compilationUnit) {
-		StringBuilder source = new StringBuilder();
+		StringBuilder source = new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 
 		PackageDeclaration packageDeclaration = compilationUnit.getPackage();
 		if (packageDeclaration != null) {
-			source.append("package "); //$NON-NLS-1$
-			source.append(getQualifiedIdentifier(packageDeclaration.getName()));
-			source.append(";\n"); //$NON-NLS-1$
+			source.append("package "); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+			source.append(getQualifiedIdentifier(packageDeclaration.getName())); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+			source.append(";\n"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		}
 
-		for (Iterator<ImportDeclaration> iterator = compilationUnit.imports().iterator(); iterator
+		for (Iterator<ImportDeclaration> iterator = compilationUnit.imports().iterator(); iterator //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				.hasNext();) {
 			ImportDeclaration importDeclaration = iterator
 					.next();
-			source.append("import "); //$NON-NLS-1$
+			source.append("import "); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			if (importDeclaration.isStatic()) {
-				source.append("static "); //$NON-NLS-1$
+				source.append("static "); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			}
-			source.append(getQualifiedIdentifier(importDeclaration.getName()));
+			source.append(getQualifiedIdentifier(importDeclaration.getName())); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			if (importDeclaration.isOnDemand()) {
-				source.append(".*"); //$NON-NLS-1$
+				source.append(".*"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			}
-			source.append(";\n"); //$NON-NLS-1$
+			source.append(";\n"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		}
 
 		fSnippetStartPosition += source.length();
-		source.append(buffer);
+		source.append(buffer); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 
-		for (Iterator<TypeDeclaration> iterator = compilationUnit.types().iterator(); iterator
+		for (Iterator<TypeDeclaration> iterator = compilationUnit.types().iterator(); iterator //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				.hasNext();) {
 			AbstractTypeDeclaration typeDeclaration = iterator.next();
 			if (Flags.isPublic(typeDeclaration.getModifiers())) {
@@ -747,10 +747,10 @@ public class SourceBasedSourceGenerator extends ASTVisitor {
 			if (!fLastTypeName
 					.equals(typeDeclaration.getName().getIdentifier())) {
 				if (typeDeclaration instanceof TypeDeclaration) {
-					source.append(buildTypeDeclaration(null,
+					source.append(buildTypeDeclaration(null, //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 							(TypeDeclaration) typeDeclaration));
 				} else if (typeDeclaration instanceof EnumDeclaration) {
-					source.append(buildEnumDeclaration(null,
+					source.append(buildEnumDeclaration(null, //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 							(EnumDeclaration) typeDeclaration));
 				}
 			}
@@ -779,13 +779,13 @@ public class SourceBasedSourceGenerator extends ASTVisitor {
 		BodyDeclaration bodyDeclaration;
 		MethodDeclaration method;
 		String foundName;
-		while (iter.hasNext()) {
+		while (iter.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			bodyDeclaration = iter.next();
 			if (bodyDeclaration instanceof MethodDeclaration) {
 				method = (MethodDeclaration) bodyDeclaration;
 				foundName = method.getName().getIdentifier();
 				if (foundName.startsWith(methodName)) {
-					methodName = foundName + '_';
+					methodName = foundName + '_'; //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 				}
 			}
 		}
@@ -803,21 +803,21 @@ public class SourceBasedSourceGenerator extends ASTVisitor {
 	 *            the list of {@link BodyDeclaration}s to search through
 	 * @return the unique field name
 	 */
-	private String getUniqueFieldName(String fieldName, List<BodyDeclaration> bodyDeclarations) {
+	private String getUniqueFieldName(String fieldName, List<BodyDeclaration> bodyDeclarations) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		Iterator<BodyDeclaration> iter = bodyDeclarations.iterator();
 		BodyDeclaration bodyDeclaration;
 		FieldDeclaration fieldDeclaration;
 		String foundName;
-		while (iter.hasNext()) {
+		while (iter.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			bodyDeclaration = iter.next();
 			if (bodyDeclaration instanceof FieldDeclaration) {
 				fieldDeclaration = (FieldDeclaration) bodyDeclaration;
-				for (Iterator<VariableDeclarationFragment> iterator = fieldDeclaration.fragments()
+				for (Iterator<VariableDeclarationFragment> iterator = fieldDeclaration.fragments() //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 						.iterator(); iterator.hasNext();) {
 					foundName = iterator.next()
 							.getName().getIdentifier();
 					if (foundName.startsWith(fieldName)) {
-						fieldName = foundName + '_';
+						fieldName = foundName + '_'; //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 					}
 				}
 			}
@@ -827,20 +827,20 @@ public class SourceBasedSourceGenerator extends ASTVisitor {
 
 	private String getQualifiedIdentifier(Name name) {
 		String typeName = ""; //$NON-NLS-1$
-		while (name.isQualifiedName()) {
+		while (name.isQualifiedName()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			QualifiedName qualifiedName = (QualifiedName) name;
-			typeName = "." + qualifiedName.getName().getIdentifier() + typeName; //$NON-NLS-1$
+			typeName = "." + qualifiedName.getName().getIdentifier() + typeName; //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 			name = qualifiedName.getQualifier();
 		}
 		if (name.isSimpleName()) {
-			typeName = ((SimpleName) name).getIdentifier() + typeName;
+			typeName = ((SimpleName) name).getIdentifier() + typeName; //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		} else {
 			return null;
 		}
 		return typeName;
 	}
 
-	public String getTypeName(Type type) {
+	public String getTypeName(Type type) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		if (type.isSimpleType()) {
 			String name = getQualifiedIdentifier(((SimpleType) type).getName());
 			if (!isSourceLevelGreaterOrEqual(1, 5)
@@ -849,35 +849,35 @@ public class SourceBasedSourceGenerator extends ASTVisitor {
 			}
 			return name;
 		} else if (type.isArrayType()) {
-			return getTypeName(((ArrayType) type).getElementType()) + "[]"; //$NON-NLS-1$
+			return getTypeName(((ArrayType) type).getElementType()) + "[]"; //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		} else if (type.isPrimitiveType()) {
 			return ((PrimitiveType) type).getPrimitiveTypeCode().toString();
 		} else if (type.isQualifiedType()) {
 			QualifiedType qualifiedType = (QualifiedType) type;
-			return getTypeName(qualifiedType.getQualifier()) + '.'
+			return getTypeName(qualifiedType.getQualifier()) + '.' //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 					+ qualifiedType.getName().getIdentifier();
 		} else if (type.isParameterizedType()) {
 			ParameterizedType parameterizedType = (ParameterizedType) type;
-			StringBuilder buff = new StringBuilder(
+			StringBuilder buff = new StringBuilder( //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 					getTypeName(parameterizedType.getType()));
 			Iterator<Type> iter = parameterizedType.typeArguments().iterator();
 			if (iter.hasNext() && isSourceLevelGreaterOrEqual(1, 5)) {
-				buff.append('<');
-				buff.append(getTypeName(iter.next()));
-				while (iter.hasNext()) {
-					buff.append(',');
-					buff.append(getTypeName(iter.next()));
+				buff.append('<'); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+				buff.append(getTypeName(iter.next())); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+				while (iter.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
+					buff.append(','); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+					buff.append(getTypeName(iter.next())); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				}
-				buff.append('>');
+				buff.append('>'); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			}
 			return buff.toString();
 		} else if (type.isWildcardType()) {
 			WildcardType wildcardType = (WildcardType) type;
-			StringBuilder buff = new StringBuilder("?"); //$NON-NLS-1$
+			StringBuilder buff = new StringBuilder("?"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 			Type bound = wildcardType.getBound();
 			if (bound != null) {
-				buff.append(wildcardType.isUpperBound() ? " extends " : " super "); //$NON-NLS-1$ //$NON-NLS-2$
-				buff.append(getTypeName(bound));
+				buff.append(wildcardType.isUpperBound() ? " extends " : " super "); //$NON-NLS-1$ //$NON-NLS-2$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+				buff.append(getTypeName(bound)); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			}
 			return buff.toString();
 		}
@@ -885,7 +885,7 @@ public class SourceBasedSourceGenerator extends ASTVisitor {
 
 	}
 
-	public String getReturnExpression(Type type) {
+	public String getReturnExpression(Type type) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		if (type.isSimpleType() || type.isArrayType() || type.isQualifiedType()
 				|| type.isWildcardType() || type.isParameterizedType()) {
 			return "return null;"; //$NON-NLS-1$
@@ -910,7 +910,7 @@ public class SourceBasedSourceGenerator extends ASTVisitor {
 	/**
 	 * @see ASTVisitor#endVisit(ClassInstanceCreation)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public void endVisit(ClassInstanceCreation node) {
 		if (hasError()) {
 			return;
@@ -934,13 +934,13 @@ public class SourceBasedSourceGenerator extends ASTVisitor {
 				StringBuilder source = buildTypeBody(fSource, bodyDeclarations);
 
 				ASTNode parent = node.getParent();
-				while (!(parent instanceof MethodDeclaration
+				while (!(parent instanceof MethodDeclaration //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 						|| parent instanceof FieldDeclaration || parent instanceof Initializer)
 						&& parent != null) {
 					parent = parent.getParent();
 				}
 
-				fSource = new StringBuilder();
+				fSource = new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 
 				if (parent instanceof Initializer) {
 					buildAnonymousEvalMethod(true, bodyDeclarations,
@@ -954,23 +954,23 @@ public class SourceBasedSourceGenerator extends ASTVisitor {
 				} else if (parent instanceof FieldDeclaration enclosingFieldDeclaration) {
 					if (Flags
 							.isStatic(enclosingFieldDeclaration.getModifiers())) {
-						fSource.append("static "); //$NON-NLS-1$
+						fSource.append("static "); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 					}
 
 					Type type = getParentType(enclosingFieldDeclaration
 							.getType());
-					fSource.append(getQualifiedIdentifier(((SimpleType) type)
+					fSource.append(getQualifiedIdentifier(((SimpleType) type) //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 							.getName()));
-					fSource.append(' ');
-					fSource.append(getUniqueFieldName(EVAL_FIELD_NAME,
+					fSource.append(' '); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+					fSource.append(getUniqueFieldName(EVAL_FIELD_NAME, //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 							bodyDeclarations));
-					fSource.append(" = new "); //$NON-NLS-1$
-					fSource.append(getTypeName(node.getType()));
-					fSource.append("()"); //$NON-NLS-1$
+					fSource.append(" = new "); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+					fSource.append(getTypeName(node.getType())); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+					fSource.append("()"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 
 					fSnippetStartPosition += fSource.length();
-					fSource.append(source);
-					fSource.append(";\n"); //$NON-NLS-1$
+					fSource.append(source); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+					fSource.append(";\n"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 
 				}
 				fLastTypeName = ""; //$NON-NLS-1$
@@ -1003,19 +1003,19 @@ public class SourceBasedSourceGenerator extends ASTVisitor {
 	void buildAnonymousEvalMethod(boolean isstatic, List<BodyDeclaration> bodydecls,
 			String typename, StringBuilder body) {
 		if (isstatic) {
-			fSource.append("static "); //$NON-NLS-1$
+			fSource.append("static "); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		}
 		adddTypeParameters(fSource);
-		fSource.append("void "); //$NON-NLS-1$
-		fSource.append(getUniqueMethodName(EVAL_METHOD_NAME, bodydecls));
-		fSource.append("() {\n"); //$NON-NLS-1$
-		fSource.append("new "); //$NON-NLS-1$
-		fSource.append(typename);
-		fSource.append("()"); //$NON-NLS-1$
+		fSource.append("void "); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+		fSource.append(getUniqueMethodName(EVAL_METHOD_NAME, bodydecls)); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+		fSource.append("() {\n"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+		fSource.append("new "); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+		fSource.append(typename); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+		fSource.append("()"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 
 		fSnippetStartPosition += fSource.length();
-		fSource.append(body);
-		fSource.append(";}\n"); //$NON-NLS-1$
+		fSource.append(body); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+		fSource.append(";}\n"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 	}
 
 	/**
@@ -1060,7 +1060,7 @@ public class SourceBasedSourceGenerator extends ASTVisitor {
 	 * org.eclipse.jdt.core.dom.ASTVisitor#endVisit(org.eclipse.jdt.core.dom
 	 * .EnumDeclaration)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public void endVisit(EnumDeclaration node) {
 
 		if (hasError()) {
@@ -1087,21 +1087,21 @@ public class SourceBasedSourceGenerator extends ASTVisitor {
 				// enclose in a method if necessary
 
 				ASTNode parent = node.getParent();
-				while (!(parent instanceof MethodDeclaration)) {
+				while (!(parent instanceof MethodDeclaration)) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 					parent = parent.getParent();
 				}
 				MethodDeclaration enclosingMethodDeclaration = (MethodDeclaration) parent;
 
-				fSource = new StringBuilder();
+				fSource = new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 
 				if (Flags.isStatic(enclosingMethodDeclaration.getModifiers())) {
-					fSource.append("static "); //$NON-NLS-1$
+					fSource.append("static "); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				}
 
-				fSource.append("void ___eval() {\n"); //$NON-NLS-1$
+				fSource.append("void ___eval() {\n"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				fSnippetStartPosition += fSource.length();
-				fSource.append(source);
-				fSource.append("}\n"); //$NON-NLS-1$
+				fSource.append(source); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+				fSource.append("}\n"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 
 				fLastTypeName = ""; //$NON-NLS-1$
 			} else {
@@ -1123,7 +1123,7 @@ public class SourceBasedSourceGenerator extends ASTVisitor {
 	/**
 	 * @see ASTVisitor#endVisit(TypeDeclaration)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public void endVisit(TypeDeclaration node) {
 		if (hasError()) {
 			fTypeParameterStack.pop();
@@ -1153,21 +1153,21 @@ public class SourceBasedSourceGenerator extends ASTVisitor {
 				// enclose in a method if nessecary
 
 				ASTNode parent = node.getParent();
-				while (!(parent instanceof MethodDeclaration)) {
+				while (!(parent instanceof MethodDeclaration)) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 					parent = parent.getParent();
 				}
 				MethodDeclaration enclosingMethodDeclaration = (MethodDeclaration) parent;
 
-				fSource = new StringBuilder();
+				fSource = new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 
 				if (Flags.isStatic(enclosingMethodDeclaration.getModifiers())) {
-					fSource.append("static "); //$NON-NLS-1$
+					fSource.append("static "); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				}
 
-				fSource.append("void ___eval() {\n"); //$NON-NLS-1$
+				fSource.append("void ___eval() {\n"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				fSnippetStartPosition += fSource.length();
-				fSource.append(source);
-				fSource.append("}\n"); //$NON-NLS-1$
+				fSource.append(source); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+				fSource.append("}\n"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 
 				fLastTypeName = ""; //$NON-NLS-1$
 			} else {
@@ -1667,9 +1667,9 @@ public class SourceBasedSourceGenerator extends ASTVisitor {
 
 	private void pushTypeParameters(List<TypeParameter> typeParameters, TypeParameterLocation location) {
 		if (!typeParameters.isEmpty()) {
-			HashMap<String,String> newTypeParameters = new HashMap<>(fTypeParameterStack.peek());
+			HashMap<String,String> newTypeParameters = new HashMap<>(fTypeParameterStack.peek()); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
 			Iterator<TypeParameter> iterator = typeParameters.iterator();
-			while (iterator.hasNext()) {
+			while (iterator.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				TypeParameter typeParameter = iterator.next();
 				String boundName = typeParameter.getName().getIdentifier();
 				newTypeParameters.put(boundName, typeParameter.toString());
@@ -2189,39 +2189,39 @@ public class SourceBasedSourceGenerator extends ASTVisitor {
 	 * @param typeParameters
 	 *            the list of {@link TypeParameter}s to add
 	 */
-	private void appendTypeParameters(StringBuilder source, List<TypeParameter> typeParameters) {
+	private void appendTypeParameters(StringBuilder source, List<TypeParameter> typeParameters) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		if (!typeParameters.isEmpty() && isSourceLevelGreaterOrEqual(1, 5)) {
-			source.append('<');
+			source.append('<'); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			Iterator<TypeParameter> iter = typeParameters.iterator();
 			TypeParameter typeParameter = iter.next();
-			source.append(typeParameter.getName().getIdentifier());
+			source.append(typeParameter.getName().getIdentifier()); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			List<Type> typeBounds = typeParameter.typeBounds();
 			if (!typeBounds.isEmpty()) {
-				source.append(" extends "); //$NON-NLS-1$
+				source.append(" extends "); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				Iterator<Type> iter2 = typeBounds.iterator();
-				source.append(getTypeName(iter2.next()));
-				while (iter2.hasNext()) {
-					source.append('&');
-					source.append(getTypeName(iter2.next()));
+				source.append(getTypeName(iter2.next())); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+				while (iter2.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
+					source.append('&'); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+					source.append(getTypeName(iter2.next())); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				}
 			}
-			while (iter.hasNext()) {
-				source.append(',');
+			while (iter.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
+				source.append(','); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				typeParameter = iter.next();
-				source.append(typeParameter.getName().getIdentifier());
+				source.append(typeParameter.getName().getIdentifier()); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				typeBounds = typeParameter.typeBounds();
 				if (!typeBounds.isEmpty()) {
-					source.append(" extends "); //$NON-NLS-1$
+					source.append(" extends "); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 					Iterator<Type> iter2 = typeBounds.iterator();
-					source.append(getTypeName(iter2.next()));
-					while (iter2.hasNext()) {
-						source.append('&');
-						source.append(getTypeName(iter2.next()));
+					source.append(getTypeName(iter2.next())); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+					while (iter2.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
+						source.append('&'); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+						source.append(getTypeName(iter2.next())); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 					}
 				}
 			}
-			source.append('>');
-			source.append(' ');
+			source.append('>'); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+			source.append(' '); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		}
 	}
 }

@@ -52,12 +52,12 @@ import org.eclipse.swt.widgets.Control;
  *
  * @since 3.10
  */
-public class JavaVariablesDetailPane extends DefaultDetailPane {
+public class JavaVariablesDetailPane extends DefaultDetailPane { //FLLDCIM: MARK — T06  IMPLEMENTS
 
 	/**
 	 * Identifier for this Java Variable detail pane editor
 	 */
-	public static final String JAVA_VARIABLE_DETAIL_PANE_VARIABLES = JDIDebugUIPlugin.getUniqueIdentifier() + ".JAVA_VARIABLE_DETAIL_PANE_VARIABLES"; //$NON-NLS-1$
+	public static final String JAVA_VARIABLE_DETAIL_PANE_VARIABLES = JDIDebugUIPlugin.getUniqueIdentifier() + ".JAVA_VARIABLE_DETAIL_PANE_VARIABLES"; //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 	public static final String NAME = PropertyPageMessages.JavaVariableDetailsPane_name;
 	public static final String DESCRIPTION = PropertyPageMessages.JavaVariableDetailsPane_description;
 
@@ -69,7 +69,7 @@ public class JavaVariablesDetailPane extends DefaultDetailPane {
 	private static final String DS_SECTION_EXPRESSION_HISTORY = "expressionHistory"; //$NON-NLS-1$
 	private static final String DS_KEY_HISTORY_ENTRY_COUNT = "expressionHistoryEntryCount"; //$NON-NLS-1$
 	private static final String DS_KEY_HISTORY_ENTRY_PREFIX = "expressionHistoryEntry_"; //$NON-NLS-1$
-	private static final Pattern NEWLINE_PATTERN = Pattern.compile("\r\n|\r|\n"); //$NON-NLS-1$ ;
+	private static final Pattern NEWLINE_PATTERN = Pattern.compile("\r\n|\r|\n"); //$NON-NLS-1$ ; //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
 
 	private IJavaVariable fVariable;
 	private IValue fValue;
@@ -79,7 +79,7 @@ public class JavaVariablesDetailPane extends DefaultDetailPane {
 		fExpressionHistoryDialogSettings = DialogSettings.getOrCreateSection(JDIDebugUIPlugin.getDefault().getDialogSettings(), DS_SECTION_EXPRESSION_HISTORY);
 	}
 
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public Control createControl(Composite parent) {
 		if (!isInView()) {
 			Control c = super.createControl(parent);
@@ -92,7 +92,7 @@ public class JavaVariablesDetailPane extends DefaultDetailPane {
 			fDetailPaneContainer = container;
 
 			fExpressionHistory = SWTFactory.createCombo(container, SWT.DROP_DOWN | SWT.READ_ONLY, 1, null);
-			fExpressionHistory.addSelectionListener(new SelectionAdapter() {
+			fExpressionHistory.addSelectionListener(new SelectionAdapter() { //FLLDCIM: MARK — T03 SELECTION_LANE CALL
 				@Override
 				public void widgetSelected(SelectionEvent e) {
 					int historyIndex = fExpressionHistory.getSelectionIndex() - 1;
@@ -134,8 +134,8 @@ public class JavaVariablesDetailPane extends DefaultDetailPane {
 				}
 			}
 		};
-		viewer.getTextWidget().addFocusListener(focusListener);
-		viewer.getTextWidget().addModifyListener(new ModifyListener() {
+		viewer.getTextWidget().addFocusListener(focusListener); //FLLDCIM: MARK — T15 FOCUS CALL
+		viewer.getTextWidget().addModifyListener(new ModifyListener() { //FLLDCIM: MARK — T02 TEXT_INPUT_DEBOUNCE CALL
 			@Override
 			public void modifyText(ModifyEvent e) {
 				textModified = true;
@@ -162,8 +162,8 @@ public class JavaVariablesDetailPane extends DefaultDetailPane {
 	private String[] getExpressionHistoryLabels() {
 		String[] expressions = getExpressionHistory();
 		String[] labels = new String[expressions.length];
-		for (int i = 0; i < expressions.length; i++) {
-			labels[i] = NEWLINE_PATTERN.matcher(expressions[i]).replaceAll(" "); //$NON-NLS-1$
+		for (int i = 0; i < expressions.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
+			labels[i] = NEWLINE_PATTERN.matcher(expressions[i]).replaceAll(" "); //$NON-NLS-1$ //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
 		}
 		return labels;
 	}
@@ -181,7 +181,7 @@ public class JavaVariablesDetailPane extends DefaultDetailPane {
 	/**
 	 * Updates the local and global Expression histories.
 	 */
-	private void updateExpressionHistories() {
+	private void updateExpressionHistories() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String newItem = getSourceViewer().getDocument().get();
 		if (newItem.length() == 0 || fValue == null) {
 			return;
@@ -228,8 +228,8 @@ public class JavaVariablesDetailPane extends DefaultDetailPane {
 		}
 		count = Math.min(count, MAX_HISTORY_SIZE);
 		String[] expressions = new String[count];
-		for (int i = 0; i < count; i++) {
-			expressions[i] = dialogSettings.get(DS_KEY_HISTORY_ENTRY_PREFIX + i);
+		for (int i = 0; i < count; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
+			expressions[i] = dialogSettings.get(DS_KEY_HISTORY_ENTRY_PREFIX + i); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		}
 		return expressions;
 	}
@@ -243,11 +243,11 @@ public class JavaVariablesDetailPane extends DefaultDetailPane {
 	 *            the dialog settings
 	 */
 	private static void storeExpressionHistory(String[] expressions, IDialogSettings dialogSettings) {
-		List<String> uniqueExpressions = new ArrayList<>(new LinkedHashSet<>(Arrays.asList(expressions)));
+		List<String> uniqueExpressions = new ArrayList<>(new LinkedHashSet<>(Arrays.asList(expressions))); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 		final int length = Math.min(uniqueExpressions.size(), MAX_HISTORY_SIZE);
 		int count = 0;
-		for (String expression : uniqueExpressions) {
-			dialogSettings.put(DS_KEY_HISTORY_ENTRY_PREFIX + count, expression);
+		for (String expression : uniqueExpressions) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
+			dialogSettings.put(DS_KEY_HISTORY_ENTRY_PREFIX + count, expression); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 			count++;
 			if (count >= length) {
 				break;

@@ -43,7 +43,7 @@ import org.eclipse.ui.actions.SelectionListenerAction;
 /**
  * Adds a project to the runtime class path.
  */
-public class AddProjectAction extends RuntimeClasspathAction {
+public class AddProjectAction extends RuntimeClasspathAction { //FLLDCIM: MARK — T04  IMPLEMENTS
 
 
 
@@ -56,7 +56,7 @@ public class AddProjectAction extends RuntimeClasspathAction {
 	 *
 	 * @see IAction#run()
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public void run() {
 		List<IJavaProject> projects = getPossibleAdditions();
 		ProjectSelectionDialog dialog= new ProjectSelectionDialog(getShell(),projects);
@@ -66,9 +66,9 @@ public class AddProjectAction extends RuntimeClasspathAction {
 		if (dialog.open() == Window.OK) {
 			Object[] selections = dialog.getResult();
 
-			List<IJavaProject> additions = new ArrayList<>(selections.length);
+			List<IJavaProject> additions = new ArrayList<>(selections.length); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 			try {
-				for (Object selection : selections) {
+				for (Object selection : selections) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 					IJavaProject jp = (IJavaProject) selection;
 					if (dialog.isAddRequiredProjects()) {
 						collectRequiredProjects(jp, additions);
@@ -80,10 +80,10 @@ public class AddProjectAction extends RuntimeClasspathAction {
 				status.add(e.getStatus());
 			}
 
-			List<IRuntimeClasspathEntry> runtimeEntries = new ArrayList<>(additions.size());
+			List<IRuntimeClasspathEntry> runtimeEntries = new ArrayList<>(additions.size()); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 			Iterator<IJavaProject> iter = additions.iterator();
 			IRuntimeClasspathEntry[] addedEntries = getViewer().getEntries();
-			while (iter.hasNext()) {
+			while (iter.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				IJavaProject jp = iter.next();
 				if (isProjectAdded(jp, addedEntries)) {
 					continue;
@@ -107,7 +107,7 @@ public class AddProjectAction extends RuntimeClasspathAction {
 	}
 
 	private boolean isProjectAdded(IJavaProject project, IRuntimeClasspathEntry[] addedEntries) {
-		for (IRuntimeClasspathEntry entry : addedEntries) {
+		for (IRuntimeClasspathEntry entry : addedEntries) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			if (entry.getType() == IRuntimeClasspathEntry.PROJECT) {
 				IResource res = ResourcesPlugin.getWorkspace().getRoot().findMember(entry.getPath());
 				if (res.getLocationURI().equals(project.getResource().getLocationURI())) {
@@ -135,7 +135,7 @@ public class AddProjectAction extends RuntimeClasspathAction {
 	 * Returns the possible projects that can be added
 	 * @return the list of projects
 	 */
-	protected List<IJavaProject> getPossibleAdditions() {
+	protected List<IJavaProject> getPossibleAdditions() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IJavaProject[] projects;
 		IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
 		try {
@@ -144,12 +144,12 @@ public class AddProjectAction extends RuntimeClasspathAction {
 			JDIDebugUIPlugin.log(e);
 			projects= new IJavaProject[0];
 		}
-		List<IJavaProject> remaining = new ArrayList<>();
-		for (IJavaProject project : projects) {
+		List<IJavaProject> remaining = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
+		for (IJavaProject project : projects) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			remaining.add(project);
 		}
-		List<IJavaProject> alreadySelected = new ArrayList<>();
-		for (IRuntimeClasspathEntry entry : getViewer().getEntries()) {
+		List<IJavaProject> alreadySelected = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
+		for (IRuntimeClasspathEntry entry : getViewer().getEntries()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			if (entry.getType() == IRuntimeClasspathEntry.PROJECT) {
 				IResource res = root.findMember(entry.getPath());
 				IJavaProject jp = (IJavaProject)JavaCore.create(res);
@@ -175,7 +175,7 @@ public class AddProjectAction extends RuntimeClasspathAction {
 
 			IJavaModel model= proj.getJavaModel();
 
-			for (IClasspathEntry curr : proj.getRawClasspath()) {
+			for (IClasspathEntry curr : proj.getRawClasspath()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				if (curr.getEntryKind() == IClasspathEntry.CPE_PROJECT) {
 					IJavaProject ref= model.getJavaProject(curr.getPath().segment(0));
 					if (ref.exists()) {
@@ -194,8 +194,8 @@ public class AddProjectAction extends RuntimeClasspathAction {
 	 * @param runtimeEntries the entries
 	 * @throws CoreException if an exception occurs
 	 */
-	protected void collectExportedEntries(IJavaProject proj, List<IRuntimeClasspathEntry> runtimeEntries) throws CoreException {
-		for (IClasspathEntry entry : proj.getRawClasspath()) {
+	protected void collectExportedEntries(IJavaProject proj, List<IRuntimeClasspathEntry> runtimeEntries) throws CoreException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
+		for (IClasspathEntry entry : proj.getRawClasspath()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			if (entry.isExported()) {
 				IRuntimeClasspathEntry rte = null;
 				switch (entry.getEntryKind()) {

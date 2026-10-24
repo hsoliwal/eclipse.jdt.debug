@@ -96,7 +96,7 @@ public class JavaProjectSourceLocation extends PlatformObject implements IJavaSo
 	@Override
 	public Object findSourceElement(String name) throws CoreException {
 		if (fRootLocations != null) {
-			for (int i = 0; i < fRootLocations.length; i++) {
+			for (int i = 0; i < fRootLocations.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				Object element = fRootLocations[i].findSourceElement(name);
 				if (element != null) {
 					return element;
@@ -112,15 +112,15 @@ public class JavaProjectSourceLocation extends PlatformObject implements IJavaSo
 	 *
 	 * @param project Java project
 	 */
-	private void setJavaProject(IJavaProject project) {
+	private void setJavaProject(IJavaProject project) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		fProject = project;
 		fRootLocations = null;
 		if (fProject != null) {
 			try {
 				IPackageFragmentRoot[] roots = project.getPackageFragmentRoots();
-				ArrayList<PackageFragmentRootSourceLocation> list = new ArrayList<>(roots.length);
+				ArrayList<PackageFragmentRootSourceLocation> list = new ArrayList<>(roots.length); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 
-				for (int i = 0; i < roots.length; i++) {
+				for (int i = 0; i < roots.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 					if (roots[i].getKind() == IPackageFragmentRoot.K_SOURCE) {
 						list.add(new PackageFragmentRootSourceLocation(roots[i]));
 					}
@@ -178,7 +178,7 @@ public class JavaProjectSourceLocation extends PlatformObject implements IJavaSo
 	/* (non-Javadoc)
 	 * @see org.eclipse.jdt.launching.sourcelookup.IJavaSourceLocation#initializeFrom(java.lang.String)
 	 */
-	@Deprecated
+	@Deprecated //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	@Override
 	public void initializeFrom(String memento) throws CoreException {
 		Exception ex = null;

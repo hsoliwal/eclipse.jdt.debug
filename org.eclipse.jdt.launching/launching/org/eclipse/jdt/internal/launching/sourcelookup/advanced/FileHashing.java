@@ -114,9 +114,9 @@ public class FileHashing {
 
 		@Override
 		public final String toString() {
-			StringBuilder sb = new StringBuilder(2 * bytes.length);
-			for (byte b : bytes) {
-				sb.append(hexDigits[(b >> 4) & 0xf]).append(hexDigits[b & 0xf]);
+			StringBuilder sb = new StringBuilder(2 * bytes.length); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
+			for (byte b : bytes) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
+				sb.append(hexDigits[(b >> 4) & 0xf]).append(hexDigits[b & 0xf]); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			}
 			return sb.toString();
 		}
@@ -138,16 +138,16 @@ public class FileHashing {
 		}
 
 		public HasherImpl(HasherImpl initial) {
-			this.cache = new LinkedHashMap<>(initial.cache);
+			this.cache = new LinkedHashMap<>(initial.cache); //FLLDCIM: MARK — M04 M3_ORDERED_LANES NEW
 		}
 
-		@Override
+		@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		public HashCode hash(File file) {
 			if (file == null) {
 				return null;
 			}
 			try {
-				BasicFileAttributes attributes = Files.readAttributes(file.toPath(), BasicFileAttributes.class);
+				BasicFileAttributes attributes = Files.readAttributes(file.toPath(), BasicFileAttributes.class); //FLLDCIM: MARK — M31 M3FILE_IO CALL
 				if (!attributes.isRegularFile()) {
 					return null;
 				}
@@ -182,9 +182,9 @@ public class FileHashing {
 			throw new IllegalStateException("Unsupported JVM", e); //$NON-NLS-1$
 		}
 		byte[] buf = new byte[4096];
-		try (InputStream is = new FileInputStream(file)) {
+		try (InputStream is = new FileInputStream(file)) { //FLLDCIM: MARK — M31 M3FILE_IO NEW
 			int len;
-			while ((len = is.read(buf)) > 0) {
+			while ((len = is.read(buf)) > 0) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				digest.update(buf, 0, len);
 			}
 		}

@@ -124,10 +124,10 @@ public abstract class AbstractJDITest extends TestCase {
 		fVMLauncherName = "DefaultVMLauncher";
 		try {
 			String cp = MainClass.class.getProtectionDomain().getCodeSource().getLocation().toURI().getPath();
-			System.out.println("MainClass path=" + cp);
-			if (new File(cp).isDirectory() && !cp.endsWith(File.separatorChar + "bin" + File.separatorChar)
-					&& new File(cp + "bin" + File.separatorChar).isDirectory()) {
-				cp += "bin" + File.separatorChar;
+			System.out.println("MainClass path=" + cp); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
+			if (new File(cp).isDirectory() && !cp.endsWith(File.separatorChar + "bin" + File.separatorChar) //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT //FLLDCIM: MARK — M31 M3FILE_IO CALL
+					&& new File(cp + "bin" + File.separatorChar).isDirectory()) { //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT //FLLDCIM: MARK — M31 M3FILE_IO CALL
+				cp += "bin" + File.separatorChar; //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 			}
 			fClassPath = new File(cp).getAbsolutePath();
 		} catch (URISyntaxException e) {
@@ -166,11 +166,11 @@ public abstract class AbstractJDITest extends TestCase {
 	 * Returns all tests that start with the given string.
 	 * Returns a vector of String.
 	 */
-	protected Vector<String> getAllMatchingTests(String match) {
+	protected Vector<String> getAllMatchingTests(String match) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		Class<? extends AbstractJDITest> theClass = this.getClass();
 		java.lang.reflect.Method[] methods = theClass.getDeclaredMethods();
 		Vector<String> result = new Vector<>();
-		for (int i = 0; i < methods.length; i++) {
+		for (int i = 0; i < methods.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			java.lang.reflect.Method m = methods[i];
 			String name = m.getName();
 			Class<?>[] parameters = m.getParameterTypes();
@@ -178,7 +178,7 @@ public abstract class AbstractJDITest extends TestCase {
 				if (!isExcludedTest(name)) {
 					result.add(name);
 				} else {
-					System.out.println(name + " is excluded.");
+					System.out.println(name + " is excluded."); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 				}
 			}
 		}
@@ -432,7 +432,7 @@ public abstract class AbstractJDITest extends TestCase {
 		// Get field
 		Field result = type.fieldByName(fieldName);
 		if (result == null) {
-			throw new Error("Unknown field: " + fieldName);
+			throw new Error("Unknown field: " + fieldName); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		}
 
 		return result;
@@ -507,7 +507,7 @@ public abstract class AbstractJDITest extends TestCase {
 	 * Returns the method with the given name and signature
 	 * in the given class.
 	 */
-	protected Method getMethod(String className, String name, String signature) {
+	protected Method getMethod(String className, String name, String signature) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		// Get main class
 		ClassType type = getClass(className);
 
@@ -515,7 +515,7 @@ public abstract class AbstractJDITest extends TestCase {
 		Method method = null;
 		List<Method> methods = type.methods();
 		ListIterator<Method> iterator = methods.listIterator();
-		while (iterator.hasNext()) {
+		while (iterator.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			Method m = iterator.next();
 			if ((m.name().equals(name)) && (m.signature().equals(signature))) {
 				method = m;
@@ -523,7 +523,7 @@ public abstract class AbstractJDITest extends TestCase {
 			}
 		}
 		if (method == null) {
-			throw new Error("Unknown method: " + name + signature);
+			throw new Error("Unknown method: " + name + signature); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		}
 
 		return method;
@@ -615,7 +615,7 @@ public abstract class AbstractJDITest extends TestCase {
 		return getThread("fMainThread");
 	}
 
-	protected ThreadReference getThread(String fieldName) {
+	protected ThreadReference getThread(String fieldName) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		ClassType type = getMainClass();
 		if (type == null) {
 			return null;
@@ -625,7 +625,7 @@ public abstract class AbstractJDITest extends TestCase {
 		List<Field> fields = type.fields();
 		ListIterator<Field> iterator = fields.listIterator();
 		Field field = null;
-		while (iterator.hasNext()) {
+		while (iterator.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			field = iterator.next();
 			if (field.name().equals(fieldName)) {
 				break;
@@ -659,7 +659,7 @@ public abstract class AbstractJDITest extends TestCase {
 		if (excludedTests == null) {
 			return false;
 		}
-		for (int i = 0; i < excludedTests.length; i++) {
+		for (int i = 0; i < excludedTests.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			if (testName.equals(excludedTests[i])) {
 				return true;
 			}
@@ -709,7 +709,7 @@ public abstract class AbstractJDITest extends TestCase {
 			}
 			fLaunchedVM = Runtime.getRuntime().exec(parseCommand(fVmCmd));
 		} catch (IOException e) {
-			throw new Error("Could not launch the VM because " + e.getMessage());
+			throw new Error("Could not launch the VM because " + e.getMessage()); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		}
 	}
 
@@ -727,24 +727,24 @@ public abstract class AbstractJDITest extends TestCase {
 		if(tokenizer.hasMoreTokens()) {
 			commandArray[0] = tokenizer.nextToken();
 		}
-		for (int i= 1; tokenizer.hasMoreTokens(); i++) {
+		for (int i= 1; tokenizer.hasMoreTokens(); i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			commandArray[i] = tokenizer.nextToken();
 		}
 		return commandArray;
 	}
 
-	private void launchJavaTarget() {
+	private void launchJavaTarget() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 			// Launch target VM
 			String binDirectory =
-				fTargetAddress
+				fTargetAddress //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 					+ File.separatorChar
 					+ "bin"
 					+ File.separatorChar;
 
 			Vector<String> commandLine = new Vector<>();
 
-			commandLine.add(binDirectory + "java");
+			commandLine.add(binDirectory + "java"); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 			if (fBootPath.length() > 0) {
 				commandLine.add("-bootpath");
 				commandLine.add(fBootPath);
@@ -754,14 +754,14 @@ public abstract class AbstractJDITest extends TestCase {
 			commandLine.add(enhanceClasspath(fClassPath));
 			addDebugOptions(commandLine);
 			addNoJITCompilerOption(commandLine);
-			commandLine.add("-Xrunjdwp:transport=dt_socket,address=" + fBackEndPort + ",suspend=y,server=y");
+			commandLine.add("-Xrunjdwp:transport=dt_socket,address=" + fBackEndPort + ",suspend=y,server=y"); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 			injectVMArgs(commandLine);
 			commandLine.add(getMainClassName());
 
 			fLaunchedVM = exec(commandLine);
 
 		} catch (IOException e) {
-			throw new Error("Could not launch the VM because " + e.getMessage());
+			throw new Error("Could not launch the VM because " + e.getMessage()); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		}
 	}
 
@@ -777,24 +777,24 @@ public abstract class AbstractJDITest extends TestCase {
 	/**
 	 * Launches the target Sun VM.
 	 */
-	private void launchSunTarget() {
+	private void launchSunTarget() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 			// Launch target VM
-			StringBuilder binDirectory= new StringBuilder();
+			StringBuilder binDirectory= new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 			if (fTargetAddress.endsWith("jre")) {
-				binDirectory.append(fTargetAddress.substring(0, fTargetAddress.length() - 4));
+				binDirectory.append(fTargetAddress.substring(0, fTargetAddress.length() - 4)); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			} else {
-				binDirectory.append(fTargetAddress);
+				binDirectory.append(fTargetAddress); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			}
-			binDirectory.append(File.separatorChar);
-			binDirectory.append("bin").append(File.separatorChar);
+			binDirectory.append(File.separatorChar); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+			binDirectory.append("bin").append(File.separatorChar); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 
 			Vector<String> commandLine = new Vector<>();
 
-			String launcher = binDirectory.toString() + "javaw.exe";
+			String launcher = binDirectory.toString() + "javaw.exe"; //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 			File vm= new File(launcher);
-			if (!vm.exists()) {
-				launcher = binDirectory + "java";
+			if (!vm.exists()) { //FLLDCIM: MARK — M31 M3FILE_IO CALL
+				launcher = binDirectory + "java"; //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 			}
 			commandLine.add(launcher);
 
@@ -806,31 +806,31 @@ public abstract class AbstractJDITest extends TestCase {
 			commandLine.add(enhanceClasspath(fClassPath));
 			addDebugOptions(commandLine);
 			addNoJITCompilerOption(commandLine);
-			commandLine.add("-Xrunjdwp:transport=dt_socket,address=" + fBackEndPort + ",suspend=y,server=y");
+			commandLine.add("-Xrunjdwp:transport=dt_socket,address=" + fBackEndPort + ",suspend=y,server=y"); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 			injectVMArgs(commandLine);
 			commandLine.add(getMainClassName());
 
 			fLaunchedVM = exec(commandLine);
 
 		} catch (IOException e) {
-			throw new Error("Could not launch the VM because " + e.getMessage());
+			throw new Error("Could not launch the VM because " + e.getMessage()); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		}
 	}
 	/**
 	 * Launches the target IBM VM.
 	 */
-	private void launchIBMTarget() {
+	private void launchIBMTarget() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 			// Launch target VM
 			String binDirectory =
-				fTargetAddress
+				fTargetAddress //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 					+ File.separatorChar
 					+ "bin"
 					+ File.separatorChar;
 
 			Vector<String> commandLine = new Vector<>();
 
-			commandLine.add(binDirectory + "javaw");
+			commandLine.add(binDirectory + "javaw"); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 			if (fBootPath.length() > 0) {
 				commandLine.add("-bootpath");
 				commandLine.add(fBootPath);
@@ -840,14 +840,14 @@ public abstract class AbstractJDITest extends TestCase {
 			commandLine.add(enhanceClasspath(fClassPath));
 			addDebugOptions(commandLine);
 			addNoJITCompilerOption(commandLine);
-			commandLine.add("-Xrunjdwp:transport=dt_socket,address=" + fBackEndPort + ",suspend=y,server=y");
+			commandLine.add("-Xrunjdwp:transport=dt_socket,address=" + fBackEndPort + ",suspend=y,server=y"); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 			injectVMArgs(commandLine);
 			commandLine.add(getMainClassName());
 
 			fLaunchedVM = exec(commandLine);
 
 		} catch (IOException e) {
-			throw new Error("Could not launch the VM because " + e.getMessage());
+			throw new Error("Could not launch the VM because " + e.getMessage()); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		}
 	}
 
@@ -883,8 +883,8 @@ public abstract class AbstractJDITest extends TestCase {
 	 */
 	private void injectVMArgs(Vector<String> commandLine) {
 		if (fVmArgs != null) {
-			String[] args = fVmArgs.split(",");
-			for (int i=0; i < args.length; i++) {
+			String[] args = fVmArgs.split(","); //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
+			for (int i=0; i < args.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				commandLine.add(args[i]);
 			}
 		}
@@ -899,7 +899,7 @@ public abstract class AbstractJDITest extends TestCase {
 		String[] vmString = new String[commandLine.size()];
 		commandLine.toArray(vmString);
 		Process exec = Runtime.getRuntime().exec(vmString);
-		System.out.println("launched with pid=" + exec.pid() + ": " + String.join(" ", vmString));
+		System.out.println("launched with pid=" + exec.pid() + ": " + String.join(" ", vmString)); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		return exec;
 	}
 
@@ -907,14 +907,14 @@ public abstract class AbstractJDITest extends TestCase {
 	/**
 	 * Connects to the target vm.
 	 */
-	protected void connectToVM() {
+	protected void connectToVM() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		// Start the console reader if possible so that the VM doesn't block when the stdout is full
 		startConsoleReaders();
 
 
 		// Contact the VM (try at least 10 times for 5 seconds)
 		long n0 = System.nanoTime();
-		for (int i = 0; i < 10000; i++) {
+		for (int i = 0; i < 10000; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			try {
 				VirtualMachineManager manager = Bootstrap.virtualMachineManager();
 				List<AttachingConnector> connectors = manager.attachingConnectors();
@@ -937,7 +937,7 @@ public abstract class AbstractJDITest extends TestCase {
 				long n1 = System.nanoTime();
 				if (i > 10 && n1 - n0 > 5_000_000_000L) {
 					e.printStackTrace();
-					System.out.println("Could not contact the VM at localhost" + ":" + fBackEndPort + " after " + (n1 - n0) / 1_000_000L + "ms");
+					System.out.println("Could not contact the VM at localhost" + ":" + fBackEndPort + " after " + (n1 - n0) / 1_000_000L + "ms"); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 					break;
 				}
 				try {
@@ -953,7 +953,7 @@ public abstract class AbstractJDITest extends TestCase {
 					if (!vmIsRunning()) {
 						InputStream in = fLaunchedVM.getErrorStream();
 						int read;
-						do {
+						do { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 							read = in.read();
 							if (read != -1) {
 								System.out.print((char) read);
@@ -969,7 +969,7 @@ public abstract class AbstractJDITest extends TestCase {
 			throw new Error("Could not contact the VM");
 		}
 		long n1 = System.nanoTime(); // for example after ~ 110ms
-		System.out.println("Connected to localhost" + ":" + fBackEndPort + " after " + (n1 - n0) / 1_000_000L + "ms");
+		System.out.println("Connected to localhost" + ":" + fBackEndPort + " after " + (n1 - n0) / 1_000_000L + "ms"); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		startEventReader();
 	}
 	/**
@@ -987,7 +987,7 @@ public abstract class AbstractJDITest extends TestCase {
 	 * fields.
 	 * Returns whether the parsing was successful.
 	 */
-	protected static boolean parseArgs(String[] args) {
+	protected static boolean parseArgs(String[] args) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		// Default values
 		String vmVendor = System.getProperty("java.vm.vendor");
 		String vmVersion = System.getProperty("java.vm.version");
@@ -1011,7 +1011,7 @@ public abstract class AbstractJDITest extends TestCase {
 		boolean verbose = false;
 
 		// Parse arguments
-		for (int i = 0; i < args.length; ++i) {
+		for (int i = 0; i < args.length; ++i) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			String arg = args[i];
 			if (arg.startsWith("-")) {
 				if (arg.equals("-verbose") || arg.equals("-v")) {
@@ -1067,7 +1067,7 @@ public abstract class AbstractJDITest extends TestCase {
 							}
 							break;
 						default:
-							System.out.println("Invalid option: " + arg);
+							System.out.println("Invalid option: " + arg); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 							printUsage();
 							return false;
 					}
@@ -1143,9 +1143,9 @@ public abstract class AbstractJDITest extends TestCase {
 
 		// Run test
 		System.out.println(new java.util.Date());
-		System.out.println("Begin testing " + getName() + "...");
+		System.out.println("Begin testing " + getName() + "..."); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		junit.textui.TestRunner.run(suite());
-		System.out.println("Done testing " + getName() + ".");
+		System.out.println("Done testing " + getName() + "."); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 	}
 	/**
 	 * Sets the 'in control of the VM' flag for this test.
@@ -1200,7 +1200,7 @@ public abstract class AbstractJDITest extends TestCase {
 	/**
 	 * Shut down the target.
 	 */
-	public void shutDownTarget() {
+	public void shutDownTarget() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		stopReaders();
 		if (fVM != null) {
 			try {
@@ -1230,7 +1230,7 @@ public abstract class AbstractJDITest extends TestCase {
 	/**
 	 * Starts the threads that reads from the VM and proxy input and error streams
 	 */
-	private void startConsoleReaders() {
+	private void startConsoleReaders() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		if (fStdoutFile != null) {
 			fConsoleReader =
 				new FileConsoleReader(
@@ -1330,7 +1330,7 @@ public abstract class AbstractJDITest extends TestCase {
 	/**
 	 * Starts the target program.
 	 */
-	protected void startProgram() {
+	protected void startProgram() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		verbose("Starting target program");
 
 		// Request class prepare events
@@ -1353,7 +1353,7 @@ public abstract class AbstractJDITest extends TestCase {
 		Event event = waitForEvent(waiter, TIMEOUT);
 		fEventReader.removeEventListener(waiter);
 		if (event == null) {
-			throw new RuntimeException("ClassPrepareEvent for " + getMainClassName() + " missing after " + TIMEOUT + "ms");
+			throw new RuntimeException("ClassPrepareEvent for " + getMainClassName() + " missing after " + TIMEOUT + "ms"); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		}
 		// silence streams after "Listening for transport dt_socket at address: xyz"
 		if (fConsoleErrorReader instanceof NullConsoleReader r) {
@@ -1382,7 +1382,7 @@ public abstract class AbstractJDITest extends TestCase {
 		JDITestSuite suite = new JDITestSuite(this);
 		Vector<String> testNames = getAllMatchingTests( getTestPrefix() );
 		Iterator<String> iterator = testNames.iterator();
-		while (iterator.hasNext()) {
+		while (iterator.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			String name = iterator.next();
 			suite.addTest(new JDITestCase(this, name));
 		}
@@ -1391,7 +1391,7 @@ public abstract class AbstractJDITest extends TestCase {
 	/**
 	 * Undo the initialization of the test.
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	protected void tearDown() {
 		try {
 			super.tearDown();
@@ -1432,7 +1432,7 @@ public abstract class AbstractJDITest extends TestCase {
 		Event event = triggerAndWait(request, eventType, shouldGo, TIMEOUT);
 		if (event == null) {
 			throw new Error(
-				"Event for " + request + " didn't come in after " + TIMEOUT + "ms");
+				"Event for " + request + " didn't come in after " + TIMEOUT + "ms"); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		}
 
 		return event;
@@ -1443,7 +1443,7 @@ public abstract class AbstractJDITest extends TestCase {
 	 * Returns null if the event didn't come in after the given amount of time (in ms)
 	 * @param time the time to wait
 	 */
-	protected Event triggerAndWait(
+	protected Event triggerAndWait( //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		EventRequest request,
 		String eventType,
 		boolean shouldGo,
@@ -1482,7 +1482,7 @@ public abstract class AbstractJDITest extends TestCase {
 	/**
 	 * Triggers the given type of event. See the MainClass for details on types of event.
 	 */
-	protected void triggerEvent(String eventType) {
+	protected void triggerEvent(String eventType) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		// Set the "fEventType" field to the given eventType
 		ClassType type = getMainClass();
 		Field field = type.fieldByName("fEventType");
@@ -1501,7 +1501,7 @@ public abstract class AbstractJDITest extends TestCase {
 		// Resume the test thread
 		ThreadReference thread = getThread();
 		int suspendCount = thread.suspendCount();
-		for (int i = 0; i < suspendCount; i++) {
+		for (int i = 0; i < suspendCount; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			thread.resume();
 		}
 	}
@@ -1529,7 +1529,7 @@ public abstract class AbstractJDITest extends TestCase {
 		return triggerStepAndWait(thread, eventRequest, TIMEOUT);
 	}
 
-	protected StepEvent triggerStepAndWait(
+	protected StepEvent triggerStepAndWait( //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		ThreadReference thread,
 		EventRequest eventRequest,
 		int timeout) {
@@ -1539,7 +1539,7 @@ public abstract class AbstractJDITest extends TestCase {
 
 		// Trigger step event
 		int suspendCount = thread.suspendCount();
-		for (int i = 0; i < suspendCount; i++) {
+		for (int i = 0; i < suspendCount; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			thread.resume();
 		}
 
@@ -1547,7 +1547,7 @@ public abstract class AbstractJDITest extends TestCase {
 		StepEvent event = (StepEvent) waitForEvent(waiter, timeout);
 		fEventReader.removeEventListener(waiter);
 		if (event == null) {
-			throw new Error("StepEvent didn't come in after " + timeout + "ms");
+			throw new Error("StepEvent didn't come in after " + timeout + "ms"); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		}
 
 		// Stop getting step events
@@ -1584,10 +1584,10 @@ public abstract class AbstractJDITest extends TestCase {
 	 * The default behavior is to wait until the "Test Thread" throws and catches
 	 * an exception.
 	 */
-	protected void waitUntilReady() {
+	protected void waitUntilReady() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		// Make sure the program is running
 		ThreadReference thread = getThread();
-		while (thread == null || thread.suspendCount() > 0) {
+		while (thread == null || thread.suspendCount() > 0) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			fVM.resume();
 			thread = getThread();
 		}
@@ -1603,13 +1603,13 @@ public abstract class AbstractJDITest extends TestCase {
 
 		request.enable();
 
-		while (true) {
+		while (true) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			// Wait for the event to come in
 			ExceptionEvent event = (ExceptionEvent) waitForEvent(waiter, TIMEOUT);
 
 			// Throw error if event is null
 			if (event == null) {
-				throw new Error("Target program was not ready after " + TIMEOUT + "ms");
+				throw new Error("Target program was not ready after " + TIMEOUT + "ms"); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 			}
 
 			// Get the method where the exception was thrown

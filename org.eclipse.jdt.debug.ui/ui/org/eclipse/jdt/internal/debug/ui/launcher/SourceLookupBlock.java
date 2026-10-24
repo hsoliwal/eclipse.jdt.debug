@@ -73,7 +73,7 @@ public class SourceLookupBlock extends AbstractJavaClasspathTab implements ILaun
 	 *
 	 * @param parent the parent widget of this control
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public void createControl(Composite parent) {
 		Font font = parent.getFont();
 
@@ -114,7 +114,7 @@ public class SourceLookupBlock extends AbstractJavaClasspathTab implements ILaun
 		gd.horizontalSpan = 2;
 		fDefaultButton.setLayoutData(gd);
 		fDefaultButton.setFont(font);
-		fDefaultButton.addSelectionListener(new SelectionAdapter() {
+		fDefaultButton.addSelectionListener(new SelectionAdapter() { //FLLDCIM: MARK — T03 SELECTION_LANE CALL
 			@Override
 			public void widgetSelected(SelectionEvent evt) {
 				handleDefaultButtonSelected();
@@ -127,7 +127,7 @@ public class SourceLookupBlock extends AbstractJavaClasspathTab implements ILaun
 		gd.horizontalSpan = 2;
 		fDuplicatesButton.setLayoutData(gd);
 		fDuplicatesButton.setFont(font);
-		fDuplicatesButton.addSelectionListener(new SelectionAdapter() {
+		fDuplicatesButton.addSelectionListener(new SelectionAdapter() { //FLLDCIM: MARK — T03 SELECTION_LANE CALL
 			@Override
 			public void widgetSelected(SelectionEvent evt) {
 				setDirty(true);
@@ -135,7 +135,7 @@ public class SourceLookupBlock extends AbstractJavaClasspathTab implements ILaun
 			}
 		});
 
-		List<RuntimeClasspathAction> advancedActions = new ArrayList<>(5);
+		List<RuntimeClasspathAction> advancedActions = new ArrayList<>(5); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 
 		GC gc = new GC(parent);
 		gc.setFont(parent.getFont());
@@ -192,7 +192,7 @@ public class SourceLookupBlock extends AbstractJavaClasspathTab implements ILaun
 	/**
 	 * The "default" button has been toggled
 	 */
-	protected void handleDefaultButtonSelected() {
+	protected void handleDefaultButtonSelected() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		setDirty(true);
 		boolean def = fDefaultButton.getSelection();
 		if (def) {
@@ -243,7 +243,7 @@ public class SourceLookupBlock extends AbstractJavaClasspathTab implements ILaun
 	/* (non-Javadoc)
 	 * @see org.eclipse.debug.ui.ILaunchConfigurationTab#initializeFrom(org.eclipse.debug.core.ILaunchConfiguration)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public void initializeFrom(ILaunchConfiguration config) {
 		boolean useDefault = true;
 		setErrorMessage(null);
@@ -282,7 +282,7 @@ public class SourceLookupBlock extends AbstractJavaClasspathTab implements ILaun
 	/* (non-Javadoc)
 	 * @see org.eclipse.debug.ui.ILaunchConfigurationTab#performApply(org.eclipse.debug.core.ILaunchConfigurationWorkingCopy)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public void performApply(ILaunchConfigurationWorkingCopy configuration) {
 		if (isDirty()) {
 			boolean def = fDefaultButton.getSelection();
@@ -293,8 +293,8 @@ public class SourceLookupBlock extends AbstractJavaClasspathTab implements ILaun
 				configuration.setAttribute(IJavaLaunchConfigurationConstants.ATTR_DEFAULT_SOURCE_PATH, def);
 				try {
 					IRuntimeClasspathEntry[] entries = fPathViewer.getEntries();
-					List<String> mementos = new ArrayList<>(entries.length);
-					for (int i = 0; i < entries.length; i++) {
+					List<String> mementos = new ArrayList<>(entries.length); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
+					for (int i = 0; i < entries.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 						mementos.add(entries[i].getMemento());
 					}
 					configuration.setAttribute(IJavaLaunchConfigurationConstants.ATTR_SOURCE_PATH, mementos);

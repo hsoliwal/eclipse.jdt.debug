@@ -70,7 +70,7 @@ public class LambdaBreakpointsInJava8Tests extends AbstractDebugUiTests {
 	/**
 	 * Test for bug 543385 - we should stop multiple times on same line with many lambdas
 	 */
-	public void testBug541110_unconditional() throws Exception {
+	public void testBug541110_unconditional() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String typeName = "Bug541110";
 		int breakpointLineNumber = 22;
 
@@ -94,7 +94,7 @@ public class LambdaBreakpointsInJava8Tests extends AbstractDebugUiTests {
 	 *
 	 * Note: if we implement proper lambda debugging support some time later, this test will probably fail.
 	 */
-	public void testBug541110_conditional() throws Exception {
+	public void testBug541110_conditional() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String typeName = "Bug541110";
 		String breakpointCondition = "true";
 		int breakpointLineNumber = 22;
@@ -114,7 +114,7 @@ public class LambdaBreakpointsInJava8Tests extends AbstractDebugUiTests {
 		}
 	}
 
-	public void testBreakpointsInLambdaBlocks() throws Exception {
+	public void testBreakpointsInLambdaBlocks() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		final String testClass = "LambdaBreakpoints1";
 		IType type = get18Project().findType(testClass);
 		assertNotNull("Missing file", type);
@@ -177,7 +177,7 @@ public class LambdaBreakpointsInJava8Tests extends AbstractDebugUiTests {
 		return hit;
 	}
 
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	protected IBreakpoint getBreakpoint(IThread thread) {
 		IBreakpoint b = super.getBreakpoint(thread);
 		if (b == null) {
@@ -187,11 +187,11 @@ public class LambdaBreakpointsInJava8Tests extends AbstractDebugUiTests {
 				IJavaThread t = (IJavaThread) thread;
 				try {
 					IStackFrame[] stackFrames = t.getStackFrames();
-					StringBuilder stack = new StringBuilder("Stack for thread " + thread.getName() + "\n");
-					for (IStackFrame frame : stackFrames) {
-						stack.append(frame.getName()).append("():").append(frame.getLineNumber()).append("\n");
+					StringBuilder stack = new StringBuilder("Stack for thread " + thread.getName() + "\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
+					for (IStackFrame frame : stackFrames) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
+						stack.append(frame.getName()).append("():").append(frame.getLineNumber()).append("\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 					}
-					assertNotNull("suspended, but not by breakpoint! " + stack, b);
+					assertNotNull("suspended, but not by breakpoint! " + stack, b); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 				} catch (DebugException e) {
 					throwException(e);
 				}
@@ -203,7 +203,7 @@ public class LambdaBreakpointsInJava8Tests extends AbstractDebugUiTests {
 	private void terminateAndRemoveJavaLaunches() {
 		ILaunchManager launchManager = DebugPlugin.getDefault().getLaunchManager();
 		List<ILaunch> launches = Arrays.asList(launchManager.getLaunches());
-		for (ILaunch launch : launches) {
+		for (ILaunch launch : launches) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			IDebugTarget debugTarget = launch.getDebugTarget();
 			if (debugTarget instanceof IJavaDebugTarget) {
 				terminateAndRemove((IJavaDebugTarget) debugTarget);

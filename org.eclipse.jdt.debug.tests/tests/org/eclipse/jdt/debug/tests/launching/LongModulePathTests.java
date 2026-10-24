@@ -81,7 +81,7 @@ public class LongModulePathTests extends AbstractDebugTest {
 	 * When JVM > 9, an argument file for the modulepath is created when modulepath is too long
 	 */
 
-	public void testVeryLongModulepathWithArgumentFile() throws Exception {
+	public void testVeryLongModulepathWithArgumentFile() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		if (!Platform.OS.isWindows()) {
 			return;
 		}
@@ -99,7 +99,7 @@ public class LongModulePathTests extends AbstractDebugTest {
 
 		// Then
 		File tempFile = getTempFile(thread.getLaunch()).orElseThrow(() -> new RuntimeException("No temp file"));
-		assertTrue(tempFile.exists());
+		assertTrue(tempFile.exists()); //FLLDCIM: MARK — M31 M3FILE_IO CALL
 		assertTrue(tempFile.getName().endsWith(".txt"));
 		assertTrue(doEval(thread, "System.getProperty(\"jdk.module.path\")").getValueString().length() >= minModulePathLength);
 
@@ -109,7 +109,7 @@ public class LongModulePathTests extends AbstractDebugTest {
 		// Then
 		if (!Platform.OS.isWindows()) {
 			// On windows, temp file deletion may fail
-			assertFalse(tempFile.exists());
+			assertFalse(tempFile.exists()); //FLLDCIM: MARK — M31 M3FILE_IO CALL
 		}
 	}
 
@@ -122,28 +122,28 @@ public class LongModulePathTests extends AbstractDebugTest {
 		return launchConfiguration;
 	}
 
-	private void setLongModulepath(IJavaProject javaProject, int minModulePathLength) throws Exception {
-		StringBuilder sb = new StringBuilder();
-		List<IClasspathEntry> classpathEntries = new ArrayList<>();
+	private void setLongModulepath(IJavaProject javaProject, int minModulePathLength) throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
+		StringBuilder sb = new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
+		List<IClasspathEntry> classpathEntries = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 		int i = 0;
-		while (sb.length() < minModulePathLength) {
-			String jarName = "library" + i + ".jar";
-			IPath targetPath = javaProject.getPath().append("lib/" + jarName);
+		while (sb.length() < minModulePathLength) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
+			String jarName = "library" + i + ".jar"; //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
+			IPath targetPath = javaProject.getPath().append("lib/" + jarName); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 			javaProject.getProject().getFile("lib/classpath.jar").copy(targetPath, IResource.FORCE, new NullProgressMonitor());
 			IClasspathAttribute moduleClasspathAttribute = JavaCore.newClasspathAttribute(IClasspathAttribute.MODULE, "true");
 			classpathEntries.add(JavaCore.newLibraryEntry(targetPath, null, null, null, new IClasspathAttribute[] {
 					moduleClasspathAttribute }, false));
 			if (i != 0) {
-				sb.append(File.pathSeparator);
+				sb.append(File.pathSeparator); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			}
-			sb.append(javaProject.getProject().getFile("lib/" + jarName).getLocation().toString());
+			sb.append(javaProject.getProject().getFile("lib/" + jarName).getLocation().toString()); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			i++;
 		}
 		IClasspathAttribute moduleClasspathAttribute = JavaCore.newClasspathAttribute(IClasspathAttribute.MODULE, "true");
 		classpathEntries.add(JavaCore.newLibraryEntry(javaProject.getPath().append("lib/classpath.jar"), null, null, null, new IClasspathAttribute[] {
 				moduleClasspathAttribute }, false));
-		sb.append(File.pathSeparator);
-		sb.append(javaProject.getProject().getFile("lib/classpath.jar").getLocation().toString());
+		sb.append(File.pathSeparator); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+		sb.append(javaProject.getProject().getFile("lib/classpath.jar").getLocation().toString()); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		classpathEntries.addAll(Arrays.asList(javaProject.getRawClasspath()));
 		javaProject.setRawClasspath(classpathEntries.toArray(new IClasspathEntry[classpathEntries.size()]), null);
 	}
@@ -156,7 +156,7 @@ public class LongModulePathTests extends AbstractDebugTest {
 
 	private IExecutionEnvironment getExecutionEnvironment(IJavaProject javaProject) throws JavaModelException {
 		IClasspathEntry[] entries = javaProject.getRawClasspath();
-		for (int i = 0; i < entries.length; i++) {
+		for (int i = 0; i < entries.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			IClasspathEntry entry = entries[i];
 			if (entry.getEntryKind() == IClasspathEntry.CPE_CONTAINER) {
 				String eeId = JavaRuntime.getExecutionEnvironmentId(entry.getPath());
@@ -170,7 +170,7 @@ public class LongModulePathTests extends AbstractDebugTest {
 
 	private void useModuleForJREContainer(IJavaProject javaProject) throws JavaModelException {
 		IClasspathEntry[] rawClasspath = javaProject.getRawClasspath();
-		for (int i = 0; i < rawClasspath.length; i++) {
+		for (int i = 0; i < rawClasspath.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			IClasspathEntry classpathEntry = rawClasspath[i];
 			if (classpathEntry.getEntryKind() == IClasspathEntry.CPE_CONTAINER) {
 				IClasspathAttribute moduleClasspathAttribute = JavaCore.newClasspathAttribute(IClasspathAttribute.MODULE, "true");

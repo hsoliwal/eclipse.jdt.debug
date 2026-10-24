@@ -66,7 +66,7 @@ import org.xml.sax.SAXException;
  */
 public class EnvironmentsManager implements IExecutionEnvironmentsManager, IVMInstallChangedListener, IPreferenceChangeListener {
 
-	private static final Pattern EE_PATTERN = Pattern.compile("(\\d+)"); //$NON-NLS-1$
+	private static final Pattern EE_PATTERN = Pattern.compile("(\\d+)"); //$NON-NLS-1$ //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
 
 	/**
 	 * Extension configuration element name.
@@ -205,11 +205,11 @@ public class EnvironmentsManager implements IExecutionEnvironmentsManager, IVMIn
 		return collection.toArray(new Analyzer[collection.size()]);
 	}
 
-	private String getExecutionEnvironmentCompliance(IExecutionEnvironment executionEnvironment) {
+	private String getExecutionEnvironmentCompliance(IExecutionEnvironment executionEnvironment) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String desc = executionEnvironment.getId();
 		// For java version > 1.8 we can simply extract the version from the string by searching the numbers
-		Matcher matcher = EE_PATTERN.matcher(desc);
-		if (matcher.find()) {
+		Matcher matcher = EE_PATTERN.matcher(desc); //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
+		if (matcher.find()) { //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
 			String group = matcher.group(1);
 			if (Integer.parseInt(group) >= 9) {
 				return group;
@@ -236,7 +236,7 @@ public class EnvironmentsManager implements IExecutionEnvironmentsManager, IVMIn
 		}
 	}
 
-	private synchronized void initializeExtensions() {
+	private synchronized void initializeExtensions() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		if (fEnvironments != null) {
 			return;
 		}
@@ -250,9 +250,9 @@ public class EnvironmentsManager implements IExecutionEnvironmentsManager, IVMIn
 		IConfigurationElement[] configs = extensionPoint.getConfigurationElements();
 		fEnvironments = new TreeSet<>(eeComparator);
 		fRuleParticipants = new LinkedHashSet<>();
-		fEnvironmentsMap = new HashMap<>(configs.length);
-		fAnalyzers = new HashMap<>(configs.length);
-		for (int i = 0; i < configs.length; i++) {
+		fEnvironmentsMap = new HashMap<>(configs.length); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
+		fAnalyzers = new HashMap<>(configs.length); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
+		for (int i = 0; i < configs.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			IConfigurationElement element = configs[i];
 			String name = element.getName();
 			switch (name) {
@@ -290,7 +290,7 @@ public class EnvironmentsManager implements IExecutionEnvironmentsManager, IVMIn
 		}
 
 		SortedSet<IExecutionEnvironment> filtered = new TreeSet<>(eeComparator);
-		for (IExecutionEnvironment environment : fEnvironments) {
+		for (IExecutionEnvironment environment : fEnvironments) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			Map<String, String> options = environment.getComplianceOptions();
 			if (options != null && JavaCore.isJavaSourceVersionSupportedByCompiler(options.get(JavaCore.COMPILER_COMPLIANCE))) {
 				filtered.add(environment);
@@ -302,15 +302,15 @@ public class EnvironmentsManager implements IExecutionEnvironmentsManager, IVMIn
 	/**
 	 * Initializes compatibility settings.
 	 */
-	void initializeCompatibilities() {
+	void initializeCompatibilities() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IVMInstallType[] installTypes = JavaRuntime.getVMInstallTypes();
         synchronized (this) {
         	if (!fInitializedCompatibilities) {
 	        	fInitializedCompatibilities = true;
-	            for (int i = 0; i < installTypes.length; i++) {
+	            for (int i = 0; i < installTypes.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 	                IVMInstallType type = installTypes[i];
 	                IVMInstall[] installs = type.getVMInstalls();
-	                for (int j = 0; j < installs.length; j++) {
+	                for (int j = 0; j < installs.length; j++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 	                    IVMInstall install = installs[j];
 	                    // TODO: progress reporting?
 	                    analyze(install, new NullProgressMonitor());
@@ -324,7 +324,7 @@ public class EnvironmentsManager implements IExecutionEnvironmentsManager, IVMIn
 	/**
 	 * Reads persisted default VMs from the preference store
 	 */
-	private synchronized void initializeDefaultVMs() {
+	private synchronized void initializeDefaultVMs() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String xml = InstanceScope.INSTANCE.getNode(LaunchingPlugin.ID_PLUGIN).get(PREF_DEFAULT_ENVIRONMENTS_XML, ""); //$NON-NLS-1$
 		try {
 			if (xml.length() > 0) {
@@ -334,7 +334,7 @@ public class EnvironmentsManager implements IExecutionEnvironmentsManager, IVMIn
 				Element envs = document.getDocumentElement();
 				NodeList list = envs.getChildNodes();
 				int length = list.getLength();
-				for (int i = 0; i < length; ++i) {
+				for (int i = 0; i < length; ++i) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 					Node node = list.item(i);
 					short type = node.getNodeType();
 					if (type == Node.ELEMENT_NODE) {
@@ -368,14 +368,14 @@ public class EnvironmentsManager implements IExecutionEnvironmentsManager, IVMIn
 	 * @return an XML description of default VMs per environment. Returns
 	 * an empty string when there are none.
 	 */
-	private String getDefatulVMsAsXML() {
+	private String getDefatulVMsAsXML() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		int count = 0;
 		try {
 			Document doc = DebugPlugin.newDocument();
 			Element envs = doc.createElement(DEFAULT_ENVIRONMENTS);
 			doc.appendChild(envs);
 			IExecutionEnvironment[] environments = getExecutionEnvironments();
-			for (int i = 0; i < environments.length; i++) {
+			for (int i = 0; i < environments.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				IExecutionEnvironment env = environments[i];
 				IVMInstall vm = env.getDefaultVM();
 				if (vm != null) {
@@ -403,11 +403,11 @@ public class EnvironmentsManager implements IExecutionEnvironmentsManager, IVMIn
 	 */
 	private void analyze(IVMInstall vm, IProgressMonitor monitor) {
 		Analyzer[] analyzers = getAnalyzers();
-		for (int i = 0; i < analyzers.length; i++) {
+		for (int i = 0; i < analyzers.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			Analyzer analyzer = analyzers[i];
 			try {
 				CompatibleEnvironment[] environments = analyzer.analyze(vm, monitor);
-				for (int j = 0; j < environments.length; j++) {
+				for (int j = 0; j < environments.length; j++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 					CompatibleEnvironment compatibleEnvironment = environments[j];
 					ExecutionEnvironment environment = (ExecutionEnvironment) compatibleEnvironment.getCompatibleEnvironment();
 					environment.add(vm, compatibleEnvironment.isStrictlyCompatbile());
@@ -460,7 +460,7 @@ public class EnvironmentsManager implements IExecutionEnvironmentsManager, IVMIn
 			return;
 		}
 		IExecutionEnvironment[] environments = getExecutionEnvironments();
-		for (int i = 0; i < environments.length; i++) {
+		for (int i = 0; i < environments.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			ExecutionEnvironment environment = (ExecutionEnvironment) environments[i];
 			environment.remove(vm);
 		}

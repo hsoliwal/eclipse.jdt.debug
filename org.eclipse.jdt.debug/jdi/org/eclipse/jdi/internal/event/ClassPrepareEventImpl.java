@@ -80,7 +80,7 @@ public class ClassPrepareEventImpl extends EventImpl implements
 
 	@Override
 	public String toString() {
-		return super.toString() + " referenceType=" + referenceType().name(); //$NON-NLS-1$
+		return super.toString() + " referenceType=" + referenceType().name(); //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 	}
 
 }

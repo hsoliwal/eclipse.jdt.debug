@@ -39,7 +39,7 @@ public class EventRequestTest extends AbstractJDITest {
 	/**
 	 * Init the fields that are used by this test only.
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public void localSetUp() {
 		// Get all kinds of request
 		if (fVM.canWatchFieldAccess()) {
@@ -78,17 +78,17 @@ public class EventRequestTest extends AbstractJDITest {
 	 * Test JDI disable(), enable(), isEnable() and setEnable(boolean).
 	 */
 	public void testJDIEnable() {
-		for (int i = 0; i < fRequests.size(); i++) {
+		for (int i = 0; i < fRequests.size(); i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			EventRequest request = fRequests.get(i);
-			assertFalse("1." + i, request.isEnabled());
+			assertFalse("1." + i, request.isEnabled()); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 			request.setEnabled(true);
-			assertTrue("2." + i, request.isEnabled());
+			assertTrue("2." + i, request.isEnabled()); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 			request.setEnabled(false);
-			assertFalse("3." + i, request.isEnabled());
+			assertFalse("3." + i, request.isEnabled()); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 			request.enable();
-			assertTrue("4." + i, request.isEnabled());
+			assertTrue("4." + i, request.isEnabled()); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 			request.disable();
-			assertFalse("5." + i, request.isEnabled());
+			assertFalse("5." + i, request.isEnabled()); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		}
 	}
 	/**
@@ -96,11 +96,11 @@ public class EventRequestTest extends AbstractJDITest {
 	 */
 	public void testJDISuspendPolicy() {
 		int policy = EventRequest.SUSPEND_EVENT_THREAD;
-		for (int i = 0; i < fRequests.size(); i++) {
+		for (int i = 0; i < fRequests.size(); i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			EventRequest request = fRequests.get(i);
 			request.setSuspendPolicy(policy);
 		}
-		for (int i = 0; i < fRequests.size(); i++) {
+		for (int i = 0; i < fRequests.size(); i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			EventRequest request = fRequests.get(i);
 			assertEquals(String.valueOf(i), request.suspendPolicy(), policy);
 		}
@@ -108,7 +108,7 @@ public class EventRequestTest extends AbstractJDITest {
 	/**
 	 * Test JDI putProperty and getProperty.
 	 */
-	public void testJDIProperties() {
+	public void testJDIProperties() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		EventRequest request = fRequests.get(0);
 		request.putProperty(Integer.valueOf(0), "prop1");
 		String prop = (String) request.getProperty(Integer.valueOf(0));

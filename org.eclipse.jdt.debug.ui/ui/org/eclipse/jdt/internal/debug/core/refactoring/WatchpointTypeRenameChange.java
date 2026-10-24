@@ -42,7 +42,7 @@ public class WatchpointTypeRenameChange extends WatchpointTypeChange {
 		fArguments = arguments;
 	}
 
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public Change perform(IProgressMonitor pm) throws CoreException {
 		IField originalField = getOriginalType().getField(getFieldName());
 		IField destinationField = null;
@@ -50,7 +50,7 @@ public class WatchpointTypeRenameChange extends WatchpointTypeChange {
 		if (fArguments.getUpdateSimilarDeclarations()) {
 			IJavaElement[] similarDeclarations = fArguments.getSimilarDeclarations();
 			if (similarDeclarations != null) {
-				for (int i = 0; i < similarDeclarations.length; i++) {
+				for (int i = 0; i < similarDeclarations.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 					IJavaElement element = similarDeclarations[i];
 					if (element.equals(originalField)) {
 						IJavaElementMapper elementMapper = fProcessor.getAdapter(IJavaElementMapper.class);
@@ -64,7 +64,7 @@ public class WatchpointTypeRenameChange extends WatchpointTypeChange {
 			destinationField = getDestinationType().getField(getFieldName());
 		}
 
-		Map<String, Object> map = new HashMap<>();
+		Map<String, Object> map = new HashMap<>(); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
 		BreakpointUtils.addJavaBreakpointAttributes(map, destinationField);
 		map.put(IInternalDebugUIConstants.WORKING_SET_NAME, getOriginalWorkingSets()); // creating breakpoint in the original working set
 		IResource resource = BreakpointUtils.getBreakpointResource(destinationField);

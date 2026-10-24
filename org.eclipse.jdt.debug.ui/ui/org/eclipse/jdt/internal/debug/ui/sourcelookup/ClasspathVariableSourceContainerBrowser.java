@@ -56,7 +56,7 @@ public class ClasspathVariableSourceContainerBrowser extends AbstractSourceConta
 		IPath[] paths = BuildPathDialogAccess.chooseVariableEntries(shell, new IPath[0]);
 		if (paths != null) {
 			ISourceContainer[] containers = new ISourceContainer[paths.length];
-			for (int i = 0; i < containers.length; i++) {
+			for (int i = 0; i < containers.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				containers[i] = new ClasspathVariableSourceContainer(paths[i]);
 			}
 			return containers;

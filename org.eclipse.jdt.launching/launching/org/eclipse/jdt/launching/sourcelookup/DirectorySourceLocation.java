@@ -85,7 +85,7 @@ public class DirectorySourceLocation extends PlatformObject implements IJavaSour
 	/* (non-Javadoc)
 	 * @see org.eclipse.jdt.launching.sourcelookup.IJavaSourceLocation#findSourceElement(java.lang.String)
 	 */
-	@Deprecated
+	@Deprecated //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	@Override
 	public Object findSourceElement(String name) throws CoreException {
 		if (getDirectory() == null) {
@@ -95,13 +95,13 @@ public class DirectorySourceLocation extends PlatformObject implements IJavaSour
 		String pathStr= name.replace('.', '/');
 		int lastSlash = pathStr.lastIndexOf('/');
 		try {
-			IPath root = new Path(getDirectory().getCanonicalPath());
+			IPath root = new Path(getDirectory().getCanonicalPath()); //FLLDCIM: MARK — M31 M3FILE_IO CALL
 			boolean possibleInnerType = false;
 			String typeName = pathStr;
-			do {
-				IPath filePath = root.append(new Path(typeName + ".java")); //$NON-NLS-1$
+			do { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
+				IPath filePath = root.append(new Path(typeName + ".java")); //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 				File file = filePath.toFile();
-				if (file.exists()) {
+				if (file.exists()) { //FLLDCIM: MARK — M31 M3FILE_IO CALL
 					return new LocalFileStorage(file);
 				}
 				int index = typeName.lastIndexOf('$');
@@ -174,7 +174,7 @@ public class DirectorySourceLocation extends PlatformObject implements IJavaSour
 	/* (non-Javadoc)
 	 * @see org.eclipse.jdt.launching.sourcelookup.IJavaSourceLocation#initializeFrom(java.lang.String)
 	 */
-	@Deprecated
+	@Deprecated //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	@Override
 	public void initializeFrom(String memento) throws CoreException {
 		Exception ex = null;
@@ -193,7 +193,7 @@ public class DirectorySourceLocation extends PlatformObject implements IJavaSour
 				abort(LaunchingMessages.DirectorySourceLocation_Unable_to_initialize_source_location___missing_directory_path_3, null);
 			} else {
 				File dir = new File(path);
-				if (dir.exists() && dir.isDirectory()) {
+				if (dir.exists() && dir.isDirectory()) { //FLLDCIM: MARK — M31 M3FILE_IO CALL
 					setDirectory(dir);
 				} else {
 					abort(NLS.bind(LaunchingMessages.DirectorySourceLocation_Unable_to_initialize_source_location___directory_does_not_exist___0__4, new String[] {path}), null);

@@ -36,7 +36,7 @@ public class ConfigurationResourceMappingTests extends AbstractDebugTest {
 	 * Tests that setting the mapped resources to <code>null</code> removes
 	 * the resource mapping
 	 */
-	public void testRemovingMappedResources1() throws CoreException {
+	public void testRemovingMappedResources1() throws CoreException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		ILaunchConfiguration config = getLaunchConfiguration("MigrationTests");
 		assertNotNull("the configuration cannot be null", config);
 		ILaunchConfigurationWorkingCopy copy = config.getWorkingCopy();
@@ -65,7 +65,7 @@ public class ConfigurationResourceMappingTests extends AbstractDebugTest {
 	 * Tests that setting the resource mapping to an empty array of <code>IResource</code> removes
 	 * the resource mapping
 	 */
-	public void testRemovingMappedResources2() throws CoreException {
+	public void testRemovingMappedResources2() throws CoreException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		ILaunchConfiguration config = getLaunchConfiguration("MigrationTests");
 		assertNotNull("the configuration cannot be null", config);
 		ILaunchConfigurationWorkingCopy copy = config.getWorkingCopy();
@@ -93,7 +93,7 @@ public class ConfigurationResourceMappingTests extends AbstractDebugTest {
 	/**
 	 * Tests that a single element array can be set as a mapped resource
 	 */
-	public void testSetMappedResource() throws CoreException {
+	public void testSetMappedResource() throws CoreException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		ILaunchConfiguration config = getLaunchConfiguration("MigrationTests");
 		assertNotNull("the configuration cannot be null", config);
 		ILaunchConfigurationWorkingCopy copy = config.getWorkingCopy();
@@ -117,7 +117,7 @@ public class ConfigurationResourceMappingTests extends AbstractDebugTest {
 	/**
 	 * Tests that > 1 resource can be mapped correctly
 	 */
-	public void testSetMappedResources() throws CoreException {
+	public void testSetMappedResources() throws CoreException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		ILaunchConfiguration config = getLaunchConfiguration("MigrationTests");
 		assertNotNull("the configuration cannot be null", config);
 		ILaunchConfigurationWorkingCopy copy = config.getWorkingCopy();

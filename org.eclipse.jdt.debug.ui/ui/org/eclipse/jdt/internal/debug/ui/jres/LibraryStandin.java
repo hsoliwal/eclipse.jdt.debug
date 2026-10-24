@@ -202,27 +202,27 @@ public final class LibraryStandin {
 	/**
 	 * Returns a status for this library describing any error states
 	 */
-	IStatus validate() {
-		if (!getSystemLibraryPath().toFile().exists()) {
-			return new Status(IStatus.ERROR, IJavaDebugUIConstants.PLUGIN_ID, IJavaDebugUIConstants.INTERNAL_ERROR,"System library does not exist: " + getSystemLibraryPath().toOSString(), null); //$NON-NLS-1$
+	IStatus validate() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
+		if (!getSystemLibraryPath().toFile().exists()) { //FLLDCIM: MARK — M31 M3FILE_IO CALL
+			return new Status(IStatus.ERROR, IJavaDebugUIConstants.PLUGIN_ID, IJavaDebugUIConstants.INTERNAL_ERROR,"System library does not exist: " + getSystemLibraryPath().toOSString(), null); //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		}
 		IPath path = getSystemLibrarySourcePath();
 		if (!path.isEmpty()) {
-			if (!path.toFile().exists()) {
+			if (!path.toFile().exists()) { //FLLDCIM: MARK — M31 M3FILE_IO CALL
 				// check for workspace resource
 				IResource resource = ResourcesPlugin.getWorkspace().getRoot().findMember(path);
 				if (resource == null || !resource.exists()) {
-					return new Status(IStatus.ERROR, IJavaDebugUIConstants.PLUGIN_ID, IJavaDebugUIConstants.INTERNAL_ERROR, "Source attachment does not exist: " + path.toOSString(), null); //$NON-NLS-1$
+					return new Status(IStatus.ERROR, IJavaDebugUIConstants.PLUGIN_ID, IJavaDebugUIConstants.INTERNAL_ERROR, "Source attachment does not exist: " + path.toOSString(), null); //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 				}
 			}
 		}
 		path = getExternalAnnotationsPath();
 		if (path != null && !path.isEmpty()) {
-			if (!path.toFile().exists()) {
+			if (!path.toFile().exists()) { //FLLDCIM: MARK — M31 M3FILE_IO CALL
 				// check for workspace resource
 				IResource resource = ResourcesPlugin.getWorkspace().getRoot().findMember(path);
 				if (resource == null || !resource.exists()) {
-					return new Status(IStatus.ERROR, IJavaDebugUIConstants.PLUGIN_ID, IJavaDebugUIConstants.INTERNAL_ERROR, "External Annotations file does not exist: " + path.toOSString(), null); //$NON-NLS-1$
+					return new Status(IStatus.ERROR, IJavaDebugUIConstants.PLUGIN_ID, IJavaDebugUIConstants.INTERNAL_ERROR, "External Annotations file does not exist: " + path.toOSString(), null); //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 				}
 			}
 		}

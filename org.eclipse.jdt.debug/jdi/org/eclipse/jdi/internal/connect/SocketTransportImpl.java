@@ -50,7 +50,7 @@ public class SocketTransportImpl implements Transport {
 	}
 
 	public String startListening(int port) throws IOException {
-		fListenKey = service.startListening(port + ""); //$NON-NLS-1$
+		fListenKey = service.startListening(port + ""); //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		return fListenKey.address();
 	}
 

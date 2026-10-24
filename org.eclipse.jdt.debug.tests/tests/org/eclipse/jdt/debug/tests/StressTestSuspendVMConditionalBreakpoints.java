@@ -30,7 +30,7 @@ public class StressTestSuspendVMConditionalBreakpoints extends DebugSuite {
 	}
 
 	public StressTestSuspendVMConditionalBreakpoints() {
-		for (int i = 0; i < STRESS_TEST_REPEAT_COUNT; ++i) {
+		for (int i = 0; i < STRESS_TEST_REPEAT_COUNT; ++i) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			addTest(new TestSuite(SuspendVMConditionalBreakpointsTests.class));
 		}
 	}

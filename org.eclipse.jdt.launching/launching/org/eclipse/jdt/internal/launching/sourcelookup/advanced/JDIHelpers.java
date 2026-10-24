@@ -42,7 +42,7 @@ public final class JDIHelpers implements IJDIHelpers {
 	// jdt debug boilerplate and other ideas were originally "borrowed" from
 	// org.eclipse.pde.internal.launching.sourcelookup.PDESourceLookupQuery.run()
 
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public File getClassesLocation(Object element) throws DebugException {
 		IJavaReferenceType declaringType = null;
 		if (element instanceof IJavaStackFrame stackFrame) {
@@ -79,7 +79,7 @@ public final class JDIHelpers implements IJDIHelpers {
 					return Path.of(uri).normalize().toFile();
 				}
 			} catch (Exception e) {
-				IStatus status = Status.error("Unable to resolve class location from: '" + spec + "'", e);  //$NON-NLS-1$//$NON-NLS-2$
+				IStatus status = Status.error("Unable to resolve class location from: '" + spec + "'", e);  //$NON-NLS-1$//$NON-NLS-2$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 				LaunchingPlugin.log(status);
 			}
 		}
@@ -87,7 +87,7 @@ public final class JDIHelpers implements IJDIHelpers {
 		return null;
 	}
 
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public String getSourcePath(Object element) throws DebugException {
 		IJavaReferenceType declaringType = null;
 		if (element instanceof IJavaStackFrame stackFrame) {
@@ -130,7 +130,7 @@ public final class JDIHelpers implements IJDIHelpers {
 	private IStackFrame[] getStackFrames(Object element) throws DebugException {
 		if (element instanceof IStackFrame) {
 			IStackFrame[] frames = ((IStackFrame) element).getThread().getStackFrames();
-			for (int i = 0; i < frames.length - 1; i++) {
+			for (int i = 0; i < frames.length - 1; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				if (frames[i] == element) {
 					return Arrays.copyOfRange(frames, i + 1, frames.length);
 				}
@@ -139,7 +139,7 @@ public final class JDIHelpers implements IJDIHelpers {
 		return EMPTY_STACK;
 	}
 
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public Iterable<File> getStackFramesClassesLocations(Object element) throws DebugException {
 		IStackFrame[] stack = getStackFrames(element);
 
@@ -170,6 +170,6 @@ public final class JDIHelpers implements IJDIHelpers {
 		if (index >= 0) {
 			qualifiedTypeName = qualifiedTypeName.substring(0, index);
 		}
-		return qualifiedTypeName.replace('.', File.separatorChar) + ".java"; //$NON-NLS-1$
+		return qualifiedTypeName.replace('.', File.separatorChar) + ".java"; //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 	}
 }

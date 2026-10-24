@@ -40,7 +40,7 @@ public class LibraryLabelProvider extends LabelProvider {
 	/* (non-Javadoc)
 	 * @see org.eclipse.jface.viewers.LabelProvider#getImage(java.lang.Object)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public Image getImage(Object element) {
 		String key = null;
 		IStatus status = Status.OK_STATUS;
@@ -83,38 +83,38 @@ public class LibraryLabelProvider extends LabelProvider {
 	/* (non-Javadoc)
 	 * @see org.eclipse.jface.viewers.LabelProvider#getText(java.lang.Object)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public String getText(Object element) {
 		if (element instanceof LibraryStandin) {
 			return ((LibraryStandin)element).getSystemLibraryPath().toOSString();
 		} else if (element instanceof SubElement subElement) {
-			StringBuilder text= new StringBuilder();
+			StringBuilder text= new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 			switch (subElement.getType()) {
 			case SubElement.SOURCE_PATH:
-				text.append(JREMessages.VMLibraryBlock_0);
+				text.append(JREMessages.VMLibraryBlock_0); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				IPath systemLibrarySourcePath= subElement.getParent().getSystemLibrarySourcePath();
 				if (systemLibrarySourcePath != null && !Path.EMPTY.equals(systemLibrarySourcePath)) {
-					text.append(systemLibrarySourcePath.toOSString());
+					text.append(systemLibrarySourcePath.toOSString()); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				} else {
-					text.append(JREMessages.VMLibraryBlock_1);
+					text.append(JREMessages.VMLibraryBlock_1); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				}
 				break;
 			case SubElement.JAVADOC_URL:
-				text.append(JREMessages.LibraryLabelProvider_0);
+				text.append(JREMessages.LibraryLabelProvider_0); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				URL javadocLocation= subElement.getParent().getJavadocLocation();
 				if (javadocLocation != null) {
-					text.append(javadocLocation.toExternalForm());
+					text.append(javadocLocation.toExternalForm()); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				} else {
-					text.append(JREMessages.VMLibraryBlock_1);
+					text.append(JREMessages.VMLibraryBlock_1); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				}
 				break;
 			case SubElement.EXTERNAL_ANNOTATIONS_PATH:
-				text.append(JREMessages.VMExternalAnnsBlock_1);
+				text.append(JREMessages.VMExternalAnnsBlock_1); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				IPath externalAnnotationsPath = subElement.getParent().getExternalAnnotationsPath();
 				if (externalAnnotationsPath != null && !Path.EMPTY.equals(externalAnnotationsPath)) {
-					text.append(externalAnnotationsPath.toOSString());
+					text.append(externalAnnotationsPath.toOSString()); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				} else {
-					text.append(JREMessages.VMExternalAnnsBlock_2);
+					text.append(JREMessages.VMExternalAnnsBlock_2); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				}
 				break;
 			default:

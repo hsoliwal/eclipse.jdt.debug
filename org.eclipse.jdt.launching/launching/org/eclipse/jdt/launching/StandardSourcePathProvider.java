@@ -60,10 +60,10 @@ public class StandardSourcePathProvider extends StandardClasspathProvider {
 	/* (non-Javadoc)
 	 * @see org.eclipse.jdt.launching.IRuntimeClasspathProvider#resolveClasspath(org.eclipse.jdt.launching.IRuntimeClasspathEntry[], org.eclipse.debug.core.ILaunchConfiguration)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public IRuntimeClasspathEntry[] resolveClasspath(IRuntimeClasspathEntry[] entries, ILaunchConfiguration configuration) throws CoreException {
 		List<IRuntimeClasspathEntry> all = new UniqueList(entries.length);
-		for (int i = 0; i < entries.length; i++) {
+		for (int i = 0; i < entries.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			switch (entries[i].getType()) {
 				case IRuntimeClasspathEntry.PROJECT:
 					// a project resolves to itself for source lookup (rather than the class file output locations)
@@ -88,7 +88,7 @@ public class StandardSourcePathProvider extends StandardClasspathProvider {
 							break;
 					}
 					if (res != null) {
-						for (int j = 0; j < res.length; j++) {
+						for (int j = 0; j < res.length; j++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 							all.add(res[j]);
 							addManifestReferences(res[j], all);
 						}
@@ -97,7 +97,7 @@ public class StandardSourcePathProvider extends StandardClasspathProvider {
 
 				default:
 					IRuntimeClasspathEntry[] resolved = JavaRuntime.resolveRuntimeClasspathEntry(entries[i], configuration);
-					for (int j = 0; j < resolved.length; j++) {
+					for (int j = 0; j < resolved.length; j++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 						all.add(resolved[j]);
 						addManifestReferences(resolved[j], all);
 					}
@@ -113,7 +113,7 @@ public class StandardSourcePathProvider extends StandardClasspathProvider {
      * @param entry runtime classpath entry
      * @param all list to add references to
      */
-    protected void addManifestReferences(IRuntimeClasspathEntry entry, List<IRuntimeClasspathEntry> all) {
+    protected void addManifestReferences(IRuntimeClasspathEntry entry, List<IRuntimeClasspathEntry> all) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
         if (entry.getType() == IRuntimeClasspathEntry.ARCHIVE) {
             String location = entry.getLocation();
             if (location != null) {
@@ -124,12 +124,12 @@ public class StandardSourcePathProvider extends StandardClasspathProvider {
                         if (mainAttributes != null) {
                             String value = mainAttributes.getValue(Attributes.Name.CLASS_PATH);
                             if (value != null) {
-                                String[] entries = value.split("\\s+"); //$NON-NLS-1$
+                                String[] entries = value.split("\\s+"); //$NON-NLS-1$ //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
                                 IPath base = new Path(location);
                                 base = base.removeLastSegments(1);
-                                for (int i = 0; i < entries.length; i++) {
+                                for (int i = 0; i < entries.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
                                     IPath path = base.append(entries[i]);
-                                    if (path.toFile().exists()) {
+                                    if (path.toFile().exists()) { //FLLDCIM: MARK — M31 M3FILE_IO CALL
                                         IRuntimeClasspathEntry ref = JavaRuntime.newArchiveRuntimeClasspathEntry(path);
                                         if (!all.contains(ref)) {
                                             all.add(ref);
@@ -155,7 +155,7 @@ public class StandardSourcePathProvider extends StandardClasspathProvider {
 
         public UniqueList(int length) {
             super(length);
-            set = new HashSet<>(length);
+            set = new HashSet<>(length); //FLLDCIM: MARK — M03 M3_SET_LANES NEW
         }
 
         @Override
@@ -214,7 +214,7 @@ public class StandardSourcePathProvider extends StandardClasspathProvider {
 
         @Override
 		protected void removeRange(int fromIndex, int toIndex) {
-            for (int index = fromIndex; index<=toIndex; index++) {
+            for (int index = fromIndex; index<=toIndex; index++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				remove(index);
 			}
         }

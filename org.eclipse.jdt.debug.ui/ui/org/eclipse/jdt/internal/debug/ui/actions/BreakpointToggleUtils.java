@@ -82,7 +82,7 @@ public class BreakpointToggleUtils {
 	 *            the currently active workbench part
 	 */
 	public static void report(final String message, final IWorkbenchPart part) {
-		JDIDebugUIPlugin.getStandardDisplay().asyncExec(new Runnable() {
+		JDIDebugUIPlugin.getStandardDisplay().asyncExec(new Runnable() { //FLLDCIM: MARK — T08 UI_THREAD_SYNCHRONIZER CALL
 			@Override
 			public void run() {
 				IEditorStatusLine statusLine = part.getAdapter(IEditorStatusLine.class);

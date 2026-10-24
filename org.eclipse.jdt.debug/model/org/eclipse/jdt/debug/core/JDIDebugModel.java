@@ -69,14 +69,14 @@ public class JDIDebugModel {
 	/**
 	 * Preference key for default JDI request timeout value.
 	 */
-	public static final String PREF_REQUEST_TIMEOUT = getPluginIdentifier()
+	public static final String PREF_REQUEST_TIMEOUT = getPluginIdentifier() //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 			+ ".PREF_REQUEST_TIMEOUT"; //$NON-NLS-1$
 
 	/**
 	 * Preference key for specifying if hot code replace should be performed
 	 * when a replacement class file contains compilation errors.
 	 */
-	public static final String PREF_HCR_WITH_COMPILATION_ERRORS = getPluginIdentifier()
+	public static final String PREF_HCR_WITH_COMPILATION_ERRORS = getPluginIdentifier() //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 			+ ".PREF_HCR_WITH_COMPILATION_ERRORS"; //$NON-NLS-1$
 
 	/**
@@ -92,7 +92,7 @@ public class JDIDebugModel {
 	 *
 	 * @since 3.0
 	 */
-	public static final String PREF_SUSPEND_FOR_BREAKPOINTS_DURING_EVALUATION = getPluginIdentifier()
+	public static final String PREF_SUSPEND_FOR_BREAKPOINTS_DURING_EVALUATION = getPluginIdentifier() //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 			+ ".suspend_for_breakpoints_during_evaluation"; //$NON-NLS-1$
 
 	/**
@@ -100,7 +100,7 @@ public class JDIDebugModel {
 	 * in source projects and not related to the current debug session.
 	 * @since 3.10
 	 */
-	public static final String PREF_FILTER_BREAKPOINTS_FROM_UNRELATED_SOURCES = getPluginIdentifier()
+	public static final String PREF_FILTER_BREAKPOINTS_FROM_UNRELATED_SOURCES = getPluginIdentifier() //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 			+ ".do_not_install_breakpoints_from_unrelated_sources"; //$NON-NLS-1$
 
 	/**
@@ -109,14 +109,14 @@ public class JDIDebugModel {
 	 *
 	 * @since 3.23
 	 */
-	public static final String PREF_CREATE_EXCEPTION_BREAKPOINTS_ON_CLICK = getPluginIdentifier() + ".create_exception_breakpoint_on_click"; //$NON-NLS-1$
+	public static final String PREF_CREATE_EXCEPTION_BREAKPOINTS_ON_CLICK = getPluginIdentifier() + ".create_exception_breakpoint_on_click"; //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 	/**
 	 * Preference key for specifying if the value returned or thrown should be displayed as variable after a "step return" or "step over" (if
 	 * supported by the vm)
 	 * @since 3.11
 	 */
-	public static final String PREF_SHOW_STEP_RESULT = getPluginIdentifier()
+	public static final String PREF_SHOW_STEP_RESULT = getPluginIdentifier() //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 			+ ".PREF_SHOW_STEP_RESULT"; //$NON-NLS-1$
 
 	/**
@@ -124,7 +124,7 @@ public class JDIDebugModel {
 	 *
 	 * @since 3.15
 	 */
-	public static final String PREF_SHOW_STEP_RESULT_REMOTE = getPluginIdentifier() + ".PREF_SHOW_STEP_RESULT_REMOTE"; //$NON-NLS-1$
+	public static final String PREF_SHOW_STEP_RESULT_REMOTE = getPluginIdentifier() + ".PREF_SHOW_STEP_RESULT_REMOTE"; //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 	/**
 	 * Preference key for specifying if the timeout (in ms) after which the return method result of a step operation is not observed any longer (0
@@ -132,7 +132,7 @@ public class JDIDebugModel {
 	 *
 	 * @since 3.12
 	 */
-	public static final String PREF_SHOW_STEP_TIMEOUT = getPluginIdentifier() + ".PREF_SHOW_STEP_TIMEOUT"; //$NON-NLS-1$
+	public static final String PREF_SHOW_STEP_TIMEOUT = getPluginIdentifier() + ".PREF_SHOW_STEP_TIMEOUT"; //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 	/**
 	 * The default value for {@link #PREF_SHOW_STEP_TIMEOUT} timeout when no preference is set.
@@ -148,14 +148,14 @@ public class JDIDebugModel {
 	 *
 	 * @since 3.14
 	 */
-	public static final String PREF_SUSPEND_ON_RECURRENCE_STRATEGY = getPluginIdentifier() + ".PREF_SUSPEND_ON_RECURRENCE_STRATEGY"; //$NON-NLS-1$
+	public static final String PREF_SUSPEND_ON_RECURRENCE_STRATEGY = getPluginIdentifier() + ".PREF_SUSPEND_ON_RECURRENCE_STRATEGY"; //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 	/**
 	 * Launch attribute, use ILaunch.setAttribute to set it to "true", to disable hot code replace for an individual launch.
 	 *
 	 * @since 3.17
 	 */
-	public static final String DISABLE_HCR_LAUNCH_ATTRIBUTE = getPluginIdentifier() + ".disable.hcr"; //$NON-NLS-1$
+	public static final String DISABLE_HCR_LAUNCH_ATTRIBUTE = getPluginIdentifier() + ".disable.hcr"; //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 	/**
 	 * Not to be instantiated.
@@ -242,7 +242,7 @@ public class JDIDebugModel {
 			final boolean allowTerminate, final boolean allowDisconnect,
 			final boolean resume) {
 		final IJavaDebugTarget[] target = new IJavaDebugTarget[1];
-		IWorkspaceRunnable r = m -> target[0] = new JDIDebugTarget(launch, vm, name,
+		IWorkspaceRunnable r = m -> target[0] = new JDIDebugTarget(launch, vm, name, //FLLDCIM: MARK — T09  LAMBDA
 				allowTerminate, allowDisconnect, process, resume);
 		try {
 			ResourcesPlugin.getWorkspace().run(r, null, 0, null);
@@ -380,7 +380,7 @@ public class JDIDebugModel {
 			int hitCount, boolean register, Map<String, Object> attributes)
 			throws CoreException {
 		if (attributes == null) {
-			attributes = new HashMap<>(10);
+			attributes = new HashMap<>(10); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
 		}
 		return new JavaLineBreakpoint(resource, typeName, lineNumber,
 				charStart, charEnd, hitCount, register, attributes);
@@ -442,7 +442,7 @@ public class JDIDebugModel {
 			int lineNumber, int charStart, int charEnd, int hitCount,
 			boolean register, Map<String, Object> attributes) throws CoreException {
 		if (attributes == null) {
-			attributes = new HashMap<>(10);
+			attributes = new HashMap<>(10); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
 		}
 		return new JavaPatternBreakpoint(resource, sourceName, pattern,
 				lineNumber, charStart, charEnd, hitCount, register, attributes);
@@ -527,7 +527,7 @@ public class JDIDebugModel {
 			int charStart, int charEnd, int hitCount, boolean register,
 			Map<String, Object> attributes) throws CoreException {
 		if (attributes == null) {
-			attributes = new HashMap<>(10);
+			attributes = new HashMap<>(10); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
 		}
 		return new JavaStratumLineBreakpoint(resource, stratum, sourceName,
 				sourcePath, classNamePattern, lineNumber, charStart, charEnd,
@@ -584,7 +584,7 @@ public class JDIDebugModel {
 			int charStart, int charEnd, int hitCount, boolean register,
 			Map<String, Object> attributes) throws CoreException {
 		if (attributes == null) {
-			attributes = new HashMap<>(10);
+			attributes = new HashMap<>(10); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
 		}
 		return new JavaTargetPatternBreakpoint(resource, sourceName,
 				lineNumber, charStart, charEnd, hitCount, register, attributes);
@@ -632,7 +632,7 @@ public class JDIDebugModel {
 			boolean uncaught, boolean checked, boolean register, Map<String, Object> attributes)
 			throws CoreException {
 		if (attributes == null) {
-			attributes = new HashMap<>(10);
+			attributes = new HashMap<>(10); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
 		}
 		return new JavaExceptionBreakpoint(resource, exceptionName, caught,
 				uncaught, checked, register, attributes);
@@ -695,7 +695,7 @@ public class JDIDebugModel {
 			int charEnd, int hitCount, boolean register, Map<String, Object> attributes)
 			throws CoreException {
 		if (attributes == null) {
-			attributes = new HashMap<>(10);
+			attributes = new HashMap<>(10); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
 		}
 		return new JavaWatchpoint(resource, typeName, fieldName, lineNumber,
 				charStart, charEnd, hitCount, register, attributes);
@@ -766,7 +766,7 @@ public class JDIDebugModel {
 			int hitCount, boolean register, Map<String, Object> attributes)
 			throws CoreException {
 		if (attributes == null) {
-			attributes = new HashMap<>(10);
+			attributes = new HashMap<>(10); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
 		}
 		return new JavaMethodBreakpoint(resource, typePattern, methodName,
 				methodSignature, entry, exit, nativeOnly, lineNumber,
@@ -826,7 +826,7 @@ public class JDIDebugModel {
 			int hitCount, boolean register, Map<String, Object> attributes)
 			throws CoreException {
 		if (attributes == null) {
-			attributes = new HashMap<>(10);
+			attributes = new HashMap<>(10); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
 		}
 		return new JavaMethodEntryBreakpoint(resource, typeName, methodName,
 				methodSignature, lineNumber, charStart, charEnd, hitCount,
@@ -850,13 +850,13 @@ public class JDIDebugModel {
 	 *                if unable to retrieve the associated marker attributes
 	 *                (line number).
 	 */
-	public static IJavaLineBreakpoint lineBreakpointExists(String typeName,
+	public static IJavaLineBreakpoint lineBreakpointExists(String typeName, //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 			int lineNumber) throws CoreException {
 		String modelId = getPluginIdentifier();
 		String markerType = JavaLineBreakpoint.getMarkerType();
 		IBreakpointManager manager = DebugPlugin.getDefault()
 				.getBreakpointManager();
-		for (IBreakpoint bp : manager.getBreakpoints(modelId)) {
+		for (IBreakpoint bp : manager.getBreakpoints(modelId)) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			if (!(bp instanceof IJavaLineBreakpoint)) {
 				continue;
 			}
@@ -865,7 +865,7 @@ public class JDIDebugModel {
 			if (marker != null && marker.exists()
 				&& marker.getType().equals(markerType)) {
 				String breakpointTypeName = breakpoint.getTypeName();
-				if (JavaDebugUtils.typeNamesEqual(breakpointTypeName, typeName) || (breakpointTypeName != null && breakpointTypeName.startsWith(typeName + '$'))) {
+				if (JavaDebugUtils.typeNamesEqual(breakpointTypeName, typeName) || (breakpointTypeName != null && breakpointTypeName.startsWith(typeName + '$'))) { //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 					if (breakpoint.getLineNumber() == lineNumber) {
 						return breakpoint;
 					}
@@ -895,13 +895,13 @@ public class JDIDebugModel {
 	 *                (line number).
 	 * @since 3.1
 	 */
-	public static IJavaLineBreakpoint lineBreakpointExists(IResource resource,
+	public static IJavaLineBreakpoint lineBreakpointExists(IResource resource, //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 			String typeName, int lineNumber) throws CoreException {
 		String modelId = getPluginIdentifier();
 		String markerType = JavaLineBreakpoint.getMarkerType();
 		IBreakpointManager manager = DebugPlugin.getDefault()
 				.getBreakpointManager();
-		for (IBreakpoint bp : manager.getBreakpoints(modelId)) {
+		for (IBreakpoint bp : manager.getBreakpoints(modelId)) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			if (!(bp instanceof IJavaLineBreakpoint)) {
 				continue;
 			}
@@ -910,7 +910,7 @@ public class JDIDebugModel {
 			if (marker != null && marker.exists()
 				&& marker.getType().equals(markerType)) {
 				String breakpointTypeName = breakpoint.getTypeName();
-				if ((JavaDebugUtils.typeNamesEqual(breakpointTypeName, typeName) || (breakpointTypeName != null && breakpointTypeName.startsWith(typeName + '$')))
+				if ((JavaDebugUtils.typeNamesEqual(breakpointTypeName, typeName) || (breakpointTypeName != null && breakpointTypeName.startsWith(typeName + '$'))) //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 					&& breakpoint.getLineNumber() == lineNumber
 					&& resource.equals(marker.getResource())) {
 					return breakpoint;
@@ -1021,7 +1021,7 @@ public class JDIDebugModel {
 			IResource resource, String typeName, int memberType, int charStart,
 			int charEnd, boolean register, Map<String, Object> attributes) throws CoreException {
 		if (attributes == null) {
-			attributes = new HashMap<>(10);
+			attributes = new HashMap<>(10); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
 		}
 		return new JavaClassPrepareBreakpoint(resource, typeName, memberType,
 				charStart, charEnd, register, attributes);

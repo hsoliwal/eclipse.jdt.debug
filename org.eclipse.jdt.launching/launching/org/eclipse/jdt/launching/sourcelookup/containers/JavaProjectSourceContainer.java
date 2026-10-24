@@ -59,9 +59,9 @@ public class JavaProjectSourceContainer extends CompositeSourceContainer {
 	static {
 		String[] extensions = JavaCore.getJavaLikeExtensions();
 		fgJavaExtensions = new String[extensions.length];
-		for (int i = 0; i < extensions.length; i++) {
+		for (int i = 0; i < extensions.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			String ext = extensions[i];
-			fgJavaExtensions[i] = '.' + ext;
+			fgJavaExtensions[i] = '.' + ext; //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		}
 	}
 
@@ -69,7 +69,7 @@ public class JavaProjectSourceContainer extends CompositeSourceContainer {
 	 * Unique identifier for Java project source container type
 	 * (value <code>org.eclipse.jdt.launching.sourceContainer.javaProject</code>).
 	 */
-	public static final String TYPE_ID = LaunchingPlugin.getUniqueIdentifier() + ".sourceContainer.javaProject";   //$NON-NLS-1$
+	public static final String TYPE_ID = LaunchingPlugin.getUniqueIdentifier() + ".sourceContainer.javaProject";   //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 	/**
 	 * Constructs a source container on the given Java project.
@@ -106,13 +106,13 @@ public class JavaProjectSourceContainer extends CompositeSourceContainer {
 	/* (non-Javadoc)
 	 * @see org.eclipse.debug.internal.core.sourcelookup.containers.CompositeSourceContainer#createSourceContainers()
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	protected ISourceContainer[] createSourceContainers() throws CoreException {
-		List<ISourceContainer> containers = new ArrayList<>();
+		List<ISourceContainer> containers = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 		IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
 		if (fProject.getProject().isOpen()) {
 			IClasspathEntry[] entries = fProject.getRawClasspath();
-			for (int i = 0; i < entries.length; i++) {
+			for (int i = 0; i < entries.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				IClasspathEntry entry = entries[i];
 				switch (entry.getEntryKind()) {
 					case IClasspathEntry.CPE_SOURCE:
@@ -152,7 +152,7 @@ public class JavaProjectSourceContainer extends CompositeSourceContainer {
 	/* (non-Javadoc)
 	 * @see org.eclipse.debug.core.sourcelookup.ISourceContainer#findSourceElements(java.lang.String)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public Object[] findSourceElements(String name) throws CoreException {
 		// force container initialization
 		getSourceContainers();
@@ -161,13 +161,13 @@ public class JavaProjectSourceContainer extends CompositeSourceContainer {
 			// only look in source folders
 			Object[] objects = findSourceElements(name, fSourceFolders);
 			List<Object> filtered = null;
-			for (int i = 0; i < objects.length; i++) {
+			for (int i = 0; i < objects.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				Object object = objects[i];
 				if (object instanceof IResource) {
 					if (!getJavaProject().isOnClasspath((IResource)object)) {
 						if (filtered == null) {
-							filtered = new ArrayList<>(objects.length);
-							for (int j = 0; j < objects.length; j++) {
+							filtered = new ArrayList<>(objects.length); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
+							for (int j = 0; j < objects.length; j++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 								filtered.add(objects[j]);
 							}
 						}
@@ -191,7 +191,7 @@ public class JavaProjectSourceContainer extends CompositeSourceContainer {
 	}
 
 	private boolean isJavaLikeFileName(String name) {
-		for (int i = 0; i < fgJavaExtensions.length; i++) {
+		for (int i = 0; i < fgJavaExtensions.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			String ext = fgJavaExtensions[i];
 			if (name.endsWith(ext)) {
 				return true;

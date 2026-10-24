@@ -47,9 +47,9 @@ public class MethodBreakpointTests extends AbstractDebugTest {
 		super(name);
 	}
 
-	public void testEntryAndExitBreakpoints() throws Exception {
+	public void testEntryAndExitBreakpoints() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String typeName = "DropTests";
-		List<IJavaMethodBreakpoint> bps = new ArrayList<>();
+		List<IJavaMethodBreakpoint> bps = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 		// method 4 - entry
 		bps.add(createMethodBreakpoint(typeName, "method4", "()V", true, false));
 		// method 1 - exit
@@ -82,7 +82,7 @@ public class MethodBreakpointTests extends AbstractDebugTest {
 	 * Tests the 'stop in main' launching preference
 	 * {@link IJavaLaunchConfigurationConstants#ATTR_STOP_IN_MAIN}
 	 */
-	public void testStopInMain() throws Exception {
+	public void testStopInMain() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String typeName = "DropTests";
 		ILaunchConfiguration config = getLaunchConfiguration(typeName);
 		assertNotNull("Could not find launch config", config);
@@ -110,7 +110,7 @@ public class MethodBreakpointTests extends AbstractDebugTest {
 	/**
 	 * Tests disabled method entry and exit breakpoints
 	 */
-	public void testDisabledEntryAndExitBreakpoints() throws Exception {
+	public void testDisabledEntryAndExitBreakpoints() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String typeName = "DropTests";
 		// method 4 - entry
 		IBreakpoint bp1 = createMethodBreakpoint(typeName, "method4", "()V", true, false);
@@ -133,9 +133,9 @@ public class MethodBreakpointTests extends AbstractDebugTest {
 	/**
 	 * Tests that a method is NOT hit in an inner class
 	 */
-	public void testInnerClassNotHit() throws Exception {
+	public void testInnerClassNotHit() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String typeNamePattern = "A";
-		List<IJavaMethodBreakpoint> bps = new ArrayList<>();
+		List<IJavaMethodBreakpoint> bps = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 		// method b - entry
 		bps.add(createMethodBreakpoint(typeNamePattern, "b", "()V", true, false));
 
@@ -161,9 +161,9 @@ public class MethodBreakpointTests extends AbstractDebugTest {
 	/**
 	 * Tests that a given method IS hit in an inner class
 	 */
-	public void testInnerClassesHit() throws Exception {
+	public void testInnerClassesHit() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String typeNamePattern = "A*";
-		List<IJavaMethodBreakpoint> bps = new ArrayList<>();
+		List<IJavaMethodBreakpoint> bps = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 		// method b - entry
 		bps.add(createMethodBreakpoint(typeNamePattern, "b", "()V", true, false));
 
@@ -202,7 +202,7 @@ public class MethodBreakpointTests extends AbstractDebugTest {
 	/**
 	 * Tests the hit count for a method breakpoint suspends when reached
 	 */
-	public void testHitCountEntryBreakpoint() throws Exception {
+	public void testHitCountEntryBreakpoint() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String typeName = "MethodLoop";
 		IJavaMethodBreakpoint bp = createMethodBreakpoint(typeName, "calculateSum", "()V", true, false);
 		bp.setHitCount(3);
@@ -219,7 +219,7 @@ public class MethodBreakpointTests extends AbstractDebugTest {
 			IJavaPrimitiveValue value = (IJavaPrimitiveValue)var.getValue();
 			assertNotNull("variable 'sum' has no value", value);
 			int iValue = value.getIntValue();
-			assertEquals("value of 'sum' should be '3', but was " + iValue, 3, iValue);
+			assertEquals("value of 'sum' should be '3', but was " + iValue, 3, iValue); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 			bp.delete();
 		} finally {
@@ -231,7 +231,7 @@ public class MethodBreakpointTests extends AbstractDebugTest {
 	/**
 	 * Tests that the a method exit breakpoint suspends when its hit count is reached
 	 */
-	public void testHitCountExitBreakpoint() throws Exception {
+	public void testHitCountExitBreakpoint() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String typeName = "MethodLoop";
 		IJavaMethodBreakpoint bp = createMethodBreakpoint(typeName, "calculateSum", "()V", false, true);
 		bp.setHitCount(3);
@@ -248,7 +248,7 @@ public class MethodBreakpointTests extends AbstractDebugTest {
 			IJavaPrimitiveValue value = (IJavaPrimitiveValue)var.getValue();
 			assertNotNull("variable 'sum' has no value", value);
 			int iValue = value.getIntValue();
-			assertEquals("value of 'sum' should be '6', but was " + iValue, 6, iValue);
+			assertEquals("value of 'sum' should be '6', but was " + iValue, 6, iValue); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 			bp.delete();
 		} finally {
@@ -260,7 +260,7 @@ public class MethodBreakpointTests extends AbstractDebugTest {
 	/**
 	 * Tests an inclusive thread filter on a method breakpoint
 	 */
-	public void testThreadFilterInclusive() throws Exception {
+	public void testThreadFilterInclusive() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String typeName = "MethodLoop";
 		IJavaMethodBreakpoint methodBp = createMethodBreakpoint(typeName, "calculateSum", "()V", true, false);
 		createLineBreakpoint(18, typeName);
@@ -290,7 +290,7 @@ public class MethodBreakpointTests extends AbstractDebugTest {
 	/**
 	 * Tests an exclusive thread filter on a method breakpoint
 	 */
-	public void testThreadFilterExclusive() throws Exception {
+	public void testThreadFilterExclusive() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String typeName = "MethodLoop";
 		IJavaMethodBreakpoint methodBp = createMethodBreakpoint(typeName, "calculateSum", "()V", true, false);
 		createLineBreakpoint(18, typeName);
@@ -304,7 +304,7 @@ public class MethodBreakpointTests extends AbstractDebugTest {
 
 			// set a thread filter (*not* the main thread)
 			IThread[] threads = thread.getDebugTarget().getThreads();
-			for (int i = 0; i < threads.length; i++) {
+			for (int i = 0; i < threads.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				IThread thread2 = threads[i];
 				if (!thread2.equals(thread)) {
 					methodBp.setThreadFilter((IJavaThread)thread2);
@@ -324,7 +324,7 @@ public class MethodBreakpointTests extends AbstractDebugTest {
 	 * Test for bug 33551
 	 * Tests that a method breakpoint is hit properly in the default package
 	 */
-	public void testEntryDefaultPackageReturnType() throws Exception {
+	public void testEntryDefaultPackageReturnType() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String typeName = "DefPkgReturnType";
 		IJavaMethodBreakpoint bp = createMethodBreakpoint(typeName, "self", "()LDefPkgReturnType;", true, false);
 
@@ -398,9 +398,9 @@ public class MethodBreakpointTests extends AbstractDebugTest {
 	/**
 	 * Tests that a specific method breakpoint is skipped when set to do so
 	 */
-	public void testSkipMethodBreakpoint() throws Exception {
+	public void testSkipMethodBreakpoint() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String typeName = "DropTests";
-		List<IJavaMethodBreakpoint> bps = new ArrayList<>();
+		List<IJavaMethodBreakpoint> bps = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 		// method 4 - entry
 		bps.add(createMethodBreakpoint(typeName, "method4", "()V", true, false));
 		// method 1 - exit
@@ -428,7 +428,7 @@ public class MethodBreakpointTests extends AbstractDebugTest {
 	/**
 	 * Tests that a method entry breakpoint with a hit count works also without line information.
 	 */
-	public void testHitCountEntryBreakpointNoLocationsBug565982() throws Exception {
+	public void testHitCountEntryBreakpointNoLocationsBug565982() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IJavaProject project = getProjectContext();
 		boolean inheritJavaCoreOptions = true;
 		String compilerLineNumberAttribute = project.getOption(JavaCore.COMPILER_LINE_NUMBER_ATTR, inheritJavaCoreOptions);

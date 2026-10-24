@@ -33,7 +33,7 @@ public class ConvertPublicAnonymousTypeToNestedUnitTests extends AbstractRefacto
 		super(name);
 	}
 
-	public void testLineBreakpoint() throws Exception {
+	public void testLineBreakpoint() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 			String 	src = "src",
 					pack = "a.b.c",
@@ -63,7 +63,7 @@ public class ConvertPublicAnonymousTypeToNestedUnitTests extends AbstractRefacto
 		}
 	}//end testBreakPoint
 
-	public void testMethodBreakpoint() throws Exception {
+	public void testMethodBreakpoint() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 			String 	src = "src",
 					pack = "a.b.c",
@@ -91,7 +91,7 @@ public class ConvertPublicAnonymousTypeToNestedUnitTests extends AbstractRefacto
 		}
 	}//end testBreakPoint
 
-	public void testWatchpoint() throws Exception {
+	public void testWatchpoint() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 			String 	src = "src",
 					pack = "a.b.c",
@@ -120,7 +120,7 @@ public class ConvertPublicAnonymousTypeToNestedUnitTests extends AbstractRefacto
 		}
 	}//end testBreakPoint
 
-	public void testClassLoadpoint() throws Exception {
+	public void testClassLoadpoint() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 			String 	src = "src",
 					pack = "a.b.c",
@@ -147,7 +147,7 @@ public class ConvertPublicAnonymousTypeToNestedUnitTests extends AbstractRefacto
 		}
 	}//end testBreakPoint
 
-	private Refactoring setupRefactor(String root, String packageName, String cuName, String targetName) throws Exception {
+	private Refactoring setupRefactor(String root, String packageName, String cuName, String targetName) throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IJavaProject javaProject = get14Project();
 		ICompilationUnit cunit = getCompilationUnit(javaProject, root, packageName, cuName);
 		IType type = (IType)getMember(cunit,targetName);

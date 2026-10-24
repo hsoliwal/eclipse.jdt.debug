@@ -86,7 +86,7 @@ public class JdwpReplyPacket extends JdwpPacket {
 	public static final short HCR_OPERATION_REFUSED = 900; // HCR specific.
 
 	/** Mapping of error codes to strings. */
-	private static HashMap<Integer, String> fErrorMap = null;
+	private static HashMap<Integer, String> fErrorMap = null; //FLLDCIM: MARK — M10 M3_PRIMITIVE_LANES FIELD
 
 	/** JDWP Error code. */
 	private short fErrorCode;
@@ -133,14 +133,14 @@ public class JdwpReplyPacket extends JdwpPacket {
 	/**
 	 * Retrieves constant mappings.
 	 */
-	public static void getConstantMaps() {
+	public static void getConstantMaps() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		if (fErrorMap != null) {
 			return;
 		}
 
 		Field[] fields = JdwpReplyPacket.class.getDeclaredFields();
-		fErrorMap = new HashMap<>(fields.length);
-		for (Field field : fields) {
+		fErrorMap = new HashMap<>(fields.length); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
+		for (Field field : fields) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			if ((field.getModifiers() & Modifier.PUBLIC) == 0
 					|| (field.getModifiers() & Modifier.STATIC) == 0
 					|| (field.getModifiers() & Modifier.FINAL) == 0)

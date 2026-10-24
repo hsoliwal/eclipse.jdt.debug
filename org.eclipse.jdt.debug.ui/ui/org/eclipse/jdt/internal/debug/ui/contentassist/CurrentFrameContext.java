@@ -65,18 +65,18 @@ public class CurrentFrameContext extends TypeContext {
     /* (non-Javadoc)
      * @see org.eclipse.jdt.internal.debug.ui.contentassist.IJavaDebugContentAssistContext#getLocalVariables()
      */
-    @Override
+    @Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public String[][] getLocalVariables() throws CoreException {
         IJavaStackFrame frame = getStackFrame();
         if (frame != null) {
 			IVariable[] variables = extractVariables(frame);
             int index = 0;
-			while (index < variables.length
+			while (index < variables.length //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 					&& (variables[index] instanceof JDIThisVariable || JDIPlaceholderVariable.class.isAssignableFrom(variables[index].getClass()))) {
 				index++;
 			}
             String[][] locals = new String[2][variables.length - index];
-            for (int i = 0; i < locals[0].length; i++) {
+            for (int i = 0; i < locals[0].length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
                 IJavaVariable var = (IJavaVariable) variables[index];
 				locals[0][i] = resolveVarName(var);
                 try {
@@ -93,8 +93,8 @@ public class CurrentFrameContext extends TypeContext {
     }
 
 	private IVariable[] extractVariables(IJavaStackFrame frame) throws DebugException {
-		ArrayList<IVariable> vars = new ArrayList<>(Arrays.asList(frame.getVariables()));
-		for (IVariable var : vars) {
+		ArrayList<IVariable> vars = new ArrayList<>(Arrays.asList(frame.getVariables())); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
+		for (IVariable var : vars) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			if (var instanceof JDIThisVariable) {
 				vars.addAll(Arrays.asList(SyntheticVariableUtils.findSyntheticVariables(var.getValue().getVariables())));
 				break;

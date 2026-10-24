@@ -86,8 +86,8 @@ public class TypeHierarchyTestsGenerator extends TestGenerator {
 		System.out.println("done");
 	}
 
-	public static void  gen_main() throws Exception {
-		StringBuilder code= new StringBuilder();
+	public static void  gen_main() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
+		StringBuilder code= new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 
 		createTestQualifier(IAA, M1, code);
 		createTestQualifier(IAB, M1, code);
@@ -153,7 +153,7 @@ public class TypeHierarchyTestsGenerator extends TestGenerator {
 	}
 
 	public static void gen_aa_testA() throws Exception {
-		StringBuilder code= new StringBuilder();
+		StringBuilder code= new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 
 		createTest_TestA(code, AA);
 
@@ -161,7 +161,7 @@ public class TypeHierarchyTestsGenerator extends TestGenerator {
 	}
 
 	public static void gen_ab_testA() throws Exception {
-		StringBuilder code= new StringBuilder();
+		StringBuilder code= new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 
 		createTest_TestA(code, AB);
 
@@ -169,7 +169,7 @@ public class TypeHierarchyTestsGenerator extends TestGenerator {
 	}
 
 	public static void gen_ac_testA() throws Exception {
-		StringBuilder code= new StringBuilder();
+		StringBuilder code= new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 
 		createTest_TestA(code, AC);
 
@@ -177,7 +177,7 @@ public class TypeHierarchyTestsGenerator extends TestGenerator {
 	}
 
 	public static void gen_bb_testA() throws Exception {
-		StringBuilder code= new StringBuilder();
+		StringBuilder code= new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 
 		createTest_TestA(code, BB);
 
@@ -185,7 +185,7 @@ public class TypeHierarchyTestsGenerator extends TestGenerator {
 	}
 
 	public static void gen_bc_testA() throws Exception {
-		StringBuilder code= new StringBuilder();
+		StringBuilder code= new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 
 		createTest_TestA(code, BC);
 
@@ -193,7 +193,7 @@ public class TypeHierarchyTestsGenerator extends TestGenerator {
 	}
 
 	public static void gen_cc_testA() throws Exception {
-		StringBuilder code= new StringBuilder();
+		StringBuilder code= new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 
 		createTest_TestA(code, CC);
 
@@ -201,7 +201,7 @@ public class TypeHierarchyTestsGenerator extends TestGenerator {
 	}
 
 	public static void gen_bb_testB() throws Exception {
-		StringBuilder code= new StringBuilder();
+		StringBuilder code= new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 
 		createTest_TestB(code, BB);
 
@@ -209,7 +209,7 @@ public class TypeHierarchyTestsGenerator extends TestGenerator {
 	}
 
 	public static void gen_bc_testB() throws Exception {
-		StringBuilder code= new StringBuilder();
+		StringBuilder code= new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 
 		createTest_TestB(code, BC);
 
@@ -217,7 +217,7 @@ public class TypeHierarchyTestsGenerator extends TestGenerator {
 	}
 
 	public static void gen_cc_testB() throws Exception {
-		StringBuilder code= new StringBuilder();
+		StringBuilder code= new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 
 		createTest_TestB(code, CC);
 
@@ -225,7 +225,7 @@ public class TypeHierarchyTestsGenerator extends TestGenerator {
 	}
 
 	public static void gen_cc_testC() throws Exception {
-		StringBuilder code= new StringBuilder();
+		StringBuilder code= new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 
 		createTest_TestC(code, CC);
 
@@ -271,15 +271,15 @@ public class TypeHierarchyTestsGenerator extends TestGenerator {
 
 	public static void createTest(int level, int method, StringBuilder code) {
 		String strMethod= methods[method];
-		code.append("\tpublic void testEvalNestedTypeTest_" + strMethod + "() throws Throwable {\n");
+		code.append("\tpublic void testEvalNestedTypeTest_" + strMethod + "() throws Throwable {\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		tryBlockBegin(code);
 
-		genCodeEval("\"" + strMethod + "()\"", true, code);
+		genCodeEval("\"" + strMethod + "()\"", true, code); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		genCodeReturnTypeCheck(strMethod, "int", true, code);
-		genCodeReturnValueCheckPrimitiveType(strMethod, "int", "Int", IInternalDebugCoreConstants.EMPTY_STRING + values[level][method], true, code);
+		genCodeReturnValueCheckPrimitiveType(strMethod, "int", "Int", IInternalDebugCoreConstants.EMPTY_STRING + values[level][method], true, code); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 		tryBlockEnd(code);
-		code.append("\t}\n\n");
+		code.append("\t}\n\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 	}
 
 
@@ -288,59 +288,59 @@ public class TypeHierarchyTestsGenerator extends TestGenerator {
 		String nameQualifier= strQualifier.replace('(', '_').replace(')', '_').replace(' ', '_');
 		String strMethod= methods[method];
 		int[] level= ((method + 1) % 3 == 0) ? staticLevel : instanceLevel;
-		code.append("\tpublic void testEvalNestedTypeTest_" + nameQualifier + "_" + strMethod + "() throws Throwable {\n");
+		code.append("\tpublic void testEvalNestedTypeTest_" + nameQualifier + "_" + strMethod + "() throws Throwable {\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		tryBlockBegin(code);
 
-		genCodeEval("\"" + strQualifier + "." + strMethod + "()\"", true, code);
-		genCodeReturnTypeCheck(strQualifier + "." + strMethod, "int", true, code);
-		genCodeReturnValueCheckPrimitiveType(strQualifier + "." + strMethod, "int", "Int", IInternalDebugCoreConstants.EMPTY_STRING + values[level[qualifier]][method], true, code);
+		genCodeEval("\"" + strQualifier + "." + strMethod + "()\"", true, code); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
+		genCodeReturnTypeCheck(strQualifier + "." + strMethod, "int", true, code); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
+		genCodeReturnValueCheckPrimitiveType(strQualifier + "." + strMethod, "int", "Int", IInternalDebugCoreConstants.EMPTY_STRING + values[level[qualifier]][method], true, code); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 		tryBlockEnd(code);
-		code.append("\t}\n\n");
+		code.append("\t}\n\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 	}
 
 	//------------
 
 
-	public static void createJavaFile(StringBuilder tests, int lineNumber, int numberFrames, int hitCount) throws Exception {
+	public static void createJavaFile(StringBuilder tests, int lineNumber, int numberFrames, int hitCount) throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 
-		StringBuilder code= new StringBuilder();
+		StringBuilder code= new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 
-		code.append("/*******************************************************************************\n");
-		code.append(" * Copyright (c) 2002, 2003 IBM Corporation and others.\n");
-		code.append("This program and the accompanying materials \n");
-		code.append(" * are made available under the terms of the Eclipse Public License 2.0\n");
-		code.append(" * which accompanies this distribution, and is available at\n");
-		code.append(" * https://www.eclipse.org/legal/epl-2.0/");
-		code.append(" * \n");
-		code.append(" * SPDX-License-Identifier: EPL-2.0\n");
-		code.append(" * \n");
-		code.append(" * Contributors:\n");
-		code.append(" *     IBM Corporation - initial API and implementation\n");
-		code.append(" *******************************************************************************/\n");
-		code.append("package org.eclipse.jdt.debug.tests.eval;\n\n");
-		code.append("import org.eclipse.debug.core.model.IValue;\n");
-		code.append("import org.eclipse.jdt.debug.core.IJavaPrimitiveValue;\n\n");
-		code.append("public class TypeHierarchy_" + lineNumber + "_" + hitCount + " extends Tests {\n");
-		code.append("\t/**\n");
-		code.append("\t * Constructor for TypeHierarchy.\n");
-		code.append("\t * @param name\n");
-		code.append("\t */\n");
-		code.append("\tpublic TypeHierarchy_" + lineNumber + "_" + hitCount + "(String name) {\n");
-		code.append("\t\tsuper(name);\n");
-		code.append("\t}\n\n");
-		code.append("\tpublic void init() throws Exception {\n");
-		code.append("\t\tinitializeFrame(\"EvalTypeHierarchyTests\", " + lineNumber + ", " + numberFrames + ", " + hitCount + ");\n");
-		code.append("\t}\n\n");
-		code.append("\tprotected void end() throws Exception {\n");
-		code.append("\t\tdestroyFrame();\n");
-		code.append("\t}\n\n");
+		code.append("/*******************************************************************************\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+		code.append(" * Copyright (c) 2002, 2003 IBM Corporation and others.\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+		code.append("This program and the accompanying materials \n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+		code.append(" * are made available under the terms of the Eclipse Public License 2.0\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+		code.append(" * which accompanies this distribution, and is available at\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+		code.append(" * https://www.eclipse.org/legal/epl-2.0/"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+		code.append(" * \n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+		code.append(" * SPDX-License-Identifier: EPL-2.0\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+		code.append(" * \n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+		code.append(" * Contributors:\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+		code.append(" *     IBM Corporation - initial API and implementation\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+		code.append(" *******************************************************************************/\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+		code.append("package org.eclipse.jdt.debug.tests.eval;\n\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+		code.append("import org.eclipse.debug.core.model.IValue;\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+		code.append("import org.eclipse.jdt.debug.core.IJavaPrimitiveValue;\n\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+		code.append("public class TypeHierarchy_" + lineNumber + "_" + hitCount + " extends Tests {\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+		code.append("\t/**\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+		code.append("\t * Constructor for TypeHierarchy.\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+		code.append("\t * @param name\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+		code.append("\t */\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+		code.append("\tpublic TypeHierarchy_" + lineNumber + "_" + hitCount + "(String name) {\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+		code.append("\t\tsuper(name);\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+		code.append("\t}\n\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+		code.append("\tpublic void init() throws Exception {\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+		code.append("\t\tinitializeFrame(\"EvalTypeHierarchyTests\", " + lineNumber + ", " + numberFrames + ", " + hitCount + ");\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+		code.append("\t}\n\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+		code.append("\tprotected void end() throws Exception {\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+		code.append("\t\tdestroyFrame();\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+		code.append("\t}\n\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 
-		code.append(tests.toString());
+		code.append(tests.toString()); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 
-		code.append("}\n");
+		code.append("}\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 
-		try (Writer file = new FileWriter(new File("TypeHierarchy_" + lineNumber + "_" + hitCount + ".java").getAbsoluteFile())) {
+		try (Writer file = new FileWriter(new File("TypeHierarchy_" + lineNumber + "_" + hitCount + ".java").getAbsoluteFile())) { //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT //FLLDCIM: MARK — M31 M3FILE_IO NEW
 			file.write(code.toString());
 		}
 

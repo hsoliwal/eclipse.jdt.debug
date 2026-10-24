@@ -50,9 +50,9 @@ public class SocketAttachingConnectorImpl extends ConnectorImpl implements
 	/* (non-Javadoc)
 	 * @see com.sun.jdi.connect.Connector#defaultArguments()
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public Map<String, Connector.Argument> defaultArguments() {
-		HashMap<String, Connector.Argument> arguments = new HashMap<>(2);
+		HashMap<String, Connector.Argument> arguments = new HashMap<>(2); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
 
 		// Host name
 		StringArgumentImpl strArg = new StringArgumentImpl(
@@ -94,7 +94,7 @@ public class SocketAttachingConnectorImpl extends ConnectorImpl implements
 	/**
 	 * Retrieves connection arguments.
 	 */
-	private void getConnectionArguments(Map<String,? extends Connector.Argument> connectionArgs)
+	private void getConnectionArguments(Map<String,? extends Connector.Argument> connectionArgs) //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 			throws IllegalConnectorArgumentsException {
 		String attribute = ""; //$NON-NLS-1$
 		try {
@@ -138,7 +138,7 @@ public class SocketAttachingConnectorImpl extends ConnectorImpl implements
 			connection = ((SocketTransportImpl) fTransport).attach(fHostname,
 					fPort, fTimeout, 0);
 		} catch (IllegalArgumentException e) {
-			List<String> args = new ArrayList<>();
+			List<String> args = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 			args.add("hostname"); //$NON-NLS-1$
 			args.add("port"); //$NON-NLS-1$
 			throw new IllegalConnectorArgumentsException(e.getMessage(), args);

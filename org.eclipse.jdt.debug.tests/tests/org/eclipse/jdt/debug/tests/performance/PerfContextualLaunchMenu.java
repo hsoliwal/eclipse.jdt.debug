@@ -38,7 +38,7 @@ public class PerfContextualLaunchMenu extends AbstractDebugPerformanceTest {
     /**
      * Tests the performance of the fly-out time of the contextual launch menu
      */
-    public void testContextualLaunchMenu() throws Exception {
+    public void testContextualLaunchMenu() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
     	setDegradationComment("This test is unreliable as it improved 10x during 3.3 (vs 3.2), and needs to be replaced.");
         final PerfTestContextualLaunchAction launchaction = new PerfTestContextualLaunchAction();
 
@@ -46,21 +46,21 @@ public class PerfContextualLaunchMenu extends AbstractDebugPerformanceTest {
         StructuredSelection selection = new StructuredSelection(new Object[] {cu});
         launchaction.selectionChanged(new BogusAction(), selection);
 
-        DebugUIPlugin.getStandardDisplay().syncExec(new Runnable() {
-            @Override
+        DebugUIPlugin.getStandardDisplay().syncExec(new Runnable() { //FLLDCIM: MARK — T08 UI_THREAD_SYNCHRONIZER CALL
+            @Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 			public void run() {
                 Shell shell = DebugUIPlugin.getStandardDisplay().getActiveShell();
                 Menu menu = launchaction.getMenu(new Menu(shell));
                 showMenu(launchaction, menu, 5);
 
-                for(int i=0; i<10; i++) {
+                for(int i=0; i<10; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
                     try {
                     System.gc();
                     startMeasuring();
                     showMenu(launchaction, menu, 40);
                     stopMeasuring();
                     } catch (Throwable t) {
-                        System.err.println("Error on iteration: " + i);
+                        System.err.println("Error on iteration: " + i); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
                         t.printStackTrace();
                         break;
                     }
@@ -68,7 +68,7 @@ public class PerfContextualLaunchMenu extends AbstractDebugPerformanceTest {
             }
 
             private void showMenu(PerfTestContextualLaunchAction action, Menu menu, int repeat) {
-                for (int j = 0; j < repeat; j++) {
+                for (int j = 0; j < repeat; j++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
                     action.showMenu(menu);
                 }
             }

@@ -40,12 +40,12 @@ public class DefaultAccessRuleParticipant implements IAccessRuleParticipant {
 	/**
 	 * Cache of access rules per environment. Re-use rules between projects.
 	 */
-	private static Map<String, IAccessRule[][]> fgRules = new HashMap<>();
+	private static Map<String, IAccessRule[][]> fgRules = new HashMap<>(); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
 
 	/* (non-Javadoc)
 	 * @see org.eclipse.jdt.launching.environments.IAccessRuleParticipant#getAccessRules(org.eclipse.jdt.launching.environments.IExecutionEnvironment, org.eclipse.jdt.launching.IVMInstall, org.eclipse.jdt.launching.LibraryLocation[], org.eclipse.jdt.core.IJavaProject)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public IAccessRule[][] getAccessRules(IExecutionEnvironment environment, IVMInstall vm, LibraryLocation[] libraries, IJavaProject project) {
 		Map<String, String> complianceOptions = environment.getComplianceOptions();
 		if (complianceOptions != null) {
@@ -62,7 +62,7 @@ public class DefaultAccessRuleParticipant implements IAccessRuleParticipant {
 			IAccessRule[] packageRules = null;
 			if (packages.length > 0) {
 				packageRules = new IAccessRule[packages.length + 1];
-				for (int i = 0; i < packages.length; i++) {
+				for (int i = 0; i < packages.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 					packageRules[i] = JavaCore.newAccessRule(new Path(packages[i].replace('.', IPath.SEPARATOR)), IAccessRule.K_ACCESSIBLE);
 				}
 				// add IGNORE_IF_BETTER flag in case another explicit entry allows access (see bug 228488)
@@ -71,7 +71,7 @@ public class DefaultAccessRuleParticipant implements IAccessRuleParticipant {
 				packageRules = new IAccessRule[0];
 			}
 			allRules = new IAccessRule[libraries.length][];
-			for (int i = 0; i < allRules.length; i++) {
+			for (int i = 0; i < allRules.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				allRules[i] = packageRules;
 			}
 			fgRules.put(environment.getId(), allRules);
@@ -87,8 +87,8 @@ public class DefaultAccessRuleParticipant implements IAccessRuleParticipant {
 				StringTokenizer tokenizer = new StringTokenizer(packages, ","); //$NON-NLS-1$
 				String[] result = new String[tokenizer.countTokens() + 1];
 				result[0] = "java.**"; //$NON-NLS-1$
-				for (int i = 1; i < result.length; i++) {
-					result[i] = tokenizer.nextToken().trim() + ".*"; //$NON-NLS-1$
+				for (int i = 1; i < result.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
+					result[i] = tokenizer.nextToken().trim() + ".*"; //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 				}
 				return result;
 			}

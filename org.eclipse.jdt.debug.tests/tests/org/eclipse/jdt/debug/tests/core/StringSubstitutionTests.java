@@ -145,7 +145,7 @@ public class StringSubstitutionTests extends AbstractDebugTest implements IValue
 	/**
 	 * Tests the setValue and setDescription methods of value variables
 	 */
-	public void testValueVariableSetMethods() throws Exception{
+	public void testValueVariableSetMethods() throws Exception{ //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IValueVariable variable, copy;
 		variable = getValueVariable("VALUE_VAR_WITH_INITIALIZER");
 		copy = copy(variable);
@@ -301,7 +301,7 @@ public class StringSubstitutionTests extends AbstractDebugTest implements IValue
 	/**
 	 * Test for simple cycling references like ${A} -> ${B} -> ${A}
 	 */
-	public void testSimpleReferenceCycle() throws CoreException {
+	public void testSimpleReferenceCycle() throws CoreException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IStringVariableManager manager = VariablesPlugin.getDefault().getStringVariableManager();
 		IValueVariable var1 = manager.newValueVariable("var_A", null);
 		IValueVariable var2 = manager.newValueVariable("var_B", null);
@@ -328,7 +328,7 @@ public class StringSubstitutionTests extends AbstractDebugTest implements IValue
 	 * Test for cycling references in cases where original expression is never duplicated
 	 * eg. ${A} -> ${B}z -> ${A}z -> ${B}zz
 	 */
-	public void testReferenceCycleWithUniqueExpression() throws CoreException {
+	public void testReferenceCycleWithUniqueExpression() throws CoreException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IStringVariableManager manager = VariablesPlugin.getDefault().getStringVariableManager();
 		IValueVariable var1 = manager.newValueVariable("var_A", null);
 		IValueVariable var2 = manager.newValueVariable("var_B", null);
@@ -359,7 +359,7 @@ public class StringSubstitutionTests extends AbstractDebugTest implements IValue
 	 * 		${C} = ${A}${B}
 	 * 		In this case any references to ${C} or ${A}${B} cannot be resolved
 	 */
-	public void testDividedRecursiveReferenceCycles() throws CoreException {
+	public void testDividedRecursiveReferenceCycles() throws CoreException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IStringVariableManager manager = VariablesPlugin.getDefault().getStringVariableManager();
 		IValueVariable var1 = manager.newValueVariable("var_A", null);
 		IValueVariable var2 = manager.newValueVariable("var_B", null);
@@ -397,9 +397,9 @@ public class StringSubstitutionTests extends AbstractDebugTest implements IValue
 	/**
 	 * Test that we receive proper add notification.
 	 */
-	public void testAddNotificaiton() throws CoreException {
+	public void testAddNotificaiton() throws CoreException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IStringVariableManager manager = VariablesPlugin.getDefault().getStringVariableManager();
-		List<IValueVariable> vars = new ArrayList<>();
+		List<IValueVariable> vars = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 		IValueVariable one = manager.newValueVariable("var_one", null);
 		IValueVariable two = manager.newValueVariable("var_two", null);
 		vars.add(one);
@@ -407,7 +407,7 @@ public class StringSubstitutionTests extends AbstractDebugTest implements IValue
 		try {
 			manager.addVariables(new IValueVariable[]{one, two});
 			assertNotNull("no add notifications", fAdded);
-			for (int i = 0; i < fAdded.length; i++) {
+			for (int i = 0; i < fAdded.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				vars.remove(fAdded[i]);
 			}
 			assertEquals("collection should be empty", 0, vars.size());
@@ -419,7 +419,7 @@ public class StringSubstitutionTests extends AbstractDebugTest implements IValue
 	/**
 	 * Test that we receive proper change notification.
 	 */
-	public void testChangeNotificaiton() throws CoreException {
+	public void testChangeNotificaiton() throws CoreException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IStringVariableManager manager = VariablesPlugin.getDefault().getStringVariableManager();
 		IValueVariable one = manager.newValueVariable("var_one", null);
 		IValueVariable two = manager.newValueVariable("var_two", null);
@@ -441,9 +441,9 @@ public class StringSubstitutionTests extends AbstractDebugTest implements IValue
 	/**
 	 * Test that we receive proper remove notification.
 	 */
-	public void testRemoveNotificaiton() throws CoreException {
+	public void testRemoveNotificaiton() throws CoreException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IStringVariableManager manager = VariablesPlugin.getDefault().getStringVariableManager();
-		List<IValueVariable> vars = new ArrayList<>();
+		List<IValueVariable> vars = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 		IValueVariable one = manager.newValueVariable("var_one", null);
 		IValueVariable two = manager.newValueVariable("var_two", null);
 		vars.add(one);
@@ -452,7 +452,7 @@ public class StringSubstitutionTests extends AbstractDebugTest implements IValue
 			manager.addVariables(new IValueVariable[]{one, two});
 			manager.removeVariables(new IValueVariable[]{one, two});
 			assertNotNull("no remove notifications", fRemoved);
-			for (int i = 0; i < fRemoved.length; i++) {
+			for (int i = 0; i < fRemoved.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				vars.remove(fRemoved[i]);
 			}
 			assertEquals("collection should be empty", 0, vars.size());
@@ -731,7 +731,7 @@ public class StringSubstitutionTests extends AbstractDebugTest implements IValue
 	 * Tests that variables work as parameters to various fields in local Java
 	 * application configurations.
 	 */
-	public void testLocalJavaApplicationParameters() throws CoreException {
+	public void testLocalJavaApplicationParameters() throws CoreException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IResource resource = get14Project().getProject().getFile(JAVA14_SOURCE_FILE);
 		setSelection(resource);
 
@@ -755,7 +755,7 @@ public class StringSubstitutionTests extends AbstractDebugTest implements IValue
 	 *
 	 * @param resource resource to select or <code>null</code> if empty
 	 */
-	protected void setSelection(final IResource resource) {
+	protected void setSelection(final IResource resource) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		Runnable r = () -> {
 			IWorkbenchPage page = DebugUIPlugin.getActiveWorkbenchWindow().getActivePage();
 			assertNotNull("the active workbench window page should not be null", page);
@@ -778,7 +778,7 @@ public class StringSubstitutionTests extends AbstractDebugTest implements IValue
 			}
 
 		};
-		DebugUIPlugin.getStandardDisplay().syncExec(r);
+		DebugUIPlugin.getStandardDisplay().syncExec(r); //FLLDCIM: MARK — T08 UI_THREAD_SYNCHRONIZER CALL
 	}
 
 	/**

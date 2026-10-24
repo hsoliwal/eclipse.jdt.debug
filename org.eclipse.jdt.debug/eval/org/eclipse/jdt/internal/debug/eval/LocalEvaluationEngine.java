@@ -201,7 +201,7 @@ public class LocalEvaluationEngine implements IClassFileEvaluationEngine,
 	/**
 	 * @see ICodeSnippetRequestor#acceptClassFiles(byte[][], String[][], String)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public boolean acceptClassFiles(byte[][] classFileBytes,
 			String[][] classFileCompoundNames, String codeSnippetClassName) {
 		try {
@@ -222,7 +222,7 @@ public class LocalEvaluationEngine implements IClassFileEvaluationEngine,
 		return true;
 	}
 
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public void run(IJavaThread thread, IProgressMonitor monitor) {
 		IJavaObject codeSnippetInstance = null;
 		try {
@@ -235,7 +235,7 @@ public class LocalEvaluationEngine implements IClassFileEvaluationEngine,
 			IVariable[] fields = codeSnippetInstance.getVariables();
 			IJavaVariable resultValue = null;
 			IJavaVariable resultType = null;
-			for (IVariable field : fields) {
+			for (IVariable field : fields) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				if (field.getName().equals(RESULT_TYPE_FIELD)) {
 					resultType = (IJavaVariable) field;
 				}
@@ -282,16 +282,16 @@ public class LocalEvaluationEngine implements IClassFileEvaluationEngine,
 	 * @exception DebugException
 	 *                if an exception is thrown accessing the given object
 	 */
-	protected void initializeLocals(IJavaObject object) throws DebugException {
+	protected void initializeLocals(IJavaObject object) throws DebugException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IJavaVariable[] locals = null;
 		IJavaObject thisObject = getThis();
 		if (getStackFrame() != null) {
 			locals = getStackFrame().getLocalVariables();
 		}
 		if (locals != null) {
-			for (IJavaVariable local : locals) {
+			for (IJavaVariable local : locals) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				IJavaVariable field = object.getField(
-						LOCAL_VAR_PREFIX + local.getName(), false);
+						LOCAL_VAR_PREFIX + local.getName(), false); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 				// internal error if field is not found
 				if (field == null) {
 					throw new DebugException(
@@ -331,15 +331,15 @@ public class LocalEvaluationEngine implements IClassFileEvaluationEngine,
 	 * @exception DebugException
 	 *                if an exception is thrown accessing the given object
 	 */
-	protected void restoreLocals(IJavaObject object) throws DebugException {
+	protected void restoreLocals(IJavaObject object) throws DebugException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IJavaVariable[] locals = null;
 		if (getStackFrame() != null) {
 			locals = getStackFrame().getLocalVariables();
 		}
 		if (locals != null) {
-			for (IJavaVariable local : locals) {
+			for (IJavaVariable local : locals) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				IJavaVariable field = object.getField(
-						LOCAL_VAR_PREFIX + local.getName(), false);
+						LOCAL_VAR_PREFIX + local.getName(), false); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 				// internal error if field is not found
 				if (field == null) {
 					throw new DebugException(
@@ -425,7 +425,7 @@ public class LocalEvaluationEngine implements IClassFileEvaluationEngine,
 	/**
 	 * @see IClassFileEvaluationEngine#evaluate(String, IJavaThread, IEvaluationListener, boolean)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public void evaluate(String snippet, IJavaThread thread,
 			IEvaluationListener listener, boolean hitBreakpoints)
 			throws DebugException {
@@ -475,7 +475,7 @@ public class LocalEvaluationEngine implements IClassFileEvaluationEngine,
 	/**
 	 * @see IEvaluationEngine#evaluate(String, IJavaStackFrame, IEvaluationListener, int, boolean)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public void evaluate(String snippet, IJavaStackFrame frame,
 			IEvaluationListener listener, int evaluationDetail,
 			boolean hitBreakpoints) throws DebugException {
@@ -493,10 +493,10 @@ public class LocalEvaluationEngine implements IClassFileEvaluationEngine,
 			// set up local variables and 'this' context for evaluation
 			IJavaVariable[] locals = frame.getLocalVariables();
 
-			List<String> typeNames = new ArrayList<>(locals.length);
-			List<String> varNames = new ArrayList<>(locals.length);
+			List<String> typeNames = new ArrayList<>(locals.length); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
+			List<String> varNames = new ArrayList<>(locals.length); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 
-			for (IJavaVariable var : locals) {
+			for (IJavaVariable var : locals) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				String typeName = getTranslatedTypeName(var
 						.getReferenceTypeName());
 				if (typeName != null) {
@@ -523,7 +523,7 @@ public class LocalEvaluationEngine implements IClassFileEvaluationEngine,
 
 			// do the evaluation in a different thread
 			Runnable r = new Runnable() {
-				@Override
+				@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 				public void run() {
 					try {
 						LocalEvaluationEngine.this
@@ -562,7 +562,7 @@ public class LocalEvaluationEngine implements IClassFileEvaluationEngine,
 	/**
 	 * Verifies the receiving type was resolved and is not an inner type.
 	 */
-	private void validateReceivingType(final IType receivingType)
+	private void validateReceivingType(final IType receivingType) //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 			throws DebugException {
 		if (receivingType == null) {
 			throw new DebugException(
@@ -588,7 +588,7 @@ public class LocalEvaluationEngine implements IClassFileEvaluationEngine,
 	/**
 	 * @see IEvaluationEngine#evaluate(String, IJavaObject, IJavaThread, IEvaluationListener, int, boolean)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public void evaluate(String snippet, IJavaObject thisContext,
 			IJavaThread thread, IEvaluationListener listener,
 			int evaluationDetail, boolean hitBreakpoints) throws DebugException {
@@ -616,7 +616,7 @@ public class LocalEvaluationEngine implements IClassFileEvaluationEngine,
 
 			// do the evaluation in a different thread
 			Runnable r = new Runnable() {
-				@Override
+				@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 				public void run() {
 					try {
 						LocalEvaluationEngine.this
@@ -711,7 +711,7 @@ public class LocalEvaluationEngine implements IClassFileEvaluationEngine,
 	 *
 	 * @see IEvaluationEngine#dispose()
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public void dispose() {
 		fDisposed = true;
 		ENGINE_COUNT--;
@@ -722,14 +722,14 @@ public class LocalEvaluationEngine implements IClassFileEvaluationEngine,
 		}
 		List<File> snippetFiles = getSnippetFiles();
 		Iterator<File> iter = snippetFiles.iterator();
-		while (iter.hasNext()) {
+		while (iter.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			File file = iter.next();
-			if (file.exists()) {
+			if (file.exists()) { //FLLDCIM: MARK — M31 M3FILE_IO CALL
 				if (CODE_SNIPPET_NAME.equals(file.getName())
 						&& ENGINE_COUNT > 0) {
 					continue; // do not delete the common file for other engines
 				}
-				if (!file.delete()) {
+				if (!file.delete()) { //FLLDCIM: MARK — M31 M3FILE_IO CALL
 					JDIDebugPlugin
 							.log(new Status(
 									IStatus.ERROR,
@@ -744,11 +744,11 @@ public class LocalEvaluationEngine implements IClassFileEvaluationEngine,
 		List<File> directories = getDirectories();
 		// remove directories in bottom up order
 		int i = directories.size() - 1;
-		while (i >= 0) {
+		while (i >= 0) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			File dir = directories.get(i);
-			String[] listing = dir.list();
-			if (dir.exists() && listing != null && listing.length == 0
-					&& !dir.delete()) {
+			String[] listing = dir.list(); //FLLDCIM: MARK — M31 M3FILE_IO CALL
+			if (dir.exists() && listing != null && listing.length == 0 //FLLDCIM: MARK — M31 M3FILE_IO CALL
+					&& !dir.delete()) { //FLLDCIM: MARK — M31 M3FILE_IO CALL
 				JDIDebugPlugin
 						.log(new Status(
 								IStatus.ERROR,
@@ -862,28 +862,28 @@ public class LocalEvaluationEngine implements IClassFileEvaluationEngine,
 	 * @exception DebugException
 	 *                if this fails due to a lower level exception.
 	 */
-	protected void deploy(byte[][] classFiles, String[][] classFileNames)
+	protected void deploy(byte[][] classFiles, String[][] classFileNames) //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 			throws DebugException {
-		for (int i = 0; i < classFiles.length; i++) {
+		for (int i = 0; i < classFiles.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			String[] compoundName = classFileNames[i];
 			// create required folders
 			File dir = LocalEvaluationEngine.this.getOutputDirectory();
 			try {
-				String pkgDirName = dir.getCanonicalPath();
-				for (int j = 0; j < (compoundName.length - 1); j++) {
-					pkgDirName += File.separator + compoundName[j];
+				String pkgDirName = dir.getCanonicalPath(); //FLLDCIM: MARK — M31 M3FILE_IO CALL
+				for (int j = 0; j < (compoundName.length - 1); j++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
+					pkgDirName += File.separator + compoundName[j]; //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 					File pkgDir = new File(pkgDirName);
-					if (!pkgDir.exists()) {
-						pkgDir.mkdir();
+					if (!pkgDir.exists()) { //FLLDCIM: MARK — M31 M3FILE_IO CALL
+						pkgDir.mkdir(); //FLLDCIM: MARK — M31 M3FILE_IO CALL
 						addDirectory(pkgDir);
 					}
 				}
-				String name = compoundName[compoundName.length - 1] + ".class"; //$NON-NLS-1$
-				File classFile = new File(pkgDirName + File.separator + name);
-				if (!classFile.exists()) {
-					classFile.createNewFile();
+				String name = compoundName[compoundName.length - 1] + ".class"; //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
+				File classFile = new File(pkgDirName + File.separator + name); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
+				if (!classFile.exists()) { //FLLDCIM: MARK — M31 M3FILE_IO CALL
+					classFile.createNewFile(); //FLLDCIM: MARK — M31 M3FILE_IO CALL
 				}
-				try (FileOutputStream stream = new FileOutputStream(classFile)) {
+				try (FileOutputStream stream = new FileOutputStream(classFile)) { //FLLDCIM: MARK — M31 M3FILE_IO NEW
 					stream.write(classFiles[i]);
 				}
 				LocalEvaluationEngine.this.addSnippetFile(classFile);
@@ -910,7 +910,7 @@ public class LocalEvaluationEngine implements IClassFileEvaluationEngine,
 	 */
 	private void addSnippetFile(File file) {
 		if (fSnippetFiles == null) {
-			fSnippetFiles = new ArrayList<>();
+			fSnippetFiles = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 		}
 		fSnippetFiles.add(file);
 	}
@@ -924,7 +924,7 @@ public class LocalEvaluationEngine implements IClassFileEvaluationEngine,
 	 */
 	private void addDirectory(File file) {
 		if (fDirectories == null) {
-			fDirectories = new ArrayList<>();
+			fDirectories = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 		}
 		fDirectories.add(file);
 	}
@@ -1053,7 +1053,7 @@ public class LocalEvaluationEngine implements IClassFileEvaluationEngine,
 	 * @exception DebugException
 	 *                if creation fails
 	 */
-	protected IJavaObject newInstance(String className) throws DebugException {
+	protected IJavaObject newInstance(String className) throws DebugException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IJavaObject object = null;
 		IJavaClassType clazz = null;
 		IJavaType[] types = getDebugTarget().getJavaTypes(className);
@@ -1108,7 +1108,7 @@ public class LocalEvaluationEngine implements IClassFileEvaluationEngine,
 	 *            the value of the result, to be interpreted based on resultType
 	 * @return the result of running the code snippet class file
 	 */
-	protected IJavaValue convertResult(IJavaClassObject resultType,
+	protected IJavaValue convertResult(IJavaClassObject resultType, //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 			IJavaValue result) throws DebugException {
 		if (resultType == null) {
 			// there was an exception or compilation problem - no result
@@ -1132,7 +1132,7 @@ public class LocalEvaluationEngine implements IClassFileEvaluationEngine,
 			// signature of the result type we are looking for
 			IVariable[] vars = result.getVariables();
 			IJavaVariable var = null;
-			for (IVariable var2 : vars) {
+			for (IVariable var2 : vars) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				IJavaVariable jv = (IJavaVariable) var2;
 				if (!jv.isStatic() && jv.getSignature().equals(sig)) {
 					var = jv;
@@ -1289,8 +1289,8 @@ public class LocalEvaluationEngine implements IClassFileEvaluationEngine,
 			typeName = typeName.substring(index + 1);
 		}
 		index = typeName.indexOf('$');
-		ArrayList<String> list = new ArrayList<>(1);
-		while (index >= 0) {
+		ArrayList<String> list = new ArrayList<>(1); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
+		while (index >= 0) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			list.add(typeName.substring(0, index));
 			typeName = typeName.substring(index + 1);
 			index = typeName.indexOf('$');

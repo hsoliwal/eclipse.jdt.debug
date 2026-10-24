@@ -51,7 +51,7 @@ public abstract class AbstractDetailPane implements IDetailPane3 {
 	private final String fDescription;
 	private final String fId;
 	private AbstractJavaBreakpointEditor fEditor;
-	private final Set<Integer> fAutoSaveProperties = new HashSet<>();
+	private final Set<Integer> fAutoSaveProperties = new HashSet<>(); //FLLDCIM: MARK — M03 M3_SET_LANES NEW //FLLDCIM: MARK — M10 M3_PRIMITIVE_LANES FIELD
 	private IWorkbenchPartSite fSite;
 
 	// property listeners
@@ -100,7 +100,7 @@ public abstract class AbstractDetailPane implements IDetailPane3 {
 	 * @param property the property
 	 */
 	protected void firePropertyChange(int property) {
-		for (IPropertyListener listener : fListeners) {
+		for (IPropertyListener listener : fListeners) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			listener.propertyChanged(this, property);
 		}
 	}
@@ -147,7 +147,7 @@ public abstract class AbstractDetailPane implements IDetailPane3 {
 	 * @param autosave the auto-save properties
 	 */
 	protected void addAutosaveProperties(int[] autosave) {
-		for (int element : autosave) {
+		for (int element : autosave) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			fAutoSaveProperties.add(Integer.valueOf(element));
 		}
 	}
@@ -155,13 +155,13 @@ public abstract class AbstractDetailPane implements IDetailPane3 {
 	/* (non-Javadoc)
 	 * @see org.eclipse.debug.ui.IDetailPane#createControl(org.eclipse.swt.widgets.Composite)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public Control createControl(Composite parent) {
 		fEditorParent = SWTFactory.createComposite(parent, 1, 1, GridData.FILL_BOTH);
 		fEditorParent.setBackground(parent.getDisplay().getSystemColor(SWT.COLOR_LIST_BACKGROUND));
 		fEditor = createEditor(fEditorParent);
 		fEditor.setMnemonics(false);
-		fEditor.addPropertyListener(new IPropertyListener() {
+		fEditor.addPropertyListener(new IPropertyListener() { //FLLDCIM: MARK — T06  ANONYMOUS
 			@Override
 			public void propertyChanged(Object source, int propId) {
 				if (fAutoSaveProperties.contains(Integer.valueOf(propId))) {
@@ -237,7 +237,7 @@ public abstract class AbstractDetailPane implements IDetailPane3 {
 		}
 	}
 
-	private IStatusLineManager getStatusLine() {
+	private IStatusLineManager getStatusLine() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		// we want to show messages globally hence we
 		// have to go through the active part
 		if (fSite instanceof IViewSite) {
@@ -284,7 +284,7 @@ public abstract class AbstractDetailPane implements IDetailPane3 {
 	/* (non-Javadoc)
 	 * @see org.eclipse.debug.ui.IDetailPane#display(org.eclipse.jface.viewers.IStructuredSelection)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public void display(IStructuredSelection selection) {
 		// clear status line
 		IStatusLineManager statusLine = getStatusLine();

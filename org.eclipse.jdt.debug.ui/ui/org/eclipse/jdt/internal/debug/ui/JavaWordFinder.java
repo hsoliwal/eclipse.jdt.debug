@@ -36,7 +36,7 @@ public class JavaWordFinder {
 	 * @param offset The offset to start looking for the word
 	 * @return IRegion containing the word or <code>null</code>
 	 */
-	public static IRegion findWord(IDocument document, int offset) {
+	public static IRegion findWord(IDocument document, int offset) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 
 		if (document == null){
 			return null;
@@ -51,7 +51,7 @@ public class JavaWordFinder {
 			int pos= offset;
 			char c;
 
-			while (pos >= 0) {
+			while (pos >= 0) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				c= document.getChar(pos);
 				if (!Character.isJavaIdentifierPart(c)) {
 					// Check for surrogates
@@ -75,7 +75,7 @@ public class JavaWordFinder {
 			pos= offset;
 			int length= document.getLength();
 
-			while (pos < length) {
+			while (pos < length) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				c= document.getChar(pos);
 				if (!Character.isJavaIdentifierPart(c)) {
 					break;

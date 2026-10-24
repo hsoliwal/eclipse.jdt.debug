@@ -168,7 +168,7 @@ public class ASTInstructionCompiler extends ASTVisitor {
 		fStartPosition = startPosition;
 		fInstructions = new InstructionSequence(snippet);
 		fStack = new Stack<>();
-		fCompleteInstructions = new ArrayList<>();
+		fCompleteInstructions = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 		fJavaProject = javaProject;
 	}
 
@@ -214,7 +214,7 @@ public class ASTInstructionCompiler extends ASTVisitor {
 		fStack.push(i);
 	}
 
-	private void storeInstruction() {
+	private void storeInstruction() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		Instruction instruction = null;
 		try {
 			instruction = fStack.pop();
@@ -233,7 +233,7 @@ public class ASTInstructionCompiler extends ASTVisitor {
 			}
 			fInstructions.add(instruction);
 			//System.out.println("Added: " + instruction.toString()); //$NON-NLS-1$
-			verbose("Add " + instruction.toString()); //$NON-NLS-1$
+			verbose("Add " + instruction.toString()); //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		}
 	}
 
@@ -249,7 +249,7 @@ public class ASTInstructionCompiler extends ASTVisitor {
 		}
 	}
 
-	private String getTypeName(ITypeBinding typeBinding) {
+	private String getTypeName(ITypeBinding typeBinding) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		if (typeBinding.isRawType()) {
 			typeBinding = typeBinding.getErasure();
 		}
@@ -266,18 +266,18 @@ public class ASTInstructionCompiler extends ASTVisitor {
 		}
 		StringBuilder name;
 		if (typeBinding.isArray()) {
-			name = new StringBuilder(getTypeName(typeBinding.getElementType()));
+			name = new StringBuilder(getTypeName(typeBinding.getElementType())); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 			int dimensions = typeBinding.getDimensions();
-			for (int i = 0; i < dimensions; i++) {
-				name.append("[]"); //$NON-NLS-1$
+			for (int i = 0; i < dimensions; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
+				name.append("[]"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			}
 			return name.toString();
 		}
 		//try it the old way
-		name = new StringBuilder(Signature.getTypeErasure(typeBinding.getName()));
+		name = new StringBuilder(Signature.getTypeErasure(typeBinding.getName())); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 		IPackageBinding packageBinding = typeBinding.getPackage();
 		typeBinding = typeBinding.getDeclaringClass();
-		while (typeBinding != null) {
+		while (typeBinding != null) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			name.insert(0, '$').insert(0, Signature.getTypeErasure(typeBinding.getName()));
 			typeBinding = typeBinding.getDeclaringClass();
 		}
@@ -293,7 +293,7 @@ public class ASTInstructionCompiler extends ASTVisitor {
 	}
 
 	private boolean isALocalType(ITypeBinding typeBinding) {
-		while (typeBinding != null) {
+		while (typeBinding != null) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			if (typeBinding.isLocal()) {
 				return true;
 			}
@@ -304,7 +304,7 @@ public class ASTInstructionCompiler extends ASTVisitor {
 
 	private boolean containsALocalType(IMethodBinding methodBinding) {
 		ITypeBinding[] typeBindings = methodBinding.getParameterTypes();
-		for (ITypeBinding typeBinding : typeBindings) {
+		for (ITypeBinding typeBinding : typeBindings) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			if (isALocalType(typeBinding)) {
 				return true;
 			}
@@ -315,7 +315,7 @@ public class ASTInstructionCompiler extends ASTVisitor {
 	private boolean containsALocalType(IMethodBinding methodBinding, MethodInvocation node) {
 		if (methodBinding != null) {
 			ITypeBinding[] typeBindings = methodBinding.getParameterTypes();
-			for (ITypeBinding typeBinding : typeBindings) {
+			for (ITypeBinding typeBinding : typeBindings) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				if (isALocalType(typeBinding)) {
 					return true;
 				}
@@ -326,12 +326,12 @@ public class ASTInstructionCompiler extends ASTVisitor {
 		return false;
 	}
 
-	private int getEnclosingLevel(ASTNode node,
+	private int getEnclosingLevel(ASTNode node, //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 			ITypeBinding referenceTypeBinding) {
 		ASTNode parent = node;
 		ITypeBinding refbinding = referenceTypeBinding.isParameterizedType() ? referenceTypeBinding
 				.getTypeDeclaration() : referenceTypeBinding;
-		do {
+		do { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			parent = parent.getParent();
 		} while (parent != null
 				&& !(parent instanceof AbstractTypeDeclaration || parent instanceof AnonymousClassDeclaration));
@@ -384,7 +384,7 @@ public class ASTInstructionCompiler extends ASTVisitor {
 	 * @param expression
 	 *            the expression to test.
 	 */
-	private void addPopInstructionIfNeeded(Expression expression) {
+	private void addPopInstructionIfNeeded(Expression expression) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		boolean pop = true;
 
 		if (expression instanceof MethodInvocation) {
@@ -442,7 +442,7 @@ public class ASTInstructionCompiler extends ASTVisitor {
 	/**
 	 * Add to the stack the instruction to box a primitive value.
 	 */
-	private void boxing(ITypeBinding requestedBinding, ITypeBinding valueBinding) {
+	private void boxing(ITypeBinding requestedBinding, ITypeBinding valueBinding) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String requestedTypeName = requestedBinding.getQualifiedName();
 		if ("java.lang.Object".equals(requestedTypeName)) { //$NON-NLS-1$
 			switch (valueBinding.getBinaryName().charAt(0)) {
@@ -510,7 +510,7 @@ public class ASTInstructionCompiler extends ASTVisitor {
 	 * Add the instruction to un-box a non-primitive value if needed. Returns
 	 * true if a storeInstruction() is needed after visiting the expression
 	 */
-	private boolean unBoxing(ITypeBinding valueBinding) {
+	private boolean unBoxing(ITypeBinding valueBinding) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String valueTypeName = valueBinding.getQualifiedName();
 		if ("java.lang.Integer".equals(valueTypeName)) { //$NON-NLS-1$
 			push(new SendMessage("intValue", "()I", 0, null, fCounter)); //$NON-NLS-1$ //$NON-NLS-2$
@@ -701,7 +701,7 @@ public class ASTInstructionCompiler extends ASTVisitor {
 	 */
 	@Override
 	public void endVisit(CompilationUnit node) {
-		while(!fStack.isEmpty()) {
+		while(!fStack.isEmpty()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			storeInstruction();
 		}
 	}
@@ -709,7 +709,7 @@ public class ASTInstructionCompiler extends ASTVisitor {
 	/**
 	 * @see ASTVisitor#endVisit(ConditionalExpression)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public void endVisit(ConditionalExpression node) {
 		if (!isActive() || hasErrors()) {
 			return;
@@ -762,7 +762,7 @@ public class ASTInstructionCompiler extends ASTVisitor {
 	/**
 	 * @see ASTVisitor#endVisit(DoStatement)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public void endVisit(DoStatement node) {
 		if (!isActive() || hasErrors()) {
 			return;
@@ -794,7 +794,7 @@ public class ASTInstructionCompiler extends ASTVisitor {
 
 		// for each pending break or continue instruction which are related to
 		// this loop, set the offset of the corresponding jump.
-		for (Iterator<CompleteInstruction> iter = fCompleteInstructions.iterator(); iter.hasNext();) {
+		for (Iterator<CompleteInstruction> iter = fCompleteInstructions.iterator(); iter.hasNext();) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			CompleteInstruction instruction = iter.next();
 			Jump jumpInstruction = instruction.fInstruction;
 			int instructionAddress = fInstructions.indexOf(jumpInstruction);
@@ -834,7 +834,7 @@ public class ASTInstructionCompiler extends ASTVisitor {
 	 * org.eclipse.jdt.core.dom.ASTVisitor#endVisit(org.eclipse.jdt.core.dom
 	 * .EnhancedForStatement)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public void endVisit(EnhancedForStatement node) {
 		if (!isActive() || hasErrors()) {
 			return;
@@ -877,7 +877,7 @@ public class ASTInstructionCompiler extends ASTVisitor {
 		// for each pending break or continue instruction which are related to
 		// this loop, set the offset of the corresponding jump.
 		String label = getLabel(node);
-		for (Iterator<CompleteInstruction> iter = fCompleteInstructions.iterator(); iter.hasNext();) {
+		for (Iterator<CompleteInstruction> iter = fCompleteInstructions.iterator(); iter.hasNext();) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			CompleteInstruction instruction = iter.next();
 			Jump jumpInstruction = instruction.fInstruction;
 			int instructionAddress = fInstructions.indexOf(jumpInstruction);
@@ -933,7 +933,7 @@ public class ASTInstructionCompiler extends ASTVisitor {
 	/**
 	 * @see ASTVisitor#endVisit(ForStatement)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public void endVisit(ForStatement node) {
 		if (!isActive() || hasErrors()) {
 			return;
@@ -991,7 +991,7 @@ public class ASTInstructionCompiler extends ASTVisitor {
 
 		// for each pending break or continue instruction which are related to
 		// this loop, set the offset of the corresponding jump.
-		for (Iterator<CompleteInstruction> iter = fCompleteInstructions.iterator(); iter.hasNext();) {
+		for (Iterator<CompleteInstruction> iter = fCompleteInstructions.iterator(); iter.hasNext();) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			CompleteInstruction instruction = iter.next();
 			Jump jumpInstruction = instruction.fInstruction;
 			int instructionAddress = fInstructions.indexOf(jumpInstruction);
@@ -1016,7 +1016,7 @@ public class ASTInstructionCompiler extends ASTVisitor {
 	/**
 	 * @see ASTVisitor#endVisit(IfStatement)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public void endVisit(IfStatement node) {
 		if (!isActive() || hasErrors()) {
 			return;
@@ -1110,7 +1110,7 @@ public class ASTInstructionCompiler extends ASTVisitor {
 	/**
 	 * @see ASTVisitor#endVisit(LabeledStatement)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public void endVisit(LabeledStatement node) {
 		if (!isActive() || hasErrors()) {
 			return;
@@ -1120,7 +1120,7 @@ public class ASTInstructionCompiler extends ASTVisitor {
 
 		// for each pending continue instruction which are related to
 		// this statement, set the offset of the corresponding jump.
-		for (Iterator<CompleteInstruction> iter = fCompleteInstructions.iterator(); iter.hasNext();) {
+		for (Iterator<CompleteInstruction> iter = fCompleteInstructions.iterator(); iter.hasNext();) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			CompleteInstruction instruction = iter.next();
 			if (instruction.fLabel != null && instruction.fLabel.equals(label)) {
 				iter.remove();
@@ -1458,7 +1458,7 @@ public class ASTInstructionCompiler extends ASTVisitor {
 	/**
 	 * @see ASTVisitor#endVisit(WhileStatement)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public void endVisit(WhileStatement node) {
 		if (!isActive() || hasErrors()) {
 			return;
@@ -1494,7 +1494,7 @@ public class ASTInstructionCompiler extends ASTVisitor {
 
 		// for each pending break or continue instruction which are related to
 		// this loop, set the offset of the corresponding jump.
-		for (Iterator<CompleteInstruction> iter = fCompleteInstructions.iterator(); iter.hasNext();) {
+		for (Iterator<CompleteInstruction> iter = fCompleteInstructions.iterator(); iter.hasNext();) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			CompleteInstruction instruction = iter.next();
 			Jump jumpInstruction = instruction.fInstruction;
 			int instructionAddress = fInstructions.indexOf(jumpInstruction);
@@ -1580,7 +1580,7 @@ public class ASTInstructionCompiler extends ASTVisitor {
 	/**
 	 * @see ASTVisitor#visit(ArrayCreation)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public boolean visit(ArrayCreation node) {
 		if (!isActive()) {
 			return false;
@@ -1656,7 +1656,7 @@ public class ASTInstructionCompiler extends ASTVisitor {
 	/**
 	 * @see ASTVisitor#visit(Assignment)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public boolean visit(Assignment node) {
 		if (!isActive()) {
 			return false;
@@ -1780,7 +1780,7 @@ public class ASTInstructionCompiler extends ASTVisitor {
 
 				if (unrecognized) {
 					setHasError(true);
-					addErrorMessage(EvaluationEngineMessages.ASTInstructionCompiler_Unrecognized_assignment_operator____4
+					addErrorMessage(EvaluationEngineMessages.ASTInstructionCompiler_Unrecognized_assignment_operator____4 //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 							+ opToken);
 					return false;
 				}
@@ -1867,7 +1867,7 @@ public class ASTInstructionCompiler extends ASTVisitor {
 
 			if (unrecognized) {
 				setHasError(true);
-				addErrorMessage(EvaluationEngineMessages.ASTInstructionCompiler_Unrecognized_assignment_operator____4
+				addErrorMessage(EvaluationEngineMessages.ASTInstructionCompiler_Unrecognized_assignment_operator____4 //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 						+ opToken);
 				return false;
 			}
@@ -1930,7 +1930,7 @@ public class ASTInstructionCompiler extends ASTVisitor {
 	/**
 	 * @see ASTVisitor#visit(BreakStatement)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public boolean visit(BreakStatement node) {
 		if (!isActive()) {
 			return false;
@@ -1954,7 +1954,7 @@ public class ASTInstructionCompiler extends ASTVisitor {
 	/**
 	 * @see ASTVisitor#visit(CastExpression)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public boolean visit(CastExpression node) {
 		if (!isActive()) {
 			return false;
@@ -2010,7 +2010,7 @@ public class ASTInstructionCompiler extends ASTVisitor {
 	 *
 	 * @see ASTVisitor#visit(ClassInstanceCreation)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public boolean visit(ClassInstanceCreation node) {
 		if (!isActive()) {
 			return true;
@@ -2097,7 +2097,7 @@ public class ASTInstructionCompiler extends ASTVisitor {
 				// for a non-static inner class, check if we are not in a static
 				// context (method)
 				ASTNode parent = node;
-				do {
+				do { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 					parent = parent.getParent();
 				} while (!(parent instanceof MethodDeclaration));
 				if (Modifier.isStatic(((MethodDeclaration) parent)
@@ -2156,7 +2156,7 @@ public class ASTInstructionCompiler extends ASTVisitor {
 	/**
 	 * @see ASTVisitor#visit(ContinueStatement)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public boolean visit(ContinueStatement node) {
 		if (!isActive()) {
 			return false;
@@ -2229,7 +2229,7 @@ public class ASTInstructionCompiler extends ASTVisitor {
 	 * @see org.eclipse.jdt.core.dom.ASTVisitor#visit(org.eclipse.jdt.core.dom.
 	 * EnhancedForStatement)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public boolean visit(EnhancedForStatement node) {
 		if (!isActive()) {
 			return false;
@@ -2255,8 +2255,8 @@ public class ASTInstructionCompiler extends ASTVisitor {
 		if (typeBinding.isArray()) {
 			// the expression returns an array
 			int idIndex = fUniqueIdIndex++;
-			String arrayIdentifier = "#a" + idIndex; //$NON-NLS-1$
-			String varIdentifier = "#i" + idIndex; //$NON-NLS-1$
+			String arrayIdentifier = "#a" + idIndex; //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
+			String varIdentifier = "#i" + idIndex; //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 			push(new LocalVariableCreation(arrayIdentifier, typeSignature, 1,
 					isParamPrimitiveType, true, fCounter));
 			node.getExpression().accept(this);
@@ -2307,7 +2307,7 @@ public class ASTInstructionCompiler extends ASTVisitor {
 
 		} else {
 			// the expression returns a collection
-			String iteratorIdentifier = "#i" + fUniqueIdIndex++; //$NON-NLS-1$
+			String iteratorIdentifier = "#i" + fUniqueIdIndex++; //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 			push(new LocalVariableCreation(iteratorIdentifier,
 					"Ljava/util/Iterator;", 0, false, true, fCounter)); //$NON-NLS-1$
 			push(new SendMessage(
@@ -2388,7 +2388,7 @@ public class ASTInstructionCompiler extends ASTVisitor {
 	/**
 	 * @see ASTVisitor#visit(ExpressionMethodReference)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public boolean visit(ExpressionMethodReference node) {
 		if (!isActive()) {
 			return true;
@@ -2408,7 +2408,7 @@ public class ASTInstructionCompiler extends ASTVisitor {
 		return false;
 	}
 
-	@SuppressWarnings("unused")
+	@SuppressWarnings("unused") //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	private RemoteEvaluatorBuilder makeBuilder(ASTNode node) throws DebugException {
 		RemoteEvaluatorBuilder builder = new RemoteEvaluatorBuilder(fJavaProject, new ExpressionBinder() {
 			@Override
@@ -2429,7 +2429,7 @@ public class ASTInstructionCompiler extends ASTVisitor {
 	}
 
 	private ITypeBinding getEnclosingClass(ASTNode node) {
-		while (node != null) {
+		while (node != null) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			if (node instanceof MethodDeclaration) {
 				return ((MethodDeclaration) node).resolveBinding().getDeclaringClass();
 			}
@@ -2442,7 +2442,7 @@ public class ASTInstructionCompiler extends ASTVisitor {
 	}
 
 	private boolean isStaticContext(ASTNode node) {
-		while (node != null) {
+		while (node != null) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			if (node instanceof MethodDeclaration) {
 				return Modifier.isStatic(((MethodDeclaration) node).getModifiers());
 			} else if (node instanceof Initializer) {
@@ -2466,7 +2466,7 @@ public class ASTInstructionCompiler extends ASTVisitor {
 	 *
 	 * @see ASTVisitor#visit(FieldAccess)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public boolean visit(FieldAccess node) {
 		if (!isActive()) {
 			return false;
@@ -2520,7 +2520,7 @@ public class ASTInstructionCompiler extends ASTVisitor {
 	 *      the standard accept order. order used for visiting children :
 	 *      initializers, condition, body, updaters
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public boolean visit(ForStatement node) {
 		if (!isActive()) {
 			return false;
@@ -2529,7 +2529,7 @@ public class ASTInstructionCompiler extends ASTVisitor {
 		push(new NoOp(fCounter));
 
 		push(new NoOp(fCounter));
-		for (Iterator<Expression> iter = node.initializers().iterator(); iter.hasNext();) {
+		for (Iterator<Expression> iter = node.initializers().iterator(); iter.hasNext();) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			Expression expr = iter.next();
 			expr.accept(this);
 			addPopInstructionIfNeeded(expr);
@@ -2544,7 +2544,7 @@ public class ASTInstructionCompiler extends ASTVisitor {
 		node.getBody().accept(this);
 
 		push(new NoOp(fCounter));
-		for (Iterator<Expression> iter = node.updaters().iterator(); iter.hasNext();) {
+		for (Iterator<Expression> iter = node.updaters().iterator(); iter.hasNext();) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			Expression expr = iter.next();
 			expr.accept(this);
 			addPopInstructionIfNeeded(expr);
@@ -2581,7 +2581,7 @@ public class ASTInstructionCompiler extends ASTVisitor {
 	 *
 	 * @see ASTVisitor#visit(InfixExpression)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public boolean visit(InfixExpression node) {
 		if (!isActive()) {
 			return false;
@@ -2641,7 +2641,7 @@ public class ASTInstructionCompiler extends ASTVisitor {
 		types[0][1] = leftTypeId;
 		types[0][2] = rightTypeId;
 
-		for (int i = 1; i < operatorNumber; i++) {
+		for (int i = 1; i < operatorNumber; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			Expression operand = iterator.next();
 			leftTypeId = resultTypeId;
 			rightTypeId = getUnBoxedTypeId(operand);
@@ -2656,31 +2656,31 @@ public class ASTInstructionCompiler extends ASTVisitor {
 
 		switch (char0) {
 		case '*': // multiply
-			for (int i = operatorNumber - 1; i >= 0; i--) {
+			for (int i = operatorNumber - 1; i >= 0; i--) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				push(new MultiplyOperator(types[i][0], types[i][1],
 						types[i][2], fCounter));
 			}
 			break;
 		case '/': // divide
-			for (int i = operatorNumber - 1; i >= 0; i--) {
+			for (int i = operatorNumber - 1; i >= 0; i--) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				push(new DivideOperator(types[i][0], types[i][1], types[i][2],
 						fCounter));
 			}
 			break;
 		case '%': // remainder
-			for (int i = operatorNumber - 1; i >= 0; i--) {
+			for (int i = operatorNumber - 1; i >= 0; i--) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				push(new RemainderOperator(types[i][0], types[i][1],
 						types[i][2], fCounter));
 			}
 			break;
 		case '+': // plus
-			for (int i = operatorNumber - 1; i >= 0; i--) {
+			for (int i = operatorNumber - 1; i >= 0; i--) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				push(new PlusOperator(types[i][0], types[i][1], types[i][2],
 						fCounter));
 			}
 			break;
 		case '-': // minus
-			for (int i = operatorNumber - 1; i >= 0; i--) {
+			for (int i = operatorNumber - 1; i >= 0; i--) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				push(new MinusOperator(types[i][0], types[i][1], types[i][2],
 						fCounter));
 			}
@@ -2688,19 +2688,19 @@ public class ASTInstructionCompiler extends ASTVisitor {
 		case '<': // left shift or less or less equal
 			switch (char1) {
 			case '\0': // less
-				for (int i = operatorNumber - 1; i >= 0; i--) {
+				for (int i = operatorNumber - 1; i >= 0; i--) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 					push(new LessOperator(types[i][1], types[i][2], fCounter));
 				}
 				break;
 			case '<': // left shift
-				for (int i = operatorNumber - 1; i >= 0; i--) {
+				for (int i = operatorNumber - 1; i >= 0; i--) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 					push(new LeftShiftOperator(
 							Instruction.getUnaryPromotionType(types[i][1]),
 							types[i][1], types[i][2], fCounter));
 				}
 				break;
 			case '=': // less equal
-				for (int i = operatorNumber - 1; i >= 0; i--) {
+				for (int i = operatorNumber - 1; i >= 0; i--) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 					push(new LessEqualOperator(types[i][1], types[i][2],
 							fCounter));
 				}
@@ -2714,21 +2714,21 @@ public class ASTInstructionCompiler extends ASTVisitor {
 					// equal
 			switch (char1) {
 			case '\0': // greater
-				for (int i = operatorNumber - 1; i >= 0; i--) {
+				for (int i = operatorNumber - 1; i >= 0; i--) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 					push(new GreaterOperator(types[i][1], types[i][2], fCounter));
 				}
 				break;
 			case '>': // right shift or unsigned right shift
 				switch (char2) {
 				case '\0': // right shift
-					for (int i = operatorNumber - 1; i >= 0; i--) {
+					for (int i = operatorNumber - 1; i >= 0; i--) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 						push(new RightShiftOperator(
 								Instruction.getUnaryPromotionType(types[i][1]),
 								types[i][1], types[i][2], fCounter));
 					}
 					break;
 				case '>': // unsigned right shift
-					for (int i = operatorNumber - 1; i >= 0; i--) {
+					for (int i = operatorNumber - 1; i >= 0; i--) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 						push(new UnsignedRightShiftOperator(
 								Instruction.getUnaryPromotionType(types[i][1]),
 								types[i][1], types[i][2], fCounter));
@@ -2737,7 +2737,7 @@ public class ASTInstructionCompiler extends ASTVisitor {
 				}
 				break;
 			case '=': // greater equal
-				for (int i = operatorNumber - 1; i >= 0; i--) {
+				for (int i = operatorNumber - 1; i >= 0; i--) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 					push(new GreaterEqualOperator(types[i][1], types[i][2],
 							fCounter));
 				}
@@ -2748,19 +2748,19 @@ public class ASTInstructionCompiler extends ASTVisitor {
 			}
 			break;
 		case '=': // equal equal
-			for (int i = operatorNumber - 1; i >= 0; i--) {
+			for (int i = operatorNumber - 1; i >= 0; i--) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				push(new EqualEqualOperator(types[i][1], types[i][2], true,
 						fCounter));
 			}
 			break;
 		case '!': // not equal
-			for (int i = operatorNumber - 1; i >= 0; i--) {
+			for (int i = operatorNumber - 1; i >= 0; i--) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				push(new EqualEqualOperator(types[i][1], types[i][2], false,
 						fCounter));
 			}
 			break;
 		case '^': // XOr
-			for (int i = operatorNumber - 1; i >= 0; i--) {
+			for (int i = operatorNumber - 1; i >= 0; i--) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				push(new XorOperator(types[i][0], types[i][1], types[i][2],
 						fCounter));
 			}
@@ -2768,13 +2768,13 @@ public class ASTInstructionCompiler extends ASTVisitor {
 		case '|': // or or or or
 			switch (char1) {
 			case '\0': // or
-				for (int i = operatorNumber - 1; i >= 0; i--) {
+				for (int i = operatorNumber - 1; i >= 0; i--) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 					push(new OrOperator(types[i][0], types[i][1], types[i][2],
 							fCounter));
 				}
 				break;
 			case '|': // or or
-				for (int i = operatorNumber - 1; i >= 0; i--) {
+				for (int i = operatorNumber - 1; i >= 0; i--) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 					push(new NoOp(fCounter));
 				}
 				break;
@@ -2786,13 +2786,13 @@ public class ASTInstructionCompiler extends ASTVisitor {
 		case '&': // and or and and
 			switch (char1) {
 			case '\0': // and
-				for (int i = operatorNumber - 1; i >= 0; i--) {
+				for (int i = operatorNumber - 1; i >= 0; i--) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 					push(new AndOperator(types[i][0], types[i][1], types[i][2],
 							fCounter));
 				}
 				break;
 			case '&': // and and
-				for (int i = operatorNumber - 1; i >= 0; i--) {
+				for (int i = operatorNumber - 1; i >= 0; i--) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 					push(new NoOp(fCounter));
 				}
 				break;
@@ -2807,7 +2807,7 @@ public class ASTInstructionCompiler extends ASTVisitor {
 		}
 		if (unrecognized) {
 			setHasError(true);
-			addErrorMessage(EvaluationEngineMessages.ASTInstructionCompiler_Unrecognized_infix_operator____13
+			addErrorMessage(EvaluationEngineMessages.ASTInstructionCompiler_Unrecognized_infix_operator____13 //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 					+ opToken);
 		}
 		if (hasErrors()) {
@@ -2840,7 +2840,7 @@ public class ASTInstructionCompiler extends ASTVisitor {
 				storeInstruction();
 			}
 
-			for (int i = 1; i < operatorNumber; i++) {
+			for (int i = 1; i < operatorNumber; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				conditionalJump = new ConditionalJump(isOrOr);
 				conditionalJumps[i] = conditionalJump;
 				conditionalJumpAddresses[i] = fCounter;
@@ -2863,7 +2863,7 @@ public class ASTInstructionCompiler extends ASTVisitor {
 			push(jump);
 			storeInstruction();
 
-			for (int i = 0; i < operatorNumber; i++) {
+			for (int i = 0; i < operatorNumber; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				conditionalJumps[i].setOffset(fCounter
 						- conditionalJumpAddresses[i] - 1);
 			}
@@ -2875,7 +2875,7 @@ public class ASTInstructionCompiler extends ASTVisitor {
 			// since we add no-op for number of operators (there will be more than one when we have extendedOperands),
 			// we need to store them as well to make sure the next expression such as PrefixExpressions can properly
 			// store the instruction in correct place.
-			for (int i = 0; i < operatorNumber; i++) {
+			for (int i = 0; i < operatorNumber; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				storeInstruction();
 			}
 
@@ -2898,7 +2898,7 @@ public class ASTInstructionCompiler extends ASTVisitor {
 			}
 
 			storeInstruction();
-			for (int i = 1; i < operatorNumber; i++) {
+			for (int i = 1; i < operatorNumber; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				Expression operand = iterator.next();
 				if (unbox) {
 					ITypeBinding typeBinding = resolveTypeBinding(operand);
@@ -3041,7 +3041,7 @@ public class ASTInstructionCompiler extends ASTVisitor {
 	 *
 	 * @see ASTVisitor#visit(MethodInvocation)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public boolean visit(MethodInvocation node) {
 		if (!isActive()) {
 			return false;
@@ -3111,7 +3111,7 @@ public class ASTInstructionCompiler extends ASTVisitor {
 		ASTNode root = node.getRoot();
 		if (root instanceof CompilationUnit cu) {
 			IProblem[] problems = cu.getProblems();
-			for (IProblem problem : problems) {
+			for (IProblem problem : problems) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				setHasError(true);
 				addErrorMessage(problem.getMessage());
 			}
@@ -3127,7 +3127,7 @@ public class ASTInstructionCompiler extends ASTVisitor {
 	 * @param arguments
 	 *            argument list
 	 */
-	private void pushMethodArguments(IMethodBinding methodBinding, List<Expression> arguments) {
+	private void pushMethodArguments(IMethodBinding methodBinding, List<Expression> arguments) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		int argCount = arguments.size();
 		ITypeBinding[] parameterTypes = methodBinding.getParameterTypes();
 		int paramCount = parameterTypes.length;
@@ -3147,7 +3147,7 @@ public class ASTInstructionCompiler extends ASTVisitor {
 			// (multiple arguments) and not an array
 			Iterator<Expression> iterator = arguments.iterator();
 			// process the first arguments (no part of the variable argument)
-			for (int i = 0; i < paramCount - 1; i++) {
+			for (int i = 0; i < paramCount - 1; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				Expression argument = iterator.next();
 				boolean storeRequired = checkAutoBoxing(
 						argument.resolveTypeBinding(), parameterTypes[i]);
@@ -3163,7 +3163,7 @@ public class ASTInstructionCompiler extends ASTVisitor {
 			push(new ArrayInitializerInstruction(
 					getTypeSignature(varargsElementType), argCount - paramCount
 							+ 1, varargsParameterType.getDimensions(), fCounter));
-			while (iterator.hasNext()) {
+			while (iterator.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				Expression argument = iterator.next();
 				boolean storeRequired = checkAutoBoxing(
 						argument.resolveTypeBinding(), varargsElementType);
@@ -3176,7 +3176,7 @@ public class ASTInstructionCompiler extends ASTVisitor {
 		} else {
 			Iterator<Expression> iterator = arguments.iterator();
 			int i = 0;
-			while (iterator.hasNext()) {
+			while (iterator.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				Expression argument = iterator.next();
 				boolean storeRequired = checkAutoBoxing(
 						argument.resolveTypeBinding(), parameterTypes[i++]);
@@ -3251,7 +3251,7 @@ public class ASTInstructionCompiler extends ASTVisitor {
 	/**
 	 * @see ASTVisitor#visit(NumberLiteral)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public boolean visit(NumberLiteral node) {
 		if (!isActive()) {
 			return false;
@@ -3393,7 +3393,7 @@ public class ASTInstructionCompiler extends ASTVisitor {
 	 *            the token to get the base from
 	 * @return the numeric base for the given token
 	 */
-	public static int getBase(String token) {
+	public static int getBase(String token) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		if (token.charAt(0) == '0' && (token.length() > 1)) {
 			switch (token.charAt(1)) {
 			case 'x':
@@ -3452,7 +3452,7 @@ public class ASTInstructionCompiler extends ASTVisitor {
 	/**
 	 * @see ASTVisitor#visit(PostfixExpression)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public boolean visit(PostfixExpression node) {
 		if (!isActive()) {
 			return false;
@@ -3485,7 +3485,7 @@ public class ASTInstructionCompiler extends ASTVisitor {
 				break;
 			default:
 				setHasError(true);
-				addErrorMessage(EvaluationEngineMessages.ASTInstructionCompiler_unrecognized_postfix_operator____15
+				addErrorMessage(EvaluationEngineMessages.ASTInstructionCompiler_unrecognized_postfix_operator____15 //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 						+ opToken);
 				return false;
 			}
@@ -3521,7 +3521,7 @@ public class ASTInstructionCompiler extends ASTVisitor {
 			break;
 		default:
 			setHasError(true);
-			addErrorMessage(EvaluationEngineMessages.ASTInstructionCompiler_unrecognized_postfix_operator____15
+			addErrorMessage(EvaluationEngineMessages.ASTInstructionCompiler_unrecognized_postfix_operator____15 //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 					+ opToken);
 			return false;
 		}
@@ -3532,7 +3532,7 @@ public class ASTInstructionCompiler extends ASTVisitor {
 	/**
 	 * @see ASTVisitor#visit(PrefixExpression)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public boolean visit(PrefixExpression node) {
 		if (!isActive()) {
 			return false;
@@ -3577,7 +3577,7 @@ public class ASTInstructionCompiler extends ASTVisitor {
 					break;
 				default:
 					setHasError(true);
-					addErrorMessage(EvaluationEngineMessages.ASTInstructionCompiler_unrecognized_prefix_operator____16
+					addErrorMessage(EvaluationEngineMessages.ASTInstructionCompiler_unrecognized_prefix_operator____16 //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 							+ opToken);
 					return false;
 				}
@@ -3609,7 +3609,7 @@ public class ASTInstructionCompiler extends ASTVisitor {
 					break;
 				default:
 					setHasError(true);
-					addErrorMessage(EvaluationEngineMessages.ASTInstructionCompiler_unrecognized_prefix_operator____16
+					addErrorMessage(EvaluationEngineMessages.ASTInstructionCompiler_unrecognized_prefix_operator____16 //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 							+ opToken);
 					return false;
 				}
@@ -3669,7 +3669,7 @@ public class ASTInstructionCompiler extends ASTVisitor {
 
 		if (unrecognized) {
 			setHasError(true);
-			addErrorMessage(EvaluationEngineMessages.ASTInstructionCompiler_unrecognized_prefix_operator____16
+			addErrorMessage(EvaluationEngineMessages.ASTInstructionCompiler_unrecognized_prefix_operator____16 //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 					+ opToken);
 			return false;
 		}
@@ -3695,7 +3695,7 @@ public class ASTInstructionCompiler extends ASTVisitor {
 	/**
 	 * @see ASTVisitor#visit(QualifiedName)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public boolean visit(QualifiedName node) {
 		if (!isActive()) {
 			return false;
@@ -3775,7 +3775,7 @@ public class ASTInstructionCompiler extends ASTVisitor {
 	/**
 	 * @see ASTVisitor#visit(SimpleName)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public boolean visit(SimpleName node) {
 		if (!isActive()) {
 			return false;
@@ -3852,7 +3852,7 @@ public class ASTInstructionCompiler extends ASTVisitor {
 	 * @see ASTVisitor#visit(SingleVariableDeclaration) return
 	 *      <code>false</code>, don't use the standard accept order.
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public boolean visit(SingleVariableDeclaration node) {
 		if (!isActive()) {
 			return false;
@@ -3915,7 +3915,7 @@ public class ASTInstructionCompiler extends ASTVisitor {
 	/**
 	 * @see ASTVisitor#visit(SuperFieldAccess)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public boolean visit(SuperFieldAccess node) {
 		if (!isActive()) {
 			return false;
@@ -3961,7 +3961,7 @@ public class ASTInstructionCompiler extends ASTVisitor {
 	 *
 	 * @see ASTVisitor#visit(SuperMethodInvocation)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public boolean visit(SuperMethodInvocation node) {
 		if (!isActive()) {
 			return false;
@@ -4022,7 +4022,7 @@ public class ASTInstructionCompiler extends ASTVisitor {
 			// (multiple arguments) and not an array
 			Iterator<Expression> iterator = arguments.iterator();
 			// process the first arguments (no part of the variable argument)
-			for (int i = 0; i < paramCount - 1; i++) {
+			for (int i = 0; i < paramCount - 1; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				Expression argument = iterator.next();
 				boolean storeRequired = checkAutoBoxing(
 						argument.resolveTypeBinding(), parameterTypes[i]);
@@ -4038,7 +4038,7 @@ public class ASTInstructionCompiler extends ASTVisitor {
 			push(new ArrayInitializerInstruction(
 					getTypeSignature(varargsElementType), argCount - paramCount
 							+ 1, varargsParameterType.getDimensions(), fCounter));
-			while (iterator.hasNext()) {
+			while (iterator.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				Expression argument = iterator.next();
 				boolean storeRequired = checkAutoBoxing(
 						argument.resolveTypeBinding(), varargsElementType);
@@ -4051,7 +4051,7 @@ public class ASTInstructionCompiler extends ASTVisitor {
 		} else {
 			Iterator<Expression> iterator = arguments.iterator();
 			int i = 0;
-			while (iterator.hasNext()) {
+			while (iterator.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				Expression argument = iterator.next();
 				boolean storeRequired = checkAutoBoxing(
 						argument.resolveTypeBinding(), parameterTypes[i++]);
@@ -4098,14 +4098,14 @@ public class ASTInstructionCompiler extends ASTVisitor {
 	}
 
 	static class slot {
-		ArrayList<ConditionalJump> jumps = new ArrayList<>();
+		ArrayList<ConditionalJump> jumps = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 		ArrayList<Statement> stmts = null;
 	}
 
 	/**
 	 * @see ASTVisitor#visit(SwitchStatement)
 	 */
-	@SuppressWarnings("deprecation")
+	@SuppressWarnings("deprecation") //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	@Override
 	public boolean visit(SwitchStatement node) {
 		if (!isActive()) {
@@ -4117,21 +4117,21 @@ public class ASTInstructionCompiler extends ASTVisitor {
 
 		ArrayList<Statement> statementsDefault = null;
 		Jump jumpDefault = null;
-		ArrayList<slot> jumpsStatements = new ArrayList<>();
+		ArrayList<slot> jumpsStatements = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 		slot currentslot = new slot();
 		jumpsStatements.add(currentslot);
 
-		for (Iterator<Statement> iter = node.statements().iterator(); iter.hasNext();) {
+		for (Iterator<Statement> iter = node.statements().iterator(); iter.hasNext();) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			Statement statement = iter.next();
 			if (statement instanceof SwitchCase switchCase) {
 				if (switchCase.isDefault()) {
 					jumpDefault = new Jump();
 					push(jumpDefault);
 					storeInstruction(); // jump
-					statementsDefault = new ArrayList<>();
+					statementsDefault = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 				} else {
 					if (node.getAST().apiLevel() >= AST.JLS14) {
-						for (Object expression : switchCase.expressions()) {
+						for (Object expression : switchCase.expressions()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 							if (expression instanceof StringLiteral || expression instanceof TextBlock) {
 								push(new SendMessage("equals", "(Ljava/lang/Object;)Z", 1, null, fCounter)); //$NON-NLS-1$ //$NON-NLS-2$
 							} else {
@@ -4167,7 +4167,7 @@ public class ASTInstructionCompiler extends ASTVisitor {
 					statementsDefault.add(statement);
 				} else {
 					if (currentslot.stmts == null) {
-						currentslot.stmts = new ArrayList<>();
+						currentslot.stmts = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 					}
 					currentslot.stmts.add(statement);
 				}
@@ -4183,14 +4183,14 @@ public class ASTInstructionCompiler extends ASTVisitor {
 			storeInstruction(); // jump
 		}
 
-		for (slot slot : jumpsStatements) {
-			for (ConditionalJump condJump : slot.jumps) {
+		for (slot slot : jumpsStatements) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
+			for (ConditionalJump condJump : slot.jumps) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				condJump.setOffset((fCounter - fInstructions.indexOf(condJump)) - 1);
 			}
 			if (currentslot.stmts != null) {
 				push(new Pop(0));
 				storeInstruction(); // pop
-				for (Statement statement : currentslot.stmts) {
+				for (Statement statement : currentslot.stmts) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 					statement.accept(this);
 				}
 			}
@@ -4201,7 +4201,7 @@ public class ASTInstructionCompiler extends ASTVisitor {
 			jumpDefault.setOffset((fCounter - fInstructions.indexOf(jumpDefault)) - 1);
 			push(new Pop(0));
 			storeInstruction(); // pop
-			for (Statement statement : statementsDefault) {
+			for (Statement statement : statementsDefault) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				statement.accept(this);
 			}
 		} else if(jumpEnd != null){
@@ -4211,7 +4211,7 @@ public class ASTInstructionCompiler extends ASTVisitor {
 		// for each pending break or continue instruction which are related to
 		// this loop, set the offset of the corresponding jump.
 		String label = getLabel(node);
-		for (Iterator<CompleteInstruction> iter = fCompleteInstructions.iterator(); iter.hasNext();) {
+		for (Iterator<CompleteInstruction> iter = fCompleteInstructions.iterator(); iter.hasNext();) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			CompleteInstruction instruction = iter.next();
 			Jump jumpInstruction = instruction.fInstruction;
 			int instructionAddress = fInstructions.indexOf(jumpInstruction);
@@ -4264,7 +4264,7 @@ public class ASTInstructionCompiler extends ASTVisitor {
 	/**
 	 * @see ASTVisitor#visit(ThisExpression)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public boolean visit(ThisExpression node) {
 		if (!isActive()) {
 			return false;
@@ -4363,7 +4363,7 @@ public class ASTInstructionCompiler extends ASTVisitor {
 	/**
 	 * @see ASTVisitor#visit(TypeMethodReference)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public boolean visit(TypeMethodReference node) {
 		if (!isActive()) {
 			return true;
@@ -4397,7 +4397,7 @@ public class ASTInstructionCompiler extends ASTVisitor {
 		if (!isActive()) {
 			return true;
 		}
-		for (Iterator<VariableDeclarationFragment> iter = node.fragments().iterator(); iter.hasNext();) {
+		for (Iterator<VariableDeclarationFragment> iter = node.fragments().iterator(); iter.hasNext();) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			iter.next().accept(this);
 		}
 		return false;
@@ -4406,7 +4406,7 @@ public class ASTInstructionCompiler extends ASTVisitor {
 	/**
 	 * @see ASTVisitor#visit(VariableDeclarationFragment)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public boolean visit(VariableDeclarationFragment node) {
 		/*
 		 * if it is in the code to execute, return <code>false</code>, we don't
@@ -4474,7 +4474,7 @@ public class ASTInstructionCompiler extends ASTVisitor {
 		if (!isActive()) {
 			return true;
 		}
-		for (Iterator<VariableDeclarationFragment> iter = node.fragments().iterator(); iter.hasNext();) {
+		for (Iterator<VariableDeclarationFragment> iter = node.fragments().iterator(); iter.hasNext();) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			iter.next().accept(this);
 		}
 		return false;
@@ -4522,7 +4522,7 @@ public class ASTInstructionCompiler extends ASTVisitor {
 		}
 	}
 
-	private int getUnBoxedTypeId(Expression expression) {
+	private int getUnBoxedTypeId(Expression expression) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		ITypeBinding typeBinding = expression.resolveTypeBinding();
 		if (typeBinding == null) {
 			return Instruction.T_undefined;
@@ -4555,7 +4555,7 @@ public class ASTInstructionCompiler extends ASTVisitor {
 		}
 	}
 
-	private int getTypeId(Type type) {
+	private int getTypeId(Type type) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		if (type.isPrimitiveType()) {
 			return getPrimitiveTypeId(((PrimitiveType) type)
 					.getPrimitiveTypeCode().toString());
@@ -4575,7 +4575,7 @@ public class ASTInstructionCompiler extends ASTVisitor {
 
 	}
 
-	public static String removePrefixZerosAndUnderscores(String tokenString,
+	public static String removePrefixZerosAndUnderscores(String tokenString, //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 			boolean isLong) {
 		char[] token = tokenString.toCharArray();
 		int max = token.length;
@@ -4595,7 +4595,7 @@ public class ASTInstructionCompiler extends ASTVisitor {
 		}
 		boolean modified = false;
 		boolean ignore = true;
-		loop: for (int i = start; i < max; i++) {
+		loop: for (int i = start; i < max; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			char currentChar = token[i];
 			switch (currentChar) {
 			case '0':
@@ -4615,9 +4615,9 @@ public class ASTInstructionCompiler extends ASTVisitor {
 			return tokenString;
 		}
 		ignore = true;
-		StringBuilder buffer = new StringBuilder();
-		buffer.append(token, 0, start);
-		loop: for (int i = start; i < max; i++) {
+		StringBuilder buffer = new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
+		buffer.append(token, 0, start); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+		loop: for (int i = start; i < max; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			char currentChar = token[i];
 			switch (currentChar) {
 			case '0':
@@ -4631,7 +4631,7 @@ public class ASTInstructionCompiler extends ASTVisitor {
 			default:
 				ignore = false;
 			}
-			buffer.append(currentChar);
+			buffer.append(currentChar); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		}
 		return buffer.toString();
 	}
@@ -4647,7 +4647,7 @@ public class ASTInstructionCompiler extends ASTVisitor {
 	 * @return the method signature for the given binding and enclosing type
 	 *         signature
 	 */
-	private String getMethodSignature(IMethodBinding methodBinding,
+	private String getMethodSignature(IMethodBinding methodBinding, //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 			String enclosingTypeSignature) {
 		methodBinding = methodBinding.getMethodDeclaration();
 		ITypeBinding[] parameterTypes = methodBinding.getParameterTypes();
@@ -4663,7 +4663,7 @@ public class ASTInstructionCompiler extends ASTVisitor {
 			parameterSignatures = new String[argCount];
 			parameterSignatures[0] = enclosingTypeSignature;
 		}
-		for (int i = 0; i < parameterTypes.length; i++) {
+		for (int i = 0; i < parameterTypes.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			parameterSignatures[i + offset] = getTypeSignature(parameterTypes[i]);
 		}
 		String signature = Signature.createMethodSignature(parameterSignatures,
@@ -4671,7 +4671,7 @@ public class ASTInstructionCompiler extends ASTVisitor {
 		return signature;
 	}
 
-	public static int getPrimitiveTypeId(String typeName) {
+	public static int getPrimitiveTypeId(String typeName) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		switch (typeName.charAt(0)) {
 		case 'b': // byte or boolean
 			switch (typeName.charAt(1)) {

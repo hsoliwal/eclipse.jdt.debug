@@ -51,9 +51,9 @@ public class JavaSourceLookupUtil {
 	 * @param entries entries to translate
 	 * @return source containers corresponding to the given runtime classpath entries
 	 */
-	public static ISourceContainer[] translate(IRuntimeClasspathEntry[] entries) {
-		List<ISourceContainer> containers = new ArrayList<>(entries.length);
-		for (int i = 0; i < entries.length; i++) {
+	public static ISourceContainer[] translate(IRuntimeClasspathEntry[] entries) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
+		List<ISourceContainer> containers = new ArrayList<>(entries.length); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
+		for (int i = 0; i < entries.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			IRuntimeClasspathEntry entry = entries[i];
 			switch (entry.getType()) {
 				case IRuntimeClasspathEntry.ARCHIVE:
@@ -100,7 +100,7 @@ public class JavaSourceLookupUtil {
 	 * @param entry
 	 *            non null
 	 */
-	private static void addSourceAttachment(IRuntimeClasspathEntry entry, List<ISourceContainer> containers) {
+	private static void addSourceAttachment(IRuntimeClasspathEntry entry, List<ISourceContainer> containers) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String path = entry.getSourceAttachmentLocation();
 		ISourceContainer container = null;
 		if (path == null) {
@@ -110,7 +110,7 @@ public class JavaSourceLookupUtil {
 		if (path != null) {
 			// check if file or folder
 			File file = new File(path);
-			if (file.isDirectory()) {
+			if (file.isDirectory()) { //FLLDCIM: MARK — M31 M3FILE_IO CALL
 				IResource resource = entry.getResource();
 				if (resource instanceof IContainer) {
 					container = new FolderSourceContainer((IContainer) resource, false);
@@ -163,7 +163,7 @@ public class JavaSourceLookupUtil {
 	 * @param entry archive runtime classpath entry
 	 * @return package fragment root or <code>null</code>
 	 */
-	private static IPackageFragmentRoot getPackageFragmentRoot(IRuntimeClasspathEntry entry) {
+	private static IPackageFragmentRoot getPackageFragmentRoot(IRuntimeClasspathEntry entry) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IResource resource = entry.getResource();
 		if (resource != null) {
 			// find package fragment associated with the resource
@@ -188,12 +188,12 @@ public class JavaSourceLookupUtil {
 		IPath entryPath = entry.getPath();
 		try {
 			IJavaProject[] jps = model.getJavaProjects();
-			for (int i = 0; i < jps.length; i++) {
+			for (int i = 0; i < jps.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				IJavaProject jp = jps[i];
 				IProject p =  jp.getProject();
 				if (p.isOpen()) {
 					IPackageFragmentRoot[] allRoots = jp.getPackageFragmentRoots();
-					for (int j = 0; j < allRoots.length; j++) {
+					for (int j = 0; j < allRoots.length; j++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 						IPackageFragmentRoot root = allRoots[j];
 						if (root.getPath().equals(entryPath) && isSourceAttachmentEqual(root, entry)) {
 							// use package fragment root
@@ -219,18 +219,18 @@ public class JavaSourceLookupUtil {
 	 *            container list to be updated
 	 */
 
-	private static void getPackageFragmentRootContainers(IRuntimeClasspathEntry entry, List<ISourceContainer> containers) {
+	private static void getPackageFragmentRootContainers(IRuntimeClasspathEntry entry, List<ISourceContainer> containers) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IJavaModel model = JavaCore.create(ResourcesPlugin.getWorkspace().getRoot());
 		IPath entryPath = entry.getPath();
 		boolean found = false;
 		try {
 			IJavaProject[] jps = model.getJavaProjects();
-			for (int i = 0; i < jps.length; i++) {
+			for (int i = 0; i < jps.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				IJavaProject jp = jps[i];
 				IProject p = jp.getProject();
 				if (p.isOpen()) {
 					IPackageFragmentRoot[] allRoots = jp.getPackageFragmentRoots();
-					for (int j = 0; j < allRoots.length; j++) {
+					for (int j = 0; j < allRoots.length; j++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 						IPackageFragmentRoot root = allRoots[j];
 						if (root.getPath().equals(entryPath) && isSourceAttachmentEqual(root, entry)) {
 							PackageFragmentRootSourceContainer container = new PackageFragmentRootSourceContainer(root);

@@ -90,7 +90,7 @@ public class InterfaceTypeImpl extends ReferenceTypeImpl implements
 		// For all reference types that have this interface cached, this cache must be
 		// undone.
 		Iterator<Object> itr = virtualMachineImpl().allCachedRefTypes();
-		while (itr.hasNext()) {
+		while (itr.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			ReferenceTypeImpl refType = (ReferenceTypeImpl) itr.next();
 			if (refType.fInterfaces != null
 					&& refType.fInterfaces.contains(this)) {
@@ -103,12 +103,12 @@ public class InterfaceTypeImpl extends ReferenceTypeImpl implements
 	/* (non-Javadoc)
 	 * @see com.sun.jdi.InterfaceType#implementors()
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public List<ClassType> implementors() {
 		// Note that this information should not be cached.
-		List<ClassType> implementors = new ArrayList<>();
+		List<ClassType> implementors = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 		Iterator<ReferenceType> itr = virtualMachineImpl().allRefTypes();
-		while (itr.hasNext()) {
+		while (itr.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			ReferenceType refType = itr.next();
 			if (refType instanceof ClassTypeImpl) {
 				try {
@@ -128,12 +128,12 @@ public class InterfaceTypeImpl extends ReferenceTypeImpl implements
 	/* (non-Javadoc)
 	 * @see com.sun.jdi.InterfaceType#subinterfaces()
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public List<InterfaceType> subinterfaces() {
 		// Note that this information should not be cached.
-		List<InterfaceType> implementors = new ArrayList<>();
+		List<InterfaceType> implementors = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 		Iterator<ReferenceType> itr = virtualMachineImpl().allRefTypes();
-		while (itr.hasNext()) {
+		while (itr.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			try {
 				ReferenceType refType = itr.next();
 				if (refType instanceof InterfaceTypeImpl interFaceType) {
@@ -171,7 +171,7 @@ public class InterfaceTypeImpl extends ReferenceTypeImpl implements
 	 * @return Returns a the single non-abstract Method visible from this class
 	 *         that has the given name and signature.
 	 */
-	public Method concreteMethodByName(String name, String signature) {
+	public Method concreteMethodByName(String name, String signature) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		/*
 		 * Recursion is used to find the method: The methods of its own (own
 		 * methods() command); The methods of it's superclass.
@@ -179,7 +179,7 @@ public class InterfaceTypeImpl extends ReferenceTypeImpl implements
 
 		Iterator<Method> methods = methods().iterator();
 		Method method;
-		while (methods.hasNext()) {
+		while (methods.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			method = methods.next();
 			if (method.name().equals(name) && method.signature().equals(signature)) {
 				if (method.isAbstract()) {
@@ -190,7 +190,7 @@ public class InterfaceTypeImpl extends ReferenceTypeImpl implements
 		}
 
 		if (superinterfaces() != null) {
-			for (InterfaceType superi: superinterfaces()) {
+			for (InterfaceType superi: superinterfaces()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				Method foundMethod = ((InterfaceTypeImpl)superi).concreteMethodByName(name, signature);
 				if (foundMethod != null) {
 					return foundMethod;
@@ -214,7 +214,7 @@ public class InterfaceTypeImpl extends ReferenceTypeImpl implements
 	 * @return Reads ID and returns known ReferenceTypeImpl with that ID, or if
 	 *         ID is unknown a newly created ReferenceTypeImpl.
 	 */
-	public static InterfaceTypeImpl read(MirrorImpl target, DataInputStream in)
+	public static InterfaceTypeImpl read(MirrorImpl target, DataInputStream in) //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 			throws IOException {
 		VirtualMachineImpl vmImpl = target.virtualMachineImpl();
 		JdwpInterfaceID ID = new JdwpInterfaceID(vmImpl);
@@ -240,7 +240,7 @@ public class InterfaceTypeImpl extends ReferenceTypeImpl implements
 	 * @return Reads ID and returns known ReferenceTypeImpl with that ID, or if
 	 *         ID is unknown a newly created ReferenceTypeImpl.
 	 */
-	public static InterfaceTypeImpl readWithSignature(MirrorImpl target,
+	public static InterfaceTypeImpl readWithSignature(MirrorImpl target, //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 			boolean withGenericSignature, DataInputStream in)
 			throws IOException {
 		VirtualMachineImpl vmImpl = target.virtualMachineImpl();

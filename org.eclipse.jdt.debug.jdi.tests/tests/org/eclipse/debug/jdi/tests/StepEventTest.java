@@ -83,7 +83,7 @@ public class StepEventTest extends AbstractJDITest {
 	/**
 	 * Tests a step request with a specified class filter
 	 */
-	public void testJDIClassFilter1() {
+	public void testJDIClassFilter1() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		// Request for step events
 		StepRequest request = getRequest();
 		request.addClassFilter("java.lang.NegativeArraySizeException");

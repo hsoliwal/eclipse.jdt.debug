@@ -22,7 +22,7 @@ import org.eclipse.ui.IViewPart;
 /**
  * An action delegate that toggles the state of its viewer to show/hide running threads.
  */
-public class ShowRunningThreadsAction extends AbstractThreadsViewFilterAction {
+public class ShowRunningThreadsAction extends AbstractThreadsViewFilterAction { //FLLDCIM: MARK — T23  IMPLEMENTS
 
 	@Override
 	public void init(IViewPart view) {
@@ -31,7 +31,7 @@ public class ShowRunningThreadsAction extends AbstractThreadsViewFilterAction {
 		IPreferenceStore store = getPreferenceStore();
 		String preferenceKey = getPreferenceKey();
 		if (store.contains(preferenceKey)) {
-			String compositeKey = view.getSite().getId() + "." + preferenceKey; //$NON-NLS-1$
+			String compositeKey = view.getSite().getId() + "." + preferenceKey; //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 			store.setDefault(compositeKey, store.getBoolean(preferenceKey));
 		}
 

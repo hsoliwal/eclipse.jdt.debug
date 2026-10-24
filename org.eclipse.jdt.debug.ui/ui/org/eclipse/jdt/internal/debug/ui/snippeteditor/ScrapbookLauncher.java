@@ -71,11 +71,11 @@ import org.eclipse.osgi.util.NLS;
  * Support for launching scrapbook using launch configurations.
  */
 
-public class ScrapbookLauncher implements IDebugEventSetListener {
+public class ScrapbookLauncher implements IDebugEventSetListener { //FLLDCIM: MARK — T27  IMPLEMENTS
 
-	public static final String SCRAPBOOK_LAUNCH = IJavaDebugUIConstants.PLUGIN_ID + ".scrapbook_launch"; //$NON-NLS-1$
+	public static final String SCRAPBOOK_LAUNCH = IJavaDebugUIConstants.PLUGIN_ID + ".scrapbook_launch"; //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
-	public static final String SCRAPBOOK_FILE_PATH = IJavaDebugUIConstants.PLUGIN_ID + ".scrapbook_file_path"; //$NON-NLS-1$
+	public static final String SCRAPBOOK_FILE_PATH = IJavaDebugUIConstants.PLUGIN_ID + ".scrapbook_file_path"; //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 	/**
 	 * Persistent property associated with snippet files specifying working directory.
@@ -86,9 +86,9 @@ public class ScrapbookLauncher implements IDebugEventSetListener {
 
 	private IJavaLineBreakpoint fMagicBreakpoint;
 
-	private final HashMap<IFile, IDebugTarget> fScrapbookToVMs = new HashMap<>(10);
-	private final HashMap<IDebugTarget, IBreakpoint> fVMsToBreakpoints = new HashMap<>(10);
-	private final HashMap<IDebugTarget, IFile> fVMsToScrapbooks = new HashMap<>(10);
+	private final HashMap<IFile, IDebugTarget> fScrapbookToVMs = new HashMap<>(10); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
+	private final HashMap<IDebugTarget, IBreakpoint> fVMsToBreakpoints = new HashMap<>(10); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
+	private final HashMap<IDebugTarget, IFile> fVMsToScrapbooks = new HashMap<>(10); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
 
 	private static ScrapbookLauncher fgDefault = null;
 
@@ -110,7 +110,7 @@ public class ScrapbookLauncher implements IDebugEventSetListener {
 	 *
 	 * @return resulting launch, or <code>null</code> on failure
 	 */
-	protected ILaunch launch(IFile page) {
+	protected ILaunch launch(IFile page) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 
 		// clean up orphaned launch configurations
 		cleanupLaunchConfigurations();
@@ -140,13 +140,13 @@ public class ScrapbookLauncher implements IDebugEventSetListener {
 			return null;
 		}
 
-		List<IRuntimeClasspathEntry> cp = new ArrayList<>(3);
+		List<IRuntimeClasspathEntry> cp = new ArrayList<>(3); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 		String jarFile = jarURL.getFile();
 		IRuntimeClasspathEntry supportEntry = JavaRuntime.newArchiveRuntimeClasspathEntry(new Path(jarFile));
 		cp.add(supportEntry);
 		// get bootpath entries
 		try {
-			for (IRuntimeClasspathEntry entry : JavaRuntime.computeUnresolvedRuntimeClasspath(javaProject)) {
+			for (IRuntimeClasspathEntry entry : JavaRuntime.computeUnresolvedRuntimeClasspath(javaProject)) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				if (entry.getClasspathProperty() != IRuntimeClasspathEntry.USER_CLASSES) {
 					cp.add(entry);
 				}
@@ -160,11 +160,11 @@ public class ScrapbookLauncher implements IDebugEventSetListener {
 		return null;
 	}
 
-	private ILaunch doLaunch(IJavaProject p, IFile page, IRuntimeClasspathEntry[] classPath, String jarFile) {
+	private ILaunch doLaunch(IJavaProject p, IFile page, IRuntimeClasspathEntry[] classPath, String jarFile) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 			if (fVMsToScrapbooks.isEmpty()) {
 				// register for debug events if a scrapbook is not currently running
-				DebugPlugin.getDefault().addDebugEventListener(this);
+				DebugPlugin.getDefault().addDebugEventListener(this); //FLLDCIM: MARK — T27 DEBUG_EVENT_ADAPTER CALL
 			}
 			ILaunchConfiguration config = null;
 			ILaunchConfigurationWorkingCopy wc = null;
@@ -195,7 +195,7 @@ public class ScrapbookLauncher implements IDebugEventSetListener {
 			String[] defaultClasspath = JavaRuntime.computeDefaultRuntimeClassPath(p);
 			String[] urls = new String[defaultClasspath.length + 1];
 			urls[0] = u.toExternalForm();
-			for (int i = 0; i < defaultClasspath.length; i++) {
+			for (int i = 0; i < defaultClasspath.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				f = new File(defaultClasspath[i]);
 				try {
 					urls[i + 1] = getEncodedURL(f).toExternalForm();
@@ -206,8 +206,8 @@ public class ScrapbookLauncher implements IDebugEventSetListener {
 			}
 
 			// convert to mementos
-			List<String> classpathList= new ArrayList<>(classPath.length);
-			for (IRuntimeClasspathEntry cp : classPath) {
+			List<String> classpathList= new ArrayList<>(classPath.length); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
+			for (IRuntimeClasspathEntry cp : classPath) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				classpathList.add(cp.getMemento());
 			}
 			if(wc == null) {
@@ -220,10 +220,10 @@ public class ScrapbookLauncher implements IDebugEventSetListener {
 				wc.setAttribute(IJavaLaunchConfigurationConstants.ATTR_SOURCE_PATH_PROVIDER, "org.eclipse.jdt.debug.ui.scrapbookSourcepathProvider"); //$NON-NLS-1$
 			}
 
-			StringBuilder urlsString = new StringBuilder();
-			for (String url : urls) {
-				urlsString.append(' ');
-				urlsString.append(url);
+			StringBuilder urlsString = new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
+			for (String url : urls) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
+				urlsString.append(' '); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+				urlsString.append(url); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			}
 			wc.setAttribute(IJavaLaunchConfigurationConstants.ATTR_PROGRAM_ARGUMENTS, urlsString.toString());
 			wc.setAttribute(SCRAPBOOK_LAUNCH, SCRAPBOOK_LAUNCH);
@@ -256,14 +256,14 @@ public class ScrapbookLauncher implements IDebugEventSetListener {
 	 * @throws CoreException
 	 *             if an exception occurs
 	 */
-	IBreakpoint createMagicBreakpoint(String jarFile) throws CoreException {
+	IBreakpoint createMagicBreakpoint(String jarFile) throws CoreException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		// set a breakpoint on the "Thread.sleep(100);" line of the "ScrapbookMainnop()" method
 		String typeName = "org.eclipse.jdt.internal.debug.ui.snippeteditor.ScrapbookMain"; //$NON-NLS-1$
 
-		IClassFileReader reader = ToolFactory.createDefaultClassFileReader(jarFile, typeName.replace('.', '/')
+		IClassFileReader reader = ToolFactory.createDefaultClassFileReader(jarFile, typeName.replace('.', '/') //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 				+ ".class", IClassFileReader.METHOD_INFOS | IClassFileReader.METHOD_BODIES); //$NON-NLS-1$
 		IMethodInfo[] methodInfos = reader.getMethodInfos();
-		for (IMethodInfo methodInfo : methodInfos) {
+		for (IMethodInfo methodInfo : methodInfos) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			if (!CharOperation.equals("nop".toCharArray(), methodInfo.getName())) {//$NON-NLS-1$
 				continue;
 			}
@@ -284,7 +284,7 @@ public class ScrapbookLauncher implements IDebugEventSetListener {
 	 */
 	@Override
 	public void handleDebugEvents(DebugEvent[] events) {
-		for (DebugEvent event : events) {
+		for (DebugEvent event : events) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			if (event.getSource() instanceof IDebugTarget && event.getKind() == DebugEvent.TERMINATE) {
 				cleanup((IDebugTarget)event.getSource());
 			}
@@ -338,26 +338,26 @@ public class ScrapbookLauncher implements IDebugEventSetListener {
 		}
 	}
 
-	@SuppressWarnings("deprecation")
+	@SuppressWarnings("deprecation") //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	protected URL getEncodedURL(File file) throws MalformedURLException {
 		//looking at File.toURL the delimiter is always '/'
 		// NOT File.separatorChar
 		String urlDelimiter= "/"; //$NON-NLS-1$
 		String unencoded= file.toURL().toExternalForm();
-		StringBuilder encoded= new StringBuilder();
+		StringBuilder encoded= new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 		StringTokenizer tokenizer= new StringTokenizer(unencoded, urlDelimiter);
 
-		encoded.append(tokenizer.nextToken()); //file:
-		encoded.append(urlDelimiter);
-		encoded.append(tokenizer.nextToken()); //drive letter and ':'
-		while (tokenizer.hasMoreElements()) {
-			encoded.append(urlDelimiter);
+		encoded.append(tokenizer.nextToken()); //file: //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+		encoded.append(urlDelimiter); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+		encoded.append(tokenizer.nextToken()); //drive letter and ':' //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+		while (tokenizer.hasMoreElements()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
+			encoded.append(urlDelimiter); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			String token= tokenizer.nextToken();
 			// should use same encoding as org.eclipse.jdt.internal.debug.ui.snippeteditor.ScrapbookMain.getClasspath(String[])
-			encoded.append(URLEncoder.encode(token, StandardCharsets.UTF_8));
+			encoded.append(URLEncoder.encode(token, StandardCharsets.UTF_8)); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		}
-		if (file.isDirectory()) {
-			encoded.append(urlDelimiter);
+		if (file.isDirectory()) { //FLLDCIM: MARK — M31 M3FILE_IO CALL
+			encoded.append(urlDelimiter); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		}
 		return new URL(encoded.toString());
 	}
@@ -491,11 +491,11 @@ public class ScrapbookLauncher implements IDebugEventSetListener {
 	 * configurations are deleted each time a scrapbook is launched - which is
 	 * infrequent.
 	 */
-	public void cleanupLaunchConfigurations() {
+	public void cleanupLaunchConfigurations() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 			ILaunchConfigurationType lcType = getLaunchManager().getLaunchConfigurationType(IJavaLaunchConfigurationConstants.ID_JAVA_APPLICATION);
 			IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
-			for (ILaunchConfiguration config : getLaunchManager().getLaunchConfigurations(lcType)) {
+			for (ILaunchConfiguration config : getLaunchManager().getLaunchConfigurations(lcType)) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				String path = config.getAttribute(SCRAPBOOK_FILE_PATH, (String)null);
 				if (path != null) {
 					IPath pagePath = new Path(path);

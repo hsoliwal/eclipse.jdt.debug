@@ -64,7 +64,7 @@ public class ArrayReferenceTest extends AbstractJDITest {
 	 * setValue(Value,int), setValues(List) and setValues(int,List,int,int),
 	 * and JDWP 'Array - Get values' and 'Array - Set values'.
 	 */
-	public void testJDIGetSetDoubleValue() {
+	public void testJDIGetSetDoubleValue() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		double one = 1.0;
 		double pi = 3.1415926535;
 		double twos = 2.2;
@@ -94,16 +94,16 @@ public class ArrayReferenceTest extends AbstractJDITest {
 		List<Value> values = fDoubleArray.getValues();
 		double[] expected = new double[] { pi, twos, threes };
 		ListIterator<Value> iterator = values.listIterator();
-		while (iterator.hasNext()) {
+		while (iterator.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			DoubleValue dv = (DoubleValue) iterator.next();
 			boolean included = false;
-			for (int i = 0; i < expected.length; i++) {
+			for (int i = 0; i < expected.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				if (dv.value() == expected[i]) {
 					included = true;
 					break;
 				}
 			}
-			assertTrue("testJDIGetSetDoubleValue.5." + dv.value(), included);
+			assertTrue("testJDIGetSetDoubleValue.5." + dv.value(), included); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		}
 
 		// setValues(List)
@@ -123,16 +123,16 @@ public class ArrayReferenceTest extends AbstractJDITest {
 		values = fDoubleArray.getValues(1, 2);
 		expected = new double[] { cnt, threes };
 		iterator = values.listIterator();
-		while (iterator.hasNext()) {
+		while (iterator.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			DoubleValue dv = (DoubleValue) iterator.next();
 			boolean included = false;
-			for (int i = 0; i < expected.length; i++) {
+			for (int i = 0; i < expected.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				if (dv.value() == expected[i]) {
 					included = true;
 					break;
 				}
 			}
-			assertTrue("testJDIGetSetDoubleValue.9." + dv.value(), included);
+			assertTrue("testJDIGetSetDoubleValue.9." + dv.value(), included); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		}
 
 		// setValues(int,List,int,int)
@@ -153,7 +153,7 @@ public class ArrayReferenceTest extends AbstractJDITest {
 	 * setValue(Value,int), setValues(List) and setValues(int,List,int,int),
 	 * and JDWP 'Array - Get values' and 'Array - Set values'.
 	 */
-	public void testJDIGetSetValue() {
+	public void testJDIGetSetValue() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		// getValue(int)
 		StringReference string = (StringReference) fArray.getValue(0);
 		assertEquals("1", "foo", string.value());
@@ -175,16 +175,16 @@ public class ArrayReferenceTest extends AbstractJDITest {
 		List<Value> values = fArray.getValues();
 		String[] expected = new String[] { "biz", "bar", "hop" };
 		ListIterator<Value> iterator = values.listIterator();
-		while (iterator.hasNext()) {
+		while (iterator.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			StringReference ref = (StringReference) iterator.next();
 			boolean included = false;
-			for (int i = 0; i < expected.length; i++) {
+			for (int i = 0; i < expected.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				if (ref.value().equals(expected[i])) {
 					included = true;
 					break;
 				}
 			}
-			assertTrue("4." + ref.value(), included);
+			assertTrue("4." + ref.value(), included); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		}
 
 		// setValues(List)
@@ -205,16 +205,16 @@ public class ArrayReferenceTest extends AbstractJDITest {
 		values = fArray.getValues(1, 2);
 		expected = new String[] { "hip", "hop" };
 		iterator = values.listIterator();
-		while (iterator.hasNext()) {
+		while (iterator.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			StringReference ref = (StringReference) iterator.next();
 			boolean included = false;
-			for (int i = 0; i < expected.length; i++) {
+			for (int i = 0; i < expected.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				if (ref.value().equals(expected[i])) {
 					included = true;
 					break;
 				}
 			}
-			assertTrue("8." + ref.value(), included);
+			assertTrue("8." + ref.value(), included); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		}
 
 		// setValues(int,List,int,int)

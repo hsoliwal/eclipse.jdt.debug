@@ -54,7 +54,7 @@ public class DefaultClasspathEntryDialog extends MessageDialog {
 		fEntry = (DefaultProjectClasspathEntry) entry;
 	}
 
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	protected Control createCustomArea(Composite parent) {
 		Composite comp = SWTFactory.createComposite(parent, 1, 1, GridData.FILL_BOTH);
 		boolean wslocked = Platform.getPreferencesService().getBoolean(
@@ -66,10 +66,10 @@ public class DefaultClasspathEntryDialog extends MessageDialog {
 			Link link = new Link(comp, SWT.NONE);
 			link.setLayoutData(new GridData());
 			link.setText(ClasspathMessages.DefaultClasspathEntryDialog_property_locked);
-			link.addSelectionListener(new SelectionAdapter() {
+			link.addSelectionListener(new SelectionAdapter() { //FLLDCIM: MARK — T03 SELECTION_LANE CALL
 				@Override
 				public void widgetSelected(SelectionEvent e) {
-					UIJob job = new UIJob(ClasspathMessages.DefaultClasspathEntryDialog_show_preferences) {
+					UIJob job = new UIJob(ClasspathMessages.DefaultClasspathEntryDialog_show_preferences) { //FLLDCIM: MARK — T09  ANONYMOUS
 						@Override
 						public IStatus runInUIThread(IProgressMonitor monitor) {
 							JDIDebugUIPlugin.showPreferencePage("org.eclipse.jdt.debug.ui.JavaDebugPreferencePage"); //$NON-NLS-1$

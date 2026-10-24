@@ -51,7 +51,7 @@ public class BreakpointRenameFieldParticipant extends BreakpointRenameParticipan
 	 */
 	@Override
 	public Change createChange(IProgressMonitor pm) throws CoreException, OperationCanceledException {
-		List<Change> changes = new ArrayList<>();
+		List<Change> changes = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 		IResource resource = getBreakpointContainer();
 		IMarker[] markers = resource.findMarkers(JavaWatchpoint.JAVA_WATCHPOINT, true, IResource.DEPTH_INFINITE);
 		gatherChanges(markers, changes, getArguments().getNewName());
@@ -69,7 +69,7 @@ public class BreakpointRenameFieldParticipant extends BreakpointRenameParticipan
 	@Override
 	protected void gatherChanges(IMarker[] markers, List<Change> changes, String destFieldName) throws CoreException, OperationCanceledException {
 		IField originalField = (IField) getOriginalElement();
-		for (IMarker marker : markers) {
+		for (IMarker marker : markers) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			IBreakpoint breakpoint = getBreakpoint(marker);
 			if (breakpoint instanceof IJavaWatchpoint) {
 				IJavaWatchpoint watchpoint = (IJavaWatchpoint) breakpoint;

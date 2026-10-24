@@ -106,7 +106,7 @@ public class StringValueInputDialog extends ExpressionInputDialog {
      * value.
      * @param parent parent composite
      */
-    private void createTextViewer(Composite parent) {
+    private void createTextViewer(Composite parent) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
     	fTextGroup = SWTFactory.createGroup(parent, ActionMessages.StringValueInputDialog_0, 1, 1, GridData.FILL_BOTH);
 
         fTextViewer= new TextViewer(fTextGroup, SWT.MULTI | SWT.BORDER | SWT.V_SCROLL | SWT.H_SCROLL);
@@ -131,14 +131,14 @@ public class StringValueInputDialog extends ExpressionInputDialog {
         }
         fWrapText = SWTFactory.createCheckButton(fTextGroup, ActionMessages.StringValueInputDialog_4, null, wrap, 1);
         updateWordWrap();
-        fWrapText.addSelectionListener(new SelectionAdapter() {
+        fWrapText.addSelectionListener(new SelectionAdapter() { //FLLDCIM: MARK — T03 SELECTION_LANE CALL
             @Override
 			public void widgetSelected(SelectionEvent e) {
                 updateWordWrap();
             }
         });
 
-		IDocumentListener listener = new IDocumentListener() {
+		IDocumentListener listener = new IDocumentListener() { //FLLDCIM: MARK — T28  ANONYMOUS
             @Override
 			public void documentAboutToBeChanged(DocumentEvent event) {
             }
@@ -161,7 +161,7 @@ public class StringValueInputDialog extends ExpressionInputDialog {
     protected void createRadioButtons(Composite parent) {
 
     	fTextButton = SWTFactory.createRadioButton(parent, ActionMessages.StringValueInputDialog_1);
-        fTextButton.addSelectionListener(new SelectionAdapter() {
+        fTextButton.addSelectionListener(new SelectionAdapter() { //FLLDCIM: MARK — T03 SELECTION_LANE CALL
             @Override
 			public void widgetSelected(SelectionEvent e) {
                 handleRadioSelectionChanged();

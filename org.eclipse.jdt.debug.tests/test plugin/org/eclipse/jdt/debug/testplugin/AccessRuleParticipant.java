@@ -41,7 +41,7 @@ public class AccessRuleParticipant implements IAccessRuleParticipant {
 	@Override
 	public IAccessRule[][] getAccessRules(IExecutionEnvironment environment, IVMInstall vm, LibraryLocation[] libraries, IJavaProject project) {
 		IAccessRule[][] rules = new IAccessRule[libraries.length][];
-		for (int i = 0; i < libraries.length; i++) {
+		for (int i = 0; i < libraries.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			rules[i] = fRules;
 		}
 		return rules;

@@ -94,7 +94,7 @@ public class ASTEvaluationEngine implements IAstEvaluationEngine {
 	/**
 	 * Regex to find occurrences of 'this' in a code snippet
 	 */
-	private static Pattern fgThisPattern = Pattern.compile("(.*[^a-zA-Z0-9]+|^)(this)([^a-zA-Z0-9]+|$).*"); //$NON-NLS-1$
+	private static Pattern fgThisPattern = Pattern.compile("(.*[^a-zA-Z0-9]+|^)(this)([^a-zA-Z0-9]+|$).*"); //$NON-NLS-1$ //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
 
 	/**
 	 * Filters variable change events during an evaluation to avoid refreshing the variables view until done.
@@ -168,20 +168,20 @@ public class ASTEvaluationEngine implements IAstEvaluationEngine {
 	 * @param thread
 	 *            thread to evaluate in
 	 */
-	private void traceCaller(String snippet, IThread thread) {
+	private void traceCaller(String snippet, IThread thread) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		if (JDIDebugOptions.DEBUG_AST_EVAL_THREAD_TRACE) {
-			StringBuilder buf = new StringBuilder();
-			buf.append(JDIDebugOptions.FORMAT.format(Instant.now()));
-			buf.append(" : Evaluation Request Trace - Expression: "); //$NON-NLS-1$
-			buf.append(snippet);
-			buf.append("\n\tThread: "); //$NON-NLS-1$
+			StringBuilder buf = new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
+			buf.append(JDIDebugOptions.FORMAT.format(Instant.now())); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+			buf.append(" : Evaluation Request Trace - Expression: "); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+			buf.append(snippet); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+			buf.append("\n\tThread: "); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			try {
 				String name = thread.getName();
-				buf.append('[');
-				buf.append(name);
-				buf.append("] "); //$NON-NLS-1$
+				buf.append('['); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+				buf.append(name); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+				buf.append("] "); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			} catch (DebugException e) {
-				buf.append(thread.toString());
+				buf.append(thread.toString()); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			}
 			JDIDebugOptions.trace(buf.toString());
 		}
@@ -262,7 +262,7 @@ public class ASTEvaluationEngine implements IAstEvaluationEngine {
 	 *
 	 * @see org.eclipse.jdt.debug.eval.IAstEvaluationEngine#getCompiledExpression (java.lang.String, org.eclipse.jdt.debug.core.IJavaStackFrame)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public ICompiledExpression getCompiledExpression(String snippet, IJavaStackFrame frame) {
 		IJavaProject javaProject = getJavaProject();
 		RuntimeContext context = new RuntimeContext(javaProject, frame);
@@ -270,7 +270,7 @@ public class ASTEvaluationEngine implements IAstEvaluationEngine {
 		EvaluationSourceGenerator mapper = null;
 		CompilationUnit unit = null;
 		try {
-			List<IJavaVariable> localsVar = new ArrayList<>();
+			List<IJavaVariable> localsVar = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 			localsVar.addAll(Arrays.asList(context.getLocals()));
 			IJavaObject thisClass = context.getThis();
 			IVariable[] innerClassFields; // For anonymous classes, getting variables from outer class
@@ -281,7 +281,7 @@ public class ASTEvaluationEngine implements IAstEvaluationEngine {
 			}
 			List<IVariable> lambdaFrameVariables = LambdaUtils.getLambdaFrameVariables(frame);
 			int numLocalsVar = localsVar.size();
-			Set<String> names = new HashSet<>();
+			Set<String> names = new HashSet<>(); //FLLDCIM: MARK — M03 M3_SET_LANES NEW
 			// ******
 			// to hide problems with local variable declare as instance of Local
 			// Types
@@ -290,7 +290,7 @@ public class ASTEvaluationEngine implements IAstEvaluationEngine {
 			IJavaVariable[] locals = new IJavaVariable[numLocalsVar + innerClassFields.length + lambdaFrameVariables.size()];
 			String[] localVariablesWithNull = new String[numLocalsVar + innerClassFields.length + lambdaFrameVariables.size()];
 			int numLocals = 0;
-			for (int i = 0; i < numLocalsVar; i++) {
+			for (int i = 0; i < numLocalsVar; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				IJavaVariable variable = localsVar.get(i);
 				if (!isLocalType(variable.getSignature()) && !names.contains(variable.getName())) {
 					locals[numLocals] = variable;
@@ -303,7 +303,7 @@ public class ASTEvaluationEngine implements IAstEvaluationEngine {
 			 * check variables one stack frame above the lambda frames, in order to also include outer-scope variables. This is necessary to use local
 			 * variables defined in a method, within a breakpoint condition inside a lambda also defined in that method.
 			 */
-			for (IVariable variable : lambdaFrameVariables) {
+			for (IVariable variable : lambdaFrameVariables) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				if (variable instanceof IJavaVariable javaVariable && !isLambdaOrImplicitVariable(variable)) {
 					final boolean lambdaField = LambdaUtils.isLambdaField(variable);
 					String name = variable.getName();
@@ -319,7 +319,7 @@ public class ASTEvaluationEngine implements IAstEvaluationEngine {
 				}
 			}
 			// Adding outer class variables to inner class scope
-			for (IVariable var : innerClassFields) {
+			for (IVariable var : innerClassFields) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				if (var instanceof IJavaVariable && var.getName().startsWith(ANONYMOUS_VAR_PREFIX)) {
 					String name = var.getName().substring(ANONYMOUS_VAR_PREFIX.length());
 					if (!names.contains(name)) {
@@ -332,7 +332,7 @@ public class ASTEvaluationEngine implements IAstEvaluationEngine {
 			// to solve and remove
 			// ******
 			String[] localTypesNames = new String[numLocals];
-			for (int i = 0; i < numLocals; i++) {
+			for (int i = 0; i < numLocals; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				localTypesNames[i] = getFixedUnresolvableGenericTypes(locals[i]);
 			}
 			// Copying local variables removing the nulls in the last
@@ -373,18 +373,18 @@ public class ASTEvaluationEngine implements IAstEvaluationEngine {
 
 	private IVariable[] extractVariables(IJavaObject thisClass) throws DebugException {
 		IVariable[] vars = thisClass.getVariables();
-		List<IVariable> varList = new ArrayList<>(Arrays.asList(vars));
+		List<IVariable> varList = new ArrayList<>(Arrays.asList(vars)); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 		varList.addAll(Arrays.asList(SyntheticVariableUtils.findSyntheticVariables(vars)));
 		return varList.toArray(new IVariable[0]);
 	}
 
 	private String getFixedUnresolvableGenericTypes(IJavaVariable variable) throws DebugException {
-		StringBuilder fixedSignature = new StringBuilder();
+		StringBuilder fixedSignature = new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 		scanAndFixSignature(variable.getGenericSignature(), Signature.toString(variable.getSignature()), fixedSignature);
 		return fixedSignature.toString();
 	}
 
-	private void scanAndFixSignature(String genericSignature, String erasureSignature, StringBuilder fixedSignature) {
+	private void scanAndFixSignature(String genericSignature, String erasureSignature, StringBuilder fixedSignature) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		/*
 		 * This actually fix variables which are type of Generic Types which cannot be resolved to a type in the current context. For example variable
 		 * type like P_OUT in java.util.stream.ReferencePipeline.filter(Predicate<? super P_OUT>)
@@ -394,17 +394,17 @@ public class ASTEvaluationEngine implements IAstEvaluationEngine {
 		 */
 		if (genericSignature.startsWith(String.valueOf(Signature.C_TYPE_VARIABLE)) || genericSignature.startsWith(String.valueOf(Signature.C_CAPTURE))
 				|| genericSignature.startsWith(String.valueOf(Signature.C_SUPER))) {
-			fixedSignature.append(toDotQualified(erasureSignature));
+			fixedSignature.append(toDotQualified(erasureSignature)); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			return;
 		}
 
 		if (genericSignature.startsWith(String.valueOf(Signature.C_EXTENDS))) {
-			fixedSignature.append(toDotQualified(Signature.toString(getUpperBoundTypeSignature(genericSignature))));
+			fixedSignature.append(toDotQualified(Signature.toString(getUpperBoundTypeSignature(genericSignature)))); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			return;
 		}
 
 		// we have a proper type which might be parameterized so extract the type FQN
-		fixedSignature.append(toDotQualified(Signature.toString(Signature.getTypeErasure(genericSignature))));
+		fixedSignature.append(toDotQualified(Signature.toString(Signature.getTypeErasure(genericSignature)))); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 
 		String[] typeArguments = Signature.getTypeArguments(genericSignature);
 		if (typeArguments.length > 0) {
@@ -416,10 +416,10 @@ public class ASTEvaluationEngine implements IAstEvaluationEngine {
 			}
 
 			List<String[]> typeParameters = null;
-			fixedSignature.append(Signature.C_GENERIC_START);
-			for (int i = 0; i < typeArguments.length; i++) {
+			fixedSignature.append(Signature.C_GENERIC_START); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+			for (int i = 0; i < typeArguments.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				if (i > 0) {
-					fixedSignature.append(',');
+					fixedSignature.append(','); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				}
 				if (isTypeVariableArgument(typeArguments[i])) {
 					if (typeParameters == null) {
@@ -428,13 +428,13 @@ public class ASTEvaluationEngine implements IAstEvaluationEngine {
 					if (isBoundedTypeParameter(typeParameters, i)) {
 						// The type variable would be replaced by java.lang.Object which is not a valid substitute for a bounded
 						// type parameter (e.g. Foo<U> with class Foo<U extends Number>), use a wildcard which is always valid.
-						fixedSignature.append('?');
+						fixedSignature.append('?'); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 						continue;
 					}
 				}
 				scanAndFixSignature(typeArguments[i], QN_OBJECT, fixedSignature);
 			}
-			fixedSignature.append(Signature.C_GENERIC_END);
+			fixedSignature.append(Signature.C_GENERIC_END); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		}
 	}
 
@@ -458,8 +458,8 @@ public class ASTEvaluationEngine implements IAstEvaluationEngine {
 	 * may declare different type parameters.
 	 * </p>
 	 */
-	private List<String[]> getDeclaredTypeParameters(String parameterizedTypeSignature) {
-		List<String[]> typeParameters = new ArrayList<>();
+	private List<String[]> getDeclaredTypeParameters(String parameterizedTypeSignature) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
+		List<String[]> typeParameters = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 		try {
 			String erasure = Signature.getTypeErasure(parameterizedTypeSignature);
 			if (erasure.length() < 3 || erasure.charAt(0) != Signature.C_RESOLVED || erasure.indexOf(Signature.C_DOT) >= 0) {
@@ -469,7 +469,7 @@ public class ASTEvaluationEngine implements IAstEvaluationEngine {
 			String typeName = erasure.substring(1, erasure.length() - 1).replace('/', '.');
 			IJavaType[] types = getDebugTarget().getJavaTypes(typeName);
 			if (types != null) {
-				for (IJavaType type : types) {
+				for (IJavaType type : types) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 					if (type instanceof IJavaReferenceType referenceType) {
 						String genericSignature = referenceType.getGenericSignature();
 						if (genericSignature != null) {
@@ -494,9 +494,9 @@ public class ASTEvaluationEngine implements IAstEvaluationEngine {
 	 * </p>
 	 */
 	private static boolean isBoundedTypeParameter(List<String[]> typeParameterDeclarations, int index) {
-		for (String[] typeParameters : typeParameterDeclarations) {
+		for (String[] typeParameters : typeParameterDeclarations) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			if (index < typeParameters.length) {
-				for (String bound : Signature.getTypeParameterBounds(typeParameters[index])) {
+				for (String bound : Signature.getTypeParameterBounds(typeParameters[index])) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 					if (!OBJECT_SIGNATURE.equals(bound)) {
 						return true;
 					}
@@ -533,8 +533,8 @@ public class ASTEvaluationEngine implements IAstEvaluationEngine {
 		parser.setProject(project);
 		parser.setResolveBindings(true);
 		Map<String, String> options = EvaluationSourceGenerator.getCompilerOptions(project);
-		options = new LinkedHashMap<>(options);
-		for (Entry<String, String> extraCompileOption : extraCompileOptions.entrySet()) {
+		options = new LinkedHashMap<>(options); //FLLDCIM: MARK — M04 M3_ORDERED_LANES NEW
+		for (Entry<String, String> extraCompileOption : extraCompileOptions.entrySet()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			options.put(extraCompileOption.getKey(), extraCompileOption.getValue());
 		}
 		parser.setCompilerOptions(options);
@@ -546,7 +546,7 @@ public class ASTEvaluationEngine implements IAstEvaluationEngine {
 	private boolean isLocalType(String typeName) {
 		StringTokenizer strTok = new StringTokenizer(typeName, "$"); //$NON-NLS-1$
 		strTok.nextToken();
-		while (strTok.hasMoreTokens()) {
+		while (strTok.hasMoreTokens()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			char char0 = strTok.nextToken().charAt(0);
 			if ('0' <= char0 && char0 <= '9') {
 				return true;
@@ -560,7 +560,7 @@ public class ASTEvaluationEngine implements IAstEvaluationEngine {
 	/**
 	 * Returns a compiled expression for an evaluation in the context of an array as a receiver.
 	 */
-	private ICompiledExpression getCompiledExpression(String snippet, IJavaArrayType arrayType) {
+	private ICompiledExpression getCompiledExpression(String snippet, IJavaArrayType arrayType) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		EvaluationSourceGenerator mapper = null;
 		CompilationUnit unit = null;
 		try {
@@ -570,7 +570,7 @@ public class ASTEvaluationEngine implements IAstEvaluationEngine {
 
 			int dimension = 1;
 			IJavaType componentType = arrayType.getComponentType();
-			while (componentType instanceof IJavaArrayType) {
+			while (componentType instanceof IJavaArrayType) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				componentType = ((IJavaArrayType) componentType).getComponentType();
 				dimension++;
 			}
@@ -582,10 +582,10 @@ public class ASTEvaluationEngine implements IAstEvaluationEngine {
 			String recTypeName = QN_OBJECT;
 			String typeName = arrayType.getName();
 			if (componentType instanceof IJavaReferenceType) {
-				StringBuilder buf = new StringBuilder();
-				buf.append(QN_OBJECT);
-				for (int i = 0; i < dimension; i++) {
-					buf.append("[]"); //$NON-NLS-1$
+				StringBuilder buf = new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
+				buf.append(QN_OBJECT); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+				for (int i = 0; i < dimension; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
+					buf.append("[]"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				}
 				typeName = buf.toString();
 			}
@@ -647,7 +647,7 @@ public class ASTEvaluationEngine implements IAstEvaluationEngine {
 		return getCompiledExpression(snippet, type, Collections.EMPTY_MAP);
 	}
 
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public ICompiledExpression getCompiledExpression(String snippet, IJavaReferenceType type, Map<String, String> compileOptions) {
 		if (type instanceof IJavaArrayType) {
 			return getCompiledExpression(snippet, (IJavaArrayType) type);
@@ -678,7 +678,7 @@ public class ASTEvaluationEngine implements IAstEvaluationEngine {
 	 * @param unit
 	 *            the compilation unit (AST) generated for the snippet
 	 */
-	private ICompiledExpression createExpressionFromAST(String snippet, EvaluationSourceGenerator mapper, CompilationUnit unit) {
+	private ICompiledExpression createExpressionFromAST(String snippet, EvaluationSourceGenerator mapper, CompilationUnit unit) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IProblem[] problems = unit.getProblems();
 		if (problems.length != 0) {
 			boolean snippetError = false;
@@ -688,7 +688,7 @@ public class ASTEvaluationEngine implements IAstEvaluationEngine {
 			int codeSnippetEnd = codeSnippetStart + mapper.getSnippet().length();
 			int runMethodStart = mapper.getRunMethodStart();
 			int runMethodEnd = runMethodStart + mapper.getRunMethodLength();
-			for (IProblem problem : problems) {
+			for (IProblem problem : problems) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				int errorOffset = problem.getSourceStart();
 				int problemId = problem.getID();
 				if (problemId == IProblem.IsClassPathCorrect) {
@@ -707,7 +707,7 @@ public class ASTEvaluationEngine implements IAstEvaluationEngine {
 						snippetError = true;
 					} else if (runMethodStart <= errorOffset && errorOffset <= runMethodEnd) {
 						runMethodError = true;
-						DebugPlugin.log(new Status(IStatus.WARNING, DebugPlugin.getUniqueIdentifier(), "Compile error during code evaluation: " //$NON-NLS-1$
+						DebugPlugin.log(new Status(IStatus.WARNING, DebugPlugin.getUniqueIdentifier(), "Compile error during code evaluation: " //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 								+ problem.getMessage()));
 					}
 					errorSequence.addProblemID(problemId);
@@ -782,51 +782,51 @@ public class ASTEvaluationEngine implements IAstEvaluationEngine {
 			fDisableGcOnResult = (evaluationDetail & IAstEvaluationEngine.DISABLE_GC_ON_RESULT) != 0;
 		}
 
-		@Override
+		@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		public void run() {
 			if (JDIDebugOptions.DEBUG_AST_EVAL) {
-				StringBuilder buf = new StringBuilder();
-				buf.append(JDIDebugOptions.FORMAT.format(Instant.now()));
-				buf.append(" : AST Evaluation"); //$NON-NLS-1$
-				buf.append("\n\tExpression: "); //$NON-NLS-1$
-				buf.append(fExpression.getSnippet());
-				buf.append("\n\tThread: "); //$NON-NLS-1$
+				StringBuilder buf = new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
+				buf.append(JDIDebugOptions.FORMAT.format(Instant.now())); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+				buf.append(" : AST Evaluation"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+				buf.append("\n\tExpression: "); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+				buf.append(fExpression.getSnippet()); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+				buf.append("\n\tThread: "); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				try {
 					String name = fThread.getName();
-					buf.append('[');
-					buf.append(name);
-					buf.append("] "); //$NON-NLS-1$
+					buf.append('['); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+					buf.append(name); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+					buf.append("] "); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				} catch (DebugException e) {
 				}
-				buf.append(fThread.toString());
-				buf.append("\n\tDetail: "); //$NON-NLS-1$
+				buf.append(fThread.toString()); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+				buf.append("\n\tDetail: "); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				if (fEvaluationDetail == DebugEvent.EVALUATION) {
-					buf.append("EVALUATION"); //$NON-NLS-1$
+					buf.append("EVALUATION"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				} else if (fEvaluationDetail == DebugEvent.EVALUATION_IMPLICIT) {
-					buf.append("EVALUATION_IMPLICIT"); //$NON-NLS-1$
+					buf.append("EVALUATION_IMPLICIT"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				} else {
-					buf.append(fEvaluationDetail);
+					buf.append(fEvaluationDetail); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				}
-				buf.append(" Hit Breakpoints: "); //$NON-NLS-1$
-				buf.append(fHitBreakpoints);
+				buf.append(" Hit Breakpoints: "); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+				buf.append(fHitBreakpoints); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				JDIDebugOptions.trace(buf.toString());
 			}
 			EvaluationResult result = new EvaluationResult(ASTEvaluationEngine.this, fExpression.getSnippet(), fThread);
 			if (fExpression.hasErrors()) {
 				String[] errors = fExpression.getErrorMessages();
-				for (String error : errors) {
+				for (String error : errors) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 					result.addError(error);
 				}
 				evaluationFinished(result);
 				if (JDIDebugOptions.DEBUG_AST_EVAL) {
-					StringBuilder buf = new StringBuilder();
-					buf.append("\tErrors: "); //$NON-NLS-1$
-					for (int i = 0; i < errors.length; i++) {
+					StringBuilder buf = new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
+					buf.append("\tErrors: "); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+					for (int i = 0; i < errors.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 						if (i > 0) {
-							buf.append('\n');
+							buf.append('\n'); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 						}
-						buf.append("\t\t"); //$NON-NLS-1$
-						buf.append(errors[i]);
+						buf.append("\t\t"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+						buf.append(errors[i]); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 					}
 					JDIDebugOptions.trace(buf.toString());
 				}
@@ -839,7 +839,7 @@ public class ASTEvaluationEngine implements IAstEvaluationEngine {
 				CoreException fException;
 				boolean fTerminated = false;
 
-				@Override
+				@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 				public void run(IJavaThread jt, IProgressMonitor pm) {
 					EventFilter filter = new EventFilter();
 					try {
@@ -904,9 +904,9 @@ public class ASTEvaluationEngine implements IAstEvaluationEngine {
 			result.setTerminated(er.fTerminated);
 			if (exception != null) {
 				if (JDIDebugOptions.DEBUG_AST_EVAL) {
-					StringBuilder buf = new StringBuilder();
-					buf.append("\tException: "); //$NON-NLS-1$
-					buf.append(exception.toString());
+					StringBuilder buf = new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
+					buf.append("\tException: "); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+					buf.append(exception.toString()); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 					JDIDebugOptions.trace(buf.toString());
 				}
 				if (exception instanceof DebugException) {
@@ -918,9 +918,9 @@ public class ASTEvaluationEngine implements IAstEvaluationEngine {
 				if (value != null) {
 					result.setValue(value);
 					if (JDIDebugOptions.DEBUG_AST_EVAL) {
-						StringBuilder buf = new StringBuilder();
-						buf.append("\tResult: "); //$NON-NLS-1$
-						buf.append(value);
+						StringBuilder buf = new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
+						buf.append("\tResult: "); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+						buf.append(value); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 						JDIDebugOptions.trace(buf.toString());
 					}
 				} else {
@@ -929,10 +929,10 @@ public class ASTEvaluationEngine implements IAstEvaluationEngine {
 			}
 
 			if (JDIDebugOptions.DEBUG_AST_EVAL) {
-				StringBuilder buf = new StringBuilder();
-				buf.append("\tDuration: "); //$NON-NLS-1$
-				buf.append(end - start);
-				buf.append("ms"); //$NON-NLS-1$
+				StringBuilder buf = new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
+				buf.append("\tDuration: "); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+				buf.append(end - start); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+				buf.append("ms"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				JDIDebugOptions.trace(buf.toString());
 			}
 
@@ -957,17 +957,17 @@ public class ASTEvaluationEngine implements IAstEvaluationEngine {
 	 */
 	public static String replaceThisReferences(String snippet) {
 		// replace all occurrences of 'this' with 'array_this'
-		StringBuilder updatedSnippet = new StringBuilder();
-		Matcher matcher = fgThisPattern.matcher(snippet);
+		StringBuilder updatedSnippet = new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
+		Matcher matcher = fgThisPattern.matcher(snippet); //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
 		int start = 0;
-		while (matcher.find()) {
+		while (matcher.find()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
 			int end = matcher.start(2);
-			updatedSnippet.append(snippet.substring(start, end));
-			updatedSnippet.append(ArrayRuntimeContext.ARRAY_THIS_VARIABLE);
+			updatedSnippet.append(snippet.substring(start, end)); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+			updatedSnippet.append(ArrayRuntimeContext.ARRAY_THIS_VARIABLE); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			start = end + 4;
 		}
 		if (start < snippet.length()) {
-			updatedSnippet.append(snippet.substring(start, snippet.length()));
+			updatedSnippet.append(snippet.substring(start, snippet.length())); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		}
 		return updatedSnippet.toString();
 	}

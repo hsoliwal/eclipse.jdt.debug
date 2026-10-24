@@ -42,14 +42,14 @@ public class DebugViewTests extends AbstractDebugViewTests {
 		super(name);
 	}
 
-	public void testLastStackElementShown() throws Exception {
+	public void testLastStackElementShown() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		final String typeName = "DropTests";
 		final int expectedFramesNumber = 5;
-		final String expectedMethod = "method" + (expectedFramesNumber - 1);
+		final String expectedMethod = "method" + (expectedFramesNumber - 1); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		createMethodBreakpoint(typeName, expectedMethod);
 
 		// Open editor to avoid UI overhead on suspend
-		sync(() -> openEditor(typeName + ".java"));
+		sync(() -> openEditor(typeName + ".java")); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 		IJavaThread thread = null;
 		try {
@@ -75,9 +75,9 @@ public class DebugViewTests extends AbstractDebugViewTests {
 					// skip this test on Mac - see bug 516024
 					return;
 				}
-				throw new TestAgainException("Unexpected selection: " + Arrays.toString(selectedText));
+				throw new TestAgainException("Unexpected selection: " + Arrays.toString(selectedText)); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 			}
-			assertEquals("Unexpected selection: " + Arrays.toString(selectedText), 1, selected.length);
+			assertEquals("Unexpected selection: " + Arrays.toString(selectedText), 1, selected.length); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 			TreeItem selectedTreeItem = selected[selected.length - 1];
 			IJavaStackFrame selectedFrame = selectedFrame(selected);
 
@@ -92,9 +92,9 @@ public class DebugViewTests extends AbstractDebugViewTests {
 			// we expect to see one monitor + frames
 			final int expectedChildrenCount = expectedFramesNumber + 1;
 			if (childrenText.length != expectedChildrenCount) {
-				throw new TestAgainException("Not all frames shown: " + dumpFrames(childrenText));
+				throw new TestAgainException("Not all frames shown: " + dumpFrames(childrenText)); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 			}
-			assertEquals("Unexpected stack: " + dumpFrames(childrenText), expectedChildrenCount, childrenText.length);
+			assertEquals("Unexpected stack: " + dumpFrames(childrenText), expectedChildrenCount, childrenText.length); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 			// This is too unstable, see bug 516024 comment 10
 
@@ -163,7 +163,7 @@ public class DebugViewTests extends AbstractDebugViewTests {
 	 * <li>terminate and remove break point</li>
 	 * </ol>
 	 */
-	public void testWrongSelectionBug538303() throws Exception {
+	public void testWrongSelectionBug538303() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String typeName = "Bug538303";
 		String breakpointMethodName = "breakpointMethod";
 		int expectedBreakpointHitsCount = 1;

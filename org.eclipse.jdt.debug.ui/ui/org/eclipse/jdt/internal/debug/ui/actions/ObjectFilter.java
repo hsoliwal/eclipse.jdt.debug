@@ -22,7 +22,7 @@ import org.eclipse.jface.viewers.ViewerFilter;
 /**
  * A filter on a set of objects
  */
-public class ObjectFilter extends ViewerFilter {
+public class ObjectFilter extends ViewerFilter { //FLLDCIM: MARK — T23  IMPLEMENTS
 
 	/**
 	 * Objects to filter

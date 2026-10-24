@@ -76,19 +76,19 @@ public class JavaOwnedMonitor extends PlatformObject implements IDebugElement, I
 	 * Returns an array of all of the threads waiting on this monitor
 	 * @return the array of <code>JavaWaitingThread</code>s waiting on this monitor
 	 */
-	public JavaWaitingThread[] getWaitingThreads() {
+	public JavaWaitingThread[] getWaitingThreads() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		JavaMonitorThread[] waitingThreads= fMonitor.getWaitingThreads0();
 		JavaWaitingThread[] tmp= new JavaWaitingThread[waitingThreads.length];
 		if (fWaitingThreads == null) {
 			// the list was empty, creating new objects
-			for (int i= 0; i < waitingThreads.length; i++) {
+			for (int i= 0; i < waitingThreads.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				tmp[i]= new JavaWaitingThread(waitingThreads[i], this);
 			}
 		} else {
 			// trying to reuse the objects from the previous list
-	outer:	for (int i= 0; i < waitingThreads.length; i++) {
+	outer:	for (int i= 0; i < waitingThreads.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				JavaMonitorThread waitingThread= waitingThreads[i];
-				for (int j= 0; j < fWaitingThreads.length; j++) {
+				for (int j= 0; j < fWaitingThreads.length; j++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 					if (fWaitingThreads[j].getThread() == waitingThread) {
 						tmp[i]= fWaitingThreads[j];
 						continue outer;

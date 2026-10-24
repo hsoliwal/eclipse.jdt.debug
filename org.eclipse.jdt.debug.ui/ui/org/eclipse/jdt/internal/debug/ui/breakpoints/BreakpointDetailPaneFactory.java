@@ -43,9 +43,9 @@ public class BreakpointDetailPaneFactory implements IDetailPaneFactory {
 	/* (non-Javadoc)
 	 * @see org.eclipse.debug.ui.IDetailPaneFactory#getDetailPaneTypes(org.eclipse.jface.viewers.IStructuredSelection)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public Set<String> getDetailPaneTypes(IStructuredSelection selection) {
-		HashSet<String> set = new HashSet<>();
+		HashSet<String> set = new HashSet<>(); //FLLDCIM: MARK — M03 M3_SET_LANES NEW
 		if (selection.size() == 1) {
 			IBreakpoint b = (IBreakpoint) selection.getFirstElement();
 			try {
@@ -69,7 +69,7 @@ public class BreakpointDetailPaneFactory implements IDetailPaneFactory {
 	/* (non-Javadoc)
 	 * @see org.eclipse.debug.ui.IDetailPaneFactory#getDefaultDetailPane(org.eclipse.jface.viewers.IStructuredSelection)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public String getDefaultDetailPane(IStructuredSelection selection) {
 		if (selection.size() == 1) {
 			IBreakpoint b = (IBreakpoint) selection.getFirstElement();
@@ -94,7 +94,7 @@ public class BreakpointDetailPaneFactory implements IDetailPaneFactory {
 	/* (non-Javadoc)
 	 * @see org.eclipse.debug.ui.IDetailPaneFactory#createDetailPane(java.lang.String)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public IDetailPane createDetailPane(String paneID) {
 		if (LineBreakpointDetailPane.DETAIL_PANE_LINE_BREAKPOINT.equals(paneID)) {
 			return new LineBreakpointDetailPane();
@@ -132,7 +132,7 @@ public class BreakpointDetailPaneFactory implements IDetailPaneFactory {
 
 	private Map<String, String> getNameMap() {
 		if (fNameMap == null) {
-			fNameMap = new HashMap<>();
+			fNameMap = new HashMap<>(); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
 			fNameMap.put(LineBreakpointDetailPane.DETAIL_PANE_LINE_BREAKPOINT, BreakpointMessages.BreakpointDetailPaneFactory_0);
 			fNameMap.put(WatchpointDetailPane.DETAIL_PANE_WATCHPOINT, BreakpointMessages.WatchpointDetailPane_0);
 			fNameMap.put(MethodBreakpointDetailPane.DETAIL_PANE_METHOD_BREAKPOINT, BreakpointMessages.BreakpointDetailPaneFactory_1);

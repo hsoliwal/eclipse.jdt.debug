@@ -71,7 +71,7 @@ public class ClassTypeTest extends AbstractJDITest {
 	public void testJDIAllFields() {
 		boolean found = false;
 		Iterator<?> it = fType.allFields().iterator();
-		while (it.hasNext()) {
+		while (it.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			Field fld = (Field) it.next();
 			if (fld.name().equals("fString")) {
 				found = true;
@@ -86,7 +86,7 @@ public class ClassTypeTest extends AbstractJDITest {
 		List<?> all = fType.allInterfaces();
 		boolean found = false;
 		Iterator<?> interfaces = fType.allInterfaces().iterator();
-		while (interfaces.hasNext()) {
+		while (interfaces.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			InterfaceType next = (InterfaceType) interfaces.next();
 			assertTrue(next.name(), all.contains(next));
 			if (next.name().equals("java.lang.Comparable")) {
@@ -101,7 +101,7 @@ public class ClassTypeTest extends AbstractJDITest {
 	public void testJDIAllMethods() {
 		boolean found = false;
 		Iterator<?> it = fType.allMethods().iterator();
-		while (it.hasNext()) {
+		while (it.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			Method mth = (Method) it.next();
 			if (mth.name().equals("after")) { // in Date
 				found = true;
@@ -121,16 +121,16 @@ public class ClassTypeTest extends AbstractJDITest {
 	/**
 	 * Test JDI interfaces().
 	 */
-	public void testJDIInterfaces() {
+	public void testJDIInterfaces() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		boolean found = false;
 		boolean extra = false;
 		List<?> interfaces = fType.interfaces();
 		assertEquals("1", 2, interfaces.size());
 		Iterator<?> iterator = interfaces.iterator();
 		int i = 0;
-		while (iterator.hasNext()) {
+		while (iterator.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			Object next = iterator.next();
-			assertTrue("2." + i++, next instanceof InterfaceType);
+			assertTrue("2." + i++, next instanceof InterfaceType); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 			InterfaceType ift = (InterfaceType) next;
 			if (ift.name().equals("java.lang.Runnable")) {
 				found = true;
@@ -145,7 +145,7 @@ public class ClassTypeTest extends AbstractJDITest {
 	/**
 	 * Test JDI invokeMethod(ThreadReference, Method, Value[]).
 	 */
-	public void testJDIInvokeMethod() {
+	public void testJDIInvokeMethod() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		// Make sure the entire VM is not suspended before we start a new thread
 		// (otherwise this new thread will start suspended and we will never get the
 		// ThreadStart event)
@@ -162,7 +162,7 @@ public class ClassTypeTest extends AbstractJDITest {
 			fType.concreteMethodByName(
 				"invoke1",
 				"(ILjava/lang/Object;)Ljava/lang/String;");
-		List<IntegerValue> args = new ArrayList<>();
+		List<IntegerValue> args = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 		args.add(fVM.mirrorOf(41));
 		args.add(null);
 		Exception oops = null;
@@ -178,7 +178,7 @@ public class ClassTypeTest extends AbstractJDITest {
 	/**
 	 * Test JDI invokeMethod - failure.
 	 */
-	public void testJDIInvokeMethodFail() {
+	public void testJDIInvokeMethodFail() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		// Make sure the entire VM is not suspended before we start a new thread
 		// (otherwise this new thread will start suspended and we will never get the
 		// ThreadStart event)
@@ -195,7 +195,7 @@ public class ClassTypeTest extends AbstractJDITest {
 		Exception good = null;
 		Exception oops = null;
 		try {
-			fType.invokeMethod(thread, inv2, new ArrayList<>(), 0);
+			fType.invokeMethod(thread, inv2, new ArrayList<>(), 0); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 		} catch (InvocationException exc) {
 			good = exc;
 		} catch (Exception exc) {
@@ -235,7 +235,7 @@ public class ClassTypeTest extends AbstractJDITest {
 	public void testJDIMethods() {
 		boolean found = false;
 		Iterator<?> it = fType.methods().iterator();
-		while (it.hasNext()) {
+		while (it.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			Method mth = (Method) it.next();
 			if (mth.name().equals("printAndSignal")) {
 				found = true;
@@ -246,7 +246,7 @@ public class ClassTypeTest extends AbstractJDITest {
 	/**
 	 * Test JDI newInstance(ThreadReference, Method, Value[]).
 	 */
-	public void testJDINewInstance() {
+	public void testJDINewInstance() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		// Make sure the entire VM is not suspended before we start a new thread
 		// (otherwise this new thread will start suspended and we will never get the
 		// ThreadStart event)
@@ -264,7 +264,7 @@ public class ClassTypeTest extends AbstractJDITest {
 			.methodsByName("<init>", "(ILjava/lang/Object;Ljava/lang/Object;)V")
 			.get(0);
 		ObjectReference result = null;
-		ArrayList<Value> arguments = new ArrayList<>();
+		ArrayList<Value> arguments = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 		arguments.add(fVM.mirrorOf(0));
 		arguments.add(fVM.allThreads().get(0));
 		arguments.add(null);
@@ -287,7 +287,7 @@ public class ClassTypeTest extends AbstractJDITest {
 	/**
 	 * Test JDI setValue(Field,Value) and JDWP 'Class - Set Fields Values'.
 	 */
-	public void testJDISetValue() {
+	public void testJDISetValue() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 
 		// Get static field "fInt"
 		Field field = fType.fieldByName("fInt");
@@ -356,9 +356,9 @@ public class ClassTypeTest extends AbstractJDITest {
 		List<?> subclasses = fType.subclasses();
 		assertEquals("1", 1, subclasses.size());
 		Iterator<?> iterator = subclasses.iterator();
-		while (iterator.hasNext()) {
+		while (iterator.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			ClassType sub = (ClassType) iterator.next();
-			assertEquals("2 " + sub.name(), fType, sub.superclass());
+			assertEquals("2 " + sub.name(), fType, sub.superclass()); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		}
 	}
 	/**

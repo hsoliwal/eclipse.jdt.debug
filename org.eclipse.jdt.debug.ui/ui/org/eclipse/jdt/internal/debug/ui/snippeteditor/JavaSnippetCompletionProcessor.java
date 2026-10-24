@@ -109,7 +109,7 @@ public class JavaSnippetCompletionProcessor implements IContentAssistProcessor {
 	/**
 	 * @see IContentAssistProcessor#computeCompletionProposals(ITextViewer, int)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public ICompletionProposal[] computeCompletionProposals(ITextViewer viewer, int position) {
 		try {
 			setErrorMessage(null);

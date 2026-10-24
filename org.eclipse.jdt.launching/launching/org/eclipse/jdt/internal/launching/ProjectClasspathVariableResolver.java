@@ -40,7 +40,7 @@ import org.eclipse.osgi.util.NLS;
  */
 public class ProjectClasspathVariableResolver implements IDynamicVariableResolver {
 
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public String resolveValue(IDynamicVariable variable, String argument) throws CoreException {
 		IProject proj = null;
 		if (argument == null) {
@@ -58,20 +58,20 @@ public class ProjectClasspathVariableResolver implements IDynamicVariableResolve
 		if (javaProject.exists()) {
 			IRuntimeClasspathEntry2 defClassPath = (IRuntimeClasspathEntry2) JavaRuntime.newDefaultProjectClasspathEntry(javaProject);
 			IRuntimeClasspathEntry[] entries = defClassPath.getRuntimeClasspathEntries(false);
-			List<IRuntimeClasspathEntry> collect = new ArrayList<>();
-			for (int i = 0; i < entries.length; i++) {
+			List<IRuntimeClasspathEntry> collect = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
+			for (int i = 0; i < entries.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				IRuntimeClasspathEntry[] children = JavaRuntime.resolveRuntimeClasspathEntry(entries[i], javaProject, false);
-				for (int j = 0; j < children.length; j++) {
+				for (int j = 0; j < children.length; j++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 					collect.add(children[j]);
 				}
 			}
 			entries = collect.toArray(new IRuntimeClasspathEntry[collect.size()]);
-			StringBuilder buffer = new StringBuilder();
-			for (int i = 0; i < entries.length; i++) {
+			StringBuilder buffer = new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
+			for (int i = 0; i < entries.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				if (i > 0) {
-					buffer.append(File.pathSeparatorChar);
+					buffer.append(File.pathSeparatorChar); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				}
-				buffer.append(entries[i].getLocation());
+				buffer.append(entries[i].getLocation()); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			}
 			return buffer.toString();
 		}

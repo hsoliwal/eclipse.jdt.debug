@@ -24,7 +24,7 @@ public class GreaterEqualOperator extends BinaryOperator {
 	/*
 	 * @see BinaryOperator#getBooleanResult(IJavaValue, IJavaValue)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	protected boolean getBooleanResult(IJavaValue leftOperand,
 			IJavaValue rightOperand) {
 		switch (getInternResultType()) {

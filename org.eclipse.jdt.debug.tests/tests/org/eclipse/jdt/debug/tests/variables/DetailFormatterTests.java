@@ -68,7 +68,7 @@ public class DetailFormatterTests extends AbstractDebugTest {
 	 * Tests a detail formatter made from a large compound expression
 	 * @see "https://bugs.eclipse.org/bugs/show_bug.cgi?id=403028"
 	 */
-	public void testCompoundDetails1() throws Exception {
+	public void testCompoundDetails1() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IJavaThread thread = null;
 		DetailFormatter formatter = null;
 		JavaDetailFormattersManager jdfm = JavaDetailFormattersManager.getDefault();
@@ -114,7 +114,7 @@ public class DetailFormatterTests extends AbstractDebugTest {
 	 * Tests a detail formatter made from a small compound expression
 	 * @see "https://bugs.eclipse.org/bugs/show_bug.cgi?id=403028"
 	 */
-	public void testCompoundDetails2() throws Exception {
+	public void testCompoundDetails2() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IJavaThread thread = null;
 		DetailFormatter formatter = null;
 		JavaDetailFormattersManager jdfm = JavaDetailFormattersManager.getDefault();
@@ -147,7 +147,7 @@ public class DetailFormatterTests extends AbstractDebugTest {
 	 * Tests a detail formatter made from a small compound expression
 	 * @see "https://bugs.eclipse.org/bugs/show_bug.cgi?id=403028"
 	 */
-	public void testSimpleDetails1() throws Exception {
+	public void testSimpleDetails1() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IJavaThread thread = null;
 		DetailFormatter formatter = null;
 		JavaDetailFormattersManager jdfm = JavaDetailFormattersManager.getDefault();
@@ -178,7 +178,7 @@ public class DetailFormatterTests extends AbstractDebugTest {
 	 * Tests a detail formatter made from a small compound expression
 	 * @see "https://bugs.eclipse.org/bugs/show_bug.cgi?id=403028"
 	 */
-	public void testSimpleDetails2() throws Exception {
+	public void testSimpleDetails2() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IJavaThread thread = null;
 		DetailFormatter formatter = null;
 		JavaDetailFormattersManager jdfm = JavaDetailFormattersManager.getDefault();
@@ -209,7 +209,7 @@ public class DetailFormatterTests extends AbstractDebugTest {
 	 * Tests a detail formatter made from an infix expression
 	 * @see "https://bugs.eclipse.org/bugs/show_bug.cgi?id=403028"
 	 */
-	public void testInfixDetails1() throws Exception {
+	public void testInfixDetails1() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IJavaThread thread = null;
 		DetailFormatter formatter = null;
 		JavaDetailFormattersManager jdfm = JavaDetailFormattersManager.getDefault();
@@ -240,7 +240,7 @@ public class DetailFormatterTests extends AbstractDebugTest {
 
 	private void waitForListenerValue() throws InterruptedException {
 		long timeoutNanos = System.nanoTime() + 5000 * 1_000_000L;
-		while (fListener.value == null && System.nanoTime() < timeoutNanos) {
+		while (fListener.value == null && System.nanoTime() < timeoutNanos) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			Thread.sleep(1);
 		}
 	}
@@ -249,7 +249,7 @@ public class DetailFormatterTests extends AbstractDebugTest {
 	 * Tests a detail formatter made from an infix expression
 	 * @see "https://bugs.eclipse.org/bugs/show_bug.cgi?id=403028"
 	 */
-	public void testInfixDetails2() throws Exception {
+	public void testInfixDetails2() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IJavaThread thread = null;
 		DetailFormatter formatter = null;
 		JavaDetailFormattersManager jdfm = JavaDetailFormattersManager.getDefault();
@@ -281,7 +281,7 @@ public class DetailFormatterTests extends AbstractDebugTest {
 	 * Tests a detail formatter made from an infix expression
 	 * @see "https://bugs.eclipse.org/bugs/show_bug.cgi?id=403028"
 	 */
-	public void testInfixDetails3() throws Exception {
+	public void testInfixDetails3() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IJavaThread thread = null;
 		DetailFormatter formatter = null;
 		JavaDetailFormattersManager jdfm = JavaDetailFormattersManager.getDefault();
@@ -314,7 +314,7 @@ public class DetailFormatterTests extends AbstractDebugTest {
 	 *
 	 * @see "https://bugs.eclipse.org/bugs/show_bug.cgi?id=484686"
 	 */
-	public void testHoverWithNoTypeArguments() throws Exception {
+	public void testHoverWithNoTypeArguments() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IJavaThread thread = null;
 		DetailFormatter formatter = null;
 		JavaDetailFormattersManager jdfm = JavaDetailFormattersManager.getDefault();
@@ -341,7 +341,7 @@ public class DetailFormatterTests extends AbstractDebugTest {
 		}
 	}
 
-	public void testFormatterForPrimitivesInt() throws Exception {
+	public void testFormatterForPrimitivesInt() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IJavaThread thread = null;
 		DetailFormatter formatter = null;
 		JavaDetailFormattersManager jdfm = JavaDetailFormattersManager.getDefault();
@@ -367,7 +367,7 @@ public class DetailFormatterTests extends AbstractDebugTest {
 		}
 	}
 
-	public void testFormatterForPrimitivesfloat() throws Exception {
+	public void testFormatterForPrimitivesfloat() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IJavaThread thread = null;
 		DetailFormatter formatter = null;
 		JavaDetailFormattersManager jdfm = JavaDetailFormattersManager.getDefault();
@@ -392,7 +392,7 @@ public class DetailFormatterTests extends AbstractDebugTest {
 		}
 	}
 
-	public void testFormatterForPrimitivesIntArrays() throws Exception {
+	public void testFormatterForPrimitivesIntArrays() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IJavaThread thread = null;
 		DetailFormatter formatter = null;
 		JavaDetailFormattersManager jdfm = JavaDetailFormattersManager.getDefault();
@@ -417,7 +417,7 @@ public class DetailFormatterTests extends AbstractDebugTest {
 		}
 	}
 
-	public void testFormatterForPrimitivesIntArraysMulti() throws Exception {
+	public void testFormatterForPrimitivesIntArraysMulti() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IJavaThread thread = null;
 		DetailFormatter formatter = null;
 		JavaDetailFormattersManager jdfm = JavaDetailFormattersManager.getDefault();
@@ -442,7 +442,7 @@ public class DetailFormatterTests extends AbstractDebugTest {
 		}
 	}
 
-	public void testFormatterForPrimitivesCharArray() throws Exception {
+	public void testFormatterForPrimitivesCharArray() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IJavaThread thread = null;
 		DetailFormatter formatter = null;
 		JavaDetailFormattersManager jdfm = JavaDetailFormattersManager.getDefault();
@@ -467,7 +467,7 @@ public class DetailFormatterTests extends AbstractDebugTest {
 		}
 	}
 
-	public void testFormatterForExceptionObjectsWithoutFormatter() throws Exception {
+	public void testFormatterForExceptionObjectsWithoutFormatter() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IJavaThread thread = null;
 		JavaDetailFormattersManager jdfm = JavaDetailFormattersManager.getDefault();
 		try {
@@ -481,7 +481,7 @@ public class DetailFormatterTests extends AbstractDebugTest {
 			waitForListenerValue();
 			assertNotNull("The IValue of the detailComputed callback cannot be null", fListener.value);
 			String value = fListener.result.toString().trim();
-			value = value.split("\n")[1].trim();
+			value = value.split("\n")[1].trim(); //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
 			assertEquals("at a.b.c.ExceptionDefaultTest.main(ExceptionDefaultTest.java:18)", value);
 		} finally {
 			terminateAndRemove(thread);
@@ -489,7 +489,7 @@ public class DetailFormatterTests extends AbstractDebugTest {
 		}
 	}
 
-	public void testFormatterForExceptionObjectsWithFormatter() throws Exception {
+	public void testFormatterForExceptionObjectsWithFormatter() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IJavaThread thread = null;
 		DetailFormatter formatter = null;
 		JavaDetailFormattersManager jdfm = JavaDetailFormattersManager.getDefault();

@@ -18,7 +18,7 @@ public class CommandLineQuoting {
 			if (cmdLine.length > 0) {
 				winCmdLine[0] = cmdLine[0];
 			}
-			for (int i = 1; i < cmdLine.length; i++) {
+			for (int i = 1; i < cmdLine.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				winCmdLine[i] = winQuote(cmdLine[i]);
 			}
 			cmdLine = winCmdLine;
@@ -26,7 +26,7 @@ public class CommandLineQuoting {
 		return cmdLine;
 	}
 
-	static boolean needsQuoting(String s) {
+	static boolean needsQuoting(String s) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		int len = s.length();
 		if (len == 0) {
 			return true;
@@ -35,7 +35,7 @@ public class CommandLineQuoting {
 		{
 			return false; // empty quotes must not be quoted again
 		}
-		for (int i = 0; i < len; i++) {
+		for (int i = 0; i < len; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			switch (s.charAt(i)) {
 				case ' ':
 				case '\t':
@@ -51,9 +51,9 @@ public class CommandLineQuoting {
 		if (!needsQuoting(s)) {
 			return s;
 		}
-		s = s.replaceAll("([\\\\]*)\"", "$1$1\\\\\""); //$NON-NLS-1$ //$NON-NLS-2$
-		s = s.replaceAll("([\\\\]*)\\z", "$1$1"); //$NON-NLS-1$ //$NON-NLS-2$
-		return "\"" + s + "\""; //$NON-NLS-1$ //$NON-NLS-2$
+		s = s.replaceAll("([\\\\]*)\"", "$1$1\\\\\""); //$NON-NLS-1$ //$NON-NLS-2$ //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
+		s = s.replaceAll("([\\\\]*)\\z", "$1$1"); //$NON-NLS-1$ //$NON-NLS-2$ //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
+		return "\"" + s + "\""; //$NON-NLS-1$ //$NON-NLS-2$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 	}
 
 }

@@ -136,7 +136,7 @@ public class DisplayView extends ViewPart implements ITextInputListener, IPerspe
 			try {
 				// add a cariage return if needed.
 				if (offset != document.getLineInformationOfOffset(offset).getOffset()) {
-					expression= System.lineSeparator() + expression.trim();
+					expression= System.lineSeparator() + expression.trim(); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 				}
 				fSourceViewer.getDocument().replace(offset, 0, expression);
 				fSourceViewer.setSelectedRange(offset + expression.length(), 0);
@@ -151,7 +151,7 @@ public class DisplayView extends ViewPart implements ITextInputListener, IPerspe
 		 */
 		@Override
 		public void displayExpressionValue(String value) {
-			value= System.lineSeparator() + '\t' + value;
+			value= System.lineSeparator() + '\t' + value; //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 			ITextSelection selection= (ITextSelection)fSourceViewer.getSelection();
 
 			int offset= selection.getOffset() + selection.getLength();
@@ -173,8 +173,8 @@ public class DisplayView extends ViewPart implements ITextInputListener, IPerspe
 	protected IAction fClearDisplayAction;
 	protected DisplayViewAction fContentAssistAction;
 
-	protected Map<String, IAction> fGlobalActions= new HashMap<>(4);
-	protected List<String> fSelectionActions= new ArrayList<>(3);
+	protected Map<String, IAction> fGlobalActions= new HashMap<>(4); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
+	protected List<String> fSelectionActions= new ArrayList<>(3); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 
 	protected String fRestoredContents= null;
 	/**
@@ -189,26 +189,26 @@ public class DisplayView extends ViewPart implements ITextInputListener, IPerspe
 	/**
 	 * @see ViewPart#createPartControl(Composite)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public void createPartControl(Composite parent) {
 		fSourceViewer= new JDISourceViewer(parent, null, SWT.V_SCROLL | SWT.H_SCROLL | SWT.MULTI | SWT.FULL_SELECTION | SWT.LEFT_TO_RIGHT);
 		fSourceViewer.configure(new DisplayViewerConfiguration());
 		fSourceViewer.getTextWidget().setFont(JFaceResources.getFont(PreferenceConstants.EDITOR_TEXT_FONT));
-		IPropertyChangeListener fontListener = new IPropertyChangeListener() {
+		IPropertyChangeListener fontListener = new IPropertyChangeListener() { //FLLDCIM: MARK — T06  ANONYMOUS
 			@Override
 			public void propertyChange(PropertyChangeEvent event) {
 				if (PreferenceConstants.EDITOR_TEXT_FONT.equals(event.getProperty())) {
 					final StyledText textWidget = fSourceViewer.getTextWidget();
-					textWidget.getDisplay().asyncExec(() -> textWidget.setFont(JFaceResources.getFont(PreferenceConstants.EDITOR_TEXT_FONT)));
+					textWidget.getDisplay().asyncExec(() -> textWidget.setFont(JFaceResources.getFont(PreferenceConstants.EDITOR_TEXT_FONT))); //FLLDCIM: MARK — T08 UI_THREAD_SYNCHRONIZER CALL
 				}
 			}
 		};
 		IThemeManager themeManager = getViewSite().getWorkbenchWindow().getWorkbench().getThemeManager();
 		themeManager.addPropertyChangeListener(fontListener);
-		fSourceViewer.getTextWidget().addDisposeListener(unused -> themeManager.removePropertyChangeListener(fontListener));
-		fSourceViewer.getSelectionProvider().addSelectionChangedListener(getSelectionChangedListener());
+		fSourceViewer.getTextWidget().addDisposeListener(unused -> themeManager.removePropertyChangeListener(fontListener)); //FLLDCIM: MARK — T01 LIFECYCLE_RESIDENCY CALL
+		fSourceViewer.getSelectionProvider().addSelectionChangedListener(getSelectionChangedListener()); //FLLDCIM: MARK — T04 VIEWER_SELECTION_DELTA CALL
 		fSourceViewer.setDocument(getRestoredDocument());
-		fSourceViewer.addTextInputListener(this);
+		fSourceViewer.addTextInputListener(this); //FLLDCIM: MARK — T28 DOCUMENT_DELTA CALL
 		// Light bulb for content assist hint
 		ControlDecoration decoration = new ControlDecoration(fSourceViewer.getControl(), SWT.TOP | SWT.LEFT);
 		decoration.setShowOnlyOnFocus(true);
@@ -224,7 +224,7 @@ public class DisplayView extends ViewPart implements ITextInputListener, IPerspe
 		// create context menu
 		MenuManager menuMgr = new MenuManager("#PopUp"); //$NON-NLS-1$
 		menuMgr.setRemoveAllWhenShown(true);
-		menuMgr.addMenuListener(new IMenuListener() {
+		menuMgr.addMenuListener(new IMenuListener() { //FLLDCIM: MARK — T16 MENU_TRAVERSE CALL
 			@Override
 			public void menuAboutToShow(IMenuManager mgr) {
 				fillContextMenu(mgr);
@@ -242,7 +242,7 @@ public class DisplayView extends ViewPart implements ITextInputListener, IPerspe
 		initDragAndDrop();
 	}
 
-	protected IDocument getRestoredDocument() {
+	protected IDocument getRestoredDocument() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IDocument doc= null;
 		if (fRestoredContents != null) {
 			doc= new Document(fRestoredContents);
@@ -251,7 +251,7 @@ public class DisplayView extends ViewPart implements ITextInputListener, IPerspe
 		}
 		JavaTextTools tools= JDIDebugUIPlugin.getDefault().getJavaTextTools();
 		tools.setupJavaDocumentPartitioner(doc, IJavaPartitions.JAVA_PARTITIONING);
-		fDocumentListener= new IDocumentListener() {
+		fDocumentListener= new IDocumentListener() { //FLLDCIM: MARK — T28  ANONYMOUS
 			/**
 			 * @see IDocumentListener#documentAboutToBeChanged(DocumentEvent)
 			 */
@@ -284,7 +284,7 @@ public class DisplayView extends ViewPart implements ITextInputListener, IPerspe
 	/**
 	 * Initialize the actions of this view
 	 */
-	protected void createActions() {
+	protected void createActions() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 
 		fClearDisplayAction= new ClearOutputAction(fSourceViewer);
 
@@ -352,7 +352,7 @@ public class DisplayView extends ViewPart implements ITextInputListener, IPerspe
 	 *
 	 * @since 3.2
 	 */
-	protected void createUndoRedoActions() {
+	protected void createUndoRedoActions() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IUndoContext undoContext= getUndoContext();
 		if (undoContext != null) {
 			// Use actions provided by global undo/redo
@@ -404,7 +404,7 @@ public class DisplayView extends ViewPart implements ITextInputListener, IPerspe
 	/**
 	 * Adds the context menu actions for the display view.
 	 */
-	protected void fillContextMenu(IMenuManager menu) {
+	protected void fillContextMenu(IMenuManager menu) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 
 		if (fSourceViewer.getDocument() == null) {
 			return;
@@ -427,7 +427,7 @@ public class DisplayView extends ViewPart implements ITextInputListener, IPerspe
 	/* (non-Javadoc)
 	 * @see org.eclipse.ui.part.WorkbenchPart#getAdapter(Class)
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings("unchecked") //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	@Override
 	public <T> T getAdapter(Class<T> required) {
 
@@ -452,7 +452,7 @@ public class DisplayView extends ViewPart implements ITextInputListener, IPerspe
 
 	protected void updateActions() {
 		Iterator<String> iterator = fSelectionActions.iterator();
-		while (iterator.hasNext()) {
+		while (iterator.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			IAction action = fGlobalActions.get(iterator.next());
 			if (action instanceof IUpdate) {
 				 ((IUpdate) action).update();
@@ -498,12 +498,12 @@ public class DisplayView extends ViewPart implements ITextInputListener, IPerspe
      *
      * @since 3.4
      */
-	protected void initDragAndDrop() {
+	protected void initDragAndDrop() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		StyledText text = fSourceViewer.getTextWidget();
 		// Drag & Drop
 		DragSource ds = new DragSource(fSourceViewer.getTextWidget(), DND.DROP_COPY | DND.DROP_MOVE);
 		ds.setTransfer(new Transfer[] { TextTransfer.getInstance() });
-		ds.addDragListener(new DragSourceAdapter() {
+		ds.addDragListener(new DragSourceAdapter() { //FLLDCIM: MARK — T25 DND CALL
 			@Override
 			public void dragSetData(org.eclipse.swt.dnd.DragSourceEvent event) {
 				event.data = fSourceViewer.getTextWidget().getSelectionText();
@@ -512,7 +512,7 @@ public class DisplayView extends ViewPart implements ITextInputListener, IPerspe
 
 		DropTarget dropTarget = new DropTarget(text, DND.DROP_COPY | DND.DROP_MOVE);
 		dropTarget.setTransfer(new Transfer[] { LocalSelectionTransfer.getTransfer() });
-		dropTarget.addDropListener(new DropTargetAdapter() {
+		dropTarget.addDropListener(new DropTargetAdapter() { //FLLDCIM: MARK — T25 DND CALL
 
 			@Override
 			public void dragEnter(DropTargetEvent event) {
@@ -524,7 +524,7 @@ public class DisplayView extends ViewPart implements ITextInputListener, IPerspe
 				normalizeDrop(event);
 			}
 
-			@Override
+			@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 			public void drop(DropTargetEvent event) {
 				normalizeDrop(event);
 				String dropped = null;
@@ -536,19 +536,19 @@ public class DisplayView extends ViewPart implements ITextInputListener, IPerspe
 
 					if (selection instanceof IStructuredSelection sel) {
 						List<Object> selections = sel.toList();
-						StringBuilder build = new StringBuilder();
-						for (Object obj : selections) {
+						StringBuilder build = new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
+						for (Object obj : selections) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 							if (obj instanceof IVariable var) {
 								try {
-									build.append(var.getName());
+									build.append(var.getName()); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 								} catch (DebugException e) {
 									DebugUIPlugin.log(e);
 								}
 							} else if (obj instanceof IWatchExpression exp) {
-								build.append(exp.getExpressionText());
+								build.append(exp.getExpressionText()); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 							}
 							if (selections.size() > 1) {
-								build.append(System.lineSeparator());
+								build.append(System.lineSeparator()); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 							}
 						}
 						dropped = build.toString();
@@ -598,7 +598,7 @@ public class DisplayView extends ViewPart implements ITextInputListener, IPerspe
 	}
 
 	protected final ISelectionChangedListener getSelectionChangedListener() {
-		return new ISelectionChangedListener() {
+		return new ISelectionChangedListener() { //FLLDCIM: MARK — T04  ANONYMOUS
 				@Override
 				public void selectionChanged(SelectionChangedEvent event) {
 					updateSelectionDependentActions();
@@ -608,7 +608,7 @@ public class DisplayView extends ViewPart implements ITextInputListener, IPerspe
 
 	protected void updateSelectionDependentActions() {
 		Iterator<String> iterator= fSelectionActions.iterator();
-		while (iterator.hasNext()) {
+		while (iterator.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			updateAction(iterator.next());
 		}
 	}

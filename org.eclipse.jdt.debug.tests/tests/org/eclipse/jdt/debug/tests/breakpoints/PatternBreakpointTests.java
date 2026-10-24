@@ -39,10 +39,10 @@ public class PatternBreakpointTests extends AbstractDebugTest {
 	/**
 	 * Tests several pattern breakpoints
 	 */
-	public void testPatternBreakpoints() throws Exception {
+	public void testPatternBreakpoints() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String sourceName = "Breakpoints.java";
 		String pattern = "Break";
-		List<IJavaPatternBreakpoint> bps = new ArrayList<>();
+		List<IJavaPatternBreakpoint> bps = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 		// anonymous class
 		bps.add(createPatternBreakpoint(46, sourceName, pattern));
 		// blocks
@@ -87,7 +87,7 @@ public class PatternBreakpointTests extends AbstractDebugTest {
 		try {
 			thread= launchToBreakpoint("Breakpoints", false);
 			assertNotNull("Breakpoint not hit within timeout period", thread);
-			while (!bps.isEmpty()) {
+			while (!bps.isEmpty()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				IBreakpoint hit = getBreakpoint(thread);
 				assertNotNull("suspended, but not by breakpoint", hit);
 				assertTrue("hit un-registered breakpoint", bps.contains(hit));
@@ -111,7 +111,7 @@ public class PatternBreakpointTests extends AbstractDebugTest {
 	/**
 	 * Bug 74108 - enable/disable a stratum breakpoint that is not yet installed
 	 */
-	public void testToggleStratumBreakpoint() throws Exception {
+	public void testToggleStratumBreakpoint() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IJavaStratumLineBreakpoint stratumLineBreakpoint = createStratumBreakpoint(6, "date.jsp", "JSP");
 		String typeName = "Breakpoints";
 		createLineBreakpoint(55, typeName);
@@ -141,7 +141,7 @@ public class PatternBreakpointTests extends AbstractDebugTest {
 	/**
 	 * Bug 74108 - enable/disable a pattern breakpoint that is not yet installed
 	 */
-	public void testTogglePatternBreakpoint() throws Exception {
+	public void testTogglePatternBreakpoint() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IJavaPatternBreakpoint patternBreakpoint = createPatternBreakpoint(3, "date.jsp", "date");
 		String typeName = "Breakpoints";
 		createLineBreakpoint(55, typeName);
@@ -171,10 +171,10 @@ public class PatternBreakpointTests extends AbstractDebugTest {
 	/**
 	 * Tests that a pattern breakpoint is skipped when set to do so
 	 */
-	public void testSkipPatternBreakpoint() throws Exception {
+	public void testSkipPatternBreakpoint() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String sourceName = "Breakpoints.java";
 		String pattern = "Break";
-		List<IJavaPatternBreakpoint> bps = new ArrayList<>();
+		List<IJavaPatternBreakpoint> bps = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 		// anonymous class
 		bps.add(createPatternBreakpoint(46, sourceName, pattern));
 		// blocks

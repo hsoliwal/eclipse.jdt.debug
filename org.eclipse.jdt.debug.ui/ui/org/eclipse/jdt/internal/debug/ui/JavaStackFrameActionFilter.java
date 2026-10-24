@@ -24,7 +24,7 @@ public class JavaStackFrameActionFilter implements IActionFilter {
 	/**
 	 * @see org.eclipse.ui.IActionFilter#testAttribute(Object, String, String)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public boolean testAttribute(Object target, String name, String value) {
 		IJavaStackFrame frame = null;
 		if (target instanceof IStackFrame) {

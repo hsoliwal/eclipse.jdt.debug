@@ -86,15 +86,15 @@ import org.eclipse.ui.texteditor.ITextEditorActionDefinitionIds;
 /**
  * A dialog that allows users to create/edit logical structures.
  */
-public class EditLogicalStructureDialog extends StatusDialog implements Listener, ISelectionChangedListener, IDocumentListener, ITypeProvider {
+public class EditLogicalStructureDialog extends StatusDialog implements Listener, ISelectionChangedListener, IDocumentListener, ITypeProvider { //FLLDCIM: MARK — T04  IMPLEMENTS
 
 	public class AttributesContentProvider implements IStructuredContentProvider {
 
 		private final List<String[]> fVariables;
 
 		public AttributesContentProvider(String[][] variables) {
-			fVariables= new ArrayList<>();
-			for (String[] v : variables) {
+			fVariables= new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
+			for (String[] v : variables) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				String[] variable= new String[2];
 				variable[0] = v[0];
 				variable[1] = v[1];
@@ -153,7 +153,7 @@ public class EditLogicalStructureDialog extends StatusDialog implements Listener
 		 * @param list the list
 		 */
 		public void up(List<String[]> list) {
-			for (String[] variable : list) {
+			for (String[] variable : list) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				int index= fVariables.indexOf(variable);
 				fVariables.remove(variable);
 				fVariables.add(index - 1, variable);
@@ -165,7 +165,7 @@ public class EditLogicalStructureDialog extends StatusDialog implements Listener
 		 * @param list the list
 		 */
 		public void down(List<String[]> list) {
-			for (String[] variable : list) {
+			for (String[] variable : list) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				int index= fVariables.indexOf(variable);
 				fVariables.remove(variable);
 				fVariables.add(index + 1, variable);
@@ -221,7 +221,7 @@ public class EditLogicalStructureDialog extends StatusDialog implements Listener
 	/* (non-Javadoc)
 	 * @see org.eclipse.jface.dialogs.Dialog#createDialogArea(org.eclipse.swt.widgets.Composite)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	protected Control createDialogArea(Composite parent) {
 		IWorkbench workbench = PlatformUI.getWorkbench();
 		workbench.getHelpSystem().setHelp(
@@ -250,16 +250,16 @@ public class EditLogicalStructureDialog extends StatusDialog implements Listener
 		SWTFactory.createLabel(typeNameDescriptionContainer, DebugUIMessages.EditLogicalStructureDialog_0, 2);
 
 		fQualifiedTypeNameText = SWTFactory.createSingleText(typeNameDescriptionContainer, 1);
-		fQualifiedTypeNameText.addListener(SWT.Modify, this);
+		fQualifiedTypeNameText.addListener(SWT.Modify, this); //FLLDCIM: MARK — T13 SWT_TYPED_EVENT CALL
 
 		fBrowseTypeButton = SWTFactory.createPushButton(typeNameDescriptionContainer, DebugUIMessages.EditLogicalStructureDialog_1, DebugUIMessages.EditLogicalStructureDialog_25, null);
 
-		fBrowseTypeButton.addListener(SWT.Selection, this);
+		fBrowseTypeButton.addListener(SWT.Selection, this); //FLLDCIM: MARK — T13 SWT_TYPED_EVENT CALL
 
 		SWTFactory.createLabel(typeNameDescriptionContainer, DebugUIMessages.EditLogicalStructureDialog_2, 2);
 
 		fDescriptionText = SWTFactory.createSingleText(typeNameDescriptionContainer, 2);
-		fDescriptionText.addListener(SWT.Modify, this);
+		fDescriptionText.addListener(SWT.Modify, this); //FLLDCIM: MARK — T13 SWT_TYPED_EVENT CALL
 
 		fSubTypeButton = SWTFactory.createCheckButton(typeNameDescriptionContainer, DebugUIMessages.EditLogicalStructureDialog_3, null, false, 1);
 		fSubTypeButton.setToolTipText(DebugUIMessages.EditLogicalStructureDialog_26);
@@ -267,7 +267,7 @@ public class EditLogicalStructureDialog extends StatusDialog implements Listener
 		Group radioContainer= SWTFactory.createGroup(container, DebugUIMessages.EditLogicalStructureDialog_33, 1, 1, GridData.FILL_HORIZONTAL);
 
 		fValueButton = SWTFactory.createRadioButton(radioContainer, DebugUIMessages.EditLogicalStructureDialog_4);
-		fValueButton.addListener(SWT.Selection, this);
+		fValueButton.addListener(SWT.Selection, this); //FLLDCIM: MARK — T13 SWT_TYPED_EVENT CALL
 
 		fVariablesButton = SWTFactory.createRadioButton(radioContainer, DebugUIMessages.EditLogicalStructureDialog_5);
 
@@ -293,7 +293,7 @@ public class EditLogicalStructureDialog extends StatusDialog implements Listener
 	 * Create the widgets it the code snippet editor group
 	 * @param isValue if it is a snippet value
 	 */
-	private void createCodeGroupWidgets(boolean isValue) {
+	private void createCodeGroupWidgets(boolean isValue) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		if (isValue) {
 			fCodeGroup.setText(DebugUIMessages.EditLogicalStructureDialog_9);
 		} else {
@@ -305,7 +305,7 @@ public class EditLogicalStructureDialog extends StatusDialog implements Listener
 			SWTFactory.createLabel(attributeNameContainer, DebugUIMessages.EditLogicalStructureDialog_8, 1);
 
 			fAttributeNameText = SWTFactory.createSingleText(attributeNameContainer, 1);
-			fAttributeNameText.addListener(SWT.Modify, this);
+			fAttributeNameText.addListener(SWT.Modify, this); //FLLDCIM: MARK — T13 SWT_TYPED_EVENT CALL
 
 			SWTFactory.createLabel(fCodeGroup, DebugUIMessages.EditLogicalStructureDialog_9, 1);
 		}
@@ -317,7 +317,7 @@ public class EditLogicalStructureDialog extends StatusDialog implements Listener
 		JavaTextTools tools= JDIDebugUIPlugin.getDefault().getJavaTextTools();
 		if (fSnippetDocument == null) {
 			fSnippetDocument= new Document();
-			fSnippetDocument.addDocumentListener(this);
+			fSnippetDocument.addDocumentListener(this); //FLLDCIM: MARK — T28 DOCUMENT_DELTA CALL
 		}
 		tools.setupJavaDocumentPartitioner(fSnippetDocument, IJavaPartitions.JAVA_PARTITIONING);
 		if (fViewerConfiguration == null) {
@@ -342,7 +342,7 @@ public class EditLogicalStructureDialog extends StatusDialog implements Listener
 	/**
 	 * Create the widgets for the attribute list
 	 */
-	private void createAttributeListWidgets() {
+	private void createAttributeListWidgets() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		fAttributeListViewer = new TableViewer(fAttributesContainer, SWT.BORDER | SWT.MULTI | SWT.FULL_SELECTION);
 		Table table = (Table)fAttributeListViewer.getControl();
 		GridData gd= new GridData(SWT.FILL, SWT.FILL, true, false);
@@ -354,23 +354,23 @@ public class EditLogicalStructureDialog extends StatusDialog implements Listener
 			fAttributesContentProvider= new AttributesContentProvider(fLogicalStructure.getVariables());
 		}
 		fAttributeListViewer.setContentProvider(fAttributesContentProvider);
-		fAttributeListViewer.setLabelProvider(new AttributesLabelProvider());
-		fAttributeListViewer.setInput(this);
-		fAttributeListViewer.addSelectionChangedListener(this);
+		fAttributeListViewer.setLabelProvider(new AttributesLabelProvider()); //FLLDCIM: MARK — T24 LABEL_DELTA CALL
+		fAttributeListViewer.setInput(this); //FLLDCIM: MARK — M21 FULL_REBUILD_TO_DELTA CALL
+		fAttributeListViewer.addSelectionChangedListener(this); //FLLDCIM: MARK — T04 VIEWER_SELECTION_DELTA CALL
 
 		Composite attributeListButtonsCotnainer = SWTFactory.createComposite(fAttributesContainer, fAttributesContainer.getFont(), 1, 1, SWT.NONE);
 
 		fAttributeAddButton = SWTFactory.createPushButton(attributeListButtonsCotnainer, DebugUIMessages.EditLogicalStructureDialog_10, DebugUIMessages.EditLogicalStructureDialog_27, null);
-		fAttributeAddButton.addListener(SWT.Selection, this);
+		fAttributeAddButton.addListener(SWT.Selection, this); //FLLDCIM: MARK — T13 SWT_TYPED_EVENT CALL
 
 		fAttributeRemoveButton = SWTFactory.createPushButton(attributeListButtonsCotnainer, DebugUIMessages.EditLogicalStructureDialog_11, DebugUIMessages.EditLogicalStructureDialog_28, null);
-		fAttributeRemoveButton.addListener(SWT.Selection, this);
+		fAttributeRemoveButton.addListener(SWT.Selection, this); //FLLDCIM: MARK — T13 SWT_TYPED_EVENT CALL
 
 		fAttributeUpButton = SWTFactory.createPushButton(attributeListButtonsCotnainer, DebugUIMessages.EditLogicalStructureDialog_12, DebugUIMessages.EditLogicalStructureDialog_29, null);
-		fAttributeUpButton.addListener(SWT.Selection, this);
+		fAttributeUpButton.addListener(SWT.Selection, this); //FLLDCIM: MARK — T13 SWT_TYPED_EVENT CALL
 
 		fAttributeDownButton = SWTFactory.createPushButton(attributeListButtonsCotnainer, DebugUIMessages.EditLogicalStructureDialog_13, DebugUIMessages.EditLogicalStructureDialog_30, null);
-		fAttributeDownButton.addListener(SWT.Selection, this);
+		fAttributeDownButton.addListener(SWT.Selection, this); //FLLDCIM: MARK — T13 SWT_TYPED_EVENT CALL
 	}
 
 	private void initializeData() {
@@ -392,7 +392,7 @@ public class EditLogicalStructureDialog extends StatusDialog implements Listener
 	/* (non-Javadoc)
 	 * @see org.eclipse.swt.widgets.Listener#handleEvent(org.eclipse.swt.widgets.Event)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public void handleEvent(Event event) {
 		Widget source= event.widget;
 		switch (event.type) {
@@ -430,17 +430,17 @@ public class EditLogicalStructureDialog extends StatusDialog implements Listener
 	private void addAttribute() {
 		String[] newAttribute= new String[] {DebugUIMessages.EditLogicalStructureDialog_14, DebugUIMessages.EditLogicalStructureDialog_15}; //
 		fAttributesContentProvider.add(newAttribute);
-		fAttributeListViewer.refresh();
+		fAttributeListViewer.refresh(); //FLLDCIM: MARK — M21 FULL_REBUILD_TO_DELTA CALL
 		fAttributeListViewer.setSelection(new StructuredSelection((Object)newAttribute));
 	}
 
 	// code for remove attribute button
-	private void removeAttribute() {
+	private void removeAttribute() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IStructuredSelection selection= (IStructuredSelection)fAttributeListViewer.getSelection();
 		if (selection.size() > 0) {
 			List<String[]> selectedElements= selection.toList();
 			Object newSelectedElement= null;
-			for (Object element : fAttributesContentProvider.getElements()) {
+			for (Object element : fAttributesContentProvider.getElements()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				if (!selectedElements.contains(element)) {
 					newSelectedElement = element;
 				} else {
@@ -448,7 +448,7 @@ public class EditLogicalStructureDialog extends StatusDialog implements Listener
 				}
 			}
 			fAttributesContentProvider.remove(selectedElements);
-			fAttributeListViewer.refresh();
+			fAttributeListViewer.refresh(); //FLLDCIM: MARK — M21 FULL_REBUILD_TO_DELTA CALL
 			if (newSelectedElement == null) {
 				Object[] newElements= fAttributesContentProvider.getElements();
 				if (newElements.length > 0) {
@@ -465,7 +465,7 @@ public class EditLogicalStructureDialog extends StatusDialog implements Listener
 		IStructuredSelection selection= (IStructuredSelection)fAttributeListViewer.getSelection();
 		if (selection.size() > 0) {
 			fAttributesContentProvider.up(selection.toList());
-			fAttributeListViewer.refresh();
+			fAttributeListViewer.refresh(); //FLLDCIM: MARK — M21 FULL_REBUILD_TO_DELTA CALL
 			fAttributeListViewer.setSelection(selection);
 		}
 	}
@@ -475,7 +475,7 @@ public class EditLogicalStructureDialog extends StatusDialog implements Listener
 		IStructuredSelection selection= (IStructuredSelection)fAttributeListViewer.getSelection();
 		if (selection.size() > 0) {
 			fAttributesContentProvider.down(selection.toList());
-			fAttributeListViewer.refresh();
+			fAttributeListViewer.refresh(); //FLLDCIM: MARK — M21 FULL_REBUILD_TO_DELTA CALL
 			fAttributeListViewer.setSelection(selection);
 		}
 	}
@@ -485,7 +485,7 @@ public class EditLogicalStructureDialog extends StatusDialog implements Listener
 		if (fCurrentAttributeSelection.size() == 1) {
 			String[] variable= (String[])fCurrentAttributeSelection.getFirstElement();
 			variable[0]= fAttributeNameText.getText();
-			fAttributeListViewer.refresh(variable);
+			fAttributeListViewer.refresh(variable); //FLLDCIM: MARK — M21 FULL_REBUILD_TO_DELTA CALL
 		}
 	}
 
@@ -493,7 +493,7 @@ public class EditLogicalStructureDialog extends StatusDialog implements Listener
 	 * Display or hide the widgets specific to a logical structure with
 	 * variables.
 	 */
-	private void toggleAttributesWidgets(boolean isValue) {
+	private void toggleAttributesWidgets(boolean isValue) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		if (!isValue) {
 			// recreate the attribute list
 			fValueTmp= fSnippetDocument.get();
@@ -501,13 +501,13 @@ public class EditLogicalStructureDialog extends StatusDialog implements Listener
 		} else {
 			// dispose the attribute list
 			saveAttributeValue();
-			for (Control child : fAttributesContainer.getChildren()) {
+			for (Control child : fAttributesContainer.getChildren()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				child.dispose();
 			}
 		}
 
 		// dispose and recreate the code snippet editor group
-		for (Control child : fCodeGroup.getChildren()) {
+		for (Control child : fCodeGroup.getChildren()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			child.dispose();
 		}
 		fSnippetViewer.dispose();
@@ -546,7 +546,7 @@ public class EditLogicalStructureDialog extends StatusDialog implements Listener
 	/* (non-Javadoc)
 	 * @see org.eclipse.jface.viewers.ISelectionChangedListener#selectionChanged(org.eclipse.jface.viewers.SelectionChangedEvent)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public void selectionChanged(SelectionChangedEvent event) {
 		saveAttributeValue();
 		fCurrentAttributeSelection= (IStructuredSelection) event.getSelection();
@@ -574,7 +574,7 @@ public class EditLogicalStructureDialog extends StatusDialog implements Listener
 	/**
 	 * Check the values in the widgets.
 	 */
-	public void checkValues() {
+	public void checkValues() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		StatusInfo status= new StatusInfo();
 		if (fQualifiedTypeNameText.getText().trim().length() == 0) {
 			status.setError(DebugUIMessages.EditLogicalStructureDialog_16);
@@ -592,7 +592,7 @@ public class EditLogicalStructureDialog extends StatusDialog implements Listener
 			} else if (oneElementSelected && fSnippetDocument.get().trim().length() == 0) {
 				status.setError(DebugUIMessages.EditLogicalStructureDialog_21);
 			} else {
-				for (Object element : elements) {
+				for (Object element : elements) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 					String[] variable = (String[]) element;
 					if (variable[0].trim().length() == 0) {
 						status.setError(DebugUIMessages.EditLogicalStructureDialog_22);
@@ -618,7 +618,7 @@ public class EditLogicalStructureDialog extends StatusDialog implements Listener
 	/**
 	 * Open the 'select type' dialog, and set the user choice into the formatter.
 	 */
-	private void selectType() {
+	private void selectType() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		Shell shell = getShell();
 		IProject[] projects = ResourcesPlugin.getWorkspace().getRoot().getProjects();
 		if (projects.length == 0) {
@@ -626,7 +626,7 @@ public class EditLogicalStructureDialog extends StatusDialog implements Listener
 			return;
 		}
 		boolean allClosed = true;
-		for (IProject iProject : projects) {
+		for (IProject iProject : projects) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			if (iProject.isOpen()) {
 				allClosed = false;
 				break;
@@ -704,7 +704,7 @@ public class EditLogicalStructureDialog extends StatusDialog implements Listener
 	 * Use the Java search engine to find the type which corresponds
 	 * to the given name.
 	 */
-	private void findCorrespondingType() {
+	private void findCorrespondingType() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		if (fTypeSearched) {
 			return;
 		}

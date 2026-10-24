@@ -52,7 +52,7 @@ public class PacketReceiveManager extends PacketManager {
 	 * List of Packets that have timed out already. Maintained so that responses
 	 * can be discarded if/when they are received.
 	 */
-	private final ArrayList<Integer> fTimedOutPackets;
+	private final ArrayList<Integer> fTimedOutPackets; //FLLDCIM: MARK — M10 M3_PRIMITIVE_LANES FIELD
 
 	private final VirtualMachineImpl fVM;
 
@@ -64,7 +64,7 @@ public class PacketReceiveManager extends PacketManager {
 		fVM = vmImpl;
 		fCommandPackets = new LinkedList<>();
 		fReplyPackets = new LinkedList<>();
-		fTimedOutPackets = new ArrayList<>();
+		fTimedOutPackets = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 	}
 
 	@Override
@@ -84,7 +84,7 @@ public class PacketReceiveManager extends PacketManager {
 	@Override
 	public void run() {
 		try {
-			while (!VMIsDisconnected()) {
+			while (!VMIsDisconnected()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				// Read a packet from the input stream.
 				readAvailablePacket();
 			}
@@ -101,7 +101,7 @@ public class PacketReceiveManager extends PacketManager {
 	/**
 	 * @return Returns a specified Command Packet from the Virtual Machine.
 	 */
-	public JdwpCommandPacket getCommand(int command, long timeToWait)
+	public JdwpCommandPacket getCommand(int command, long timeToWait) //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 			throws InterruptedException {
 		JdwpCommandPacket packet = null;
 		synchronized (fCommandPackets) {
@@ -110,7 +110,7 @@ public class PacketReceiveManager extends PacketManager {
 			long waitedTime;
 
 			// Wait until command is available.
-			while (!VMIsDisconnected()
+			while (!VMIsDisconnected() //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 					&& (packet = removeCommandPacket(command)) == null
 					&& (timeToWait < 0 || remainingTime > 0)) {
 				timeBeforeWait = System.currentTimeMillis();
@@ -146,13 +146,13 @@ public class PacketReceiveManager extends PacketManager {
 	/**
 	 * @return Returns a specified Reply Packet from the Virtual Machine.
 	 */
-	public JdwpReplyPacket getReply(int id, long timeToWait) {
+	public JdwpReplyPacket getReply(int id, long timeToWait) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		JdwpReplyPacket packet = null;
 		long remainingTime = timeToWait;
 		synchronized (fReplyPackets) {
 			final long timeBeforeWait = System.currentTimeMillis();
 			// Wait until reply is available.
-			while (!VMIsDisconnected() && remainingTime > 0) {
+			while (!VMIsDisconnected() && remainingTime > 0) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				packet = removeReplyPacket(id);
 				if (packet != null) {
 					break;
@@ -165,7 +165,7 @@ public class PacketReceiveManager extends PacketManager {
 				// just stop waiting for the reply and treat it as a timeout
 				catch (InterruptedException e) {
 					if (JDIDebugOptions.DEBUG) {
-						JDIDebugOptions.trace(null, "Interrupt observed while waiting for packet: " + id, e); //$NON-NLS-1$
+						JDIDebugOptions.trace(null, "Interrupt observed while waiting for packet: " + id, e); //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 					}
 					// Do not stop waiting on interrupt, this causes
 					// sporadic TimeoutException's without timeout
@@ -193,7 +193,7 @@ public class PacketReceiveManager extends PacketManager {
 				fTimedOutPackets.add(Integer.valueOf(id));
 			}
 			throw new TimeoutException(NLS.bind(
-					ConnectMessages.PacketReceiveManager_0, id + "")); //$NON-NLS-1$
+					ConnectMessages.PacketReceiveManager_0, id + "")); //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		}
 		return packet;
 	}
@@ -231,7 +231,7 @@ public class PacketReceiveManager extends PacketManager {
 	 */
 	private JdwpCommandPacket removeCommandPacket(int command) {
 		ListIterator<JdwpCommandPacket> iter = fCommandPackets.listIterator();
-		while (iter.hasNext()) {
+		while (iter.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			JdwpCommandPacket packet = iter.next();
 			if (packet.getCommand() == command) {
 				iter.remove();
@@ -246,7 +246,7 @@ public class PacketReceiveManager extends PacketManager {
 	 */
 	private JdwpReplyPacket removeReplyPacket(int id) {
 		ListIterator<JdwpReplyPacket> iter = fReplyPackets.listIterator();
-		while (iter.hasNext()) {
+		while (iter.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			JdwpReplyPacket packet = iter.next();
 			if (packet.getId() == id) {
 				iter.remove();

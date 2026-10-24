@@ -38,21 +38,21 @@ import org.eclipse.ui.PlatformUI;
  *
  * @since 3.3
  */
-public class ForceReturnAction extends EvaluateAction {
+public class ForceReturnAction extends EvaluateAction { //FLLDCIM: MARK — T20  IMPLEMENTS
 
 	private IJavaStackFrame fTargetFrame = null;
 
 	/* (non-Javadoc)
 	 * @see org.eclipse.jdt.internal.debug.ui.actions.EvaluateAction#displayResult(org.eclipse.jdt.debug.eval.IEvaluationResult)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	protected void displayResult(final IEvaluationResult result) {
 		evaluationCleanup();
 
 		final Display display = JDIDebugUIPlugin.getStandardDisplay();
 		// error with evaluation
 		if (result.hasErrors()) {
-			display.asyncExec(new Runnable() {
+			display.asyncExec(new Runnable() { //FLLDCIM: MARK — T08 UI_THREAD_SYNCHRONIZER CALL
 				@Override
 				public void run() {
 					if (display.isDisposed()) {
@@ -70,7 +70,7 @@ public class ForceReturnAction extends EvaluateAction {
 			IJavaValue value = result.getValue();
 			frame.forceReturn(value);
 			if (!Signature.SIG_VOID.equals(value.getSignature())) {
-				display.asyncExec(new Runnable() {
+				display.asyncExec(new Runnable() { //FLLDCIM: MARK — T08 UI_THREAD_SYNCHRONIZER CALL
 					@Override
 					public void run() {
 						if (display.isDisposed()) {
@@ -84,7 +84,7 @@ public class ForceReturnAction extends EvaluateAction {
 			}
 		} catch (DebugException e) {
 			final IStatus status = e.getStatus();
-			display.asyncExec(new Runnable() {
+			display.asyncExec(new Runnable() { //FLLDCIM: MARK — T08 UI_THREAD_SYNCHRONIZER CALL
 				@Override
 				public void run() {
 					if (display.isDisposed()) {
@@ -96,7 +96,7 @@ public class ForceReturnAction extends EvaluateAction {
 		}
 	}
 
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	protected void run() {
 		IJavaStackFrame stackFrame= getStackFrameContext();
 		ForceReturnRunnable runnable = new ForceReturnRunnable(stackFrame);
@@ -122,7 +122,7 @@ public class ForceReturnAction extends EvaluateAction {
 	}
 
 
-	private static class ForceReturnRunnable implements IRunnableWithProgress {
+	private static class ForceReturnRunnable implements IRunnableWithProgress { //FLLDCIM: MARK — T09  IMPLEMENTS
 
 		private final IJavaStackFrame stackFrame;
 		private boolean forceReturnDone;

@@ -125,7 +125,7 @@ import com.sun.jdi.request.EventRequestManager;
 /**
  * Debug target for JDI debug model.
  */
-public class JDIDebugTarget extends JDIDebugElement implements
+public class JDIDebugTarget extends JDIDebugElement implements //FLLDCIM: MARK — T27  IMPLEMENTS
 		IJavaDebugTarget, ILaunchListener, IBreakpointManagerListener,
 		IDebugEventSetListener {
 
@@ -332,12 +332,12 @@ public class JDIDebugTarget extends JDIDebugElement implements
 	/**
 	 * Java types from breakpoints with the flag if they are in scope for current launch
 	 */
-	private final Map<String, Boolean> fKnownTypes = new ConcurrentHashMap<>();
+	private final Map<String, Boolean> fKnownTypes = new ConcurrentHashMap<>(); //FLLDCIM: MARK — M10 M3_PRIMITIVE_LANES FIELD
 
 	/**
 	 * Labels given by the user is stored in this map, where the key is the unique ID of the object.
 	 */
-	private final Map<Long, String> objectLabels = new HashMap<>();
+	private final Map<Long, String> objectLabels = new HashMap<>(); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW //FLLDCIM: MARK — M10 M3_PRIMITIVE_LANES FIELD
 
 	/**
 	 * HCR failure alert pref for current debug session.
@@ -383,7 +383,7 @@ public class JDIDebugTarget extends JDIDebugElement implements
 	 * @param resume
 	 *            whether the VM should be resumed on startup. Has no effect if the VM is already resumed/running when the connection is made.
 	 */
-	public JDIDebugTarget(ILaunch launch, VirtualMachine jvm, String name,
+	public JDIDebugTarget(ILaunch launch, VirtualMachine jvm, String name, //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 			boolean supportTerminate, boolean supportDisconnect,
 			IProcess process, boolean resume) {
 		super(null);
@@ -400,10 +400,10 @@ public class JDIDebugTarget extends JDIDebugElement implements
 		setDisconnecting(false);
 		setName(name);
 		fScope = prepareBreakpointsSearchScope();
-		fBreakpoints = Collections.synchronizedList(new ArrayList<>(5));
-		fThreads = Collections.synchronizedList(new ArrayList<>());
-		fGroups = Collections.synchronizedList(new ArrayList<>(5));
-		fOutOfSynchTypes = Collections.synchronizedSet(new HashSet<>());
+		fBreakpoints = Collections.synchronizedList(new ArrayList<>(5)); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
+		fThreads = Collections.synchronizedList(new ArrayList<>()); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
+		fGroups = Collections.synchronizedList(new ArrayList<>(5)); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
+		fOutOfSynchTypes = Collections.synchronizedSet(new HashSet<>()); //FLLDCIM: MARK — M03 M3_SET_LANES NEW
 		setHCROccurred(false);
 		initialize();
 		DebugPlugin.getDefault().getLaunchManager().addLaunchListener(this);
@@ -412,7 +412,7 @@ public class JDIDebugTarget extends JDIDebugElement implements
 	}
 
 
-	private IJavaSearchScope prepareBreakpointsSearchScope() {
+	private IJavaSearchScope prepareBreakpointsSearchScope() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		boolean enableFiltering = Platform.getPreferencesService().getBoolean(
 				JDIDebugPlugin.getUniqueIdentifier(),
 				JDIDebugModel.PREF_FILTER_BREAKPOINTS_FROM_UNRELATED_SOURCES,
@@ -487,7 +487,7 @@ public class JDIDebugTarget extends JDIDebugElement implements
 		List<JDIThread> threadList;
 		synchronized (fThreads) {
 			//TODO investigate making fThreads be a synchronized collection, to remove all this copying
-			threadList = new ArrayList<>(fThreads);
+			threadList = new ArrayList<>(fThreads); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 		}
 		return threadList.iterator();
 	}
@@ -511,7 +511,7 @@ public class JDIDebugTarget extends JDIDebugElement implements
 	 * @param event
 	 *            VM start event
 	 */
-	public void handleVMStart(VMStartEvent event) {
+	public void handleVMStart(VMStartEvent event) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		if (isResumeOnStartup()) {
 			try {
 				setSuspended(true);
@@ -524,7 +524,7 @@ public class JDIDebugTarget extends JDIDebugElement implements
 		// update their status (avoid concurrent modification - use
 		// #getThreads())
 		IThread[] threads = getThreads();
-		for (IThread thread2 : threads) {
+		for (IThread thread2 : threads) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			JDIThread thread = (JDIThread) thread2;
 			if (thread.isSuspended()) {
 				try {
@@ -549,7 +549,7 @@ public class JDIDebugTarget extends JDIDebugElement implements
 	 * is synchronized to ensure that we do not start to process an events from
 	 * the target until our state is initialized.
 	 */
-	protected synchronized void initialize() {
+	protected synchronized void initialize() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		setEventDispatcher(new EventDispatcher(this));
 		setRequestTimeout(Platform.getPreferencesService().getInt(
 				JDIDebugPlugin.getUniqueIdentifier(),
@@ -561,16 +561,16 @@ public class JDIDebugTarget extends JDIDebugElement implements
 		initializeBreakpoints();
 		getLaunch().addDebugTarget(this);
 		DebugPlugin plugin = DebugPlugin.getDefault();
-		plugin.addDebugEventListener(this);
+		plugin.addDebugEventListener(this); //FLLDCIM: MARK — T27 DEBUG_EVENT_ADAPTER CALL
 		fireCreationEvent();
 		// begin handling/dispatching events after the creation event is handled
 		// by all listeners
-		plugin.asyncExec(() -> {
+		plugin.asyncExec(() -> { //FLLDCIM: MARK — T08 UI_THREAD_SYNCHRONIZER CALL
 			EventDispatcher dispatcher = getEventDispatcher();
 			if (dispatcher != null) {
 				Thread t = new Thread(
 						dispatcher,
-						JDIDebugModel.getPluginIdentifier()
+						JDIDebugModel.getPluginIdentifier() //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 								+ JDIDebugModelMessages.JDIDebugTarget_JDI_Event_Dispatcher);
 				t.setDaemon(true);
 				t.start();
@@ -581,7 +581,7 @@ public class JDIDebugTarget extends JDIDebugElement implements
 	/**
 	 * Adds all of the pre-existing threads to this debug target.
 	 */
-	protected void initializeState() {
+	protected void initializeState() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 
 		List<ThreadReference> threads = null;
 		VirtualMachine vm = getVM();
@@ -599,7 +599,7 @@ public class JDIDebugTarget extends JDIDebugElement implements
 			}
 			if (threads != null) {
 				Iterator<ThreadReference> initialThreads = threads.iterator();
-				while (initialThreads.hasNext()) {
+				while (initialThreads.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 					createThread(initialThreads.next());
 				}
 			}
@@ -629,7 +629,7 @@ public class JDIDebugTarget extends JDIDebugElement implements
 		manager.addBreakpointListener(this);
 		IBreakpoint[] bps = manager.getBreakpoints(JDIDebugModel
 				.getPluginIdentifier());
-		for (IBreakpoint bp : bps) {
+		for (IBreakpoint bp : bps) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			if (bp instanceof IJavaBreakpoint) {
 				breakpointAdded(bp);
 			}
@@ -679,18 +679,18 @@ public class JDIDebugTarget extends JDIDebugElement implements
 		return null;
 	}
 
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public IThread[] getThreads() {
 		synchronized (fThreads) {
 			IThread[] threads = new IThread[fThreads.size()];
 			int index = 0;
-			for (JDIThread thread : fThreads) {
+			for (JDIThread thread : fThreads) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				if (!thread.isSystemThread()) {
 					threads[index] = thread;
 					++index;
 				}
 			}
-			for (JDIThread thread : fThreads) {
+			for (JDIThread thread : fThreads) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				if (thread.isSystemThread()) {
 					threads[index] = thread;
 					++index;
@@ -714,7 +714,7 @@ public class JDIDebugTarget extends JDIDebugElement implements
 	 */
 	private boolean canResumeThreads() {
 		Iterator<JDIThread> it = getThreadIterator();
-		while (it.hasNext()) {
+		while (it.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			IThread thread = it.next();
 			if (thread.canResume()) {
 				return true;
@@ -728,7 +728,7 @@ public class JDIDebugTarget extends JDIDebugElement implements
 		if (isAvailable()) {
 			// allow suspend when one or more threads are currently running
 			IThread[] threads = getThreads();
-			for (IThread thread : threads) {
+			for (IThread thread : threads) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				if (((JDIThread) thread).canSuspend()) {
 					return true;
 				}
@@ -839,7 +839,7 @@ public class JDIDebugTarget extends JDIDebugElement implements
 		return false;
 	}
 
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public void disconnect() throws DebugException {
 
 		if (!isAvailable()) {
@@ -942,7 +942,7 @@ public class JDIDebugTarget extends JDIDebugElement implements
 	@Override
 	public boolean isOutOfSynch() throws DebugException {
 		Iterator<JDIThread> threads = getThreadIterator();
-		while (threads.hasNext()) {
+		while (threads.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			JDIThread thread = threads.next();
 			if (thread.isOutOfSynch()) {
 				return true;
@@ -954,7 +954,7 @@ public class JDIDebugTarget extends JDIDebugElement implements
 	@Override
 	public boolean mayBeOutOfSynch() {
 		Iterator<JDIThread> threads = getThreadIterator();
-		while (threads.hasNext()) {
+		while (threads.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			JDIThread thread = threads.next();
 			if (thread.mayBeOutOfSynch()) {
 				return true;
@@ -982,14 +982,14 @@ public class JDIDebugTarget extends JDIDebugElement implements
 	/**
 	 * Reinstall all breakpoints installed in the given resources
 	 */
-	public void reinstallBreakpointsIn(List<String> classNames) {
+	public void reinstallBreakpointsIn(List<String> classNames) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		List<IBreakpoint> breakpoints = getBreakpoints();
 		IJavaBreakpoint[] copy = new IJavaBreakpoint[breakpoints.size()];
 		breakpoints.toArray(copy);
 		IJavaBreakpoint breakpoint = null;
 		String installedType = null;
 
-		for (IJavaBreakpoint element : copy) {
+		for (IJavaBreakpoint element : copy) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			breakpoint = element;
 			if (breakpoint instanceof JavaLineBreakpoint) {
 				try {
@@ -1015,7 +1015,7 @@ public class JDIDebugTarget extends JDIDebugElement implements
 	 */
 	public JDIThread findThread(ThreadReference tr) {
 		Iterator<JDIThread> iter = getThreadIterator();
-		while (iter.hasNext()) {
+		while (iter.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			JDIThread thread = iter.next();
 			if (thread.getUnderlyingThread().equals(tr)) {
 				return thread;
@@ -1235,7 +1235,7 @@ public class JDIDebugTarget extends JDIDebugElement implements
 	 *                if unable to create the request
 	 * @since 3.3
 	 */
-	public ClassPrepareRequest createClassPrepareRequest(String classPattern,
+	public ClassPrepareRequest createClassPrepareRequest(String classPattern, //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 			String classExclusionPattern, boolean enabled, String sourceName)
 			throws CoreException {
 		EventRequestManager manager = getEventRequestManager();
@@ -1297,7 +1297,7 @@ public class JDIDebugTarget extends JDIDebugElement implements
 	 *      Updates the state of this debug target, but only fires notification
 	 *      to listeners if <code>fireNotification</code> is <code>true</code>.
 	 */
-	protected void resume(boolean fireNotification) throws DebugException {
+	protected void resume(boolean fireNotification) throws DebugException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		if ((!isSuspended() && !canResumeThreads()) || !isAvailable()) {
 			return;
 		}
@@ -1307,7 +1307,7 @@ public class JDIDebugTarget extends JDIDebugElement implements
 			VirtualMachine vm = getVM();
 			if (vm != null) {
 				// Extra resume call per each VM_SUSPEND breakpoint hit before
-				while (extraResumeCount.getAndUpdate(count -> count > 0 ? --count : 0) > 0) {
+				while (extraResumeCount.getAndUpdate(count -> count > 0 ? --count : 0) > 0) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 					vm.resume();
 				}
 
@@ -1329,7 +1329,7 @@ public class JDIDebugTarget extends JDIDebugElement implements
 		}
 	}
 
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public boolean supportsBreakpoint(IBreakpoint breakpoint) {
 		boolean isJava = breakpoint instanceof IJavaBreakpoint;
 		if(!isJava){
@@ -1353,7 +1353,7 @@ public class JDIDebugTarget extends JDIDebugElement implements
 	}
 
 
-	public boolean supportsResource(Callable<String> typeNameSupplier, IResource resource) {
+	public boolean supportsResource(Callable<String> typeNameSupplier, IResource resource) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		if (fScope == null) {
 			// No checks, everything in scope: the filtering is disabled
 			return true;
@@ -1377,7 +1377,7 @@ public class JDIDebugTarget extends JDIDebugElement implements
 		URI uri = resource.getLocationURI();
 		if(uri != null){
 			IFile[] files = root.findFilesForLocationURI(uri);
-			for (IFile file : files) {
+			for (IFile file : files) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				if(projects.contains(file.getProject())){
 					return true;
 				}
@@ -1408,7 +1408,7 @@ public class JDIDebugTarget extends JDIDebugElement implements
 
 	private Set<IJavaProject> getJavaProjects(IResource... resources) {
 		Set<IJavaProject> projects = new LinkedHashSet<>();
-		for (IResource resource : resources) {
+		for (IResource resource : resources) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			IProject project = resource.getProject();
 			if(!project.isAccessible()){
 				continue;
@@ -1428,12 +1428,12 @@ public class JDIDebugTarget extends JDIDebugElement implements
 	private Set<IProject> collectReferencedJavaProjects(Set<IJavaProject> javaProjects) {
 		Set<IProject> projects = new LinkedHashSet<>();
 		// collect all references
-		for (IJavaProject jProject : javaProjects) {
+		for (IJavaProject jProject : javaProjects) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			projects.add(jProject.getProject());
 			addReferencedProjects(jProject, projects);
 		}
 		// update java projects set with new java projects we might collected
-		for (IProject project : projects) {
+		for (IProject project : projects) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			IJavaProject jProject = JavaCore.create(project);
 			if(jProject != null){
 				javaProjects.add(jProject);
@@ -1442,7 +1442,7 @@ public class JDIDebugTarget extends JDIDebugElement implements
 		return projects;
 	}
 
-	private void addReferencedProjects(IJavaProject jProject, Set<IProject> projects) {
+	private void addReferencedProjects(IJavaProject jProject, Set<IProject> projects) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IClasspathEntry[] cp;
 		try {
 			// we want resolved classpath to get variables and containers resolved for us
@@ -1451,7 +1451,7 @@ public class JDIDebugTarget extends JDIDebugElement implements
 			// we don't care here
 			return;
 		}
-		for (IClasspathEntry cpe : cp) {
+		for (IClasspathEntry cpe : cp) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			int entryKind = cpe.getEntryKind();
 			IProject project = null;
 			switch (entryKind) {
@@ -1517,7 +1517,7 @@ public class JDIDebugTarget extends JDIDebugElement implements
 	/*
 	 * Checks if the given type (computed from a breakpoint resource) exists multiple times in the workspace.
 	 */
-	private boolean hasMultipleMatchesInWorkspace(final String typeName) {
+	private boolean hasMultipleMatchesInWorkspace(final String typeName) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		final AtomicInteger matchCount = new AtomicInteger(0);
 		String packageName = null;
 		String simpleName = typeName;
@@ -1531,7 +1531,7 @@ public class JDIDebugTarget extends JDIDebugElement implements
 		int firstDoll = simpleName.indexOf('$');
 		if(firstDoll > 0 && firstDoll < simpleName.length() - 1){
 			simpleName = simpleName.substring(0, firstDoll);
-			fqName = packageName + "." + simpleName; //$NON-NLS-1$
+			fqName = packageName + "." + simpleName; //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		} else {
 			fqName = typeName;
 		}
@@ -1578,7 +1578,7 @@ public class JDIDebugTarget extends JDIDebugElement implements
 	 * @param breakpoint
 	 *            the breakpoint added to the breakpoint manager
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public void breakpointAdded(IBreakpoint breakpoint) {
 		if (!isAvailable()) {
 			return;
@@ -1624,7 +1624,7 @@ public class JDIDebugTarget extends JDIDebugElement implements
 	 * @param breakpoint
 	 *            the breakpoint has been removed from the breakpoint manager.
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public void breakpointRemoved(IBreakpoint breakpoint, IMarkerDelta delta) {
 		if (!isAvailable()) {
 			return;
@@ -1634,7 +1634,7 @@ public class JDIDebugTarget extends JDIDebugElement implements
 				((JavaBreakpoint) breakpoint).removeFromTarget(this);
 				getBreakpoints().remove(breakpoint);
 				Iterator<JDIThread> threads = getThreadIterator();
-				while (threads.hasNext()) {
+				while (threads.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 					threads.next()
 							.removeCurrentBreakpoint(breakpoint);
 				}
@@ -1644,11 +1644,11 @@ public class JDIDebugTarget extends JDIDebugElement implements
 		}
 	}
 
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public void suspend() throws DebugException {
 		if (isSuspended()) {
 			IThread[] threads = getThreads();
-			for (IThread thread : threads) {
+			for (IThread thread : threads) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				((JDIThread) thread).suspend();
 			}
 			return;
@@ -1682,7 +1682,7 @@ public class JDIDebugTarget extends JDIDebugElement implements
 	 */
 	protected void prepareThreadsForClientSuspend() throws DebugException {
 		Iterator<JDIThread> threads = getThreadIterator();
-		while (threads.hasNext()) {
+		while (threads.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			threads.next().prepareForClientSuspend();
 		}
 	}
@@ -1692,7 +1692,7 @@ public class JDIDebugTarget extends JDIDebugElement implements
 	 */
 	protected void suspendThreads() {
 		Iterator<JDIThread> threads = getThreadIterator();
-		while (threads.hasNext()) {
+		while (threads.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			JDIThread thread = threads.next();
 			if (!thread.isBreakpointHandlingOngoing()) {
 				thread.suspendedByVM();
@@ -1705,7 +1705,7 @@ public class JDIDebugTarget extends JDIDebugElement implements
 	 */
 	protected void resumeThreads() throws DebugException {
 		Iterator<JDIThread> threads = getThreadIterator();
-		while (threads.hasNext()) {
+		while (threads.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			JDIThread thread = threads.next();
 			if (!thread.isBreakpointHandlingOngoing()) {
 				thread.resumedByVM();
@@ -1754,7 +1754,7 @@ public class JDIDebugTarget extends JDIDebugElement implements
 		resumeThreads();
 	}
 
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public void terminate() throws DebugException {
 		if (!isAvailable()) {
 			return;
@@ -1829,7 +1829,7 @@ public class JDIDebugTarget extends JDIDebugElement implements
 	 * breakpoint listener, and all breakpoints are removed from this target.
 	 * </p>
 	 */
-	protected void cleanup() {
+	protected void cleanup() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		removeAllThreads();
 		DebugPlugin plugin = DebugPlugin.getDefault();
 		plugin.getBreakpointManager().removeBreakpointListener(this);
@@ -1859,7 +1859,7 @@ public class JDIDebugTarget extends JDIDebugElement implements
 	 */
 	protected void removeAllThreads() {
 		Iterator<JDIThread> itr = getThreadIterator();
-		while (itr.hasNext()) {
+		while (itr.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			JDIThread child = itr.next();
 			child.terminated();
 		}
@@ -1874,8 +1874,8 @@ public class JDIDebugTarget extends JDIDebugElement implements
 	 * cleared.
 	 */
 	protected void removeAllBreakpoints() {
-		List<IBreakpoint> list = new ArrayList<>(getBreakpoints());
-		for(IBreakpoint bp : list) {
+		List<IBreakpoint> list = new ArrayList<>(getBreakpoints()); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
+		for(IBreakpoint bp : list) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			JavaBreakpoint breakpoint = (JavaBreakpoint) bp;
 			try {
 				breakpoint.removeFromTarget(this);
@@ -1891,8 +1891,8 @@ public class JDIDebugTarget extends JDIDebugElement implements
 	 * target.
 	 */
 	protected void reinstallAllBreakpoints() {
-		List<IBreakpoint> list = new ArrayList<>(getBreakpoints());
-		for(IBreakpoint bp : list) {
+		List<IBreakpoint> list = new ArrayList<>(getBreakpoints()); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
+		for(IBreakpoint bp : list) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			JavaBreakpoint breakpoint = (JavaBreakpoint) bp;
 			try {
 				breakpoint.addToTarget(this);
@@ -1927,7 +1927,7 @@ public class JDIDebugTarget extends JDIDebugElement implements
 	@Override
 	public IJavaVariable findVariable(String varName) throws DebugException {
 		IThread[] threads = getThreads();
-		for (IThread thread2 : threads) {
+		for (IThread thread2 : threads) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			IJavaThread thread = (IJavaThread) thread2;
 			IJavaVariable var = thread.findVariable(varName);
 			if (var != null) {
@@ -1985,7 +1985,7 @@ public class JDIDebugTarget extends JDIDebugElement implements
 	 *                exception responsible for the failure.</li>
 	 *                </ul>
 	 */
-	protected Integer getCRC(String typeName) throws DebugException {
+	protected Integer getCRC(String typeName) throws DebugException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		if (getVM() instanceof org.eclipse.jdi.hcr.VirtualMachine) {
 			List<ReferenceType> classes = jdiClassesByName(typeName);
 			if (!classes.isEmpty()) {
@@ -2011,7 +2011,7 @@ public class JDIDebugTarget extends JDIDebugElement implements
 		return null;
 	}
 
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public IJavaType[] getJavaTypes(String name) throws DebugException {
 		try {
 			// get java.lang.Class
@@ -2067,7 +2067,7 @@ public class JDIDebugTarget extends JDIDebugElement implements
 				return null;
 			}
 			IJavaType[] types = new IJavaType[classes.size()];
-			for (int i = 0; i < types.length; i++) {
+			for (int i = 0; i < types.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				types[i] = JDIType.createType(this, classes.get(i));
 			}
 			return types;
@@ -2240,7 +2240,7 @@ public class JDIDebugTarget extends JDIDebugElement implements
 		 *            the target in which the thread started
 		 * @return <code>true</code> - the thread should be resumed
 		 */
-		@Override
+		@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		public boolean handleEvent(Event event, JDIDebugTarget target,
 				boolean suspendVote, EventSet eventSet) {
 			ThreadReference thread = ((ThreadStartEvent) event).thread();
@@ -2302,7 +2302,7 @@ public class JDIDebugTarget extends JDIDebugElement implements
 	class ThreadDeathHandler implements IJDIEventListener {
 
 		// terminated threads marked for removal from the fThreads list
-		private final Map<Event, JDIThread> toRemove = Collections.synchronizedMap(new HashMap<>());
+		private final Map<Event, JDIThread> toRemove = Collections.synchronizedMap(new HashMap<>()); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
 
 		protected ThreadDeathHandler() {
 			createRequest();
@@ -2400,7 +2400,7 @@ public class JDIDebugTarget extends JDIDebugElement implements
 		/**
 		 * Creates a breakpoint request at {@link java.lang.Thread#setName(String)} that doesn't suspend the target JVM.
 		 */
-		void createRequest() {
+		void createRequest() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 			EventRequestManager manager = getEventRequestManager();
 			if (manager != null) {
 				try {
@@ -2412,17 +2412,17 @@ public class JDIDebugTarget extends JDIDebugElement implements
 						addJDIEventListener(this, request);
 					}
 				} catch (RuntimeException e) {
-					String errorMessage = "Failed to add thread name change listener to debug target " + JDIDebugTarget.this; //$NON-NLS-1$
+					String errorMessage = "Failed to add thread name change listener to debug target " + JDIDebugTarget.this; //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 					IStatus errorStatus = new Status(IStatus.ERROR, JDIDebugPlugin.getUniqueIdentifier(), errorMessage, e);
 					logRequestStatus(errorStatus);
 				}
 			}
 		}
 
-		private Location locationOfSetNameMethod() {
+		private Location locationOfSetNameMethod() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 			List<ReferenceType> types = jdiClassesByName(TYPE_NAME);
 			boolean foundThreadType = false;
-			for (ReferenceType type : types) {
+			for (ReferenceType type : types) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				if (type instanceof ClassType) {
 					foundThreadType = true;
 					Method method = ((ClassType) type).concreteMethodByName(METHOD_NAME, METHOD_SIGNATURE);
@@ -2431,9 +2431,9 @@ public class JDIDebugTarget extends JDIDebugElement implements
 						if (location != null && location.codeIndex() != -1) {
 							return location;
 						}
-						logRequestWarning("Unable to find location of java.lang.Thread.setName() in debuggee JVM, for type " + type); //$NON-NLS-1$
+						logRequestWarning("Unable to find location of java.lang.Thread.setName() in debuggee JVM, for type " + type); //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 					} else {
-						logRequestWarning("Unable to find java.lang.Thread.setName() method in debuggee JVM, for type " + type); //$NON-NLS-1$
+						logRequestWarning("Unable to find java.lang.Thread.setName() method in debuggee JVM, for type " + type); //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 					}
 				}
 			}
@@ -2883,13 +2883,13 @@ public class JDIDebugTarget extends JDIDebugElement implements
 	 * When the breakpoint manager disables, remove all registered breakpoints
 	 * requests from the VM. When it enables, reinstall them.
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public void breakpointManagerEnablementChanged(boolean enabled) {
 		if (!isAvailable()) {
 			return;
 		}
-		List<IBreakpoint> list = new ArrayList<>(getBreakpoints());
-		for(IBreakpoint bp : list) {
+		List<IBreakpoint> list = new ArrayList<>(getBreakpoints()); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
+		for(IBreakpoint bp : list) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			JavaBreakpoint breakpoint = (JavaBreakpoint) bp;
 			try {
 				if (enabled) {
@@ -2935,7 +2935,7 @@ public class JDIDebugTarget extends JDIDebugElement implements
 	 */
 	void addThreadGroup(ThreadGroupReference group) {
 		ThreadGroupReference currentGroup = group;
-		while (currentGroup != null) {
+		while (currentGroup != null) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			synchronized (fGroups) {
 				if (findThreadGroup(currentGroup) == null) {
 					JDIThreadGroup modelGroup = new JDIThreadGroup(this,
@@ -2952,7 +2952,7 @@ public class JDIDebugTarget extends JDIDebugElement implements
 	JDIThreadGroup findThreadGroup(ThreadGroupReference group) {
 		synchronized (fGroups) {
 			Iterator<JDIThreadGroup> groups = fGroups.iterator();
-			while (groups.hasNext()) {
+			while (groups.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				JDIThreadGroup modelGroup = groups.next();
 				if (modelGroup.getUnderlyingThreadGroup().equals(group)) {
 					return modelGroup;
@@ -2962,7 +2962,7 @@ public class JDIDebugTarget extends JDIDebugElement implements
 		return null;
 	}
 
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public IJavaThreadGroup[] getRootThreadGroups() throws DebugException {
 		try {
 			VirtualMachine vm = getVM();
@@ -2970,8 +2970,8 @@ public class JDIDebugTarget extends JDIDebugElement implements
 				return new IJavaThreadGroup[0];
 			}
 			List<ThreadGroupReference> groups = vm.topLevelThreadGroups();
-			List<JDIThreadGroup> modelGroups = new ArrayList<>(groups.size());
-			for(ThreadGroupReference ref : groups) {
+			List<JDIThreadGroup> modelGroups = new ArrayList<>(groups.size()); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
+			for(ThreadGroupReference ref : groups) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				JDIThreadGroup group = findThreadGroup(ref);
 				if (group != null) {
 					modelGroups.add(group);
@@ -3089,18 +3089,18 @@ public class JDIDebugTarget extends JDIDebugElement implements
 		}
 	}
 
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public void refreshState() throws DebugException {
 		if (isTerminated() || isDisconnected()) {
 			return;
 		}
 		boolean prevSuspend = isSuspended();
 		int running = 0;
-		List<JDIThread> toSuspend = new ArrayList<>();
-		List<JDIThread> toResume = new ArrayList<>();
-		List<JDIThread> toRefresh = new ArrayList<>();
+		List<JDIThread> toSuspend = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
+		List<JDIThread> toResume = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
+		List<JDIThread> toRefresh = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 		Iterator<JDIThread> iterator = getThreadIterator();
-		while (iterator.hasNext()) {
+		while (iterator.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			JDIThread thread = iterator.next();
 			boolean modelSuspended = thread.isSuspended();
 			ThreadReference reference = thread.getUnderlyingThread();
@@ -3145,17 +3145,17 @@ public class JDIDebugTarget extends JDIDebugElement implements
 		}
 		if (targetLevelEvent) {
 			iterator = toSuspend.iterator();
-			while (iterator.hasNext()) {
+			while (iterator.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				JDIThread thread = iterator.next();
 				thread.suspendedByVM();
 			}
 			iterator = toResume.iterator();
-			while (iterator.hasNext()) {
+			while (iterator.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				JDIThread thread = iterator.next();
 				thread.resumedByVM();
 			}
 			iterator = toRefresh.iterator();
-			while (iterator.hasNext()) {
+			while (iterator.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				JDIThread thread = iterator.next();
 				thread.preserveStackFrames();
 			}
@@ -3172,20 +3172,20 @@ public class JDIDebugTarget extends JDIDebugElement implements
 			}
 		} else {
 			iterator = toSuspend.iterator();
-			while (iterator.hasNext()) {
+			while (iterator.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				JDIThread thread = iterator.next();
 				thread.preserveStackFrames();
 				thread.setRunning(false);
 				thread.fireSuspendEvent(DebugEvent.CLIENT_REQUEST);
 			}
 			iterator = toResume.iterator();
-			while (iterator.hasNext()) {
+			while (iterator.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				JDIThread thread = iterator.next();
 				thread.setRunning(true);
 				thread.fireResumeEvent(DebugEvent.CLIENT_REQUEST);
 			}
 			iterator = toRefresh.iterator();
-			while (iterator.hasNext()) {
+			while (iterator.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				JDIThread thread = iterator.next();
 				thread.preserveStackFrames();
 				thread.fireSuspendEvent(DebugEvent.CLIENT_REQUEST);
@@ -3238,7 +3238,7 @@ public class JDIDebugTarget extends JDIDebugElement implements
 	public void filterUnrelatedResources(List<IResource> resourcesToFilter, List<String> qualifiedNamesToFilter) {
 		Iterator<IResource> resources = resourcesToFilter.iterator();
 		Iterator<String> names = qualifiedNamesToFilter.iterator();
-		while (resources.hasNext()) {
+		while (resources.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			boolean supported = supportsResource(() -> names.next(), resources.next());
 			if (!supported) {
 				resources.remove();
@@ -3257,7 +3257,7 @@ public class JDIDebugTarget extends JDIDebugElement implements
 	 *            the list of qualified names to filter, which corresponds to the list of resources on a one-to-one-basis
 	 */
 	public void filterNotLoadedTypes(List<IResource> resources, List<String> qualifiedNames) {
-		for (int i = 0, numElements = qualifiedNames.size(); i < numElements; i++) {
+		for (int i = 0, numElements = qualifiedNames.size(); i < numElements; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			String name = qualifiedNames.get(i);
 			List<ReferenceType> list = jdiClassesByName(name);
 			if (list.isEmpty()) {

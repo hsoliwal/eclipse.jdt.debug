@@ -216,21 +216,21 @@ public final class JavaRuntime {
 	 * </ol>
 	 * @since 2.0
 	 */
-	public static final String JRE_CONTAINER = LaunchingPlugin.getUniqueIdentifier() + ".JRE_CONTAINER"; //$NON-NLS-1$
+	public static final String JRE_CONTAINER = LaunchingPlugin.getUniqueIdentifier() + ".JRE_CONTAINER"; //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 	/**
 	 * Marker type identifier for JRE container problems.
 	 *
 	 * @since 3.6
 	 */
-	public static final String JRE_CONTAINER_MARKER = LaunchingPlugin.getUniqueIdentifier() + ".jreContainerMarker"; //$NON-NLS-1$
+	public static final String JRE_CONTAINER_MARKER = LaunchingPlugin.getUniqueIdentifier() + ".jreContainerMarker"; //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 	/**
 	 * Marker type identifier for JRE compiler compliance problems.
 	 *
 	 * @since 3.11
 	 */
-	public static final String JRE_COMPILER_COMPLIANCE_MARKER = LaunchingPlugin.getUniqueIdentifier() + ".jreCompilerComplianceMarker"; //$NON-NLS-1$
+	public static final String JRE_COMPILER_COMPLIANCE_MARKER = LaunchingPlugin.getUniqueIdentifier() + ".jreCompilerComplianceMarker"; //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 	/**
 	 * A status code indicating that a JRE could not be resolved for a project.
@@ -252,14 +252,14 @@ public final class JavaRuntime {
 	 *
 	 * @since 2.0
 	 */
-	public static final String PREF_CONNECT_TIMEOUT = LaunchingPlugin.getUniqueIdentifier() + ".PREF_CONNECT_TIMEOUT"; //$NON-NLS-1$
+	public static final String PREF_CONNECT_TIMEOUT = LaunchingPlugin.getUniqueIdentifier() + ".PREF_CONNECT_TIMEOUT"; //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 	/**
 	 * Preference key for the String of XML that defines all installed VMs.
 	 *
 	 * @since 2.1
 	 */
-	public static final String PREF_VM_XML = LaunchingPlugin.getUniqueIdentifier() + ".PREF_VM_XML"; //$NON-NLS-1$
+	public static final String PREF_VM_XML = LaunchingPlugin.getUniqueIdentifier() + ".PREF_VM_XML"; //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 	/**
 	 * Preference key for the problem severity when an execution environment is bound to a project's build path for which there is no strictly
@@ -268,7 +268,7 @@ public final class JavaRuntime {
 	 *
 	 * @since 3.5
 	 */
-	public static final String PREF_STRICTLY_COMPATIBLE_JRE_NOT_AVAILABLE = LaunchingPlugin.getUniqueIdentifier() + ".PREF_STRICTLY_COMPATIBLE_JRE_NOT_AVAILABLE"; //$NON-NLS-1$
+	public static final String PREF_STRICTLY_COMPATIBLE_JRE_NOT_AVAILABLE = LaunchingPlugin.getUniqueIdentifier() + ".PREF_STRICTLY_COMPATIBLE_JRE_NOT_AVAILABLE"; //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 	/**
 	 * Preference key for the problem severity when an compiler compliance that is set does not match the used JRE. Value is one of
@@ -279,7 +279,7 @@ public final class JavaRuntime {
 	 *
 	 * @since 3.10
 	 */
-	public static final String PREF_COMPILER_COMPLIANCE_DOES_NOT_MATCH_JRE = LaunchingPlugin.getUniqueIdentifier() + ".PREF_COMPILER_COMPLIANCE_DOES_NOT_MATCH_JRE"; //$NON-NLS-1$
+	public static final String PREF_COMPILER_COMPLIANCE_DOES_NOT_MATCH_JRE = LaunchingPlugin.getUniqueIdentifier() + ".PREF_COMPILER_COMPLIANCE_DOES_NOT_MATCH_JRE"; //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 	/**
 	 * Unique identifier constant (value <code>"org.eclipse.jdt.launching"</code>)
@@ -308,13 +308,13 @@ public final class JavaRuntime {
 	 * @deprecated - use <code>IProcess.ATTR_CMDLINE</code>
 	 */
 	@Deprecated
-	public final static String ATTR_CMDLINE= LaunchingPlugin.getUniqueIdentifier() + ".launcher.cmdLine"; //$NON-NLS-1$
+	public final static String ATTR_CMDLINE= LaunchingPlugin.getUniqueIdentifier() + ".launcher.cmdLine"; //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 	/**
 	 * Boolean preference controlling whether only exported entries should even be included when the runtime classpath is computed
 	 * @since 3.7
 	 */
-	public static final String PREF_ONLY_INCLUDE_EXPORTED_CLASSPATH_ENTRIES = ID_PLUGIN + ".only_include_exported_classpath_entries"; //$NON-NLS-1$
+	public static final String PREF_ONLY_INCLUDE_EXPORTED_CLASSPATH_ENTRIES = ID_PLUGIN + ".only_include_exported_classpath_entries"; //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 	/**
 	 * Attribute key for a classpath attribute referencing a
@@ -337,7 +337,7 @@ public final class JavaRuntime {
 	 * @since 3.1
 	 * @see org.eclipse.jdt.core.IClasspathAttribute
 	 */
-	public static final String CLASSPATH_ATTR_LIBRARY_PATH_ENTRY =  LaunchingPlugin.getUniqueIdentifier() + ".CLASSPATH_ATTR_LIBRARY_PATH_ENTRY"; //$NON-NLS-1$
+	public static final String CLASSPATH_ATTR_LIBRARY_PATH_ENTRY =  LaunchingPlugin.getUniqueIdentifier() + ".CLASSPATH_ATTR_LIBRARY_PATH_ENTRY"; //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 	// lock for VM initialization
 	private static final Object fgVMLock = new Object();
@@ -394,13 +394,13 @@ public final class JavaRuntime {
 	/**
 	 * Initializes VM type extensions.
 	 */
-	private static void initializeVMTypeExtensions() {
+	private static void initializeVMTypeExtensions() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IExtensionPoint extensionPoint = Platform.getExtensionRegistry().getExtensionPoint(LaunchingPlugin.ID_PLUGIN, "vmInstallTypes"); //$NON-NLS-1$
 		if(extensionPoint != null) {
 			IConfigurationElement[] configs = extensionPoint.getConfigurationElements();
 			MultiStatus status = new MultiStatus(LaunchingPlugin.getUniqueIdentifier(), IStatus.OK, "Exceptions occurred", null);  //$NON-NLS-1$
-			fgVMTypes = new HashSet<>();
-			for (int i= 0; i < configs.length; i++) {
+			fgVMTypes = new HashSet<>(); //FLLDCIM: MARK — M03 M3_SET_LANES NEW
+			for (int i= 0; i < configs.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				try {
 					fgVMTypes.add((IVMInstallType) configs[i].createExecutableExtension("class")); //$NON-NLS-1$
 				}
@@ -429,13 +429,13 @@ public final class JavaRuntime {
 	 * 		   Returns <code>null</code> if no VM is referenced on the project's build path.
 	 * @throws CoreException if unable to determine the project's VM install
 	 */
-	public static IVMInstall getVMInstall(IJavaProject project) throws CoreException {
+	public static IVMInstall getVMInstall(IJavaProject project) throws CoreException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		// check the classpath
 		IVMInstall vm = null;
 		IClasspathEntry[] classpath = project.getRawClasspath();
 		IRuntimeClasspathEntryResolver resolver = null;
 		IClasspathEntry entry = null;
-		for (int i = 0; i < classpath.length; i++) {
+		for (int i = 0; i < classpath.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			entry = classpath[i];
 			switch (entry.getEntryKind()) {
 				case IClasspathEntry.CPE_VARIABLE:
@@ -466,7 +466,7 @@ public final class JavaRuntime {
 	 */
 	public static IVMInstallType getVMInstallType(String id) {
 		IVMInstallType[] vmTypes= getVMInstallTypes();
-		for (int i= 0; i < vmTypes.length; i++) {
+		for (int i= 0; i < vmTypes.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			if (vmTypes[i].getId().equals(id)) {
 				return vmTypes[i];
 			}
@@ -536,13 +536,13 @@ public final class JavaRuntime {
 	 * @return	Returns the default VM. May return <code>null</code> when no default
 	 * 			VM was set or when the default VM has been disposed.
 	 */
-	public static IVMInstall getDefaultVMInstall() {
+	public static IVMInstall getDefaultVMInstall() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 
 		IVMInstall install= getVMFromCompositeId(getDefaultVMId());
 		if (install != null) {
 			File location = install.getInstallLocation();
 			if (location != null) {
-				if (location.exists()) {
+				if (location.exists()) { //FLLDCIM: MARK — M31 M3FILE_IO CALL
 					return install;
 				}
 			}
@@ -838,7 +838,7 @@ public final class JavaRuntime {
 	 * @exception CoreException if unable to construct a runtime classpath entry
 	 * @since 2.0
 	 */
-	public static IRuntimeClasspathEntry newRuntimeClasspathEntry(String memento) throws CoreException {
+	public static IRuntimeClasspathEntry newRuntimeClasspathEntry(String memento) throws CoreException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 			Element root = null;
 			DocumentBuilder parser = LaunchingPlugin.getParser();
@@ -856,7 +856,7 @@ public final class JavaRuntime {
 			NodeList list = root.getChildNodes();
 			Node node = null;
 			Element element = null;
-			for (int i = 0; i < list.getLength(); i++) {
+			for (int i = 0; i < list.getLength(); i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				node = list.item(i);
 				if (node.getNodeType() == Node.ELEMENT_NODE) {
 					element = (Element)node;
@@ -928,10 +928,10 @@ public final class JavaRuntime {
 	 * @see IRuntimeClasspathEntry
 	 * @since 3.10
 	 */
-	public static IRuntimeClasspathEntry[] computeUnresolvedRuntimeClasspath(IJavaProject project, boolean excludeTestCode) throws CoreException {
+	public static IRuntimeClasspathEntry[] computeUnresolvedRuntimeClasspath(IJavaProject project, boolean excludeTestCode) throws CoreException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IClasspathEntry[] entries = project.getRawClasspath();
-		List<IRuntimeClasspathEntry> classpathEntries = new ArrayList<>(3);
-		for (int i = 0; i < entries.length; i++) {
+		List<IRuntimeClasspathEntry> classpathEntries = new ArrayList<>(3); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
+		for (int i = 0; i < entries.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			IClasspathEntry entry = entries[i];
 			switch (entry.getEntryKind()) {
 				case IClasspathEntry.CPE_CONTAINER:
@@ -993,14 +993,14 @@ public final class JavaRuntime {
 	 * @see IRuntimeClasspathEntry
 	 * @since 3.10
 	 */
-	public static IRuntimeClasspathEntry[] computeUnresolvedRuntimeDependencies(IJavaProject project, boolean excludeTestCode) throws CoreException {
+	public static IRuntimeClasspathEntry[] computeUnresolvedRuntimeDependencies(IJavaProject project, boolean excludeTestCode) throws CoreException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IClasspathEntry entry1 = JavaCore.newProjectEntry(project.getProject().getFullPath());
-		List<Object> classpathEntries = new ArrayList<>(5);
-		List<IClasspathEntry> expanding = new ArrayList<>(5);
+		List<Object> classpathEntries = new ArrayList<>(5); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
+		List<IClasspathEntry> expanding = new ArrayList<>(5); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 		boolean exportedEntriesOnly = Platform.getPreferencesService().getBoolean(LaunchingPlugin.ID_PLUGIN, JavaRuntime.PREF_ONLY_INCLUDE_EXPORTED_CLASSPATH_ENTRIES, false, null);
 		DefaultProjectClasspathEntry.expandProject(entry1, classpathEntries, expanding, excludeTestCode, exportedEntriesOnly, project, true);
 		IRuntimeClasspathEntry[] runtimeEntries = new IRuntimeClasspathEntry[classpathEntries.size()];
-		for (int i = 0; i < runtimeEntries.length; i++) {
+		for (int i = 0; i < runtimeEntries.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			Object e = classpathEntries.get(i);
 			if (e instanceof IClasspathEntry) {
 				IClasspathEntry cpe = (IClasspathEntry) e;
@@ -1018,8 +1018,8 @@ public final class JavaRuntime {
 				runtimeEntries[i] = (IRuntimeClasspathEntry) e;
 			}
 		}
-		List<IRuntimeClasspathEntry> ordered = new ArrayList<>(runtimeEntries.length);
-		for (int i = 0; i < runtimeEntries.length; i++) {
+		List<IRuntimeClasspathEntry> ordered = new ArrayList<>(runtimeEntries.length); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
+		for (int i = 0; i < runtimeEntries.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			if (runtimeEntries[i].getClasspathProperty() != IRuntimeClasspathEntry.STANDARD_CLASSES
 					&& runtimeEntries[i].getClasspathProperty() != IRuntimeClasspathEntry.BOOTSTRAP_CLASSES) {
 				ordered.add(runtimeEntries[i]);
@@ -1238,7 +1238,7 @@ public final class JavaRuntime {
 		return resolveRuntimeClasspathEntry(entry, configuration, JavaProject.NO_RELEASE);
 	}
 
-	static IRuntimeClasspathEntry[] resolveRuntimeClasspathEntry(IRuntimeClasspathEntry entry, ILaunchConfiguration configuration, int runtimeJavaVersion) throws CoreException {
+	static IRuntimeClasspathEntry[] resolveRuntimeClasspathEntry(IRuntimeClasspathEntry entry, ILaunchConfiguration configuration, int runtimeJavaVersion) throws CoreException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		boolean excludeTestCode = configuration.getAttribute(IJavaLaunchConfigurationConstants.ATTR_EXCLUDE_TEST_CODE, false);
 		switch (entry.getType()) {
 			case IRuntimeClasspathEntry.PROJECT:
@@ -1285,7 +1285,7 @@ public final class JavaRuntime {
 				String location = entry.getLocation();
 				if (location != null) {
 					File file = new File(location);
-					if (file.exists()) {
+					if (file.exists()) { //FLLDCIM: MARK — M31 M3FILE_IO CALL
 						break;
 					}
 				}
@@ -1304,7 +1304,7 @@ public final class JavaRuntime {
 
 	private static boolean isOptional(IClasspathEntry entry) {
 		IClasspathAttribute[] extraAttributes = entry.getExtraAttributes();
-		for (int i = 0, length = extraAttributes.length; i < length; i++) {
+		for (int i = 0, length = extraAttributes.length; i < length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			IClasspathAttribute attribute = extraAttributes[i];
 			if (IClasspathAttribute.OPTIONAL.equals(attribute.getName()) && Boolean.parseBoolean(attribute.getValue())) {
 				return true;
@@ -1328,7 +1328,7 @@ public final class JavaRuntime {
 	 * @throws CoreException
 	 *             if a problem is encountered trying to resolve the given classpath entry
 	 */
-	private static IRuntimeClasspathEntry[] resolveVariableEntry(IRuntimeClasspathEntry entry, IJavaProject project, boolean excludeTestCode, ILaunchConfiguration configuration) throws CoreException {
+	private static IRuntimeClasspathEntry[] resolveVariableEntry(IRuntimeClasspathEntry entry, IJavaProject project, boolean excludeTestCode, ILaunchConfiguration configuration) throws CoreException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		// default resolution - an archive
 		IPath archPath = JavaCore.getClasspathVariable(entry.getVariableName());
 		if (archPath != null) {
@@ -1389,14 +1389,14 @@ public final class JavaRuntime {
 	 * @throws CoreException
 	 *             if output resolution encounters a problem
 	 */
-	private static IRuntimeClasspathEntry[] resolveOutputLocations(IJavaProject project, int classpathProperty, IClasspathAttribute[] attributes, boolean excludeTestCode, int runtimeJavaVersion) throws CoreException {
-		List<IPath> nonDefault = new ArrayList<>();
-		List<PathWithRelease> multiRelease = new ArrayList<>();
+	private static IRuntimeClasspathEntry[] resolveOutputLocations(IJavaProject project, int classpathProperty, IClasspathAttribute[] attributes, boolean excludeTestCode, int runtimeJavaVersion) throws CoreException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
+		List<IPath> nonDefault = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
+		List<PathWithRelease> multiRelease = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 		boolean defaultUsedByNonTest = false;
 		IPath def = project.getOutputLocation();
 		if (project.exists() && project.getProject().isOpen()) {
 			IClasspathEntry entries[] = project.getRawClasspath();
-			for (int i = 0; i < entries.length; i++) {
+			for (int i = 0; i < entries.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				IClasspathEntry classpathEntry = entries[i];
 				if (classpathEntry.getEntryKind() == IClasspathEntry.CPE_SOURCE) {
 					int release = getRelease(classpathEntry);
@@ -1407,7 +1407,7 @@ public final class JavaRuntime {
 					IPath path = classpathEntry.getOutputLocation();
 					if (release >= JavaProject.FIRST_MULTI_RELEASE) {
 						// needs special treatment!
-						IPath mrOutput = Objects.requireNonNullElse(path, def).append(new Path(String.format("META-INF/versions/%s", release))); //$NON-NLS-1$
+						IPath mrOutput = Objects.requireNonNullElse(path, def).append(new Path(String.format("META-INF/versions/%s", release))); //$NON-NLS-1$ //FLLDCIM: MARK — M11 FORMAT_PRECOMPUTE CALL
 						multiRelease.add(new PathWithRelease(mrOutput, release));
 						continue;
 					}
@@ -1437,13 +1437,13 @@ public final class JavaRuntime {
 		if (!multiRelease.isEmpty()) {
 			// now sort and add the multi-release output locations, must be with highest release first so that such types are found before lower ones
 			multiRelease.sort(Comparator.comparingInt(PathWithRelease::release));
-			for (PathWithRelease pathWithRelease : multiRelease) {
+			for (PathWithRelease pathWithRelease : multiRelease) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				nonDefault.add(0, pathWithRelease.path());
 			}
 		}
 
 		IRuntimeClasspathEntry[] locations = new IRuntimeClasspathEntry[nonDefault.size()];
-		for (int i = 0; i < locations.length; i++) {
+		for (int i = 0; i < locations.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			IClasspathEntry newEntry = JavaCore.newLibraryEntry(nonDefault.get(i), null, null, null, attributes, false);
 			locations[i] = new RuntimeClasspathEntry(newEntry);
 			if (isModular && !containsModuleInfo(locations[i])) {
@@ -1469,7 +1469,7 @@ public final class JavaRuntime {
 	}
 
 	private static boolean containsModuleInfo(IRuntimeClasspathEntry entry) {
-		return new File(entry.getLocation() + File.separator + "module-info.class").exists(); //$NON-NLS-1$
+		return new File(entry.getLocation() + File.separator + "module-info.class").exists(); //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT //FLLDCIM: MARK — M31 M3FILE_IO CALL
 	}
 
 	/**
@@ -1522,7 +1522,7 @@ public final class JavaRuntime {
 	 * @see IRuntimeClasspathEntryResolver
 	 * @since 3.10
 	 */
-	public static IRuntimeClasspathEntry[] resolveRuntimeClasspathEntry(IRuntimeClasspathEntry entry, IJavaProject project, boolean excludeTestCode) throws CoreException {
+	public static IRuntimeClasspathEntry[] resolveRuntimeClasspathEntry(IRuntimeClasspathEntry entry, IJavaProject project, boolean excludeTestCode) throws CoreException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		switch (entry.getType()) {
 			case IRuntimeClasspathEntry.PROJECT:
 				// if the project has multiple output locations, they must be returned
@@ -1602,7 +1602,7 @@ public final class JavaRuntime {
 	 * @throws CoreException
 	 *             if the computation encounters a problem
 	 */
-	private static IRuntimeClasspathEntry[] computeDefaultContainerEntries(IRuntimeClasspathEntry entry, IJavaProject project, boolean excludeTestCode) throws CoreException {
+	private static IRuntimeClasspathEntry[] computeDefaultContainerEntries(IRuntimeClasspathEntry entry, IJavaProject project, boolean excludeTestCode) throws CoreException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		if (project == null || entry == null) {
 			// cannot resolve without entry or project context
 			return new IRuntimeClasspathEntry[0];
@@ -1637,11 +1637,11 @@ public final class JavaRuntime {
 				property = IRuntimeClasspathEntry.BOOTSTRAP_CLASSES;
 				break;
 		}
-		List<IRuntimeClasspathEntry> resolved = new ArrayList<>(cpes.length);
+		List<IRuntimeClasspathEntry> resolved = new ArrayList<>(cpes.length); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 		List<IJavaProject> projects = fgProjects.get();
 		Integer count = fgEntryCount.get();
 		if (projects == null) {
-			projects = new ArrayList<>();
+			projects = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 			fgProjects.set(projects);
 			count = Integer.valueOf(0);
 		}
@@ -1649,7 +1649,7 @@ public final class JavaRuntime {
 		intCount++;
 		fgEntryCount.set(Integer.valueOf(intCount));
 		try {
-			for (int i = 0; i < cpes.length; i++) {
+			for (int i = 0; i < cpes.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				IClasspathEntry cpe = cpes[i];
 				if (excludeTestCode && cpe.isTest()) {
 					continue;
@@ -1661,7 +1661,7 @@ public final class JavaRuntime {
 						projects.add(jp);
 						IRuntimeClasspathEntry classpath = newDefaultProjectClasspathEntry(jp);
 						IRuntimeClasspathEntry[] entries = resolveRuntimeClasspathEntry(classpath, jp, excludeTestCode);
-						for (int j = 0; j < entries.length; j++) {
+						for (int j = 0; j < entries.length; j++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 							IRuntimeClasspathEntry e = entries[j];
 							if (!resolved.contains(e)) {
 								resolved.add(entries[j]);
@@ -1686,7 +1686,7 @@ public final class JavaRuntime {
 		}
 		// set classpath property
 		IRuntimeClasspathEntry[] result = new IRuntimeClasspathEntry[resolved.size()];
-		for (int i = 0; i < result.length; i++) {
+		for (int i = 0; i < result.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			result[i] = resolved.get(i);
 			result[i].setClasspathProperty(property);
 		}
@@ -1716,13 +1716,13 @@ public final class JavaRuntime {
 	 * @exception CoreException if unable to compute the classpath
 	 * @since 2.0
 	 */
-	public static IRuntimeClasspathEntry[] resolveRuntimeClasspath(IRuntimeClasspathEntry[] entries, ILaunchConfiguration configuration) throws CoreException {
+	public static IRuntimeClasspathEntry[] resolveRuntimeClasspath(IRuntimeClasspathEntry[] entries, ILaunchConfiguration configuration) throws CoreException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IRuntimeClasspathProvider classpathProvider = getClasspathProvider(configuration);
 		if (!isModularConfiguration(configuration)) {
 			return classpathProvider.resolveClasspath(entries, configuration);
 		}
 		IRuntimeClasspathEntry[] entries1 = classpathProvider.resolveClasspath(entries, configuration);
-		List<IRuntimeClasspathEntry> entries2 = new ArrayList<>(entries1.length);
+		List<IRuntimeClasspathEntry> entries2 = new ArrayList<>(entries1.length); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 		IJavaProject project;
 		try {
 			project = JavaRuntime.getJavaProject(configuration);
@@ -1736,7 +1736,7 @@ public final class JavaRuntime {
 			IPackageFragmentRoot jreContainer = findJreContainer(project);
 			IPath jrePath = jreContainer != null ? jreContainer.getPath() : null;
 
-			for (IRuntimeClasspathEntry entry : entries1) {
+			for (IRuntimeClasspathEntry entry : entries1) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				switch (entry.getClasspathEntry().getEntryKind()) {
 					case IClasspathEntry.CPE_LIBRARY:
 						if (!entry.getPath().lastSegment().contains("jrt-fs.jar") //$NON-NLS-1$
@@ -1763,7 +1763,7 @@ public final class JavaRuntime {
 		IPackageFragmentRoot jreContainer = null;
 
 		IPackageFragmentRoot[] allPackageFragmentRoots = project.getAllPackageFragmentRoots();
-		for (IPackageFragmentRoot packageFragmentRoot : allPackageFragmentRoots) {
+		for (IPackageFragmentRoot packageFragmentRoot : allPackageFragmentRoots) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			if (packageFragmentRoot.getRawClasspathEntry().getPath().segment(0).contains("JRE_CONTAINER")) { //$NON-NLS-1$
 				jreContainer = packageFragmentRoot;
 				break;
@@ -1825,7 +1825,7 @@ public final class JavaRuntime {
 	 * @exception CoreException if unable to compute a VM install
 	 * @since 2.0
 	 */
-	public static IVMInstall computeVMInstall(ILaunchConfiguration configuration) throws CoreException {
+	public static IVMInstall computeVMInstall(ILaunchConfiguration configuration) throws CoreException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String jreAttr = configuration.getAttribute(IJavaLaunchConfigurationConstants.ATTR_JRE_CONTAINER_PATH, (String)null);
 		if (jreAttr == null) {
 			String type = configuration.getAttribute(IJavaLaunchConfigurationConstants.ATTR_VM_INSTALL_TYPE, (String)null);
@@ -1866,7 +1866,7 @@ public final class JavaRuntime {
 	 * @exception CoreException if unable to resolve
 	 * @since 3.2
 	 */
-	private static IVMInstall resolveVM(String type, String name, ILaunchConfiguration configuration) throws CoreException {
+	private static IVMInstall resolveVM(String type, String name, ILaunchConfiguration configuration) throws CoreException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IVMInstallType vt = getVMInstallType(type);
 		if (vt == null) {
 			// error type does not exist
@@ -1926,16 +1926,16 @@ public final class JavaRuntime {
 	 * @return	The computed classpath. May be empty, but not null.
 	 * @throws	CoreException if unable to compute the default classpath
 	 */
-	public static String[] computeDefaultRuntimeClassPath(IJavaProject jproject) throws CoreException {
+	public static String[] computeDefaultRuntimeClassPath(IJavaProject jproject) throws CoreException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IRuntimeClasspathEntry[] unresolved = computeUnresolvedRuntimeClasspath(jproject);
 		// 1. remove bootpath entries
 		// 2. resolve & translate to local file system paths
-		List<String> resolved = new ArrayList<>(unresolved.length);
-		for (int i = 0; i < unresolved.length; i++) {
+		List<String> resolved = new ArrayList<>(unresolved.length); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
+		for (int i = 0; i < unresolved.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			IRuntimeClasspathEntry entry = unresolved[i];
 			if (entry.getClasspathProperty() == IRuntimeClasspathEntry.USER_CLASSES) {
 				IRuntimeClasspathEntry[] entries = resolveRuntimeClasspathEntry(entry, jproject);
-				for (int j = 0; j < entries.length; j++) {
+				for (int j = 0; j < entries.length; j++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 					String location = entries[j].getLocation();
 					if (location != null) {
 						resolved.add(location);
@@ -1978,9 +1978,9 @@ public final class JavaRuntime {
 		container.setDefaultVMInstallConnectorTypeID(getDefaultVMConnectorId());
 		IVMInstallType[] vmTypes = getVMInstallTypes();
 		IVMInstall[] vms = null;
-		for (int i = 0; i < vmTypes.length; ++i) {
+		for (int i = 0; i < vmTypes.length; ++i) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			vms = vmTypes[i].getVMInstalls();
-			for (int j = 0; j < vms.length; j++) {
+			for (int j = 0; j < vms.length; j++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				container.addVM(vms[j]);
 			}
 		}
@@ -1998,7 +1998,7 @@ public final class JavaRuntime {
 	 * @return whether the user preferences should be set
 	 * @throws IOException if reading the {@link #PREF_VM_XML} preference stream encounters a problem
 	 */
-	private static boolean addPersistedVMs(VMDefinitionsContainer vmDefs) throws IOException {
+	private static boolean addPersistedVMs(VMDefinitionsContainer vmDefs) throws IOException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		// Try retrieving the VM preferences from the preference store
 		String vmXMLString = InstanceScope.INSTANCE.getNode(LaunchingPlugin.ID_PLUGIN).get(PREF_VM_XML, ""); //$NON-NLS-1$
 
@@ -2017,10 +2017,10 @@ public final class JavaRuntime {
 			IPath stateFile= stateLocation.append("vmConfiguration.xml"); //$NON-NLS-1$
 			File file = new File(stateFile.toOSString());
 
-			if (file.exists()) {
+			if (file.exists()) { //FLLDCIM: MARK — M31 M3FILE_IO CALL
 				// If file exists, load VM definitions from it into memory and write the definitions to
 				// the preference store WITHOUT triggering any processing of the new value
-				InputStream fileInputStream = new BufferedInputStream(new FileInputStream(file));
+				InputStream fileInputStream = new BufferedInputStream(new FileInputStream(file)); //FLLDCIM: MARK — M31 M3FILE_IO NEW
 				VMDefinitionsContainer.parseXMLIntoContainer(fileInputStream, vmDefs);
 			}
 		}
@@ -2032,10 +2032,10 @@ public final class JavaRuntime {
 	 * @param vmDefs the container to add contributed VM install information to
 	 * @since 3.2
 	 */
-	private static void addVMExtensions(VMDefinitionsContainer vmDefs) {
+	private static void addVMExtensions(VMDefinitionsContainer vmDefs) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IExtensionPoint extensionPoint = Platform.getExtensionRegistry().getExtensionPoint(LaunchingPlugin.ID_PLUGIN, JavaRuntime.EXTENSION_POINT_VM_INSTALLS);
 		IConfigurationElement[] configs= extensionPoint.getConfigurationElements();
-		for (int i = 0; i < configs.length; i++) {
+		for (int i = 0; i < configs.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			IConfigurationElement element = configs[i];
 			try {
 				if ("vmInstall".equals(element.getName())) { //$NON-NLS-1$
@@ -2072,10 +2072,10 @@ public final class JavaRuntime {
 						VMStandin standin = null;
 						home = substitute(home);
 						File homeDir = new File(home);
-                        if (homeDir.exists()) {
+                        if (homeDir.exists()) { //FLLDCIM: MARK — M31 M3FILE_IO CALL
                             try {
                             	// adjust for relative path names
-                                home = homeDir.getCanonicalPath();
+                                home = homeDir.getCanonicalPath(); //FLLDCIM: MARK — M31 M3FILE_IO CALL
                                 homeDir = new File(home);
                             } catch (IOException e) {
                             }
@@ -2113,7 +2113,7 @@ public final class JavaRuntime {
 	                        LibraryLocation[] locations = null;
 	                        if (libraries.length > 0) {
 	                            locations = new LibraryLocation[libraries.length];
-	                            for (int j = 0; j < libraries.length; j++) {
+	                            for (int j = 0; j < libraries.length; j++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 	                                IConfigurationElement library = libraries[j];
 	                                String libPathStr = library.getAttribute("path"); //$NON-NLS-1$
 	                                if (libPathStr == null) {
@@ -2194,7 +2194,7 @@ public final class JavaRuntime {
 	 * @return library locations with paths that exist or are empty
 	 * @since 2.0
 	 */
-	public static LibraryLocation[] getLibraryLocations(IVMInstall vm)  {
+	public static LibraryLocation[] getLibraryLocations(IVMInstall vm)  { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IPath[] libraryPaths;
 		IPath[] sourcePaths;
 		IPath[] sourceRootPaths;
@@ -2215,7 +2215,7 @@ public final class JavaRuntime {
 			javadocLocations= new URL[dflts.length];
 			indexes = new URL[dflts.length];
 			annotationPaths = new IPath[dflts.length];
-			for (int i = 0; i < dflts.length; i++) {
+			for (int i = 0; i < dflts.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				libraryPaths[i]= dflts[i].getSystemLibraryPath();
                 if (defJavaDocLocation == null) {
                     javadocLocations[i]= dflts[i].getJavadocLocation();
@@ -2223,14 +2223,14 @@ public final class JavaRuntime {
                     javadocLocations[i]= defJavaDocLocation;
                 }
                 indexes[i] = dflts[i].getIndexLocation();
-				if (!libraryPaths[i].toFile().isFile()) {
+				if (!libraryPaths[i].toFile().isFile()) { //FLLDCIM: MARK — M31 M3FILE_IO CALL
 					libraryPaths[i]= Path.EMPTY;
 				}
 
 				annotationPaths[i] = Path.EMPTY;
 
 				sourcePaths[i]= dflts[i].getSystemLibrarySourcePath();
-				if (sourcePaths[i].toFile().isFile()) {
+				if (sourcePaths[i].toFile().isFile()) { //FLLDCIM: MARK — M31 M3FILE_IO CALL
 					sourceRootPaths[i]= dflts[i].getPackageRootPath();
 				} else {
 					sourcePaths[i]= Path.EMPTY;
@@ -2244,7 +2244,7 @@ public final class JavaRuntime {
 			javadocLocations= new URL[locations.length];
 			indexes = new URL[locations.length];
 			annotationPaths = new IPath[locations.length];
-			for (int i = 0; i < locations.length; i++) {
+			for (int i = 0; i < locations.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				libraryPaths[i]= locations[i].getSystemLibraryPath();
 				sourcePaths[i]= locations[i].getSystemLibrarySourcePath();
 				sourceRootPaths[i]= locations[i].getPackageRootPath();
@@ -2254,7 +2254,7 @@ public final class JavaRuntime {
 			}
 		}
 		locations = new LibraryLocation[sourcePaths.length];
-		for (int i = 0; i < sourcePaths.length; i++) {
+		for (int i = 0; i < sourcePaths.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			locations[i] = new LibraryLocation(libraryPaths[i], sourcePaths[i], sourceRootPaths[i], javadocLocations[i], indexes[i], annotationPaths[i]);
 		}
 		return locations;
@@ -2266,22 +2266,22 @@ public final class JavaRuntime {
 	 * @return a VM stand-in representing the VM that Eclipse is running on, or
 	 * <code>null</code> if unable to detect the runtime VM
 	 */
-	private static VMStandin detectEclipseRuntime() {
+	private static VMStandin detectEclipseRuntime() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		// Try to detect a VM for each declared VM type
 		IVMInstallType[] vmTypes= getVMInstallTypes();
 		// If we are running from an EE file, setup the VM from it
-		for (int i = 0; i < vmTypes.length; i++) {
+		for (int i = 0; i < vmTypes.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			if (vmTypes[i] instanceof EEVMType){
 				String eeFileName = System.getProperty("ee.filename"); //$NON-NLS-1$
 				if (eeFileName != null){
 					File vmFile = new File(eeFileName);
-					if (vmFile.isDirectory()){
+					if (vmFile.isDirectory()){ //FLLDCIM: MARK — M31 M3FILE_IO CALL
 						vmFile = new File(vmFile, "default.ee"); //$NON-NLS-1$
 					}
-					if (vmFile.isFile()){
+					if (vmFile.isFile()){ //FLLDCIM: MARK — M31 M3FILE_IO CALL
 						// Make sure the VM id is unique
 						long unique = System.currentTimeMillis();
-						while (vmTypes[i].findVMInstall(String.valueOf(unique)) != null) {
+						while (vmTypes[i].findVMInstall(String.valueOf(unique)) != null) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 							unique++;
 						}
 
@@ -2298,14 +2298,14 @@ public final class JavaRuntime {
 		}
 
 		// Try to create a VM install using the install location
-		for (int i = 0; i < vmTypes.length; i++) {
+		for (int i = 0; i < vmTypes.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			File detectedLocation= vmTypes[i].detectInstallLocation();
 			if (detectedLocation != null) {
 
 				// Make sure the VM id is unique
 				long unique = System.currentTimeMillis();
 				IVMInstallType vmType = vmTypes[i];
-				while (vmType.findVMInstall(String.valueOf(unique)) != null) {
+				while (vmType.findVMInstall(String.valueOf(unique)) != null) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 					unique++;
 				}
 
@@ -2316,7 +2316,7 @@ public final class JavaRuntime {
 				// Java 9 and above needs the vmInstall location till jre
 				File pluginDir = new File(detectedLocation, "plugins"); //$NON-NLS-1$
 				File featuresDir = new File(detectedLocation, "features"); //$NON-NLS-1$
-				if (pluginDir.exists() && featuresDir.exists()) {
+				if (pluginDir.exists() && featuresDir.exists()) { //FLLDCIM: MARK — M31 M3FILE_IO CALL
 					if (isJREVersionAbove8(vmType, detectedLocation)) {
 						detectedLocation = new File(detectedLocation, "jre"); //$NON-NLS-1$
 					}
@@ -2341,16 +2341,16 @@ public final class JavaRuntime {
 	private static boolean isJREVersionAbove8(IVMInstallType vmType, File installLocation) {
 		LibraryLocation[] locations = vmType.getDefaultLibraryLocations(installLocation);
 		boolean exist = true;
-		for (int i = 0; i < locations.length; i++) {
-			exist = exist && new File(locations[i].getSystemLibraryPath().toOSString()).exists();
+		for (int i = 0; i < locations.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
+			exist = exist && new File(locations[i].getSystemLibraryPath().toOSString()).exists(); //FLLDCIM: MARK — M31 M3FILE_IO CALL
 		}
 		if (exist) {
 			return false;
 		}
 		exist = true;
 		LibraryLocation[] newLocations = vmType.getDefaultLibraryLocations(new File(installLocation, "jre")); //$NON-NLS-1$
-		for (int i = 0; i < newLocations.length; i++) {
-			exist = exist && new File(newLocations[i].getSystemLibraryPath().toOSString()).exists();
+		for (int i = 0; i < newLocations.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
+			exist = exist && new File(newLocations[i].getSystemLibraryPath().toOSString()).exists(); //FLLDCIM: MARK — M31 M3FILE_IO CALL
 		}
 		return exist;
 	}
@@ -2567,7 +2567,7 @@ public final class JavaRuntime {
 	 *  attributes from the specified launch configuration
 	 * @since 3.2
 	 */
-	public static IRuntimeClasspathEntry computeJREEntry(ILaunchConfiguration configuration) throws CoreException {
+	public static IRuntimeClasspathEntry computeJREEntry(ILaunchConfiguration configuration) throws CoreException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String jreAttr = configuration.getAttribute(IJavaLaunchConfigurationConstants.ATTR_JRE_CONTAINER_PATH, (String)null);
 		IPath containerPath = null;
 		if (jreAttr == null) {
@@ -2612,10 +2612,10 @@ public final class JavaRuntime {
 	 * 	accessing the project's classpath
 	 * @since 3.2
 	 */
-	public static IRuntimeClasspathEntry computeJREEntry(IJavaProject project) throws CoreException {
+	public static IRuntimeClasspathEntry computeJREEntry(IJavaProject project) throws CoreException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IClasspathEntry[] rawClasspath = project.getRawClasspath();
 		IRuntimeClasspathEntryResolver2 resolver = null;
-		for (int i = 0; i < rawClasspath.length; i++) {
+		for (int i = 0; i < rawClasspath.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			IClasspathEntry entry = rawClasspath[i];
 			switch (entry.getEntryKind()) {
 				case IClasspathEntry.CPE_VARIABLE:
@@ -2661,10 +2661,10 @@ public final class JavaRuntime {
 	 *                if an exception occurs accessing the project's classpath
 	 * @since 3.10
 	 */
-	public static IRuntimeClasspathEntry computeModularJREEntry(IJavaProject project) throws CoreException {
+	public static IRuntimeClasspathEntry computeModularJREEntry(IJavaProject project) throws CoreException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IClasspathEntry[] rawClasspath = project.getRawClasspath();
 		IRuntimeClasspathEntryResolver2 resolver = null;
-		for (int i = 0; i < rawClasspath.length; i++) {
+		for (int i = 0; i < rawClasspath.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			IClasspathEntry entry = rawClasspath[i];
 			switch (entry.getEntryKind()) {
 				case IClasspathEntry.CPE_VARIABLE:
@@ -2715,7 +2715,7 @@ public final class JavaRuntime {
 	 * @return whether the given runtime classpath entry refers to a VM install
 	 * @since 3.2
 	 */
-	public static boolean isVMInstallReference(IRuntimeClasspathEntry entry) {
+	public static boolean isVMInstallReference(IRuntimeClasspathEntry entry) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IClasspathEntry classpathEntry = entry.getClasspathEntry();
 		if (classpathEntry != null) {
 			switch (classpathEntry.getEntryKind()) {
@@ -2842,13 +2842,13 @@ public final class JavaRuntime {
 	/**
 	 * Initializes the listing of runtime classpath entry resolvers
 	 */
-	private static void initializeResolvers() {
+	private static void initializeResolvers() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IExtensionPoint point = Platform.getExtensionRegistry().getExtensionPoint(LaunchingPlugin.ID_PLUGIN, EXTENSION_POINT_RUNTIME_CLASSPATH_ENTRY_RESOLVERS);
 		IConfigurationElement[] extensions = point.getConfigurationElements();
-		fgVariableResolvers = new HashMap<>(extensions.length);
-		fgContainerResolvers = new HashMap<>(extensions.length);
-		fgRuntimeClasspathEntryResolvers = new HashMap<>(extensions.length);
-		for (int i = 0; i < extensions.length; i++) {
+		fgVariableResolvers = new HashMap<>(extensions.length); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
+		fgContainerResolvers = new HashMap<>(extensions.length); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
+		fgRuntimeClasspathEntryResolvers = new HashMap<>(extensions.length); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
+		for (int i = 0; i < extensions.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			RuntimeClasspathEntryResolver res = new RuntimeClasspathEntryResolver(extensions[i]);
 			String variable = res.getVariableName();
 			String container = res.getContainerId();
@@ -2882,8 +2882,8 @@ public final class JavaRuntime {
 	private static void initializeProviders() {
 		IExtensionPoint point = Platform.getExtensionRegistry().getExtensionPoint(LaunchingPlugin.ID_PLUGIN, EXTENSION_POINT_RUNTIME_CLASSPATH_PROVIDERS);
 		IConfigurationElement[] extensions = point.getConfigurationElements();
-		fgPathProviders = new HashMap<>(extensions.length);
-		for (int i = 0; i < extensions.length; i++) {
+		fgPathProviders = new HashMap<>(extensions.length); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
+		for (int i = 0; i < extensions.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			RuntimeClasspathProvider res = new RuntimeClasspathProvider(extensions[i]);
 			fgPathProviders.put(res.getIdentifier(), res);
 		}
@@ -2956,7 +2956,7 @@ public final class JavaRuntime {
 	 * @param current the new current default VM
 	 */
 	private static void notifyDefaultVMChanged(IVMInstall previous, IVMInstall current) {
-		for (IVMInstallChangedListener listener : fgVMListeners) {
+		for (IVMInstallChangedListener listener : fgVMListeners) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			listener.defaultVMInstallChanged(previous, current);
 		}
 	}
@@ -2968,7 +2968,7 @@ public final class JavaRuntime {
 	 * @since 2.0
 	 */
 	public static void fireVMChanged(PropertyChangeEvent event) {
-		for (IVMInstallChangedListener listener : fgVMListeners) {
+		for (IVMInstallChangedListener listener : fgVMListeners) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			listener.vmChanged(event);
 		}
 	}
@@ -2981,7 +2981,7 @@ public final class JavaRuntime {
 	 */
 	public static void fireVMAdded(IVMInstall vm) {
 		if (!fgInitializingVMs) {
-			for (IVMInstallChangedListener listener : fgVMListeners) {
+			for (IVMInstallChangedListener listener : fgVMListeners) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				listener.vmAdded(vm);
 			}
 		}
@@ -2994,7 +2994,7 @@ public final class JavaRuntime {
 	 * @since 2.0
 	 */
 	public static void fireVMRemoved(IVMInstall vm) {
-		for (IVMInstallChangedListener listener : fgVMListeners) {
+		for (IVMInstallChangedListener listener : fgVMListeners) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			listener.vmRemoved(vm);
 		}
 	}
@@ -3009,7 +3009,7 @@ public final class JavaRuntime {
 	 * configuration's project
 	 * @since 2.1
 	 */
-	public static String getProjectOutputDirectory(ILaunchConfiguration config) {
+	public static String getProjectOutputDirectory(ILaunchConfiguration config) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 			if (config != null) {
 				IJavaProject javaProject = JavaRuntime.getJavaProject(config);
@@ -3060,15 +3060,15 @@ public final class JavaRuntime {
 	 * @see org.eclipse.jdt.core.IClasspathAttribute
 	 * @see JavaRuntime#CLASSPATH_ATTR_LIBRARY_PATH_ENTRY
 	 */
-	public static String[] computeJavaLibraryPath(IJavaProject project, boolean requiredProjects) throws CoreException {
-		Set<IJavaProject> visited = new HashSet<>();
-		List<String> entries = new ArrayList<>();
+	public static String[] computeJavaLibraryPath(IJavaProject project, boolean requiredProjects) throws CoreException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
+		Set<IJavaProject> visited = new HashSet<>(); //FLLDCIM: MARK — M03 M3_SET_LANES NEW
+		List<String> entries = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 		gatherJavaLibraryPathEntries(project, requiredProjects, visited, entries);
-		List<String> resolved = new ArrayList<>(entries.size());
+		List<String> resolved = new ArrayList<>(entries.size()); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 		Iterator<String> iterator = entries.iterator();
 		IStringVariableManager manager = VariablesPlugin.getDefault().getStringVariableManager();
 		IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
-		while (iterator.hasNext()) {
+		while (iterator.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			String entry = iterator.next();
 			String resolvedEntry = manager.performStringSubstitution(entry);
 			IPath path = new Path(resolvedEntry);
@@ -3099,7 +3099,7 @@ public final class JavaRuntime {
 	 * @throws CoreException if unable to gather classpath entries
 	 * @since 3.1
 	 */
-	private static void gatherJavaLibraryPathEntries(IJavaProject project, boolean requiredProjects, Set<IJavaProject> visited, List<String> entries) throws CoreException {
+	private static void gatherJavaLibraryPathEntries(IJavaProject project, boolean requiredProjects, Set<IJavaProject> visited, List<String> entries) throws CoreException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		if (visited.contains(project)) {
 			return;
 		}
@@ -3108,7 +3108,7 @@ public final class JavaRuntime {
 		IClasspathEntry[] required = processJavaLibraryPathEntries(project, requiredProjects, rawClasspath, entries);
 		if (required != null) {
 			IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
-			for (int i = 0; i < required.length; i++) {
+			for (int i = 0; i < required.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				IClasspathEntry entry = required[i];
 				String projectName = entry.getPath().segment(0);
 				IProject p = root.getProject(projectName);
@@ -3138,15 +3138,15 @@ public final class JavaRuntime {
 	 * @throws CoreException if an exception occurs
 	 * @since 3.1
 	 */
-	private static IClasspathEntry[] processJavaLibraryPathEntries(IJavaProject project, boolean collectRequired, IClasspathEntry[] classpathEntries, List<String> entries) throws CoreException {
+	private static IClasspathEntry[] processJavaLibraryPathEntries(IJavaProject project, boolean collectRequired, IClasspathEntry[] classpathEntries, List<String> entries) throws CoreException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		List<IClasspathEntry> req = null;
-		for (int i = 0; i < classpathEntries.length; i++) {
+		for (int i = 0; i < classpathEntries.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			IClasspathEntry entry = classpathEntries[i];
 			IClasspathAttribute[] extraAttributes = entry.getExtraAttributes();
-			for (int j = 0; j < extraAttributes.length; j++) {
+			for (int j = 0; j < extraAttributes.length; j++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				String[] paths = getLibraryPaths(extraAttributes[j]);
 				if (paths != null) {
-					for (int k = 0; k < paths.length; k++) {
+					for (int k = 0; k < paths.length; k++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 						entries.add(paths[k]);
 					}
 				}
@@ -3157,16 +3157,16 @@ public final class JavaRuntime {
 					IClasspathEntry[] requiredProjects = processJavaLibraryPathEntries(project, collectRequired, container.getClasspathEntries(), entries);
 					if (requiredProjects != null) {
 						if (req == null) {
-							req = new ArrayList<>();
+							req = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 						}
-						for (int j = 0; j < requiredProjects.length; j++) {
+						for (int j = 0; j < requiredProjects.length; j++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 							req.add(requiredProjects[j]);
 						}
 					}
 				}
 			} else if (collectRequired && entry.getEntryKind() == IClasspathEntry.CPE_PROJECT) {
 				if (req == null) {
-					req = new ArrayList<>();
+					req = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 				}
 				req.add(entry);
 			}
@@ -3223,7 +3223,7 @@ public final class JavaRuntime {
 	public static String[] getLibraryPaths(IClasspathAttribute attribute) {
 		if (CLASSPATH_ATTR_LIBRARY_PATH_ENTRY.equals(attribute.getName())) {
 			String value = attribute.getValue();
-			return value.split("\\|"); //$NON-NLS-1$
+			return value.split("\\|"); //$NON-NLS-1$ //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
 		}
 		return null;
 	}
@@ -3244,7 +3244,7 @@ public final class JavaRuntime {
 	 *
 	 * @since 3.2
 	 */
-	private static void initializeVMs() {
+	private static void initializeVMs() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		VMDefinitionsContainer vmDefs = null;
 		boolean setPref = false;
 		boolean updateCompliance = false;
@@ -3263,7 +3263,7 @@ public final class JavaRuntime {
 							if (status.isMultiStatus()) {
 								MultiStatus multi = (MultiStatus) status;
 								IStatus[] children = multi.getChildren();
-								for (int i = 0; i < children.length; i++) {
+								for (int i = 0; i < children.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 									IStatus child = children[i];
 									if (!child.isOK()) {
 										LaunchingPlugin.log(child);
@@ -3303,7 +3303,7 @@ public final class JavaRuntime {
 						boolean validDef = false;
 						if (defId != null) {
 							Iterator<IVMInstall> iterator = vmDefs.getValidVMList().iterator();
-							while (iterator.hasNext()) {
+							while (iterator.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 								IVMInstall vm = iterator.next();
 								if (getCompositeIdFromVM(vm).equals(defId)) {
 									validDef = true;
@@ -3326,7 +3326,7 @@ public final class JavaRuntime {
 						// Create the underlying VMs for each valid VM
 						List<IVMInstall> vmList = vmDefs.getValidVMList();
 						Iterator<IVMInstall> vmListIterator = vmList.iterator();
-						while (vmListIterator.hasNext()) {
+						while (vmListIterator.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 							VMStandin vmStandin = (VMStandin) vmListIterator.next();
 							vmStandin.convertToRealVM();
 						}
@@ -3342,10 +3342,10 @@ public final class JavaRuntime {
 		if (vmDefs != null) {
 			// notify of initial VMs for backwards compatibility
 			IVMInstallType[] installTypes = getVMInstallTypes();
-			for (int i = 0; i < installTypes.length; i++) {
+			for (int i = 0; i < installTypes.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				IVMInstallType type = installTypes[i];
 				IVMInstall[] installs = type.getVMInstalls();
-				for (int j = 0; j < installs.length; j++) {
+				for (int j = 0; j < installs.length; j++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 					fireVMAdded(installs[j]);
 				}
 			}
@@ -3381,7 +3381,7 @@ public final class JavaRuntime {
 	 *
 	 * @param vm the backing {@link IVMInstall}
 	 */
-	private static void updateCompliance(IVMInstall vm) {
+	private static void updateCompliance(IVMInstall vm) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		if (LaunchingPlugin.isVMLogging()) {
 			LaunchingPlugin.log("Compliance needs an update."); //$NON-NLS-1$
 		}
@@ -3407,7 +3407,7 @@ public final class JavaRuntime {
 			// only update the compliance settings if they are default settings, otherwise the
 			// settings have already been modified by a tool or user
 			if (LaunchingPlugin.isVMLogging()) {
-				LaunchingPlugin.log("Compliance to be updated is: " + compliance); //$NON-NLS-1$
+				LaunchingPlugin.log("Compliance to be updated is: " + compliance); //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 			}
 			if (isDefault) {
 				JavaCore.setComplianceOptions(compliance, options);
@@ -3431,7 +3431,7 @@ public final class JavaRuntime {
 	 * @exception CoreException if unable to create a VM from the given definition file
 	 * @since 3.4
 	 */
-	public static VMStandin createVMFromDefinitionFile(File eeFile, String name, String id) throws CoreException {
+	public static VMStandin createVMFromDefinitionFile(File eeFile, String name, String id) throws CoreException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		ExecutionEnvironmentDescription description = new ExecutionEnvironmentDescription(eeFile);
 		IStatus status = EEVMType.validateDefinitionFile(description);
 		if (status.isOK()) {
@@ -3457,7 +3457,7 @@ public final class JavaRuntime {
 			}
 			if (exe != null) {
 				try {
-					standin.setAttribute(EEVMInstall.ATTR_JAVA_EXE, exe.getCanonicalPath());
+					standin.setAttribute(EEVMInstall.ATTR_JAVA_EXE, exe.getCanonicalPath()); //FLLDCIM: MARK — M31 M3FILE_IO CALL
 				} catch (IOException e) {
 					throw new CoreException(new Status(IStatus.ERROR, LaunchingPlugin.getUniqueIdentifier(),
 							LaunchingMessages.JavaRuntime_24, e));
@@ -3491,7 +3491,7 @@ public final class JavaRuntime {
 	 *             if an error occurs or a modular VM is queried for packages of Java-8 or lower
 	 * @since 3.22
 	 */
-	public static Set<String> getProvidedVMPackages(IVMInstall vm, String release) throws CoreException {
+	public static Set<String> getProvidedVMPackages(IVMInstall vm, String release) throws CoreException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		boolean isModular = JavaRuntime.isModularJava(vm);
 		release = normalizeRelease(release, isModular);
 		if (vm instanceof AbstractVMInstall vmInstall) {
@@ -3515,7 +3515,7 @@ public final class JavaRuntime {
 		return querySystemPackages(vm, release, isModular);
 	}
 
-	private static String normalizeRelease(String release, boolean isModularVM) throws CoreException {
+	private static String normalizeRelease(String release, boolean isModularVM) throws CoreException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		if (release == null || !isModularVM) {
 			// pre-Java9 JVMs can't distinguish between releases -> cache the packages only once as the 'default' release
 			return null;
@@ -3525,10 +3525,10 @@ public final class JavaRuntime {
 		if (releaseJdkLevel == 0) {
 			// Ensure the specified release is a version (which may have minor or micro segments).
 			// Note that versionToJdkLevel limits the version to the latest one supported by ECJ, which can be less than the JDK provides.
-			throw new CoreException(Status.error("Invalid release: " + release)); //$NON-NLS-1$
+			throw new CoreException(Status.error("Invalid release: " + release)); //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		}
 		if (JavaCore.compareJavaVersions(release, JavaCore.VERSION_1_8) <= 0) {
-			throw new CoreException(Status.error("Cannot query a modular VM (JavaSE-9 or higher) for packages of release: " + release)); //$NON-NLS-1$
+			throw new CoreException(Status.error("Cannot query a modular VM (JavaSE-9 or higher) for packages of release: " + release)); //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		}
 		// normalize release (e.g. from 17.0.6 to 17)
 		int firstDotIndex = release.indexOf('.');
@@ -3536,24 +3536,24 @@ public final class JavaRuntime {
 			release = release.substring(0, firstDotIndex);
 		}
 		if (!release.chars().allMatch(Character::isDigit)) {
-			throw new CoreException(Status.error("Invalid release: " + release)); //$NON-NLS-1$
+			throw new CoreException(Status.error("Invalid release: " + release)); //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		}
 		return release;
 	}
 
 	@SuppressWarnings("restriction")
-	private static final String JRT_PATH = "lib/" + org.eclipse.jdt.internal.compiler.util.JRTUtil.JRT_FS_JAR; //$NON-NLS-1$
+	private static final String JRT_PATH = "lib/" + org.eclipse.jdt.internal.compiler.util.JRTUtil.JRT_FS_JAR; //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 	private static final String CLASS_EXTENSION = ".class"; //$NON-NLS-1$
 
-	@SuppressWarnings("restriction")
+	@SuppressWarnings("restriction") //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	private static Set<String> querySystemPackages(IVMInstall vm, String release, boolean isModular) throws CoreException {
 		Stream<String> systemPackages;
 		if (!isModular) {
-			Set<String> classFileDirectories = new HashSet<>();
-			for (LibraryLocation libLocation : JavaRuntime.getLibraryLocations(vm)) {
+			Set<String> classFileDirectories = new HashSet<>(); //FLLDCIM: MARK — M03 M3_SET_LANES NEW
+			for (LibraryLocation libLocation : JavaRuntime.getLibraryLocations(vm)) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				IPath path = libLocation.getSystemLibraryPath();
 				if (path != null) {
-					try (ZipFile zip = new ZipFile(path.toFile())) {
+					try (ZipFile zip = new ZipFile(path.toFile())) { //FLLDCIM: MARK — M25 M3FILE_ARCHIVE_STREAM NEW
 						// Collect names of all directories that contain a .class file
 						zip.stream().filter(e -> !e.isDirectory()).map(ZipEntry::getName) //
 								.filter(n -> n.endsWith(CLASS_EXTENSION)) //
@@ -3564,7 +3564,7 @@ public final class JavaRuntime {
 									}
 								});
 					} catch (Exception e) {
-						throw new CoreException(Status.error("Failed to read packages in JVM library for " + vm + ", at " + path, e)); //$NON-NLS-1$//$NON-NLS-2$
+						throw new CoreException(Status.error("Failed to read packages in JVM library for " + vm + ", at " + path, e)); //$NON-NLS-1$//$NON-NLS-2$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 					}
 				}
 			}
@@ -3603,28 +3603,28 @@ public final class JavaRuntime {
 	 *
 	 * @since 3.10
 	 */
-	public static String getModuleCLIOptions(ILaunchConfiguration configuration) {
-		StringBuilder cliOptionString = new StringBuilder();
+	public static String getModuleCLIOptions(ILaunchConfiguration configuration) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
+		StringBuilder cliOptionString = new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 		try {
 			IRuntimeClasspathEntry[] entries;
 			entries = JavaRuntime.computeUnresolvedRuntimeClasspath(configuration);
 
 			IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
-			for (IRuntimeClasspathEntry iRuntimeClasspathEntry : entries) {
+			for (IRuntimeClasspathEntry iRuntimeClasspathEntry : entries) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				IClasspathEntry classpathEntry = iRuntimeClasspathEntry.getClasspathEntry();
 				if (classpathEntry != null && classpathEntry.getEntryKind() == IClasspathEntry.CPE_PROJECT) {
 					IResource res = root.findMember(classpathEntry.getPath());
 					IJavaProject jp = (IJavaProject) JavaCore.create(res);
 					if (jp.isOpen()) {
 						IClasspathEntry[] rawClasspath = jp.getRawClasspath();
-						for (IClasspathEntry iClasspathEntry : rawClasspath) {
+						for (IClasspathEntry iClasspathEntry : rawClasspath) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 							if (iClasspathEntry.getEntryKind() == IClasspathEntry.CPE_CONTAINER) {
 								if (JavaRuntime.JRE_CONTAINER.equals(iClasspathEntry.getPath().segment(0))) {
 									String cliOptions = getModuleCLIOptions(jp, iClasspathEntry);
 									if (cliOptionString.length() > 0 && cliOptions.length() > 0) {
-										cliOptionString.append(" "); //$NON-NLS-1$
+										cliOptionString.append(" "); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 									}
-									cliOptionString.append(cliOptions);
+									cliOptionString.append(cliOptions); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 								}
 							}
 						}
@@ -3661,10 +3661,10 @@ public final class JavaRuntime {
 	 * @throws JavaModelException
 	 *             when access to the classpath or module description of the given project fails.
 	 */
-	private static String getModuleCLIOptions(IJavaProject project, IClasspathEntry systemLibrary) throws JavaModelException {
-		StringBuilder buf = new StringBuilder();
-		for (IClasspathEntry classpathEntry : project.getRawClasspath()) {
-			for (IClasspathAttribute classpathAttribute : classpathEntry.getExtraAttributes()) {
+	private static String getModuleCLIOptions(IJavaProject project, IClasspathEntry systemLibrary) throws JavaModelException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
+		StringBuilder buf = new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
+		for (IClasspathEntry classpathEntry : project.getRawClasspath()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
+			for (IClasspathAttribute classpathAttribute : classpathEntry.getExtraAttributes()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				String optName = classpathAttribute.getName();
 				switch (optName) {
 					case IClasspathAttribute.ADD_EXPORTS:
@@ -3673,11 +3673,11 @@ public final class JavaRuntime {
 						String readModules = classpathAttribute.getValue();
 						int equalsIdx = readModules.indexOf('=');
 						if (equalsIdx != -1) {
-							for (String readModule : readModules.split(":")) { //$NON-NLS-1$
-								buf.append(OPTION_START).append(optName).append(BLANK).append(readModule).append(BLANK);
+							for (String readModule : readModules.split(":")) { //$NON-NLS-1$ //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
+								buf.append(OPTION_START).append(optName).append(BLANK).append(readModule).append(BLANK); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 							}
 						} else {
-							buf.append(OPTION_START).append(optName).append(BLANK).append(readModules).append(BLANK);
+							buf.append(OPTION_START).append(optName).append(BLANK).append(readModules).append(BLANK); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 						}
 						break;
 					}
@@ -3691,41 +3691,41 @@ public final class JavaRuntime {
 		}
 		return buf.toString().trim();
 	}
-	private static void addLimitModules(StringBuilder buf, IJavaProject prj, IClasspathEntry systemLibrary, String value) throws JavaModelException {
-		String[] modules = value.split(COMMA);
+	private static void addLimitModules(StringBuilder buf, IJavaProject prj, IClasspathEntry systemLibrary, String value) throws JavaModelException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
+		String[] modules = value.split(COMMA); //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
 		boolean isUnnamed = prj.getModuleDescription() == null;
 		if (isUnnamed) {
-			Set<String> selected = new HashSet<>(Arrays.asList(modules));
+			Set<String> selected = new HashSet<>(Arrays.asList(modules)); //FLLDCIM: MARK — M03 M3_SET_LANES NEW
 			List<IPackageFragmentRoot> allSystemRoots = Arrays.asList(prj.findUnfilteredPackageFragmentRoots(systemLibrary));
 			Set<String> defaultModules = getDefaultModules(allSystemRoots);
-			Set<String> limit = new HashSet<>(defaultModules); // contains some redundancy, but is no full closure
+			Set<String> limit = new HashSet<>(defaultModules); // contains some redundancy, but is no full closure //FLLDCIM: MARK — M03 M3_SET_LANES NEW
 
 			// selected contains the minimal representation, now compute the transitive closure for comparison with semi-closed defaultModules:
 			Map<String, IModuleDescription> allModules = allSystemRoots.stream() //
 					.map(r -> r.getModuleDescription()) //
 					.filter(Objects::nonNull) //
 					.collect(Collectors.toMap(IModuleDescription::getElementName, module -> module));
-			Set<String> selectedClosure = closure(selected, new HashSet<>(), allModules);
+			Set<String> selectedClosure = closure(selected, new HashSet<>(), allModules); //FLLDCIM: MARK — M03 M3_SET_LANES NEW
 
 			if (limit.retainAll(selectedClosure)) { // limit = selected ∩ default -- only add the option, if limit ⊂ default
 				if (limit.isEmpty()) {
 					throw new IllegalArgumentException("Cannot hide all modules, at least java.base is required"); //$NON-NLS-1$
 				}
-				buf.append(LIMIT_MODULES).append(joinedSortedList(reduceNames(limit, allModules.values()))).append(BLANK);
+				buf.append(LIMIT_MODULES).append(joinedSortedList(reduceNames(limit, allModules.values()))).append(BLANK); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			}
 
 			selectedClosure.removeAll(defaultModules);
 			if (!selectedClosure.isEmpty()) { // add = selected \ default
-				buf.append(ADD_MODULES).append(joinedSortedList(selectedClosure)).append(BLANK);
+				buf.append(ADD_MODULES).append(joinedSortedList(selectedClosure)).append(BLANK); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			}
 		} else {
 			Arrays.sort(modules);
-			buf.append(LIMIT_MODULES).append(String.join(COMMA, modules)).append(BLANK);
+			buf.append(LIMIT_MODULES).append(String.join(COMMA, modules)).append(BLANK); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		}
 	}
 
 	private static Set<String> closure(Collection<String> moduleNames, Set<String> collected, Map<String, IModuleDescription> allModules) {
-		for (String name : moduleNames) {
+		for (String name : moduleNames) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			if (collected.add(name)) {
 				IModuleDescription module = allModules.get(name);
 				if (module != null) {
@@ -3740,18 +3740,18 @@ public final class JavaRuntime {
 		return collected;
 	}
 
-	private static Collection<String> reduceNames(Collection<String> names, Collection<IModuleDescription> allModules) {
+	private static Collection<String> reduceNames(Collection<String> names, Collection<IModuleDescription> allModules) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		// build a reverse dependency tree:
-		Map<String, List<String>> moduleRequiredByModules = new HashMap<>();
-		for (IModuleDescription module : allModules) {
+		Map<String, List<String>> moduleRequiredByModules = new HashMap<>(); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
+		for (IModuleDescription module : allModules) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			if (!names.contains(module.getElementName())) {
 				continue;
 			}
 			try {
-				for (String required : module.getRequiredModuleNames()) {
+				for (String required : module.getRequiredModuleNames()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 					List<String> dominators = moduleRequiredByModules.get(required);
 					if (dominators == null) {
-						moduleRequiredByModules.put(required, dominators = new ArrayList<>());
+						moduleRequiredByModules.put(required, dominators = new ArrayList<>()); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 					}
 					dominators.add(module.getElementName());
 				}
@@ -3761,11 +3761,11 @@ public final class JavaRuntime {
 			}
 		}
 		// use the tree to find and eliminate redundancy:
-		List<String> reduced = new ArrayList<>();
-		outer: for (String name : names) {
+		List<String> reduced = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
+		outer: for (String name : names) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			List<String> dominators = moduleRequiredByModules.get(name);
 			if (dominators != null) {
-				for (String dominator : dominators) {
+				for (String dominator : dominators) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 					if (names.contains(dominator)) {
 						continue outer;
 					}
@@ -3776,19 +3776,19 @@ public final class JavaRuntime {
 		return reduced;
 	}
 
-	private static Set<String> getDefaultModules(List<IPackageFragmentRoot> allSystemRoots) throws JavaModelException {
-		Map<String, String[]> moduleDescriptions = new HashMap<>();
-		for (IPackageFragmentRoot packageFragmentRoot : allSystemRoots) {
+	private static Set<String> getDefaultModules(List<IPackageFragmentRoot> allSystemRoots) throws JavaModelException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
+		Map<String, String[]> moduleDescriptions = new HashMap<>(); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
+		for (IPackageFragmentRoot packageFragmentRoot : allSystemRoots) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			IModuleDescription module = packageFragmentRoot.getModuleDescription();
 			if (module != null) {
 				moduleDescriptions.put(module.getElementName(), module.getRequiredModuleNames());
 			}
 		}
-		HashSet<String> result = new HashSet<>();
-		HashSet<String> todo = new HashSet<>(JavaProject.defaultRootModules(allSystemRoots));
-		while (!todo.isEmpty()) {
-			HashSet<String> more = new HashSet<>();
-			for (String s : todo) {
+		HashSet<String> result = new HashSet<>(); //FLLDCIM: MARK — M03 M3_SET_LANES NEW
+		HashSet<String> todo = new HashSet<>(JavaProject.defaultRootModules(allSystemRoots)); //FLLDCIM: MARK — M03 M3_SET_LANES NEW
+		while (!todo.isEmpty()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
+			HashSet<String> more = new HashSet<>(); //FLLDCIM: MARK — M03 M3_SET_LANES NEW
+			for (String s : todo) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				if (result.add(s)) {
 					String[] requiredModules = moduleDescriptions.get(s);
 					if (requiredModules != null) {

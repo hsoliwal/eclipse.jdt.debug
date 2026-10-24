@@ -126,7 +126,7 @@ public class ArrayTypeImpl extends ReferenceTypeImpl implements ArrayType {
 	 * @return Creates and returns a new instance of this array class in the
 	 *         target VM.
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public ArrayReference newInstance(int length) {
 		// Note that this information should not be cached.
 		initJdwpRequest();
@@ -218,7 +218,7 @@ public class ArrayTypeImpl extends ReferenceTypeImpl implements ArrayType {
 	@Override
 	public Map<Field, Value> getValues(List<? extends Field> fields) {
 		if (fields.isEmpty()) {
-			return new HashMap<>();
+			return new HashMap<>(); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
 		}
 
 		throw new IllegalArgumentException(
@@ -251,7 +251,7 @@ public class ArrayTypeImpl extends ReferenceTypeImpl implements ArrayType {
 	 * @return Reads JDWP representation and returns new instance.
 	 * @throws IOException if the read fails
 	 */
-	public static ArrayTypeImpl readWithSignature(MirrorImpl target,
+	public static ArrayTypeImpl readWithSignature(MirrorImpl target, //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 			boolean withGenericSignature, DataInputStream in)
 			throws IOException {
 		VirtualMachineImpl vmImpl = target.virtualMachineImpl();

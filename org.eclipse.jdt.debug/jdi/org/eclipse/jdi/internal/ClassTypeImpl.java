@@ -95,7 +95,7 @@ public class ClassTypeImpl extends ReferenceTypeImpl implements ClassType {
 		// For all classes that have this class cached as superclass, this cache
 		// must be undone.
 		Iterator<Object> itr = virtualMachineImpl().allCachedRefTypes();
-		while (itr.hasNext()) {
+		while (itr.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			ReferenceTypeImpl refType = (ReferenceTypeImpl) itr.next();
 			if (refType instanceof ClassTypeImpl classType) {
 				if (classType.fSuperclass != null && classType.fSuperclass.equals(this)) {
@@ -111,7 +111,7 @@ public class ClassTypeImpl extends ReferenceTypeImpl implements ClassType {
 	 * @return Returns a the single non-abstract Method visible from this class
 	 *         that has the given name and signature.
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public Method concreteMethodByName(String name, String signature) {
 		/*
 		 * Recursion is used to find the method: The methods of its own (own
@@ -120,7 +120,7 @@ public class ClassTypeImpl extends ReferenceTypeImpl implements ClassType {
 
 		Iterator<Method> methods = methods().iterator();
 		Method method;
-		while (methods.hasNext()) {
+		while (methods.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			method = methods.next();
 			if (method.name().equals(name) && method.signature().equals(signature)) {
 				if (method.isAbstract()) {
@@ -150,7 +150,7 @@ public class ClassTypeImpl extends ReferenceTypeImpl implements ClassType {
 	/* (non-Javadoc)
 	 * @see com.sun.jdi.ClassType#newInstance(com.sun.jdi.ThreadReference, com.sun.jdi.Method, java.util.List, int)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public ObjectReference newInstance(ThreadReference thread, Method method, List<? extends Value> arguments, int options) throws InvalidTypeException,
 			ClassNotLoadedException, IncompatibleThreadStateException,
 			InvocationException {
@@ -182,7 +182,7 @@ public class ClassTypeImpl extends ReferenceTypeImpl implements ClassType {
 
 			writeInt(checkedArguments.size(), "size", outData); //$NON-NLS-1$
 			Iterator<Value> iter = checkedArguments.iterator();
-			while (iter.hasNext()) {
+			while (iter.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				Value elt = iter.next();
 				if (elt instanceof ValueImpl) {
 					checkVM(elt);
@@ -229,7 +229,7 @@ public class ClassTypeImpl extends ReferenceTypeImpl implements ClassType {
 	/**
 	 * Assigns a value to a static field. .
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public void setValue(Field field, Value value) throws InvalidTypeException,
 			ClassNotLoadedException {
 		// Note that this information should not be cached.
@@ -272,12 +272,12 @@ public class ClassTypeImpl extends ReferenceTypeImpl implements ClassType {
 	/* (non-Javadoc)
 	 * @see com.sun.jdi.ClassType#subclasses()
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public List<ClassType> subclasses() {
 		// Note that this information should not be cached.
-		List<ClassType> subclasses = new ArrayList<>();
+		List<ClassType> subclasses = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 		Iterator<ReferenceType> itr = virtualMachineImpl().allRefTypes();
-		while (itr.hasNext()) {
+		while (itr.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			try {
 				ReferenceType refType = itr.next();
 				if (refType instanceof ClassTypeImpl classType) {
@@ -296,7 +296,7 @@ public class ClassTypeImpl extends ReferenceTypeImpl implements ClassType {
 	/* (non-Javadoc)
 	 * @see com.sun.jdi.ClassType#superclass()
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public ClassType superclass() {
 		if (fSuperclass != null)
 			return fSuperclass;
@@ -344,7 +344,7 @@ public class ClassTypeImpl extends ReferenceTypeImpl implements ClassType {
 	 * @return Reads ID and returns known ReferenceTypeImpl with that ID, or if
 	 * ID is unknown a newly created ReferenceTypeImpl.
 	 */
-	public static ClassTypeImpl readWithSignature(MirrorImpl target,
+	public static ClassTypeImpl readWithSignature(MirrorImpl target, //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 			boolean withGenericSignature, DataInputStream in)
 			throws IOException {
 		VirtualMachineImpl vmImpl = target.virtualMachineImpl();

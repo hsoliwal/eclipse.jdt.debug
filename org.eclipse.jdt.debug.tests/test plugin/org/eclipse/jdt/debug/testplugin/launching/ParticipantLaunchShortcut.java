@@ -95,7 +95,7 @@ public class ParticipantLaunchShortcut implements ILaunchShortcut2 {
 		performLaunch(mode);
 	}
 
-	protected void performLaunch(String mode) {
+	protected void performLaunch(String mode) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		//first try to find a config
 		try {
 			ILaunchManager lm = DebugPlugin.getDefault().getLaunchManager();

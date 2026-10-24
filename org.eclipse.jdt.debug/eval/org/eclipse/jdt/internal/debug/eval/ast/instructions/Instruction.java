@@ -222,7 +222,7 @@ public abstract class Instruction {
 	 *            type name, for example - "int"
 	 * @return primitive type
 	 */
-	protected IJavaType getPrimitiveType(String name) throws CoreException {
+	protected IJavaType getPrimitiveType(String name) throws CoreException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IJavaReferenceType type = null;
 		if (name != null) {
 			switch (name) {
@@ -269,15 +269,15 @@ public abstract class Instruction {
 						name), null));
 	}
 
-	protected IJavaArrayType getArrayType(String typeSignature, int dimension)
+	protected IJavaArrayType getArrayType(String typeSignature, int dimension) //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 			throws CoreException {
 		String qualifiedName = RuntimeSignature.toString(typeSignature);
 		String braces = ""; //$NON-NLS-1$
-		for (int i = 0; i < dimension; i++) {
+		for (int i = 0; i < dimension; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			qualifiedName += "[]"; //$NON-NLS-1$
 			braces += "["; //$NON-NLS-1$
 		}
-		String signature = braces + typeSignature;
+		String signature = braces + typeSignature; //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		// Force the class to be loaded, and record the class reference
 		// for later use if there are multiple classes with the same name.
 		IJavaObject classReference = getContext().classForName(signature);
@@ -295,7 +295,7 @@ public abstract class Instruction {
 			return (IJavaArrayType) types[0];
 		}
 		// Found many classes, look for the right one for this scope.
-		for (IJavaType type : types) {
+		for (IJavaType type : types) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			if (classReference.equals(getClassObject(type))) {
 				return (IJavaArrayType) type;
 			}

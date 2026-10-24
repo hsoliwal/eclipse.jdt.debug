@@ -83,7 +83,7 @@ public class JavaDetailFormattersPreferencePage extends PreferencePage implement
 	/* (non-Javadoc)
 	 * @see org.eclipse.jface.preference.PreferencePage#createContents(org.eclipse.swt.widgets.Composite)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	protected Control createContents(Composite parent) {
 		noDefaultAndApplyButton();
 		PlatformUI.getWorkbench().getHelpSystem().setHelp(getControl(), IJavaDebugHelpContextIds.JAVA_DETAIL_FORMATTER_PREFERENCE_PAGE);
@@ -115,7 +115,7 @@ public class JavaDetailFormattersPreferencePage extends PreferencePage implement
 	public void init(IWorkbench workbench) {
 	}
 
-    private void createLabelPreferences(Composite parent) {
+    private void createLabelPreferences(Composite parent) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
         Group group= new Group(parent, SWT.NONE);
         GridData gridData= new GridData(GridData.FILL_HORIZONTAL);
         gridData.horizontalSpan= 2;
@@ -142,7 +142,7 @@ public class JavaDetailFormattersPreferencePage extends PreferencePage implement
 	/**
 	 * Create a group to contain the detail formatters related widgetry
 	 */
-	private Control createDetailFormatsPreferences(Composite parent) {
+	private Control createDetailFormatsPreferences(Composite parent) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
         Font font= parent.getFont();
 
 		//table label
@@ -162,7 +162,7 @@ public class JavaDetailFormattersPreferencePage extends PreferencePage implement
 		table.setFont(font);
 		fFormatViewerContentProvider= new FormatterListViewerContentProvider(fFormatterListViewer);
 		fFormatterListViewer.setContentProvider(fFormatViewerContentProvider);
-		fFormatterListViewer.setLabelProvider(new LabelProvider() {
+		fFormatterListViewer.setLabelProvider(new LabelProvider() { //FLLDCIM: MARK — T24 LABEL_DELTA CALL
 			@Override
 			public String getText(Object element) {
 				if (element instanceof DetailFormatter) {
@@ -171,19 +171,19 @@ public class JavaDetailFormattersPreferencePage extends PreferencePage implement
 				return null;
 			}
 		});
-		fFormatterListViewer.addCheckStateListener(new ICheckStateListener() {
+		fFormatterListViewer.addCheckStateListener(new ICheckStateListener() { //FLLDCIM: MARK — T21 CHECK_STATE_LANE CALL
 			@Override
 			public void checkStateChanged(CheckStateChangedEvent event) {
 				((DetailFormatter)event.getElement()).setEnabled(event.getChecked());
 			}
 		});
-		fFormatterListViewer.addSelectionChangedListener(new ISelectionChangedListener() {
+		fFormatterListViewer.addSelectionChangedListener(new ISelectionChangedListener() { //FLLDCIM: MARK — T04 VIEWER_SELECTION_DELTA CALL
 			@Override
 			public void selectionChanged(SelectionChangedEvent event) {
 				updatePage((IStructuredSelection)event.getSelection());
 			}
 		});
-		fFormatterListViewer.addDoubleClickListener(new IDoubleClickListener() {
+		fFormatterListViewer.addDoubleClickListener(new IDoubleClickListener() { //FLLDCIM: MARK — T05 VIEWER_OPEN CALL
 			@Override
 			public void doubleClick(DoubleClickEvent event) {
 				if (!event.getSelection().isEmpty()) {
@@ -191,7 +191,7 @@ public class JavaDetailFormattersPreferencePage extends PreferencePage implement
 				}
 			}
 		});
-		table.addKeyListener(new KeyAdapter() {
+		table.addKeyListener(new KeyAdapter() { //FLLDCIM: MARK — T12 INPUT_EVENT CALL
 			@Override
 			public void keyPressed(KeyEvent event) {
 				if (event.character == SWT.DEL && event.stateMask == 0) {
@@ -199,7 +199,7 @@ public class JavaDetailFormattersPreferencePage extends PreferencePage implement
 				}
 			}
 		});
-		fFormatterListViewer.setInput(this);
+		fFormatterListViewer.setInput(this); //FLLDCIM: MARK — M21 FULL_REBUILD_TO_DELTA CALL
 
 		createDetailFormatsButtons(parent);
 
@@ -216,7 +216,7 @@ public class JavaDetailFormattersPreferencePage extends PreferencePage implement
 	}
 
 
-	private void createDetailFormatsButtons(Composite container) {
+	private void createDetailFormatsButtons(Composite container) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		Font font = container.getFont();
 
 		// button container
@@ -236,7 +236,7 @@ public class JavaDetailFormattersPreferencePage extends PreferencePage implement
 		fAddFormatterButton.setLayoutData(gd);
 		fAddFormatterButton.setFont(font);
 		setButtonLayoutData(fAddFormatterButton);
-		fAddFormatterButton.addListener(SWT.Selection, new Listener() {
+		fAddFormatterButton.addListener(SWT.Selection, new Listener() { //FLLDCIM: MARK — T13 SWT_TYPED_EVENT CALL
 			@Override
 			public void handleEvent(Event e) {
 				addType();
@@ -249,7 +249,7 @@ public class JavaDetailFormattersPreferencePage extends PreferencePage implement
 		fEditFormatterButton.setToolTipText(DebugUIMessages.JavaDetailFormattersPreferencePage_Edit_the_selected_detail_formatter_10);
 		fEditFormatterButton.setFont(font);
 		setButtonLayoutData(fEditFormatterButton);
-		fEditFormatterButton.addListener(SWT.Selection, new Listener() {
+		fEditFormatterButton.addListener(SWT.Selection, new Listener() { //FLLDCIM: MARK — T13 SWT_TYPED_EVENT CALL
 			@Override
 			public void handleEvent(Event e) {
 				editType();
@@ -263,7 +263,7 @@ public class JavaDetailFormattersPreferencePage extends PreferencePage implement
 		fRemoveFormatterButton.setToolTipText(DebugUIMessages.JavaDetailFormattersPreferencePage_Remove_all_selected_detail_formatters_8);
 		fRemoveFormatterButton.setFont(font);
 		setButtonLayoutData(fRemoveFormatterButton);
-		fRemoveFormatterButton.addListener(SWT.Selection, new Listener() {
+		fRemoveFormatterButton.addListener(SWT.Selection, new Listener() { //FLLDCIM: MARK — T13 SWT_TYPED_EVENT CALL
 			@Override
 			public void handleEvent(Event e) {
 				removeTypes();
@@ -310,12 +310,12 @@ public class JavaDetailFormattersPreferencePage extends PreferencePage implement
 		}
 	}
 
-	public void removeTypes() {
+	public void removeTypes() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		Object[] all = fFormatViewerContentProvider.getElements(null);
 		IStructuredSelection selection= (IStructuredSelection)fFormatterListViewer.getSelection();
 		Object first = selection.getFirstElement();
 		int index = -1;
-		for (int i = 0; i < all.length; i++) {
+		for (int i = 0; i < all.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			Object object = all[i];
 			if (object.equals(first)) {
 				index = i;
@@ -335,7 +335,7 @@ public class JavaDetailFormattersPreferencePage extends PreferencePage implement
 	public void editType() {
 		IStructuredSelection selection= (IStructuredSelection)fFormatterListViewer.getSelection();
 		if (new DetailFormatterDialog(getShell(), (DetailFormatter)(selection).getFirstElement(), null, true, true).open() == Window.OK) {
-			fFormatterListViewer.refresh();
+			fFormatterListViewer.refresh(); //FLLDCIM: MARK — M21 FULL_REBUILD_TO_DELTA CALL
 			fFormatViewerContentProvider.refreshViewer();
 			updatePage(selection);
 		}
@@ -374,8 +374,8 @@ public class JavaDetailFormattersPreferencePage extends PreferencePage implement
 			// load the current formatters
 			String[] detailFormattersList= JavaDebugOptionsManager.parseList(JDIDebugUIPlugin.getDefault().getPreferenceStore().getString(IJDIPreferencesConstants.PREF_DETAIL_FORMATTERS_LIST));
 			fDetailFormattersSet= new TreeSet<>();
-			fDefinedTypes= new ArrayList<>(detailFormattersList.length / 3);
-			for (int i= 0, length= detailFormattersList.length; i < length;) {
+			fDefinedTypes= new ArrayList<>(detailFormattersList.length / 3); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
+			for (int i= 0, length= detailFormattersList.length; i < length;) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				String typeName= detailFormattersList[i++];
 				String snippet= detailFormattersList[i++].replace('\u0000', ',');
 				boolean enabled= ! DETAIL_FORMATTER_IS_DISABLED.equals(detailFormattersList[i++]);
@@ -391,7 +391,7 @@ public class JavaDetailFormattersPreferencePage extends PreferencePage implement
 		public void saveDetailFormatters() {
 			String[] values= new String[fDetailFormattersSet.size() * 3];
 			int i= 0;
-			for (Iterator<DetailFormatter> iter= fDetailFormattersSet.iterator(); iter.hasNext();) {
+			for (Iterator<DetailFormatter> iter= fDetailFormattersSet.iterator(); iter.hasNext();) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				DetailFormatter detailFormatter= iter.next();
 				values[i++]= detailFormatter.getTypeName();
 				values[i++]= detailFormatter.getSnippet().replace(',','\u0000');
@@ -408,7 +408,7 @@ public class JavaDetailFormattersPreferencePage extends PreferencePage implement
 		public void addDetailFormatter(DetailFormatter detailFormatter) {
 			fDetailFormattersSet.add(detailFormatter);
 			fDefinedTypes.add(detailFormatter.getTypeName());
-			fViewer.refresh();
+			fViewer.refresh(); //FLLDCIM: MARK — M21 FULL_REBUILD_TO_DELTA CALL
 			refreshViewer();
 			IStructuredSelection selection= new StructuredSelection(detailFormatter);
 			fViewer.setSelection(selection);
@@ -421,7 +421,7 @@ public class JavaDetailFormattersPreferencePage extends PreferencePage implement
 		public void removeDetailFormatter(DetailFormatter detailFormatter) {
 			fDetailFormattersSet.remove(detailFormatter);
 			fDefinedTypes.remove(detailFormatter.getTypeName());
-			fViewer.refresh();
+			fViewer.refresh(); //FLLDCIM: MARK — M21 FULL_REBUILD_TO_DELTA CALL
 			IStructuredSelection selection= new StructuredSelection();
 			fViewer.setSelection(selection);
 			updatePage(selection);
@@ -431,11 +431,11 @@ public class JavaDetailFormattersPreferencePage extends PreferencePage implement
 		 * Remove detailFormatters
 		 */
 		public void removeDetailFormatters(Object[] detailFormatters) {
-			for (int i= 0, length= detailFormatters.length; i < length; i++) {
+			for (int i= 0, length= detailFormatters.length; i < length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				fDetailFormattersSet.remove(detailFormatters[i]);
 				fDefinedTypes.remove(((DetailFormatter)detailFormatters[i]).getTypeName());
 			}
-			fViewer.refresh();
+			fViewer.refresh(); //FLLDCIM: MARK — M21 FULL_REBUILD_TO_DELTA CALL
 			IStructuredSelection selection= new StructuredSelection();
 			fViewer.setSelection(selection);
 			updatePage(selection);
@@ -447,7 +447,7 @@ public class JavaDetailFormattersPreferencePage extends PreferencePage implement
 		private void refreshViewer() {
 			DetailFormatter[] checkedElementsTmp= new DetailFormatter[fDetailFormattersSet.size()];
 			int i= 0;
-			for (Iterator<DetailFormatter> iter= fDetailFormattersSet.iterator(); iter.hasNext();) {
+			for (Iterator<DetailFormatter> iter= fDetailFormattersSet.iterator(); iter.hasNext();) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				DetailFormatter detailFormatter= iter.next();
 				if (detailFormatter.isEnabled()) {
 					checkedElementsTmp[i++]= detailFormatter;

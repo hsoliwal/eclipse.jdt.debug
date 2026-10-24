@@ -32,25 +32,25 @@ import org.eclipse.jdt.internal.launching.LaunchingPlugin;
 public class BackgroundProcessingJob extends Job {
 	private static final long EXECUTION_DELAY = 1000L;
 
-	private final ArrayList<IRunnableWithProgress> queue = new ArrayList<>();
+	private final ArrayList<IRunnableWithProgress> queue = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 
 	public BackgroundProcessingJob() {
 		super(Messages.BackgroundProcessingJob_name);
 	}
 
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	protected IStatus run(IProgressMonitor monitor) {
 		ArrayList<IRunnableWithProgress> tasks;
 		synchronized (this.queue) {
-			tasks = new ArrayList<>(this.queue);
+			tasks = new ArrayList<>(this.queue); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 			this.queue.clear();
 		}
 
 		SubMonitor progress = SubMonitor.convert(monitor, tasks.size());
 
-		List<IStatus> errors = new ArrayList<>();
+		List<IStatus> errors = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 
-		for (IRunnableWithProgress task : tasks) {
+		for (IRunnableWithProgress task : tasks) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			try {
 				task.run(progress.split(1));
 			}

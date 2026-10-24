@@ -119,13 +119,13 @@ public class OpenFromClipboardTests {
 
 	@Before
 	public void setUp() throws Exception {
-		TestUtil.logInfo("SETUP " + getClass().getSimpleName() + "." + name.getMethodName());
+		TestUtil.logInfo("SETUP " + getClass().getSimpleName() + "." + name.getMethodName()); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		fSourceFolder = JavaProjectHelper.addSourceContainer(fJProject, "src");
 	}
 
 	@After
 	public void tearDown() throws Exception {
-		TestUtil.logInfo("TDOWN " + getClass().getSimpleName() + "." + name.getMethodName());
+		TestUtil.logInfo("TDOWN " + getClass().getSimpleName() + "." + name.getMethodName()); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		JavaProjectHelper.removeSourceContainer(fJProject, "src");
 	}
 
@@ -143,13 +143,13 @@ public class OpenFromClipboardTests {
 	private void setupTypeTest(String typeName) throws CoreException {
 		IPackageFragment pack= fSourceFolder.createPackageFragment("p", false, null);
 		((IContainer)pack.getUnderlyingResource()).setDefaultCharset("UTF-8", null);
-		StringBuilder buf= new StringBuilder();
-		buf.append("package p;\n");
-		buf.append("public class " + typeName + " {\n");
-		buf.append("	void getMatching$Pattern(){\n");
-		buf.append("	}\n");
-		buf.append("}\n");
-		ICompilationUnit x= pack.createCompilationUnit(typeName + ".java", buf.toString(), false, null);
+		StringBuilder buf= new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
+		buf.append("package p;\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+		buf.append("public class " + typeName + " {\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+		buf.append("	void getMatching$Pattern(){\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+		buf.append("	}\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+		buf.append("}\n"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+		ICompilationUnit x= pack.createCompilationUnit(typeName + ".java", buf.toString(), false, null); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		x.exists();
 
 	}
@@ -187,7 +187,7 @@ public class OpenFromClipboardTests {
 	@Test
 	public void testDBCS() throws Exception {
 		String typeName= "\u65b0\u898f\u30af\u30e9\u30b9";
-		String s= typeName + ".java:100";
+		String s= typeName + ".java:100"; //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 		assertEquals(JAVA_FILE_LINE, getMatchingPattern(s));
 
@@ -200,7 +200,7 @@ public class OpenFromClipboardTests {
 	@Test
 	public void testUmlaut() throws Exception {
 		String typeName= "\u0042\u006c\u00f6\u0064";
-		String s= typeName + ".java:100";
+		String s= typeName + ".java:100"; //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 		assertEquals(JAVA_FILE_LINE, getMatchingPattern(s));
 
@@ -424,7 +424,7 @@ public class OpenFromClipboardTests {
 		assertEquals(METHOD, getMatchingPattern(s));
 	}
 
-	private void setupMethodWithDollarSignTest() throws JavaModelException {
+	private void setupMethodWithDollarSignTest() throws JavaModelException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IPackageFragment pack = fSourceFolder.createPackageFragment("p", false, null);
 		String str = """
 			package p;
@@ -549,7 +549,7 @@ public class OpenFromClipboardTests {
 		assertEquals(1, matches.size());
 	}
 
-	private void setupQualifiedNameWithDollarSignTest() throws JavaModelException {
+	private void setupQualifiedNameWithDollarSignTest() throws JavaModelException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IPackageFragment pack = fSourceFolder.createPackageFragment("p", false, null);
 		String str = """
 			package p;

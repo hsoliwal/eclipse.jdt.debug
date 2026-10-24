@@ -58,7 +58,7 @@ public class JavaObjectValueEditor implements IVariableValueEditor {
     /* (non-Javadoc)
      * @see org.eclipse.debug.ui.actions.IVariableValueEditor#editVariable(org.eclipse.debug.core.model.IVariable, org.eclipse.swt.widgets.Shell)
      */
-    @Override
+    @Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public boolean editVariable(IVariable variable, Shell shell) {
         try {
             IJavaVariable javaVariable = (IJavaVariable) variable;
@@ -112,8 +112,8 @@ public class JavaObjectValueEditor implements IVariableValueEditor {
      * @param variable the variable whose value should be set
      * @param expression the expression to evaluate
      */
-    protected void setValue(final IVariable variable, final String expression){
-        UIJob job = new UIJob("Setting Variable Value"){ //$NON-NLS-1$
+    protected void setValue(final IVariable variable, final String expression){ //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
+        UIJob job = new UIJob("Setting Variable Value"){ //$NON-NLS-1$ //FLLDCIM: MARK — T09  ANONYMOUS
 			@Override
 			public IStatus runInUIThread(IProgressMonitor monitor) {
 				try {
@@ -155,7 +155,7 @@ public class JavaObjectValueEditor implements IVariableValueEditor {
      * @param stringValue the snippet to evaluate
      * @return the value that was computed or <code>null</code> if any errors occurred.
      */
-    private IValue evaluate(String stringValue, IVariable variable) throws DebugException {
+    private IValue evaluate(String stringValue, IVariable variable) throws DebugException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
         IAdaptable adaptable = DebugUITools.getDebugContext();
 		IJavaStackFrame frame = adaptable.getAdapter(IJavaStackFrame.class);
         if (frame != null) {
@@ -195,14 +195,14 @@ public class JavaObjectValueEditor implements IVariableValueEditor {
     			}
     			if (result.hasErrors()) {
     			    DebugException exception = result.getException();
-    			    StringBuilder buffer = new StringBuilder();
+    			    StringBuilder buffer = new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
     			    if (exception == null) {
         			    String[] messages = result.getErrorMessages();
-        			    for (int i = 0; i < messages.length; i++) {
-                            buffer.append(messages[i]).append("\n "); //$NON-NLS-1$
+        			    for (int i = 0; i < messages.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
+                            buffer.append(messages[i]).append("\n "); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
                         }
     			    } else {
-    			    	buffer.append(EvaluateAction.getExceptionMessage(exception));
+    			    	buffer.append(EvaluateAction.getExceptionMessage(exception)); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
     			    }
     			    IStatus status= new Status(IStatus.ERROR, JDIDebugUIPlugin.getUniqueIdentifier(), IStatus.ERROR, buffer.toString(), null);
     			    throw new DebugException(status);
@@ -217,7 +217,7 @@ public class JavaObjectValueEditor implements IVariableValueEditor {
 	 * Convert the evaluationResult into an object, which can be stored into variable. Currently, it converts primitive types into the wrapper, boxed
 	 * types.
 	 */
-    private EvaluationResult convert(EvaluationResult evaluationResult, IVariable variable, IJavaThread thread) {
+    private EvaluationResult convert(EvaluationResult evaluationResult, IVariable variable, IJavaThread thread) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
         if (evaluationResult.hasErrors()) {
             return evaluationResult;
         }
@@ -270,7 +270,7 @@ public class JavaObjectValueEditor implements IVariableValueEditor {
     }
 
     private void updateEvaluation(EvaluationResult evaluationResult, IJavaValue newValue, IJavaClassType instanceType, IJavaThread thread) throws DebugException {
-        var signature = String.format("(%s)%s", newValue.getSignature(), instanceType.getSignature()); //$NON-NLS-1$
+        var signature = String.format("(%s)%s", newValue.getSignature(), instanceType.getSignature()); //$NON-NLS-1$ //FLLDCIM: MARK — M11 FORMAT_PRECOMPUTE CALL
         updateEvaluation(evaluationResult, newValue, instanceType, "valueOf", signature, thread); //$NON-NLS-1$
     }
 

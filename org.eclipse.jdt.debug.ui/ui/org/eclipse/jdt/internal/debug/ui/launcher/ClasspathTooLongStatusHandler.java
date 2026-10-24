@@ -50,7 +50,7 @@ public class ClasspathTooLongStatusHandler implements IStatusHandler {
 
 	private boolean askEnableClasspathOnlyJar() {
 		final boolean[] result = new boolean[1];
-		JDIDebugUIPlugin.getStandardDisplay().syncExec(new Runnable() {
+		JDIDebugUIPlugin.getStandardDisplay().syncExec(new Runnable() { //FLLDCIM: MARK — T08 UI_THREAD_SYNCHRONIZER CALL
 			@Override
 			public void run() {
 				String title = LauncherMessages.ClasspathTooLongStatusHandler_0;

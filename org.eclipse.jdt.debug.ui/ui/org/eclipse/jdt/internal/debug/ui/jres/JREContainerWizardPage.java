@@ -98,7 +98,7 @@ public class JREContainerWizardPage extends WizardPage implements IClasspathCont
 	/* (non-Javadoc)
 	 * @see org.eclipse.jface.dialogs.IDialogPage#createControl(org.eclipse.swt.widgets.Composite)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public void createControl(Composite parent) {
 		Composite composite = SWTFactory.createComposite(parent, 1, 1, GridData.FILL_BOTH);
 		fJREBlock = new JREsComboBlock(false);
@@ -108,7 +108,7 @@ public class JREContainerWizardPage extends WizardPage implements IClasspathCont
 		GridData gd = new GridData(GridData.FILL_HORIZONTAL);
 		fJREBlock.getControl().setLayoutData(gd);
 		setControl(composite);
-		fJREBlock.addPropertyChangeListener(new IPropertyChangeListener() {
+		fJREBlock.addPropertyChangeListener(new IPropertyChangeListener() { //FLLDCIM: MARK — T06  ANONYMOUS
 			@Override
 			public void propertyChange(PropertyChangeEvent event) {
 				IStatus status = fJREBlock.getStatus();

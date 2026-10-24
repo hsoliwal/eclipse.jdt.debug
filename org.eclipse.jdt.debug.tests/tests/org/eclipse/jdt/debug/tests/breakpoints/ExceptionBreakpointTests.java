@@ -38,7 +38,7 @@ public class ExceptionBreakpointTests extends AbstractDebugTest {
 	/**
 	 * tests that breakpoint suspends on caught exceptions
 	 */
-	public void testCaughtException() throws Exception {
+	public void testCaughtException() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String typeName = "ThrowsException";
 		IJavaExceptionBreakpoint ex = createExceptionBreakpoint("TestException", true, false);
 
@@ -60,7 +60,7 @@ public class ExceptionBreakpointTests extends AbstractDebugTest {
 	/**
 	 * tests that breakpoint suspends on uncaught exceptions
 	 */
-	public void testUncaughtException() throws Exception {
+	public void testUncaughtException() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String typeName = "HitCountException";
 		IJavaExceptionBreakpoint ex = createExceptionBreakpoint("java.lang.NullPointerException", false, true);
 
@@ -73,7 +73,7 @@ public class ExceptionBreakpointTests extends AbstractDebugTest {
 			assertNotNull("suspended, but not by breakpoint", hit);
 			assertEquals("suspended, but not by exception breakpoint", ex ,hit);
 			IJavaStackFrame frame= (IJavaStackFrame)thread.getTopStackFrame();
-			assertEquals("Should have been suspended at line number 38, not " + frame.getLineNumber(), 38, frame.getLineNumber());
+			assertEquals("Should have been suspended at line number 38, not " + frame.getLineNumber(), 38, frame.getLineNumber()); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 			ex.delete();
 		} finally {
 			terminateAndRemove(thread);
@@ -117,7 +117,7 @@ public class ExceptionBreakpointTests extends AbstractDebugTest {
 	/**
 	 * tests that the breakpoint will only suspend on a breakpoint in the inclusion filters
 	 */
-	public void testInclusiveScopedException() throws Exception {
+	public void testInclusiveScopedException() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String typeName = "ThrowsException";
 		IJavaExceptionBreakpoint ex = createExceptionBreakpoint("TestException", true, false);
 		ex.setInclusionFilters(new String[] {"ThrowsException"});
@@ -296,7 +296,7 @@ public class ExceptionBreakpointTests extends AbstractDebugTest {
 	/**
 	 * tests that breakpoint is skipped when told to do so
 	 */
-	public void testSkipExceptionBreakpoint() throws Exception {
+	public void testSkipExceptionBreakpoint() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String typeName = "ThrowsNPE";
 		createExceptionBreakpoint("java.lang.NullPointerException", true, false);
 		IJavaLineBreakpoint lineBreakpoint = createLineBreakpoint(15, typeName);

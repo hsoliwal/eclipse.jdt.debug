@@ -149,13 +149,13 @@ public class InstalledJREsBlock implements IAddVMDialogRequestor, ISelectionProv
 			if (Display.getCurrent() == display) {
 				deliver.run();
 			} else if (!display.isDisposed()) {
-				display.asyncExec(deliver);
+				display.asyncExec(deliver); //FLLDCIM: MARK — M21 FULL_REBUILD_TO_DELTA CALL
 			}
 		}
-
+ //FLLDCIM: MARK — T08 UI_THREAD_SYNCHRONIZER CALL
 		/* (non-Javadoc)
 		 * @see org.eclipse.jdt.launching.IVMInstallChangedListener#vmRemoved(org.eclipse.jdt.launching.IVMInstall)
-		 */
+		 */ //FLLDCIM: MARK — M21 FULL_REBUILD_TO_DELTA CALL
 		@Override
 		public void vmRemoved(IVMInstall vm) {
 			//do nothing, we do not want other bundles removing VM installs without user interaction
@@ -178,7 +178,7 @@ public class InstalledJREsBlock implements IAddVMDialogRequestor, ISelectionProv
 	/** Immutable UI-thread ownership published before listener registration. */
 	private record UIBinding(Display display, Composite control) { }
 
-	/** Volatile binding identity invalidates stale callbacks after disposal/recreation. */
+	/** Volatile binding identity invalidates stale callbacks after disposal/recreation. */ //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 	private volatile UIBinding fUIBinding;
 
 	/**
@@ -240,7 +240,7 @@ public class InstalledJREsBlock implements IAddVMDialogRequestor, ISelectionProv
 	 * Label provider for installed JREs table.
 	 */
 	class VMLabelProvider extends LabelProvider implements ITableLabelProvider, IFontProvider, IColorProvider {
-
+ //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		Font bold = null;
 
 		/**
@@ -279,7 +279,7 @@ public class InstalledJREsBlock implements IAddVMDialogRequestor, ISelectionProv
 			return null;
 		}
 
-		@Override
+		@Override //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 		public Font getFont(Object element) {
 			if(fVMList.getChecked(element)) {
 				if (bold == null) {
@@ -366,7 +366,7 @@ public class InstalledJREsBlock implements IAddVMDialogRequestor, ISelectionProv
 			if (!selection.equals(fPrevSelection)) {
 				fPrevSelection = selection;
 				Object jre = ((IStructuredSelection)selection).getFirstElement();
-				if (jre == null) {
+				if (jre == null) { //FLLDCIM: MARK — M21 FULL_REBUILD_TO_DELTA CALL
 					fVMList.setCheckedElements(new Object[0]);
 				} else {
 					fVMList.setCheckedElements(new Object[]{jre});
@@ -377,7 +377,7 @@ public class InstalledJREsBlock implements IAddVMDialogRequestor, ISelectionProv
 			}
 		}
 	}
-
+ //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	/**
 	 * Creates this block's control in the given control.
 	 *
@@ -395,11 +395,11 @@ public class InstalledJREsBlock implements IAddVMDialogRequestor, ISelectionProv
 		GridData gd = new GridData(GridData.FILL_BOTH);
 		gd.heightHint = 250;
 		gd.widthHint = 350;
-		fTable.setLayoutData(gd);
+		fTable.setLayoutData(gd); //FLLDCIM: MARK — T03 SELECTION_LANE CALL
 		fTable.setFont(font);
 		fTable.setHeaderVisible(true);
 		fTable.setLinesVisible(true);
-
+ //FLLDCIM: MARK — M21 FULL_REBUILD_TO_DELTA CALL
 		TableColumn column = new TableColumn(fTable, SWT.NULL);
 		column.setText(JREMessages.InstalledJREsBlock_0);
 		column.addSelectionListener(new SelectionAdapter() {
@@ -407,41 +407,41 @@ public class InstalledJREsBlock implements IAddVMDialogRequestor, ISelectionProv
 			public void widgetSelected(SelectionEvent e) {
 				sortByName();
 				fVMList.refresh(true);
-			}
+			} //FLLDCIM: MARK — T03 SELECTION_LANE CALL
 		});
 		int defaultwidth = 350/3 +1;
 		column.setWidth(defaultwidth);
-
+ //FLLDCIM: MARK — M21 FULL_REBUILD_TO_DELTA CALL
 		column = new TableColumn(fTable, SWT.NULL);
 		column.setText(JREMessages.InstalledJREsBlock_1);
 		column.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				sortByLocation();
-				fVMList.refresh(true);
+				fVMList.refresh(true); //FLLDCIM: MARK — T03 SELECTION_LANE CALL
 			}
 		});
 		column.setWidth(defaultwidth);
-
+ //FLLDCIM: MARK — M21 FULL_REBUILD_TO_DELTA CALL
 		column = new TableColumn(fTable, SWT.NULL);
 		column.setText(JREMessages.InstalledJREsBlock_2);
 		column.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				sortByType();
+				sortByType(); //FLLDCIM: MARK — T24 LABEL_DELTA CALL
 				fVMList.refresh(true);
 			}
 		});
 		column.setWidth(defaultwidth);
 
-		fVMList = new CheckboxTableViewer(fTable);
+		fVMList = new CheckboxTableViewer(fTable); //FLLDCIM: MARK — T04 VIEWER_SELECTION_DELTA CALL
 		fVMList.setLabelProvider(new VMLabelProvider());
 		fVMList.setContentProvider(new JREsContentProvider());
 		fVMList.setUseHashlookup(true);
 		// by default, sort by name
 		sortByName();
 
-		fVMList.addSelectionChangedListener(new ISelectionChangedListener() {
+		fVMList.addSelectionChangedListener(new ISelectionChangedListener() { //FLLDCIM: MARK — T21 CHECK_STATE_LANE CALL
 			@Override
 			public void selectionChanged(SelectionChangedEvent evt) {
 				enableButtons();
@@ -452,7 +452,7 @@ public class InstalledJREsBlock implements IAddVMDialogRequestor, ISelectionProv
 			@Override
 			public void checkStateChanged(CheckStateChangedEvent event) {
 				if (event.getChecked()) {
-					setCheckedJRE((IVMInstall)event.getElement());
+					setCheckedJRE((IVMInstall)event.getElement()); //FLLDCIM: MARK — T05 VIEWER_OPEN CALL
 				} else {
 					setCheckedJRE(null);
 				}
@@ -460,7 +460,7 @@ public class InstalledJREsBlock implements IAddVMDialogRequestor, ISelectionProv
 		});
 
 		fVMList.addDoubleClickListener(new IDoubleClickListener() {
-			@Override
+			@Override //FLLDCIM: MARK — T12 INPUT_EVENT CALL
 			public void doubleClick(DoubleClickEvent e) {
 				if (!fVMList.getSelection().isEmpty()) {
 					editVM();
@@ -474,7 +474,7 @@ public class InstalledJREsBlock implements IAddVMDialogRequestor, ISelectionProv
 					if (fRemoveButton.isEnabled()){
 						removeVMs();
 					}
-				}
+				} //FLLDCIM: MARK — T13 SWT_TYPED_EVENT CALL
 			}
 		});
 
@@ -482,7 +482,7 @@ public class InstalledJREsBlock implements IAddVMDialogRequestor, ISelectionProv
 
 		fAddButton = SWTFactory.createPushButton(buttons, JREMessages.InstalledJREsBlock_3, null);
 		fAddButton.addListener(SWT.Selection, new Listener() {
-			@Override
+			@Override //FLLDCIM: MARK — T13 SWT_TYPED_EVENT CALL
 			public void handleEvent(Event evt) {
 				addVM();
 			}
@@ -490,7 +490,7 @@ public class InstalledJREsBlock implements IAddVMDialogRequestor, ISelectionProv
 
 		fEditButton= SWTFactory.createPushButton(buttons, JREMessages.InstalledJREsBlock_4, null);
 		fEditButton.addListener(SWT.Selection, new Listener() {
-			@Override
+			@Override //FLLDCIM: MARK — T13 SWT_TYPED_EVENT CALL
 			public void handleEvent(Event evt) {
 				editVM();
 			}
@@ -498,7 +498,7 @@ public class InstalledJREsBlock implements IAddVMDialogRequestor, ISelectionProv
 
 		fCopyButton = SWTFactory.createPushButton(buttons, JREMessages.InstalledJREsBlock_16, null);
 		fCopyButton.addListener(SWT.Selection, new Listener() {
-			@Override
+			@Override //FLLDCIM: MARK — T13 SWT_TYPED_EVENT CALL
 			public void handleEvent(Event evt) {
 				copyVM();
 			}
@@ -508,17 +508,17 @@ public class InstalledJREsBlock implements IAddVMDialogRequestor, ISelectionProv
 		fRemoveButton.addListener(SWT.Selection, new Listener() {
 			@Override
 			public void handleEvent(Event evt) {
-				removeVMs();
+				removeVMs(); //FLLDCIM: MARK — T13 SWT_TYPED_EVENT CALL
 			}
 		});
 
 		SWTFactory.createVerticalSpacer(parent, 1);
 
 		fSearchButton = SWTFactory.createPushButton(buttons, JREMessages.InstalledJREsBlock_6, null);
-		fSearchButton.addListener(SWT.Selection, new Listener() {
-			@Override
+		fSearchButton.addListener(SWT.Selection, new Listener() { //FLLDCIM: MARK — T13 SWT_TYPED_EVENT CALL
+			@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 			public void handleEvent(Event evt) {
-				search();
+				search(); //FLLDCIM: MARK — T09  ANONYMOUS
 			}
 		});
 		detectJvmButton = SWTFactory.createPushButton(buttons, JREMessages.JREsPreferencePage_DetectJVMsNow, null);
@@ -549,12 +549,12 @@ public class InstalledJREsBlock implements IAddVMDialogRequestor, ISelectionProv
 		enableButtons();
 		fAddButton.setEnabled(JavaRuntime.getVMInstallTypes().length > 0);
 
-		JavaRuntime.addVMInstallChangedListener(fListener);
+		JavaRuntime.addVMInstallChangedListener(fListener); //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	}
 
 	/**
-	 * Adds a duplicate of the selected VM to the block
-	 * @since 3.2
+	 * Adds a duplicate of the selected VM to the block //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
+	 * @since 3.2 //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 	 */
 	protected void copyVM() {
         IStructuredSelection selection = (IStructuredSelection) fVMList.getSelection();
@@ -574,12 +574,12 @@ public class InstalledJREsBlock implements IAddVMDialogRequestor, ISelectionProv
 				if (result != null) {
 					newEntries.add(result);
 				}
-			} else if (dialogResult == Window.CANCEL){
+			} else if (dialogResult == Window.CANCEL){ //FLLDCIM: MARK — M21 FULL_REBUILD_TO_DELTA CALL
 				// Canceling one wizard should cancel all subsequent wizards
 				break;
 			}
         }
-        if (newEntries.size() > 0){
+        if (newEntries.size() > 0){ //FLLDCIM: MARK — M21 FULL_REBUILD_TO_DELTA CALL
         	fVMs.addAll(newEntries);
         	fVMList.refresh();
         	fVMList.setSelection(new StructuredSelection(newEntries.toArray()));
@@ -593,15 +593,15 @@ public class InstalledJREsBlock implements IAddVMDialogRequestor, ISelectionProv
 	 * Compares the given name against current names and adds the appropriate numerical
 	 * suffix to ensure that it is unique.
 	 * @param name the name with which to ensure uniqueness
-	 * @return the unique version of the given name
+	 * @return the unique version of the given name //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
 	 * @since 3.2
 	 */
 	public String generateName(String name){
             if (!isDuplicateName(name)) {
-                return name;
+                return name; //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
             }
             if (name.matches(".*\\(\\d*\\)")) { //$NON-NLS-1$
-                int start = name.lastIndexOf('(');
+                int start = name.lastIndexOf('('); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
                 int end = name.lastIndexOf(')');
                 String stringInt = name.substring(start+1, end);
                 int numericValue = Integer.parseInt(stringInt);
@@ -609,7 +609,7 @@ public class InstalledJREsBlock implements IAddVMDialogRequestor, ISelectionProv
                 return generateName(newName);
             }
             return generateName(name + " (1)"); //$NON-NLS-1$
-        }
+        } //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 
 	/**
 	 * Fire current selection
@@ -617,7 +617,7 @@ public class InstalledJREsBlock implements IAddVMDialogRequestor, ISelectionProv
 	private void fireSelectionChanged() {
 		SelectionChangedEvent event = new SelectionChangedEvent(this, getSelection());
 		for (ISelectionChangedListener listener : fSelectionListeners) {
-			listener.selectionChanged(event);
+			listener.selectionChanged(event); //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		}
 	}
 
@@ -646,7 +646,7 @@ public class InstalledJREsBlock implements IAddVMDialogRequestor, ISelectionProv
 			public boolean isSorterProperty(Object element, String property) {
 				return true;
 			}
-		});
+		}); //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		fSortColumn = 3;
 	}
 
@@ -669,7 +669,7 @@ public class InstalledJREsBlock implements IAddVMDialogRequestor, ISelectionProv
 			public boolean isSorterProperty(Object element, String property) {
 				return true;
 			}
-		});
+		}); //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		fSortColumn = 1;
 	}
 
@@ -692,14 +692,14 @@ public class InstalledJREsBlock implements IAddVMDialogRequestor, ISelectionProv
 			public boolean isSorterProperty(Object element, String property) {
 				return true;
 			}
-		});
+		}); //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		fSortColumn = 2;
 	}
 
 	/**
 	 * Enables the buttons based on selected items counts in the viewer
 	 */
-	private void enableButtons() {
+	private void enableButtons() { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 		IStructuredSelection selection = (IStructuredSelection) fVMList.getSelection();
 		int selectionCount= selection.size();
 		fEditButton.setEnabled(selectionCount == 1);
@@ -728,11 +728,11 @@ public class InstalledJREsBlock implements IAddVMDialogRequestor, ISelectionProv
 		return fControl;
 	}
 
-	/**
+	/** //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 	 * Sets the JREs to be displayed in this block
 	 *
-	 * @param vms JREs to be displayed
-	 */
+	 * @param vms JREs to be displayed //FLLDCIM: MARK — M21 FULL_REBUILD_TO_DELTA CALL
+	 */ //FLLDCIM: MARK — M21 FULL_REBUILD_TO_DELTA CALL
 	protected void setJREs(IVMInstall[] vms) {
 		fVMs.clear();
 		for (int i = 0; i < vms.length; i++) {
@@ -747,7 +747,7 @@ public class InstalledJREsBlock implements IAddVMDialogRequestor, ISelectionProv
 	 *
 	 * @return JREs currently being displayed in this block
 	 */
-	public IVMInstall[] getJREs() {
+	public IVMInstall[] getJREs() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		return fVMs.toArray(new IVMInstall[fVMs.size()]);
 	}
 
@@ -755,14 +755,14 @@ public class InstalledJREsBlock implements IAddVMDialogRequestor, ISelectionProv
 	 * Bring up a wizard that lets the user create a new VM definition.
 	 */
 	private void addVM() {
-		AddVMInstallWizard wizard = new AddVMInstallWizard(fVMs.toArray(new IVMInstall[fVMs.size()]));
+		AddVMInstallWizard wizard = new AddVMInstallWizard(fVMs.toArray(new IVMInstall[fVMs.size()])); //FLLDCIM: MARK — M21 FULL_REBUILD_TO_DELTA CALL
 		WizardDialog dialog = new WizardDialog(getShell(), wizard);
 		if (dialog.open() == Window.OK) {
 			VMStandin result = wizard.getResult();
 			if (result != null) {
 				fVMs.add(result);
 				//refresh from model
-				fVMList.refresh();
+				fVMList.refresh(); //FLLDCIM: MARK — M21 FULL_REBUILD_TO_DELTA CALL
 				if (fVMs.size() == 1) {
 					// if this added JRE is the only JRE present, select it
 					setCheckedJRE(result);
@@ -775,9 +775,9 @@ public class InstalledJREsBlock implements IAddVMDialogRequestor, ISelectionProv
 	}
 
 	/**
-	 * @see IAddVMDialogRequestor#vmAdded(IVMInstall)
+	 * @see IAddVMDialogRequestor#vmAdded(IVMInstall) //FLLDCIM: MARK — M21 FULL_REBUILD_TO_DELTA CALL
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — M21 FULL_REBUILD_TO_DELTA CALL
 	public void vmAdded(IVMInstall vm) {
 		boolean makeselection = fVMs.size() < 1;
 		fVMs.add(vm);
@@ -789,7 +789,7 @@ public class InstalledJREsBlock implements IAddVMDialogRequestor, ISelectionProv
 		if(makeselection) {
 			fireSelectionChanged();
 		}
-	}
+	} //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 
 	/**
 	 * @see IAddVMDialogRequestor#isDuplicateName(String)
@@ -801,7 +801,7 @@ public class InstalledJREsBlock implements IAddVMDialogRequestor, ISelectionProv
 			if (vm.getName().equals(name)) {
 				return true;
 			}
-		}
+		} //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		return false;
 	}
 
@@ -821,7 +821,7 @@ public class InstalledJREsBlock implements IAddVMDialogRequestor, ISelectionProv
 			EditVMInstallWizard wizard = new EditVMInstallWizard(vm, fVMs.toArray(new IVMInstall[fVMs.size()]));
 			WizardDialog dialog = new WizardDialog(getShell(), wizard);
 			if (dialog.open() == Window.OK) {
-				VMStandin result = wizard.getResult();
+				VMStandin result = wizard.getResult(); //FLLDCIM: MARK — M21 FULL_REBUILD_TO_DELTA CALL
 				if (result != null) {
 					// replace with the edited VM
 					int index = fVMs.indexOf(vm);
@@ -835,7 +835,7 @@ public class InstalledJREsBlock implements IAddVMDialogRequestor, ISelectionProv
 	}
 
 	/**
-	 * Performs the remove VM(s) action when the Remove... button is pressed
+	 * Performs the remove VM(s) action when the Remove... button is pressed //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 	 */
 	private void removeVMs() {
 		IStructuredSelection selection= (IStructuredSelection)fVMList.getSelection();
@@ -845,11 +845,11 @@ public class InstalledJREsBlock implements IAddVMDialogRequestor, ISelectionProv
 		while (iter.hasNext()) {
 			vms[i] = iter.next();
 			i++;
-		}
-		removeJREs(vms);
+		} //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
+		removeJREs(vms); //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 	}
 
-	/**
+	/** //FLLDCIM: MARK — M21 FULL_REBUILD_TO_DELTA CALL
 	 * Removes the given VMs from the table.
 	 */
 	public void removeJREs(IVMInstall[] vms) {
@@ -861,13 +861,13 @@ public class InstalledJREsBlock implements IAddVMDialogRequestor, ISelectionProv
 		IVMInstall[] installs = getJREs();
 		if(installs.length < 1) {
 			fPrevSelection = null;
-		}
+		} //FLLDCIM: MARK — M21 FULL_REBUILD_TO_DELTA CALL
 		if (curr.size() == 0 && installs.length == 1) {
 			// pick a default VM automatically
 			setSelection(new StructuredSelection(installs[0]));
 		} else {
 			fireSelectionChanged();
-		}
+		} //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		fVMList.refresh(true);
 	}
 
@@ -890,17 +890,17 @@ public class InstalledJREsBlock implements IAddVMDialogRequestor, ISelectionProv
 				return;
 			}
 		} else {
-			path = dialog.open();
-		}
+			path = dialog.open(); //FLLDCIM: MARK — M03 M3_SET_LANES NEW
+		} //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 		if (path == null) {
 			return;
 		}
 
 		// ignore installed locations
-		final Set<File> exstingLocations = new HashSet<>();
-		for (IVMInstall vm : fVMs) {
+		final Set<File> exstingLocations = new HashSet<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
+		for (IVMInstall vm : fVMs) { //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 			exstingLocations.add(vm.getInstallLocation());
-		}
+		} //FLLDCIM: MARK — T09  ANONYMOUS
 
 		// search
 		final File rootDir = new File(path);
@@ -923,14 +923,14 @@ public class InstalledJREsBlock implements IAddVMDialogRequestor, ISelectionProv
 		} catch (InterruptedException e) {
 			// canceled
 			return;
-		}
+		} //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 
 		if (locations.isEmpty()) {
 			String messagePath = path.replace("&", "&&"); // @see bug 29855  //$NON-NLS-1$//$NON-NLS-2$
 			MessageDialog.openInformation(getShell(), JREMessages.InstalledJREsBlock_12, NLS.bind(JREMessages.InstalledJREsBlock_13, messagePath)); //
 		} else {
-			Iterator<IVMInstallType> iter2 = types.iterator();
-			for(File location: locations) {
+			Iterator<IVMInstallType> iter2 = types.iterator(); //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
+			for(File location: locations) { //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 				IVMInstallType type = iter2.next();
 				AbstractVMInstall vm = new VMStandin(type, createUniqueId(type));
 				String name = location.getName();
@@ -945,7 +945,7 @@ public class InstalledJREsBlock implements IAddVMDialogRequestor, ISelectionProv
 					//set default java doc location
 					AbstractVMInstallType abs = (AbstractVMInstallType)type;
 					vm.setJavadocLocation(abs.getDefaultJavadocLocation(location));
-					vm.setVMArgs(abs.getDefaultVMArguments(location));
+					vm.setVMArgs(abs.getDefaultVMArguments(location)); //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 				}
 				vmAdded(vm);
 			}
@@ -968,20 +968,20 @@ public class InstalledJREsBlock implements IAddVMDialogRequestor, ISelectionProv
 				setOperationCancelButtonEnabled(enableCancelButton);
 			}
 		};
-		progress.run(true, true, r);
-	}
-
-	/**
+		progress.run(true, true, r); //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
+	} //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
+ //FLLDCIM: MARK — T09  ANONYMOUS
+	/** //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	 * Calls out to {@link MacVMSearch} to find all installed JREs in the standard
-	 * Mac OS location
-	 */
+	 * Mac OS location //FLLDCIM: MARK — M03 M3_SET_LANES NEW
+	 */ //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 	private void doMacSearch() {
 		final List<VMStandin> added = new ArrayList<>();
 		IRunnableWithProgress r = new IRunnableWithProgress() {
 			@Override
 			public void run(IProgressMonitor monitor) throws InvocationTargetException {
 				Set<String> exists = new HashSet<>();
-				for (IVMInstall vm : fVMs) {
+				for (IVMInstall vm : fVMs) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 					exists.add(vm.getId());
 				}
 				SubMonitor localmonitor = SubMonitor.convert(monitor, JREMessages.MacVMSearch_0, 5);
@@ -1003,7 +1003,7 @@ public class InstalledJREsBlock implements IAddVMDialogRequestor, ISelectionProv
 
 		try {
             ProgressMonitorDialog progress = new ProgressMonitorDialog(getShell());
-            progress.run(true, true, r);
+            progress.run(true, true, r); //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 		} catch (InvocationTargetException e) {
 			JDIDebugUIPlugin.log(e);
 		} catch (InterruptedException e) {
@@ -1018,7 +1018,7 @@ public class InstalledJREsBlock implements IAddVMDialogRequestor, ISelectionProv
 	protected Shell getShell() {
 		return getControl().getShell();
 	}
-
+ //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 	/**
 	 * Find a unique VM id.  Check existing 'real' VMs, as well as the last id used for
 	 * a VMStandin.
@@ -1060,10 +1060,10 @@ public class InstalledJREsBlock implements IAddVMDialogRequestor, ISelectionProv
 
 	/**
 	 * Persist table settings into the give dialog store, prefixed
-	 * with the given key.
-	 *
+	 * with the given key. //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
+	 * //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 	 * @param settings dialog store
-	 * @param qualifier key qualifier
+	 * @param qualifier key qualifier //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 	 */
 	public void saveColumnSettings(IDialogSettings settings, String qualifier) {
         int columnCount = fTable.getColumnCount();
@@ -1073,11 +1073,11 @@ public class InstalledJREsBlock implements IAddVMDialogRequestor, ISelectionProv
 		settings.put(qualifier + ".sortColumn", fSortColumn); //$NON-NLS-1$
 	}
 
-	/**
+	/** //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	 * Restore table settings from the given dialog store using the
 	 * given key.
 	 *
-	 * @param settings dialog settings store
+	 * @param settings dialog settings store //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 	 * @param qualifier key to restore settings from
 	 */
 	public void restoreColumnSettings(IDialogSettings settings, String qualifier) {
@@ -1099,10 +1099,10 @@ public class InstalledJREsBlock implements IAddVMDialogRequestor, ISelectionProv
 				sortByType();
 				break;
 		}
-	}
+	} //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 
 	/**
-	 * Restores the column widths from dialog settings
+	 * Restores the column widths from dialog settings //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 	 */
 	private void restoreColumnWidths(IDialogSettings settings, String qualifier) {
         int columnCount = fTable.getColumnCount();
@@ -1118,12 +1118,12 @@ public class InstalledJREsBlock implements IAddVMDialogRequestor, ISelectionProv
                 fTable.getColumn(i).setWidth(width);
             }
         }
-	}
+	} //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 
-	/**
+	/** //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 	 * Populates the JRE table with existing JREs defined in the workspace.
 	 */
-	protected void fillWithWorkspaceJREs() {
+	protected void fillWithWorkspaceJREs() { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 		// fill with JREs
 		List<VMStandin> standins = new ArrayList<>();
 		IVMInstallType[] types = JavaRuntime.getVMInstallTypes();
@@ -1148,38 +1148,38 @@ public class InstalledJREsBlock implements IAddVMDialogRequestor, ISelectionProv
 	/**
 	 * Disposes the block and any listeners
 	 *
-	 * @since 3.6.300
+	 * @since 3.6.300 //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	 */
 	public void dispose() {
-		fUIBinding = null;
+		fUIBinding = null; //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		JavaRuntime.removeVMInstallChangedListener(fListener);
-	}
+	} //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 
-
-	private StringBuilder appendVMAttributes(IVMInstall vmInstall, StringBuilder buf) {
+ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+	private StringBuilder appendVMAttributes(IVMInstall vmInstall, StringBuilder buf) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 		if (vmInstall != null) {
-			String str = vmInstall.getName();
+			String str = vmInstall.getName(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			buf.append('[').append(str.length()).append(']').append(str);
 			str = vmInstall.getVMInstallType().getName();
 			buf.append('[').append(str.length()).append(']').append(str);
-			if (vmInstall.getVMArguments() != null && vmInstall.getVMArguments().length > 0) {
+			if (vmInstall.getVMArguments() != null && vmInstall.getVMArguments().length > 0) { //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				buf.append('[').append(vmInstall.getVMArguments().length).append(']');
-				for (int i = 0; i < vmInstall.getVMArguments().length; i++) {
+				for (int i = 0; i < vmInstall.getVMArguments().length; i++) { //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 					str = vmInstall.getVMArguments()[i];
 					buf.append('[').append(str.length()).append(']').append(str);
 				}
 			}
 			str = vmInstall.getInstallLocation().getAbsolutePath();
-			buf.append('[').append(str.length()).append(']').append(str).append(';');
+			buf.append('[').append(str.length()).append(']').append(str).append(';'); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 		} else {
 			buf.append('[').append(']').append(';');
 		}
-		return buf;
-	}
+		return buf; //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+	} //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 
 	private String getEncodedVMInstalls() {
 		StringBuilder buf = new StringBuilder();
-		IVMInstall vmInstall = getCheckedJRE();
+		IVMInstall vmInstall = getCheckedJRE(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 
 		int nElements = fVMs.size();
 		buf.append('[').append(nElements).append(']');

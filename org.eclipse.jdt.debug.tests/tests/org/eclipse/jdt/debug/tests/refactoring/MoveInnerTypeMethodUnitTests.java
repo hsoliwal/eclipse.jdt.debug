@@ -35,7 +35,7 @@ public class MoveInnerTypeMethodUnitTests extends MoveRefactoringTest {
 	/**
 	 * Tests if a LineBreakPoint was moved appropriately.
 	 */
-	public void testLineBreakPoint() throws Exception {
+	public void testLineBreakPoint() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IJavaProject javaProject = get14Project();
 		ICompilationUnit cunit= getCompilationUnit(javaProject, "src", "a.b.c", "Movee.java");
 		IJavaElement type = cunit.getType("Movee").getType("InnerType").getMethod("innerTypeMethod", Signature.getParameterTypes("()V"));
@@ -61,7 +61,7 @@ public class MoveInnerTypeMethodUnitTests extends MoveRefactoringTest {
 	/**
 	 * Tests if a MethodBreakPoint was moved appropriately.
 	 */
-	public void testMethodBreakPoint() throws Exception {
+	public void testMethodBreakPoint() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IJavaProject javaProject = get14Project();
 		ICompilationUnit cunit= getCompilationUnit(javaProject, "src", "a.b.c", "Movee.java");
 		IJavaElement type = cunit.getType("Movee").getType("InnerType").getMethods()[0];

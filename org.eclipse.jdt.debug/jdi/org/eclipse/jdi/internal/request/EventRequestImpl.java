@@ -88,10 +88,10 @@ public abstract class EventRequestImpl extends MirrorImpl implements
 	public static final byte MODIF_KIND_PLATFORMTHREADSONLY = 13;
 
 	/** Mapping of command codes to strings. */
-	private static HashMap<Integer, String> fStepSizeMap = null;
-	private static HashMap<Integer, String> fStepDepthMap = null;
-	private static HashMap<Integer, String> fSuspendPolicyMap = null;
-	private static HashMap<Integer, String> fModifierKindMap = null;
+	private static HashMap<Integer, String> fStepSizeMap = null; //FLLDCIM: MARK — M10 M3_PRIMITIVE_LANES FIELD
+	private static HashMap<Integer, String> fStepDepthMap = null; //FLLDCIM: MARK — M10 M3_PRIMITIVE_LANES FIELD
+	private static HashMap<Integer, String> fSuspendPolicyMap = null; //FLLDCIM: MARK — M10 M3_PRIMITIVE_LANES FIELD
+	private static HashMap<Integer, String> fModifierKindMap = null; //FLLDCIM: MARK — M10 M3_PRIMITIVE_LANES FIELD
 
 	/**
 	 * Flag that indicates the request was generated from inside of this JDI
@@ -118,7 +118,7 @@ public abstract class EventRequestImpl extends MirrorImpl implements
 	 * Modifiers.
 	 */
 	/** Count filters. */
-	protected ArrayList<Integer> fCountFilters;
+	protected ArrayList<Integer> fCountFilters; //FLLDCIM: MARK — M10 M3_PRIMITIVE_LANES FIELD
 
 	/** Thread filters. */
 	protected ArrayList<ThreadReference> fThreadFilters = null;
@@ -172,9 +172,9 @@ public abstract class EventRequestImpl extends MirrorImpl implements
 	 */
 	@Override
 	public String toString() {
-		return super.toString()
+		return super.toString() //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 				+ (fRequestID == null ? RequestMessages.EventRequestImpl___not_enabled__1
-						: RequestMessages.EventRequestImpl____2 + fRequestID); //
+						: RequestMessages.EventRequestImpl____2 + fRequestID); // //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 	}
 
 	/**
@@ -195,7 +195,7 @@ public abstract class EventRequestImpl extends MirrorImpl implements
 	@Override
 	public void putProperty(Object key, Object value) {
 		if (fPropertyMap == null) {
-			fPropertyMap = new HashMap<>();
+			fPropertyMap = new HashMap<>(); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
 		}
 
 		if (value == null) {
@@ -224,7 +224,7 @@ public abstract class EventRequestImpl extends MirrorImpl implements
 	/**
 	 * Disables event request.
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public synchronized void disable() {
 		if (!isEnabled()) {
 			return;
@@ -259,7 +259,7 @@ public abstract class EventRequestImpl extends MirrorImpl implements
 	/**
 	 * Enables event request.
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public synchronized void enable() {
 		if (isEnabled()) {
 			return;
@@ -368,7 +368,7 @@ public abstract class EventRequestImpl extends MirrorImpl implements
 	public void addCountFilter(int count) throws InvalidRequestStateException {
 		checkDisabled();
 		if (fCountFilters == null) {
-			fCountFilters = new ArrayList<>();
+			fCountFilters = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 		}
 
 		fCountFilters.add(Integer.valueOf(count));
@@ -386,7 +386,7 @@ public abstract class EventRequestImpl extends MirrorImpl implements
 			throw new ObjectCollectedException();
 		}
 		if (fThreadFilters == null) {
-			fThreadFilters = new ArrayList<>();
+			fThreadFilters = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 		}
 
 		fThreadFilters.add(threadFilter);
@@ -401,7 +401,7 @@ public abstract class EventRequestImpl extends MirrorImpl implements
 		checkVM(filter);
 		checkDisabled();
 		if (fClassFilterRefs == null) {
-			fClassFilterRefs = new ArrayList<>();
+			fClassFilterRefs = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 		}
 
 		fClassFilterRefs.add(filter);
@@ -415,7 +415,7 @@ public abstract class EventRequestImpl extends MirrorImpl implements
 			throws InvalidRequestStateException {
 		checkDisabled();
 		if (fClassFilters == null) {
-			fClassFilters = new ArrayList<>();
+			fClassFilters = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 		}
 
 		fClassFilters.add(filter);
@@ -430,7 +430,7 @@ public abstract class EventRequestImpl extends MirrorImpl implements
 			throws InvalidRequestStateException {
 		checkDisabled();
 		if (fClassExclusionFilters == null) {
-			fClassExclusionFilters = new ArrayList<>();
+			fClassExclusionFilters = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 		}
 
 		fClassExclusionFilters.add(filter);
@@ -446,7 +446,7 @@ public abstract class EventRequestImpl extends MirrorImpl implements
 		// Used in createBreakpointRequest.
 		checkVM(location);
 		if (fLocationFilters == null) {
-			fLocationFilters = new ArrayList<>();
+			fLocationFilters = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 		}
 
 		fLocationFilters.add(location);
@@ -466,7 +466,7 @@ public abstract class EventRequestImpl extends MirrorImpl implements
 		}
 
 		if (fExceptionFilters == null) {
-			fExceptionFilters = new ArrayList<>();
+			fExceptionFilters = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 		}
 
 		ExceptionFilter filter = new ExceptionFilter();
@@ -484,7 +484,7 @@ public abstract class EventRequestImpl extends MirrorImpl implements
 		// Used in createXWatchpointRequest methods.
 		checkVM(field);
 		if (fFieldFilters == null) {
-			fFieldFilters = new ArrayList<>();
+			fFieldFilters = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 		}
 
 		fFieldFilters.add(field);
@@ -501,7 +501,7 @@ public abstract class EventRequestImpl extends MirrorImpl implements
 		checkVM(thread);
 
 		if (fThreadStepFilters == null) {
-			fThreadStepFilters = new ArrayList<>();
+			fThreadStepFilters = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 		}
 
 		ThreadStepFilter filter = new ThreadStepFilter();
@@ -521,7 +521,7 @@ public abstract class EventRequestImpl extends MirrorImpl implements
 		checkDisabled();
 		checkVM(instance);
 		if (fInstanceFilters == null) {
-			fInstanceFilters = new ArrayList<>();
+			fInstanceFilters = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 		}
 		fInstanceFilters.add(instance);
 	}
@@ -537,7 +537,7 @@ public abstract class EventRequestImpl extends MirrorImpl implements
 	public void addSourceNameFilter(String pattern) {
 		checkDisabled();
 		if (fSourceNameFilters == null) {
-			fSourceNameFilters = new ArrayList<>();
+			fSourceNameFilters = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 		}
 		fSourceNameFilters.add(pattern);
 	}
@@ -559,7 +559,7 @@ public abstract class EventRequestImpl extends MirrorImpl implements
 			return SUSPENDPOL_ALL_JDWP;
 		default:
 			throw new InternalException(
-					RequestMessages.EventRequestImpl_Invalid_suspend_policy_encountered___3
+					RequestMessages.EventRequestImpl_Invalid_suspend_policy_encountered___3 //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 							+ fSuspendPolicy);
 		}
 	}
@@ -575,7 +575,7 @@ public abstract class EventRequestImpl extends MirrorImpl implements
 			return STEP_SIZE_LINE_JDWP;
 		default:
 			throw new InternalException(
-					RequestMessages.EventRequestImpl_Invalid_step_size_encountered___4
+					RequestMessages.EventRequestImpl_Invalid_step_size_encountered___4 //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 							+ threadStepSize);
 		}
 	}
@@ -593,7 +593,7 @@ public abstract class EventRequestImpl extends MirrorImpl implements
 			return STEP_DEPTH_OUT_JDWP;
 		default:
 			throw new InternalException(
-					RequestMessages.EventRequestImpl_Invalid_step_depth_encountered___5
+					RequestMessages.EventRequestImpl_Invalid_step_depth_encountered___5 //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 							+ threadStepDepth);
 		}
 	}
@@ -606,7 +606,7 @@ public abstract class EventRequestImpl extends MirrorImpl implements
 	/**
 	 * @return Returns number of modifiers.
 	 */
-	protected int modifierCount() {
+	protected int modifierCount() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		int count = 0;
 
 		if (fCountFilters != null) {
@@ -653,12 +653,12 @@ public abstract class EventRequestImpl extends MirrorImpl implements
 	/**
 	 * Writes JDWP bytestream representation of modifiers.
 	 */
-	protected void writeModifiers(DataOutputStream outData) throws IOException {
+	protected void writeModifiers(DataOutputStream outData) throws IOException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		// Note: for some reason the order of these modifiers matters when
 		// communicating with SUN's VM.
 		// It seems to expect them 'the wrong way around'.
 		if (fThreadStepFilters != null) {
-			for (ThreadStepFilter filter : fThreadStepFilters) {
+			for (ThreadStepFilter filter : fThreadStepFilters) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				writeByte(MODIF_KIND_STEP,
 						"modifier", modifierKindMap(), outData); //$NON-NLS-1$
 				filter.fThread.write(this, outData);
@@ -669,7 +669,7 @@ public abstract class EventRequestImpl extends MirrorImpl implements
 			}
 		}
 		if (fFieldFilters != null) {
-			for (FieldImpl field : fFieldFilters) {
+			for (FieldImpl field : fFieldFilters) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				writeByte(MODIF_KIND_FIELDONLY,
 						"modifier", modifierKindMap(), outData); //$NON-NLS-1$
 				field.writeWithReferenceType(this,
@@ -677,7 +677,7 @@ public abstract class EventRequestImpl extends MirrorImpl implements
 			}
 		}
 		if (fExceptionFilters != null) {
-			for (ExceptionFilter filter : fExceptionFilters) {
+			for (ExceptionFilter filter : fExceptionFilters) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				writeByte(MODIF_KIND_EXCEPTIONONLY,
 						"modifier", modifierKindMap(), outData); //$NON-NLS-1$
 				if (filter.fException != null) {
@@ -691,14 +691,14 @@ public abstract class EventRequestImpl extends MirrorImpl implements
 			}
 		}
 		if (fLocationFilters != null) {
-			for (LocationImpl locationFilter : fLocationFilters) {
+			for (LocationImpl locationFilter : fLocationFilters) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				writeByte(MODIF_KIND_LOCATIONONLY,
 						"modifier", modifierKindMap(), outData); //$NON-NLS-1$
 				locationFilter.write(this, outData);
 			}
 		}
 		if (fClassExclusionFilters != null) {
-			for (String classExclusionFilter : fClassExclusionFilters) {
+			for (String classExclusionFilter : fClassExclusionFilters) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				writeByte(MODIF_KIND_CLASSEXCLUDE,
 						"modifier", modifierKindMap(), outData); //$NON-NLS-1$
 				writeString(classExclusionFilter,
@@ -706,7 +706,7 @@ public abstract class EventRequestImpl extends MirrorImpl implements
 			}
 		}
 		if (fClassFilters != null) {
-			for (String classFilter : fClassFilters) {
+			for (String classFilter : fClassFilters) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				writeByte(MODIF_KIND_CLASSMATCH,
 						"modifier", modifierKindMap(), outData); //$NON-NLS-1$
 				writeString(classFilter,
@@ -714,7 +714,7 @@ public abstract class EventRequestImpl extends MirrorImpl implements
 			}
 		}
 		if (fClassFilterRefs != null) {
-			for (ReferenceType classFilterRef : fClassFilterRefs) {
+			for (ReferenceType classFilterRef : fClassFilterRefs) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				writeByte(MODIF_KIND_CLASSONLY,
 						"modifier", modifierKindMap(), outData); //$NON-NLS-1$
 				((ReferenceTypeImpl) classFilterRef).write(this,
@@ -722,7 +722,7 @@ public abstract class EventRequestImpl extends MirrorImpl implements
 			}
 		}
 		if (fThreadFilters != null) {
-			for (ThreadReference threadFilter : fThreadFilters) {
+			for (ThreadReference threadFilter : fThreadFilters) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				writeByte(MODIF_KIND_THREADONLY,
 						"modifier", modifierKindMap(), outData); //$NON-NLS-1$
 				((ThreadReferenceImpl) threadFilter).write(this,
@@ -730,7 +730,7 @@ public abstract class EventRequestImpl extends MirrorImpl implements
 			}
 		}
 		if (fCountFilters != null) {
-			for (Integer countFilter : fCountFilters) {
+			for (Integer countFilter : fCountFilters) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				writeByte(MODIF_KIND_COUNT,
 						"modifier", modifierKindMap(), outData); //$NON-NLS-1$
 				writeInt(countFilter.intValue(),
@@ -738,7 +738,7 @@ public abstract class EventRequestImpl extends MirrorImpl implements
 			}
 		}
 		if (fInstanceFilters != null) {
-			for (ObjectReference instanceFilter : fInstanceFilters) {
+			for (ObjectReference instanceFilter : fInstanceFilters) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				writeByte(MODIF_KIND_INSTANCE,
 						"modifier", modifierKindMap(), outData); //$NON-NLS-1$
 				((ObjectReferenceImpl) instanceFilter).write(this,
@@ -747,7 +747,7 @@ public abstract class EventRequestImpl extends MirrorImpl implements
 		}
 		if (fSourceNameFilters != null) {
 			if (supportsSourceNameFilters()) {
-				for (String sourceNameFilter : fSourceNameFilters) {
+				for (String sourceNameFilter : fSourceNameFilters) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 					writeByte(MODIF_KIND_SOURCE_NAME_FILTER,
 							"modifier", modifierKindMap(), outData); //$NON-NLS-1$
 					writeString(sourceNameFilter,
@@ -782,16 +782,16 @@ public abstract class EventRequestImpl extends MirrorImpl implements
 	/**
 	 * Retrieves constant mappings.
 	 */
-	public static void getConstantMaps() {
+	public static void getConstantMaps() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		if (fStepSizeMap != null) {
 			return;
 		}
 
-		fStepSizeMap = new HashMap<>();
-		fStepDepthMap = new HashMap<>();
-		fSuspendPolicyMap = new HashMap<>();
-		fModifierKindMap = new HashMap<>();
-		for (Field field : EventRequestImpl.class.getDeclaredFields()) {
+		fStepSizeMap = new HashMap<>(); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
+		fStepDepthMap = new HashMap<>(); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
+		fSuspendPolicyMap = new HashMap<>(); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
+		fModifierKindMap = new HashMap<>(); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
+		for (Field field : EventRequestImpl.class.getDeclaredFields()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			if ((field.getModifiers() & java.lang.reflect.Modifier.PUBLIC) == 0
 					|| (field.getModifiers() & java.lang.reflect.Modifier.STATIC) == 0
 					|| (field.getModifiers() & java.lang.reflect.Modifier.FINAL) == 0) {

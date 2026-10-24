@@ -43,7 +43,7 @@ public class MacOSXVMInstall extends AbstractVMInstall {
 		return null;
 	}
 
-    @Override
+    @Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public String getJavaVersion() {
         File installLocation= getInstallLocation();
         if (installLocation != null) {
@@ -52,11 +52,11 @@ public class MacOSXVMInstall extends AbstractVMInstall {
                 MacOSXVMInstallType installType= (MacOSXVMInstallType) getVMInstallType();
                 String vmVersion= installType.getVMVersion(installLocation, executable);
                 // strip off extra info
-                StringBuilder version= new StringBuilder();
-                for (int i= 0; i < vmVersion.length(); i++) {
+                StringBuilder version= new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
+                for (int i= 0; i < vmVersion.length(); i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
                     char ch= vmVersion.charAt(i);
                     if (Character.isDigit(ch) || ch == '.') {
-                        version.append(ch);
+                        version.append(ch); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
                     } else {
                         break;
                     }
