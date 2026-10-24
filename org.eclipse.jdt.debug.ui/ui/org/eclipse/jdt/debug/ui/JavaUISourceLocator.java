@@ -293,15 +293,7 @@ public class JavaUISourceLocator implements IPersistableSourceLocator {
 		String handle = fJavaProject.getHandleIdentifier();
 		String findAll = Boolean.toString(isFindAllSourceElements());
 
-		StringBuilder buffer = new StringBuilder();
-		buffer.append("<project>"); //$NON-NLS-1$
-		buffer.append(handle);
-		buffer.append("</project>"); //$NON-NLS-1$
-		buffer.append("<findAll>"); //$NON-NLS-1$
-		buffer.append(findAll);
-		buffer.append("</findAll>"); //$NON-NLS-1$
-		buffer.append(memento);
-		return buffer.toString();
+		return "<project>" + handle + "</project>" + "<findAll>" + findAll + "</findAll>" + memento; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 	}
 
 	/**

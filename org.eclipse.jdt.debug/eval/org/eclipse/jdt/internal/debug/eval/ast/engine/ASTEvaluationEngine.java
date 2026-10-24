@@ -904,10 +904,7 @@ public class ASTEvaluationEngine implements IAstEvaluationEngine {
 			result.setTerminated(er.fTerminated);
 			if (exception != null) {
 				if (JDIDebugOptions.DEBUG_AST_EVAL) {
-					StringBuilder buf = new StringBuilder();
-					buf.append("\tException: "); //$NON-NLS-1$
-					buf.append(exception.toString());
-					JDIDebugOptions.trace(buf.toString());
+					JDIDebugOptions.trace("\tException: " + exception.toString()); //$NON-NLS-1$
 				}
 				if (exception instanceof DebugException) {
 					result.setException((DebugException) exception);
@@ -918,10 +915,7 @@ public class ASTEvaluationEngine implements IAstEvaluationEngine {
 				if (value != null) {
 					result.setValue(value);
 					if (JDIDebugOptions.DEBUG_AST_EVAL) {
-						StringBuilder buf = new StringBuilder();
-						buf.append("\tResult: "); //$NON-NLS-1$
-						buf.append(value);
-						JDIDebugOptions.trace(buf.toString());
+						JDIDebugOptions.trace("\tResult: " + value); //$NON-NLS-1$
 					}
 				} else {
 					result.addError(EvaluationEngineMessages.ASTEvaluationEngine_An_unknown_error_occurred_during_evaluation);
@@ -929,11 +923,7 @@ public class ASTEvaluationEngine implements IAstEvaluationEngine {
 			}
 
 			if (JDIDebugOptions.DEBUG_AST_EVAL) {
-				StringBuilder buf = new StringBuilder();
-				buf.append("\tDuration: "); //$NON-NLS-1$
-				buf.append(end - start);
-				buf.append("ms"); //$NON-NLS-1$
-				JDIDebugOptions.trace(buf.toString());
+				JDIDebugOptions.trace("\tDuration: " + (end - start) + "ms"); //$NON-NLS-1$ //$NON-NLS-2$
 			}
 
 			evaluationFinished(result);

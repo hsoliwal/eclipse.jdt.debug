@@ -207,16 +207,7 @@ public class MirrorImpl implements Mirror {
 				.getReply(commandPacket);
 		long recieved = System.currentTimeMillis();
 		if (JDIDebugOptions.DEBUG_JDI_REQUEST_TIMES) {
-			StringBuilder buf = new StringBuilder();
-			buf.append(JDIDebugOptions.FORMAT.format(Instant.ofEpochMilli(sent)));
-			buf.append(" JDI Request: "); //$NON-NLS-1$
-			buf.append(commandPacket.toString());
-			buf.append("\n\tResponse Time: "); //$NON-NLS-1$
-			buf.append(recieved - sent);
-			buf.append("ms"); //$NON-NLS-1$
-			buf.append(" length: "); //$NON-NLS-1$
-			buf.append(reply.getLength());
-			JDIDebugOptions.trace(buf.toString());
+			JDIDebugOptions.trace(JDIDebugOptions.FORMAT.format(Instant.ofEpochMilli(sent)) + " JDI Request: " + commandPacket.toString() + "\n\tResponse Time: " + (recieved - sent) + "ms" + " length: " + reply.getLength()); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 		}
 		if (fVerboseWriter != null) {
 			fVerboseWriter.println();

@@ -805,11 +805,7 @@ public final class JavaBreakpointConditionEditor extends AbstractJavaBreakpointE
 			dashes.append('-');
 		}
 
-		StringBuilder result= new StringBuilder();
-		result.append(dashes);
-		result.append(" " + separatorLabel + " "); //$NON-NLS-1$//$NON-NLS-2$
-		result.append(dashes);
-		return result.toString().trim();
+		return ("" + dashes + (" " + separatorLabel + " ") + dashes).trim(); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 	}
 
 	private void registerViewerUndoRedoActions() {

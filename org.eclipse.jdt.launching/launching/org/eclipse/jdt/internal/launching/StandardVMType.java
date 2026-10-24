@@ -379,11 +379,7 @@ public class StandardVMType extends AbstractVMInstallType {
 		if (extension != null) {
 			IPath srcPath = IPath.fromFile(libLocation);
 			srcPath = srcPath.removeLastSegments(1);
-			StringBuilder buf = new StringBuilder();
-			buf.append(prefix);
-			buf.append("-src."); //$NON-NLS-1$
-			buf.append(extension);
-			srcPath = srcPath.append(buf.toString());
+			srcPath = srcPath.append(prefix + "-src." + extension); //$NON-NLS-1$
 			if (srcPath.toFile().exists()) {
 				return srcPath;
 			}
