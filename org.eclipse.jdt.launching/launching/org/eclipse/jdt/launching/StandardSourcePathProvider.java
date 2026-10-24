@@ -22,6 +22,7 @@ import java.util.List;
 import java.util.jar.Attributes;
 import java.util.jar.JarFile;
 import java.util.jar.Manifest;
+import java.util.regex.Pattern;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
@@ -107,6 +108,8 @@ public class StandardSourcePathProvider extends StandardClasspathProvider {
 		return all.toArray(new IRuntimeClasspathEntry[all.size()]);
 	}
 
+    private static final Pattern ENTRIES_PATTERN = Pattern.compile("\\s+"); //$NON-NLS-1$
+
     /**
      * If the given entry is an archive, adds any archives referenced by the associated manifest.
      *
@@ -124,7 +127,7 @@ public class StandardSourcePathProvider extends StandardClasspathProvider {
                         if (mainAttributes != null) {
                             String value = mainAttributes.getValue(Attributes.Name.CLASS_PATH);
                             if (value != null) {
-                                String[] entries = value.split("\\s+"); //$NON-NLS-1$
+                                String[] entries = ENTRIES_PATTERN.split(value);
                                 IPath base = new Path(location);
                                 base = base.removeLastSegments(1);
                                 for (int i = 0; i < entries.length; i++) {

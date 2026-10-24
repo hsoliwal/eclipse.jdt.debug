@@ -63,14 +63,21 @@ import org.eclipse.ui.texteditor.ITextEditor;
  */
 public class JavaStackTraceHyperlink implements IHyperlink {
 	final static String ANSI_ESCAPE_REGEX = "\033\\[[\\d;]*[A-HJKSTfimnsu]"; //$NON-NLS-1$
+	private static final Pattern ANSI_ESCAPE_PATTERN = Pattern.compile(ANSI_ESCAPE_REGEX);
 	private final TextConsole fConsole;
 	private final AtomicReference<String> generatedLink;
 	private static final String REGEX_FOR_NORMAL = "([a-zA-Z0-9\\$]+)\\.([a-zA-Z0-9]+)\\(([^)]*)\\)"; //$NON-NLS-1$
+	private static final Pattern REGEX_FOR_NORMAL_PATTERN = Pattern.compile(REGEX_FOR_NORMAL);
 	private static final String REGEX_FOR_GENERICS = "([a-zA-Z0-9\\$]+(?:<[a-zA-Z0-9,<>]+>)?)\\.([a-zA-Z0-9]+)\\(([^)]*)\\)"; //$NON-NLS-1$
+	private static final Pattern REGEX_FOR_GENERICS_PATTERN = Pattern.compile(REGEX_FOR_GENERICS);
 	private static final String REGEX_FOR_INNER_CLASS = "([a-zA-Z0-9\\$]+(?:\\([a-zA-Z0-9]+\\))?)\\.([a-zA-Z0-9]+)\\(([^)]*)\\)"; //$NON-NLS-1$
+	private static final Pattern REGEX_FOR_INNER_CLASS_PATTERN = Pattern.compile(REGEX_FOR_INNER_CLASS);
 	private static final String METHOD_SIGNATURE_REGEX = "\\w+\\([^)]*\\)"; //$NON-NLS-1$
+	private static final Pattern METHOD_SIGNATURE_PATTERN = Pattern.compile(METHOD_SIGNATURE_REGEX);
 	private static final String METHOD_ARGUMENTS_REGEX = "\\(([^)]*)\\)"; //$NON-NLS-1$
+	private static final Pattern METHOD_ARGUMENTS_PATTERN = Pattern.compile(METHOD_ARGUMENTS_REGEX);
 	private static final String INNER_CLASS_ARGUMENTS_REGEX = "\\(([^)]+)\\)"; //$NON-NLS-1$
+	private static final Pattern INNER_CLASS_ARGUMENTS_PATTERN = Pattern.compile(INNER_CLASS_ARGUMENTS_REGEX);
 	/**
 	 * Constructor
 	 *
@@ -105,7 +112,7 @@ public class JavaStackTraceHyperlink implements IHyperlink {
 		int lineNumber;
 		try {
 			String linkText = getLinkText();
-			linkText = linkText.replaceAll(ANSI_ESCAPE_REGEX, ""); //$NON-NLS-1$
+			linkText = ANSI_ESCAPE_PATTERN.matcher(linkText).replaceAll(""); //$NON-NLS-1$
 			generatedLink.set(linkText);
 			typeName = getTypeName(linkText);
 			lineNumber = getLineNumber(linkText);
@@ -258,21 +265,21 @@ public class JavaStackTraceHyperlink implements IHyperlink {
 	 */
 	public IStatus processAmbiguousResults(List<Object> matches, String typeName, int line, String link) {
 		List<Object> exactMatchesFiltered = new ArrayList<>();
-		Pattern pattern = Pattern.compile(REGEX_FOR_NORMAL);
+		Pattern pattern = REGEX_FOR_NORMAL_PATTERN;
 		Matcher matcher = pattern.matcher(link);
 		String methodSignature = null;
 		if (matcher.find()) {
 			methodSignature = matcher.group(2) + "(" + matcher.group(3) + ")"; //$NON-NLS-1$ //$NON-NLS-2$
 		}
 		if (methodSignature == null) {
-			pattern = Pattern.compile(REGEX_FOR_GENERICS);
+			pattern = REGEX_FOR_GENERICS_PATTERN;
 			matcher = pattern.matcher(link);
 			if (matcher.find()) {
 				methodSignature = matcher.group(2) + "(" + matcher.group(3) + ")"; //$NON-NLS-1$ //$NON-NLS-2$
 			}
 		}
 		if (methodSignature == null) {
-			pattern = Pattern.compile(REGEX_FOR_INNER_CLASS);
+			pattern = REGEX_FOR_INNER_CLASS_PATTERN;
 			matcher = pattern.matcher(link);
 			if (matcher.find()) {
 				methodSignature = matcher.group(2) + "(" + matcher.group(3) + ")"; //$NON-NLS-1$ //$NON-NLS-2$
@@ -433,14 +440,14 @@ public class JavaStackTraceHyperlink implements IHyperlink {
 					return true;
 				}
 				String methodDetails = method.toString();
-				Pattern pattern = Pattern.compile(METHOD_SIGNATURE_REGEX);
+				Pattern pattern = METHOD_SIGNATURE_PATTERN;
 				Matcher matcher = pattern.matcher(methodDetails);
 				if (!matcher.find()) {
 					return false;
 				}
 				String methodName = matcher.group();
 				methodName = methodName.replace(" ", ""); //$NON-NLS-1$//$NON-NLS-2$
-				pattern = Pattern.compile(METHOD_ARGUMENTS_REGEX);
+				pattern = METHOD_ARGUMENTS_PATTERN;
 				matcher = pattern.matcher(methodSignature);
 				if (!matcher.find()) {
 					return false;
@@ -487,7 +494,7 @@ public class JavaStackTraceHyperlink implements IHyperlink {
 	 */
 	private String innerClassMethodSignatureGen(String extractedMethodName, String methodSignature) {
 		StringBuilder newSignature = new StringBuilder(extractedMethodName + "("); //$NON-NLS-1$
-		Pattern pattern = Pattern.compile(INNER_CLASS_ARGUMENTS_REGEX);
+		Pattern pattern = INNER_CLASS_ARGUMENTS_PATTERN;
 		Matcher matcher = pattern.matcher(methodSignature);
 		matcher.find();
 		String paramsExtracted = matcher.group(1);
@@ -763,6 +770,8 @@ public class JavaStackTraceHyperlink implements IHyperlink {
 		return typeName;
 	}
 
+	private static final Pattern FILTER_BINARY_TYPES_PATTERN = Pattern.compile("@(.*?)\\/"); //$NON-NLS-1$
+
 	/**
 	 * Intermediate method to filter Binary Types based on given version
 	 *
@@ -777,7 +786,7 @@ public class JavaStackTraceHyperlink implements IHyperlink {
 			List<Object> filteredResults = new ArrayList<>();
 			int binaryInserted = 0;
 			try {
-				Pattern pattern = Pattern.compile("@(.*?)\\/"); //$NON-NLS-1$
+				Pattern pattern = FILTER_BINARY_TYPES_PATTERN;
 				Matcher match = pattern.matcher(link);
 				if (match.find()) {
 					String jdkVersion = match.group(1);
