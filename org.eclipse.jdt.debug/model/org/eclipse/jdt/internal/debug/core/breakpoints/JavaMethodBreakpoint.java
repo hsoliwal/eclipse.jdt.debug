@@ -54,6 +54,10 @@ import com.sun.jdi.request.MethodExitRequest;
 
 public class JavaMethodBreakpoint extends JavaLineBreakpoint implements //FLLDCIM: MARK — T27  IMPLEMENTS
 		IJavaMethodBreakpoint {
+	private static final Pattern METHOD_DOT_PATTERN = Pattern.compile("\\."); //$NON-NLS-1$
+	private static final Pattern METHOD_STAR_PATTERN = Pattern.compile("\\*"); //$NON-NLS-1$
+	private static final Pattern METHOD_DOLLAR_PATTERN = Pattern.compile("\\$"); //$NON-NLS-1$
+
 
 	public static final String JAVA_METHOD_BREAKPOINT = "org.eclipse.jdt.debug.javaMethodBreakpointMarker"; //$NON-NLS-1$
 
@@ -683,9 +687,9 @@ public class JavaMethodBreakpoint extends JavaLineBreakpoint implements //FLLDCI
 	 * @return the modified pattern
 	 */
 	private String convertToRegularExpression(String stringMatcherPattern) {
-		String regex = stringMatcherPattern.replaceAll("\\.", "\\\\."); //$NON-NLS-1$//$NON-NLS-2$ //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
-		regex = regex.replaceAll("\\*", "\\.\\*"); //$NON-NLS-1$//$NON-NLS-2$ //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
-		regex = regex.replaceAll("\\$", "\\\\\\$"); //$NON-NLS-1$ //$NON-NLS-2$ //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
+		String regex = METHOD_DOT_PATTERN.matcher(stringMatcherPattern).replaceAll("\\\\."); //$NON-NLS-1$//$NON-NLS-2$ //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
+		regex = METHOD_STAR_PATTERN.matcher(regex).replaceAll("\\.\\*"); //$NON-NLS-1$//$NON-NLS-2$ //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
+		regex = METHOD_DOLLAR_PATTERN.matcher(regex).replaceAll("\\\\\\$"); //$NON-NLS-1$ //$NON-NLS-2$ //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
 		return regex;
 	}
 
