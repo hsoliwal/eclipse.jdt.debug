@@ -214,7 +214,7 @@ public class MacOSXVMInstallType extends StandardVMType {
 		if (javaVMName == null) {
 			return null;
 		}
-		if (!JVM_VERSIONS_FOLDER.exists() || !JVM_VERSIONS_FOLDER.isDirectory()) {
+		if (!JVM_VERSIONS_FOLDER.isDirectory()) {
 			String message= NLS.bind(Messages.MacOSXVMInstallType_1, JVM_VERSIONS_FOLDER);
 			LaunchingPlugin.log(message);
 			return null;

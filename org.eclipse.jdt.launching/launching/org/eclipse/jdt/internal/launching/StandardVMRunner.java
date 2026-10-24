@@ -310,7 +310,7 @@ public class StandardVMRunner extends AbstractVMRunner {
 	 * @return true if the file indeed exists, false otherwise
 	 */
 	protected boolean fileExists(File file) {
-		return file.exists() && file.isFile();
+		return file.isFile();
 	}
 
 	protected String convertClassPath(String[] cp) {

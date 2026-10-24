@@ -193,7 +193,7 @@ public class DirectorySourceLocation extends PlatformObject implements IJavaSour
 				abort(LaunchingMessages.DirectorySourceLocation_Unable_to_initialize_source_location___missing_directory_path_3, null);
 			} else {
 				File dir = new File(path);
-				if (dir.exists() && dir.isDirectory()) {
+				if (dir.isDirectory()) {
 					setDirectory(dir);
 				} else {
 					abort(NLS.bind(LaunchingMessages.DirectorySourceLocation_Unable_to_initialize_source_location___directory_does_not_exist___0__4, new String[] {path}), null);

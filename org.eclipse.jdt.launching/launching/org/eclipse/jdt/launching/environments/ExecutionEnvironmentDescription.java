@@ -265,7 +265,7 @@ public final class ExecutionEnvironmentDescription {
 			for (int i = 0; i < bootpath.length; i++) {
 				IPath path = IPath.fromOSString(bootpath[i]);
 				File lib = path.toFile();
-				if (lib.exists() && lib.isFile()) {
+				if (lib.isFile()) {
 					LibraryLocation libraryLocation = new LibraryLocation(path, src, IPath.EMPTY, url, indexurl);
 					boot.add(libraryLocation);
 				}
