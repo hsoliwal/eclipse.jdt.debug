@@ -130,9 +130,27 @@ public class InstalledJREsBlock implements IAddVMDialogRequestor, ISelectionProv
 		 */
 		@Override
 		public void vmAdded(IVMInstall vm) {
-			if(!fVMs.contains(vm)) {
-				fVMs.add(vm);
-				doRefresh();
+			// JavaRuntime listeners can run on arbitrary threads. The original
+			// ArrayList and CheckboxTableViewer are owned by one SWT Display.
+			UIBinding binding = fUIBinding;
+			if (binding == null) {
+				return;
+			}
+			Runnable deliver = () -> {
+				if (fUIBinding != binding || binding.control().isDisposed() || fVMList == null
+						|| fVMList.getControl().isDisposed()) {
+					return; // A queued notification belongs to an older form.
+				}
+				if (!fVMs.contains(vm)) {
+					fVMs.add(vm);
+					fVMList.refresh();
+				}
+			};
+			Display display = binding.display();
+			if (Display.getCurrent() == display) {
+				deliver.run();
+			} else if (!display.isDisposed()) {
+				display.asyncExec(deliver);
 			}
 		}
 
@@ -142,24 +160,6 @@ public class InstalledJREsBlock implements IAddVMDialogRequestor, ISelectionProv
 		@Override
 		public void vmRemoved(IVMInstall vm) {
 			//do nothing, we do not want other bundles removing VM installs without user interaction
-		}
-
-		/**
-		 * Refreshes the VM listing after a VM install notification, might not happen on the UI thread
-		 */
-		void doRefresh() {
-			Display display = Display.getDefault();
-			if(display.getThread().equals(Thread.currentThread())) {
-				fVMList.refresh();
-			}
-			else {
-				display.asyncExec(new Runnable() {
-					@Override
-					public void run() {
-						fVMList.refresh();
-					}
-				});
-			}
 		}
 	}
 
@@ -175,6 +175,12 @@ public class InstalledJREsBlock implements IAddVMDialogRequestor, ISelectionProv
 	 * This block's control
 	 */
 	private Composite fControl;
+
+	/** Immutable UI-thread ownership published before listener registration. */
+	private record UIBinding(Display display, Composite control) { }
+
+	/** Volatile binding identity invalidates stale callbacks after disposal/recreation. */
+	private volatile UIBinding fUIBinding;
 
 	/**
 	 * VMs being displayed
@@ -382,6 +388,7 @@ public class InstalledJREsBlock implements IAddVMDialogRequestor, ISelectionProv
 		Font font = ancestor.getFont();
 		Composite parent= SWTFactory.createComposite(ancestor, font, 2, 1, GridData.FILL_BOTH);
 		fControl = parent;
+		fUIBinding = new UIBinding(parent.getDisplay(), parent);
 
 		SWTFactory.createLabel(parent, JREMessages.InstalledJREsBlock_15, 2);
 
@@ -1147,6 +1154,7 @@ public class InstalledJREsBlock implements IAddVMDialogRequestor, ISelectionProv
 	 * @since 3.6.300
 	 */
 	public void dispose() {
+		fUIBinding = null;
 		JavaRuntime.removeVMInstallChangedListener(fListener);
 	}
 
