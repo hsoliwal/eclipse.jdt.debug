@@ -43,6 +43,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import java.util.zip.ZipEntry;
@@ -3585,6 +3586,7 @@ public final class JavaRuntime {
 
 	private static final String BLANK = " "; //$NON-NLS-1$
 	private static final String COMMA = ","; //$NON-NLS-1$
+	private static final Pattern COMMA_PATTERN = Pattern.compile(COMMA);
 	private static final String OPTION_START = "--"; //$NON-NLS-1$
 	private static final String ADD_MODULES = "--add-modules "; //$NON-NLS-1$
 	private static final String LIMIT_MODULES = "--limit-modules "; //$NON-NLS-1$
@@ -3692,7 +3694,7 @@ public final class JavaRuntime {
 		return buf.toString().trim();
 	}
 	private static void addLimitModules(StringBuilder buf, IJavaProject prj, IClasspathEntry systemLibrary, String value) throws JavaModelException {
-		String[] modules = value.split(COMMA);
+		String[] modules = COMMA_PATTERN.split(value);
 		boolean isUnnamed = prj.getModuleDescription() == null;
 		if (isUnnamed) {
 			Set<String> selected = new HashSet<>(Arrays.asList(modules));

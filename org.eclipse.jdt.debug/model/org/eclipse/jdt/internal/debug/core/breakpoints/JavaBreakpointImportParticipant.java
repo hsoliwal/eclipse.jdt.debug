@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Stack;
+import java.util.regex.Pattern;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IMarker;
@@ -281,6 +282,8 @@ public class JavaBreakpointImportParticipant implements
 			return false;
 		}
 
+		private static final Pattern SIG_PATTERN = Pattern.compile("\\."); //$NON-NLS-1$
+
 		/**
 		 * @see org.eclipse.jdt.core.dom.ASTVisitor#visit(org.eclipse.jdt.core.dom.MethodDeclaration)
 		 */
@@ -297,7 +300,7 @@ public class JavaBreakpointImportParticipant implements
 			if (name != null && name.getFullyQualifiedName().equals(fName)) {
 				String sig = getMethodSignatureFromNode(node);
 				if (sig != null) {
-					sig = sig.replaceAll("\\.", "/"); //$NON-NLS-1$ //$NON-NLS-2$
+					sig = SIG_PATTERN.matcher(sig).replaceAll("/"); //$NON-NLS-1$
 					if (sig.equals(fSignature)) {
 						IMarker marker = fBreakpoint.getMarker();
 						int currentstart = marker.getAttribute(
