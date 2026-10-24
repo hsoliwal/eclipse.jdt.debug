@@ -71,6 +71,12 @@ public class JavaStackTraceHyperlink implements IHyperlink {
 	private static final String METHOD_SIGNATURE_REGEX = "\\w+\\([^)]*\\)"; //$NON-NLS-1$
 	private static final String METHOD_ARGUMENTS_REGEX = "\\(([^)]*)\\)"; //$NON-NLS-1$
 	private static final String INNER_CLASS_ARGUMENTS_REGEX = "\\(([^)]+)\\)"; //$NON-NLS-1$
+	private static final Pattern REGEX_FOR_NORMAL_PATTERN = Pattern.compile(REGEX_FOR_NORMAL);
+	private static final Pattern REGEX_FOR_GENERICS_PATTERN = Pattern.compile(REGEX_FOR_GENERICS);
+	private static final Pattern REGEX_FOR_INNER_CLASS_PATTERN = Pattern.compile(REGEX_FOR_INNER_CLASS);
+	private static final Pattern METHOD_SIGNATURE_PATTERN = Pattern.compile(METHOD_SIGNATURE_REGEX);
+	private static final Pattern METHOD_ARGUMENTS_PATTERN = Pattern.compile(METHOD_ARGUMENTS_REGEX);
+	private static final Pattern INNER_CLASS_ARGUMENTS_PATTERN = Pattern.compile(INNER_CLASS_ARGUMENTS_REGEX);
 	/**
 	 * Constructor
 	 *
@@ -258,21 +264,21 @@ public class JavaStackTraceHyperlink implements IHyperlink {
 	 */
 	public IStatus processAmbiguousResults(List<Object> matches, String typeName, int line, String link) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		List<Object> exactMatchesFiltered = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
-		Pattern pattern = Pattern.compile(REGEX_FOR_NORMAL); //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
+		Pattern pattern = REGEX_FOR_NORMAL_PATTERN; //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
 		Matcher matcher = pattern.matcher(link); //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
 		String methodSignature = null;
 		if (matcher.find()) { //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
 			methodSignature = matcher.group(2) + "(" + matcher.group(3) + ")"; //$NON-NLS-1$ //$NON-NLS-2$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		}
 		if (methodSignature == null) {
-			pattern = Pattern.compile(REGEX_FOR_GENERICS); //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
+			pattern = REGEX_FOR_GENERICS_PATTERN; //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
 			matcher = pattern.matcher(link); //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
 			if (matcher.find()) { //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
 				methodSignature = matcher.group(2) + "(" + matcher.group(3) + ")"; //$NON-NLS-1$ //$NON-NLS-2$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 			}
 		}
 		if (methodSignature == null) {
-			pattern = Pattern.compile(REGEX_FOR_INNER_CLASS); //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
+			pattern = REGEX_FOR_INNER_CLASS_PATTERN; //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
 			matcher = pattern.matcher(link); //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
 			if (matcher.find()) { //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
 				methodSignature = matcher.group(2) + "(" + matcher.group(3) + ")"; //$NON-NLS-1$ //$NON-NLS-2$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
@@ -433,14 +439,14 @@ public class JavaStackTraceHyperlink implements IHyperlink {
 					return true;
 				}
 				String methodDetails = method.toString();
-				Pattern pattern = Pattern.compile(METHOD_SIGNATURE_REGEX); //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
+				Pattern pattern = METHOD_SIGNATURE_PATTERN; //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
 				Matcher matcher = pattern.matcher(methodDetails); //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
 				if (!matcher.find()) { //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
 					return false;
 				}
 				String methodName = matcher.group();
 				methodName = methodName.replace(" ", ""); //$NON-NLS-1$//$NON-NLS-2$
-				pattern = Pattern.compile(METHOD_ARGUMENTS_REGEX); //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
+				pattern = METHOD_ARGUMENTS_PATTERN; //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
 				matcher = pattern.matcher(methodSignature); //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
 				if (!matcher.find()) { //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
 					return false;
@@ -487,7 +493,7 @@ public class JavaStackTraceHyperlink implements IHyperlink {
 	 */
 	private String innerClassMethodSignatureGen(String extractedMethodName, String methodSignature) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		StringBuilder newSignature = new StringBuilder(extractedMethodName + "("); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
-		Pattern pattern = Pattern.compile(INNER_CLASS_ARGUMENTS_REGEX); //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
+		Pattern pattern = INNER_CLASS_ARGUMENTS_PATTERN; //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
 		Matcher matcher = pattern.matcher(methodSignature); //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
 		matcher.find(); //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
 		String paramsExtracted = matcher.group(1);
