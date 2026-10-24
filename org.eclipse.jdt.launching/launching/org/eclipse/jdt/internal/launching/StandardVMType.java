@@ -452,12 +452,12 @@ public class StandardVMType extends AbstractVMInstallType {
 				// src zip moved to lib folder from JDK 9 EA Build 151
 				IPath path = IPath.fromFile(installLocation.getAbsoluteFile()).append(LIB).append(SRC_ZIP);
 				File lib = path.toFile();
-				if (lib.exists() && lib.isFile()) {
+				if (lib.isFile()) {
 					sourceRootPath = getDefaultSystemLibrarySource(lib); // To attach source if available
 				} else {
 					path = IPath.fromFile(installLocation.getAbsoluteFile()).append(SRC_ZIP);
 					lib = path.toFile();
-					if (lib.exists() && lib.isFile()) {
+					if (lib.isFile()) {
 						sourceRootPath = getDefaultSystemLibrarySource(lib); // To attach source if available
 					}
 				}
@@ -483,7 +483,7 @@ public class StandardVMType extends AbstractVMInstallType {
 			for (String element : bootpath) {
 				IPath path = IPath.fromOSString(element);
 				File lib = path.toFile();
-				if (lib.exists() && lib.isFile()) {
+				if (lib.isFile()) {
 					LibraryLocation libraryLocation = new LibraryLocation(path,
 									getDefaultSystemLibrarySource(lib),
 									getDefaultPackageRootPath(),

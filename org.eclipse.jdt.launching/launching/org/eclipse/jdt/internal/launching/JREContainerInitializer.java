@@ -333,7 +333,7 @@ public class JREContainerInitializer extends ClasspathContainerInitializer {
 			if (entry.getEntryKind() == IClasspathEntry.CPE_LIBRARY) {
 				IPath path = entry.getPath();
 				File lib = path.toFile();
-				if (lib.exists() && lib.isFile()) {
+				if (lib.isFile()) {
 					IPath srcPath = entry.getSourceAttachmentPath();
 					if (srcPath == null) {
 						srcPath = Path.EMPTY;
