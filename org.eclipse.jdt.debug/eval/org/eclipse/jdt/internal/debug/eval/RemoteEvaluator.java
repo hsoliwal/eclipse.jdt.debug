@@ -95,7 +95,7 @@ public class RemoteEvaluator {
 			} else {
 				IJavaArray byteArray = createClassBytes(theThread, debugTarget, entry);
 				IJavaValue[] defineClassArgs = new IJavaValue[] { // args for defineClass
-						debugTarget.newValue(className.replaceAll("/", ".")), // class name //$NON-NLS-1$ //$NON-NLS-2$ //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
+						debugTarget.newValue(className.replace("/", ".")), // class name //$NON-NLS-1$ //$NON-NLS-2$ //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
 						byteArray, // classBytes,
 						debugTarget.newValue(0), // offset
 						debugTarget.newValue(entry.getValue().length), // length

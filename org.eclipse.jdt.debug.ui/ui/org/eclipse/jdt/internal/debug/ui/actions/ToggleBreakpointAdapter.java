@@ -460,7 +460,7 @@ public class ToggleBreakpointAdapter implements IToggleBreakpointsTargetExtensio
 			String pattern = getCodeTemplate((ITextSelection) finalSelection, (JavaEditor) part);
 			if (pattern != null) {
 				pattern = pattern.trim();
-				pattern = pattern.replaceAll("\\\t", ""); //$NON-NLS-1$//$NON-NLS-2$ //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
+				pattern = pattern.replace("\t", ""); //$NON-NLS-1$//$NON-NLS-2$ //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
 				methodBreakpoint.setCondition(pattern);
 				methodBreakpoint.setConditionEnabled(true);
 				methodBreakpoint.setConditionSuspendOnTrue(true);
@@ -593,7 +593,7 @@ public class ToggleBreakpointAdapter implements IToggleBreakpointsTargetExtensio
 					String pattern = getCodeTemplate((ITextSelection) selection, (JavaEditor) part);
 					if (pattern != null) {
 						pattern = pattern.trim();
-						pattern = pattern.replaceAll("\\\t", ""); //$NON-NLS-1$//$NON-NLS-2$ //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
+						pattern = pattern.replace("\t", ""); //$NON-NLS-1$//$NON-NLS-2$ //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
 						breakpoint.setCondition(pattern);
 						breakpoint.setConditionEnabled(true);
 						breakpoint.setConditionSuspendOnTrue(true);

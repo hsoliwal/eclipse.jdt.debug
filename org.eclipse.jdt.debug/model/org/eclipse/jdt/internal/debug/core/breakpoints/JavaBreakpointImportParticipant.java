@@ -297,7 +297,7 @@ public class JavaBreakpointImportParticipant implements
 			if (name != null && name.getFullyQualifiedName().equals(fName)) {
 				String sig = getMethodSignatureFromNode(node);
 				if (sig != null) {
-					sig = sig.replaceAll("\\.", "/"); //$NON-NLS-1$ //$NON-NLS-2$ //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
+					sig = sig.replace(".", "/"); //$NON-NLS-1$ //$NON-NLS-2$ //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
 					if (sig.equals(fSignature)) {
 						IMarker marker = fBreakpoint.getMarker();
 						int currentstart = marker.getAttribute(
