@@ -293,15 +293,9 @@ public class JavaUISourceLocator implements IPersistableSourceLocator {
 		String handle = fJavaProject.getHandleIdentifier();
 		String findAll = Boolean.toString(isFindAllSourceElements());
 
-		StringBuilder buffer = new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
-		buffer.append("<project>"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
-		buffer.append(handle); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
-		buffer.append("</project>"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
-		buffer.append("<findAll>"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
-		buffer.append(findAll); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
-		buffer.append("</findAll>"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
-		buffer.append(memento); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
-		return buffer.toString();
+		return "<project>" + handle + "</project>" + "<findAll>" + findAll + "</findAll>" + memento; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
+		// preserved predecessor annotation: //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+		// preserved predecessor annotation: //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 	}
 
 	/**
