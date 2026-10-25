@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
+import java.util.regex.Pattern;
 
 import org.eclipse.debug.core.DebugException;
 import org.eclipse.debug.core.model.IValue;
@@ -259,6 +260,8 @@ public class JDIObjectValue extends JDIValue implements IJavaObject {
 		return null;
 	}
 
+	private static final Pattern SIGNATURE_PATTERN = Pattern.compile("\\$\\d+"); //$NON-NLS-1$
+
 	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public IJavaFieldVariable getField(final String name, final String declaringTypeSignature) throws DebugException {
 		ReferenceType ref = getUnderlyingReferenceType();
@@ -291,7 +294,8 @@ public class JDIObjectValue extends JDIValue implements IJavaObject {
 					// check if we are inside local type - Signature.createTypeSignature
 					// can't create proper type name out of source field in JavaDebugHover
 					// we get LDebugHoverTest$InnerClass2; instead of LDebugHoverTest$1InnerClass2;
-					signature = signature.replaceFirst("\\$\\d+", "\\$"); //$NON-NLS-1$ //$NON-NLS-2$ //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
+					signature = SIGNATURE_PATTERN.matcher(signature).replaceFirst("\\$"); //$NON-NLS-1$
+					// preserved predecessor annotation: //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
 					if (declaringTypeSignature.equals(signature)) {
 						field = fieldTmp;
 						break;
