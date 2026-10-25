@@ -232,10 +232,9 @@ public class JavaStackTraceHyperlink implements IHyperlink {
 					try {
 						return processAmbiguousResults(matches, typeName, lineNumber, link);
 					} catch(Exception e) {
-						StringBuilder temp = new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
-						temp.append("Unable to parse \"" + link + "\" \n "); //$NON-NLS-1$ //$NON-NLS-2$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
-						temp.append(e.getClass().getSimpleName()); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
-						exceptionHandler(temp.toString(), e);
+						exceptionHandler(("Unable to parse \"" + link + "\" \n ") + e.getClass().getSimpleName(), e); //$NON-NLS-1$ //$NON-NLS-2$
+						// preserved predecessor annotation: //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+						// preserved predecessor annotation: //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 					}
 
 				} else {
