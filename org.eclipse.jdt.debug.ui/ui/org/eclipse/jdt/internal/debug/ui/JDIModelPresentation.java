@@ -1623,9 +1623,9 @@ public class JDIModelPresentation extends LabelProvider implements IDebugModelPr
 			if (suffix == null) {
 				return label;
 			}
-			StringBuilder buffer = new StringBuilder(label); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
-			buffer.append(suffix); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
-			return buffer.toString();
+			return label + suffix;
+			// preserved predecessor annotation: //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+			// preserved predecessor annotation: //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 	    } catch (CoreException e) {
 	    	// if the breakpoint has been deleted, don't log exception
 	    	IMarker marker = breakpoint.getMarker();
