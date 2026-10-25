@@ -1746,11 +1746,9 @@ public class ToggleBreakpointAdapter implements IToggleBreakpointsTargetExtensio
 	 * Additional diagnosis info for bug 528321
 	 */
 	private static void logBadAnnotation(SimpleMarkerAnnotation annotation, CoreException e) {
-		StringBuilder message = new StringBuilder("Editor annotation with non existing marker found: "); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
-		message.append("text: ").append(annotation.getText()); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
-		message.append(", type: ").append(annotation.getType()); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
-		message.append(", ").append(annotation.getMarker()); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
-		JDIDebugUIPlugin.log(message.toString(), e);
+		JDIDebugUIPlugin.log("Editor annotation with non existing marker found: " + "text: " + annotation.getText() + ", type: " + annotation.getType() + ", " + annotation.getMarker(), e); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
+		// preserved predecessor annotation: //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+		// preserved predecessor annotation: //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 	}
 
 	/**
