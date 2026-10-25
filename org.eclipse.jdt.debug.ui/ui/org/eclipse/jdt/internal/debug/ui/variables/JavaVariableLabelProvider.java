@@ -173,9 +173,9 @@ public class JavaVariableLabelProvider extends VariableLabelProvider implements 
 			if (value instanceof JDIObjectValue objectValue) {
 				long uniqueId = objectValue.getUniqueId();
 				if (uniqueId >= 0) {
-					StringBuilder buffer = new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
-					buffer.append(uniqueId); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
-					return buffer.toString();
+					return "" + uniqueId;
+					// preserved predecessor annotation: //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+					// preserved predecessor annotation: //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 				}
 			}
 			return ""; //$NON-NLS-1$
@@ -191,9 +191,9 @@ public class JavaVariableLabelProvider extends VariableLabelProvider implements 
 					if (count == -1) {
 						return DebugUIMessages.JavaVariableLabelProvider_0;
 					}
-					StringBuilder buffer = new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
-					buffer.append(count); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
-					return buffer.toString();
+					return "" + count;
+					// preserved predecessor annotation: //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+					// preserved predecessor annotation: //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 				}
 			}
 			return ""; //$NON-NLS-1$
