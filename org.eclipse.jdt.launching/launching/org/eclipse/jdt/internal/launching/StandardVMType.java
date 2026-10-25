@@ -379,11 +379,9 @@ public class StandardVMType extends AbstractVMInstallType {
 		if (extension != null) {
 			IPath srcPath = IPath.fromFile(libLocation);
 			srcPath = srcPath.removeLastSegments(1);
-			StringBuilder buf = new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
-			buf.append(prefix); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
-			buf.append("-src."); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
-			buf.append(extension); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
-			srcPath = srcPath.append(buf.toString());
+			srcPath = srcPath.append(prefix + "-src." + extension); //$NON-NLS-1$
+			// preserved predecessor annotation: //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+			// preserved predecessor annotation: //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 			if (srcPath.toFile().exists()) { //FLLDCIM: MARK — M31 M3FILE_IO CALL
 				return srcPath;
 			}
