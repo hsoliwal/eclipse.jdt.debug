@@ -28,6 +28,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
+import java.util.regex.Pattern;
 
 import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IMarker;
@@ -68,6 +69,7 @@ import org.eclipse.jdt.internal.launching.JavaSourceLookupDirector;
 import org.eclipse.jdt.internal.launching.LaunchingMessages;
 import org.eclipse.jdt.internal.launching.LaunchingPlugin;
 import org.eclipse.osgi.util.NLS;
+
 /**
  * Abstract implementation of a Java launch configuration delegate. Provides
  * convenience methods for accessing and verifying launch configuration
@@ -1116,6 +1118,8 @@ public abstract class AbstractJavaLaunchConfigurationDelegate extends LaunchConf
 		this.allowAdvancedSourcelookup = true;
 	}
 
+	private static final Pattern GET_MODULE_CLIOPTIONS_PATTERN = Pattern.compile("::"); //$NON-NLS-1$
+
 	/**
 	 * Returns the module-related command line options for the configuration that are needed at runtime as equivalents of those options specified by
 	 * {@link IClasspathAttribute}s of the following names:
@@ -1153,7 +1157,8 @@ public abstract class AbstractJavaLaunchConfigurationDelegate extends LaunchConf
 					for (IClasspathAttribute attribute : entry.getClasspathEntry().getExtraAttributes()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 						if (IClasspathAttribute.PATCH_MODULE.equals(attribute.getName())) {
 							String patchModules = attribute.getValue();
-							for (String patchModule : patchModules.split("::")) { //$NON-NLS-1$ //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
+							for (String patchModule : GET_MODULE_CLIOPTIONS_PATTERN.split(patchModules)) {
+							// preserved predecessor annotation: //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
 								int equalsIdx = patchModule.indexOf('=');
 								if (equalsIdx != -1) {
 									if (equalsIdx < patchModule.length() - 1) { // otherwise malformed?

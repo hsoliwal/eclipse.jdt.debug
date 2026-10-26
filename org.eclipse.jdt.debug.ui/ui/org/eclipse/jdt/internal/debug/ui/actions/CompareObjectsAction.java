@@ -478,11 +478,9 @@ public class CompareObjectsAction extends ObjectActionDelegate implements IWorkb
 	 */
 	@SuppressWarnings("nls")
 	private String printListContents(String Selection, List<String> list, int displayLimit) {
-		StringBuilder content = new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
-		content.append("["); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
-		content.append(list.stream().limit(displayLimit).collect(Collectors.joining(","))); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
-		content.append("......]"); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
-		String message = NLS.bind(DebugUIMessages.DialogBoxMapMissingKey, new Object[] { Selection, content.toString() });
+		String message = NLS.bind(DebugUIMessages.DialogBoxMapMissingKey, new Object[] { Selection, "[" + list.stream().limit(displayLimit).collect(Collectors.joining(",")) + "......]" });
+		// preserved predecessor annotation: //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+		// preserved predecessor annotation: //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 		return message;
 	}
 

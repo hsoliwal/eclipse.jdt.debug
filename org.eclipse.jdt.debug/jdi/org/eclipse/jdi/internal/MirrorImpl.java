@@ -207,16 +207,9 @@ public class MirrorImpl implements Mirror {
 				.getReply(commandPacket);
 		long recieved = System.currentTimeMillis();
 		if (JDIDebugOptions.DEBUG_JDI_REQUEST_TIMES) {
-			StringBuilder buf = new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
-			buf.append(JDIDebugOptions.FORMAT.format(Instant.ofEpochMilli(sent))); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
-			buf.append(" JDI Request: "); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
-			buf.append(commandPacket.toString()); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
-			buf.append("\n\tResponse Time: "); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
-			buf.append(recieved - sent); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
-			buf.append("ms"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
-			buf.append(" length: "); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
-			buf.append(reply.getLength()); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
-			JDIDebugOptions.trace(buf.toString());
+			JDIDebugOptions.trace(JDIDebugOptions.FORMAT.format(Instant.ofEpochMilli(sent)) + " JDI Request: " + commandPacket.toString() + "\n\tResponse Time: " + (recieved - sent) + "ms" + " length: " + reply.getLength()); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
+			// preserved predecessor annotation: //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+			// preserved predecessor annotation: //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 		}
 		if (fVerboseWriter != null) {
 			fVerboseWriter.println();

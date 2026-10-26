@@ -15,6 +15,7 @@ package org.eclipse.jdt.internal.debug.ui;
 
 
 import java.text.Bidi;
+import java.util.regex.Pattern;
 
 import org.eclipse.jdt.internal.debug.ui.display.DisplayViewerConfiguration;
 import org.eclipse.jdt.ui.PreferenceConstants;
@@ -60,6 +61,7 @@ public class JDISourceViewer extends SourceViewer implements IPropertyChangeList
 	 * @since 3.4
 	 */
 	private static final String BIDI_DELIMITERS= "[ \\p{Punct}&&[^_]]"; //$NON-NLS-1$
+	private static final Pattern BIDI_DELIMITERS_PATTERN = Pattern.compile(BIDI_DELIMITERS);
 
 
 	private Font fFont;
@@ -377,7 +379,8 @@ public class JDISourceViewer extends SourceViewer implements IPropertyChangeList
 				int partitionEnd= Math.min(lineLength, lineOffset + partition.getLength());
 				while (++lineOffset < partitionEnd) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 					if (isMismatchingLevel(bidi.getLevelAt(lineOffset), baseLevel)
-							&& String.valueOf(lineText.charAt(lineOffset)).matches(BIDI_DELIMITERS)) { //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
+							&& BIDI_DELIMITERS_PATTERN.matcher(String.valueOf(lineText.charAt(lineOffset))).matches()) {
+							// preserved predecessor annotation: //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
 						// For default content types, indicate a segment before
 						// a delimiting character with a mismatching embedding
 						// level.

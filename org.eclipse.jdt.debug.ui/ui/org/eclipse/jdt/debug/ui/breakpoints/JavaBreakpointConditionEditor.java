@@ -805,11 +805,9 @@ public final class JavaBreakpointConditionEditor extends AbstractJavaBreakpointE
 			dashes.append('-'); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		}
 
-		StringBuilder result= new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
-		result.append(dashes); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
-		result.append(" " + separatorLabel + " "); //$NON-NLS-1$//$NON-NLS-2$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
-		result.append(dashes); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
-		return result.toString().trim();
+		return ("" + dashes + (" " + separatorLabel + " ") + dashes).trim(); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+		// preserved predecessor annotation: //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+		// preserved predecessor annotation: //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 	}
 
 	private void registerViewerUndoRedoActions() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD

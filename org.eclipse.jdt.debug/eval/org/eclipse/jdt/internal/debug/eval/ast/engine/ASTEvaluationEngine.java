@@ -904,10 +904,9 @@ public class ASTEvaluationEngine implements IAstEvaluationEngine {
 			result.setTerminated(er.fTerminated);
 			if (exception != null) {
 				if (JDIDebugOptions.DEBUG_AST_EVAL) {
-					StringBuilder buf = new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
-					buf.append("\tException: "); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
-					buf.append(exception.toString()); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
-					JDIDebugOptions.trace(buf.toString());
+					JDIDebugOptions.trace("\tException: " + exception.toString()); //$NON-NLS-1$
+					// preserved predecessor annotation: //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+					// preserved predecessor annotation: //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 				}
 				if (exception instanceof DebugException) {
 					result.setException((DebugException) exception);
@@ -918,10 +917,7 @@ public class ASTEvaluationEngine implements IAstEvaluationEngine {
 				if (value != null) {
 					result.setValue(value);
 					if (JDIDebugOptions.DEBUG_AST_EVAL) {
-						StringBuilder buf = new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
-						buf.append("\tResult: "); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
-						buf.append(value); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
-						JDIDebugOptions.trace(buf.toString());
+						JDIDebugOptions.trace("\tResult: " + value); //$NON-NLS-1$
 					}
 				} else {
 					result.addError(EvaluationEngineMessages.ASTEvaluationEngine_An_unknown_error_occurred_during_evaluation);
@@ -929,11 +925,9 @@ public class ASTEvaluationEngine implements IAstEvaluationEngine {
 			}
 
 			if (JDIDebugOptions.DEBUG_AST_EVAL) {
-				StringBuilder buf = new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
-				buf.append("\tDuration: "); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
-				buf.append(end - start); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
-				buf.append("ms"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
-				JDIDebugOptions.trace(buf.toString());
+				JDIDebugOptions.trace("\tDuration: " + (end - start) + "ms"); //$NON-NLS-1$ //$NON-NLS-2$
+				// preserved predecessor annotation: //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+				// preserved predecessor annotation: //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 			}
 
 			evaluationFinished(result);

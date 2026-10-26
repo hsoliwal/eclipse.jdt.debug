@@ -195,6 +195,9 @@ public class JavaClassPrepareBreakpoint extends JavaBreakpoint implements //FLLD
 			ThreadReference thread) {
 	}
 
+	private static final Pattern HANDLE_CLASS_PREPARE_EVENT_PATTERN = Pattern.compile("\\."); //$NON-NLS-1$
+	private static final Pattern TYPE_NAME_PATTERN = Pattern.compile("\\$"); //$NON-NLS-1$
+
 	/*
 	 * (non-Javadoc)
 	 *
@@ -209,8 +212,10 @@ public class JavaClassPrepareBreakpoint extends JavaBreakpoint implements //FLLD
 			if (pattern == null){
 				 String typeName = ".*";//$NON-NLS-1$
 				 String breakpointName = ensureMarker().getAttribute(TYPE_NAME, null);
-				 typeName = typeName + breakpointName.replaceAll("\\.", "\\\\.");  //$NON-NLS-1$//$NON-NLS-2$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
-				 typeName = typeName.replaceAll("\\$", "\\\\\\$");  //$NON-NLS-1$//$NON-NLS-2$ //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
+				 typeName = typeName + HANDLE_CLASS_PREPARE_EVENT_PATTERN.matcher(breakpointName).replaceAll("\\\\.");  //$NON-NLS-1$
+				 typeName = TYPE_NAME_PATTERN.matcher(typeName).replaceAll("\\\\\\$");  //$NON-NLS-1$
+				 // preserved predecessor annotation: //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
+				 // preserved predecessor annotation: //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
 				 typeName = typeName.concat(".*"); //$NON-NLS-1$
 				 pattern = Pattern.compile(typeName); //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
 			}

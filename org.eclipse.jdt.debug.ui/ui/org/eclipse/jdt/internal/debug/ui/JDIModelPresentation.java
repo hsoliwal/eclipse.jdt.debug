@@ -18,6 +18,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.StringTokenizer;
+import java.util.regex.Pattern;
 
 import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IResource;
@@ -1445,6 +1446,8 @@ public class JDIModelPresentation extends LabelProvider implements IDebugModelPr
 		return detail[0];
 	}
 
+	private static final Pattern SNIPPET_PATTERN = Pattern.compile("[\n\r\t]+"); //$NON-NLS-1$
+
 	protected String getExpressionText(IExpression expression) throws DebugException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		boolean showTypes= isShowVariableTypeNames();
 		StringBuilder buff= new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
@@ -1481,7 +1484,8 @@ public class JDIModelPresentation extends LabelProvider implements IDebugModelPr
 			snippetBuffer.append(snippet); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		}
 		snippetBuffer.append('"'); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
-		snippet = snippetBuffer.toString().replaceAll("[\n\r\t]+", " ");  //$NON-NLS-1$//$NON-NLS-2$ //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
+		snippet = SNIPPET_PATTERN.matcher(snippetBuffer.toString()).replaceAll(" ");  //$NON-NLS-1$
+		// preserved predecessor annotation: //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
 		buff.append(snippet); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 
 		if (javaValue != null) {
@@ -1619,9 +1623,9 @@ public class JDIModelPresentation extends LabelProvider implements IDebugModelPr
 			if (suffix == null) {
 				return label;
 			}
-			StringBuilder buffer = new StringBuilder(label); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
-			buffer.append(suffix); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
-			return buffer.toString();
+			return label + suffix;
+			// preserved predecessor annotation: //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+			// preserved predecessor annotation: //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 	    } catch (CoreException e) {
 	    	// if the breakpoint has been deleted, don't log exception
 	    	IMarker marker = breakpoint.getMarker();
