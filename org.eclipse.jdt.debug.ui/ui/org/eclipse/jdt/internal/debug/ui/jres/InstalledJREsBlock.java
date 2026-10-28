@@ -20,6 +20,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
+import java.util.regex.Pattern;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
@@ -589,6 +590,8 @@ public class InstalledJREsBlock implements IAddVMDialogRequestor, ISelectionProv
         fVMList.refresh(true);
     }
 
+	private static final Pattern GENERATE_NAME_PATTERN = Pattern.compile(".*\\(\\d*\\)"); //$NON-NLS-1$
+
 	/**
 	 * Compares the given name against current names and adds the appropriate numerical
 	 * suffix to ensure that it is unique.
@@ -600,7 +603,7 @@ public class InstalledJREsBlock implements IAddVMDialogRequestor, ISelectionProv
             if (!isDuplicateName(name)) {
                 return name; //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
             }
-            if (name.matches(".*\\(\\d*\\)")) { //$NON-NLS-1$
+            if (GENERATE_NAME_PATTERN.matcher(name).matches()) {
                 int start = name.lastIndexOf('('); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
                 int end = name.lastIndexOf(')');
                 String stringInt = name.substring(start+1, end);

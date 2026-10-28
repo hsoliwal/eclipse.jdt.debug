@@ -63,13 +63,19 @@ import org.eclipse.ui.texteditor.ITextEditor;
  */
 public class JavaStackTraceHyperlink implements IHyperlink {
 	final static String ANSI_ESCAPE_REGEX = "\033\\[[\\d;]*[A-HJKSTfimnsu]"; //$NON-NLS-1$
+	private static final Pattern ANSI_ESCAPE_PATTERN = Pattern.compile(ANSI_ESCAPE_REGEX);
 	private final TextConsole fConsole;
 	private final AtomicReference<String> generatedLink;
 	private static final String REGEX_FOR_NORMAL = "([a-zA-Z0-9\\$]+)\\.([a-zA-Z0-9]+)\\(([^)]*)\\)"; //$NON-NLS-1$
+	private static final Pattern REGEX_FOR_NORMAL_PATTERN = Pattern.compile(REGEX_FOR_NORMAL);
 	private static final String REGEX_FOR_GENERICS = "([a-zA-Z0-9\\$]+(?:<[a-zA-Z0-9,<>]+>)?)\\.([a-zA-Z0-9]+)\\(([^)]*)\\)"; //$NON-NLS-1$
+	private static final Pattern REGEX_FOR_GENERICS_PATTERN = Pattern.compile(REGEX_FOR_GENERICS);
 	private static final String REGEX_FOR_INNER_CLASS = "([a-zA-Z0-9\\$]+(?:\\([a-zA-Z0-9]+\\))?)\\.([a-zA-Z0-9]+)\\(([^)]*)\\)"; //$NON-NLS-1$
+	private static final Pattern REGEX_FOR_INNER_CLASS_PATTERN = Pattern.compile(REGEX_FOR_INNER_CLASS);
 	private static final String METHOD_SIGNATURE_REGEX = "\\w+\\([^)]*\\)"; //$NON-NLS-1$
+	private static final Pattern METHOD_SIGNATURE_PATTERN = Pattern.compile(METHOD_SIGNATURE_REGEX);
 	private static final String METHOD_ARGUMENTS_REGEX = "\\(([^)]*)\\)"; //$NON-NLS-1$
+	private static final Pattern METHOD_ARGUMENTS_PATTERN = Pattern.compile(METHOD_ARGUMENTS_REGEX);
 	private static final String INNER_CLASS_ARGUMENTS_REGEX = "\\(([^)]+)\\)"; //$NON-NLS-1$
 	private static final Pattern REGEX_FOR_NORMAL_PATTERN = Pattern.compile(REGEX_FOR_NORMAL);
 	private static final Pattern REGEX_FOR_GENERICS_PATTERN = Pattern.compile(REGEX_FOR_GENERICS);
@@ -111,7 +117,8 @@ public class JavaStackTraceHyperlink implements IHyperlink {
 		int lineNumber;
 		try {
 			String linkText = getLinkText();
-			linkText = linkText.replaceAll(ANSI_ESCAPE_REGEX, ""); //$NON-NLS-1$ //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
+			linkText = ANSI_ESCAPE_PATTERN.matcher(linkText).replaceAll(""); //$NON-NLS-1$
+			// preserved predecessor annotation: //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
 			generatedLink.set(linkText);
 			typeName = getTypeName(linkText);
 			lineNumber = getLineNumber(linkText);
@@ -768,6 +775,8 @@ public class JavaStackTraceHyperlink implements IHyperlink {
 		return typeName;
 	}
 
+	private static final Pattern FILTER_BINARY_TYPES_PATTERN = Pattern.compile("@(.*?)\\/"); //$NON-NLS-1$
+
 	/**
 	 * Intermediate method to filter Binary Types based on given version
 	 *
@@ -782,7 +791,8 @@ public class JavaStackTraceHyperlink implements IHyperlink {
 			List<Object> filteredResults = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 			int binaryInserted = 0;
 			try {
-				Pattern pattern = Pattern.compile("@(.*?)\\/"); //$NON-NLS-1$ //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
+				Pattern pattern = FILTER_BINARY_TYPES_PATTERN;
+				// preserved predecessor annotation: //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
 				Matcher match = pattern.matcher(link); //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
 				if (match.find()) { //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
 					String jdkVersion = match.group(1);
