@@ -67,15 +67,10 @@ public class JavaStackTraceHyperlink implements IHyperlink {
 	private final TextConsole fConsole;
 	private final AtomicReference<String> generatedLink;
 	private static final String REGEX_FOR_NORMAL = "([a-zA-Z0-9\\$]+)\\.([a-zA-Z0-9]+)\\(([^)]*)\\)"; //$NON-NLS-1$
-	private static final Pattern REGEX_FOR_NORMAL_PATTERN = Pattern.compile(REGEX_FOR_NORMAL);
 	private static final String REGEX_FOR_GENERICS = "([a-zA-Z0-9\\$]+(?:<[a-zA-Z0-9,<>]+>)?)\\.([a-zA-Z0-9]+)\\(([^)]*)\\)"; //$NON-NLS-1$
-	private static final Pattern REGEX_FOR_GENERICS_PATTERN = Pattern.compile(REGEX_FOR_GENERICS);
 	private static final String REGEX_FOR_INNER_CLASS = "([a-zA-Z0-9\\$]+(?:\\([a-zA-Z0-9]+\\))?)\\.([a-zA-Z0-9]+)\\(([^)]*)\\)"; //$NON-NLS-1$
-	private static final Pattern REGEX_FOR_INNER_CLASS_PATTERN = Pattern.compile(REGEX_FOR_INNER_CLASS);
 	private static final String METHOD_SIGNATURE_REGEX = "\\w+\\([^)]*\\)"; //$NON-NLS-1$
-	private static final Pattern METHOD_SIGNATURE_PATTERN = Pattern.compile(METHOD_SIGNATURE_REGEX);
 	private static final String METHOD_ARGUMENTS_REGEX = "\\(([^)]*)\\)"; //$NON-NLS-1$
-	private static final Pattern METHOD_ARGUMENTS_PATTERN = Pattern.compile(METHOD_ARGUMENTS_REGEX);
 	private static final String INNER_CLASS_ARGUMENTS_REGEX = "\\(([^)]+)\\)"; //$NON-NLS-1$
 	private static final Pattern REGEX_FOR_NORMAL_PATTERN = Pattern.compile(REGEX_FOR_NORMAL);
 	private static final Pattern REGEX_FOR_GENERICS_PATTERN = Pattern.compile(REGEX_FOR_GENERICS);
