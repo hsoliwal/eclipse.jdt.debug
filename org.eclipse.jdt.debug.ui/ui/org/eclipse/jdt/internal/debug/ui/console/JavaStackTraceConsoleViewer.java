@@ -26,7 +26,7 @@ import org.eclipse.ui.console.TextConsoleViewer;
 /**
  * provides the viewer for Java stack trace consoles
  */
-public class JavaStackTraceConsoleViewer extends TextConsoleViewer {
+public class JavaStackTraceConsoleViewer extends TextConsoleViewer { //FLLDCIM: MARK — T29  IMPLEMENTS
 
 	private final JavaStackTraceConsole fConsole;
 	private boolean fAutoFormat = false;

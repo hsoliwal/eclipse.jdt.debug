@@ -68,7 +68,7 @@ public class DetectVMInstallationsJob extends Job {
 		super(LaunchingMessages.lookupInstalledJVMs);
 	}
 
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public IStatus run(IProgressMonitor monitor) {
 		StandardVMType standardType = (StandardVMType) JavaRuntime.getVMInstallType(StandardVMType.ID_STANDARD_VM_TYPE);
 		Collection<File> candidates = computeCandidateVMs(standardType);
@@ -81,9 +81,9 @@ public class DetectVMInstallationsJob extends Job {
 		// for MacOS, system installed VMs need a special command to locate
 		if (Platform.OS.isMac()) {
 			try {
-				systemVMs = new ArrayList<>(Arrays.asList(MacInstalledJREs.getInstalledJREs(monitor)));
+				systemVMs = new ArrayList<>(Arrays.asList(MacInstalledJREs.getInstalledJREs(monitor))); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 				systemVMs.removeIf(t -> knownVMs.contains(t.getInstallLocation()));
-				for (VMStandin systemVM : systemVMs) {
+				for (VMStandin systemVM : systemVMs) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 					candidates.removeIf(t -> t.equals(systemVM.getInstallLocation()));
 				}
 			} catch (CoreException e) {
@@ -91,7 +91,7 @@ public class DetectVMInstallationsJob extends Job {
 			}
 		}
 		monitor.beginTask(LaunchingMessages.lookupInstalledJVMs, candidates.size() + systemVMs.size());
-		for (File f : candidates) {
+		for (File f : candidates) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			if (monitor.isCanceled()) {
 				return Status.CANCEL_STATUS;
 			}
@@ -100,8 +100,8 @@ public class DetectVMInstallationsJob extends Job {
 			workingCopy.setInstallLocation(f);
 			String name = f.getName();
 			int i = 2;
-			while (isDuplicateName(name)) {
-				name = f.getName() + '(' + i++ + ')';
+			while (isDuplicateName(name)) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
+				name = f.getName() + '(' + i++ + ')'; //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 			}
 			workingCopy.setName(name);
 			IVMInstall install = workingCopy.convertToRealVM();
@@ -114,15 +114,15 @@ public class DetectVMInstallationsJob extends Job {
 		}
 
 		// for MacOS, we may have additional system installed VMs so add them here
-		for (VMStandin systemVM : systemVMs) {
+		for (VMStandin systemVM : systemVMs) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			if (monitor.isCanceled()) {
 				return Status.CANCEL_STATUS;
 			}
 			SubMonitor subMon = SubMonitor.convert(monitor, systemVM.getInstallLocation().getAbsolutePath(), 1);
 			String name = systemVM.getName();
 			int i = 2;
-			while (isDuplicateName(name)) {
-				name = systemVM.getName() + '(' + i++ + ')';
+			while (isDuplicateName(name)) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
+				name = systemVM.getName() + '(' + i++ + ')'; //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 			}
 			systemVM.setName(name);
 			IVMInstall install = systemVM.convertToRealVM();
@@ -143,9 +143,9 @@ public class DetectVMInstallationsJob extends Job {
 			.anyMatch(name::equals);
 	}
 
-	private Collection<File> computeCandidateVMs(StandardVMType standardType) {
+	private Collection<File> computeCandidateVMs(StandardVMType standardType) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		// parent directories containing a collection of VM installations
-		Collection<File> rootDirectories = new HashSet<>();
+		Collection<File> rootDirectories = new HashSet<>(); //FLLDCIM: MARK — M03 M3_SET_LANES NEW
 		if (Platform.OS.isWindows()) {
 			computeWindowsCandidates(rootDirectories);
 		} else {
@@ -155,7 +155,7 @@ public class DetectVMInstallationsJob extends Job {
 		rootDirectories.add(new File(miseDataDir(), "installs/java")); //$NON-NLS-1$
 
 		Set<File> directories = rootDirectories.stream().filter(File::isDirectory)
-			.map(dir -> dir.listFiles(File::isDirectory))
+			.map(dir -> dir.listFiles(File::isDirectory)) //FLLDCIM: MARK — M31 M3FILE_IO CALL
 			.flatMap(Arrays::stream)
 			.filter(Objects::nonNull)
 				.collect(Collectors.toCollection(HashSet::new));
@@ -252,20 +252,20 @@ public class DetectVMInstallationsJob extends Job {
 	 * detected VM to the <code>found</code> list. Any directories specified in
 	 * the <code>ignore</code> are not traversed.
 	 */
-	public static void search(File directory, List<File> found, List<IVMInstallType> types, Set<File> ignore, IProgressMonitor monitor) {
+	public static void search(File directory, List<File> found, List<IVMInstallType> types, Set<File> ignore, IProgressMonitor monitor) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		if (monitor.isCanceled()) {
 			return;
 		}
 
-		String[] fileNames = directory.list();
+		String[] fileNames = directory.list(); //FLLDCIM: MARK — M31 M3FILE_IO CALL
 		if (fileNames == null) {
 			return; // not a directory
 		}
-		List<String> names = new ArrayList<>();
+		List<String> names = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 		names.add(null); // self
 		names.addAll(List.of(fileNames));
-		List<File> subDirs = new ArrayList<>();
-		for (String name : names) {
+		List<File> subDirs = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
+		for (String name : names) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			if (monitor.isCanceled()) {
 				return;
 			}
@@ -273,14 +273,14 @@ public class DetectVMInstallationsJob extends Job {
 			monitor.subTask(NLS.bind(LaunchingMessages.SearchingJVMs, Integer.toString(found.size()),
 					file.toPath().normalize().toAbsolutePath().toString().replace("&", "&&") )); // @see bug 29855 //$NON-NLS-1$ //$NON-NLS-2$
 			IVMInstallType[] vmTypes = JavaRuntime.getVMInstallTypes();
-			if (file.isDirectory()) {
+			if (file.isDirectory()) { //FLLDCIM: MARK — M31 M3FILE_IO CALL
 				if (ignore.add(file)) {
 					boolean validLocation = false;
 
 					// Take the first VM install type that claims the location as a
 					// valid VM install.  VM install types should be smart enough to not
 					// claim another type's VM, but just in case...
-					for (int j = 0; j < vmTypes.length; j++) {
+					for (int j = 0; j < vmTypes.length; j++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 						if (monitor.isCanceled()) {
 							return;
 						}
@@ -306,7 +306,7 @@ public class DetectVMInstallationsJob extends Job {
 				}
 			}
 		}
-		while (!subDirs.isEmpty()) {
+		while (!subDirs.isEmpty()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			File subDir = subDirs.remove(0);
 			search(subDir, found, types, ignore, monitor);
 			if (monitor.isCanceled()) {
@@ -316,7 +316,7 @@ public class DetectVMInstallationsJob extends Job {
 
 	}
 
-	public static void initialize() {
+	public static void initialize() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		if (Boolean.getBoolean(PROPERTY_DETECT_VM_INSTALLATIONS_JOB_DISABLED)) {
 			// early exit no need to read preferences or check env variable!
 			return;

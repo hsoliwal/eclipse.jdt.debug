@@ -150,7 +150,7 @@ public abstract class JDIReferenceType extends JDIType implements
 	 *
 	 * @see org.eclipse.jdt.debug.core.IJavaReferenceType#getAllFieldNames()
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public String[] getAllFieldNames() throws DebugException {
 		if (fAllFields == null) {
 			try {
@@ -158,7 +158,7 @@ public abstract class JDIReferenceType extends JDIType implements
 				fAllFields = new String[fields.size()];
 				Iterator<Field> iterator = fields.iterator();
 				int i = 0;
-				while (iterator.hasNext()) {
+				while (iterator.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 					Field field = iterator.next();
 					fAllFields[i] = field.name();
 					i++;
@@ -176,7 +176,7 @@ public abstract class JDIReferenceType extends JDIType implements
 	 * @see
 	 * org.eclipse.jdt.debug.core.IJavaReferenceType#getDeclaredFieldNames()
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public String[] getDeclaredFieldNames() throws DebugException {
 		if (fDeclaredFields == null) {
 			try {
@@ -184,7 +184,7 @@ public abstract class JDIReferenceType extends JDIType implements
 				fDeclaredFields = new String[fields.size()];
 				Iterator<Field> iterator = fields.iterator();
 				int i = 0;
-				while (iterator.hasNext()) {
+				while (iterator.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 					Field field = iterator.next();
 					fDeclaredFields[i] = field.name();
 					i++;
@@ -277,14 +277,14 @@ public abstract class JDIReferenceType extends JDIType implements
 		return null;
 	}
 
-	static public String getGenericName(ReferenceType type)
+	static public String getGenericName(ReferenceType type) //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 			throws DebugException {
 		if (type instanceof ArrayType) {
 			try {
 				Type componentType;
 				componentType = ((ArrayType) type).componentType();
 				if (componentType instanceof ReferenceType) {
-					return getGenericName((ReferenceType) componentType) + "[]"; //$NON-NLS-1$
+					return getGenericName((ReferenceType) componentType) + "[]"; //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 				}
 				return type.name();
 			} catch (ClassNotLoadedException e) {
@@ -293,19 +293,19 @@ public abstract class JDIReferenceType extends JDIType implements
 			}
 		}
 		String signature = type.signature();
-		StringBuilder res = new StringBuilder(getTypeName(signature));
+		StringBuilder res = new StringBuilder(getTypeName(signature)); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 		String genericSignature = type.genericSignature();
 		if (genericSignature != null) {
 			String[] typeParameters = Signature
 					.getTypeParameters(genericSignature);
 			if (typeParameters.length > 0) {
-				res.append('<').append(
+				res.append('<').append( //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 						Signature.getTypeVariable(typeParameters[0]));
-				for (int i = 1; i < typeParameters.length; i++) {
-					res.append(',').append(
+				for (int i = 1; i < typeParameters.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
+					res.append(',').append( //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 							Signature.getTypeVariable(typeParameters[i]));
 				}
-				res.append('>');
+				res.append('>'); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			}
 		}
 		return res.toString();
@@ -318,19 +318,19 @@ public abstract class JDIReferenceType extends JDIType implements
 	 *            the signature to derive the type name from
 	 * @return the type name
 	 */
-	public static String getTypeName(String genericTypeSignature) {
+	public static String getTypeName(String genericTypeSignature) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		int arrayDimension = 0;
-		while (genericTypeSignature.charAt(arrayDimension) == '[') {
+		while (genericTypeSignature.charAt(arrayDimension) == '[') { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			arrayDimension++;
 		}
 		int parameterStart = genericTypeSignature.indexOf('<');
-		StringBuilder name = new StringBuilder();
+		StringBuilder name = new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 		if (parameterStart < 0) {
-			name.append(genericTypeSignature.substring(arrayDimension + 1,
+			name.append(genericTypeSignature.substring(arrayDimension + 1, //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 					genericTypeSignature.length() - 1).replace('/', '.'));
 		} else {
 			if (parameterStart != 0) {
-				name.append(genericTypeSignature.substring(arrayDimension + 1,
+				name.append(genericTypeSignature.substring(arrayDimension + 1, //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 						parameterStart).replace('/', '.'));
 			}
 			try {
@@ -338,14 +338,14 @@ public abstract class JDIReferenceType extends JDIType implements
 						.substring(
 								Math.max(parameterStart - 1, 0)
 										- arrayDimension);
-				name.append(sig.replace('/', '.'));
+				name.append(sig.replace('/', '.')); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			} catch (IllegalArgumentException iae) {
 				// do nothing
-				name.append(genericTypeSignature);
+				name.append(genericTypeSignature); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			}
 		}
-		for (int i = 0; i < arrayDimension; i++) {
-			name.append("[]"); //$NON-NLS-1$
+		for (int i = 0; i < arrayDimension; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
+			name.append("[]"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		}
 		return name.toString();
 	}
@@ -370,7 +370,7 @@ public abstract class JDIReferenceType extends JDIType implements
 		try {
 			List<ObjectReference> list = getReferenceType().instances(max);
 			IJavaObject[] instances = new IJavaObject[list.size()];
-			for (int i = 0; i < instances.length; i++) {
+			for (int i = 0; i < instances.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				instances[i] = (IJavaObject) JDIValue.createValue(
 						getJavaDebugTarget(), list.get(i));
 			}
@@ -386,13 +386,13 @@ public abstract class JDIReferenceType extends JDIType implements
 	 *
 	 * @see org.eclipse.jdt.debug.core.IJavaReferenceType#getInstanceCount()
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public long getInstanceCount() throws DebugException {
 		JDIDebugTarget target = getJavaDebugTarget();
 		if (target.supportsInstanceRetrieval()) {
 			Type type = getUnderlyingType();
 			if(type instanceof ReferenceType) {
-				ArrayList<ReferenceType> list = new ArrayList<>(2);
+				ArrayList<ReferenceType> list = new ArrayList<>(2); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 				list.add((ReferenceType) type);
 				VirtualMachine vm = getVM();
 				try {
@@ -419,8 +419,8 @@ public abstract class JDIReferenceType extends JDIType implements
 		if (args == null) {
 			arguments = Collections.EMPTY_LIST;
 		} else {
-			arguments = new ArrayList<>(args.length);
-			for (IJavaValue arg : args) {
+			arguments = new ArrayList<>(args.length); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
+			for (IJavaValue arg : args) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				arguments.add(((JDIValue) arg).getUnderlyingValue());
 			}
 		}

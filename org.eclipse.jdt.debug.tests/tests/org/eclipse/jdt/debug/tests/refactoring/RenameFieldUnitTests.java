@@ -31,7 +31,7 @@ public class RenameFieldUnitTests extends AbstractRefactoringDebugTest {
 		super(name);
 	}
 
-	protected void runWatchPointTest(String src, String pack, String cunit, String fullTargetName, String targetLineage) throws Exception {
+	protected void runWatchPointTest(String src, String pack, String cunit, String fullTargetName, String targetLineage) throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String newFieldName = "renamedField";
 		try {
 			//create breakpoint to test
@@ -53,7 +53,7 @@ public class RenameFieldUnitTests extends AbstractRefactoringDebugTest {
 		}
 	}
 
-	protected Refactoring setupRefactor(String root, String packageName, String cuName, String fullTargetName) throws Exception {
+	protected Refactoring setupRefactor(String root, String packageName, String cuName, String fullTargetName) throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 
 		IJavaProject javaProject = get14Project();
 		ICompilationUnit cunit = getCompilationUnit(javaProject, root, packageName, cuName);
@@ -81,7 +81,7 @@ public class RenameFieldUnitTests extends AbstractRefactoringDebugTest {
 					pack = "a.b.c",
 					cunit = "MoveeChild.java",
 					fullTargetName = "MoveeChild$InnerChildType$innerChildsMethod()V$1$anAnonInt",
-					targetLineage = pack+"."+"MoveeChild$InnerChildType$1";
+					targetLineage = pack+"."+"MoveeChild$InnerChildType$1"; //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 			runWatchPointTest(src, pack, cunit, fullTargetName, targetLineage);
 	}//end testBreakPoint
@@ -91,7 +91,7 @@ public class RenameFieldUnitTests extends AbstractRefactoringDebugTest {
 					pack = "a.b.c",
 					cunit = "MoveeChild.java",
 					fullTargetName = "MoveeChild$InnerChildType$innerChildInt",
-					targetLineage = pack+"."+"MoveeChild$InnerChildType";
+					targetLineage = pack+"."+"MoveeChild$InnerChildType"; //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 			runWatchPointTest(src, pack, cunit, fullTargetName, targetLineage);
 	}//end testBreakPoint
@@ -101,7 +101,7 @@ public class RenameFieldUnitTests extends AbstractRefactoringDebugTest {
 					pack = "a.b.c",
 					cunit = "MoveeChild.java",
 					fullTargetName = "NonPublicChildType$nonPublicChildsMethod()V$1$anAnonInt",
-					targetLineage = pack+"."+"NonPublicChildType$1";
+					targetLineage = pack+"."+"NonPublicChildType$1"; //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 			runWatchPointTest(src, pack, cunit, fullTargetName, targetLineage);
 	}//end testBreakPoint
@@ -111,7 +111,7 @@ public class RenameFieldUnitTests extends AbstractRefactoringDebugTest {
 					pack = "a.b.c",
 					cunit = "MoveeChild.java",
 					fullTargetName = "NonPublicChildType$nonPublicChildInt",
-					targetLineage = pack+"."+"NonPublicChildType";
+					targetLineage = pack+"."+"NonPublicChildType"; //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 			runWatchPointTest(src, pack, cunit, fullTargetName, targetLineage);
 	}//end testBreakPoint
@@ -121,7 +121,7 @@ public class RenameFieldUnitTests extends AbstractRefactoringDebugTest {
 		pack = "a.b.c",
 		cunit = "MoveeChild.java",
 		fullTargetName = "MoveeChild$childsMethod()V$1$anAnonInt",
-		targetLineage = pack+"."+"MoveeChild$1";
+		targetLineage = pack+"."+"MoveeChild$1"; //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 		runWatchPointTest(src, pack, cunit, fullTargetName, targetLineage);
 	}//end testBreakPoint
@@ -131,7 +131,7 @@ public class RenameFieldUnitTests extends AbstractRefactoringDebugTest {
 					pack = "a.b.c",
 					cunit = "MoveeChild.java",
 					fullTargetName = "MoveeChild$aChildInt",
-					targetLineage = pack+"."+"MoveeChild";
+					targetLineage = pack+"."+"MoveeChild"; //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 			runWatchPointTest(src, pack, cunit, fullTargetName, targetLineage);
 	}//end testBreakPoint
 

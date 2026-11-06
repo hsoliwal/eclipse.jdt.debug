@@ -40,7 +40,7 @@ public class LocalVariableTests extends AbstractDebugTest implements IValueDetai
 	 * Tests if the correct local variable is found when it shadows a field variable
 	 * @see "https://bugs.eclipse.org/bugs/show_bug.cgi?id=384458"
 	 */
-	public void testFindConflicting1() throws Exception {
+	public void testFindConflicting1() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String typeName = "LocalVariableTests2";
 		ILineBreakpoint bp = createLineBreakpoint(24, typeName);
 
@@ -83,7 +83,7 @@ public class LocalVariableTests extends AbstractDebugTest implements IValueDetai
 		}
 	}
 
-	public void testSimpleVisibility() throws Exception {
+	public void testSimpleVisibility() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String typeName = "LocalVariablesTests";
 
 		ILineBreakpoint bp = createLineBreakpoint(21, typeName);
@@ -121,7 +121,7 @@ public class LocalVariableTests extends AbstractDebugTest implements IValueDetai
 		}
 	}
 
-	public void testEvaluationAssignments() throws Exception {
+	public void testEvaluationAssignments() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String typeName = "LocalVariablesTests";
 
 		ILineBreakpoint bp = createLineBreakpoint(25, typeName);
@@ -162,7 +162,7 @@ public class LocalVariableTests extends AbstractDebugTest implements IValueDetai
 		doArrayDetailTest(varName, expectedDetails, "ArrayDetailTestsDef", 66);
 	}
 
-	protected void doArrayDetailTest(String varName, String expectedDetails, String mainName, int lineNumber) throws Exception {
+	protected void doArrayDetailTest(String varName, String expectedDetails, String mainName, int lineNumber) throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		ILineBreakpoint bp = createLineBreakpoint(lineNumber, mainName);
 		IDebugModelPresentation presentation = DebugUITools.newDebugModelPresentation();
 		IJavaThread thread= null;
@@ -172,7 +172,7 @@ public class LocalVariableTests extends AbstractDebugTest implements IValueDetai
 			IJavaStackFrame frame = (IJavaStackFrame)thread.getTopStackFrame();
 			frame.getDebugTarget();
 			IVariable var = findVariable(frame, varName);
-			assertNotNull("Could not find variable " + varName, var);
+			assertNotNull("Could not find variable " + varName, var); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 			IValue value = var.getValue();
 
 			synchronized (this) {
@@ -182,7 +182,7 @@ public class LocalVariableTests extends AbstractDebugTest implements IValueDetai
 			}
 			assertNotNull("Details not computed", fDetail);
 			if (fDetail.toUpperCase().contains("ERROR")) {
-				throw new TestAgainException("Error while computing details for presentation" + fDetail);
+				throw new TestAgainException("Error while computing details for presentation" + fDetail); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 			}
 			assertEquals(expectedDetails, fDetail);
 

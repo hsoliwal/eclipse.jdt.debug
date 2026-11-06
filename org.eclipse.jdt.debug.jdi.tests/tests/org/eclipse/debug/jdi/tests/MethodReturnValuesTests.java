@@ -75,7 +75,7 @@ public class MethodReturnValuesTests extends AbstractJDITest {
 	 * test getting a void return value.
 	 * not applicable to non 1.6 VMs
 	 */
-	public void testGetVoidMethodReturnValue() {
+	public void testGetVoidMethodReturnValue() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		if(!fVM.canGetMethodReturnValues()) {
 			return;
 		}
@@ -117,7 +117,7 @@ public class MethodReturnValuesTests extends AbstractJDITest {
 	 * test to make sure that returnValue is working to spec.
 	 * test is not applicable to non 1.6 VMs
 	 */
-	public void testGetStringMethodReturnValue() {
+	public void testGetStringMethodReturnValue() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		if(!fVM.canGetMethodReturnValues()) {
 			return;
 		}
@@ -159,7 +159,7 @@ public class MethodReturnValuesTests extends AbstractJDITest {
 	 * test to make sure that returnValue is working to spec.
 	 * test is not applicable to non 1.6 VMs
 	 */
-	public void testGetIntMethodReturnValue() {
+	public void testGetIntMethodReturnValue() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		if(!fVM.canGetMethodReturnValues()) {
 			return;
 		}
@@ -201,7 +201,7 @@ public class MethodReturnValuesTests extends AbstractJDITest {
 	 * test to make sure that returnValue is working to spec.
 	 * test is not applicable to non 1.6 VMs
 	 */
-	public void testGetBooleanMethodReturnValue() {
+	public void testGetBooleanMethodReturnValue() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		if(!fVM.canGetMethodReturnValues()) {
 			return;
 		}
@@ -243,7 +243,7 @@ public class MethodReturnValuesTests extends AbstractJDITest {
 	 * test to make sure that returnValue is working to spec.
 	 * test is not applicable to non 1.6 VMs
 	 */
-	public void testGetLongMethodReturnValue() {
+	public void testGetLongMethodReturnValue() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		if(!fVM.canGetMethodReturnValues()) {
 			return;
 		}

@@ -95,13 +95,13 @@ public class TableDetailPane implements IDetailPane, IValueDetailListener {
 	/* (non-Javadoc)
 	 * @see org.eclipse.debug.ui.IDetailPane#createControl(org.eclipse.swt.widgets.Composite)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public Control createControl(Composite parent) {
 		fComposite = new Composite(parent, SWT.NONE);
 		fComposite.setLayoutData(new GridData(GridData.FILL_BOTH));
 		fComposite.setLayout(new FillLayout(SWT.HORIZONTAL));
 		fTable = new Table(fComposite,SWT.FULL_SELECTION);
-		fTable.addSelectionListener(new SelectionListener(){
+		fTable.addSelectionListener(new SelectionListener(){ //FLLDCIM: MARK — T03 SELECTION_LANE CALL
 
 			@Override
 			public void widgetDefaultSelected(SelectionEvent e) {
@@ -133,7 +133,7 @@ public class TableDetailPane implements IDetailPane, IValueDetailListener {
 		fWordWrapButton = new Button(composite,SWT.CHECK);
 		fWordWrapButton.setText("Word Wrap");
 		fWordWrapButton.setSelection(false);
-		fWordWrapButton.addSelectionListener(new SelectionListener(){
+		fWordWrapButton.addSelectionListener(new SelectionListener(){ //FLLDCIM: MARK — T03 SELECTION_LANE CALL
 			@Override
 			public void widgetDefaultSelected(SelectionEvent e) {
 				widgetSelected(e);
@@ -150,7 +150,7 @@ public class TableDetailPane implements IDetailPane, IValueDetailListener {
 	/* (non-Javadoc)
 	 * @see org.eclipse.debug.ui.IDetailPane#display(org.eclipse.jface.viewers.IStructuredSelection)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public void display(IStructuredSelection element) {
 
 		if (element != null){
@@ -159,7 +159,7 @@ public class TableDetailPane implements IDetailPane, IValueDetailListener {
 			fText.setDocument(null);
 
 			Iterator<?> iterator = element.iterator();
-			while (iterator.hasNext()){
+			while (iterator.hasNext()){ //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 
 				Object selection = iterator.next();
 				if (selection instanceof IVariable){
@@ -242,7 +242,7 @@ public class TableDetailPane implements IDetailPane, IValueDetailListener {
 	 */
 	@Override
 	public void detailComputed(IValue value, final String result){
-		WorkbenchJob append = new WorkbenchJob("append details") { //$NON-NLS-1$
+		WorkbenchJob append = new WorkbenchJob("append details") { //$NON-NLS-1$ //FLLDCIM: MARK — T09  ANONYMOUS
 			@Override
 			public IStatus runInUIThread(IProgressMonitor monitor) {
 				fText.setDocument(new Document(result));

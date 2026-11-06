@@ -23,7 +23,7 @@ import org.eclipse.jdt.ui.wizards.BuildPathDialogAccess;
 /**
  * Adds a variable to the runtime class path.
  */
-public class AddVariableAction extends RuntimeClasspathAction {
+public class AddVariableAction extends RuntimeClasspathAction { //FLLDCIM: MARK — T04  IMPLEMENTS
 
 	public AddVariableAction(IClasspathViewer viewer) {
 		super(ActionMessages.AddVariableAction_Add_Variables_1, viewer);
@@ -40,7 +40,7 @@ public class AddVariableAction extends RuntimeClasspathAction {
 		IPath[] paths = BuildPathDialogAccess.chooseVariableEntries(getShell(), new IPath[0]);
 		if (paths != null) {
 			IRuntimeClasspathEntry[] entries = new IRuntimeClasspathEntry[paths.length];
-			for (int i = 0; i < paths.length; i++) {
+			for (int i = 0; i < paths.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				entries[i] = JavaRuntime.newVariableRuntimeClasspathEntry(paths[i]);
 			}
 			getViewer().addEntries(entries);

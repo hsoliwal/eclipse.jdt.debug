@@ -53,18 +53,18 @@ public class ThreadNameChangeTests extends AbstractDebugTest {
 	/**
 	 * Tests that we listen to thread name changes and send a debug event if that happens
 	 */
-	public void testListenToThreadNameChange() throws Exception {
+	public void testListenToThreadNameChange() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String typeName = "ThreadNameChange";
 		final int bpLine1 = 39;
 		final int bpLine2 = 43;
 
-		IJavaLineBreakpoint bp1 = createLineBreakpoint(bpLine1, "", typeName + ".java", typeName);
-		IJavaLineBreakpoint bp2 = createLineBreakpoint(bpLine2, "", typeName + ".java", typeName);
+		IJavaLineBreakpoint bp1 = createLineBreakpoint(bpLine1, "", typeName + ".java", typeName); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
+		IJavaLineBreakpoint bp2 = createLineBreakpoint(bpLine2, "", typeName + ".java", typeName); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		bp1.setSuspendPolicy(IJavaBreakpoint.SUSPEND_THREAD);
 		bp2.setSuspendPolicy(IJavaBreakpoint.SUSPEND_THREAD);
 
 		DebugListener listener = new DebugListener();
-		DebugPlugin.getDefault().addDebugEventListener(listener);
+		DebugPlugin.getDefault().addDebugEventListener(listener); //FLLDCIM: MARK — T27 DEBUG_EVENT_ADAPTER CALL
 		IJavaThread thread = null;
 		try {
 			thread = launchToLineBreakpoint(typeName, bp1);
@@ -81,12 +81,12 @@ public class ThreadNameChangeTests extends AbstractDebugTest {
 			// expect one single "CHANGE" event for second thread
 			List<DebugEvent> changeEvents = Collections.emptyList();
 			long start = System.currentTimeMillis();
-			while (changeEvents.isEmpty() && System.currentTimeMillis() - start <= DEFAULT_TIMEOUT) {
+			while (changeEvents.isEmpty() && System.currentTimeMillis() - start <= DEFAULT_TIMEOUT) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				changeEvents = listener.getStateChangeEvents(second);
 				TestUtil.runEventLoop();
 				Thread.sleep(50);
 			}
-			assertEquals("unexpected number of events: " + changeEvents, 1, changeEvents.size());
+			assertEquals("unexpected number of events: " + changeEvents, 1, changeEvents.size()); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 			// expect that thread name is changed to "2"
 			assertEquals("2", second.getName());
@@ -101,19 +101,19 @@ public class ThreadNameChangeTests extends AbstractDebugTest {
 	/**
 	 * Tests that we do not listen to thread name changes if the corresponding preference is set to false
 	 */
-	public void testListenToThreadNameChangeDisabled() throws Exception {
+	public void testListenToThreadNameChangeDisabled() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		System.setProperty(DISABLE_THREAD_NAME_CHANGE_LISTENER, String.valueOf(Boolean.TRUE));
 
 		String typeName = "ThreadNameChange";
 		final int bpLine1 = 39;
 		final int bpLine2 = 43;
 
-		IJavaLineBreakpoint bp1 = createLineBreakpoint(bpLine1, "", typeName + ".java", typeName);
-		IJavaLineBreakpoint bp2 = createLineBreakpoint(bpLine2, "", typeName + ".java", typeName);
+		IJavaLineBreakpoint bp1 = createLineBreakpoint(bpLine1, "", typeName + ".java", typeName); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
+		IJavaLineBreakpoint bp2 = createLineBreakpoint(bpLine2, "", typeName + ".java", typeName); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		bp1.setSuspendPolicy(IJavaBreakpoint.SUSPEND_THREAD);
 		bp2.setSuspendPolicy(IJavaBreakpoint.SUSPEND_THREAD);
 		DebugListener listener = new DebugListener();
-		DebugPlugin.getDefault().addDebugEventListener(listener);
+		DebugPlugin.getDefault().addDebugEventListener(listener); //FLLDCIM: MARK — T27 DEBUG_EVENT_ADAPTER CALL
 		IJavaThread thread = null;
 		try {
 			thread = launchToLineBreakpoint(typeName, bp1);
@@ -129,7 +129,7 @@ public class ThreadNameChangeTests extends AbstractDebugTest {
 
 			// expect no "CHANGE" events
 			List<DebugEvent> changeEvents = listener.getStateChangeEvents(second);
-			assertEquals("expected no events, instead got: " + changeEvents, 0, changeEvents.size());
+			assertEquals("expected no events, instead got: " + changeEvents, 0, changeEvents.size()); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 			// expect that thread name is changed to "2"
 			assertEquals("2", second.getName());
@@ -146,7 +146,7 @@ public class ThreadNameChangeTests extends AbstractDebugTest {
 		return findThread(thread, name, 5_000);
 	}
 
-	private IThread findThread(IJavaThread thread, String name, long timeoutMs) throws DebugException {
+	private IThread findThread(IJavaThread thread, String name, long timeoutMs) throws DebugException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		Predicate<IThread> predicate = x -> {
 			try {
 				return x.getName().equals(name);
@@ -159,7 +159,7 @@ public class ThreadNameChangeTests extends AbstractDebugTest {
 
 		// Wait until timeout or JDIDebugTarget.ThreadStartHandler has added the thread.
 		long timeoutNanos = System.nanoTime() + timeoutMs * 1_000_000L;
-		while (System.nanoTime() <= timeoutNanos) {
+		while (System.nanoTime() <= timeoutNanos) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			threads = thread.getDebugTarget().getThreads();
 			Optional<IThread> match = Arrays.stream(threads).filter(predicate).findFirst();
 			if (match.isPresent()) {
@@ -167,7 +167,7 @@ public class ThreadNameChangeTests extends AbstractDebugTest {
 			}
 		}
 
-		throw new AssertionError("Timeout of " + timeoutMs + "ms reached, thread with name \"" + name + "\" not found in set of threads: "
+		throw new AssertionError("Timeout of " + timeoutMs + "ms reached, thread with name \"" + name + "\" not found in set of threads: " //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 				+ Arrays.asList(threads));
 	}
 
@@ -183,9 +183,9 @@ public class ThreadNameChangeTests extends AbstractDebugTest {
 		return super.get17Project();
 	}
 
-	private static class DebugListener implements IDebugEventSetListener {
+	private static class DebugListener implements IDebugEventSetListener { //FLLDCIM: MARK — T27  IMPLEMENTS
 
-		private final List<DebugEvent> events = new ArrayList<>();
+		private final List<DebugEvent> events = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 
 		@Override
 		public void handleDebugEvents(DebugEvent[] e) {

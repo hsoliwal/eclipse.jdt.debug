@@ -49,9 +49,9 @@ public class ImportBreakpointsTest extends AbstractBreakpointWorkingSetTest {
 	 * Tests import operation from a file.
 	 * @throws Exception catch all passed to framework
 	 */
-	public void testBreakpointImportFile() throws Exception {
+	public void testBreakpointImportFile() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
-			ArrayList<IJavaBreakpoint> breakpoints = new ArrayList<>();
+			ArrayList<IJavaBreakpoint> breakpoints = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 			String typeName = "DropTests";
 			breakpoints.add(createClassPrepareBreakpoint(typeName));
 			breakpoints.add(createLineBreakpoint(32, typeName));
@@ -67,17 +67,17 @@ public class ImportBreakpointsTest extends AbstractBreakpointWorkingSetTest {
 			removeAllBreakpoints();
 			File file = path.toFile();
 			assertNotNull(file);
-			assertEquals(true, file.exists());
+			assertEquals(true, file.exists()); //FLLDCIM: MARK — M31 M3FILE_IO CALL
 			ImportBreakpointsOperation op2 = new ImportBreakpointsOperation(path.toOSString(), true, true);
 			op2.run(new NullProgressMonitor());
 			assertEquals("manager does not contain 6 breakpoints", 6, getBreakpointManager().getBreakpoints().length);
 			IBreakpoint[] importedBreakpoints = op2.getImportedBreakpoints();
 			assertEquals("imported list should contain same breakpoints", 6, importedBreakpoints.length);
-			for (int i = 0; i < importedBreakpoints.length; i++) {
+			for (int i = 0; i < importedBreakpoints.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				IBreakpoint breakpoint = importedBreakpoints[i];
 				assertEquals("Missing imported breakpoint", breakpoint, getBreakpointManager().getBreakpoint(breakpoint.getMarker()));
 			}
-			file.delete();
+			file.delete(); //FLLDCIM: MARK — M31 M3FILE_IO CALL
 		}
 		finally {
 			removeAllBreakpoints();
@@ -89,9 +89,9 @@ public class ImportBreakpointsTest extends AbstractBreakpointWorkingSetTest {
 	 *
 	 * @throws Exception catch all passed to framework
 	 */
-	public void testBreakpointImportBuffer() throws Exception {
+	public void testBreakpointImportBuffer() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
-			ArrayList<IJavaBreakpoint> breakpoints = new ArrayList<>();
+			ArrayList<IJavaBreakpoint> breakpoints = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 			String typeName = "DropTests";
 			breakpoints.add(createClassPrepareBreakpoint(typeName));
 			breakpoints.add(createLineBreakpoint(32, typeName));
@@ -118,9 +118,9 @@ public class ImportBreakpointsTest extends AbstractBreakpointWorkingSetTest {
 	 * tests and overwrote without remove all
 	 * @throws Exception catch all to pass back to framework
 	 */
-	public void testBreakpointImportOverwrite() throws Exception {
+	public void testBreakpointImportOverwrite() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
-			ArrayList<IJavaBreakpoint> breakpoints = new ArrayList<>();
+			ArrayList<IJavaBreakpoint> breakpoints = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 			String typeName = "DropTests";
 			breakpoints.add(createClassPrepareBreakpoint(typeName));
 			breakpoints.add(createLineBreakpoint(32, typeName));
@@ -135,11 +135,11 @@ public class ImportBreakpointsTest extends AbstractBreakpointWorkingSetTest {
 			op.run(new NullProgressMonitor());
 			File file = path.toFile();
 			assertNotNull(file);
-			assertEquals(true, file.exists());
+			assertEquals(true, file.exists()); //FLLDCIM: MARK — M31 M3FILE_IO CALL
 			ImportBreakpointsOperation op2 = new ImportBreakpointsOperation(path.toOSString(), true, true);
 			op2.run(new NullProgressMonitor());
 			assertEquals("manager does not contain 6 breakpoints", 6, getBreakpointManager().getBreakpoints().length);
-			file.delete();
+			file.delete(); //FLLDCIM: MARK — M31 M3FILE_IO CALL
 		}
 		finally {
 			removeAllBreakpoints();
@@ -172,7 +172,7 @@ public class ImportBreakpointsTest extends AbstractBreakpointWorkingSetTest {
 	 *
 	 * @throws Exception catch all to be passed back to the framework
 	 */
-	public void testBreakpointImportWithWorkingsets() throws Exception {
+	public void testBreakpointImportWithWorkingsets() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		//create the working set and add breakpoints to it
 			IBreakpointOrganizer bporg = BreakpointOrganizerManager.getDefault().getOrganizer("org.eclipse.debug.ui.breakpointWorkingSetOrganizer");
@@ -205,14 +205,14 @@ public class ImportBreakpointsTest extends AbstractBreakpointWorkingSetTest {
 			set = null;
 			File file = path.toFile();
 			assertNotNull(file);
-			assertEquals(true, file.exists());
+			assertEquals(true, file.exists()); //FLLDCIM: MARK — M31 M3FILE_IO CALL
 			ImportBreakpointsOperation op2 = new ImportBreakpointsOperation(path.toOSString(), true, true);
 			op2.run(new NullProgressMonitor());
 			set = wsmanager.getWorkingSet(setName);
 			assertNotNull("Import did not create working set", set);
 			assertEquals("workingset does not contain 6 breakpoints", 6, set.getElements().length);
 			assertEquals("manager does not contain 6 breakpoints", 6, getBreakpointManager().getBreakpoints().length);
-			file.delete();
+			file.delete(); //FLLDCIM: MARK — M31 M3FILE_IO CALL
 		}
 		finally {
 			removeAllBreakpoints();
@@ -227,7 +227,7 @@ public class ImportBreakpointsTest extends AbstractBreakpointWorkingSetTest {
 		try {
 			File file = JavaTestPlugin.getDefault().getFileInPlugin(new Path("testresources/brkpt_missing.bkpt"));
 			assertNotNull(file);
-			assertEquals(true, file.exists());
+			assertEquals(true, file.exists()); //FLLDCIM: MARK — M31 M3FILE_IO CALL
 			ImportBreakpointsOperation op = new ImportBreakpointsOperation(file.toPath().normalize().toAbsolutePath().toString(), true, true);
 			op.run(new NullProgressMonitor());
 			assertEquals("should be no breakpoints imported", 0, getBreakpointManager().getBreakpoints().length);
@@ -243,7 +243,7 @@ public class ImportBreakpointsTest extends AbstractBreakpointWorkingSetTest {
 	 *
 	 * @throws Exception catch all to be passed back to the framework
 	 */
-	public void testImportWithWorkingsets() throws Exception {
+	public void testImportWithWorkingsets() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		//create the working set and add breakpoints to it
 			IBreakpointOrganizer bporg = BreakpointOrganizerManager.getDefault().getOrganizer("org.eclipse.debug.ui.breakpointWorkingSetOrganizer");
@@ -282,7 +282,7 @@ public class ImportBreakpointsTest extends AbstractBreakpointWorkingSetTest {
 			set = null;
 			File file = path.toFile();
 			assertNotNull(file);
-			assertEquals(true, file.exists());
+			assertEquals(true, file.exists()); //FLLDCIM: MARK — M31 M3FILE_IO CALL
 			ImportBreakpointsOperation op2 = new ImportBreakpointsOperation(path.toOSString(), true, true);
 			op2.run(new NullProgressMonitor());
 			set = wsmanager.getWorkingSet(setname1);
@@ -290,7 +290,7 @@ public class ImportBreakpointsTest extends AbstractBreakpointWorkingSetTest {
 			assertEquals("workingset does not contain 6 breakpoints", 6, set.getElements().length);
 			assertEquals("alternate working set should contain no breakpoints", 0, set2.getElements().length);
 			assertEquals("manager does not contain 6 breakpoints", 6, getBreakpointManager().getBreakpoints().length);
-			file.delete();
+			file.delete(); //FLLDCIM: MARK — M31 M3FILE_IO CALL
 		}
 		finally {
 			removeAllBreakpoints();

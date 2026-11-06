@@ -175,12 +175,12 @@ public class JavaDebugHover implements IJavaEditorTextHover, ITextHoverExtension
 	 * Returns HTML text for the given variable
 	 */
 	private static String getVariableText(IVariable variable) {
-	    StringBuilder buffer= new StringBuilder();
+	    StringBuilder buffer= new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 		JDIModelPresentation modelPresentation = getModelPresentation();
-		buffer.append("<p><pre>"); //$NON-NLS-1$
+		buffer.append("<p><pre>"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		String variableText= modelPresentation.getVariableText((IJavaVariable) variable);
-		buffer.append(replaceHTMLChars(variableText));
-		buffer.append("</pre></p>"); //$NON-NLS-1$
+		buffer.append(replaceHTMLChars(variableText)); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+		buffer.append("</pre></p>"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		modelPresentation.dispose();
 		if (buffer.length() > 0) {
 			return buffer.toString();
@@ -193,26 +193,26 @@ public class JavaDebugHover implements IJavaEditorTextHover, ITextHoverExtension
 	 * their escaped equivalents. This is to ensure that variable
 	 * values containing reserved characters are correctly displayed.
      */
-    private static String replaceHTMLChars(String variableText) {
-        StringBuilder buffer= new StringBuilder(variableText.length());
+    private static String replaceHTMLChars(String variableText) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
+        StringBuilder buffer= new StringBuilder(variableText.length()); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
         char[] characters = variableText.toCharArray();
-        for (int i = 0; i < characters.length; i++) {
+        for (int i = 0; i < characters.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
             char character= characters[i];
             switch (character) {
             	case '<':
-            	    buffer.append("&lt;"); //$NON-NLS-1$
+            	    buffer.append("&lt;"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
             	    break;
             	case '>':
-            	    buffer.append("&gt;"); //$NON-NLS-1$
+            	    buffer.append("&gt;"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
             	    break;
             	case '&':
-            	    buffer.append("&amp;"); //$NON-NLS-1$
+            	    buffer.append("&amp;"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
             	    break;
             	case '"':
-            	    buffer.append("&quot;"); //$NON-NLS-1$
+            	    buffer.append("&quot;"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
             	    break;
             	default:
-            	    buffer.append(character);
+            	    buffer.append(character); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
             }
         }
         return buffer.toString();
@@ -227,7 +227,7 @@ public class JavaDebugHover implements IJavaEditorTextHover, ITextHoverExtension
 		String[][] booleanPrefs= {
 				{IJDIPreferencesConstants.PREF_SHOW_QUALIFIED_NAMES, JDIModelPresentation.DISPLAY_QUALIFIED_NAMES}};
 	    String viewId= IDebugUIConstants.ID_VARIABLE_VIEW;
-	    for (int i = 0; i < booleanPrefs.length; i++) {
+	    for (int i = 0; i < booleanPrefs.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 	    	boolean preferenceValue = getBooleanPreferenceValue(viewId, booleanPrefs[i][0]);
 			presentation.setAttribute(booleanPrefs[i][1], (preferenceValue ? Boolean.TRUE : Boolean.FALSE));
 		}
@@ -241,7 +241,7 @@ public class JavaDebugHover implements IJavaEditorTextHover, ITextHoverExtension
      * @return boolean
      */
     public static boolean getBooleanPreferenceValue(String id, String preference) {
-        String compositeKey = id + "." + preference; //$NON-NLS-1$
+        String compositeKey = id + "." + preference; //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
         IPreferenceStore store = JDIDebugUIPlugin.getDefault().getPreferenceStore();
         boolean value = false;
         if (store.contains(compositeKey)) {
@@ -263,7 +263,7 @@ public class JavaDebugHover implements IJavaEditorTextHover, ITextHoverExtension
 	/* (non-Javadoc)
 	 * @see org.eclipse.jface.text.ITextHoverExtension2#getHoverInfo2(org.eclipse.jface.text.ITextViewer, org.eclipse.jface.text.IRegion)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public Object getHoverInfo2(ITextViewer textViewer, IRegion hoverRegion) {
 	    IJavaStackFrame frame = getFrame();
 	    if (frame != null) {
@@ -311,7 +311,7 @@ public class JavaDebugHover implements IJavaEditorTextHover, ITextHoverExtension
 							&& isArrayTypeVariable(resolve[0]);
 				}
 
-				for (int i = 0; i < resolve.length; i++) {
+				for (int i = 0; i < resolve.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 					IJavaElement javaElement = resolve[i];
 					if (javaElement instanceof IField) {
 						IField field = (IField) javaElement;
@@ -320,7 +320,7 @@ public class JavaDebugHover implements IJavaEditorTextHover, ITextHoverExtension
 						if (Flags.isStatic(field.getFlags()) && !onArrayLength) {
 							IJavaType[] javaTypes = debugTarget.getJavaTypes(field.getDeclaringType().getFullyQualifiedName());
             		    	if (javaTypes != null) {
-	            		    	for (int j = 0; j < javaTypes.length; j++) {
+	            		    	for (int j = 0; j < javaTypes.length; j++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 									IJavaType type = javaTypes[j];
 									if (type instanceof IJavaReferenceType) {
 										IJavaReferenceType referenceType = (IJavaReferenceType) type;
@@ -411,7 +411,7 @@ public class JavaDebugHover implements IJavaEditorTextHover, ITextHoverExtension
 						}
 
             		    IJavaElement parent = var.getParent();
-						while (!(parent instanceof IMethod) && !(parent instanceof IInitializer) && parent != null) {
+						while (!(parent instanceof IMethod) && !(parent instanceof IInitializer) && parent != null) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
             		    	parent = parent.getParent();
             		    }
 						if (parent instanceof IInitializer && "()V".equals(frame.getSignature()) //$NON-NLS-1$
@@ -455,7 +455,7 @@ public class JavaDebugHover implements IJavaEditorTextHover, ITextHoverExtension
 										String name = frame.getDeclaringTypeName().substring(index + 1);
 										try {
 											Integer.getInteger(name);
-											return findLocalVariable(frame, ASTEvaluationEngine.ANONYMOUS_VAR_PREFIX + var.getElementName());
+											return findLocalVariable(frame, ASTEvaluationEngine.ANONYMOUS_VAR_PREFIX + var.getElementName()); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 										}
 										catch (NumberFormatException ex) {
 										}
@@ -537,10 +537,10 @@ public class JavaDebugHover implements IJavaEditorTextHover, ITextHoverExtension
 		return null;
 	}
 
-	private IJavaVariable evaluateQualifiedNode(ASTNode node, IJavaStackFrame frame, IJavaProject project, Predicate<IJavaStackFrame> framePredicate) {
-		StringBuilder snippetBuilder = new StringBuilder();
+	private IJavaVariable evaluateQualifiedNode(ASTNode node, IJavaStackFrame frame, IJavaProject project, Predicate<IJavaStackFrame> framePredicate) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
+		StringBuilder snippetBuilder = new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 		if (node instanceof QualifiedName) {
-			snippetBuilder.append(((QualifiedName) node).getFullyQualifiedName());
+			snippetBuilder.append(((QualifiedName) node).getFullyQualifiedName()); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		} else if (node instanceof FieldAccess) {
 			StringJoiner segments = new StringJoiner("."); //$NON-NLS-1$
 			node.accept(new ASTVisitor() {
@@ -557,7 +557,7 @@ public class JavaDebugHover implements IJavaEditorTextHover, ITextHoverExtension
 				}
 
 			});
-			snippetBuilder.append(segments.toString());
+			snippetBuilder.append(segments.toString()); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		} else {
 			return null;
 		}
@@ -608,7 +608,7 @@ public class JavaDebugHover implements IJavaEditorTextHover, ITextHoverExtension
 			return currentFrame;
 		}
 
-		for (IStackFrame stackFrame : currentFrame.getThread().getStackFrames()) {
+		for (IStackFrame stackFrame : currentFrame.getThread().getStackFrames()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			IJavaStackFrame javaStackFrame = (IJavaStackFrame) stackFrame;
 			if (currentFrame != javaStackFrame && framePredicate.test(javaStackFrame)) {
 				return javaStackFrame;
@@ -620,9 +620,9 @@ public class JavaDebugHover implements IJavaEditorTextHover, ITextHoverExtension
 	}
 
 	private static boolean containsVariable(IStackFrame frame, String variableName) throws DebugException {
-		for (IVariable variable : frame.getVariables()) {
+		for (IVariable variable : frame.getVariables()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			if (variable instanceof JDIThisVariable) {
-				for (IVariable fieldVar : variable.getValue().getVariables()) {
+				for (IVariable fieldVar : variable.getValue().getVariables()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 					if (variableName.equals(fieldVar.getName())) {
 						return true;
 					}
@@ -664,7 +664,7 @@ public class JavaDebugHover implements IJavaEditorTextHover, ITextHoverExtension
 	private static boolean isInstanceOfDeclaringType(IJavaObject javaObject, IField field) throws DebugException {
 		String declaringTypeName = field.getDeclaringType().getFullyQualifiedName();
 		IJavaType type = javaObject.getJavaType();
-		while (type instanceof IJavaClassType classType) {
+		while (type instanceof IJavaClassType classType) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			if (declaringTypeName.equals(classType.getName())) {
 				return true;
 			}

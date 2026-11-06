@@ -36,7 +36,7 @@ import org.eclipse.swt.graphics.Color;
  */
 public class ModelPresentationTests extends AbstractDebugTest {
 
-	private final Map<String, Color> colors = new HashMap<>();
+	private final Map<String, Color> colors = new HashMap<>(); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
 	/**
 	 * Constructor
 	 */
@@ -288,7 +288,7 @@ public class ModelPresentationTests extends AbstractDebugTest {
 	/**
 	 * Tests displayVariableTypeNames option
 	 */
-	public void testShowTypeTest() throws Exception {
+	public void testShowTypeTest() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String typeName = "ModelPresentationTests";
 		IJavaLineBreakpoint bp = createLineBreakpoint(19, typeName);
 		JDIModelPresentation pres = mock();
@@ -301,11 +301,11 @@ public class ModelPresentationTests extends AbstractDebugTest {
 			IJavaVariable stringArrayVariable = findVariable(frame, "stringArray");
 			long id = ((IJavaObject) stringArrayVariable.getValue()).getUniqueId();
 
-			assertEquals("stringArray= String[0]  (id=" + id + ")", pres.getText(stringArrayVariable));
+			assertEquals("stringArray= String[0]  (id=" + id + ")", pres.getText(stringArrayVariable)); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 			pres.setAttribute(IDebugModelPresentation.DISPLAY_VARIABLE_TYPE_NAMES, Boolean.TRUE);
 
-			assertEquals("String[] stringArray= String[0]  (id=" + id + ")", pres.getText(stringArrayVariable));
+			assertEquals("String[] stringArray= String[0]  (id=" + id + ")", pres.getText(stringArrayVariable)); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 		} finally {
 			terminateAndRemove(thread);

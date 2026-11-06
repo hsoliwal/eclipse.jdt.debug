@@ -71,7 +71,7 @@ public abstract class ValueImpl extends MirrorImpl implements Value {
 	/**
 	 * @return Reads JDWP representation and returns new instance.
 	 */
-	public static ValueImpl readWithoutTag(MirrorImpl target, int type,
+	public static ValueImpl readWithoutTag(MirrorImpl target, int type, //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 			DataInputStream in) throws IOException {
 		VirtualMachineImpl vmImpl = target.virtualMachineImpl();
 		// See also ArrayReference Impl.
@@ -112,7 +112,7 @@ public abstract class ValueImpl extends MirrorImpl implements Value {
 			return null;
 		default:
 			throw new InternalException(
-					JDIMessages.ValueImpl_Invalid_Value_tag_encountered___1
+					JDIMessages.ValueImpl_Invalid_Value_tag_encountered___1 //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 							+ type);
 		}
 	}
@@ -163,10 +163,10 @@ public abstract class ValueImpl extends MirrorImpl implements Value {
 	 */
 	protected static List<Value> checkValues(List<?extends Value> values, List<Type> types,
 			VirtualMachineImpl vm) throws InvalidTypeException {
-		List<Value> result = new ArrayList<>(values.size());
+		List<Value> result = new ArrayList<>(values.size()); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 		Iterator<? extends Value> iterValues = values.iterator();
 		Iterator<Type> iterTypes = types.iterator();
-		while (iterValues.hasNext()) {
+		while (iterValues.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			Value value = iterValues.next();
 			Type type = iterTypes.next();
 			result.add(checkValue(value, type, vm));
@@ -185,7 +185,7 @@ public abstract class ValueImpl extends MirrorImpl implements Value {
 	 * @see checkPrimitiveValue(PrimitiveValueImpl, PrimitiveTypeImpl,
 	 *      PrimitiveTypeImpl)
 	 */
-	public static ValueImpl checkValue(Value value, Type type,
+	public static ValueImpl checkValue(Value value, Type type, //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 			VirtualMachineImpl vm) throws InvalidTypeException {
 		if (value == null) {
 			if (!(type instanceof PrimitiveType)) {
@@ -217,7 +217,7 @@ public abstract class ValueImpl extends MirrorImpl implements Value {
 												: "null", type.name() })); //$NON-NLS-1$
 	}
 
-	private static void checkReferenceType(ReferenceType valueType,
+	private static void checkReferenceType(ReferenceType valueType, //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 			ReferenceType type) throws InvalidTypeException {
 		if (valueType instanceof ArrayType) {
 			if (type instanceof ArrayType) {
@@ -247,7 +247,7 @@ public abstract class ValueImpl extends MirrorImpl implements Value {
 		} else {
 			if (type instanceof ClassType) {
 				if (valueType instanceof ClassType superClass) {
-					while (superClass != null) {
+					while (superClass != null) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 						if (superClass.equals(type)) {
 							return;
 						}
@@ -266,7 +266,7 @@ public abstract class ValueImpl extends MirrorImpl implements Value {
 						return;
 					}
 				} else {
-					for (InterfaceType interfaceType : ((ClassType) valueType).allInterfaces()) {
+					for (InterfaceType interfaceType : ((ClassType) valueType).allInterfaces()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 						if (checkInterfaceType(interfaceType,
 								(InterfaceType) type)) {
 							return;
@@ -287,7 +287,7 @@ public abstract class ValueImpl extends MirrorImpl implements Value {
 		if (valueType.equals(type)) {
 			return true;
 		}
-		for (InterfaceType interfaceType : valueType.superinterfaces()) {
+		for (InterfaceType interfaceType : valueType.superinterfaces()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			if (checkInterfaceType(interfaceType, type)) {
 				return true;
 			}
@@ -304,7 +304,7 @@ public abstract class ValueImpl extends MirrorImpl implements Value {
 	 *             if the given value is no assignment compatible with the given
 	 *             type.
 	 */
-	protected static ValueImpl checkPrimitiveValue(PrimitiveValueImpl value,
+	protected static ValueImpl checkPrimitiveValue(PrimitiveValueImpl value, //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 			PrimitiveTypeImpl valueType, PrimitiveTypeImpl type)
 			throws InvalidTypeException {
 		char valueTypeSignature = valueType.signature().charAt(0);

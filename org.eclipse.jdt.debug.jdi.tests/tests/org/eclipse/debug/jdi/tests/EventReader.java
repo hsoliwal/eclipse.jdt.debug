@@ -63,7 +63,7 @@ public class EventReader extends AbstractReader {
 	 * Dispatches the given event to the given listener.
 	 * Returns whether the VM should be resumed.
 	 */
-	private boolean dispath(Event event, EventListener listener) {
+	private boolean dispath(Event event, EventListener listener) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		if (event instanceof AccessWatchpointEvent) {
 			return listener.accessWatchpoint((AccessWatchpointEvent) event);
 		}
@@ -109,9 +109,9 @@ public class EventReader extends AbstractReader {
 	/**
 	 * Continuously reads events that are coming from the event queue.
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	protected void readerLoop() {
-		while (!fIsStopping) {
+		while (!fIsStopping) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			try {
 				if (!fIsStopping) {
 					// Get the next event
@@ -120,9 +120,9 @@ public class EventReader extends AbstractReader {
 					// Dispatch the events
 					boolean shouldGo = true;
 					EventIterator iterator = eventSet.eventIterator();
-					while (iterator.hasNext()) {
+					while (iterator.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 						Event event = iterator.nextEvent();
-						for (EventListener listener : fEventListeners) {
+						for (EventListener listener : fEventListeners) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 							shouldGo = shouldGo & dispath(event, listener);
 						}
 						if (event instanceof VMDeathEvent) {

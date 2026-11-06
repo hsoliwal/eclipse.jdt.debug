@@ -19,7 +19,7 @@ import org.eclipse.jdt.internal.debug.ui.IJDIPreferencesConstants;
  * Enable/disable collapsing of the non-relevant stack frames in debug views.
  *
  */
-public class CollapseStackFramesAction extends ToggleBooleanPreferenceAction {
+public class CollapseStackFramesAction extends ToggleBooleanPreferenceAction { //FLLDCIM: MARK — T23  IMPLEMENTS
 
 	@Override
 	protected String getPreferenceKey() {

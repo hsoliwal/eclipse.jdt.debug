@@ -53,24 +53,24 @@ public class BreakpointUtils {
 	 * Marker attribute storing the handle id of the
 	 * Java element associated with a Java breakpoint
 	 */
-	private static final String HANDLE_ID = JDIDebugUIPlugin.getUniqueIdentifier() + ".JAVA_ELEMENT_HANDLE_ID"; //$NON-NLS-1$
+	private static final String HANDLE_ID = JDIDebugUIPlugin.getUniqueIdentifier() + ".JAVA_ELEMENT_HANDLE_ID"; //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 	/**
 	 * Marker attribute used to denote a run to line breakpoint
 	 */
-	private static final String RUN_TO_LINE =  JDIDebugUIPlugin.getUniqueIdentifier() + ".run_to_line"; //$NON-NLS-1$
+	private static final String RUN_TO_LINE =  JDIDebugUIPlugin.getUniqueIdentifier() + ".run_to_line"; //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 	/**
 	 * Marker attribute used to denote the start of the region within a Java
 	 * member that the breakpoint is located within.
 	 */
-	private static final String MEMBER_START =  JDIDebugUIPlugin.getUniqueIdentifier() + ".member_start"; //$NON-NLS-1$
+	private static final String MEMBER_START =  JDIDebugUIPlugin.getUniqueIdentifier() + ".member_start"; //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 	/**
 	 * Marker attribute used to denote the end of the region within a Java
 	 * member that the breakpoint is located within.
 	 */
-	private static final String MEMBER_END =  JDIDebugUIPlugin.getUniqueIdentifier() + ".member_end"; //$NON-NLS-1$
+	private static final String MEMBER_END =  JDIDebugUIPlugin.getUniqueIdentifier() + ".member_end"; //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 	/**
 	 * Returns the resource on which a breakpoint marker should
@@ -129,7 +129,7 @@ public class BreakpointUtils {
 	 * @exception CoreException if an exception occurs accessing
 	 *  the breakpoint
 	 */
-	public static IMember getMember(IJavaLineBreakpoint breakpoint) throws CoreException {
+	public static IMember getMember(IJavaLineBreakpoint breakpoint) throws CoreException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		if (breakpoint instanceof IJavaMethodBreakpoint) {
 			return getMethod((IJavaMethodBreakpoint)breakpoint);
 		}
@@ -166,7 +166,7 @@ public class BreakpointUtils {
 	 * @return the {@link IMember} from the given start-end range
 	 * @throws JavaModelException if there is a problem with the backing Java model
 	 */
-	protected static IMember binSearch(IType type, int start, int end) throws JavaModelException {
+	protected static IMember binSearch(IType type, int start, int end) throws JavaModelException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IJavaElement je = getElementAt(type, start);
 		if (je != null && !je.equals(type)) {
 			return asMember(je);
@@ -338,12 +338,12 @@ public class BreakpointUtils {
      * @return the {@link IBreakpoint} from the current editor position or <code>null</code>
      * @since 3.8
      */
-    public static IBreakpoint getBreakpointFromEditor(ITextEditor editor, IVerticalRulerInfo info) {
+    public static IBreakpoint getBreakpointFromEditor(ITextEditor editor, IVerticalRulerInfo info) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
     	IAnnotationModel annotationModel = editor.getDocumentProvider().getAnnotationModel(editor.getEditorInput());
 		IDocument document = editor.getDocumentProvider().getDocument(editor.getEditorInput());
 		if (annotationModel != null) {
 			Iterator<Annotation> iterator = annotationModel.getAnnotationIterator();
-			while (iterator.hasNext()) {
+			while (iterator.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				Object object = iterator.next();
 				if (object instanceof SimpleMarkerAnnotation) {
 					SimpleMarkerAnnotation markerAnnotation = (SimpleMarkerAnnotation) object;

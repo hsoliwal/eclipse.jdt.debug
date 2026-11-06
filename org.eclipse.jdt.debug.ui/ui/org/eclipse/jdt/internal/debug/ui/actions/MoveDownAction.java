@@ -22,7 +22,7 @@ import org.eclipse.jface.viewers.IStructuredSelection;
 /**
  * Moves selected entries in a runtime classpath viewer down one position.
  */
-public class MoveDownAction extends RuntimeClasspathAction {
+public class MoveDownAction extends RuntimeClasspathAction { //FLLDCIM: MARK — T04  IMPLEMENTS
 
 	public MoveDownAction(IClasspathViewer viewer) {
 		super(ActionMessages.MoveDownAction_M_ove_Down_1, viewer);
@@ -31,7 +31,7 @@ public class MoveDownAction extends RuntimeClasspathAction {
 	/* (non-Javadoc)
 	 * @see org.eclipse.jface.action.Action#run()
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public void run() {
 		List<IRuntimeClasspathEntry> targets = getOrderedSelection();
 		if (targets.isEmpty()) {
@@ -40,7 +40,7 @@ public class MoveDownAction extends RuntimeClasspathAction {
 		List<IRuntimeClasspathEntry> list = getEntriesAsList();
 		int bottom = list.size() - 1;
 		int index = 0;
-		for (int i = targets.size() - 1; i >= 0; i--) {
+		for (int i = targets.size() - 1; i >= 0; i--) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			IRuntimeClasspathEntry target = targets.get(i);
 			index = list.indexOf(target);
 			if (index < bottom) {

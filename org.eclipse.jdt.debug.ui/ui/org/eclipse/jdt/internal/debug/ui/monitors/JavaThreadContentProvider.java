@@ -48,7 +48,7 @@ public class JavaThreadContentProvider extends JavaElementContentProvider {
 	/* (non-Javadoc)
 	 * @see org.eclipse.debug.internal.ui.viewers.model.provisional.elements.ElementContentProvider#getChildCount(java.lang.Object, org.eclipse.debug.internal.ui.viewers.provisional.IPresentationContext)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	protected int getChildCount(Object element, IPresentationContext context, IViewerUpdate monitor) throws CoreException {
 		if (element instanceof GroupedStackFrame groupedFrame) {
 			return groupedFrame.getFrameCount();
@@ -98,7 +98,7 @@ public class JavaThreadContentProvider extends JavaElementContentProvider {
 		return getElements(getChildren(thread), index, length);
 	}
 
-	protected Object[] getChildren(IJavaThread thread) {
+	protected Object[] getChildren(IJavaThread thread) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 			if (thread instanceof JDIThread) {
 				JDIThread jThread = (JDIThread) thread;
@@ -138,17 +138,17 @@ public class JavaThreadContentProvider extends JavaElementContentProvider {
 	 * {@link Category#TEST} and {@link Category#CUSTOM_FILTERED} grouped into {@link GroupedStackFrame}s, those are folded by default, but can be
 	 * expanded on demand by the user.
 	 */
-	private List<IDebugElement> getStackFrames(IJavaThread thread) throws DebugException {
+	private List<IDebugElement> getStackFrames(IJavaThread thread) throws DebugException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IStackFrame[] frames = thread.getStackFrames();
 		var stackFrameProvider = getStackFrameProvider();
-		var result = new ArrayList<IDebugElement>(frames.length);
+		var result = new ArrayList<IDebugElement>(frames.length); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 		if (!stackFrameProvider.isCollapseStackFrames()) {
 			result.addAll(Arrays.asList(frames));
 			return result;
 		}
 		GroupedStackFrame lastGroupping = null;
 		boolean first = true;
-		for (var frame : frames) {
+		for (var frame : frames) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			if (first) {
 				result.add(frame);
 				first = false;

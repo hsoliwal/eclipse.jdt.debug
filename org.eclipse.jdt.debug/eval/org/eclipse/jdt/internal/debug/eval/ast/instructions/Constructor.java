@@ -36,7 +36,7 @@ public class Constructor extends CompoundInstruction {
 	public void execute() throws CoreException {
 		IJavaValue[] args = new IJavaValue[fArgCount];
 		// args are in reverse order
-		for (int i = fArgCount - 1; i >= 0; i--) {
+		for (int i = fArgCount - 1; i >= 0; i--) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			args[i] = popValue();
 		}
 		IJavaClassType clazz = (IJavaClassType) pop();
@@ -47,7 +47,7 @@ public class Constructor extends CompoundInstruction {
 
 	@Override
 	public String toString() {
-		return InstructionsEvaluationMessages.Constructor_constructor__1
+		return InstructionsEvaluationMessages.Constructor_constructor__1 //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 				+ fSignature;
 	}
 

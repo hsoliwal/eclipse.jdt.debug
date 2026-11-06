@@ -65,7 +65,7 @@ public class TestBufferredOutputActionDelegate implements IActionDelegate2, IWor
 	/**
 	 * @see org.eclipse.ui.IActionDelegate#run(org.eclipse.jface.action.IAction)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public void run(IAction action) {
 		try {
 			DebugUIPlugin.getActiveWorkbenchWindow().getActivePage().showView(IConsoleConstants.ID_CONSOLE_VIEW);
@@ -80,13 +80,13 @@ public class TestBufferredOutputActionDelegate implements IActionDelegate2, IWor
 			@Override
 			public void run() {
 				long startNano = System.nanoTime();
-				for (int i = 0; i < 1000; i++) {
+				for (int i = 0; i < 1000; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 					stream.print(Integer.toString(i));
 					stream.print(": Testing..."); //$NON-NLS-1$
 					stream.print("one..."); //$NON-NLS-1$
 					stream.println("two.... three...."); //$NON-NLS-1$
 				}
-				stream.println("Total time ms: " + (System.nanoTime() - startNano) / 1_000_000L); //$NON-NLS-1$
+				stream.println("Total time ms: " + (System.nanoTime() - startNano) / 1_000_000L); //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 			}
 		};
 		new Thread(r).start();

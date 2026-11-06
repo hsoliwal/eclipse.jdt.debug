@@ -73,7 +73,7 @@ public class LaunchModeTests extends AbstractDebugTest {
 	 *
 	 * @see TestModeLaunchDelegate
 	 */
-	public void testContributedLaunchMode() throws CoreException {
+	public void testContributedLaunchMode() throws CoreException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		ILaunch launch = null;
 		try {
 			fConfiguration = null;
@@ -117,7 +117,7 @@ public class LaunchModeTests extends AbstractDebugTest {
 	public void testLaunchModes() {
 		ILaunchMode[] modes = getLaunchManager().getLaunchModes();
 		String[] ids = new String[modes.length];
-		for (int i = 0; i < modes.length; i++) {
+		for (int i = 0; i < modes.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			ILaunchMode mode = modes[i];
 			ids[i] = mode.getIdentifier();
 		}
@@ -131,7 +131,7 @@ public class LaunchModeTests extends AbstractDebugTest {
 	 * Asserts that the array contains the given object
 	 */
 	static public void assertContains(String message, Object[] array, Object object) {
-		for (int i = 0; i < array.length; i++) {
+		for (int i = 0; i < array.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			if (array[i].equals(object)) {
 				return;
 			}
@@ -158,7 +158,7 @@ public class LaunchModeTests extends AbstractDebugTest {
 	/**
 	 * Tests that mode specific tab group contributions work.
 	 */
-	public void testModeSpecificTabGroups() throws CoreException {
+	public void testModeSpecificTabGroups() throws CoreException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		ILaunchConfigurationType javaType = getLaunchManager().getLaunchConfigurationType(IJavaLaunchConfigurationConstants.ID_JAVA_APPLICATION);
 		ILaunchConfigurationTabGroup standardGroup = LaunchConfigurationPresentationManager.getDefault().getTabGroup(javaType, ILaunchManager.DEBUG_MODE);
 		ILaunchConfigurationTabGroup testGroup = LaunchConfigurationPresentationManager.getDefault().getTabGroup(javaType, "TEST_MODE"); //$NON-NLS-1$
@@ -167,8 +167,8 @@ public class LaunchModeTests extends AbstractDebugTest {
 		testGroup.createTabs(dialog, "TEST_MODE"); //$NON-NLS-1$
 
 		ILaunchConfigurationTab[] tabs = standardGroup.getTabs();
-		HashSet<Class<? extends ILaunchConfigurationTab>> tabset = new HashSet<>();
-		for(int i = 0; i< tabs.length; i++) {
+		HashSet<Class<? extends ILaunchConfigurationTab>> tabset = new HashSet<>(); //FLLDCIM: MARK — M03 M3_SET_LANES NEW
+		for(int i = 0; i< tabs.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			tabset.add(tabs[i].getClass());
 		}
 		Class<?>[] classes = new Class<?>[] {
@@ -179,12 +179,12 @@ public class LaunchModeTests extends AbstractDebugTest {
 				SourceLookupTab.class,
 				EnvironmentTab.class,
 				CommonTab.class};
-		assertTrue("Tab set does not contain all default java tabs", tabset.containsAll(new HashSet<>(Arrays.asList(classes)))); //$NON-NLS-1$
+		assertTrue("Tab set does not contain all default java tabs", tabset.containsAll(new HashSet<>(Arrays.asList(classes)))); //$NON-NLS-1$ //FLLDCIM: MARK — M03 M3_SET_LANES NEW
 
 		tabs = testGroup.getTabs();
 		assertEquals("Wrong number of tabs in the test group", 4, tabs.length); //$NON-NLS-1$
-		tabset = new HashSet<>();
-		for(int i = 0; i< tabs.length; i++) {
+		tabset = new HashSet<>(); //FLLDCIM: MARK — M03 M3_SET_LANES NEW
+		for(int i = 0; i< tabs.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			tabset.add(tabs[i].getClass());
 		}
 		classes = new Class<?>[] {
@@ -192,7 +192,7 @@ public class LaunchModeTests extends AbstractDebugTest {
 				JavaArgumentsTab.class,
 				JavaJRETab.class,
 				JavaClasspathTab.class};
-		assertTrue("Test tab set does not contain all default tabs", tabset.containsAll(new HashSet<>(Arrays.asList(classes)))); //$NON-NLS-1$
+		assertTrue("Test tab set does not contain all default tabs", tabset.containsAll(new HashSet<>(Arrays.asList(classes)))); //$NON-NLS-1$ //FLLDCIM: MARK — M03 M3_SET_LANES NEW
 		standardGroup.dispose();
 		testGroup.dispose();
 	}
@@ -214,7 +214,7 @@ public class LaunchModeTests extends AbstractDebugTest {
 	 */
 	public void testDefaultDebugLaunchPerspective2() {
 		ILaunchConfigurationType javaType = getLaunchManager().getLaunchConfigurationType(IJavaLaunchConfigurationConstants.ID_JAVA_APPLICATION);
-		HashSet<String> modes =  new HashSet<>();
+		HashSet<String> modes =  new HashSet<>(); //FLLDCIM: MARK — M03 M3_SET_LANES NEW
 		modes.add(ILaunchManager.DEBUG_MODE);
 		assertEquals("Java debug perspective should be debug", IDebugUIConstants.ID_DEBUG_PERSPECTIVE, DebugUITools.getLaunchPerspective(javaType, null, modes)); //$NON-NLS-1$
 	}
@@ -236,7 +236,7 @@ public class LaunchModeTests extends AbstractDebugTest {
 	 */
 	public void testDefaultRunLaunchPerspective2() {
 		ILaunchConfigurationType javaType = getLaunchManager().getLaunchConfigurationType(IJavaLaunchConfigurationConstants.ID_JAVA_APPLICATION);
-		HashSet<String> modes = new HashSet<>();
+		HashSet<String> modes = new HashSet<>(); //FLLDCIM: MARK — M03 M3_SET_LANES NEW
 		modes.add(ILaunchManager.RUN_MODE);
 		assertNull("Java run perspective should be null", DebugUITools.getLaunchPerspective(javaType, null, modes)); //$NON-NLS-1$
 	}
@@ -268,7 +268,7 @@ public class LaunchModeTests extends AbstractDebugTest {
 	 */
 	public void testResetDebugLaunchPerspective2() {
 		ILaunchConfigurationType javaType = getLaunchManager().getLaunchConfigurationType(IJavaLaunchConfigurationConstants.ID_JAVA_APPLICATION);
-		HashSet<String> modes = new HashSet<>();
+		HashSet<String> modes = new HashSet<>(); //FLLDCIM: MARK — M03 M3_SET_LANES NEW
 		modes.add(ILaunchManager.DEBUG_MODE);
 		assertEquals("Java debug perspective should be debug", IDebugUIConstants.ID_DEBUG_PERSPECTIVE, DebugUITools.getLaunchPerspective(javaType, null, modes)); //$NON-NLS-1$
 		// set to NONE
@@ -289,7 +289,7 @@ public class LaunchModeTests extends AbstractDebugTest {
 	 */
 	public void testResetDebugPerspectiveJavaLaunchDelegate() {
 		ILaunchConfigurationType javaType = getLaunchManager().getLaunchConfigurationType(IJavaLaunchConfigurationConstants.ID_JAVA_APPLICATION);
-		HashSet<String> modes = new HashSet<>();
+		HashSet<String> modes = new HashSet<>(); //FLLDCIM: MARK — M03 M3_SET_LANES NEW
 		modes.add(ILaunchManager.DEBUG_MODE);
 		ILaunchDelegate delegate = ((LaunchManager)getLaunchManager()).getLaunchDelegate("org.eclipse.jdt.launching.localJavaApplication"); //$NON-NLS-1$
 		assertNotNull("Java launch delegate should not be null", delegate); //$NON-NLS-1$
@@ -328,7 +328,7 @@ public class LaunchModeTests extends AbstractDebugTest {
 	 */
 	public void testResetRunLaunchPerspective2() {
 		ILaunchConfigurationType javaType = getLaunchManager().getLaunchConfigurationType(IJavaLaunchConfigurationConstants.ID_JAVA_APPLICATION);
-		HashSet<String> modes = new HashSet<>();
+		HashSet<String> modes = new HashSet<>(); //FLLDCIM: MARK — M03 M3_SET_LANES NEW
 		modes.add(ILaunchManager.RUN_MODE);
 		assertNull("Java run perspective should be null", DebugUITools.getLaunchPerspective(javaType, null, modes)); //$NON-NLS-1$
 		// set to Java perspective
@@ -348,7 +348,7 @@ public class LaunchModeTests extends AbstractDebugTest {
 	 */
 	public void testResetRunPerspectiveJavaLaunchDelegate() {
 		ILaunchConfigurationType javaType = getLaunchManager().getLaunchConfigurationType(IJavaLaunchConfigurationConstants.ID_JAVA_APPLICATION);
-		HashSet<String> modes = new HashSet<>();
+		HashSet<String> modes = new HashSet<>(); //FLLDCIM: MARK — M03 M3_SET_LANES NEW
 		modes.add(ILaunchManager.RUN_MODE);
 		ILaunchDelegate delegate = ((LaunchManager)getLaunchManager()).getLaunchDelegate("org.eclipse.jdt.launching.localJavaApplication"); //$NON-NLS-1$
 		assertNotNull("Java launch delegate should not be null", delegate); //$NON-NLS-1$
@@ -369,7 +369,7 @@ public class LaunchModeTests extends AbstractDebugTest {
 	 */
 	public void testDefaultDebugPerspectiveJavaLaunchDelegate() {
 		ILaunchConfigurationType javaType = getLaunchManager().getLaunchConfigurationType(IJavaLaunchConfigurationConstants.ID_JAVA_APPLICATION);
-		HashSet<String> modes = new HashSet<>();
+		HashSet<String> modes = new HashSet<>(); //FLLDCIM: MARK — M03 M3_SET_LANES NEW
 		modes.add(ILaunchManager.DEBUG_MODE);
 		ILaunchDelegate delegate = ((LaunchManager)getLaunchManager()).getLaunchDelegate("org.eclipse.jdt.launching.localJavaApplication"); //$NON-NLS-1$
 		assertNotNull("Java launch delegate should not be null", delegate); //$NON-NLS-1$
@@ -384,7 +384,7 @@ public class LaunchModeTests extends AbstractDebugTest {
 	 */
 	public void testDefaultRunPerspectiveJavaLaunchDelegate() {
 		ILaunchConfigurationType javaType = getLaunchManager().getLaunchConfigurationType(IJavaLaunchConfigurationConstants.ID_JAVA_APPLICATION);
-		HashSet<String> modes = new HashSet<>();
+		HashSet<String> modes = new HashSet<>(); //FLLDCIM: MARK — M03 M3_SET_LANES NEW
 		modes.add(ILaunchManager.RUN_MODE);
 		ILaunchDelegate delegate = ((LaunchManager)getLaunchManager()).getLaunchDelegate("org.eclipse.jdt.launching.localJavaApplication"); //$NON-NLS-1$
 		assertNotNull("Java launch delegate should not be null", delegate); //$NON-NLS-1$

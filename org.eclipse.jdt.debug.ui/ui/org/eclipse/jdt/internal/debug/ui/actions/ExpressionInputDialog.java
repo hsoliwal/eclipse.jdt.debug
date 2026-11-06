@@ -183,7 +183,7 @@ public class ExpressionInputDialog extends TrayDialog {
     /**
      * Initializes the source viewer. This method is based on code in BreakpointConditionEditor.
      */
-    private void configureSourceViewer() {
+    private void configureSourceViewer() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
         JavaTextTools tools= JDIDebugUIPlugin.getDefault().getJavaTextTools();
         IDocument document= new Document();
         tools.setupJavaDocumentPartitioner(document, IJavaPartitions.JAVA_PARTITIONING);
@@ -210,7 +210,7 @@ public class ExpressionInputDialog extends TrayDialog {
 		gd.widthHint= convertWidthInCharsToPixels(40);
 		document.set(getInitialText(fVariable));
 
-		fDocumentListener= new IDocumentListener() {
+		fDocumentListener= new IDocumentListener() { //FLLDCIM: MARK — T28  ANONYMOUS
             @Override
 			public void documentAboutToBeChanged(DocumentEvent event) {
             }
@@ -249,49 +249,49 @@ public class ExpressionInputDialog extends TrayDialog {
      * @return the initial text to display in the source viewer or <code>null</code>
      *  if none.
      */
-    protected String getInitialText(IJavaVariable variable) {
+    protected String getInitialText(IJavaVariable variable) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
         try {
             String signature = variable.getSignature();
             if (signature.equals("Ljava/lang/String;")) { //$NON-NLS-1$
                 IValue value = variable.getValue();
                 if (!(value instanceof JDINullValue)) {
                     String currentValue= value.getValueString();
-                    StringBuilder buffer= new StringBuilder(currentValue.length());
-                    buffer.append('"'); // Surround value in quotes
+                    StringBuilder buffer= new StringBuilder(currentValue.length()); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
+                    buffer.append('"'); // Surround value in quotes //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
                     char[] chars = currentValue.toCharArray();
-                    for (int i = 0; i < chars.length; i++) {
+                    for (int i = 0; i < chars.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
                         char c = chars[i];
                         switch (c) {
                         	case '\b':
-                        		buffer.append("\\b"); //$NON-NLS-1$
+                        		buffer.append("\\b"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
                         		break;
                         	case '\t':
-                        		buffer.append("\\t"); //$NON-NLS-1$
+                        		buffer.append("\\t"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
                         		break;
                         	case '\n':
-                        		buffer.append("\\n"); //$NON-NLS-1$
+                        		buffer.append("\\n"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
                         		break;
                         	case '\f':
-                        		buffer.append("\\f"); //$NON-NLS-1$
+                        		buffer.append("\\f"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
                         		break;
                         	case '\r':
-                        		buffer.append("\\r"); //$NON-NLS-1$
+                        		buffer.append("\\r"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
                         		break;
                         	case '"':
-                        		buffer.append("\\\""); //$NON-NLS-1$
+                        		buffer.append("\\\""); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
                         		break;
                         	case '\'':
-                        		buffer.append("\\\'"); //$NON-NLS-1$
+                        		buffer.append("\\\'"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
                         		break;
                         	case '\\':
-                        		buffer.append("\\\\"); //$NON-NLS-1$
+                        		buffer.append("\\\\"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
                         		break;
                         	default:
-                        		buffer.append(c);
+                        		buffer.append(c); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
                         		break;
                         }
                     }
-                    buffer.append('"'); // Surround value in quotes
+                    buffer.append('"'); // Surround value in quotes //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
                     return buffer.toString();
                 }
             }

@@ -27,7 +27,7 @@ public class WatchpointDetailPane extends AbstractDetailPane {
 	/**
 	 * Identifier for this detail pane editor
 	 */
-	public static final String DETAIL_PANE_WATCHPOINT = JDIDebugUIPlugin.getUniqueIdentifier() + ".DETAIL_PANE_WATCHPOINT"; //$NON-NLS-1$
+	public static final String DETAIL_PANE_WATCHPOINT = JDIDebugUIPlugin.getUniqueIdentifier() + ".DETAIL_PANE_WATCHPOINT"; //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 	public WatchpointDetailPane() {
 		super(BreakpointMessages.WatchpointDetailPane_0, BreakpointMessages.WatchpointDetailPane_0, DETAIL_PANE_WATCHPOINT);

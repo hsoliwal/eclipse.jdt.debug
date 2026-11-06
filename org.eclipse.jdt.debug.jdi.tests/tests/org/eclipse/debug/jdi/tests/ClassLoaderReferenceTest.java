@@ -56,7 +56,7 @@ public class ClassLoaderReferenceTest extends AbstractJDITest {
 	public void testJDIDefinedClasses() {
 		Iterator<?> defined = fClassLoader.definedClasses().iterator();
 		int i = 0;
-		while (defined.hasNext()) {
+		while (defined.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			assertTrue(
 				Integer.toString(i++),
 				defined.next() instanceof ReferenceType);
@@ -68,7 +68,7 @@ public class ClassLoaderReferenceTest extends AbstractJDITest {
 	public void testJDIVisibleClasses() {
 		List<?> visible = fClassLoader.visibleClasses();
 		Iterator<?> defined = fClassLoader.definedClasses().iterator();
-		while (defined.hasNext()) {
+		while (defined.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			ReferenceType next = (ReferenceType) defined.next();
 			assertTrue(next.name(), visible.contains(next));
 		}

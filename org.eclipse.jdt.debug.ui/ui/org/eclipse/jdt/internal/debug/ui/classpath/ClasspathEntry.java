@@ -228,7 +228,7 @@ public class ClasspathEntry extends AbstractClasspathEntry implements IRuntimeCl
 			try {
 				IRuntimeClasspathEntry[] entries = r2.getRuntimeClasspathEntries(configuration);
 				IClasspathEntry[] cps = new IClasspathEntry[entries.length];
-				for (int i = 0; i < entries.length; i++) {
+				for (int i = 0; i < entries.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 					IRuntimeClasspathEntry childEntry = entries[i];
 					cps[i] = new ClasspathEntry(childEntry, this);
 				}

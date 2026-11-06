@@ -45,7 +45,7 @@ import junit.framework.TestSuite;
  */
 public class ConsoleInputTests extends AbstractDebugTest implements IConsoleLineTrackerExtension {
 
-	protected List<String> fLinesRead = new ArrayList<>();
+	protected List<String> fLinesRead = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 
 	protected boolean fStarted = false;
 
@@ -84,7 +84,7 @@ public class ConsoleInputTests extends AbstractDebugTest implements IConsoleLine
      * on the last line (without a line delimiter) should remain in the input
      * buffer until it is ended with a line delimiter.
      */
-	public void testMultiLineInput() throws Exception {
+	public void testMultiLineInput() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		ConsoleLineTracker.setDelegate(this);
 		ILaunchConfiguration configuration = getLaunchConfiguration("ConsoleInput");
 		ILaunch launch = null;
@@ -108,7 +108,7 @@ public class ConsoleInputTests extends AbstractDebugTest implements IConsoleLine
     /**
      * Tests closing standard in
      */
-	public void testEOF() throws Exception {
+	public void testEOF() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		ConsoleLineTracker.setDelegate(this);
 		ILaunchConfiguration configuration = getLaunchConfiguration("ConsoleInput");
 		ILaunch launch = null;
@@ -125,7 +125,7 @@ public class ConsoleInputTests extends AbstractDebugTest implements IConsoleLine
 			fLinesRead.clear();
 			proxy2.closeInputStream();
 			int attempts = 0;
-			while (fLinesRead.size() < 2) {
+			while (fLinesRead.size() < 2) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				spinEventLoop();
 				synchronized (fLinesRead) {
 					if (fLinesRead.size() < 2) {
@@ -148,7 +148,7 @@ public class ConsoleInputTests extends AbstractDebugTest implements IConsoleLine
 	}
 
 	private void verifyOutput(String[] expected, String[] actual) {
-		for (int i = 0; i < actual.length; i++) {
+		for (int i = 0; i < actual.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			assertEquals("Wrong message", expected[i], actual[i]);
 		}
 	}
@@ -160,10 +160,10 @@ public class ConsoleInputTests extends AbstractDebugTest implements IConsoleLine
 	 *
 	 * @return lines written to the console without line delimiters
 	 */
-	private String[] appendAndGet(IConsole console, final String text, int linesExpected) throws Exception {
+	private String[] appendAndGet(IConsole console, final String text, int linesExpected) throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		fLinesRead.clear();
 		final IDocument document = console.getDocument();
-		DebugUIPlugin.getStandardDisplay().asyncExec(new Runnable() {
+		DebugUIPlugin.getStandardDisplay().asyncExec(new Runnable() { //FLLDCIM: MARK — T08 UI_THREAD_SYNCHRONIZER CALL
             @Override
 			public void run() {
                 try {
@@ -175,7 +175,7 @@ public class ConsoleInputTests extends AbstractDebugTest implements IConsoleLine
         });
 
 		int attempts = 0;
-		while (fLinesRead.size() < linesExpected) {
+		while (fLinesRead.size() < linesExpected) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			spinEventLoop();
 			synchronized (fLinesRead) {
 				if (fLinesRead.size() < linesExpected) {
@@ -196,7 +196,7 @@ public class ConsoleInputTests extends AbstractDebugTest implements IConsoleLine
 	 */
 	private void append(IConsole console, final String text) throws Exception {
 		final IDocument document = console.getDocument();
-		DebugUIPlugin.getStandardDisplay().asyncExec(new Runnable() {
+		DebugUIPlugin.getStandardDisplay().asyncExec(new Runnable() { //FLLDCIM: MARK — T08 UI_THREAD_SYNCHRONIZER CALL
             @Override
 			public void run() {
                 try {
@@ -214,7 +214,7 @@ public class ConsoleInputTests extends AbstractDebugTest implements IConsoleLine
 	 */
 	private void deleteAll(IConsole console) throws Exception {
 		final IDocument document = console.getDocument();
-		DebugUIPlugin.getStandardDisplay().asyncExec(new Runnable() {
+		DebugUIPlugin.getStandardDisplay().asyncExec(new Runnable() { //FLLDCIM: MARK — T08 UI_THREAD_SYNCHRONIZER CALL
             @Override
 			public void run() {
                 try {
@@ -292,7 +292,7 @@ public class ConsoleInputTests extends AbstractDebugTest implements IConsoleLine
 	 * Tests the scenario reported in bug 241394 - 'a', backspace, 'b', backspace, 'c', Enter.
 	 * Result should be 'c'.
 	 */
-	public void testDeleteAllEnteredText() throws Exception {
+	public void testDeleteAllEnteredText() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		ConsoleLineTracker.setDelegate(this);
 		ILaunchConfiguration configuration = getLaunchConfiguration("ConsoleInput");
 		ILaunch launch = null;
@@ -355,7 +355,7 @@ public class ConsoleInputTests extends AbstractDebugTest implements IConsoleLine
 	 * @throws Exception
 	 *             if the test gets in trouble
 	 */
-	private void utf8InputTest(String prefix, int numTwoByteCharacters) throws Exception {
+	private void utf8InputTest(String prefix, int numTwoByteCharacters) throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		ConsoleLineTracker.setDelegate(this);
 		ILaunchConfiguration configuration = getLaunchConfiguration("ConsoleInput");
 		ILaunchConfigurationWorkingCopy configurationCopy = configuration.getWorkingCopy();
@@ -363,9 +363,9 @@ public class ConsoleInputTests extends AbstractDebugTest implements IConsoleLine
 		ILaunch launch = null;
 		try {
 			launch = configurationCopy.launch(ILaunchManager.RUN_MODE, null);
-			String input = prefix + String.join("", Collections.nCopies(numTwoByteCharacters, "\u00F8"));
+			String input = prefix + String.join("", Collections.nCopies(numTwoByteCharacters, "\u00F8")); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 			waitStarted();
-			String[] list = appendAndGet(fConsole, input + "\n", 2);
+			String[] list = appendAndGet(fConsole, input + "\n", 2); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 			verifyOutput(new String[] { input, input }, list);
 
 		} finally {
@@ -380,14 +380,14 @@ public class ConsoleInputTests extends AbstractDebugTest implements IConsoleLine
 		Runnable runnable= new Runnable() {
 			@Override
 			public void run() {
-				while (display.readAndDispatch()) {
+				while (display.readAndDispatch()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				}
 			}
 		};
 		if (Display.getCurrent() == display) {
 			runnable.run();
 		} else {
-			display.syncExec(runnable);
+			display.syncExec(runnable); //FLLDCIM: MARK — T08 UI_THREAD_SYNCHRONIZER CALL
 		}
 	}
 }

@@ -53,7 +53,7 @@ public class EventQueueImpl extends MirrorImpl implements EventQueue {
 	 * @return Returns next EventSet from Virtual Machine, returns null if times
 	 * out.
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public EventSet remove(long timeout) throws InterruptedException {
 		// Return a received EventSet or null if no EventSet is received in
 		// time.
@@ -66,7 +66,7 @@ public class EventQueueImpl extends MirrorImpl implements EventQueue {
 			// We remove elements from event sets that are generated from
 			// inside, therefore the set may become empty.
 			EventSetImpl set;
-			do {
+			do { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				JdwpCommandPacket packet = getCommandVM(
 						JdwpCommandPacket.E_COMPOSITE, timeout);
 				initJdwpEventSet(packet);

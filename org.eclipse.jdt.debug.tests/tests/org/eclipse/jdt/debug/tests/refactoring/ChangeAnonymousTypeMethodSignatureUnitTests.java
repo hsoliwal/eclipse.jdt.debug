@@ -32,7 +32,7 @@ public class ChangeAnonymousTypeMethodSignatureUnitTests extends AbstractRefacto
 	}
 
 
-	public void testAnonymousTypeMethodChange() throws Exception {
+	public void testAnonymousTypeMethodChange() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 			String 	src = "src",
 					pack = "a.b.c",
@@ -60,7 +60,7 @@ public class ChangeAnonymousTypeMethodSignatureUnitTests extends AbstractRefacto
 		}
 	}//end testBreakPoint
 
-	private Refactoring setupRefactor(String root, String packageName, String cuName, String fullTargetName) throws Exception {
+	private Refactoring setupRefactor(String root, String packageName, String cuName, String fullTargetName) throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IJavaProject javaProject = get14Project();
 		ICompilationUnit cunit = getCompilationUnit(javaProject, root, packageName, cuName);
 		IMethod method = (IMethod)(getMember(cunit,fullTargetName));

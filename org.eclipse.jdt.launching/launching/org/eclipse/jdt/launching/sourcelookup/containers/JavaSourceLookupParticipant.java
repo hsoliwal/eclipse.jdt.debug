@@ -70,7 +70,7 @@ public class JavaSourceLookupParticipant extends AbstractSourceLookupParticipant
 	@Override
 	public void dispose() {
 		Iterator<PackageFragmentRootSourceContainer> iterator = fDelegateContainers.values().iterator();
-		while (iterator.hasNext()) {
+		while (iterator.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			ISourceContainer container = iterator.next();
 			container.dispose();
 		}
@@ -96,17 +96,17 @@ public class JavaSourceLookupParticipant extends AbstractSourceLookupParticipant
 	@Override
 	public void init(ISourceLookupDirector director) {
 		super.init(director);
-		fDelegateContainers = new HashMap<>();
+		fDelegateContainers = new HashMap<>(); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
 	}
 	/* (non-Javadoc)
 	 * @see org.eclipse.debug.internal.core.sourcelookup.ISourceLookupParticipant#sourceContainersChanged(org.eclipse.debug.internal.core.sourcelookup.ISourceLookupDirector)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public void sourceContainersChanged(ISourceLookupDirector director) {
 		// use package fragment roots in place of local archives, where they exist
 		fDelegateContainers.clear();
 		ISourceContainer[] containers = director.getSourceContainers();
-		for (int i = 0; i < containers.length; i++) {
+		for (int i = 0; i < containers.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			ISourceContainer container = containers[i];
 			if (container.getType().getId().equals(ArchiveSourceContainer.TYPE_ID)) {
 				IFile file = ((ArchiveSourceContainer)container).getFile();
@@ -115,7 +115,7 @@ public class JavaSourceLookupParticipant extends AbstractSourceLookupParticipant
 				if (javaProject.exists()) {
 					try {
 						IPackageFragmentRoot[] roots = javaProject.getPackageFragmentRoots();
-						for (int j = 0; j < roots.length; j++) {
+						for (int j = 0; j < roots.length; j++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 							IPackageFragmentRoot root = roots[j];
 							if (file.equals(root.getUnderlyingResource())) {
 								// the root was specified

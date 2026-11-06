@@ -34,9 +34,9 @@ public class FileConsoleReader extends AbstractReader {
 		super(name);
 		fInput = input;
 		try {
-			fFileOutputStream = new FileOutputStream(new File(fileName));
+			fFileOutputStream = new FileOutputStream(new File(fileName)); //FLLDCIM: MARK — M31 M3FILE_IO NEW
 		} catch (IOException e) {
-			System.out.println("Got exception: " + e.getMessage());
+			System.out.println("Got exception: " + e.getMessage()); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		}
 	}
 	/**
@@ -47,7 +47,7 @@ public class FileConsoleReader extends AbstractReader {
 		BufferedReader input = new BufferedReader(new InputStreamReader(fInput));
 		try {
 			int read = 0;
-			while (!fIsStopping && read != -1) {
+			while (!fIsStopping && read != -1) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				read = input.read();
 				if (read != -1) {
 					fFileOutputStream.write(read);
@@ -66,7 +66,7 @@ public class FileConsoleReader extends AbstractReader {
 		try {
 			fFileOutputStream.close();
 		} catch (IOException e) {
-			System.out.println("Got exception: " + e.getMessage());
+			System.out.println("Got exception: " + e.getMessage()); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		}
 	}
 }

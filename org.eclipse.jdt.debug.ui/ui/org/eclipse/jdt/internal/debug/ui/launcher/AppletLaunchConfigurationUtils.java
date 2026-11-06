@@ -106,16 +106,16 @@ public class AppletLaunchConfigurationUtils {
 		return null;
 	}
 
-	public static Set<IType> collectAppletTypesInProject(IProgressMonitor monitor, IJavaProject project) {
+	public static Set<IType> collectAppletTypesInProject(IProgressMonitor monitor, IJavaProject project) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IType[] types;
-		HashSet<IType> result = new HashSet<>(5);
+		HashSet<IType> result = new HashSet<>(5); //FLLDCIM: MARK — M03 M3_SET_LANES NEW
 		try {
 			IType javaLangApplet = AppletLaunchConfigurationUtils.getMainType("java.applet.Applet", project); //$NON-NLS-1$
 			ITypeHierarchy hierarchy = javaLangApplet.newTypeHierarchy(project, monitor);
 			types = hierarchy.getAllSubtypes(javaLangApplet);
 			int length = types.length;
 			if (length != 0) {
-				for (int i = 0; i < length; i++) {
+				for (int i = 0; i < length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 					if (!types[i].isBinary()) {
 						result.add(types[i]);
 					}
@@ -128,9 +128,9 @@ public class AppletLaunchConfigurationUtils {
 		return result;
 	}
 
-	public static void collectTypes(Object element, IProgressMonitor monitor, Set<Object> result) throws JavaModelException/*, InvocationTargetException*/ {
+	public static void collectTypes(Object element, IProgressMonitor monitor, Set<Object> result) throws JavaModelException/*, InvocationTargetException*/ { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		element= computeScope(element);
-		while(element instanceof IMember) {
+		while(element instanceof IMember) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			if(element instanceof IType) {
 				if (isSubclassOfApplet(monitor, (IType)element)) {
 					result.add(element);
@@ -142,7 +142,7 @@ public class AppletLaunchConfigurationUtils {
 		}
 		if (element instanceof ICompilationUnit) {
 			ICompilationUnit cu= (ICompilationUnit)element;
-			for (IType type : cu.getAllTypes()) {
+			for (IType type : cu.getAllTypes()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				if (isSubclassOfApplet(monitor, type)) {
 					result.add(type);
 				}
@@ -157,10 +157,10 @@ public class AppletLaunchConfigurationUtils {
 			List<IType> found= searchSubclassesOfApplet(monitor, (IJavaElement)element);
 			// filter within the parent element
 			Iterator<IType> iterator = found.iterator();
-			while (iterator.hasNext()) {
+			while (iterator.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				IJavaElement target = iterator.next();
 				IJavaElement child = target;
-				while (child != null) {
+				while (child != null) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 					if (child.equals(parent)) {
 						result.add(target);
 						break;
@@ -173,14 +173,14 @@ public class AppletLaunchConfigurationUtils {
 	}
 
 	private static List<IType> searchSubclassesOfApplet(IProgressMonitor pm, IJavaElement javaElement) {
-		return new ArrayList<>(collectAppletTypesInProject(pm, javaElement.getJavaProject()));
+		return new ArrayList<>(collectAppletTypesInProject(pm, javaElement.getJavaProject())); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 	}
 
 	private static boolean isSubclassOfApplet(IProgressMonitor pm, IType type) {
 		return collectAppletTypesInProject(pm, type.getJavaProject()).contains(type);
 	}
 
-	private static Object computeScope(Object element) {
+	private static Object computeScope(Object element) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
         if (element instanceof IJavaElement) {
             return element;
         }
@@ -205,15 +205,15 @@ public class AppletLaunchConfigurationUtils {
 	 * @param elements the search scope
 	 * @return and array of <code>IType</code>s of matches for java types that extend <code>Applet</code> (directly or indirectly)
 	 */
-	public static IType[] findApplets(IRunnableContext context, final Object[] elements) throws InvocationTargetException, InterruptedException {
-		final Set<Object> result= new HashSet<>();
+	public static IType[] findApplets(IRunnableContext context, final Object[] elements) throws InvocationTargetException, InterruptedException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
+		final Set<Object> result= new HashSet<>(); //FLLDCIM: MARK — M03 M3_SET_LANES NEW
 
 		int nElements = elements.length;
 		if (nElements > 0) {
-			IRunnableWithProgress runnable = pm -> {
+			IRunnableWithProgress runnable = pm -> { //FLLDCIM: MARK — T09  LAMBDA
 				SubMonitor subMon = SubMonitor.convert(pm, LauncherMessages.appletlauncher_search_task_inprogress, nElements);
 				try {
-					for (Object o : elements) {
+					for (Object o : elements) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 						try {
 							collectTypes(o, subMon.split(1), result);
 						} catch (JavaModelException jme) {

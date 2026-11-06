@@ -42,7 +42,7 @@ public class HotCodeReplacementTest extends AbstractJDITest {
 	public HotCodeReplacementTest(String name) {
 		super(name);
 	}
-	private void dropTopFrame(
+	private void dropTopFrame( //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		ThreadReference thread,
 		org.eclipse.jdi.hcr.ThreadReference hcrThread) {
 		// Get stack size
@@ -100,7 +100,7 @@ public class HotCodeReplacementTest extends AbstractJDITest {
 	public static void main(String[] args) {
 		new HotCodeReplacementTest().runSuite(args);
 	}
-	private void reenterOnExit(ThreadReference thread) {
+	private void reenterOnExit(ThreadReference thread) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		// Get top frame's location
 		Location location = null;
 		try {
@@ -143,7 +143,7 @@ public class HotCodeReplacementTest extends AbstractJDITest {
 		assertTrue("reenterOnExit.5", newLocation.codeIndex() <= location.codeIndex());
 
 	}
-	private void reloadClasses() {
+	private void reloadClasses() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		// Gets the old class
 		ReferenceType oldType = getMainClass();
 
@@ -210,7 +210,7 @@ public class HotCodeReplacementTest extends AbstractJDITest {
 	 * . get step event
 	 * . get class file version for some classes
 	 */
-	public void testJDIUseCase1() {
+	public void testJDIUseCase1() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		// Get the suspended thread
 		ThreadReference thread = getThread();
 		assertTrue("1", thread.isSuspended());

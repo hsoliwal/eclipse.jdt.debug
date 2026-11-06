@@ -39,7 +39,7 @@ import org.eclipse.ui.texteditor.ITextEditor;
  */
 public class JavaStackFrameEditorPresenter implements IDebugEditorPresentation {
 
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public boolean addAnnotations(IEditorPart editorPart, IStackFrame frame) {
 		if (!(frame instanceof JDIStackFrame jdiFrame && editorPart instanceof ITextEditor textEditor)) {
 			return false;
@@ -54,7 +54,7 @@ public class JavaStackFrameEditorPresenter implements IDebugEditorPresentation {
 				if (JavaUI.getEditorInputJavaElement(editorInput) != null) {
 					IRegion region = document.getLineInformation(jdiFrame.getLineNumber() - 1);
 					List<LambdaExpression> inLineLambdas = ToggleBreakpointAdapter.findLambdaExpressions(textEditor, region);
-					for (LambdaExpression exp : inLineLambdas) {
+					for (LambdaExpression exp : inLineLambdas) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 						String key = getMethodBindingKey(exp);
 						if (key != null && key.contains(jdiFrame.getName())) {
 							textEditor.selectAndReveal(exp.getStartPosition(), exp.getLength());

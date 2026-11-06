@@ -86,14 +86,15 @@ public class OpenFromClipboardAction implements IWorkbenchWindowActionDelegate {
 	 * <code>org.eclipse.jdt.internal.debug.ui.actions.OpenFromClipboardAction</code>, or match a
 	 * simple name e.g. <code>OpenFromClipboardAction</code>.
 	 */
-	private static final String QUALIFIED_NAME_PATTERN = "(" + SIMPLE_NAME_PATTERN //$NON-NLS-1$
+	private static final String QUALIFIED_NAME_PATTERN = "(" + SIMPLE_NAME_PATTERN //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 			+ "\\.)*" + SIMPLE_NAME_PATTERN; //$NON-NLS-1$
+	private static final Pattern QUALIFIED_NAME_PATTERN_COMPILED = Pattern.compile(QUALIFIED_NAME_PATTERN);
 
 	/**
 	 * Pattern to match a qualified name e.g.
 	 * <code>org.eclipse.jdt.internal.debug.ui.actions.OpenFromClipboardAction</code>.
 	 */
-	private static final String STRICT_QUALIFIED_NAME_PATTERN = "(" + SIMPLE_NAME_PATTERN //$NON-NLS-1$
+	private static final String STRICT_QUALIFIED_NAME_PATTERN = "(" + SIMPLE_NAME_PATTERN //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 			+ "\\.)+" + SIMPLE_NAME_PATTERN; //$NON-NLS-1$
 
 	/**
@@ -104,37 +105,42 @@ public class OpenFromClipboardAction implements IWorkbenchWindowActionDelegate {
 	/**
 	 * Pattern to match a java file name e.g. <code>OpenFromClipboardAction.java</code>
 	 */
-	private static final String JAVA_FILE_PATTERN = SIMPLE_NAME_PATTERN + "\\.java"; //$NON-NLS-1$
+	private static final String JAVA_FILE_PATTERN = SIMPLE_NAME_PATTERN + "\\.java"; //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
+	private static final Pattern JAVA_FILE_PATTERN_COMPILED = Pattern.compile(JAVA_FILE_PATTERN);
 
 	/**
 	 * Pattern to match a java file name followed by line number e.g.
 	 * <code>OpenFromClipboardAction.java : 21</code>
 	 */
-	private static final String JAVA_FILE_LINE_PATTERN = JAVA_FILE_PATTERN + WS + ":" + WS + "\\d+"; //$NON-NLS-1$ //$NON-NLS-2$
+	private static final String JAVA_FILE_LINE_PATTERN = JAVA_FILE_PATTERN + WS + ":" + WS + "\\d+"; //$NON-NLS-1$ //$NON-NLS-2$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
+	private static final Pattern JAVA_FILE_LINE_PATTERN_COMPILED = Pattern.compile(JAVA_FILE_LINE_PATTERN);
 
 	/**
 	 * Pattern to match a qualified name followed by line number e.g.
 	 * <code>org.eclipse.jdt.internal.debug.ui.actions.OpenFromClipboardAction : 21</code>
 	 */
-	private static final String TYPE_LINE_PATTERN = QUALIFIED_NAME_PATTERN + WS + ":" + WS + "\\d+"; //$NON-NLS-1$ //$NON-NLS-2$
+	private static final String TYPE_LINE_PATTERN = QUALIFIED_NAME_PATTERN + WS + ":" + WS + "\\d+"; //$NON-NLS-1$ //$NON-NLS-2$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
+	private static final Pattern TYPE_LINE_PATTERN_COMPILED = Pattern.compile(TYPE_LINE_PATTERN);
 
 	/**
 	 * Pattern to match a line from a stack trace e.g.
 	 * <code>(Assert.java:41)</code>
 	 */
-	private static final String STACK_TRACE_PARENTHESIZED_PATTERN = "\\(" + WS + JAVA_FILE_LINE_PATTERN + WS + "\\)"; //$NON-NLS-1$ //$NON-NLS-2$
+	private static final String STACK_TRACE_PARENTHESIZED_PATTERN = "\\(" + WS + JAVA_FILE_LINE_PATTERN + WS + "\\)"; //$NON-NLS-1$ //$NON-NLS-2$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 	/**
 	 * Pattern to match a line from a stack trace e.g.
 	 * <code> at org.eclipse.core.runtime.Assert.isLegal(Assert.java:41)</code>
 	 */
-	private static final String STACK_TRACE_LINE_PATTERN = "[^()]*?" + STACK_TRACE_PARENTHESIZED_PATTERN; //$NON-NLS-1$
+	private static final String STACK_TRACE_LINE_PATTERN = "[^()]*?" + STACK_TRACE_PARENTHESIZED_PATTERN; //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
+	private static final Pattern STACK_TRACE_LINE_PATTERN_COMPILED = Pattern.compile(STACK_TRACE_LINE_PATTERN);
 
 	/**
 	 * Pattern to match a line from a stack trace e.g.
 	 * <code> at org.eclipse.core.runtime.Assert.isLegal(Assert.java:41)</code>
 	 */
-	private static final String STACK_TRACE_QUALIFIED_LINE_PATTERN = "[^()]*?(" + STRICT_QUALIFIED_NAME_PATTERN + ")" + WS + STACK_TRACE_PARENTHESIZED_PATTERN; //$NON-NLS-1$ //$NON-NLS-2$
+	private static final String STACK_TRACE_QUALIFIED_LINE_PATTERN = "[^()]*?(" + STRICT_QUALIFIED_NAME_PATTERN + ")" + WS + STACK_TRACE_PARENTHESIZED_PATTERN; //$NON-NLS-1$ //$NON-NLS-2$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
+	private static final Pattern STACK_TRACE_QUALIFIED_LINE_PATTERN_COMPILED = Pattern.compile(STACK_TRACE_QUALIFIED_LINE_PATTERN);
 
 	/**
 	 * Pattern to match a method e.g.
@@ -142,26 +148,30 @@ public class OpenFromClipboardAction implements IWorkbenchWindowActionDelegate {
 	 * <code>org.eclipse.jdt.internal.debug.ui.actions.OpenFromClipboardAction.run (IAction)</code> ,
 	 * <code>Worker.run()</code>
 	 */
-	private static final String METHOD_PATTERN = QUALIFIED_NAME_PATTERN + "\\s*\\(.*\\)"; //$NON-NLS-1$
+	private static final String METHOD_PATTERN = QUALIFIED_NAME_PATTERN + "\\s*\\(.*\\)"; //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
+	private static final Pattern METHOD_PATTERN_COMPILED = Pattern.compile(METHOD_PATTERN);
 
 	/**
 	 * Pattern to match a stack element e.g. <code>java.lang.String.valueOf(char) line: 1456</code>
 	 */
-	private static final String STACK_PATTERN = METHOD_PATTERN + ".*\\d+"; //$NON-NLS-1$
+	private static final String STACK_PATTERN = METHOD_PATTERN + ".*\\d+"; //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
+	private static final Pattern STACK_PATTERN_COMPILED = Pattern.compile(STACK_PATTERN);
 
 	/**
 	 * Pattern to match a member (field or method) of a type e.g.
 	 * <code>OpenFromClipboardAction#run</code>, <code>Worker#run</code>
 	 */
-	private static final String MEMBER_PATTERN = QUALIFIED_NAME_PATTERN + "#" //$NON-NLS-1$
+	private static final String MEMBER_PATTERN = QUALIFIED_NAME_PATTERN + "#" //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 			+ SIMPLE_NAME_PATTERN;
+	private static final Pattern MEMBER_PATTERN_COMPILED = Pattern.compile(MEMBER_PATTERN);
 
 	/**
 	 * Pattern to match a method e.g. <code>OpenFromClipboardAction#run(IAction)</code>,
 	 * <code>Worker#run()</code>
 	 */
-	private static final String METHOD_JAVADOC_REFERENCE_PATTERN = QUALIFIED_NAME_PATTERN + "#" //$NON-NLS-1$
+	private static final String METHOD_JAVADOC_REFERENCE_PATTERN = QUALIFIED_NAME_PATTERN + "#" //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 			+ SIMPLE_NAME_PATTERN + "\\(.*\\)"; //$NON-NLS-1$
+	private static final Pattern METHOD_JAVADOC_REFERENCE_PATTERN_COMPILED = Pattern.compile(METHOD_JAVADOC_REFERENCE_PATTERN);
 
 	/*
 	 * Constants to indicate the pattern matched
@@ -187,11 +197,12 @@ public class OpenFromClipboardAction implements IWorkbenchWindowActionDelegate {
 	private static final int METHOD_JAVADOC_REFERENCE = 9;
 
 	private static final String TASK_NAME = ActionMessages.OpenFromClipboardAction_OpeningFromClipboard;
+	private static final Pattern TRIMMED_TEXT_PATTERN = Pattern.compile("\\s+"); //$NON-NLS-1$
 
 	/*
 	 * @see org.eclipse.ui.IActionDelegate#run(org.eclipse.jface.action.IAction)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public void run(IAction action) {
 		Clipboard clipboard = new Clipboard(Display.getDefault());
 		TextTransfer textTransfer = TextTransfer.getInstance();
@@ -201,8 +212,9 @@ public class OpenFromClipboardAction implements IWorkbenchWindowActionDelegate {
 			return;
 		}
 
-		String trimmedText = inputText.replaceAll("\\s+", " "); //$NON-NLS-1$ //$NON-NLS-2$
-		List<Object> matches = new ArrayList<>();
+		String trimmedText = TRIMMED_TEXT_PATTERN.matcher(inputText).replaceAll(" "); //$NON-NLS-1$
+		// preserved predecessor annotation: //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
+		List<Object> matches = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 		int line = 0;
 		try {
 			line = getJavaElementMatches(trimmedText, matches);
@@ -222,7 +234,7 @@ public class OpenFromClipboardAction implements IWorkbenchWindowActionDelegate {
 	private static JavaStackTraceConsole getJavaStackTraceConsole() {
 		IConsoleManager consoleManager = ConsolePlugin.getDefault().getConsoleManager();
 		IConsole[] consoles = consoleManager.getConsoles();
-		for (int i = 0; i < consoles.length; i++) {
+		for (int i = 0; i < consoles.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			if (consoles[i] instanceof JavaStackTraceConsole) {
 				return (JavaStackTraceConsole) consoles[i];
 			}
@@ -254,39 +266,48 @@ public class OpenFromClipboardAction implements IWorkbenchWindowActionDelegate {
 		return s.indexOf(lineDelimiter) == -1;
 	}
 
-	public static int getMatchingPattern(String s) {
-		if (s.matches(JAVA_FILE_LINE_PATTERN)) {
+	public static int getMatchingPattern(String s) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
+		if (JAVA_FILE_LINE_PATTERN_COMPILED.matcher(s).matches()) {
+		// preserved predecessor annotation: //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
 			return JAVA_FILE_LINE;
 		}
-		if (s.matches(JAVA_FILE_PATTERN)) {
+		if (JAVA_FILE_PATTERN_COMPILED.matcher(s).matches()) {
+		// preserved predecessor annotation: //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
 			return JAVA_FILE;
 		}
-		if (s.matches(TYPE_LINE_PATTERN)) {
+		if (TYPE_LINE_PATTERN_COMPILED.matcher(s).matches()) {
+		// preserved predecessor annotation: //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
 			return TYPE_LINE;
 		}
-		if (s.matches(STACK_TRACE_LINE_PATTERN)) {
+		if (STACK_TRACE_LINE_PATTERN_COMPILED.matcher(s).matches()) {
+		// preserved predecessor annotation: //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
 			return STACK_TRACE_LINE;
 		}
-		if (s.matches(METHOD_PATTERN)) {
+		if (METHOD_PATTERN_COMPILED.matcher(s).matches()) {
+		// preserved predecessor annotation: //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
 			return METHOD;
 		}
-		if (s.matches(STACK_PATTERN)) {
+		if (STACK_PATTERN_COMPILED.matcher(s).matches()) {
+		// preserved predecessor annotation: //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
 			return STACK;
 		}
-		if (s.matches(MEMBER_PATTERN)) {
+		if (MEMBER_PATTERN_COMPILED.matcher(s).matches()) {
+		// preserved predecessor annotation: //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
 			return MEMBER;
 		}
-		if (s.matches(METHOD_JAVADOC_REFERENCE_PATTERN)) {
+		if (METHOD_JAVADOC_REFERENCE_PATTERN_COMPILED.matcher(s).matches()) {
+		// preserved predecessor annotation: //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
 			return METHOD_JAVADOC_REFERENCE;
 		}
-		if (s.matches(QUALIFIED_NAME_PATTERN)) {
+		if (QUALIFIED_NAME_PATTERN_COMPILED.matcher(s).matches()) {
+		// preserved predecessor annotation: //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
 			return QUALIFIED_NAME;
 		}
 		return INVALID;
 	}
 
 	private static void handleSingleLineInput(String inputText) {
-		List<Object> matches = new ArrayList<>();
+		List<Object> matches = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 		try {
 			int line= getJavaElementMatches(inputText, matches);
 			handleMatches(matches, line, inputText);
@@ -303,7 +324,7 @@ public class OpenFromClipboardAction implements IWorkbenchWindowActionDelegate {
 	 * @return the line number
 	 * @throws InterruptedException if canceled by the user
 	 */
-	public static int getJavaElementMatches(String inputText, List<Object> matches) throws InterruptedException {
+	public static int getJavaElementMatches(String inputText, List<Object> matches) throws InterruptedException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 			String s = inputText.trim();
 			switch (getMatchingPattern(s)) {
@@ -340,9 +361,9 @@ public class OpenFromClipboardAction implements IWorkbenchWindowActionDelegate {
 					String lineNumber = typeLine.substring(index + 1, typeLine.length()).trim();
 					int line = Integer.parseInt(lineNumber);
 
-					Pattern pattern = Pattern.compile(STACK_TRACE_QUALIFIED_LINE_PATTERN);
-					Matcher matcher = pattern.matcher(s);
-					if (matcher.find()) {
+					Pattern pattern = STACK_TRACE_QUALIFIED_LINE_PATTERN_COMPILED; //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
+					Matcher matcher = pattern.matcher(s); //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
+					if (matcher.find()) { //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
 						String qualifiedName = matcher.group(1);
 						index = qualifiedName.lastIndexOf('.');
 						qualifiedName = qualifiedName.substring(0, index);
@@ -392,7 +413,7 @@ public class OpenFromClipboardAction implements IWorkbenchWindowActionDelegate {
 	 * @throws InterruptedException if canceled by the user
 	 */
 	private static void getTypeMatches(final String typeName, final List<Object> matches) throws InterruptedException {
-		executeRunnable(new IRunnableWithProgress() {
+		executeRunnable(new IRunnableWithProgress() { //FLLDCIM: MARK — T09  ANONYMOUS
 			@Override
 			public void run(IProgressMonitor monitor) throws InvocationTargetException, InterruptedException {
 				doTypeSearch(typeName, matches, monitor);
@@ -409,7 +430,7 @@ public class OpenFromClipboardAction implements IWorkbenchWindowActionDelegate {
 	 * @throws InterruptedException if canceled by the user
 	 */
 	private static void getMethodMatches(final String s, final List<Object> matches) throws InterruptedException {
-		executeRunnable(new IRunnableWithProgress() {
+		executeRunnable(new IRunnableWithProgress() { //FLLDCIM: MARK — T09  ANONYMOUS
 			@Override
 			public void run(IProgressMonitor monitor) throws InvocationTargetException, InterruptedException {
 				doMemberSearch(s, matches, true, true, false, monitor, 100);
@@ -426,7 +447,7 @@ public class OpenFromClipboardAction implements IWorkbenchWindowActionDelegate {
 	 * @throws InterruptedException if canceled by the user
 	 */
 	private static void getMemberMatches(final String s, final List<Object> matches) throws InterruptedException {
-		executeRunnable(new IRunnableWithProgress() {
+		executeRunnable(new IRunnableWithProgress() { //FLLDCIM: MARK — T09  ANONYMOUS
 			@Override
 			public void run(IProgressMonitor monitor) throws InvocationTargetException, InterruptedException {
 				doMemberSearch(s, matches, true, true, true, monitor, 100);
@@ -443,7 +464,7 @@ public class OpenFromClipboardAction implements IWorkbenchWindowActionDelegate {
 	 * @throws InterruptedException if canceled by the user
 	 */
 	private static void getNameMatches(final String s, final List<Object> matches) throws InterruptedException {
-		executeRunnable(new IRunnableWithProgress() {
+		executeRunnable(new IRunnableWithProgress() { //FLLDCIM: MARK — T09  ANONYMOUS
 			@Override
 			public void run(IProgressMonitor monitor) throws InvocationTargetException, InterruptedException {
 				SubMonitor progress = SubMonitor.convert(monitor, 100);
@@ -474,7 +495,7 @@ public class OpenFromClipboardAction implements IWorkbenchWindowActionDelegate {
 		handleMatches(matches, line, inputText, ActionMessages.OpenFromClipboardAction_OpenFromClipboard);
 	}
 
-	public static void handleMatches(List<Object> matches, int line, String inputText, String title) {
+	public static void handleMatches(List<Object> matches, int line, String inputText, String title) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 
 		if (matches.size() > 1) {
 			int flags = JavaElementLabelProvider.SHOW_DEFAULT | JavaElementLabelProvider.SHOW_QUALIFIED | JavaElementLabelProvider.SHOW_ROOT;
@@ -521,7 +542,7 @@ public class OpenFromClipboardAction implements IWorkbenchWindowActionDelegate {
 	 *            the line number
 	 */
 	private static void openJavaElements(Object[] elements, int line) {
-		for (int i = 0; i < elements.length; i++) {
+		for (int i = 0; i < elements.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			Object ob = elements[i];
 			if (ob instanceof IJavaElement element) {
 				try {
@@ -544,7 +565,7 @@ public class OpenFromClipboardAction implements IWorkbenchWindowActionDelegate {
 	 * @param element the Java Element
 	 * @throws JavaModelException if fetching the Java element's source range fails
 	 */
-	private static void gotoLine(IEditorPart editorPart, int line, IJavaElement element) throws JavaModelException {
+	private static void gotoLine(IEditorPart editorPart, int line, IJavaElement element) throws JavaModelException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		if (line <= 0) {
 			return;
 		}
@@ -633,7 +654,7 @@ public class OpenFromClipboardAction implements IWorkbenchWindowActionDelegate {
 	 * @param monitor
 	 *            the Progress Monitor
 	 */
-	private static void doTypeSearch(String typeName, final List<Object> matches, IProgressMonitor monitor) {
+	private static void doTypeSearch(String typeName, final List<Object> matches, IProgressMonitor monitor) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IJavaSearchScope scope = SearchEngine.createWorkspaceScope();
 		SearchEngine searchEngine = new SearchEngine();
 
@@ -681,7 +702,7 @@ public class OpenFromClipboardAction implements IWorkbenchWindowActionDelegate {
 	 * @param work
 	 *            the remaining Work
 	 */
-	private static void doMemberSearch(String memberName, final List<Object> matches, boolean searchForMethods, boolean searchForConstructors, boolean searchForFields, IProgressMonitor monitor, int work) {
+	private static void doMemberSearch(String memberName, final List<Object> matches, boolean searchForMethods, boolean searchForConstructors, boolean searchForFields, IProgressMonitor monitor, int work) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		int noOfSearches = 0;
 		noOfSearches = searchForMethods ? noOfSearches + 1 : noOfSearches;
 		noOfSearches = searchForConstructors ? noOfSearches + 1 : noOfSearches;
@@ -702,11 +723,11 @@ public class OpenFromClipboardAction implements IWorkbenchWindowActionDelegate {
 		if (index != -1) {
 			typeName = memberName.substring(0, index);
 			memberName = memberName.substring(index + 1);
-			final List<Object> typeMatches = new ArrayList<>();
+			final List<Object> typeMatches = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 			noOfSearches++;
 			doTypeSearch(typeName, typeMatches, progress.newChild(work / noOfSearches));
 			IType[] types = new IType[typeMatches.size()];
-			for (int i = 0; i < typeMatches.size(); i++) {
+			for (int i = 0; i < typeMatches.size(); i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				types[i] = (IType) typeMatches.get(i);
 			}
 			scope = SearchEngine.createJavaSearchScope(types);

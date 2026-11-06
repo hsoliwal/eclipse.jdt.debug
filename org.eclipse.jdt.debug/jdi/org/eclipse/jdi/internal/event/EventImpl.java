@@ -65,7 +65,7 @@ public abstract class EventImpl extends MirrorImpl implements Event {
 	protected ThreadReferenceImpl fThreadRef;
 
 	/** Mapping of command codes to strings. */
-	private static HashMap<Integer, String> fEventKindMap = null;
+	private static HashMap<Integer, String> fEventKindMap = null; //FLLDCIM: MARK — M10 M3_PRIMITIVE_LANES FIELD
 
 	/** Request ID of event. */
 	private final RequestID fRequestID;
@@ -101,13 +101,13 @@ public abstract class EventImpl extends MirrorImpl implements Event {
 	 */
 	@Override
 	public String toString() {
-		return super.toString() + ": " + fRequestID; //$NON-NLS-1$
+		return super.toString() + ": " + fRequestID; //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 	}
 
 	/**
 	 * @return Creates, reads and returns new EventImpl.
 	 */
-	public static EventImpl read(MirrorImpl target, DataInputStream dataInStream)
+	public static EventImpl read(MirrorImpl target, DataInputStream dataInStream) //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 			throws IOException {
 		byte eventKind = target.readByte(
 				"event kind", eventKindMap(), dataInStream); //$NON-NLS-1$
@@ -184,7 +184,7 @@ public abstract class EventImpl extends MirrorImpl implements Event {
 			break;
 		default:
 			throw new IOException(
-					EventMessages.EventImpl_Read_invalid_EventKind___1
+					EventMessages.EventImpl_Read_invalid_EventKind___1 //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 							+ eventKind);
 		}
 
@@ -208,14 +208,14 @@ public abstract class EventImpl extends MirrorImpl implements Event {
 	/**
 	 * Retrieves constant mappings.
 	 */
-	public static void getConstantMaps() {
+	public static void getConstantMaps() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		if (fEventKindMap != null) {
 			return;
 		}
 
 		java.lang.reflect.Field[] fields = EventImpl.class.getDeclaredFields();
-		fEventKindMap = new HashMap<>();
-		for (Field field : fields) {
+		fEventKindMap = new HashMap<>(); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
+		for (Field field : fields) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			if ((field.getModifiers() & java.lang.reflect.Modifier.PUBLIC) == 0
 					|| (field.getModifiers() & java.lang.reflect.Modifier.STATIC) == 0
 					|| (field.getModifiers() & java.lang.reflect.Modifier.FINAL) == 0) {

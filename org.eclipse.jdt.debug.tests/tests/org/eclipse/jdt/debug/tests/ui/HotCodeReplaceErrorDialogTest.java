@@ -53,9 +53,9 @@ public class HotCodeReplaceErrorDialogTest extends AbstractDebugUiTests {
 			this.shell = shell;
 		}
 
-		@Override
+		@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		public void run() {
-			class HotCodeReplaceErrorDialogExtension extends HotCodeReplaceErrorDialog {
+			class HotCodeReplaceErrorDialogExtension extends HotCodeReplaceErrorDialog { //FLLDCIM: MARK — T27  IMPLEMENTS
 				private HotCodeReplaceErrorDialogExtension(Shell parentShell, String dialogTitle, String message, IStatus status, String preferenceKey, String toggleMessage, String toggleMessage2, IPreferenceStore store, IDebugTarget target) {
 					super(parentShell, dialogTitle, message, status, preferenceKey, toggleMessage, toggleMessage2, store, target);
 				}

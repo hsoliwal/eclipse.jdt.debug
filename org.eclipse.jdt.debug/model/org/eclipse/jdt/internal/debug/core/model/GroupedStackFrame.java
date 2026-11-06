@@ -23,7 +23,7 @@ import org.eclipse.jdt.debug.core.IJavaStackFrame;
  *
  */
 public class GroupedStackFrame extends JDIDebugElement {
-	private final List<IJavaStackFrame> stackFrames = new ArrayList<>();
+	private final List<IJavaStackFrame> stackFrames = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 
 	public GroupedStackFrame(JDIDebugTarget target) {
 		super(target);

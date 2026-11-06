@@ -49,7 +49,7 @@ public class CompareObjectsTest extends AbstractDebugTest {
 		return get14Project();
 	}
 
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings("unchecked") //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public void testForNormalStrings() throws Exception { // Test for String, StringBuffer & StringBuilder
 
 		String typeName = "compare.CompareObjectsStringTest";
@@ -74,11 +74,11 @@ public class CompareObjectsTest extends AbstractDebugTest {
 			IJavaVariable s8 = (IJavaVariable) mainThread.getTopStackFrame().getVariables()[9];
 
 			IJavaVariable s9 = (IJavaVariable) mainThread.getTopStackFrame().getVariables()[10];
-			Map<IJavaVariable, Object> result = new HashMap<>();
+			Map<IJavaVariable, Object> result = new HashMap<>(); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
 			result.put(s1, objectValueExtraction((IJavaValue) s1.getValue()));
 			result.put(s2, objectValueExtraction((IJavaValue) s2.getValue()));
 			result = stringCompare(result);
-			Map<String, String> compareResult = new HashMap<>();
+			Map<String, String> compareResult = new HashMap<>(); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
 			compareResult = (Map<String, String>) result.get(s1);
 			assertThat(compareResult.get("ImmediateResult"), containsString("Same"));
 			result.clear();
@@ -118,7 +118,7 @@ public class CompareObjectsTest extends AbstractDebugTest {
 		}
 	}
 
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings("unchecked") //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public void testForLis() throws Exception { // Test for Lists, Stack, Vector, ArrayLists
 
 		String typeName = "compare.CompareListObjects";
@@ -143,11 +143,11 @@ public class CompareObjectsTest extends AbstractDebugTest {
 			IJavaVariable vector = (IJavaVariable) mainThread.getTopStackFrame().getVariables()[10];
 			IJavaVariable linkedList = (IJavaVariable) mainThread.getTopStackFrame().getVariables()[11];
 
-			Map<IJavaVariable, Object> result = new HashMap<>();
+			Map<IJavaVariable, Object> result = new HashMap<>(); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
 			result.put(s1, listElementsExtraction((IJavaObject) s1.getValue()));
 			result.put(s2, listElementsExtraction((IJavaObject) s2.getValue()));
 			result = compareSelectedLists(result, "Lists");
-			Map<String, String> compareResult = new HashMap<>();
+			Map<String, String> compareResult = new HashMap<>(); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
 			compareResult = (Map<String, String>) result.get(s1);
 			String resultValue = compareResult.get("ImmediateResult");
 			assertEquals("Lists contain same elements as in s2, but in different order", resultValue);
@@ -201,7 +201,7 @@ public class CompareObjectsTest extends AbstractDebugTest {
 		}
 	}
 
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings("unchecked") //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public void testForMaps() throws Exception { // Test for Maps
 
 		String typeName = "compare.CompareMapObjects";
@@ -215,11 +215,11 @@ public class CompareObjectsTest extends AbstractDebugTest {
 			assertEquals("Didn't suspend at the expected line", 37, hitLine);
 			IJavaVariable map1 = (IJavaVariable) mainThread.getTopStackFrame().getVariables()[2];
 			IJavaVariable map2 = (IJavaVariable) mainThread.getTopStackFrame().getVariables()[3];
-			Map<IJavaVariable, Object> result = new HashMap<>();
+			Map<IJavaVariable, Object> result = new HashMap<>(); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
 			result.put(map1, mapElementsExtraction(map1));
 			result.put(map2, mapElementsExtraction(map2));
 			result = compareSelectedMaps(result);
-			Map<String, String> compareResult = new HashMap<>();
+			Map<String, String> compareResult = new HashMap<>(); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
 			compareResult = (Map<String, String>) result.get(map1);
 			Object o = compareResult.get("valSameInfo");
 			String resultValue = o.toString();
@@ -302,7 +302,7 @@ public class CompareObjectsTest extends AbstractDebugTest {
 		}
 	}
 
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings("unchecked") //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public void testForSets() throws Exception { // Test for Sets
 
 		String typeName = "compare.CompareSetObjects";
@@ -317,11 +317,11 @@ public class CompareObjectsTest extends AbstractDebugTest {
 			IJavaVariable s1 = (IJavaVariable) mainThread.getTopStackFrame().getVariables()[2];
 			IJavaVariable s2 = (IJavaVariable) mainThread.getTopStackFrame().getVariables()[3];
 
-			Map<IJavaVariable, Object> result = new HashMap<>();
+			Map<IJavaVariable, Object> result = new HashMap<>(); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
 			result.put(s1, setElementsExtraction((IJavaObject) s1.getValue()));
 			result.put(s2, setElementsExtraction((IJavaObject) s2.getValue()));
 			result = compareSelectedLists(result, "Sets");
-			Map<String, String> compareResult = new HashMap<>();
+			Map<String, String> compareResult = new HashMap<>(); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
 			compareResult = (Map<String, String>) result.get(s1);
 			Object o = compareResult.get("Values");
 			String resultValue = o.toString();
@@ -383,7 +383,7 @@ public class CompareObjectsTest extends AbstractDebugTest {
 		}
 	}
 
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings("unchecked") //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public void testForArrayObjects() throws Exception { // Test for Arrays
 
 		String typeName = "compare.CompareArrayObjects";
@@ -398,11 +398,11 @@ public class CompareObjectsTest extends AbstractDebugTest {
 			IJavaVariable s1 = (IJavaVariable) mainThread.getTopStackFrame().getVariables()[2];
 			IJavaVariable s2 = (IJavaVariable) mainThread.getTopStackFrame().getVariables()[3];
 
-			Map<IJavaVariable, Object> result = new HashMap<>();
+			Map<IJavaVariable, Object> result = new HashMap<>(); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
 			result.put(s1, arrayElementsExtraction(s1));
 			result.put(s2, arrayElementsExtraction(s2));
 			result = compareSelectedLists(result, "Arrays");
-			Map<String, String> compareResult = new HashMap<>();
+			Map<String, String> compareResult = new HashMap<>(); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
 			compareResult = (Map<String, String>) result.get(s1);
 			Object o = compareResult.get("ImmediateResult");
 			String resultValue = o.toString();
@@ -438,7 +438,7 @@ public class CompareObjectsTest extends AbstractDebugTest {
 		}
 	}
 
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings("unchecked") //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public void testForNormalObjects() throws Exception { // Test for normal objects
 
 		String typeName = "compare.CompareNormalObjects";
@@ -453,11 +453,11 @@ public class CompareObjectsTest extends AbstractDebugTest {
 			IJavaVariable wrap1 = (IJavaVariable) mainThread.getTopStackFrame().getVariables()[5];
 			IJavaVariable wrap2 = (IJavaVariable) mainThread.getTopStackFrame().getVariables()[6];
 
-			Map<IJavaVariable, Object> result = new HashMap<>();
+			Map<IJavaVariable, Object> result = new HashMap<>(); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
 			result.put(wrap1, objectValueExtraction((IJavaValue) wrap1.getValue()));
 			result.put(wrap2, objectValueExtraction((IJavaValue) wrap2.getValue()));
 			result = compareObjects(result);
-			Map<String, String> compareResult = new HashMap<>();
+			Map<String, String> compareResult = new HashMap<>(); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
 			compareResult = (Map<String, String>) result.get(wrap1);
 			Object o = compareResult.get("ImmediateResult");
 			String resultValue = o.toString();
@@ -481,7 +481,7 @@ public class CompareObjectsTest extends AbstractDebugTest {
 		}
 	}
 
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings("unchecked") //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public void testForCustomObjects() throws Exception { // Test for custom objects
 
 		String typeName = "compare.CompareNormalObjects";
@@ -497,11 +497,11 @@ public class CompareObjectsTest extends AbstractDebugTest {
 			IJavaVariable wrap2 = (IJavaVariable) mainThread.getTopStackFrame().getVariables()[3];
 			IJavaVariable wrap3 = (IJavaVariable) mainThread.getTopStackFrame().getVariables()[4];
 
-			Map<IJavaVariable, Object> result = new HashMap<>();
+			Map<IJavaVariable, Object> result = new HashMap<>(); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
 			result.put(wrap1, customObjectValueExtraction((IJavaObject) wrap1.getValue()));
 			result.put(wrap2, customObjectValueExtraction((IJavaObject) wrap2.getValue()));
 			result = compareCustomObjects(result);
-			Map<String, String> compareResult = new HashMap<>();
+			Map<String, String> compareResult = new HashMap<>(); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
 			compareResult = (Map<String, String>) result.get(wrap1);
 			Object o = compareResult.get("fields");
 			String resultValue = o.toString();

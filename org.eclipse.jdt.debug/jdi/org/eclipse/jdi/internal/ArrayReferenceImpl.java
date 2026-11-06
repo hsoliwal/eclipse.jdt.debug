@@ -90,7 +90,7 @@ public class ArrayReferenceImpl extends ObjectReferenceImpl implements
 	 * @return the list of {@link Value}s
 	 * @throws IndexOutOfBoundsException if the index is outside the bounds of the array
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public List<Value> getValues(int firstIndex, int length)
 			throws IndexOutOfBoundsException {
 
@@ -168,7 +168,7 @@ public class ArrayReferenceImpl extends ObjectReferenceImpl implements
 			case 0:
 			default:
 				throw new InternalException(
-						JDIMessages.ArrayReferenceImpl_Invalid_ArrayReference_Value_tag_encountered___2
+						JDIMessages.ArrayReferenceImpl_Invalid_ArrayReference_Value_tag_encountered___2 //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 								+ type);
 			}
 		} catch (IOException e) {
@@ -189,8 +189,8 @@ public class ArrayReferenceImpl extends ObjectReferenceImpl implements
 	 */
 	private List<Value> readObjectSequence(int length, DataInputStream in)
 			throws IOException {
-		List<Value> elements = new ArrayList<>(length);
-		for (int i = 0; i < length; i++) {
+		List<Value> elements = new ArrayList<>(length); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
+		for (int i = 0; i < length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			ValueImpl value = ObjectReferenceImpl
 					.readObjectRefWithTag(this, in);
 			elements.add(value);
@@ -211,8 +211,8 @@ public class ArrayReferenceImpl extends ObjectReferenceImpl implements
 	 */
 	private List<Value> readPrimitiveSequence(int length, int type, DataInputStream in)
 			throws IOException {
-		List<Value> elements = new ArrayList<>(length);
-		for (int i = 0; i < length; i++) {
+		List<Value> elements = new ArrayList<>(length); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
+		for (int i = 0; i < length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			ValueImpl value = ValueImpl.readWithoutTag(this, type, in);
 			elements.add(value);
 		}
@@ -222,7 +222,7 @@ public class ArrayReferenceImpl extends ObjectReferenceImpl implements
 	/**
 	 * @return Returns the number of components in this array.
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public int length() {
 		if (fLength == -1) {
 			initJdwpRequest();
@@ -260,7 +260,7 @@ public class ArrayReferenceImpl extends ObjectReferenceImpl implements
 	@Override
 	public void setValue(int index, Value value) throws InvalidTypeException,
 			ClassNotLoadedException {
-		ArrayList<Value> list = new ArrayList<>(1);
+		ArrayList<Value> list = new ArrayList<>(1); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 		list.add(value);
 		setValues(index, list, 0, 1);
 	}
@@ -303,7 +303,7 @@ public class ArrayReferenceImpl extends ObjectReferenceImpl implements
 	 *             thrown if the class type for the {@link ArrayReference} is
 	 *             not loaded or has been GC'd
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public void setValues(int index, List<? extends Value> values, int srcIndex, int length)
 			throws InvalidTypeException, ClassNotLoadedException {
 		if (values == null || values.isEmpty()) {
@@ -355,7 +355,7 @@ public class ArrayReferenceImpl extends ObjectReferenceImpl implements
 			writeInt(index, "index", outData); //$NON-NLS-1$
 			writeInt(length, "length", outData); //$NON-NLS-1$
 			Iterator<Value> iterValues = checkedValues.iterator();
-			while (iterValues.hasNext()) {
+			while (iterValues.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				ValueImpl value = (ValueImpl) iterValues.next();
 				if (value != null) {
 					value.write(this, outData);
@@ -397,9 +397,9 @@ public class ArrayReferenceImpl extends ObjectReferenceImpl implements
 	 */
 	private List<Value> checkValues(List<? extends Value> values, Type type)
 			throws InvalidTypeException {
-		List<Value> checkedValues = new ArrayList<>(values.size());
+		List<Value> checkedValues = new ArrayList<>(values.size()); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 		Iterator<? extends Value> iterValues = values.iterator();
-		while (iterValues.hasNext()) {
+		while (iterValues.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			checkedValues.add(ValueImpl.checkValue(iterValues.next(),
 					type, virtualMachineImpl()));
 		}
@@ -414,15 +414,15 @@ public class ArrayReferenceImpl extends ObjectReferenceImpl implements
 	@Override
 	public String toString() {
 		try {
-			StringBuilder buf = new StringBuilder(type().name());
+			StringBuilder buf = new StringBuilder(type().name()); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 			// Insert length of string between (last) square braces.
 			buf.insert(buf.length() - 1, length());
 			// Append space and idString.
-			buf.append(' ');
-			buf.append(idString());
+			buf.append(' '); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+			buf.append(idString()); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			return buf.toString();
 		} catch (ObjectCollectedException e) {
-			return JDIMessages.ArrayReferenceImpl__Garbage_Collected__ArrayReference_5
+			return JDIMessages.ArrayReferenceImpl__Garbage_Collected__ArrayReference_5 //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 					+ "[" + length() + "] " + idString(); //$NON-NLS-1$ //$NON-NLS-2$
 		} catch (Exception e) {
 			return fDescription;

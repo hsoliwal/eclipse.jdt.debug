@@ -39,7 +39,7 @@ public class TriggerPointBreakpointsTests extends AbstractDebugTest {
 	/**
 	 * Tests the trigger point
 	 */
-	public void testTriggerPointBreakpoint() throws Exception {
+	public void testTriggerPointBreakpoint() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String typeName = "TriggerPoint_01";
 		IJavaLineBreakpoint bp1 = createLineBreakpoint(28, typeName);
 		IJavaLineBreakpoint bp2 = createLineBreakpoint(33, typeName);
@@ -56,7 +56,7 @@ public class TriggerPointBreakpointsTests extends AbstractDebugTest {
 			IJavaPrimitiveValue value = (IJavaPrimitiveValue)var.getValue();
 			assertNotNull("variable 'i' has no value", value);
 			int iValue = value.getIntValue();
-			assertEquals("value of 'i' should be '1', but was " + iValue, 1, iValue);
+			assertEquals("value of 'i' should be '1', but was " + iValue, 1, iValue); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 			var = findVariable(frame, "j");
 			assertNotNull("Could not find variable 'j'", var);
@@ -64,7 +64,7 @@ public class TriggerPointBreakpointsTests extends AbstractDebugTest {
 			value = (IJavaPrimitiveValue) var.getValue();
 			assertNotNull("variable 'j' has no value", value);
 			int jValue = value.getIntValue();
-			assertEquals("value of 'j' should be '1', but was " + jValue, 1, jValue);
+			assertEquals("value of 'j' should be '1', but was " + jValue, 1, jValue); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 			bp1.delete();
 			bp2.delete();
@@ -74,7 +74,7 @@ public class TriggerPointBreakpointsTests extends AbstractDebugTest {
 		}
 	}
 
-	public void testTriggerPointBreakpointWithResume() throws Exception {
+	public void testTriggerPointBreakpointWithResume() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String typeName = "TriggerPoint_01";
 		IJavaLineBreakpoint bp1 = createLineBreakpoint(20, typeName);
 		IJavaLineBreakpoint bp2 = createLineBreakpoint(21, typeName);
@@ -95,7 +95,7 @@ public class TriggerPointBreakpointsTests extends AbstractDebugTest {
 		}
 	}
 
-	public void testTriggerPointBreakpointWithResumeAndCondition() throws Exception {
+	public void testTriggerPointBreakpointWithResumeAndCondition() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String typeName = "TriggerPoint_01";
 		IJavaLineBreakpoint bp1 = createLineBreakpoint(20, typeName);
 		IJavaLineBreakpoint bp2 = createLineBreakpoint(21, typeName);
@@ -117,7 +117,7 @@ public class TriggerPointBreakpointsTests extends AbstractDebugTest {
 		}
 	}
 
-	public void testTriggerPointBreakpointWithResumeAndConditionAsTrue() throws Exception {
+	public void testTriggerPointBreakpointWithResumeAndConditionAsTrue() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String typeName = "TriggerPoint_01";
 		IJavaLineBreakpoint bp1 = createLineBreakpoint(20, typeName);
 		IJavaLineBreakpoint bp2 = createLineBreakpoint(21, typeName);
@@ -140,7 +140,7 @@ public class TriggerPointBreakpointsTests extends AbstractDebugTest {
 	}
 
 	// see bug : https://github.com/eclipse-jdt/eclipse.jdt.debug/issues/546
-	public void testTriggerPointAutoEnableAfterConditionalBp() throws Exception {
+	public void testTriggerPointAutoEnableAfterConditionalBp() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String typeName = "TriggerPoint_01";
 		IJavaLineBreakpoint bp1 = createLineBreakpoint(20, typeName);
 		IJavaLineBreakpoint bp2 = createLineBreakpoint(21, typeName);

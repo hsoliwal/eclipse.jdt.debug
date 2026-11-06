@@ -138,7 +138,7 @@ class ExecutionEnvironment implements IExecutionEnvironment {
 	 * Caches access rules returned by each participant for a given VM.
 	 * @since 3.3
 	 */
-	private final Map<IVMInstall, Map<IAccessRuleParticipant, IAccessRule[][]>> fParticipantMap = new HashMap<>();
+	private final Map<IVMInstall, Map<IAccessRuleParticipant, IAccessRule[][]>> fParticipantMap = new HashMap<>(); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
 
 	/**
 	 * Cache of VM -> IAccessRule[][] based on the current state of the participant
@@ -146,7 +146,7 @@ class ExecutionEnvironment implements IExecutionEnvironment {
 	 * for a specific VM.
 	 * @since 3.3
 	 */
-	private final Map<IVMInstall, IAccessRule[][]> fRuleCache = new HashMap<>();
+	private final Map<IVMInstall, IAccessRule[][]> fRuleCache = new HashMap<>(); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
 
 	/**
 	 * Wild card pattern matching all files
@@ -156,7 +156,7 @@ class ExecutionEnvironment implements IExecutionEnvironment {
 	/**
 	 * Prefix of compiler settings in properties file
 	 */
-	private static final String COMPILER_SETTING_PREFIX = JavaCore.PLUGIN_ID + ".compiler"; //$NON-NLS-1$
+	private static final String COMPILER_SETTING_PREFIX = JavaCore.PLUGIN_ID + ".compiler"; //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 	/**
 	 * Constructor
@@ -194,7 +194,7 @@ class ExecutionEnvironment implements IExecutionEnvironment {
 		return fCompatibleVMs.toArray(new IVMInstall[0]);
 	}
 
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public IVMInstall getCompatibleVM() {
 		init();
 		if (fCompatibleVMs.isEmpty()) {
@@ -219,7 +219,7 @@ class ExecutionEnvironment implements IExecutionEnvironment {
 		}
 		IVMInstall best = null;
 		java.lang.Runtime.Version bestVersion = null;
-		for (IVMInstall vm : fCompatibleVMs) {
+		for (IVMInstall vm : fCompatibleVMs) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			java.lang.Runtime.Version vmVersion = getRuntimeVersion(vm);
 			if (isBetter(vmVersion, bestVersion)) {
 				bestVersion = vmVersion;
@@ -229,7 +229,7 @@ class ExecutionEnvironment implements IExecutionEnvironment {
 		return best;
 	}
 
-	private boolean isBetter(java.lang.Runtime.Version version, java.lang.Runtime.Version other) {
+	private boolean isBetter(java.lang.Runtime.Version version, java.lang.Runtime.Version other) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		if (other == null) {
 			return true;
 		}
@@ -299,17 +299,17 @@ class ExecutionEnvironment implements IExecutionEnvironment {
 	/**
 	 * Updates Java projects referencing this environment, if any.
 	 */
-	private void rebindClasspathContainers() {
+	private void rebindClasspathContainers() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IJavaModel model = JavaCore.create(ResourcesPlugin.getWorkspace().getRoot());
 		if (model != null) {
 			try {
-				List<IJavaProject> updates = new ArrayList<>();
+				List<IJavaProject> updates = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 				IJavaProject[] javaProjects = model.getJavaProjects();
 				IPath path = JavaRuntime.newJREContainerPath(this);
-				for (int i = 0; i < javaProjects.length; i++) {
+				for (int i = 0; i < javaProjects.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 					IJavaProject project = javaProjects[i];
 					IClasspathEntry[] rawClasspath = project.getRawClasspath();
-					for (int j = 0; j < rawClasspath.length; j++) {
+					for (int j = 0; j < rawClasspath.length; j++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 						IClasspathEntry entry = rawClasspath[j];
 						if (entry.getEntryKind() == IClasspathEntry.CPE_CONTAINER) {
 							if (entry.getPath().equals(path)) {
@@ -368,23 +368,23 @@ class ExecutionEnvironment implements IExecutionEnvironment {
 		fDefault = vm;
 	}
 
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public IAccessRule[][] getAccessRules(IVMInstall vm, LibraryLocation[] libraries, IJavaProject project) {
 		IAccessRuleParticipant[] participants = getParticipants();
 		Map<IAccessRuleParticipant, IAccessRule[][]> rulesByParticipant = collectRulesByParticipant(participants, vm, libraries, project);
 		synchronized (this) {
 			Map<IAccessRuleParticipant, IAccessRule[][]> cachedRules = fParticipantMap.get(vm);
 			if (cachedRules == null || !cachedRules.equals(rulesByParticipant)) {
-				ArrayList<List<IAccessRule>> libLists = new ArrayList<>(); // array of lists of access rules
-				for (int i = 0; i < libraries.length; i++) {
-					libLists.add(new ArrayList<>());
+				ArrayList<List<IAccessRule>> libLists = new ArrayList<>(); // array of lists of access rules //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
+				for (int i = 0; i < libraries.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
+					libLists.add(new ArrayList<>()); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 				}
-				for (int i = 0; i < participants.length; i++) {
+				for (int i = 0; i < participants.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 					IAccessRuleParticipant participant = participants[i];
 					addRules(rulesByParticipant.get(participant), libLists);
 				}
 				IAccessRule[][] allRules = new IAccessRule[libraries.length][];
-				for (int i = 0; i < libLists.size(); i++) {
+				for (int i = 0; i < libLists.size(); i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 					List<IAccessRule> l = libLists.get(i);
 					allRules[i] = l.toArray(new IAccessRule[l.size()]);
 				}
@@ -403,7 +403,7 @@ class ExecutionEnvironment implements IExecutionEnvironment {
 	 *
 	 * @return access rule participants to consider for this environment
 	 */
-	private IAccessRuleParticipant[] getParticipants() {
+	private IAccessRuleParticipant[] getParticipants() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		if (fParticipants == null) {
 			IAccessRuleParticipant[] participants = EnvironmentsManager.getDefault().getAccessRuleParticipants();
 			synchronized (this) {
@@ -414,7 +414,7 @@ class ExecutionEnvironment implements IExecutionEnvironment {
 				if (fRuleParticipant != null) {
 					// ensure environment specific provider is last and not duplicated
 					LinkedHashSet<IAccessRuleParticipant> set = new LinkedHashSet<>();
-					for (int i = 0; i < participants.length; i++) {
+					for (int i = 0; i < participants.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 						set.add(participants[i]);
 					}
 					// remove, add to make last
@@ -439,8 +439,8 @@ class ExecutionEnvironment implements IExecutionEnvironment {
 	 * @return the mapping of {@link IAccessRuleParticipant} to {@link IAccessRule}s
 	 */
 	private Map<IAccessRuleParticipant, IAccessRule[][]> collectRulesByParticipant(IAccessRuleParticipant[] participants, IVMInstall vm, LibraryLocation[] libraries, IJavaProject project) {
-		Map<IAccessRuleParticipant, IAccessRule[][]> map = new HashMap<>();
-		for (int i = 0; i < participants.length; i++) {
+		Map<IAccessRuleParticipant, IAccessRule[][]> map = new HashMap<>(); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
+		for (int i = 0; i < participants.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			// TODO: use safe runnable
 			map.put(participants[i], participants[i].getAccessRules(this, vm, libraries, project));
 		}
@@ -455,7 +455,7 @@ class ExecutionEnvironment implements IExecutionEnvironment {
 	 * @param collect the array of lists to collect the {@link IAccessRule}s in
 	 */
 	private void addRules(IAccessRule[][] accessRules, ArrayList<List<IAccessRule>> collect) {
-		for (int i = 0; i < accessRules.length; i++) {
+		for (int i = 0; i < accessRules.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			IAccessRule[] libRules = accessRules[i];
 			List<IAccessRule> list = collect.get(i);
 			// if the last rule is a **/* pattern, don't add any more rules, as they will have no effect
@@ -465,13 +465,13 @@ class ExecutionEnvironment implements IExecutionEnvironment {
 					continue;
 				}
 			}
-			for (int j = 0; j < libRules.length; j++) {
+			for (int j = 0; j < libRules.length; j++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				list.add(libRules[j]);
 			}
 		}
 	}
 
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public Properties getProfileProperties() {
 		if (!fPropertiesInitialized) {
 			synchronized (this) {
@@ -483,7 +483,7 @@ class ExecutionEnvironment implements IExecutionEnvironment {
 				if (path == null) {
 					// attempt default profiles known to OSGi
 					bundle = Platform.getBundle("org.eclipse.osgi"); //$NON-NLS-1$
-					path = getId().replace('/', '_') + ".profile"; //$NON-NLS-1$
+					path = getId().replace('/', '_') + ".profile"; //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 				} else {
 					// read provided file
 					bundle = Platform.getBundle(fElement.getContributor().getName());
@@ -505,7 +505,7 @@ class ExecutionEnvironment implements IExecutionEnvironment {
 	 * @param path bundle relative path to properties file
 	 * @return properties or <code>null</code> if none
 	 */
-	@SuppressWarnings("deprecation")
+	@SuppressWarnings("deprecation") //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	private Properties getJavaProfileProperties(Bundle bundle, String path) {
 		Properties profile = new Properties();
 		URL profileURL = bundle.getEntry(path);
@@ -550,12 +550,12 @@ class ExecutionEnvironment implements IExecutionEnvironment {
 	private static final String JAVASE = "JavaSE"; //$NON-NLS-1$
 
 	private String calculateVMExecutionEnvs(Version javaVersion) {
-		StringBuilder result = new StringBuilder("OSGi/Minimum-1.0, OSGi/Minimum-1.1, OSGi/Minimum-1.2, JavaSE/compact1-1.8, JavaSE/compact2-1.8, JavaSE/compact3-1.8, JRE-1.1, J2SE-1.2, J2SE-1.3, J2SE-1.4, J2SE-1.5, JavaSE-1.6, JavaSE-1.7, JavaSE-1.8"); //$NON-NLS-1$
+		StringBuilder result = new StringBuilder("OSGi/Minimum-1.0, OSGi/Minimum-1.1, OSGi/Minimum-1.2, JavaSE/compact1-1.8, JavaSE/compact2-1.8, JavaSE/compact3-1.8, JRE-1.1, J2SE-1.2, J2SE-1.3, J2SE-1.4, J2SE-1.5, JavaSE-1.6, JavaSE-1.7, JavaSE-1.8"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 		Version v = new Version(9, 0, 0);
-		while (v.compareTo(javaVersion) <= 0) {
-			result.append(',').append(' ').append(JAVASE).append('-').append(v.getMajor());
+		while (v.compareTo(javaVersion) <= 0) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
+			result.append(',').append(' ').append(JAVASE).append('-').append(v.getMajor()); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			if (v.getMinor() > 0) {
-				result.append('.').append(v.getMinor());
+				result.append('.').append(v.getMinor()); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			}
 			if (v.getMajor() == javaVersion.getMajor()) {
 				v = new Version(v.getMajor(), v.getMinor() + 1, 0);
@@ -581,7 +581,7 @@ class ExecutionEnvironment implements IExecutionEnvironment {
 		}
 	}
 
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public IExecutionEnvironment[] getSubEnvironments() {
 		Properties properties = getProfileProperties();
 		Set<IExecutionEnvironment> subenv = new LinkedHashSet<>();
@@ -589,8 +589,8 @@ class ExecutionEnvironment implements IExecutionEnvironment {
 			@SuppressWarnings("deprecation")
 			String subsets = properties.getProperty(Constants.FRAMEWORK_EXECUTIONENVIRONMENT);
 			if (subsets != null) {
-				String[] ids = subsets.split(","); //$NON-NLS-1$
-				for (int i = 0; i < ids.length; i++) {
+				String[] ids = subsets.split(","); //$NON-NLS-1$ //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
+				for (int i = 0; i < ids.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 					IExecutionEnvironment sub = JavaRuntime.getExecutionEnvironmentsManager().getEnvironment(ids[i].trim());
 					if (sub != null && !sub.getId().equals(getId())) {
 						subenv.add(sub);
@@ -605,9 +605,9 @@ class ExecutionEnvironment implements IExecutionEnvironment {
 	public Map<String, String> getComplianceOptions() {
 		Properties properties = getProfileProperties();
 		if (properties != null) {
-			Map<String, String> map = new HashMap<>();
+			Map<String, String> map = new HashMap<>(); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
 			Iterator<?> iterator = properties.keySet().iterator();
-			while (iterator.hasNext()) {
+			while (iterator.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				String key = (String) iterator.next();
 				if (key.startsWith(COMPILER_SETTING_PREFIX)) {
 					map.put(key, properties.getProperty(key));

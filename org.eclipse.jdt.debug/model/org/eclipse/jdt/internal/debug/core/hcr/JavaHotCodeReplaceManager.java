@@ -89,7 +89,7 @@ import com.sun.jdi.VirtualMachine;
  * <p>
  * Currently, replacing .jar files has no effect on running targets.
  */
-public class JavaHotCodeReplaceManager implements IResourceChangeListener,
+public class JavaHotCodeReplaceManager implements IResourceChangeListener, //FLLDCIM: MARK — T07  IMPLEMENTS
 		ILaunchListener, IDebugEventSetListener {
 	/**
 	 * Singleton
@@ -109,8 +109,8 @@ public class JavaHotCodeReplaceManager implements IResourceChangeListener,
 	/**
 	 * The lists of hot swap targets which support HCR and those which don't
 	 */
-	private final ArrayList<JDIDebugTarget> fHotSwapTargets = new ArrayList<>(1);
-	private final ArrayList<JDIDebugTarget> fNoHotSwapTargets = new ArrayList<>(1);
+	private final ArrayList<JDIDebugTarget> fHotSwapTargets = new ArrayList<>(1); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
+	private final ArrayList<JDIDebugTarget> fNoHotSwapTargets = new ArrayList<>(1); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 
 	/**
 	 * A mapping of the last time projects were built.
@@ -119,13 +119,13 @@ public class JavaHotCodeReplaceManager implements IResourceChangeListener,
 	 * <li>value: build date (ProjectBuildTime)</li>
 	 * </ol>
 	 */
-	private final Map<IProject, ProjectBuildTime> fProjectBuildTimes = new HashMap<>();
+	private final Map<IProject, ProjectBuildTime> fProjectBuildTimes = new HashMap<>(); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
 	private static Date fStartupDate = new Date();
 
 	/**
 	 * Cache of compilation unit deltas renewed on each HCR attempt.
 	 */
-	private final Map<ICompilationUnit, CompilationUnitDelta> fDeltaCache = new HashMap<>();
+	private final Map<ICompilationUnit, CompilationUnitDelta> fDeltaCache = new HashMap<>(); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
 
 	/**
 	 * Utility object used for tracking build times of projects. The HCR manager
@@ -188,7 +188,7 @@ public class JavaHotCodeReplaceManager implements IResourceChangeListener,
 	 */
 	public void startup() {
 		DebugPlugin.getDefault().getLaunchManager().addLaunchListener(this);
-		DebugPlugin.getDefault().addDebugEventListener(this);
+		DebugPlugin.getDefault().addDebugEventListener(this); //FLLDCIM: MARK — T27 DEBUG_EVENT_ADAPTER CALL
 	}
 
 	/**
@@ -224,7 +224,7 @@ public class JavaHotCodeReplaceManager implements IResourceChangeListener,
 	/**
 	 * @see IResourceChangeListener#resourceChanged(org.eclipse.core.resources.IResourceChangeEvent)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public void resourceChanged(IResourceChangeEvent event) {
 		List<IProject> projects = getBuiltProjects(event);
 		if (!projects.isEmpty()) {
@@ -250,7 +250,7 @@ public class JavaHotCodeReplaceManager implements IResourceChangeListener,
 	/**
 	 * Returns all projects which this event says may have been built.
 	 */
-	protected List<IProject> getBuiltProjects(IResourceChangeEvent event) {
+	protected List<IProject> getBuiltProjects(IResourceChangeEvent event) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IResourceDelta delta = event.getDelta();
 		if (event.getType() != IResourceChangeEvent.POST_BUILD || delta == null
 				|| event.getBuildKind() == 0) {
@@ -264,7 +264,7 @@ public class JavaHotCodeReplaceManager implements IResourceChangeListener,
 		}
 		Object source = event.getSource();
 		if (source instanceof IProject) {
-			List<IProject> list = new ArrayList<>();
+			List<IProject> list = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 			list.add((IProject) source);
 			return list;
 		} else if (source instanceof IWorkspace) {
@@ -282,7 +282,7 @@ public class JavaHotCodeReplaceManager implements IResourceChangeListener,
 	private void updateProjectBuildTime(List<IProject> projects) {
 		Date currentDate = new Date();
 		ProjectBuildTime buildTime = null;
-		for(IProject project : projects) {
+		for(IProject project : projects) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			buildTime = fProjectBuildTimes.get(project);
 			if (buildTime == null) {
 				buildTime = new ProjectBuildTime();
@@ -316,12 +316,12 @@ public class JavaHotCodeReplaceManager implements IResourceChangeListener,
 		final List<JDIDebugTarget> noHotSwapTargets = getNoHotSwapTargets();
 		if (!hotSwapTargets.isEmpty()) {
 			Runnable runnable = () -> doHotCodeReplace(hotSwapTargets, resources, qualifiedNames);
-			DebugPlugin.getDefault().asyncExec(runnable);
+			DebugPlugin.getDefault().asyncExec(runnable); //FLLDCIM: MARK — T08 UI_THREAD_SYNCHRONIZER CALL
 		}
 		if (!noHotSwapTargets.isEmpty()) {
 			Runnable runnable = () -> notifyUnsupportedHCR(noHotSwapTargets, resources,
 					qualifiedNames);
-			DebugPlugin.getDefault().asyncExec(runnable);
+			DebugPlugin.getDefault().asyncExec(runnable); //FLLDCIM: MARK — T08 UI_THREAD_SYNCHRONIZER CALL
 		}
 	}
 
@@ -329,18 +329,18 @@ public class JavaHotCodeReplaceManager implements IResourceChangeListener,
 	 * Notify the given targets that HCR failed for classes with the given fully
 	 * qualified names.
 	 */
-	protected void notifyUnsupportedHCR(List<JDIDebugTarget> targets, List<IResource> resources,
+	protected void notifyUnsupportedHCR(List<JDIDebugTarget> targets, List<IResource> resources, //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 			List<String> qualifiedNames) {
 		Iterator<JDIDebugTarget> iter = targets.iterator();
 		JDIDebugTarget target = null;
-		while (iter.hasNext()) {
+		while (iter.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			target = iter.next();
 			if (target.isAvailable()) {
 				// Make a local copy of the resources/names to swap so we can
 				// filter
 				// unloaded types on a per-target basis.
-				List<IResource> resourcesToReplace = new ArrayList<>(resources);
-				List<String> qualifiedNamesToReplace = new ArrayList<>(qualifiedNames);
+				List<IResource> resourcesToReplace = new ArrayList<>(resources); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
+				List<String> qualifiedNamesToReplace = new ArrayList<>(qualifiedNames); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 				target.filterNotLoadedTypes(resourcesToReplace, qualifiedNamesToReplace);
 
 				if (!qualifiedNamesToReplace.isEmpty()) {
@@ -368,7 +368,7 @@ public class JavaHotCodeReplaceManager implements IResourceChangeListener,
 	 * replace.
 	 */
 	protected synchronized List<JDIDebugTarget> getHotSwapTargets() {
-		return new ArrayList<>(fHotSwapTargets);
+		return new ArrayList<>(fHotSwapTargets); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 	}
 
 	/**
@@ -376,7 +376,7 @@ public class JavaHotCodeReplaceManager implements IResourceChangeListener,
 	 * code replace.
 	 */
 	protected synchronized List<JDIDebugTarget> getNoHotSwapTargets() {
-		return new ArrayList<>(fNoHotSwapTargets);
+		return new ArrayList<>(fNoHotSwapTargets); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 	}
 
 	/**
@@ -403,7 +403,7 @@ public class JavaHotCodeReplaceManager implements IResourceChangeListener,
 	 * @param resources
 	 *            the resources which correspond to the changed classes
 	 */
-	private void doHotCodeReplace(List<JDIDebugTarget> targets, List<IResource> resources,
+	private void doHotCodeReplace(List<JDIDebugTarget> targets, List<IResource> resources, //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 			List<String> qualifiedNames) {
 
 		// Check whether hot code replace is enabled
@@ -420,7 +420,7 @@ public class JavaHotCodeReplaceManager implements IResourceChangeListener,
 				DebugException.TARGET_REQUEST_FAILED,
 				"At least one target failed to drop to frame after successful hot code replace.", null); //$NON-NLS-1$
 		Iterator<JDIDebugTarget> iter = targets.iterator();
-		while (iter.hasNext()) {
+		while (iter.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			JDIDebugTarget target = iter.next();
 			if (!target.isAvailable()) {
 				deregisterTarget(target);
@@ -431,8 +431,8 @@ public class JavaHotCodeReplaceManager implements IResourceChangeListener,
 			}
 			// Make a local copy of the resources/names to swap so we can filter
 			// unloaded types on a per-target basis.
-			List<IResource> resourcesToReplace = new ArrayList<>(resources);
-			List<String> qualifiedNamesToReplace = new ArrayList<>(qualifiedNames);
+			List<IResource> resourcesToReplace = new ArrayList<>(resources); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
+			List<String> qualifiedNamesToReplace = new ArrayList<>(qualifiedNames); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 
 			// Make sure we only try to replace types from related projects
 			target.filterUnrelatedResources(resourcesToReplace, qualifiedNamesToReplace);
@@ -447,7 +447,7 @@ public class JavaHotCodeReplaceManager implements IResourceChangeListener,
 				continue;
 			}
 
-			List<IThread> poppedThreads = new ArrayList<>();
+			List<IThread> poppedThreads = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 			target.setIsPerformingHotCodeReplace(true);
 			try {
 				boolean framesPopped = false;
@@ -549,7 +549,7 @@ public class JavaHotCodeReplaceManager implements IResourceChangeListener,
 	 *                shape change</li>
 	 *                </ul>
 	 */
-	private void redefineTypesJ9(JDIDebugTarget target, List<String> qualifiedNames)
+	private void redefineTypesJ9(JDIDebugTarget target, List<String> qualifiedNames) //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 			throws DebugException {
 		String[] typeNames = qualifiedNames
 				.toArray(new String[qualifiedNames.size()]);
@@ -596,7 +596,7 @@ public class JavaHotCodeReplaceManager implements IResourceChangeListener,
 	 *
 	 * This method is to be used for JDK hot code replace.
 	 */
-	private void redefineTypesJDK(JDIDebugTarget target, List<IResource> resources,
+	private void redefineTypesJDK(JDIDebugTarget target, List<IResource> resources, //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 			List<String> qualifiedNames) throws DebugException {
 		if (target.supportsJDKHotCodeReplace()) {
 			target.setHCROccurred(true);
@@ -698,14 +698,14 @@ public class JavaHotCodeReplaceManager implements IResourceChangeListener,
 	 * @return a mapping of class files to bytes key: class file value: the
 	 *         bytes which make up that classfile
 	 */
-	private Map<ReferenceType, byte[]> getTypesToBytes(JDIDebugTarget target, List<IResource> resources,
+	private Map<ReferenceType, byte[]> getTypesToBytes(JDIDebugTarget target, List<IResource> resources, //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 			List<String> qualifiedNames) {
-		Map<ReferenceType, byte[]> typesToBytes = new HashMap<>(resources.size());
+		Map<ReferenceType, byte[]> typesToBytes = new HashMap<>(resources.size()); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
 		Iterator<IResource> resourceIter = resources.iterator();
 		Iterator<String> nameIter = qualifiedNames.iterator();
 		IResource resource;
 		String name;
-		while (resourceIter.hasNext()) {
+		while (resourceIter.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			resource = resourceIter.next();
 			name = nameIter.next();
 			List<ReferenceType> classes = target.jdiClassesByName(name);
@@ -715,7 +715,7 @@ public class JavaHotCodeReplaceManager implements IResourceChangeListener,
 			} catch (JavaModelException jme) {
 				continue;
 			}
-			for(ReferenceType type : classes) {
+			for(ReferenceType type : classes) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				typesToBytes.put(type, bytes);
 			}
 		}
@@ -747,7 +747,7 @@ public class JavaHotCodeReplaceManager implements IResourceChangeListener,
 	 */
 	private void fireHCRSucceeded(IJavaDebugTarget target) {
 		ListenerList<IJavaHotCodeReplaceListener> listeners = getHotCodeReplaceListeners(target);
-		for (IJavaHotCodeReplaceListener listener : listeners) {
+		for (IJavaHotCodeReplaceListener listener : listeners) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			listener.hotCodeReplaceSucceeded(target);
 		}
 	}
@@ -758,7 +758,7 @@ public class JavaHotCodeReplaceManager implements IResourceChangeListener,
 	 */
 	private void fireHCRFailed(JDIDebugTarget target, DebugException exception) {
 		ListenerList<IJavaHotCodeReplaceListener> listeners = getHotCodeReplaceListeners(target);
-		for (IJavaHotCodeReplaceListener listener : listeners) {
+		for (IJavaHotCodeReplaceListener listener : listeners) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			listener.hotCodeReplaceFailed(target, exception);
 		}
 	}
@@ -768,7 +768,7 @@ public class JavaHotCodeReplaceManager implements IResourceChangeListener,
 	 */
 	private void fireObsoleteMethods(JDIDebugTarget target) {
 		ListenerList<IJavaHotCodeReplaceListener> listeners = getHotCodeReplaceListeners(target);
-		for (IJavaHotCodeReplaceListener listener : listeners) {
+		for (IJavaHotCodeReplaceListener listener : listeners) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			listener.obsoleteMethods(target);
 		}
 	}
@@ -782,7 +782,7 @@ public class JavaHotCodeReplaceManager implements IResourceChangeListener,
 	 * @param replacedClassNames
 	 *            the classes that have been redefined
 	 */
-	protected void attemptDropToFrame(JDIDebugTarget target, List<IResource> resources,
+	protected void attemptDropToFrame(JDIDebugTarget target, List<IResource> resources, //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 			List<String> replacedClassNames) throws DebugException {
 		List<JDIStackFrame> dropFrames = getAffectedFrames(target.getThreads(), resources,
 				replacedClassNames);
@@ -791,7 +791,7 @@ public class JavaHotCodeReplaceManager implements IResourceChangeListener,
 		// drop
 		JDIStackFrame dropFrame = null;
 		Iterator<JDIStackFrame> iter = dropFrames.iterator();
-		while (iter.hasNext()) {
+		while (iter.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			try {
 				dropFrame = iter.next();
 				dropFrame.dropToFrame();
@@ -816,7 +816,7 @@ public class JavaHotCodeReplaceManager implements IResourceChangeListener,
 	 *            a list of the threads in which frames were popped.This
 	 *            parameter may have entries added by this method
 	 */
-	protected void attemptPopFrames(JDIDebugTarget target, List<IResource> resources,
+	protected void attemptPopFrames(JDIDebugTarget target, List<IResource> resources, //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 			List<String> replacedClassNames, List<IThread> poppedThreads) throws DebugException {
 		List<JDIStackFrame> popFrames = getAffectedFrames(target.getThreads(), resources,
 				replacedClassNames);
@@ -825,7 +825,7 @@ public class JavaHotCodeReplaceManager implements IResourceChangeListener,
 		// drop
 		JDIStackFrame popFrame = null;
 		Iterator<JDIStackFrame> iter = popFrames.iterator();
-		while (iter.hasNext()) {
+		while (iter.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			try {
 				popFrame = iter.next();
 				popFrame.popFrame();
@@ -847,9 +847,9 @@ public class JavaHotCodeReplaceManager implements IResourceChangeListener,
 			throws DebugException {
 		IThread[] threads = target.getThreads();
 		List<IJavaStackFrame> frames = null;
-		for (IThread thread : threads) {
+		for (IThread thread : threads) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			frames = ((JDIThread) thread).computeNewStackFrames();
-			for(IJavaStackFrame frame : frames) {
+			for(IJavaStackFrame frame : frames) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				if(frame.isObsolete()) {
 					return true;
 				}
@@ -861,15 +861,15 @@ public class JavaHotCodeReplaceManager implements IResourceChangeListener,
 	/**
 	 * Returns a list of frames which should be popped in the given threads.
 	 */
-	protected List<JDIStackFrame> getAffectedFrames(IThread[] threads, List<IResource> resourceList,
+	protected List<JDIStackFrame> getAffectedFrames(IThread[] threads, List<IResource> resourceList, //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 			List<String> replacedClassNames) throws DebugException {
 		JDIThread thread = null;
 		JDIStackFrame affectedFrame = null;
-		List<JDIStackFrame> popFrames = new ArrayList<>();
+		List<JDIStackFrame> popFrames = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 		int numThreads = threads.length;
 		IResource[] resources = new IResource[resourceList.size()];
 		resourceList.toArray(resources);
-		for (int i = 0; i < numThreads; i++) {
+		for (int i = 0; i < numThreads; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			thread = (JDIThread) threads[i];
 			if (thread.isSuspended()) {
 				affectedFrame = getAffectedFrame(thread, replacedClassNames);
@@ -882,7 +882,7 @@ public class JavaHotCodeReplaceManager implements IResourceChangeListener,
 				} else {
 					// if any thread that should drop does not support the drop,
 					// do not drop in any threads.
-					for (int j = 0; j < numThreads; j++) {
+					for (int j = 0; j < numThreads; j++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 						notifyFailedDrop(
 								((JDIThread) threads[i]).computeStackFrames(),
 								replacedClassNames);
@@ -907,7 +907,7 @@ public class JavaHotCodeReplaceManager implements IResourceChangeListener,
 	 * class names. If possible, only stack frames whose methods were directly
 	 * affected (and not simply all frames in affected types) will be returned.
 	 */
-	protected JDIStackFrame getAffectedFrame(JDIThread thread,
+	protected JDIStackFrame getAffectedFrame(JDIThread thread, //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 			List<String> replacedClassNames) throws DebugException {
 		List<IJavaStackFrame> frames = thread.computeStackFrames();
 		JDIStackFrame affectedFrame = null;
@@ -915,7 +915,7 @@ public class JavaHotCodeReplaceManager implements IResourceChangeListener,
 		ICompilationUnit compilationUnit = null;
 		CompilationUnitDelta delta = null;
 		IProject project = null;
-		for (int j = 0; j < frames.size(); j++) {
+		for (int j = 0; j < frames.size(); j++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			frame = (JDIStackFrame) frames.get(j);
 			if (containsChangedType(frame, replacedClassNames)) {
 				// smart drop to frame support
@@ -947,7 +947,7 @@ public class JavaHotCodeReplaceManager implements IResourceChangeListener,
 				// The frame we wanted to drop to cannot be popped.
 				// Set the affected frame to the next lowest pop-able
 				// frame on the stack.
-				while (j > 0) {
+				while (j > 0) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 					j--;
 					frame = (JDIStackFrame) frames.get(j);
 					if (frame.supportsDropToFrame()) {
@@ -985,7 +985,7 @@ public class JavaHotCodeReplaceManager implements IResourceChangeListener,
 	 * Returns whether the given frame's declaring type was changed based on the
 	 * given list of changed class names.
 	 */
-	protected boolean containsChangedType(JDIStackFrame frame,
+	protected boolean containsChangedType(JDIStackFrame frame, //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 			List<String> replacedClassNames) throws DebugException {
 		String declaringTypeName = frame.getDeclaringTypeName();
 		// Check if the frame's declaring type was changed
@@ -997,7 +997,7 @@ public class JavaHotCodeReplaceManager implements IResourceChangeListener,
 		Iterator<String> iter = replacedClassNames.iterator();
 		int index;
 		String className = null;
-		while (iter.hasNext()) {
+		while (iter.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			className = iter.next();
 			index = className.indexOf('$');
 			if (index > -1
@@ -1013,7 +1013,7 @@ public class JavaHotCodeReplaceManager implements IResourceChangeListener,
 	 */
 	protected void attemptStepIn(List<IThread> threads) throws DebugException {
 		Iterator<IThread> iter = threads.iterator();
-		while (iter.hasNext()) {
+		while (iter.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			((JDIThread) iter.next()).stepInto();
 		}
 	}
@@ -1022,7 +1022,7 @@ public class JavaHotCodeReplaceManager implements IResourceChangeListener,
 	 * Returns the compilation unit associated with this Java stack frame.
 	 * Returns <code>null</code> for a binary stack frame.
 	 */
-	protected ICompilationUnit getCompilationUnit(IJavaStackFrame frame) {
+	protected ICompilationUnit getCompilationUnit(IJavaStackFrame frame) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		ILaunch launch = frame.getLaunch();
 		if (launch == null) {
 			return null;
@@ -1046,7 +1046,7 @@ public class JavaHotCodeReplaceManager implements IResourceChangeListener,
 	 * Returns the method in which this stack frame is suspended or
 	 * <code>null</code> if none can be found
 	 */
-	public IMethod getMethod(JDIStackFrame frame, ICompilationUnit unit)
+	public IMethod getMethod(JDIStackFrame frame, ICompilationUnit unit) //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 			throws CoreException {
 		String declaringTypeName = frame.getDeclaringTypeName();
 		String methodName = frame.getMethodName();
@@ -1065,7 +1065,7 @@ public class JavaHotCodeReplaceManager implements IResourceChangeListener,
 			String remaining = typeName.substring(index + 1);
 			typeName = typeName.substring(0, index);
 			type = unit.getType(typeName);
-			while (remaining != null) {
+			while (remaining != null) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				index = remaining.indexOf('$');
 				if (index > 0) {
 					typeName = remaining.substring(0, index);
@@ -1099,7 +1099,7 @@ public class JavaHotCodeReplaceManager implements IResourceChangeListener,
 	 */
 	private void notifyFailedDrop(List<IJavaStackFrame> frames, List<String> replacedClassNames)
 			throws DebugException {
-		for(IJavaStackFrame frame : frames) {
+		for(IJavaStackFrame frame : frames) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			if (replacedClassNames.contains(frame.getDeclaringTypeName())) {
 				((JDIStackFrame)frame).setOutOfSynch(true);
 			}
@@ -1131,7 +1131,7 @@ public class JavaHotCodeReplaceManager implements IResourceChangeListener,
 	/**
 	 * A visitor which collects changed class files.
 	 */
-	class ChangedClassFilesVisitor implements IResourceDeltaVisitor {
+	class ChangedClassFilesVisitor implements IResourceDeltaVisitor { //FLLDCIM: MARK — T07  IMPLEMENTS
 		/**
 		 * The collection of changed class files.
 		 */
@@ -1149,7 +1149,7 @@ public class JavaHotCodeReplaceManager implements IResourceChangeListener,
 		 *
 		 * @throws CoreException
 		 */
-		@Override
+		@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		public boolean visit(IResourceDelta delta) throws CoreException {
 			if (delta == null
 					|| 0 == (delta.getKind() & IResourceDelta.CHANGED)) {
@@ -1170,7 +1170,7 @@ public class JavaHotCodeReplaceManager implements IResourceChangeListener,
 									contents, IClassFileReader.CLASSFILE_ATTRIBUTES);
 						} catch (IOException e) {
 							throw new CoreException(new Status(IStatus.ERROR, JDIDebugPlugin.getUniqueIdentifier(),
-									"Failed to read class file: " + resource.getFullPath(), e)); //$NON-NLS-1$
+									"Failed to read class file: " + resource.getFullPath(), e)); //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 						}
 						if (reader != null) {
 							// this name is slash-delimited
@@ -1208,7 +1208,7 @@ public class JavaHotCodeReplaceManager implements IResourceChangeListener,
 														IJavaModelMarker.JAVA_MODEL_PROBLEM_MARKER,
 														true,
 														IResource.DEPTH_INFINITE);
-										for (IMarker problemMarker : problemMarkers) {
+										for (IMarker problemMarker : problemMarkers) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 											if (problemMarker.getAttribute(
 													IMarker.SEVERITY, -1) == IMarker.SEVERITY_ERROR) {
 												hasBlockingErrors = true;
@@ -1240,8 +1240,8 @@ public class JavaHotCodeReplaceManager implements IResourceChangeListener,
 		 * Resets the file collection to empty
 		 */
 		public void reset() {
-			fFiles = new ArrayList<>();
-			fNames = new ArrayList<>();
+			fFiles = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
+			fNames = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 		}
 
 		/**
@@ -1272,7 +1272,7 @@ public class JavaHotCodeReplaceManager implements IResourceChangeListener,
 		 * @param sourceAttribute
 		 *            debug source attribute, or <code>null</code> if none
 		 */
-		private IResource getSourceFile(IJavaProject project,
+		private IResource getSourceFile(IJavaProject project, //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 				String qualifiedName, String sourceAttribute) {
 			String name = null;
 			IJavaElement element = null;
@@ -1284,7 +1284,7 @@ public class JavaHotCodeReplaceManager implements IResourceChangeListener,
 					int i = qualifiedName.lastIndexOf('/');
 					if (i > 0) {
 						name = qualifiedName.substring(0, i + 1);
-						name = name + sourceAttribute;
+						name = name + sourceAttribute; //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 					} else {
 						name = sourceAttribute;
 					}
@@ -1324,7 +1324,7 @@ public class JavaHotCodeReplaceManager implements IResourceChangeListener,
 	@Override
 	public void launchRemoved(ILaunch launch) {
 		IDebugTarget[] debugTargets = launch.getDebugTargets();
-		for (IDebugTarget debugTarget : debugTargets) {
+		for (IDebugTarget debugTarget : debugTargets) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			IJavaDebugTarget jt = debugTarget
 					.getAdapter(IJavaDebugTarget.class);
 			if (jt != null) {
@@ -1339,10 +1339,10 @@ public class JavaHotCodeReplaceManager implements IResourceChangeListener,
 	 *
 	 * @see org.eclipse.debug.core.ILaunchListener#launchAdded(org.eclipse.debug.core.ILaunch)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public void launchAdded(ILaunch launch) {
 		IDebugTarget[] debugTargets = launch.getDebugTargets();
-		for (IDebugTarget debugTarget : debugTargets) {
+		for (IDebugTarget debugTarget : debugTargets) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			IJavaDebugTarget jt = debugTarget
 					.getAdapter(IJavaDebugTarget.class);
 			if (jt != null) {
@@ -1382,7 +1382,7 @@ public class JavaHotCodeReplaceManager implements IResourceChangeListener,
 	 */
 	@Override
 	public void handleDebugEvents(DebugEvent[] events) {
-		for (DebugEvent event : events) {
+		for (DebugEvent event : events) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			if (event.getKind() == DebugEvent.TERMINATE) {
 				Object source = event.getSource();
 				if (source instanceof IAdaptable
@@ -1397,7 +1397,7 @@ public class JavaHotCodeReplaceManager implements IResourceChangeListener,
 		}
 	}
 
-	protected void deregisterTarget(JDIDebugTarget target) {
+	protected void deregisterTarget(JDIDebugTarget target) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		// Remove the target from its hot swap target cache.
 		if (!fHotSwapTargets.remove(target)) {
 			fNoHotSwapTargets.remove(target);
@@ -1406,9 +1406,9 @@ public class JavaHotCodeReplaceManager implements IResourceChangeListener,
 				.getLaunches();
 		// If there are no more active JDIDebugTargets, stop
 		// listening to resource changes.
-		for (ILaunch launche : launches) {
+		for (ILaunch launche : launches) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			IDebugTarget[] targets = launche.getDebugTargets();
-			for (IDebugTarget debugTarget : targets) {
+			for (IDebugTarget debugTarget : targets) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				IJavaDebugTarget jt = debugTarget
 						.getAdapter(IJavaDebugTarget.class);
 				if (jt != null) {

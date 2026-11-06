@@ -30,7 +30,7 @@ import org.eclipse.ui.IActionFilter;
 	/**
 	 * @see IAdapterFactory#getAdapter(Object, Class)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	@SuppressWarnings("unchecked")
 	public <T> T getAdapter(Object obj, Class<T> adapterType) {
 		if (adapterType.isInstance(obj)) {

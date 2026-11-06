@@ -182,20 +182,20 @@ public class JDINullValue extends JDIObjectValue {
 	/**
 	 * Creates an artificial NPE for display to the user as an error message
 	 */
-	private IJavaValue npe(String selector, String signature)
+	private IJavaValue npe(String selector, String signature) //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 			throws DebugException {
-		StringBuilder buffer = new StringBuilder();
-		buffer.append(selector);
+		StringBuilder buffer = new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
+		buffer.append(selector); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		String[] parameterTypes = Signature.getParameterTypes(signature);
-		buffer.append('(');
-		for (int i = 0; i < parameterTypes.length; i++) {
-			buffer.append(Signature.getSignatureSimpleName(parameterTypes[i]
+		buffer.append('('); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+		for (int i = 0; i < parameterTypes.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
+			buffer.append(Signature.getSignatureSimpleName(parameterTypes[i] //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 					.replace('/', '.')));
 			if (i + 1 < parameterTypes.length) {
-				buffer.append(", "); //$NON-NLS-1$
+				buffer.append(", "); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			}
 		}
-		buffer.append(')');
+		buffer.append(')'); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		requestFailed(MessageFormat.format(
 				JDIDebugModelMessages.JDINullValue_0,
 				buffer.toString()), new NullPointerException());

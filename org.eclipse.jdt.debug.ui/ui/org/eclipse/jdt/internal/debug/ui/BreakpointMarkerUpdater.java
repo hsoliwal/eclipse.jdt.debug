@@ -89,7 +89,7 @@ public class BreakpointMarkerUpdater implements IMarkerUpdater {
 	/* (non-Javadoc)
 	 * @see org.eclipse.ui.texteditor.IMarkerUpdater#updateMarker(org.eclipse.core.resources.IMarker, org.eclipse.jface.text.IDocument, org.eclipse.jface.text.Position)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public boolean updateMarker(IMarker marker, IDocument document, Position position) {
 		if(position.isDeleted()) {
 			return false;
@@ -198,11 +198,11 @@ public class BreakpointMarkerUpdater implements IMarkerUpdater {
 	 *
 	 * @since 3.4
 	 */
-	private IJavaLineBreakpoint lineBreakpointExists(IResource resource, String typeName, int lineNumber, IMarker currentmarker) throws CoreException {
+	private IJavaLineBreakpoint lineBreakpointExists(IResource resource, String typeName, int lineNumber, IMarker currentmarker) throws CoreException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String modelId = JDIDebugPlugin.getUniqueIdentifier();
 		String markerType= JavaLineBreakpoint.getMarkerType();
 		IBreakpointManager manager= DebugPlugin.getDefault().getBreakpointManager();
-		for (IBreakpoint b : manager.getBreakpoints(modelId)) {
+		for (IBreakpoint b : manager.getBreakpoints(modelId)) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			if (!(b instanceof IJavaLineBreakpoint)) {
 				continue;
 			}
@@ -210,7 +210,7 @@ public class BreakpointMarkerUpdater implements IMarkerUpdater {
 			IMarker marker = breakpoint.getMarker();
 			if (marker != null && marker.exists() && marker.getType().equals(markerType) && currentmarker.getId() != marker.getId()) {
 				String breakpointTypeName = breakpoint.getTypeName();
-				if ((JavaDebugUtils.typeNamesEqual(breakpointTypeName, typeName) || (breakpointTypeName != null && breakpointTypeName.startsWith(typeName + '$')))
+				if ((JavaDebugUtils.typeNamesEqual(breakpointTypeName, typeName) || (breakpointTypeName != null && breakpointTypeName.startsWith(typeName + '$'))) //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 					&& breakpoint.getLineNumber() == lineNumber && resource.equals(marker.getResource())) {
 					return breakpoint;
 				}

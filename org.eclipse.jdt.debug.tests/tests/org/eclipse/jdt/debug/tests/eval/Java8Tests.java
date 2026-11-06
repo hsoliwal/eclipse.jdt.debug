@@ -183,15 +183,15 @@ public class Java8Tests extends AbstractDebugTest {
 	/**
 	 * Evaluates a snippet containing a method reference
 	 */
-	public void testContextEvaluations() throws Exception {
+	public void testContextEvaluations() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IJavaThread thread = null;
 		try {
 			String type = "FunctionalCaptureTest18";
 			ICompilationUnit cu = getType(type).getCompilationUnit();
-			String[] lines = new String(cu.getBuffer().getCharacters()).split("\n");
+			String[] lines = new String(cu.getBuffer().getCharacters()).split("\n"); //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
 
 			int i = 0;
-			for (; i < lines.length; ++i) {
+			for (; i < lines.length; ++i) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				if (lines[i].contains("/* CHECK EXPRESSIONS BELOW */")) break;
 			}
 			assertTrue("Missing source marker", i < lines.length);
@@ -200,7 +200,7 @@ public class Java8Tests extends AbstractDebugTest {
 			thread = launchToBreakpoint(type);
 			assertNotNull("The program did not suspend", thread);
 
-			for (; i < lines.length; ++i) {
+			for (; i < lines.length; ++i) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				String line = lines[i];
 
 				if (line.contains("/* END OF TESTS */")) break;

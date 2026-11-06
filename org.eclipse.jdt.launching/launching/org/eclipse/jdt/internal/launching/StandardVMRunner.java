@@ -159,7 +159,7 @@ public class StandardVMRunner extends AbstractVMRunner {
 	 */
 	private String[] wrap(ILaunchConfiguration config, String[] cmdLine) throws CoreException {
 		if (config != null && Platform.OS.isMac()) {
-			for (String element : cmdLine) {
+			for (String element : cmdLine) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				if ("-ws".equals(element) || element.contains("swt.jar") || element.contains("org.eclipse.swt")) { //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$
 					return createSWTlauncher(cmdLine,
 							cmdLine[0],
@@ -176,14 +176,14 @@ public class StandardVMRunner extends AbstractVMRunner {
 	 * @param vmVersion the version of the VM
 	 * @return the new command line
 	 */
-	private String[] createSWTlauncher(String[] cmdLine, String vmVersion, boolean startonfirstthread) {
+	private String[] createSWTlauncher(String[] cmdLine, String vmVersion, boolean startonfirstthread) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		// the following property is defined if Eclipse is started via java_swt
 		String java_swt= System.getProperty("org.eclipse.swtlauncher");	//$NON-NLS-1$
 		if (java_swt == null) {
 			// not started via java_swt -> now we require that the VM supports the "-XstartOnFirstThread" option
 			boolean found = false;
-			ArrayList<String> args = new ArrayList<>();
-			for (String element : cmdLine) {
+			ArrayList<String> args = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
+			for (String element : cmdLine) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				if(XSTART_ON_FIRST_THREAD.equals(element)) {
 					found = true;
 				}
@@ -208,8 +208,8 @@ public class StandardVMRunner extends AbstractVMRunner {
 		String[] newCmdLine= new String[cmdLine.length+1];
 		int argCount= 0;
 		newCmdLine[argCount++]= java_swt;
-		newCmdLine[argCount++]= "-XXvm=" + vmVersion; //$NON-NLS-1$
-		for (int i= 1; i < cmdLine.length; i++) {
+		newCmdLine[argCount++]= "-XXvm=" + vmVersion; //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
+		for (int i= 1; i < cmdLine.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			newCmdLine[argCount++]= cmdLine[i];
 		}
 		return newCmdLine;
@@ -231,7 +231,7 @@ public class StandardVMRunner extends AbstractVMRunner {
 			return null;
 		}
 		File dir = new File(path);
-		if (!dir.isDirectory()) {
+		if (!dir.isDirectory()) { //FLLDCIM: MARK — M31 M3FILE_IO CALL
 			abort(NLS.bind(LaunchingMessages.StandardVMRunner_Specified_working_directory_does_not_exist_or_is_not_a_directory___0__3, path), null, IJavaLaunchConfigurationConstants.ERR_WORKING_DIRECTORY_DOES_NOT_EXIST);
 		}
 		return dir;
@@ -254,7 +254,7 @@ public class StandardVMRunner extends AbstractVMRunner {
 	 * @return full path to java executable
 	 * @exception CoreException if unable to locate an executable
 	 */
-	protected String constructProgramString(VMRunnerConfiguration config) throws CoreException {
+	protected String constructProgramString(VMRunnerConfiguration config) throws CoreException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 
 		// Look for the user-specified java executable command
 		String command= null;
@@ -280,20 +280,20 @@ public class StandardVMRunner extends AbstractVMRunner {
 
 		// Build the path to the java executable.  First try 'bin', and if that
 		// doesn't exist, try 'jre/bin'
-		String installLocation = fVMInstance.getInstallLocation().getAbsolutePath() + File.separatorChar;
-		File exe = new File(installLocation + "bin" + File.separatorChar + command); //$NON-NLS-1$
+		String installLocation = fVMInstance.getInstallLocation().getAbsolutePath() + File.separatorChar; //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
+		File exe = new File(installLocation + "bin" + File.separatorChar + command); //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		if (fileExists(exe)){
 			return exe.getAbsolutePath();
 		}
-		exe = new File(exe.getAbsolutePath() + ".exe"); //$NON-NLS-1$
+		exe = new File(exe.getAbsolutePath() + ".exe"); //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		if (fileExists(exe)){
 			return exe.getAbsolutePath();
 		}
-		exe = new File(installLocation + "jre" + File.separatorChar + "bin" + File.separatorChar + command); //$NON-NLS-1$ //$NON-NLS-2$
+		exe = new File(installLocation + "jre" + File.separatorChar + "bin" + File.separatorChar + command); //$NON-NLS-1$ //$NON-NLS-2$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		if (fileExists(exe)) {
 			return exe.getAbsolutePath();
 		}
-		exe = new File(exe.getAbsolutePath() + ".exe"); //$NON-NLS-1$
+		exe = new File(exe.getAbsolutePath() + ".exe"); //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		if (fileExists(exe)) {
 			return exe.getAbsolutePath();
 		}
@@ -310,20 +310,20 @@ public class StandardVMRunner extends AbstractVMRunner {
 	 * @return true if the file indeed exists, false otherwise
 	 */
 	protected boolean fileExists(File file) {
-		return file.exists() && file.isFile();
+		return file.exists() && file.isFile(); //FLLDCIM: MARK — M31 M3FILE_IO CALL
 	}
 
 	protected String convertClassPath(String[] cp) {
 		int pathCount= 0;
-		StringBuilder buf= new StringBuilder();
+		StringBuilder buf= new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 		if (cp.length == 0) {
 			return "";    //$NON-NLS-1$
 		}
-		for (String element : cp) {
+		for (String element : cp) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			if (pathCount > 0) {
-				buf.append(File.pathSeparator);
+				buf.append(File.pathSeparator); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			}
-			buf.append(element);
+			buf.append(element); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			pathCount++;
 		}
 		return buf.toString();
@@ -357,9 +357,9 @@ public class StandardVMRunner extends AbstractVMRunner {
 		return vmargs;
 	}
 
-	protected String[] ensureArgument(String argument, String value, String[] vmargs) {
+	protected String[] ensureArgument(String argument, String value, String[] vmargs) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		boolean foundArgument = false;
-		for (String vmarg : vmargs) {
+		for (String vmarg : vmargs) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			if (vmarg.startsWith(argument)) {
 				foundArgument = true;
 			}
@@ -370,7 +370,7 @@ public class StandardVMRunner extends AbstractVMRunner {
 			}
 			String[] newargs = new String[vmargs.length+1];
 			System.arraycopy(vmargs, 0, newargs, 0, vmargs.length);
-			newargs[newargs.length - 1] = argument + value;
+			newargs[newargs.length - 1] = argument + value; //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 			return newargs;
 		}
 		return vmargs;
@@ -438,12 +438,12 @@ public class StandardVMRunner extends AbstractVMRunner {
 		return getCmdLineAsString(cmdLine);
 	}
 
-	private CommandDetails getCommandLine(VMRunnerConfiguration config, ILaunch launch, IProgressMonitor monitor) throws CoreException {
+	private CommandDetails getCommandLine(VMRunnerConfiguration config, ILaunch launch, IProgressMonitor monitor) throws CoreException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IProgressMonitor subMonitor = SubMonitor.convert(monitor, 1);
 		subMonitor.subTask(LaunchingMessages.StandardVMRunner_Constructing_command_line____2);
 		String program = constructProgramString(config);
 
-		List<String> arguments= new ArrayList<>();
+		List<String> arguments= new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 		arguments.add(program);
 
 		// VM args are the first thing after the java program so that users can specify
@@ -485,7 +485,7 @@ public class StandardVMRunner extends AbstractVMRunner {
 		}
 		if (isModular(config, fVMInstance)) {
 			arguments.add("-m"); //$NON-NLS-1$
-			arguments.add(config.getModuleDescription() + "/" + config.getClassToLaunch()); //$NON-NLS-1$
+			arguments.add(config.getModuleDescription() + "/" + config.getClassToLaunch()); //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		} else {
 			arguments.add(config.getClassToLaunch());
 		}
@@ -523,7 +523,7 @@ public class StandardVMRunner extends AbstractVMRunner {
 		return cmd;
 	}
 
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public void run(VMRunnerConfiguration config, ILaunch launch, IProgressMonitor monitor) throws CoreException {
 		IProgressMonitor subMonitor = SubMonitor.convert(monitor, 1);
 
@@ -578,7 +578,7 @@ public class StandardVMRunner extends AbstractVMRunner {
 	 */
 	int getCPIndex(String[] env) {
 		if(env != null) {
-			for (int i = 0; i < env.length; i++) {
+			for (int i = 0; i < env.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				if(env[i].regionMatches(true, 0, "CLASSPATH=", 0, 10)) { //$NON-NLS-1$
 					return i;
 				}
@@ -594,7 +594,7 @@ public class StandardVMRunner extends AbstractVMRunner {
 	 * @return the new path segments
 	 * @since 3.3
 	 */
-	protected String[] prependJREPath(String[] env) {
+	protected String[] prependJREPath(String[] env) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		if (Platform.OS.isMac()) {
 			if (fVMInstance instanceof IVMInstall2 vm) {
 				String javaVersion = vm.getJavaVersion();
@@ -605,23 +605,23 @@ public class StandardVMRunner extends AbstractVMRunner {
 							String[] env2 = new String[map.size()];
 							Iterator<Entry<String, String>> iterator = map.entrySet().iterator();
 							int i = 0;
-							while (iterator.hasNext()) {
+							while (iterator.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 								Entry<String, String> entry = iterator.next();
 								String key = entry.getKey();
 								if (StandardVMDebugger.JAVA_JVM_VERSION.equals(key)) {
-									env2[i] = key + "=" + javaVersion; //$NON-NLS-1$
+									env2[i] = key + "=" + javaVersion; //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 								} else {
-									env2[i] = key + "=" + entry.getValue(); //$NON-NLS-1$
+									env2[i] = key + "=" + entry.getValue(); //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 								}
 								i++;
 							}
 							env = env2;
 						}
 					} else {
-						for (int i = 0; i < env.length; i++) {
+						for (int i = 0; i < env.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 							String string = env[i];
 							if (string.startsWith(StandardVMDebugger.JAVA_JVM_VERSION)) {
-								env[i]=StandardVMDebugger.JAVA_JVM_VERSION+"="+javaVersion; //$NON-NLS-1$
+								env[i]=StandardVMDebugger.JAVA_JVM_VERSION+"="+javaVersion; //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 								break;
 							}
 						}
@@ -637,7 +637,7 @@ public class StandardVMRunner extends AbstractVMRunner {
 	 * @param arguments the arguments
 	 * @param config the VM config
 	 */
-	protected void addBootClassPathArguments(List<String> arguments, VMRunnerConfiguration config) {
+	protected void addBootClassPathArguments(List<String> arguments, VMRunnerConfiguration config) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String[] prependBootCP= null;
 		String[] bootCP= null;
 		String[] appendBootCP= null;
@@ -664,16 +664,16 @@ public class StandardVMRunner extends AbstractVMRunner {
 			}
 		}
 		 if (prependBootCP != null) {
-			 arguments.add("-Xbootclasspath/p:" + convertClassPath(prependBootCP)); //$NON-NLS-1$
+			 arguments.add("-Xbootclasspath/p:" + convertClassPath(prependBootCP)); //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		 }
 
 		if (bootCP != null) {
 			if (bootCP.length > 0) {
-				arguments.add("-Xbootclasspath:" + convertClassPath(bootCP)); //$NON-NLS-1$
+				arguments.add("-Xbootclasspath:" + convertClassPath(bootCP)); //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 			}
 		}
 		if (appendBootCP != null) {
-			arguments.add("-Xbootclasspath/a:" + convertClassPath(appendBootCP)); //$NON-NLS-1$
+			arguments.add("-Xbootclasspath/a:" + convertClassPath(appendBootCP)); //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		}
 	}
 
@@ -681,7 +681,7 @@ public class StandardVMRunner extends AbstractVMRunner {
 	 * Returns the version of the current VM in use
 	 * @return the VM version
 	 */
-	protected double getJavaVersion(IVMInstall fVMInstance) {
+	protected double getJavaVersion(IVMInstall fVMInstance) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String version = null;
 		if (fVMInstance instanceof IVMInstall2) {
 			version = ((IVMInstall2)fVMInstance).getJavaVersion();

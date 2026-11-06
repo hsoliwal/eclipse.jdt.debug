@@ -27,7 +27,7 @@ import org.eclipse.swt.widgets.DirectoryDialog;
 /**
  * Adds an external folder to the runtime class path.
  */
-public class AddExternalFolderAction extends OpenDialogAction {
+public class AddExternalFolderAction extends OpenDialogAction { //FLLDCIM: MARK — T04  IMPLEMENTS
 
 	public AddExternalFolderAction(IClasspathViewer viewer, String dialogSettingsPrefix) {
 		super(ActionMessages.AddExternalFolderAction_Add_External_Folder_1, viewer, dialogSettingsPrefix);
@@ -38,7 +38,7 @@ public class AddExternalFolderAction extends OpenDialogAction {
 	 *
 	 * @see IAction#run()
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public void run() {
 
 		String lastUsedPath= getDialogSetting(LAST_PATH_SETTING);

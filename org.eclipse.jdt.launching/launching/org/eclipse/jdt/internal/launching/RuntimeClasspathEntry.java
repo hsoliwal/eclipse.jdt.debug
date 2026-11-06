@@ -113,7 +113,7 @@ public class RuntimeClasspathEntry implements IRuntimeClasspathEntry {
 	 * @param entry classpath entry
 	 * @param classpathProperty this entry's classpath property
 	 */
-	public RuntimeClasspathEntry(IClasspathEntry entry, int classpathProperty) {
+	public RuntimeClasspathEntry(IClasspathEntry entry, int classpathProperty) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		switch (entry.getEntryKind()) {
 			case IClasspathEntry.CPE_CONTAINER:
 				setType(CONTAINER);
@@ -141,7 +141,7 @@ public class RuntimeClasspathEntry implements IRuntimeClasspathEntry {
 	 * @param root a memento root doc element created by this class
 	 * @exception CoreException if unable to restore from the given memento
 	 */
-	public RuntimeClasspathEntry(Element root) throws CoreException {
+	public RuntimeClasspathEntry(Element root) throws CoreException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 			setType(Integer.parseInt(root.getAttribute("type"))); //$NON-NLS-1$
 		} catch (NumberFormatException e) {
@@ -278,7 +278,7 @@ public class RuntimeClasspathEntry implements IRuntimeClasspathEntry {
 	/**
 	 * @see IRuntimeClasspathEntry#getMemento()
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public String getMemento() throws CoreException {
 		Document doc = DebugPlugin.newDocument();
 		Element node = doc.createElement("runtimeClasspathEntry"); //$NON-NLS-1$
@@ -348,7 +348,7 @@ public class RuntimeClasspathEntry implements IRuntimeClasspathEntry {
 	 * @param path absolute path, or <code>null</code>
 	 * @return resource or <code>null</code>
 	 */
-	protected IResource getResource(IPath path) {
+	protected IResource getResource(IPath path) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		if (path != null) {
 			IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
 			if (getType() == PROJECT || getType() == ARCHIVE) {
@@ -423,7 +423,7 @@ public class RuntimeClasspathEntry implements IRuntimeClasspathEntry {
 	}
 
 	private static String findClasspathAttribute(IClasspathAttribute[] attributes, String name) {
-		for(int i = attributes.length; --i >= 0;) {
+		for(int i = attributes.length; --i >= 0;) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			if(name.equals(attributes[i].getName())) {
 				return attributes[i].getValue();
 			}
@@ -504,7 +504,7 @@ public class RuntimeClasspathEntry implements IRuntimeClasspathEntry {
 	/**
 	 * @see IRuntimeClasspathEntry#getLocation()
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public String getLocation() {
 
 		IPath path = null;
@@ -571,7 +571,7 @@ public class RuntimeClasspathEntry implements IRuntimeClasspathEntry {
 	/**
 	 * @see Object#equals(Object)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public boolean equals(Object obj) {
 		if (obj instanceof IRuntimeClasspathEntry r) {
 			if (getType() == r.getType() && getClasspathProperty() == r.getClasspathProperty()) {
@@ -646,7 +646,7 @@ public class RuntimeClasspathEntry implements IRuntimeClasspathEntry {
 	/**
 	 * @see IRuntimeClasspathEntry#getSourceAttachmentRootLocation()
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public String getSourceAttachmentRootLocation() {
 		IPath path = null;
 		switch (getType()) {
@@ -673,7 +673,7 @@ public class RuntimeClasspathEntry implements IRuntimeClasspathEntry {
 	 * @param sourcePath the source path
 	 * @param rootPath the root path
 	 */
-	protected void updateClasspathEntry(IPath path, IPath sourcePath, IPath rootPath, IPath annotationsPath) {
+	protected void updateClasspathEntry(IPath path, IPath sourcePath, IPath rootPath, IPath annotationsPath) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IClasspathEntry entry = null;
 		IClasspathEntry original = getClasspathEntry();
 		switch (getType()) {
@@ -695,7 +695,7 @@ public class RuntimeClasspathEntry implements IRuntimeClasspathEntry {
 	}
 
 	private static IClasspathAttribute[] setClasspathAttribute(IClasspathAttribute[] attributes, String name, String value) {
-		for (int i = attributes.length; --i >= 0;) {
+		for (int i = attributes.length; --i >= 0;) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			if (name.equals(attributes[i].getName())) {
 				IClasspathAttribute[] nw = Arrays.copyOf(attributes, attributes.length);
 				nw[i] = JavaCore.newClasspathAttribute(name, value);
@@ -751,7 +751,7 @@ public class RuntimeClasspathEntry implements IRuntimeClasspathEntry {
 	@Override
 	public boolean isAutomodule() {
 		IClasspathAttribute[] extraAttributes = getClasspathEntry().getExtraAttributes();
-		for (IClasspathAttribute attribute : extraAttributes) {
+		for (IClasspathAttribute attribute : extraAttributes) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			if (IClasspathAttribute.MODULE.equals(attribute.getName()) && Boolean.TRUE.toString().equals(attribute.getValue())) {
 				return true;
 			}

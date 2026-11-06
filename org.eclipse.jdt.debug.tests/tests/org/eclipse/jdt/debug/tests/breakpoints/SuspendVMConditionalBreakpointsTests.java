@@ -40,7 +40,7 @@ public class SuspendVMConditionalBreakpointsTests extends AbstractDebugTest {
 	/**
 	 * Tests that the VM is suspended when a conditional line breakpoint is hit.
 	 */
-	public void testSuspendVmLineConditionalBreakpoint() throws Exception {
+	public void testSuspendVmLineConditionalBreakpoint() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String typeName = "SuspendVMConditionalBreakpointsTestSnippet";
 
 		IJavaLineBreakpoint bp1 = createLineBreakpoint(28, typeName);

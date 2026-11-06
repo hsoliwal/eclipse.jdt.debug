@@ -33,11 +33,11 @@ public class JavaStackFrameMementoProvider extends DebugElementMementoProvider i
 	@Override
 	protected String getElementName(Object element, IPresentationContext context) throws CoreException {
 		if (element instanceof IJavaStackFrame) {
-			StringBuilder buf = new StringBuilder();
+			StringBuilder buf = new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 			IJavaStackFrame frame = (IJavaStackFrame) element;
-			buf.append(frame.getDeclaringTypeName());
-			buf.append("#"); //$NON-NLS-1$
-			buf.append(frame.getSignature());
+			buf.append(frame.getDeclaringTypeName()); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+			buf.append("#"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+			buf.append(frame.getSignature()); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			return buf.toString();
 		}
 		return null;

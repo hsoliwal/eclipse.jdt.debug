@@ -24,7 +24,7 @@ import org.eclipse.jface.viewers.Viewer;
 /**
  * Shows non-final static variables
  */
-public class ShowNullArrayEntriesAction extends ViewFilterAction {
+public class ShowNullArrayEntriesAction extends ViewFilterAction { //FLLDCIM: MARK — T23  IMPLEMENTS
 
 	public ShowNullArrayEntriesAction() {
 		super();

@@ -87,7 +87,7 @@ public class PinnedFieldsTests extends AbstractDebugTest {
 		PinnedFieldsManager.getDefault().setPinned(VIEW_ID, List.of(date), true);
 		PinnedFieldsManager.getDefault().setPinned(VIEW_ID, List.of(privStr), true);
 
-		List<String> expected = new ArrayList<>(names(fields));
+		List<String> expected = new ArrayList<>(names(fields)); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 		expected.removeAll(List.of("date", "privStr"));
 		expected.addAll(0, List.of("date", "privStr"));
 		assertEquals(expected, names(JavaContentProviderFilter.filterVariables(fields, fContext)));
@@ -99,7 +99,7 @@ public class PinnedFieldsTests extends AbstractDebugTest {
 		IVariable[] fields = getThis().getVariables();
 
 		JDIDebugUIPlugin.getDefault().getPreferenceStore().setValue(PINNED_FIELDS_KEY,
-				TYPE_NAME + "#protStr," + TYPE_NAME + "#nullDate");
+				TYPE_NAME + "#protStr," + TYPE_NAME + "#nullDate"); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 		assertEquals(List.of("protStr", "nullDate"), names(JavaContentProviderFilter.filterVariables(fields, fContext)).subList(0, 2));
 	}
@@ -114,13 +114,13 @@ public class PinnedFieldsTests extends AbstractDebugTest {
 
 		assertTrue(manager.movePin(VIEW_ID, date, fields, true));
 		assertEquals(List.of("date", "privStr"), names(JavaContentProviderFilter.filterVariables(fields, fContext)).subList(0, 2));
-		assertEquals(TYPE_NAME + "#date," + TYPE_NAME + "#privStr", JDIDebugUIPlugin.getDefault().getPreferenceStore().getString(PINNED_FIELDS_KEY));
+		assertEquals(TYPE_NAME + "#date," + TYPE_NAME + "#privStr", JDIDebugUIPlugin.getDefault().getPreferenceStore().getString(PINNED_FIELDS_KEY)); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 		assertTrue(manager.movePin(VIEW_ID, date, fields, false));
 		assertEquals(List.of("privStr", "date"), names(JavaContentProviderFilter.filterVariables(fields, fContext)).subList(0, 2));
 	}
 
-	public void testMovePinAtBoundaries() throws Exception {
+	public void testMovePinAtBoundaries() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IJavaObject object = getThis();
 		IVariable[] fields = object.getVariables();
 		IJavaFieldVariable privStr = object.getField("privStr", false);
@@ -151,7 +151,7 @@ public class PinnedFieldsTests extends AbstractDebugTest {
 		// the pin of IVTSubclass.pubStr is not displayed among the fields of an InstanceVariablesTests
 		assertTrue(manager.movePin(VIEW_ID, date, fields, true));
 		assertEquals(List.of("date", "privStr"), names(JavaContentProviderFilter.filterVariables(fields, fContext)).subList(0, 2));
-		assertEquals(TYPE_NAME + "#date,IVTSubclass#pubStr," + TYPE_NAME + "#privStr",
+		assertEquals(TYPE_NAME + "#date,IVTSubclass#pubStr," + TYPE_NAME + "#privStr", //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 				JDIDebugUIPlugin.getDefault().getPreferenceStore().getString(PINNED_FIELDS_KEY));
 	}
 
@@ -160,7 +160,7 @@ public class PinnedFieldsTests extends AbstractDebugTest {
 
 		PinnedFieldsManager.getDefault().setPinned(VIEW_ID, List.of(privStr), true);
 
-		assertEquals(TYPE_NAME + "#privStr", JDIDebugUIPlugin.getDefault().getPreferenceStore().getString(PINNED_FIELDS_KEY));
+		assertEquals(TYPE_NAME + "#privStr", JDIDebugUIPlugin.getDefault().getPreferenceStore().getString(PINNED_FIELDS_KEY)); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 	}
 
 	public void testPinAppliesToSubtypes() throws Exception {
@@ -211,7 +211,7 @@ public class PinnedFieldsTests extends AbstractDebugTest {
 		assertEquals(names(fields), names(JavaContentProviderFilter.filterVariables(fields, fContext)));
 	}
 
-	public void testPinsAreViewSpecific() throws Exception {
+	public void testPinsAreViewSpecific() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IJavaObject object = getThis();
 		IVariable[] fields = object.getVariables();
 		IJavaFieldVariable date = object.getField("date", false);
@@ -233,8 +233,8 @@ public class PinnedFieldsTests extends AbstractDebugTest {
 		assertEquals("date", names(JavaContentProviderFilter.filterVariables(fields, fContext)).get(0));
 		assertEquals("privStr", names(JavaContentProviderFilter.filterVariables(fields, fOtherContext)).get(0));
 		assertFalse(manager.isPinned(VIEW_ID, privStr));
-		assertEquals(TYPE_NAME + "#date", store.getString(PINNED_FIELDS_KEY));
-		assertEquals(TYPE_NAME + "#privStr", store.getString(PinnedFieldsManager.getPreferenceKey(OTHER_VIEW_ID)));
+		assertEquals(TYPE_NAME + "#date", store.getString(PINNED_FIELDS_KEY)); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
+		assertEquals(TYPE_NAME + "#privStr", store.getString(PinnedFieldsManager.getPreferenceKey(OTHER_VIEW_ID))); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 		manager.setPinned(OTHER_VIEW_ID, List.of(privStr), false);
 		assertTrue("unpinning a field in a view should not unpin the fields of another view", manager.isPinned(VIEW_ID, date));
@@ -259,8 +259,8 @@ public class PinnedFieldsTests extends AbstractDebugTest {
 	}
 
 	private static List<String> names(Object[] variables) throws Exception {
-		List<String> names = new ArrayList<>();
-		for (Object variable : variables) {
+		List<String> names = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
+		for (Object variable : variables) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			names.add(((IVariable) variable).getName());
 		}
 		return names;
@@ -273,7 +273,7 @@ public class PinnedFieldsTests extends AbstractDebugTest {
 	private IJavaStackFrame topFrame() throws Exception {
 		long end = System.currentTimeMillis() + DEFAULT_TIMEOUT;
 		IJavaStackFrame frame = (IJavaStackFrame) fThread.getTopStackFrame();
-		while (frame == null && System.currentTimeMillis() < end) {
+		while (frame == null && System.currentTimeMillis() < end) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			Thread.sleep(50);
 			frame = (IJavaStackFrame) fThread.getTopStackFrame();
 		}

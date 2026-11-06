@@ -132,7 +132,7 @@ public class JDIImageDescriptor extends CompositeImageDescriptor {
 	/**
 	 * Add any overlays to the image as specified in the flags.
 	 */
-	protected void drawOverlays() {
+	protected void drawOverlays() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		int flags = getFlags();
 		int x = 0;
 		int y = 0;
@@ -209,7 +209,7 @@ public class JDIImageDescriptor extends CompositeImageDescriptor {
 		}
 	}
 
-	protected void drawBreakpointOverlays() {
+	protected void drawBreakpointOverlays() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		int flags= getFlags();
 		int x= 0;
 		int y= 0;

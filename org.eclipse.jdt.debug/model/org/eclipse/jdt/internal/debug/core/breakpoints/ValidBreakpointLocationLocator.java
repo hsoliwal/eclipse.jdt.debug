@@ -303,7 +303,7 @@ public class ValidBreakpointLocationLocator extends ASTVisitor {
 	 */
 	private String computeTypeName(ASTNode node) {
 		AbstractTypeDeclaration type = null;
-		while (!(node instanceof CompilationUnit)) {
+		while (!(node instanceof CompilationUnit)) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			if (node instanceof AbstractTypeDeclaration) {
 				type = (AbstractTypeDeclaration) node;
 				break;
@@ -324,16 +324,16 @@ public class ValidBreakpointLocationLocator extends ASTVisitor {
 	 *
 	 * @return the computed type name
 	 */
-	String computeTypeName0(ASTNode node) {
+	String computeTypeName0(ASTNode node) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String typeName = null;
-		while (!(node instanceof CompilationUnit)) {
+		while (!(node instanceof CompilationUnit)) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			if (node instanceof AbstractTypeDeclaration) {
 				String identifier = ((AbstractTypeDeclaration) node).getName()
 						.getIdentifier();
 				if (typeName == null) {
 					typeName = identifier;
 				} else {
-					typeName = identifier + "$" + typeName; //$NON-NLS-1$
+					typeName = identifier + "$" + typeName; //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 				}
 			}
 			node = node.getParent();
@@ -342,16 +342,16 @@ public class ValidBreakpointLocationLocator extends ASTVisitor {
 		String packageIdentifier = ""; //$NON-NLS-1$
 		if (packageDecl != null) {
 			Name packageName = packageDecl.getName();
-			while (packageName.isQualifiedName()) {
+			while (packageName.isQualifiedName()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				QualifiedName qualifiedName = (QualifiedName) packageName;
-				packageIdentifier = qualifiedName.getName().getIdentifier()
+				packageIdentifier = qualifiedName.getName().getIdentifier() //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 						+ "." + packageIdentifier; //$NON-NLS-1$
 				packageName = qualifiedName.getQualifier();
 			}
-			packageIdentifier = ((SimpleName) packageName).getIdentifier()
+			packageIdentifier = ((SimpleName) packageName).getIdentifier() //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 					+ "." + packageIdentifier; //$NON-NLS-1$
 		}
-		return packageIdentifier + typeName;
+		return packageIdentifier + typeName; //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 	}
 
 	/**
@@ -365,7 +365,7 @@ public class ValidBreakpointLocationLocator extends ASTVisitor {
 	 *            contains some executable code, even if split in multiple
 	 *            lines.
 	 */
-	private boolean visit(ASTNode node, boolean isCode) {
+	private boolean visit(ASTNode node, boolean isCode) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		int startPosition = node.getStartPosition();
 		int startLine = lineNumber(startPosition);
 		int endLine = lineNumber(startPosition + node.getLength() - 1);
@@ -399,7 +399,7 @@ public class ValidBreakpointLocationLocator extends ASTVisitor {
 		return true;
 	}
 
-	private boolean isReplacedByConstantValue(Expression node) {
+	private boolean isReplacedByConstantValue(Expression node) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		switch (node.getNodeType()) {
 		// literals are constant
 		case ASTNode.BOOLEAN_LITERAL:
@@ -435,7 +435,7 @@ public class ValidBreakpointLocationLocator extends ASTVisitor {
 			return false;
 		}
 		if (node.hasExtendedOperands()) {
-			for (Iterator<? extends Expression> iter = node.extendedOperands().iterator(); iter.hasNext();) {
+			for (Iterator<? extends Expression> iter = node.extendedOperands().iterator(); iter.hasNext();) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				if (!isReplacedByConstantValue(iter.next())) {
 					return false;
 				}
@@ -506,7 +506,7 @@ public class ValidBreakpointLocationLocator extends ASTVisitor {
 	public boolean visit(AnnotationTypeDeclaration node) {
 		if (visit(node, false)) {
 			List<BodyDeclaration> decls = node.bodyDeclarations();
-			for(BodyDeclaration decl : decls) {
+			for(BodyDeclaration decl : decls) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				decl.accept(this);
 			}
 		}
@@ -575,7 +575,7 @@ public class ValidBreakpointLocationLocator extends ASTVisitor {
 	/**
 	 * @see org.eclipse.jdt.core.dom.ASTVisitor#visit(org.eclipse.jdt.core.dom.Assignment)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public boolean visit(Assignment node) {
 		if (visit(node, false)) {
 			// if the left hand side represent a local variable, or a static
@@ -687,7 +687,7 @@ public class ValidBreakpointLocationLocator extends ASTVisitor {
 	public boolean visit(ClassInstanceCreation node) {
 		if (visit(node, false)) {
 			List<? extends ASTNode> arguments = node.arguments();
-			for (ASTNode astNode : arguments) {
+			for (ASTNode astNode : arguments) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				if (astNode instanceof LambdaExpression) {
 					astNode.accept(this);
 					return false;
@@ -770,7 +770,7 @@ public class ValidBreakpointLocationLocator extends ASTVisitor {
 	public boolean visit(EnumConstantDeclaration node) {
 		if (visit(node, false)) {
 			List<Expression> arguments = node.arguments();
-			for(Expression exp : arguments) {
+			for(Expression exp : arguments) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				exp.accept(this);
 			}
 			AnonymousClassDeclaration decl = node.getAnonymousClassDeclaration();
@@ -791,11 +791,11 @@ public class ValidBreakpointLocationLocator extends ASTVisitor {
 	public boolean visit(EnumDeclaration node) {
 		if (visit(node, false)) {
 			List<EnumConstantDeclaration> enumConstants = node.enumConstants();
-			for(EnumConstantDeclaration econst : enumConstants) {
+			for(EnumConstantDeclaration econst : enumConstants) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				econst.accept(this);
 			}
 			List<BodyDeclaration> decls = node.bodyDeclarations();
-			for(BodyDeclaration body : decls) {
+			for(BodyDeclaration body : decls) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				body.accept(this);
 			}
 		}
@@ -830,7 +830,7 @@ public class ValidBreakpointLocationLocator extends ASTVisitor {
 	/**
 	 * @see org.eclipse.jdt.core.dom.ASTVisitor#visit(org.eclipse.jdt.core.dom.FieldDeclaration)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public boolean visit(FieldDeclaration node) {
 		if (visit(node, false)) {
 			if (fBestMatch) {
@@ -884,7 +884,7 @@ public class ValidBreakpointLocationLocator extends ASTVisitor {
 			// visit only the variable declaration fragments, not the variable
 			// names.
 			List<VariableDeclarationFragment> fragments = node.fragments();
-			for(VariableDeclarationFragment frag : fragments) {
+			for(VariableDeclarationFragment frag : fragments) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				frag.accept(this);
 				if(fLocationFound) {
 					break;
@@ -925,7 +925,7 @@ public class ValidBreakpointLocationLocator extends ASTVisitor {
 	/**
 	 * @see org.eclipse.jdt.core.dom.ASTVisitor#visit(org.eclipse.jdt.core.dom.InfixExpression)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public boolean visit(InfixExpression node) {
 		// if the breakpoint is to be set on a constant operand, the breakpoint
 		// needs to be
@@ -962,7 +962,7 @@ public class ValidBreakpointLocationLocator extends ASTVisitor {
 					firstConstant = null;
 				}
 				List<Expression> extendedOperands = node.extendedOperands();
-				for(Expression exp : extendedOperands) {
+				for(Expression exp : extendedOperands) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 					if (visit(exp, false)) {
 						if (firstConstant == null || !isReplacedByConstantValue(exp)) {
 							exp.accept(this);
@@ -1044,7 +1044,7 @@ public class ValidBreakpointLocationLocator extends ASTVisitor {
 
 	private void nestLabel(String label) {
 		if (fLabels == null) {
-			fLabels = new ArrayList<>();
+			fLabels = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 		}
 		fLabels.add(label);
 	}
@@ -1056,7 +1056,7 @@ public class ValidBreakpointLocationLocator extends ASTVisitor {
 		fLabels.remove(fLabels.size() - 1);
 	}
 
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public boolean visit(LambdaExpression node) {
 		fMemberOffset = node.getStartPosition();
 		fNodeLength = node.getLength();
@@ -1087,7 +1087,7 @@ public class ValidBreakpointLocationLocator extends ASTVisitor {
 					fLocationFound = false;
 					Block block1 = (Block) body;
 					if (visit(block1)) {
-						for (Object object : block1.statements()) {
+						for (Object object : block1.statements()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 							if (object instanceof ASTNode) {
 								ASTNode node1 = (ASTNode) object;
 								node1.accept(this);
@@ -1154,7 +1154,7 @@ public class ValidBreakpointLocationLocator extends ASTVisitor {
 	/**
 	 * @see org.eclipse.jdt.core.dom.ASTVisitor#visit(org.eclipse.jdt.core.dom.MethodDeclaration)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public boolean visit(MethodDeclaration node) {
 		if (visit(node, false)) {
 			Block body = node.getBody();
@@ -1199,7 +1199,7 @@ public class ValidBreakpointLocationLocator extends ASTVisitor {
 	/**
 	 * @see org.eclipse.jdt.core.dom.ASTVisitor#visit(org.eclipse.jdt.core.dom.MethodInvocation)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public boolean visit(MethodInvocation node) {
 		if (fLocationFound && fLambdaVisited) {
 			return false;
@@ -1213,7 +1213,7 @@ public class ValidBreakpointLocationLocator extends ASTVisitor {
 				return false;
 			}
 			List<? extends ASTNode> arguments = node.arguments();
-			for (ASTNode astNode : arguments) {
+			for (ASTNode astNode : arguments) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				// arguments needs to be accepted to handle stream operation where the lambda debug point
 				// is expected on a lambda expression which is a parameter on a nested method invocation like
 				// strings.stream().collect(Collectors.toMap(s -> s.substring(0), s -> s))
@@ -1542,7 +1542,7 @@ public class ValidBreakpointLocationLocator extends ASTVisitor {
 		if (visit(node, false)) {
 			// visit only the elements of the type declaration
 			List<BodyDeclaration> bodyDeclaration = node.bodyDeclarations();
-			for(BodyDeclaration body : bodyDeclaration) {
+			for(BodyDeclaration body : bodyDeclaration) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				body.accept(this);
 			}
 		}
@@ -1587,7 +1587,7 @@ public class ValidBreakpointLocationLocator extends ASTVisitor {
 	/**
 	 * @see org.eclipse.jdt.core.dom.ASTVisitor#visit(org.eclipse.jdt.core.dom.VariableDeclarationFragment)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public boolean visit(VariableDeclarationFragment node) {
 		Expression initializer = node.getInitializer();
 		if (visit(node, false)) {

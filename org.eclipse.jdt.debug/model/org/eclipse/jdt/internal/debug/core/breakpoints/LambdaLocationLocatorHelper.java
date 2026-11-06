@@ -31,19 +31,19 @@ public final class LambdaLocationLocatorHelper {
 	 * local variables in debugger.
 	 */
 	public static String toMethodSignature(IMethodBinding methodBinding) {
-		StringBuilder builder = new StringBuilder();
-		builder.append('(');
+		StringBuilder builder = new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
+		builder.append('('); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		if (methodBinding.getParameterTypes().length > 0 || methodBinding.getSyntheticOuterLocals().length > 0) {
-			builder.append(Stream.of(methodBinding.getSyntheticOuterLocals())
+			builder.append(Stream.of(methodBinding.getSyntheticOuterLocals()) //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 					.map(b -> Signature.createTypeSignature(qualifiedName(b.getType()), true))
 					.collect(Collectors.joining()));
 
-			builder.append(Stream.of(methodBinding.getParameterTypes())
+			builder.append(Stream.of(methodBinding.getParameterTypes()) //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 					.map(b -> Signature.createTypeSignature(qualifiedName(b), true))
 					.collect(Collectors.joining()));
 		}
-		builder.append(')');
-		builder.append(Signature.createTypeSignature(qualifiedName(methodBinding.getReturnType()), true));
+		builder.append(')'); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+		builder.append(Signature.createTypeSignature(qualifiedName(methodBinding.getReturnType()), true)); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		return builder.toString();
 	}
 

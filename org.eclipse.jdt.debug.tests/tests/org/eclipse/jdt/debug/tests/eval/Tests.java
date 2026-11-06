@@ -354,28 +354,28 @@ public abstract class Tests extends AbstractDebugTest {
 	static final String EMPTY= "";
 	static final String THIS= "this.";
 	static final String T_T= "EvalNestedTypeTests.";
-	static final String T_T_A= T_T + "A.";
+	static final String T_T_A= T_T + "A."; //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 	static final String T_A= "A.";
-	static final String T_T_A_AA= T_T_A + "AA.";
-	static final String T_A_AA= T_A + "AA.";
+	static final String T_T_A_AA= T_T_A + "AA."; //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
+	static final String T_A_AA= T_A + "AA."; //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 	static final String T_AA= "AA.";
-	static final String T_T_A_AB= T_T_A + "AB.";
-	static final String T_A_AB= T_A + "AB.";
+	static final String T_T_A_AB= T_T_A + "AB."; //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
+	static final String T_A_AB= T_A + "AB."; //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 	static final String T_AB= "AB.";
-	static final String T_T_B= T_T + "B.";
+	static final String T_T_B= T_T + "B."; //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 	static final String T_B= "B.";
-	static final String T_T_B_BB= T_T_B + "BB.";
-	static final String T_B_BB= T_B + "BB.";
+	static final String T_T_B_BB= T_T_B + "BB."; //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
+	static final String T_B_BB= T_B + "BB."; //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 	static final String T_BB= "BB.";
 	static final String T_C= "C.";
 	static final String T_E= "E.";
 
-	static final String T_T_this= T_T + "this.";
-	static final String T_T_A_this= T_T_A + "this.";
-	static final String T_A_this= T_A + "this.";
-	static final String T_B_this= T_B + "this.";
-	static final String T_C_this= T_C + "this.";
-	static final String T_E_this= T_E + "this.";
+	static final String T_T_this= T_T + "this."; //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
+	static final String T_T_A_this= T_T_A + "this."; //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
+	static final String T_A_this= T_A + "this."; //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
+	static final String T_B_this= T_B + "this."; //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
+	static final String T_C_this= T_C + "this."; //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
+	static final String T_E_this= T_E + "this."; //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 	static final String I_A= "i_a.";
 	static final String I_AA= "i_aa.";
@@ -422,7 +422,7 @@ public abstract class Tests extends AbstractDebugTest {
 	static protected IEvaluationEngine fEngine;
 
 
-	static protected IValue eval(String command) {
+	static protected IValue eval(String command) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 
 		class Listener implements IEvaluationListener {
 			IEvaluationResult fResult;
@@ -442,7 +442,7 @@ public abstract class Tests extends AbstractDebugTest {
 		} catch (DebugException e) {
 			e.printStackTrace();
 		}
-		while (listener.fResult == null) {
+		while (listener.fResult == null) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			try {
 				Thread.sleep(100);
 			} catch(InterruptedException e) {
@@ -455,8 +455,8 @@ public abstract class Tests extends AbstractDebugTest {
 			if (exception == null) {
 				message= IInternalDebugCoreConstants.EMPTY_STRING;
 				String[] messages= result.getErrorMessages();
-				for (int i= 0, limit= messages.length; i < limit; i++) {
-					message += messages[i] + ", ";
+				for (int i= 0, limit= messages.length; i < limit; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
+					message += messages[i] + ", "; //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 				}
 			} else {
 				message= exception.getStatus().getMessage();
@@ -501,7 +501,7 @@ public abstract class Tests extends AbstractDebugTest {
 		breakpoint.setHitCount(hitCount);
 		fSuspendeeThread= launchToLineBreakpoint(testClass, breakpoint);
 		IStackFrame[] stackFrames= fSuspendeeThread.getStackFrames();
-		assertEquals("Should be " + numberFrames + " stack frame children, was: " + stackFrames.length, numberFrames, stackFrames.length);
+		assertEquals("Should be " + numberFrames + " stack frame children, was: " + stackFrames.length, numberFrames, stackFrames.length); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		IStackFrame stackFrame= stackFrames[frameNumber];
 		return (IJavaStackFrame)stackFrame;
 	}

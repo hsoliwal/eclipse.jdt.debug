@@ -85,19 +85,19 @@ public class JavaProjectSourceContainerBrowser extends AbstractSourceContainerBr
 	/* (non-Javadoc)
 	 * @see org.eclipse.debug.internal.ui.sourcelookup.ISourceContainerBrowser#createSourceContainers(org.eclipse.swt.widgets.Shell, org.eclipse.debug.core.ILaunchConfiguration)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public ISourceContainer[] addSourceContainers(Shell shell, ISourceLookupDirector director) {
 		List<IJavaProject> projects = getPossibleAdditions(director);
 		ProjectSelectionDialog dialog= new ProjectSelectionDialog(shell, projects);
 		dialog.setTitle(SourceLookupMessages.JavaProjectSourceContainerBrowser_1);
 		MultiStatus status = new MultiStatus(JDIDebugUIPlugin.getUniqueIdentifier(), IJavaDebugUIConstants.INTERNAL_ERROR, "Failed to add project(s)", null);  //$NON-NLS-1$
 
-		List<ISourceContainer> sourceContainers = new ArrayList<>();
+		List<ISourceContainer> sourceContainers = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 		if (dialog.open() == Window.OK) {
 			Object[] selections = dialog.getResult();
-			List<IJavaProject> additions = new ArrayList<>(selections.length);
+			List<IJavaProject> additions = new ArrayList<>(selections.length); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 			try {
-				for (Object selection : selections) {
+				for (Object selection : selections) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 					IJavaProject jp = (IJavaProject) selection;
 					if (dialog.isAddRequiredProjects()) {
 						collectRequiredProjects(jp, additions);
@@ -110,7 +110,7 @@ public class JavaProjectSourceContainerBrowser extends AbstractSourceContainerBr
 			}
 
 			Iterator<IJavaProject> iter = additions.iterator();
-			while (iter.hasNext()) {
+			while (iter.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				IJavaProject jp = iter.next();
 				sourceContainers.add(new JavaProjectSourceContainer(jp));
 				if (dialog.isAddExportedEntries()) {
@@ -135,7 +135,7 @@ public class JavaProjectSourceContainerBrowser extends AbstractSourceContainerBr
 	 * @param director the source lookup director currently being edited
 	 * @return the listing of {@link IJavaProject}s to add
 	 */
-	protected List<IJavaProject> getPossibleAdditions(ISourceLookupDirector director) {
+	protected List<IJavaProject> getPossibleAdditions(ISourceLookupDirector director) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IJavaProject[] projects;
 		IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
 		try {
@@ -144,12 +144,12 @@ public class JavaProjectSourceContainerBrowser extends AbstractSourceContainerBr
 			JDIDebugUIPlugin.log(e);
 			projects= new IJavaProject[0];
 		}
-		List<IJavaProject> remaining = new ArrayList<>();
-		for (IJavaProject project : projects) {
+		List<IJavaProject> remaining = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
+		for (IJavaProject project : projects) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			remaining.add(project);
 		}
-		List<IJavaProject> alreadySelected = new ArrayList<>();
-		for (ISourceContainer container : director.getSourceContainers()) {
+		List<IJavaProject> alreadySelected = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
+		for (ISourceContainer container : director.getSourceContainers()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			if (container.getType().getId().equals(JavaProjectSourceContainer.TYPE_ID)) {
 				alreadySelected.add(((JavaProjectSourceContainer)container).getJavaProject());
 			}
@@ -173,7 +173,7 @@ public class JavaProjectSourceContainerBrowser extends AbstractSourceContainerBr
 
 			IJavaModel model= proj.getJavaModel();
 
-			for (IClasspathEntry curr : proj.getRawClasspath()) {
+			for (IClasspathEntry curr : proj.getRawClasspath()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				if (curr.getEntryKind() == IClasspathEntry.CPE_PROJECT) {
 					IJavaProject ref= model.getJavaProject(curr.getPath().segment(0));
 					if (ref.exists()) {
@@ -192,8 +192,8 @@ public class JavaProjectSourceContainerBrowser extends AbstractSourceContainerBr
 	 * @param list the listing of containers
 	 * @throws CoreException if an exception occurs
 	 */
-	protected void collectExportedEntries(IJavaProject proj, List<ISourceContainer> list) throws CoreException {
-		for (IClasspathEntry entry : proj.getRawClasspath()) {
+	protected void collectExportedEntries(IJavaProject proj, List<ISourceContainer> list) throws CoreException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
+		for (IClasspathEntry entry : proj.getRawClasspath()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			ISourceContainer sourceContainer = null;
 			if (entry.isExported()) {
 				switch (entry.getEntryKind()) {

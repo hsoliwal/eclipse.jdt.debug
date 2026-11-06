@@ -71,10 +71,10 @@ public class AppletMainTab extends SharedJavaMainTab {
 		Group group = SWTFactory.createGroup(parent, LauncherMessages.AppletMainTab_1, 2, 1, GridData.FILL_HORIZONTAL);
 		Composite comp = SWTFactory.createComposite(group, font, 2, 2, GridData.FILL_BOTH, 0, 0);
 		fAppletViewerClassText= SWTFactory.createSingleText(comp, 2);
-		fAppletViewerClassText.addModifyListener(getDefaultListener());
+		fAppletViewerClassText.addModifyListener(getDefaultListener()); //FLLDCIM: MARK — T02 TEXT_INPUT_DEBOUNCE CALL
 		createVerticalSpacer(comp, 1);
 		fAppletViewerClassDefaultButton= createCheckButton(comp, LauncherMessages.AppletMainTab_2);
-		fAppletViewerClassDefaultButton.addSelectionListener(new SelectionListener() {
+		fAppletViewerClassDefaultButton.addSelectionListener(new SelectionListener() { //FLLDCIM: MARK — T03 SELECTION_LANE CALL
 			@Override
 			public void widgetDefaultSelected(SelectionEvent e) {}
 			@Override
@@ -132,7 +132,7 @@ public class AppletMainTab extends SharedJavaMainTab {
 	/**
 	 * Show a dialog that lists all main types
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	protected void handleSearchButtonSelected() {
 		IJavaElement[] scope= null;
 		IJavaProject project = getJavaProject();
@@ -210,7 +210,7 @@ public class AppletMainTab extends SharedJavaMainTab {
 	/* (non-Javadoc)
 	 * @see org.eclipse.debug.ui.AbstractLaunchConfigurationTab#isValid(org.eclipse.debug.core.ILaunchConfiguration)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public boolean isValid(ILaunchConfiguration launchConfig) {
 		setErrorMessage(null);
 		setMessage(null);

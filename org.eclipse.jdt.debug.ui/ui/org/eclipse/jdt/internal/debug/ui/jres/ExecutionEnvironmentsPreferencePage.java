@@ -69,7 +69,7 @@ public class ExecutionEnvironmentsPreferencePage extends PreferencePage implemen
 	/**
 	 * Working copy "EE Profile -> Default JRE"
 	 */
-	private final Map<Object, Object> fDefaults = new HashMap<>();
+	private final Map<Object, Object> fDefaults = new HashMap<>(); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
 
 	class JREsContentProvider implements IStructuredContentProvider {
 
@@ -132,7 +132,7 @@ public class ExecutionEnvironmentsPreferencePage extends PreferencePage implemen
 	 */
 	private void handleEESelectionAndJREViewer(IStructuredSelection selection) {
 		IExecutionEnvironment env = (IExecutionEnvironment) (selection).getFirstElement();
-		fJREsViewer.setInput(env);
+		fJREsViewer.setInput(env); //FLLDCIM: MARK — M21 FULL_REBUILD_TO_DELTA CALL
 		String description = env.getDescription();
 		if (description == null) {
 			description = Util.ZERO_LENGTH_STRING;
@@ -149,7 +149,7 @@ public class ExecutionEnvironmentsPreferencePage extends PreferencePage implemen
 	/* (non-Javadoc)
 	 * @see org.eclipse.jface.preference.PreferencePage#createContents(org.eclipse.swt.widgets.Composite)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	protected Control createContents(Composite ancestor) {
 		initializeDialogUnits(ancestor);
 		noDefaultAndApplyButton();
@@ -159,7 +159,7 @@ public class ExecutionEnvironmentsPreferencePage extends PreferencePage implemen
 		// init default mappings
 		IExecutionEnvironmentsManager manager = JavaRuntime.getExecutionEnvironmentsManager();
 		IExecutionEnvironment[] environments = manager.getExecutionEnvironments();
-		for (int i = 0; i < environments.length; i++) {
+		for (int i = 0; i < environments.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			IExecutionEnvironment environment = environments[i];
 			IVMInstall install = environment.getDefaultVM();
 			if (install != null) {
@@ -194,8 +194,8 @@ public class ExecutionEnvironmentsPreferencePage extends PreferencePage implemen
 		table.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 		fProfilesViewer = new TableViewer(table);
 		fProfilesViewer.setContentProvider(ArrayContentProvider.getInstance());
-		fProfilesViewer.setLabelProvider(new ExecutionEnvironmentsLabelProvider());
-		fProfilesViewer.setInput(JavaRuntime.getExecutionEnvironmentsManager().getExecutionEnvironments());
+		fProfilesViewer.setLabelProvider(new ExecutionEnvironmentsLabelProvider()); //FLLDCIM: MARK — T24 LABEL_DELTA CALL
+		fProfilesViewer.setInput(JavaRuntime.getExecutionEnvironmentsManager().getExecutionEnvironments()); //FLLDCIM: MARK — M21 FULL_REBUILD_TO_DELTA CALL
 
 		Composite jreContainer = new Composite(container, SWT.NONE);
 		layout = new GridLayout();
@@ -213,7 +213,7 @@ public class ExecutionEnvironmentsPreferencePage extends PreferencePage implemen
 		table.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 		fJREsViewer = new CheckboxTableViewer(table);
 		fJREsViewer.setContentProvider(new JREsContentProvider());
-		fJREsViewer.setLabelProvider(new JREsEnvironmentLabelProvider(new JREsEnvironmentLabelProvider.IExecutionEnvironmentProvider() {
+		fJREsViewer.setLabelProvider(new JREsEnvironmentLabelProvider(new JREsEnvironmentLabelProvider.IExecutionEnvironmentProvider() { //FLLDCIM: MARK — T24 LABEL_DELTA CALL
 			@Override
 			public IExecutionEnvironment getEnvironment() {
 				return (IExecutionEnvironment) fJREsViewer.getInput();
@@ -231,14 +231,14 @@ public class ExecutionEnvironmentsPreferencePage extends PreferencePage implemen
 		text.setLayoutData(new GridData(SWT.FILL, 0, true, false, 2, 1));
 		fDescription = text;
 
-		fProfilesViewer.addSelectionChangedListener(new ISelectionChangedListener() {
+		fProfilesViewer.addSelectionChangedListener(new ISelectionChangedListener() { //FLLDCIM: MARK — T04 VIEWER_SELECTION_DELTA CALL
 			@Override
 			public void selectionChanged(SelectionChangedEvent event) {
 				handleEESelectionAndJREViewer((IStructuredSelection) event.getSelection());
 			}
 		});
 
-		fJREsViewer.addCheckStateListener(new ICheckStateListener() {
+		fJREsViewer.addCheckStateListener(new ICheckStateListener() { //FLLDCIM: MARK — T21 CHECK_STATE_LANE CALL
 			@Override
 			public void checkStateChanged(CheckStateChangedEvent event) {
 				if (event.getChecked()) {
@@ -259,14 +259,14 @@ public class ExecutionEnvironmentsPreferencePage extends PreferencePage implemen
 	/* (non-Javadoc)
 	 * @see org.eclipse.jface.preference.IPreferencePage#performOk()
 	 */
-	@SuppressWarnings("restriction")
+	@SuppressWarnings("restriction") //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	@Override
 	public boolean performOk() {
-		WorkbenchRunnableAdapter op = new WorkbenchRunnableAdapter(monitor -> {
+		WorkbenchRunnableAdapter op = new WorkbenchRunnableAdapter(monitor -> { //FLLDCIM: MARK — T09  LAMBDA
 			IExecutionEnvironmentsManager manager = JavaRuntime.getExecutionEnvironmentsManager();
 			IExecutionEnvironment[] environments = manager.getExecutionEnvironments();
 			monitor.beginTask(JREMessages.ExecutionEnvironmentsPreferencePage_performOk, environments.length);
-			for (int i = 0; i < environments.length; i++) {
+			for (int i = 0; i < environments.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				IExecutionEnvironment environment = environments[i];
 				monitor.setTaskName(environment.getDescription());
 				IVMInstall vm = (IVMInstall) fDefaults.get(environment);

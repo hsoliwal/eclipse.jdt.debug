@@ -260,10 +260,10 @@ public class JavaProjectHelper {
 	 *            the version to test - within [ 8 ... JavaCore.latestSupportedJavaVersion() ]
 	 * @return <code>true</code> if compatible <code>false</code> otherwise
 	 */
-	static boolean isCompatible(int ver) {
+	static boolean isCompatible(int ver) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String version = System.getProperty("java.specification.version");
 		if (version != null) {
-			String[] nums = version.split("\\.");
+			String[] nums = version.split("\\."); //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
 			if (nums.length == 2) {
 				try {
 					int major = Integer.parseInt(nums[0]);
@@ -314,7 +314,7 @@ public class JavaProjectHelper {
 	 * creates a java project with the specified name and output folder
 	 * @return a new java project
 	 */
-	public static IJavaProject createJavaProject(String projectName, String binFolderName) throws CoreException {
+	public static IJavaProject createJavaProject(String projectName, String binFolderName) throws CoreException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IProject project = createProject(projectName);
 		IPath outputLocation;
 		if (binFolderName != null && binFolderName.length() > 0) {
@@ -364,7 +364,7 @@ public class JavaProjectHelper {
 	 *            optional extra classpath attributes
 	 * @return the package fragment root of the container name
 	 */
-	public static IPackageFragmentRoot addSourceContainer(IJavaProject jproject, String containerName, IClasspathAttribute... extra) throws CoreException {
+	public static IPackageFragmentRoot addSourceContainer(IJavaProject jproject, String containerName, IClasspathAttribute... extra) throws CoreException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IProject project= jproject.getProject();
 		IContainer container= null;
 		if (containerName == null || containerName.length() == 0) {
@@ -387,7 +387,7 @@ public class JavaProjectHelper {
 	 * Adds a source container to a IJavaProject.
 	 * @return the package fragment root of the new source container
 	 */
-	public static IPackageFragmentRoot addSourceContainer(IJavaProject jproject, String containerName, String outputName) throws CoreException {
+	public static IPackageFragmentRoot addSourceContainer(IJavaProject jproject, String containerName, String outputName) throws CoreException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IProject project= jproject.getProject();
 		IContainer container= null;
 		if (containerName == null || containerName.length() == 0) {
@@ -460,7 +460,7 @@ public class JavaProjectHelper {
 	public static IPackageFragmentRoot addLibraryWithImport(IJavaProject jproject, IPath jarPath, IPath sourceAttachPath, IPath sourceAttachRoot) throws IOException, CoreException {
 		IProject project= jproject.getProject();
 		IFile newFile= project.getFile(jarPath.lastSegment());
-		try (InputStream inputStream = new FileInputStream(jarPath.toFile())) {
+		try (InputStream inputStream = new FileInputStream(jarPath.toFile())) { //FLLDCIM: MARK — M31 M3FILE_IO NEW
 			newFile.create(inputStream, true, null);
 		}
 		return addLibrary(jproject, newFile.getFullPath(), sourceAttachPath, sourceAttachRoot);
@@ -537,8 +537,8 @@ public class JavaProjectHelper {
 	public static void removeFromClasspath(IJavaProject jproject, IPath path) throws JavaModelException {
 		IClasspathEntry[] oldEntries= jproject.getRawClasspath();
 		int nEntries= oldEntries.length;
-		ArrayList<IClasspathEntry> list= new ArrayList<>(nEntries);
-		for (int i= 0 ; i < nEntries ; i++) {
+		ArrayList<IClasspathEntry> list= new ArrayList<>(nEntries); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
+		for (int i= 0 ; i < nEntries ; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			IClasspathEntry curr= oldEntries[i];
 			if (!path.equals(curr.getPath())) {
 				list.add(curr);
@@ -553,8 +553,8 @@ public class JavaProjectHelper {
 	 */
 	public static void addToClasspath(IJavaProject jproject, IClasspathEntry cpe) throws JavaModelException {
 		IClasspathEntry[] oldEntries= jproject.getRawClasspath();
-		ArrayList<IClasspathEntry> entries = new ArrayList<>(oldEntries.length);
-		for (int i= 0; i < oldEntries.length; i++) {
+		ArrayList<IClasspathEntry> entries = new ArrayList<>(oldEntries.length); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
+		for (int i= 0; i < oldEntries.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			if (oldEntries[i].equals(cpe)) {
 				return;
 			}
@@ -600,7 +600,7 @@ public class JavaProjectHelper {
 	 */
 	public static void importFilesFromDirectory(File rootDir, IPath destPath, IProgressMonitor monitor) throws InvocationTargetException, IOException {
 		IImportStructureProvider structureProvider = FileSystemStructureProvider.INSTANCE;
-		List<File> files = new ArrayList<>(100);
+		List<File> files = new ArrayList<>(100); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 		addJavaFiles(rootDir, files);
 		try {
 			ImportOperation op= new ImportOperation(destPath, rootDir, structureProvider, new ImportOverwriteQuery(), files);
@@ -621,7 +621,7 @@ public class JavaProjectHelper {
 	 */
 	public static void importFile(File file, IPath destPath, IProgressMonitor monitor) throws InvocationTargetException {
 		IImportStructureProvider structureProvider = FileSystemStructureProvider.INSTANCE;
-		List<File> files = new ArrayList<>(1);
+		List<File> files = new ArrayList<>(1); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 		files.add(file);
 		try {
 			ImportOperation op= new ImportOperation(destPath, file.getParentFile(), structureProvider, new ImportOverwriteQuery(), files);
@@ -635,19 +635,19 @@ public class JavaProjectHelper {
 	/**
 	 * Recursively adds files from the specified dir to the provided list
 	 */
-	private static void addJavaFiles(File dir, List<File> collection) throws IOException {
-		File[] files = dir.listFiles();
+	private static void addJavaFiles(File dir, List<File> collection) throws IOException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
+		File[] files = dir.listFiles(); //FLLDCIM: MARK — M31 M3FILE_IO CALL
 		if(files != null) {
-			List<File> subDirs = new ArrayList<>(2);
-			for (int i = 0; i < files.length; i++) {
-				if (files[i].isFile()) {
+			List<File> subDirs = new ArrayList<>(2); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
+			for (int i = 0; i < files.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
+				if (files[i].isFile()) { //FLLDCIM: MARK — M31 M3FILE_IO CALL
 					collection.add(files[i]);
-				} else if (files[i].isDirectory() && files[i].getName().indexOf("CVS") < 0) {
+				} else if (files[i].isDirectory() && files[i].getName().indexOf("CVS") < 0) { //FLLDCIM: MARK — M31 M3FILE_IO CALL
 					subDirs.add(files[i]);
 				}
 			}
 			Iterator<File> iter = subDirs.iterator();
-			while (iter.hasNext()) {
+			while (iter.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				File subDir = iter.next();
 				addJavaFiles(subDir, collection);
 			}

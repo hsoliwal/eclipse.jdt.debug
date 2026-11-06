@@ -46,17 +46,17 @@ public class EnvironmentTests extends AbstractDebugTest {
 	/**
 	 * Test that we can override a variable in a case insensitive way on Windows
 	 */
-	public void testWinOSCaseInsensitiveOverride() throws Exception {
+	public void testWinOSCaseInsensitiveOverride() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		if (Platform.OS.isWindows()) {
 			ILaunchConfigurationType type = getLaunchManager().getLaunchConfigurationType(IJavaLaunchConfigurationConstants.ID_JAVA_APPLICATION);
 			ILaunchConfigurationWorkingCopy workingCopy = type.newInstance(null, "testWinOSCaseInsensitiveOverride");
-			Map<String, String> override = new HashMap<>();
+			Map<String, String> override = new HashMap<>(); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
 			override.put("pAtH", "OVERRIDE");
 			workingCopy.setAttribute(ILaunchManager.ATTR_ENVIRONMENT_VARIABLES, override);
 			String[] environment = getLaunchManager().getEnvironment(workingCopy);
 			assertNotNull("env should be specified", environment);
 			boolean found = false;
-			for (int i = 0; i < environment.length; i++) {
+			for (int i = 0; i < environment.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				String var = environment[i];
 				if (var.endsWith("OVERRIDE")) {
 					found = true;

@@ -58,7 +58,7 @@ public class SelectSystemLibraryQuickFix extends JREResolution {
 		}
 	}
 
-	protected void handleContainerResolutionError(final IPath oldPath, final IJavaProject project) throws CoreException {
+	protected void handleContainerResolutionError(final IPath oldPath, final IJavaProject project) throws CoreException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 
 		String lib = oldPath.segment(0);
 		IPath initialPath = null;
@@ -73,13 +73,13 @@ public class SelectSystemLibraryQuickFix extends JREResolution {
 			return;
 		}
 
-		IRunnableWithProgress runnable = new IRunnableWithProgress() {
+		IRunnableWithProgress runnable = new IRunnableWithProgress() { //FLLDCIM: MARK — T09  ANONYMOUS
 			@Override
 			public void run(IProgressMonitor monitor) throws InvocationTargetException {
 				try {
 					IPath newPath = containerEntry.getPath();
 					IClasspathEntry[] classpath = project.getRawClasspath();
-					for (int i = 0; i < classpath.length; i++) {
+					for (int i = 0; i < classpath.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 						if (classpath[i].getPath().equals(oldPath)) {
 							classpath[i] = JavaCore.newContainerEntry(newPath, classpath[i].isExported());
 							break;

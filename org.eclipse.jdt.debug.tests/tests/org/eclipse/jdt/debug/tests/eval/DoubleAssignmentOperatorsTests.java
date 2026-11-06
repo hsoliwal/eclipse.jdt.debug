@@ -32,12 +32,12 @@ public class DoubleAssignmentOperatorsTests extends Tests {
 
 	// double += {byte, char, short, int, long, float, double}
 
-	public void testDoublePlusAssignmentByte() throws Throwable {
+	public void testDoublePlusAssignmentByte() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
 		double tmpxVar = xVarDoubleValue;
 		tmpxVar += xByteValue;
-		IValue value = eval(xVarDouble + plusAssignmentOp + xByte);
+		IValue value = eval(xVarDouble + plusAssignmentOp + xByte); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("double plusAssignment byte : wrong type : ", "double", typeName);
 		double doubleValue = ((IJavaPrimitiveValue)value).getDoubleValue();
@@ -49,7 +49,7 @@ public class DoubleAssignmentOperatorsTests extends Tests {
 		assertEquals("double local variable value : wrong result : ", tmpxVar, doubleValue, 0);
 
 		tmpxVar += yByteValue;
-		value = eval(xVarDouble + plusAssignmentOp + yByte);
+		value = eval(xVarDouble + plusAssignmentOp + yByte); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("double plusAssignment byte : wrong type : ", "double", typeName);
 		doubleValue = ((IJavaPrimitiveValue)value).getDoubleValue();
@@ -62,7 +62,7 @@ public class DoubleAssignmentOperatorsTests extends Tests {
 
 		double tmpyVar = yVarDoubleValue;
 		tmpyVar += xByteValue;
-		value = eval(yVarDouble + plusAssignmentOp + xByte);
+		value = eval(yVarDouble + plusAssignmentOp + xByte); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("double plusAssignment byte : wrong type : ", "double", typeName);
 		doubleValue = ((IJavaPrimitiveValue)value).getDoubleValue();
@@ -74,7 +74,7 @@ public class DoubleAssignmentOperatorsTests extends Tests {
 		assertEquals("double local variable value : wrong result : ", tmpyVar, doubleValue, 0);
 
 		tmpyVar += yByteValue;
-		value = eval(yVarDouble + plusAssignmentOp + yByte);
+		value = eval(yVarDouble + plusAssignmentOp + yByte); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("double plusAssignment byte : wrong type : ", "double", typeName);
 		doubleValue = ((IJavaPrimitiveValue)value).getDoubleValue();
@@ -89,12 +89,12 @@ public class DoubleAssignmentOperatorsTests extends Tests {
 		}
 	}
 
-	public void testDoublePlusAssignmentChar() throws Throwable {
+	public void testDoublePlusAssignmentChar() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
 		double tmpxVar = xVarDoubleValue;
 		tmpxVar += xCharValue;
-		IValue value = eval(xVarDouble + plusAssignmentOp + xChar);
+		IValue value = eval(xVarDouble + plusAssignmentOp + xChar); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("double plusAssignment char : wrong type : ", "double", typeName);
 		double doubleValue = ((IJavaPrimitiveValue)value).getDoubleValue();
@@ -106,7 +106,7 @@ public class DoubleAssignmentOperatorsTests extends Tests {
 		assertEquals("double local variable value : wrong result : ", tmpxVar, doubleValue, 0);
 
 		tmpxVar += yCharValue;
-		value = eval(xVarDouble + plusAssignmentOp + yChar);
+		value = eval(xVarDouble + plusAssignmentOp + yChar); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("double plusAssignment char : wrong type : ", "double", typeName);
 		doubleValue = ((IJavaPrimitiveValue)value).getDoubleValue();
@@ -119,7 +119,7 @@ public class DoubleAssignmentOperatorsTests extends Tests {
 
 		double tmpyVar = yVarDoubleValue;
 		tmpyVar += xCharValue;
-		value = eval(yVarDouble + plusAssignmentOp + xChar);
+		value = eval(yVarDouble + plusAssignmentOp + xChar); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("double plusAssignment char : wrong type : ", "double", typeName);
 		doubleValue = ((IJavaPrimitiveValue)value).getDoubleValue();
@@ -131,7 +131,7 @@ public class DoubleAssignmentOperatorsTests extends Tests {
 		assertEquals("double local variable value : wrong result : ", tmpyVar, doubleValue, 0);
 
 		tmpyVar += yCharValue;
-		value = eval(yVarDouble + plusAssignmentOp + yChar);
+		value = eval(yVarDouble + plusAssignmentOp + yChar); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("double plusAssignment char : wrong type : ", "double", typeName);
 		doubleValue = ((IJavaPrimitiveValue)value).getDoubleValue();
@@ -146,12 +146,12 @@ public class DoubleAssignmentOperatorsTests extends Tests {
 		}
 	}
 
-	public void testDoublePlusAssignmentShort() throws Throwable {
+	public void testDoublePlusAssignmentShort() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
 		double tmpxVar = xVarDoubleValue;
 		tmpxVar += xShortValue;
-		IValue value = eval(xVarDouble + plusAssignmentOp + xShort);
+		IValue value = eval(xVarDouble + plusAssignmentOp + xShort); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("double plusAssignment short : wrong type : ", "double", typeName);
 		double doubleValue = ((IJavaPrimitiveValue)value).getDoubleValue();
@@ -163,7 +163,7 @@ public class DoubleAssignmentOperatorsTests extends Tests {
 		assertEquals("double local variable value : wrong result : ", tmpxVar, doubleValue, 0);
 
 		tmpxVar += yShortValue;
-		value = eval(xVarDouble + plusAssignmentOp + yShort);
+		value = eval(xVarDouble + plusAssignmentOp + yShort); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("double plusAssignment short : wrong type : ", "double", typeName);
 		doubleValue = ((IJavaPrimitiveValue)value).getDoubleValue();
@@ -176,7 +176,7 @@ public class DoubleAssignmentOperatorsTests extends Tests {
 
 		double tmpyVar = yVarDoubleValue;
 		tmpyVar += xShortValue;
-		value = eval(yVarDouble + plusAssignmentOp + xShort);
+		value = eval(yVarDouble + plusAssignmentOp + xShort); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("double plusAssignment short : wrong type : ", "double", typeName);
 		doubleValue = ((IJavaPrimitiveValue)value).getDoubleValue();
@@ -188,7 +188,7 @@ public class DoubleAssignmentOperatorsTests extends Tests {
 		assertEquals("double local variable value : wrong result : ", tmpyVar, doubleValue, 0);
 
 		tmpyVar += yShortValue;
-		value = eval(yVarDouble + plusAssignmentOp + yShort);
+		value = eval(yVarDouble + plusAssignmentOp + yShort); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("double plusAssignment short : wrong type : ", "double", typeName);
 		doubleValue = ((IJavaPrimitiveValue)value).getDoubleValue();
@@ -203,12 +203,12 @@ public class DoubleAssignmentOperatorsTests extends Tests {
 		}
 	}
 
-	public void testDoublePlusAssignmentInt() throws Throwable {
+	public void testDoublePlusAssignmentInt() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
 		double tmpxVar = xVarDoubleValue;
 		tmpxVar += xIntValue;
-		IValue value = eval(xVarDouble + plusAssignmentOp + xInt);
+		IValue value = eval(xVarDouble + plusAssignmentOp + xInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("double plusAssignment int : wrong type : ", "double", typeName);
 		double doubleValue = ((IJavaPrimitiveValue)value).getDoubleValue();
@@ -220,7 +220,7 @@ public class DoubleAssignmentOperatorsTests extends Tests {
 		assertEquals("double local variable value : wrong result : ", tmpxVar, doubleValue, 0);
 
 		tmpxVar += yIntValue;
-		value = eval(xVarDouble + plusAssignmentOp + yInt);
+		value = eval(xVarDouble + plusAssignmentOp + yInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("double plusAssignment int : wrong type : ", "double", typeName);
 		doubleValue = ((IJavaPrimitiveValue)value).getDoubleValue();
@@ -233,7 +233,7 @@ public class DoubleAssignmentOperatorsTests extends Tests {
 
 		double tmpyVar = yVarDoubleValue;
 		tmpyVar += xIntValue;
-		value = eval(yVarDouble + plusAssignmentOp + xInt);
+		value = eval(yVarDouble + plusAssignmentOp + xInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("double plusAssignment int : wrong type : ", "double", typeName);
 		doubleValue = ((IJavaPrimitiveValue)value).getDoubleValue();
@@ -245,7 +245,7 @@ public class DoubleAssignmentOperatorsTests extends Tests {
 		assertEquals("double local variable value : wrong result : ", tmpyVar, doubleValue, 0);
 
 		tmpyVar += yIntValue;
-		value = eval(yVarDouble + plusAssignmentOp + yInt);
+		value = eval(yVarDouble + plusAssignmentOp + yInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("double plusAssignment int : wrong type : ", "double", typeName);
 		doubleValue = ((IJavaPrimitiveValue)value).getDoubleValue();
@@ -260,12 +260,12 @@ public class DoubleAssignmentOperatorsTests extends Tests {
 		}
 	}
 
-	public void testDoublePlusAssignmentLong() throws Throwable {
+	public void testDoublePlusAssignmentLong() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
 		double tmpxVar = xVarDoubleValue;
 		tmpxVar += xLongValue;
-		IValue value = eval(xVarDouble + plusAssignmentOp + xLong);
+		IValue value = eval(xVarDouble + plusAssignmentOp + xLong); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("double plusAssignment long : wrong type : ", "double", typeName);
 		double doubleValue = ((IJavaPrimitiveValue)value).getDoubleValue();
@@ -277,7 +277,7 @@ public class DoubleAssignmentOperatorsTests extends Tests {
 		assertEquals("double local variable value : wrong result : ", tmpxVar, doubleValue, 0);
 
 		tmpxVar += yLongValue;
-		value = eval(xVarDouble + plusAssignmentOp + yLong);
+		value = eval(xVarDouble + plusAssignmentOp + yLong); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("double plusAssignment long : wrong type : ", "double", typeName);
 		doubleValue = ((IJavaPrimitiveValue)value).getDoubleValue();
@@ -290,7 +290,7 @@ public class DoubleAssignmentOperatorsTests extends Tests {
 
 		double tmpyVar = yVarDoubleValue;
 		tmpyVar += xLongValue;
-		value = eval(yVarDouble + plusAssignmentOp + xLong);
+		value = eval(yVarDouble + plusAssignmentOp + xLong); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("double plusAssignment long : wrong type : ", "double", typeName);
 		doubleValue = ((IJavaPrimitiveValue)value).getDoubleValue();
@@ -302,7 +302,7 @@ public class DoubleAssignmentOperatorsTests extends Tests {
 		assertEquals("double local variable value : wrong result : ", tmpyVar, doubleValue, 0);
 
 		tmpyVar += yLongValue;
-		value = eval(yVarDouble + plusAssignmentOp + yLong);
+		value = eval(yVarDouble + plusAssignmentOp + yLong); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("double plusAssignment long : wrong type : ", "double", typeName);
 		doubleValue = ((IJavaPrimitiveValue)value).getDoubleValue();
@@ -317,12 +317,12 @@ public class DoubleAssignmentOperatorsTests extends Tests {
 		}
 	}
 
-	public void testDoublePlusAssignmentFloat() throws Throwable {
+	public void testDoublePlusAssignmentFloat() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
 		double tmpxVar = xVarDoubleValue;
 		tmpxVar += xFloatValue;
-		IValue value = eval(xVarDouble + plusAssignmentOp + xFloat);
+		IValue value = eval(xVarDouble + plusAssignmentOp + xFloat); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("double plusAssignment float : wrong type : ", "double", typeName);
 		double doubleValue = ((IJavaPrimitiveValue)value).getDoubleValue();
@@ -334,7 +334,7 @@ public class DoubleAssignmentOperatorsTests extends Tests {
 		assertEquals("double local variable value : wrong result : ", tmpxVar, doubleValue, 0);
 
 		tmpxVar += yFloatValue;
-		value = eval(xVarDouble + plusAssignmentOp + yFloat);
+		value = eval(xVarDouble + plusAssignmentOp + yFloat); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("double plusAssignment float : wrong type : ", "double", typeName);
 		doubleValue = ((IJavaPrimitiveValue)value).getDoubleValue();
@@ -347,7 +347,7 @@ public class DoubleAssignmentOperatorsTests extends Tests {
 
 		double tmpyVar = yVarDoubleValue;
 		tmpyVar += xFloatValue;
-		value = eval(yVarDouble + plusAssignmentOp + xFloat);
+		value = eval(yVarDouble + plusAssignmentOp + xFloat); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("double plusAssignment float : wrong type : ", "double", typeName);
 		doubleValue = ((IJavaPrimitiveValue)value).getDoubleValue();
@@ -359,7 +359,7 @@ public class DoubleAssignmentOperatorsTests extends Tests {
 		assertEquals("double local variable value : wrong result : ", tmpyVar, doubleValue, 0);
 
 		tmpyVar += yFloatValue;
-		value = eval(yVarDouble + plusAssignmentOp + yFloat);
+		value = eval(yVarDouble + plusAssignmentOp + yFloat); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("double plusAssignment float : wrong type : ", "double", typeName);
 		doubleValue = ((IJavaPrimitiveValue)value).getDoubleValue();
@@ -374,12 +374,12 @@ public class DoubleAssignmentOperatorsTests extends Tests {
 		}
 	}
 
-	public void testDoublePlusAssignmentDouble() throws Throwable {
+	public void testDoublePlusAssignmentDouble() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
 		double tmpxVar = xVarDoubleValue;
 		tmpxVar += xDoubleValue;
-		IValue value = eval(xVarDouble + plusAssignmentOp + xDouble);
+		IValue value = eval(xVarDouble + plusAssignmentOp + xDouble); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("double plusAssignment double : wrong type : ", "double", typeName);
 		double doubleValue = ((IJavaPrimitiveValue)value).getDoubleValue();
@@ -391,7 +391,7 @@ public class DoubleAssignmentOperatorsTests extends Tests {
 		assertEquals("double local variable value : wrong result : ", tmpxVar, doubleValue, 0);
 
 		tmpxVar += yDoubleValue;
-		value = eval(xVarDouble + plusAssignmentOp + yDouble);
+		value = eval(xVarDouble + plusAssignmentOp + yDouble); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("double plusAssignment double : wrong type : ", "double", typeName);
 		doubleValue = ((IJavaPrimitiveValue)value).getDoubleValue();
@@ -404,7 +404,7 @@ public class DoubleAssignmentOperatorsTests extends Tests {
 
 		double tmpyVar = yVarDoubleValue;
 		tmpyVar += xDoubleValue;
-		value = eval(yVarDouble + plusAssignmentOp + xDouble);
+		value = eval(yVarDouble + plusAssignmentOp + xDouble); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("double plusAssignment double : wrong type : ", "double", typeName);
 		doubleValue = ((IJavaPrimitiveValue)value).getDoubleValue();
@@ -416,7 +416,7 @@ public class DoubleAssignmentOperatorsTests extends Tests {
 		assertEquals("double local variable value : wrong result : ", tmpyVar, doubleValue, 0);
 
 		tmpyVar += yDoubleValue;
-		value = eval(yVarDouble + plusAssignmentOp + yDouble);
+		value = eval(yVarDouble + plusAssignmentOp + yDouble); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("double plusAssignment double : wrong type : ", "double", typeName);
 		doubleValue = ((IJavaPrimitiveValue)value).getDoubleValue();
@@ -433,12 +433,12 @@ public class DoubleAssignmentOperatorsTests extends Tests {
 
 	// double -= {byte, char, short, int, long, float, double}
 
-	public void testDoubleMinusAssignmentByte() throws Throwable {
+	public void testDoubleMinusAssignmentByte() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
 		double tmpxVar = xVarDoubleValue;
 		tmpxVar -= xByteValue;
-		IValue value = eval(xVarDouble + minusAssignmentOp + xByte);
+		IValue value = eval(xVarDouble + minusAssignmentOp + xByte); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("double minusAssignment byte : wrong type : ", "double", typeName);
 		double doubleValue = ((IJavaPrimitiveValue)value).getDoubleValue();
@@ -450,7 +450,7 @@ public class DoubleAssignmentOperatorsTests extends Tests {
 		assertEquals("double local variable value : wrong result : ", tmpxVar, doubleValue, 0);
 
 		tmpxVar -= yByteValue;
-		value = eval(xVarDouble + minusAssignmentOp + yByte);
+		value = eval(xVarDouble + minusAssignmentOp + yByte); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("double minusAssignment byte : wrong type : ", "double", typeName);
 		doubleValue = ((IJavaPrimitiveValue)value).getDoubleValue();
@@ -463,7 +463,7 @@ public class DoubleAssignmentOperatorsTests extends Tests {
 
 		double tmpyVar = yVarDoubleValue;
 		tmpyVar -= xByteValue;
-		value = eval(yVarDouble + minusAssignmentOp + xByte);
+		value = eval(yVarDouble + minusAssignmentOp + xByte); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("double minusAssignment byte : wrong type : ", "double", typeName);
 		doubleValue = ((IJavaPrimitiveValue)value).getDoubleValue();
@@ -475,7 +475,7 @@ public class DoubleAssignmentOperatorsTests extends Tests {
 		assertEquals("double local variable value : wrong result : ", tmpyVar, doubleValue, 0);
 
 		tmpyVar -= yByteValue;
-		value = eval(yVarDouble + minusAssignmentOp + yByte);
+		value = eval(yVarDouble + minusAssignmentOp + yByte); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("double minusAssignment byte : wrong type : ", "double", typeName);
 		doubleValue = ((IJavaPrimitiveValue)value).getDoubleValue();
@@ -490,12 +490,12 @@ public class DoubleAssignmentOperatorsTests extends Tests {
 		}
 	}
 
-	public void testDoubleMinusAssignmentChar() throws Throwable {
+	public void testDoubleMinusAssignmentChar() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
 		double tmpxVar = xVarDoubleValue;
 		tmpxVar -= xCharValue;
-		IValue value = eval(xVarDouble + minusAssignmentOp + xChar);
+		IValue value = eval(xVarDouble + minusAssignmentOp + xChar); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("double minusAssignment char : wrong type : ", "double", typeName);
 		double doubleValue = ((IJavaPrimitiveValue)value).getDoubleValue();
@@ -507,7 +507,7 @@ public class DoubleAssignmentOperatorsTests extends Tests {
 		assertEquals("double local variable value : wrong result : ", tmpxVar, doubleValue, 0);
 
 		tmpxVar -= yCharValue;
-		value = eval(xVarDouble + minusAssignmentOp + yChar);
+		value = eval(xVarDouble + minusAssignmentOp + yChar); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("double minusAssignment char : wrong type : ", "double", typeName);
 		doubleValue = ((IJavaPrimitiveValue)value).getDoubleValue();
@@ -520,7 +520,7 @@ public class DoubleAssignmentOperatorsTests extends Tests {
 
 		double tmpyVar = yVarDoubleValue;
 		tmpyVar -= xCharValue;
-		value = eval(yVarDouble + minusAssignmentOp + xChar);
+		value = eval(yVarDouble + minusAssignmentOp + xChar); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("double minusAssignment char : wrong type : ", "double", typeName);
 		doubleValue = ((IJavaPrimitiveValue)value).getDoubleValue();
@@ -532,7 +532,7 @@ public class DoubleAssignmentOperatorsTests extends Tests {
 		assertEquals("double local variable value : wrong result : ", tmpyVar, doubleValue, 0);
 
 		tmpyVar -= yCharValue;
-		value = eval(yVarDouble + minusAssignmentOp + yChar);
+		value = eval(yVarDouble + minusAssignmentOp + yChar); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("double minusAssignment char : wrong type : ", "double", typeName);
 		doubleValue = ((IJavaPrimitiveValue)value).getDoubleValue();
@@ -547,12 +547,12 @@ public class DoubleAssignmentOperatorsTests extends Tests {
 		}
 	}
 
-	public void testDoubleMinusAssignmentShort() throws Throwable {
+	public void testDoubleMinusAssignmentShort() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
 		double tmpxVar = xVarDoubleValue;
 		tmpxVar -= xShortValue;
-		IValue value = eval(xVarDouble + minusAssignmentOp + xShort);
+		IValue value = eval(xVarDouble + minusAssignmentOp + xShort); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("double minusAssignment short : wrong type : ", "double", typeName);
 		double doubleValue = ((IJavaPrimitiveValue)value).getDoubleValue();
@@ -564,7 +564,7 @@ public class DoubleAssignmentOperatorsTests extends Tests {
 		assertEquals("double local variable value : wrong result : ", tmpxVar, doubleValue, 0);
 
 		tmpxVar -= yShortValue;
-		value = eval(xVarDouble + minusAssignmentOp + yShort);
+		value = eval(xVarDouble + minusAssignmentOp + yShort); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("double minusAssignment short : wrong type : ", "double", typeName);
 		doubleValue = ((IJavaPrimitiveValue)value).getDoubleValue();
@@ -577,7 +577,7 @@ public class DoubleAssignmentOperatorsTests extends Tests {
 
 		double tmpyVar = yVarDoubleValue;
 		tmpyVar -= xShortValue;
-		value = eval(yVarDouble + minusAssignmentOp + xShort);
+		value = eval(yVarDouble + minusAssignmentOp + xShort); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("double minusAssignment short : wrong type : ", "double", typeName);
 		doubleValue = ((IJavaPrimitiveValue)value).getDoubleValue();
@@ -589,7 +589,7 @@ public class DoubleAssignmentOperatorsTests extends Tests {
 		assertEquals("double local variable value : wrong result : ", tmpyVar, doubleValue, 0);
 
 		tmpyVar -= yShortValue;
-		value = eval(yVarDouble + minusAssignmentOp + yShort);
+		value = eval(yVarDouble + minusAssignmentOp + yShort); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("double minusAssignment short : wrong type : ", "double", typeName);
 		doubleValue = ((IJavaPrimitiveValue)value).getDoubleValue();
@@ -604,12 +604,12 @@ public class DoubleAssignmentOperatorsTests extends Tests {
 		}
 	}
 
-	public void testDoubleMinusAssignmentInt() throws Throwable {
+	public void testDoubleMinusAssignmentInt() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
 		double tmpxVar = xVarDoubleValue;
 		tmpxVar -= xIntValue;
-		IValue value = eval(xVarDouble + minusAssignmentOp + xInt);
+		IValue value = eval(xVarDouble + minusAssignmentOp + xInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("double minusAssignment int : wrong type : ", "double", typeName);
 		double doubleValue = ((IJavaPrimitiveValue)value).getDoubleValue();
@@ -621,7 +621,7 @@ public class DoubleAssignmentOperatorsTests extends Tests {
 		assertEquals("double local variable value : wrong result : ", tmpxVar, doubleValue, 0);
 
 		tmpxVar -= yIntValue;
-		value = eval(xVarDouble + minusAssignmentOp + yInt);
+		value = eval(xVarDouble + minusAssignmentOp + yInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("double minusAssignment int : wrong type : ", "double", typeName);
 		doubleValue = ((IJavaPrimitiveValue)value).getDoubleValue();
@@ -634,7 +634,7 @@ public class DoubleAssignmentOperatorsTests extends Tests {
 
 		double tmpyVar = yVarDoubleValue;
 		tmpyVar -= xIntValue;
-		value = eval(yVarDouble + minusAssignmentOp + xInt);
+		value = eval(yVarDouble + minusAssignmentOp + xInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("double minusAssignment int : wrong type : ", "double", typeName);
 		doubleValue = ((IJavaPrimitiveValue)value).getDoubleValue();
@@ -646,7 +646,7 @@ public class DoubleAssignmentOperatorsTests extends Tests {
 		assertEquals("double local variable value : wrong result : ", tmpyVar, doubleValue, 0);
 
 		tmpyVar -= yIntValue;
-		value = eval(yVarDouble + minusAssignmentOp + yInt);
+		value = eval(yVarDouble + minusAssignmentOp + yInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("double minusAssignment int : wrong type : ", "double", typeName);
 		doubleValue = ((IJavaPrimitiveValue)value).getDoubleValue();
@@ -661,12 +661,12 @@ public class DoubleAssignmentOperatorsTests extends Tests {
 		}
 	}
 
-	public void testDoubleMinusAssignmentLong() throws Throwable {
+	public void testDoubleMinusAssignmentLong() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
 		double tmpxVar = xVarDoubleValue;
 		tmpxVar -= xLongValue;
-		IValue value = eval(xVarDouble + minusAssignmentOp + xLong);
+		IValue value = eval(xVarDouble + minusAssignmentOp + xLong); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("double minusAssignment long : wrong type : ", "double", typeName);
 		double doubleValue = ((IJavaPrimitiveValue)value).getDoubleValue();
@@ -678,7 +678,7 @@ public class DoubleAssignmentOperatorsTests extends Tests {
 		assertEquals("double local variable value : wrong result : ", tmpxVar, doubleValue, 0);
 
 		tmpxVar -= yLongValue;
-		value = eval(xVarDouble + minusAssignmentOp + yLong);
+		value = eval(xVarDouble + minusAssignmentOp + yLong); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("double minusAssignment long : wrong type : ", "double", typeName);
 		doubleValue = ((IJavaPrimitiveValue)value).getDoubleValue();
@@ -691,7 +691,7 @@ public class DoubleAssignmentOperatorsTests extends Tests {
 
 		double tmpyVar = yVarDoubleValue;
 		tmpyVar -= xLongValue;
-		value = eval(yVarDouble + minusAssignmentOp + xLong);
+		value = eval(yVarDouble + minusAssignmentOp + xLong); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("double minusAssignment long : wrong type : ", "double", typeName);
 		doubleValue = ((IJavaPrimitiveValue)value).getDoubleValue();
@@ -703,7 +703,7 @@ public class DoubleAssignmentOperatorsTests extends Tests {
 		assertEquals("double local variable value : wrong result : ", tmpyVar, doubleValue, 0);
 
 		tmpyVar -= yLongValue;
-		value = eval(yVarDouble + minusAssignmentOp + yLong);
+		value = eval(yVarDouble + minusAssignmentOp + yLong); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("double minusAssignment long : wrong type : ", "double", typeName);
 		doubleValue = ((IJavaPrimitiveValue)value).getDoubleValue();
@@ -718,12 +718,12 @@ public class DoubleAssignmentOperatorsTests extends Tests {
 		}
 	}
 
-	public void testDoubleMinusAssignmentFloat() throws Throwable {
+	public void testDoubleMinusAssignmentFloat() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
 		double tmpxVar = xVarDoubleValue;
 		tmpxVar -= xFloatValue;
-		IValue value = eval(xVarDouble + minusAssignmentOp + xFloat);
+		IValue value = eval(xVarDouble + minusAssignmentOp + xFloat); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("double minusAssignment float : wrong type : ", "double", typeName);
 		double doubleValue = ((IJavaPrimitiveValue)value).getDoubleValue();
@@ -735,7 +735,7 @@ public class DoubleAssignmentOperatorsTests extends Tests {
 		assertEquals("double local variable value : wrong result : ", tmpxVar, doubleValue, 0);
 
 		tmpxVar -= yFloatValue;
-		value = eval(xVarDouble + minusAssignmentOp + yFloat);
+		value = eval(xVarDouble + minusAssignmentOp + yFloat); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("double minusAssignment float : wrong type : ", "double", typeName);
 		doubleValue = ((IJavaPrimitiveValue)value).getDoubleValue();
@@ -748,7 +748,7 @@ public class DoubleAssignmentOperatorsTests extends Tests {
 
 		double tmpyVar = yVarDoubleValue;
 		tmpyVar -= xFloatValue;
-		value = eval(yVarDouble + minusAssignmentOp + xFloat);
+		value = eval(yVarDouble + minusAssignmentOp + xFloat); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("double minusAssignment float : wrong type : ", "double", typeName);
 		doubleValue = ((IJavaPrimitiveValue)value).getDoubleValue();
@@ -760,7 +760,7 @@ public class DoubleAssignmentOperatorsTests extends Tests {
 		assertEquals("double local variable value : wrong result : ", tmpyVar, doubleValue, 0);
 
 		tmpyVar -= yFloatValue;
-		value = eval(yVarDouble + minusAssignmentOp + yFloat);
+		value = eval(yVarDouble + minusAssignmentOp + yFloat); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("double minusAssignment float : wrong type : ", "double", typeName);
 		doubleValue = ((IJavaPrimitiveValue)value).getDoubleValue();
@@ -775,12 +775,12 @@ public class DoubleAssignmentOperatorsTests extends Tests {
 		}
 	}
 
-	public void testDoubleMinusAssignmentDouble() throws Throwable {
+	public void testDoubleMinusAssignmentDouble() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
 		double tmpxVar = xVarDoubleValue;
 		tmpxVar -= xDoubleValue;
-		IValue value = eval(xVarDouble + minusAssignmentOp + xDouble);
+		IValue value = eval(xVarDouble + minusAssignmentOp + xDouble); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("double minusAssignment double : wrong type : ", "double", typeName);
 		double doubleValue = ((IJavaPrimitiveValue)value).getDoubleValue();
@@ -792,7 +792,7 @@ public class DoubleAssignmentOperatorsTests extends Tests {
 		assertEquals("double local variable value : wrong result : ", tmpxVar, doubleValue, 0);
 
 		tmpxVar -= yDoubleValue;
-		value = eval(xVarDouble + minusAssignmentOp + yDouble);
+		value = eval(xVarDouble + minusAssignmentOp + yDouble); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("double minusAssignment double : wrong type : ", "double", typeName);
 		doubleValue = ((IJavaPrimitiveValue)value).getDoubleValue();
@@ -805,7 +805,7 @@ public class DoubleAssignmentOperatorsTests extends Tests {
 
 		double tmpyVar = yVarDoubleValue;
 		tmpyVar -= xDoubleValue;
-		value = eval(yVarDouble + minusAssignmentOp + xDouble);
+		value = eval(yVarDouble + minusAssignmentOp + xDouble); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("double minusAssignment double : wrong type : ", "double", typeName);
 		doubleValue = ((IJavaPrimitiveValue)value).getDoubleValue();
@@ -817,7 +817,7 @@ public class DoubleAssignmentOperatorsTests extends Tests {
 		assertEquals("double local variable value : wrong result : ", tmpyVar, doubleValue, 0);
 
 		tmpyVar -= yDoubleValue;
-		value = eval(yVarDouble + minusAssignmentOp + yDouble);
+		value = eval(yVarDouble + minusAssignmentOp + yDouble); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("double minusAssignment double : wrong type : ", "double", typeName);
 		doubleValue = ((IJavaPrimitiveValue)value).getDoubleValue();
@@ -834,12 +834,12 @@ public class DoubleAssignmentOperatorsTests extends Tests {
 
 	// double *= {byte, char, short, int, long, float, double}
 
-	public void testDoubleMultiplyAssignmentByte() throws Throwable {
+	public void testDoubleMultiplyAssignmentByte() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
 		double tmpxVar = xVarDoubleValue;
 		tmpxVar *= xByteValue;
-		IValue value = eval(xVarDouble + multiplyAssignmentOp + xByte);
+		IValue value = eval(xVarDouble + multiplyAssignmentOp + xByte); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("double multiplyAssignment byte : wrong type : ", "double", typeName);
 		double doubleValue = ((IJavaPrimitiveValue)value).getDoubleValue();
@@ -851,7 +851,7 @@ public class DoubleAssignmentOperatorsTests extends Tests {
 		assertEquals("double local variable value : wrong result : ", tmpxVar, doubleValue, 0);
 
 		tmpxVar *= yByteValue;
-		value = eval(xVarDouble + multiplyAssignmentOp + yByte);
+		value = eval(xVarDouble + multiplyAssignmentOp + yByte); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("double multiplyAssignment byte : wrong type : ", "double", typeName);
 		doubleValue = ((IJavaPrimitiveValue)value).getDoubleValue();
@@ -864,7 +864,7 @@ public class DoubleAssignmentOperatorsTests extends Tests {
 
 		double tmpyVar = yVarDoubleValue;
 		tmpyVar *= xByteValue;
-		value = eval(yVarDouble + multiplyAssignmentOp + xByte);
+		value = eval(yVarDouble + multiplyAssignmentOp + xByte); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("double multiplyAssignment byte : wrong type : ", "double", typeName);
 		doubleValue = ((IJavaPrimitiveValue)value).getDoubleValue();
@@ -876,7 +876,7 @@ public class DoubleAssignmentOperatorsTests extends Tests {
 		assertEquals("double local variable value : wrong result : ", tmpyVar, doubleValue, 0);
 
 		tmpyVar *= yByteValue;
-		value = eval(yVarDouble + multiplyAssignmentOp + yByte);
+		value = eval(yVarDouble + multiplyAssignmentOp + yByte); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("double multiplyAssignment byte : wrong type : ", "double", typeName);
 		doubleValue = ((IJavaPrimitiveValue)value).getDoubleValue();
@@ -891,12 +891,12 @@ public class DoubleAssignmentOperatorsTests extends Tests {
 		}
 	}
 
-	public void testDoubleMultiplyAssignmentChar() throws Throwable {
+	public void testDoubleMultiplyAssignmentChar() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
 		double tmpxVar = xVarDoubleValue;
 		tmpxVar *= xCharValue;
-		IValue value = eval(xVarDouble + multiplyAssignmentOp + xChar);
+		IValue value = eval(xVarDouble + multiplyAssignmentOp + xChar); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("double multiplyAssignment char : wrong type : ", "double", typeName);
 		double doubleValue = ((IJavaPrimitiveValue)value).getDoubleValue();
@@ -908,7 +908,7 @@ public class DoubleAssignmentOperatorsTests extends Tests {
 		assertEquals("double local variable value : wrong result : ", tmpxVar, doubleValue, 0);
 
 		tmpxVar *= yCharValue;
-		value = eval(xVarDouble + multiplyAssignmentOp + yChar);
+		value = eval(xVarDouble + multiplyAssignmentOp + yChar); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("double multiplyAssignment char : wrong type : ", "double", typeName);
 		doubleValue = ((IJavaPrimitiveValue)value).getDoubleValue();
@@ -921,7 +921,7 @@ public class DoubleAssignmentOperatorsTests extends Tests {
 
 		double tmpyVar = yVarDoubleValue;
 		tmpyVar *= xCharValue;
-		value = eval(yVarDouble + multiplyAssignmentOp + xChar);
+		value = eval(yVarDouble + multiplyAssignmentOp + xChar); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("double multiplyAssignment char : wrong type : ", "double", typeName);
 		doubleValue = ((IJavaPrimitiveValue)value).getDoubleValue();
@@ -933,7 +933,7 @@ public class DoubleAssignmentOperatorsTests extends Tests {
 		assertEquals("double local variable value : wrong result : ", tmpyVar, doubleValue, 0);
 
 		tmpyVar *= yCharValue;
-		value = eval(yVarDouble + multiplyAssignmentOp + yChar);
+		value = eval(yVarDouble + multiplyAssignmentOp + yChar); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("double multiplyAssignment char : wrong type : ", "double", typeName);
 		doubleValue = ((IJavaPrimitiveValue)value).getDoubleValue();
@@ -948,12 +948,12 @@ public class DoubleAssignmentOperatorsTests extends Tests {
 		}
 	}
 
-	public void testDoubleMultiplyAssignmentShort() throws Throwable {
+	public void testDoubleMultiplyAssignmentShort() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
 		double tmpxVar = xVarDoubleValue;
 		tmpxVar *= xShortValue;
-		IValue value = eval(xVarDouble + multiplyAssignmentOp + xShort);
+		IValue value = eval(xVarDouble + multiplyAssignmentOp + xShort); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("double multiplyAssignment short : wrong type : ", "double", typeName);
 		double doubleValue = ((IJavaPrimitiveValue)value).getDoubleValue();
@@ -965,7 +965,7 @@ public class DoubleAssignmentOperatorsTests extends Tests {
 		assertEquals("double local variable value : wrong result : ", tmpxVar, doubleValue, 0);
 
 		tmpxVar *= yShortValue;
-		value = eval(xVarDouble + multiplyAssignmentOp + yShort);
+		value = eval(xVarDouble + multiplyAssignmentOp + yShort); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("double multiplyAssignment short : wrong type : ", "double", typeName);
 		doubleValue = ((IJavaPrimitiveValue)value).getDoubleValue();
@@ -978,7 +978,7 @@ public class DoubleAssignmentOperatorsTests extends Tests {
 
 		double tmpyVar = yVarDoubleValue;
 		tmpyVar *= xShortValue;
-		value = eval(yVarDouble + multiplyAssignmentOp + xShort);
+		value = eval(yVarDouble + multiplyAssignmentOp + xShort); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("double multiplyAssignment short : wrong type : ", "double", typeName);
 		doubleValue = ((IJavaPrimitiveValue)value).getDoubleValue();
@@ -990,7 +990,7 @@ public class DoubleAssignmentOperatorsTests extends Tests {
 		assertEquals("double local variable value : wrong result : ", tmpyVar, doubleValue, 0);
 
 		tmpyVar *= yShortValue;
-		value = eval(yVarDouble + multiplyAssignmentOp + yShort);
+		value = eval(yVarDouble + multiplyAssignmentOp + yShort); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("double multiplyAssignment short : wrong type : ", "double", typeName);
 		doubleValue = ((IJavaPrimitiveValue)value).getDoubleValue();
@@ -1005,12 +1005,12 @@ public class DoubleAssignmentOperatorsTests extends Tests {
 		}
 	}
 
-	public void testDoubleMultiplyAssignmentInt() throws Throwable {
+	public void testDoubleMultiplyAssignmentInt() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
 		double tmpxVar = xVarDoubleValue;
 		tmpxVar *= xIntValue;
-		IValue value = eval(xVarDouble + multiplyAssignmentOp + xInt);
+		IValue value = eval(xVarDouble + multiplyAssignmentOp + xInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("double multiplyAssignment int : wrong type : ", "double", typeName);
 		double doubleValue = ((IJavaPrimitiveValue)value).getDoubleValue();
@@ -1022,7 +1022,7 @@ public class DoubleAssignmentOperatorsTests extends Tests {
 		assertEquals("double local variable value : wrong result : ", tmpxVar, doubleValue, 0);
 
 		tmpxVar *= yIntValue;
-		value = eval(xVarDouble + multiplyAssignmentOp + yInt);
+		value = eval(xVarDouble + multiplyAssignmentOp + yInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("double multiplyAssignment int : wrong type : ", "double", typeName);
 		doubleValue = ((IJavaPrimitiveValue)value).getDoubleValue();
@@ -1035,7 +1035,7 @@ public class DoubleAssignmentOperatorsTests extends Tests {
 
 		double tmpyVar = yVarDoubleValue;
 		tmpyVar *= xIntValue;
-		value = eval(yVarDouble + multiplyAssignmentOp + xInt);
+		value = eval(yVarDouble + multiplyAssignmentOp + xInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("double multiplyAssignment int : wrong type : ", "double", typeName);
 		doubleValue = ((IJavaPrimitiveValue)value).getDoubleValue();
@@ -1047,7 +1047,7 @@ public class DoubleAssignmentOperatorsTests extends Tests {
 		assertEquals("double local variable value : wrong result : ", tmpyVar, doubleValue, 0);
 
 		tmpyVar *= yIntValue;
-		value = eval(yVarDouble + multiplyAssignmentOp + yInt);
+		value = eval(yVarDouble + multiplyAssignmentOp + yInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("double multiplyAssignment int : wrong type : ", "double", typeName);
 		doubleValue = ((IJavaPrimitiveValue)value).getDoubleValue();
@@ -1062,12 +1062,12 @@ public class DoubleAssignmentOperatorsTests extends Tests {
 		}
 	}
 
-	public void testDoubleMultiplyAssignmentLong() throws Throwable {
+	public void testDoubleMultiplyAssignmentLong() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
 		double tmpxVar = xVarDoubleValue;
 		tmpxVar *= xLongValue;
-		IValue value = eval(xVarDouble + multiplyAssignmentOp + xLong);
+		IValue value = eval(xVarDouble + multiplyAssignmentOp + xLong); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("double multiplyAssignment long : wrong type : ", "double", typeName);
 		double doubleValue = ((IJavaPrimitiveValue)value).getDoubleValue();
@@ -1079,7 +1079,7 @@ public class DoubleAssignmentOperatorsTests extends Tests {
 		assertEquals("double local variable value : wrong result : ", tmpxVar, doubleValue, 0);
 
 		tmpxVar *= yLongValue;
-		value = eval(xVarDouble + multiplyAssignmentOp + yLong);
+		value = eval(xVarDouble + multiplyAssignmentOp + yLong); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("double multiplyAssignment long : wrong type : ", "double", typeName);
 		doubleValue = ((IJavaPrimitiveValue)value).getDoubleValue();
@@ -1092,7 +1092,7 @@ public class DoubleAssignmentOperatorsTests extends Tests {
 
 		double tmpyVar = yVarDoubleValue;
 		tmpyVar *= xLongValue;
-		value = eval(yVarDouble + multiplyAssignmentOp + xLong);
+		value = eval(yVarDouble + multiplyAssignmentOp + xLong); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("double multiplyAssignment long : wrong type : ", "double", typeName);
 		doubleValue = ((IJavaPrimitiveValue)value).getDoubleValue();
@@ -1104,7 +1104,7 @@ public class DoubleAssignmentOperatorsTests extends Tests {
 		assertEquals("double local variable value : wrong result : ", tmpyVar, doubleValue, 0);
 
 		tmpyVar *= yLongValue;
-		value = eval(yVarDouble + multiplyAssignmentOp + yLong);
+		value = eval(yVarDouble + multiplyAssignmentOp + yLong); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("double multiplyAssignment long : wrong type : ", "double", typeName);
 		doubleValue = ((IJavaPrimitiveValue)value).getDoubleValue();
@@ -1119,12 +1119,12 @@ public class DoubleAssignmentOperatorsTests extends Tests {
 		}
 	}
 
-	public void testDoubleMultiplyAssignmentFloat() throws Throwable {
+	public void testDoubleMultiplyAssignmentFloat() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
 		double tmpxVar = xVarDoubleValue;
 		tmpxVar *= xFloatValue;
-		IValue value = eval(xVarDouble + multiplyAssignmentOp + xFloat);
+		IValue value = eval(xVarDouble + multiplyAssignmentOp + xFloat); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("double multiplyAssignment float : wrong type : ", "double", typeName);
 		double doubleValue = ((IJavaPrimitiveValue)value).getDoubleValue();
@@ -1136,7 +1136,7 @@ public class DoubleAssignmentOperatorsTests extends Tests {
 		assertEquals("double local variable value : wrong result : ", tmpxVar, doubleValue, 0);
 
 		tmpxVar *= yFloatValue;
-		value = eval(xVarDouble + multiplyAssignmentOp + yFloat);
+		value = eval(xVarDouble + multiplyAssignmentOp + yFloat); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("double multiplyAssignment float : wrong type : ", "double", typeName);
 		doubleValue = ((IJavaPrimitiveValue)value).getDoubleValue();
@@ -1149,7 +1149,7 @@ public class DoubleAssignmentOperatorsTests extends Tests {
 
 		double tmpyVar = yVarDoubleValue;
 		tmpyVar *= xFloatValue;
-		value = eval(yVarDouble + multiplyAssignmentOp + xFloat);
+		value = eval(yVarDouble + multiplyAssignmentOp + xFloat); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("double multiplyAssignment float : wrong type : ", "double", typeName);
 		doubleValue = ((IJavaPrimitiveValue)value).getDoubleValue();
@@ -1161,7 +1161,7 @@ public class DoubleAssignmentOperatorsTests extends Tests {
 		assertEquals("double local variable value : wrong result : ", tmpyVar, doubleValue, 0);
 
 		tmpyVar *= yFloatValue;
-		value = eval(yVarDouble + multiplyAssignmentOp + yFloat);
+		value = eval(yVarDouble + multiplyAssignmentOp + yFloat); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("double multiplyAssignment float : wrong type : ", "double", typeName);
 		doubleValue = ((IJavaPrimitiveValue)value).getDoubleValue();
@@ -1176,12 +1176,12 @@ public class DoubleAssignmentOperatorsTests extends Tests {
 		}
 	}
 
-	public void testDoubleMultiplyAssignmentDouble() throws Throwable {
+	public void testDoubleMultiplyAssignmentDouble() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
 		double tmpxVar = xVarDoubleValue;
 		tmpxVar *= xDoubleValue;
-		IValue value = eval(xVarDouble + multiplyAssignmentOp + xDouble);
+		IValue value = eval(xVarDouble + multiplyAssignmentOp + xDouble); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("double multiplyAssignment double : wrong type : ", "double", typeName);
 		double doubleValue = ((IJavaPrimitiveValue)value).getDoubleValue();
@@ -1193,7 +1193,7 @@ public class DoubleAssignmentOperatorsTests extends Tests {
 		assertEquals("double local variable value : wrong result : ", tmpxVar, doubleValue, 0);
 
 		tmpxVar *= yDoubleValue;
-		value = eval(xVarDouble + multiplyAssignmentOp + yDouble);
+		value = eval(xVarDouble + multiplyAssignmentOp + yDouble); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("double multiplyAssignment double : wrong type : ", "double", typeName);
 		doubleValue = ((IJavaPrimitiveValue)value).getDoubleValue();
@@ -1206,7 +1206,7 @@ public class DoubleAssignmentOperatorsTests extends Tests {
 
 		double tmpyVar = yVarDoubleValue;
 		tmpyVar *= xDoubleValue;
-		value = eval(yVarDouble + multiplyAssignmentOp + xDouble);
+		value = eval(yVarDouble + multiplyAssignmentOp + xDouble); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("double multiplyAssignment double : wrong type : ", "double", typeName);
 		doubleValue = ((IJavaPrimitiveValue)value).getDoubleValue();
@@ -1218,7 +1218,7 @@ public class DoubleAssignmentOperatorsTests extends Tests {
 		assertEquals("double local variable value : wrong result : ", tmpyVar, doubleValue, 0);
 
 		tmpyVar *= yDoubleValue;
-		value = eval(yVarDouble + multiplyAssignmentOp + yDouble);
+		value = eval(yVarDouble + multiplyAssignmentOp + yDouble); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("double multiplyAssignment double : wrong type : ", "double", typeName);
 		doubleValue = ((IJavaPrimitiveValue)value).getDoubleValue();
@@ -1235,12 +1235,12 @@ public class DoubleAssignmentOperatorsTests extends Tests {
 
 	// double /= {byte, char, short, int, long, float, double}
 
-	public void testDoubleDivideAssignmentByte() throws Throwable {
+	public void testDoubleDivideAssignmentByte() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
 		double tmpxVar = xVarDoubleValue;
 		tmpxVar /= xByteValue;
-		IValue value = eval(xVarDouble + divideAssignmentOp + xByte);
+		IValue value = eval(xVarDouble + divideAssignmentOp + xByte); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("double divideAssignment byte : wrong type : ", "double", typeName);
 		double doubleValue = ((IJavaPrimitiveValue)value).getDoubleValue();
@@ -1252,7 +1252,7 @@ public class DoubleAssignmentOperatorsTests extends Tests {
 		assertEquals("double local variable value : wrong result : ", tmpxVar, doubleValue, 0);
 
 		tmpxVar /= yByteValue;
-		value = eval(xVarDouble + divideAssignmentOp + yByte);
+		value = eval(xVarDouble + divideAssignmentOp + yByte); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("double divideAssignment byte : wrong type : ", "double", typeName);
 		doubleValue = ((IJavaPrimitiveValue)value).getDoubleValue();
@@ -1265,7 +1265,7 @@ public class DoubleAssignmentOperatorsTests extends Tests {
 
 		double tmpyVar = yVarDoubleValue;
 		tmpyVar /= xByteValue;
-		value = eval(yVarDouble + divideAssignmentOp + xByte);
+		value = eval(yVarDouble + divideAssignmentOp + xByte); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("double divideAssignment byte : wrong type : ", "double", typeName);
 		doubleValue = ((IJavaPrimitiveValue)value).getDoubleValue();
@@ -1277,7 +1277,7 @@ public class DoubleAssignmentOperatorsTests extends Tests {
 		assertEquals("double local variable value : wrong result : ", tmpyVar, doubleValue, 0);
 
 		tmpyVar /= yByteValue;
-		value = eval(yVarDouble + divideAssignmentOp + yByte);
+		value = eval(yVarDouble + divideAssignmentOp + yByte); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("double divideAssignment byte : wrong type : ", "double", typeName);
 		doubleValue = ((IJavaPrimitiveValue)value).getDoubleValue();
@@ -1292,12 +1292,12 @@ public class DoubleAssignmentOperatorsTests extends Tests {
 		}
 	}
 
-	public void testDoubleDivideAssignmentChar() throws Throwable {
+	public void testDoubleDivideAssignmentChar() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
 		double tmpxVar = xVarDoubleValue;
 		tmpxVar /= xCharValue;
-		IValue value = eval(xVarDouble + divideAssignmentOp + xChar);
+		IValue value = eval(xVarDouble + divideAssignmentOp + xChar); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("double divideAssignment char : wrong type : ", "double", typeName);
 		double doubleValue = ((IJavaPrimitiveValue)value).getDoubleValue();
@@ -1309,7 +1309,7 @@ public class DoubleAssignmentOperatorsTests extends Tests {
 		assertEquals("double local variable value : wrong result : ", tmpxVar, doubleValue, 0);
 
 		tmpxVar /= yCharValue;
-		value = eval(xVarDouble + divideAssignmentOp + yChar);
+		value = eval(xVarDouble + divideAssignmentOp + yChar); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("double divideAssignment char : wrong type : ", "double", typeName);
 		doubleValue = ((IJavaPrimitiveValue)value).getDoubleValue();
@@ -1322,7 +1322,7 @@ public class DoubleAssignmentOperatorsTests extends Tests {
 
 		double tmpyVar = yVarDoubleValue;
 		tmpyVar /= xCharValue;
-		value = eval(yVarDouble + divideAssignmentOp + xChar);
+		value = eval(yVarDouble + divideAssignmentOp + xChar); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("double divideAssignment char : wrong type : ", "double", typeName);
 		doubleValue = ((IJavaPrimitiveValue)value).getDoubleValue();
@@ -1334,7 +1334,7 @@ public class DoubleAssignmentOperatorsTests extends Tests {
 		assertEquals("double local variable value : wrong result : ", tmpyVar, doubleValue, 0);
 
 		tmpyVar /= yCharValue;
-		value = eval(yVarDouble + divideAssignmentOp + yChar);
+		value = eval(yVarDouble + divideAssignmentOp + yChar); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("double divideAssignment char : wrong type : ", "double", typeName);
 		doubleValue = ((IJavaPrimitiveValue)value).getDoubleValue();
@@ -1349,12 +1349,12 @@ public class DoubleAssignmentOperatorsTests extends Tests {
 		}
 	}
 
-	public void testDoubleDivideAssignmentShort() throws Throwable {
+	public void testDoubleDivideAssignmentShort() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
 		double tmpxVar = xVarDoubleValue;
 		tmpxVar /= xShortValue;
-		IValue value = eval(xVarDouble + divideAssignmentOp + xShort);
+		IValue value = eval(xVarDouble + divideAssignmentOp + xShort); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("double divideAssignment short : wrong type : ", "double", typeName);
 		double doubleValue = ((IJavaPrimitiveValue)value).getDoubleValue();
@@ -1366,7 +1366,7 @@ public class DoubleAssignmentOperatorsTests extends Tests {
 		assertEquals("double local variable value : wrong result : ", tmpxVar, doubleValue, 0);
 
 		tmpxVar /= yShortValue;
-		value = eval(xVarDouble + divideAssignmentOp + yShort);
+		value = eval(xVarDouble + divideAssignmentOp + yShort); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("double divideAssignment short : wrong type : ", "double", typeName);
 		doubleValue = ((IJavaPrimitiveValue)value).getDoubleValue();
@@ -1379,7 +1379,7 @@ public class DoubleAssignmentOperatorsTests extends Tests {
 
 		double tmpyVar = yVarDoubleValue;
 		tmpyVar /= xShortValue;
-		value = eval(yVarDouble + divideAssignmentOp + xShort);
+		value = eval(yVarDouble + divideAssignmentOp + xShort); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("double divideAssignment short : wrong type : ", "double", typeName);
 		doubleValue = ((IJavaPrimitiveValue)value).getDoubleValue();
@@ -1391,7 +1391,7 @@ public class DoubleAssignmentOperatorsTests extends Tests {
 		assertEquals("double local variable value : wrong result : ", tmpyVar, doubleValue, 0);
 
 		tmpyVar /= yShortValue;
-		value = eval(yVarDouble + divideAssignmentOp + yShort);
+		value = eval(yVarDouble + divideAssignmentOp + yShort); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("double divideAssignment short : wrong type : ", "double", typeName);
 		doubleValue = ((IJavaPrimitiveValue)value).getDoubleValue();
@@ -1406,12 +1406,12 @@ public class DoubleAssignmentOperatorsTests extends Tests {
 		}
 	}
 
-	public void testDoubleDivideAssignmentInt() throws Throwable {
+	public void testDoubleDivideAssignmentInt() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
 		double tmpxVar = xVarDoubleValue;
 		tmpxVar /= xIntValue;
-		IValue value = eval(xVarDouble + divideAssignmentOp + xInt);
+		IValue value = eval(xVarDouble + divideAssignmentOp + xInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("double divideAssignment int : wrong type : ", "double", typeName);
 		double doubleValue = ((IJavaPrimitiveValue)value).getDoubleValue();
@@ -1423,7 +1423,7 @@ public class DoubleAssignmentOperatorsTests extends Tests {
 		assertEquals("double local variable value : wrong result : ", tmpxVar, doubleValue, 0);
 
 		tmpxVar /= yIntValue;
-		value = eval(xVarDouble + divideAssignmentOp + yInt);
+		value = eval(xVarDouble + divideAssignmentOp + yInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("double divideAssignment int : wrong type : ", "double", typeName);
 		doubleValue = ((IJavaPrimitiveValue)value).getDoubleValue();
@@ -1436,7 +1436,7 @@ public class DoubleAssignmentOperatorsTests extends Tests {
 
 		double tmpyVar = yVarDoubleValue;
 		tmpyVar /= xIntValue;
-		value = eval(yVarDouble + divideAssignmentOp + xInt);
+		value = eval(yVarDouble + divideAssignmentOp + xInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("double divideAssignment int : wrong type : ", "double", typeName);
 		doubleValue = ((IJavaPrimitiveValue)value).getDoubleValue();
@@ -1448,7 +1448,7 @@ public class DoubleAssignmentOperatorsTests extends Tests {
 		assertEquals("double local variable value : wrong result : ", tmpyVar, doubleValue, 0);
 
 		tmpyVar /= yIntValue;
-		value = eval(yVarDouble + divideAssignmentOp + yInt);
+		value = eval(yVarDouble + divideAssignmentOp + yInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("double divideAssignment int : wrong type : ", "double", typeName);
 		doubleValue = ((IJavaPrimitiveValue)value).getDoubleValue();
@@ -1463,12 +1463,12 @@ public class DoubleAssignmentOperatorsTests extends Tests {
 		}
 	}
 
-	public void testDoubleDivideAssignmentLong() throws Throwable {
+	public void testDoubleDivideAssignmentLong() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
 		double tmpxVar = xVarDoubleValue;
 		tmpxVar /= xLongValue;
-		IValue value = eval(xVarDouble + divideAssignmentOp + xLong);
+		IValue value = eval(xVarDouble + divideAssignmentOp + xLong); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("double divideAssignment long : wrong type : ", "double", typeName);
 		double doubleValue = ((IJavaPrimitiveValue)value).getDoubleValue();
@@ -1480,7 +1480,7 @@ public class DoubleAssignmentOperatorsTests extends Tests {
 		assertEquals("double local variable value : wrong result : ", tmpxVar, doubleValue, 0);
 
 		tmpxVar /= yLongValue;
-		value = eval(xVarDouble + divideAssignmentOp + yLong);
+		value = eval(xVarDouble + divideAssignmentOp + yLong); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("double divideAssignment long : wrong type : ", "double", typeName);
 		doubleValue = ((IJavaPrimitiveValue)value).getDoubleValue();
@@ -1493,7 +1493,7 @@ public class DoubleAssignmentOperatorsTests extends Tests {
 
 		double tmpyVar = yVarDoubleValue;
 		tmpyVar /= xLongValue;
-		value = eval(yVarDouble + divideAssignmentOp + xLong);
+		value = eval(yVarDouble + divideAssignmentOp + xLong); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("double divideAssignment long : wrong type : ", "double", typeName);
 		doubleValue = ((IJavaPrimitiveValue)value).getDoubleValue();
@@ -1505,7 +1505,7 @@ public class DoubleAssignmentOperatorsTests extends Tests {
 		assertEquals("double local variable value : wrong result : ", tmpyVar, doubleValue, 0);
 
 		tmpyVar /= yLongValue;
-		value = eval(yVarDouble + divideAssignmentOp + yLong);
+		value = eval(yVarDouble + divideAssignmentOp + yLong); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("double divideAssignment long : wrong type : ", "double", typeName);
 		doubleValue = ((IJavaPrimitiveValue)value).getDoubleValue();
@@ -1520,12 +1520,12 @@ public class DoubleAssignmentOperatorsTests extends Tests {
 		}
 	}
 
-	public void testDoubleDivideAssignmentFloat() throws Throwable {
+	public void testDoubleDivideAssignmentFloat() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
 		double tmpxVar = xVarDoubleValue;
 		tmpxVar /= xFloatValue;
-		IValue value = eval(xVarDouble + divideAssignmentOp + xFloat);
+		IValue value = eval(xVarDouble + divideAssignmentOp + xFloat); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("double divideAssignment float : wrong type : ", "double", typeName);
 		double doubleValue = ((IJavaPrimitiveValue)value).getDoubleValue();
@@ -1537,7 +1537,7 @@ public class DoubleAssignmentOperatorsTests extends Tests {
 		assertEquals("double local variable value : wrong result : ", tmpxVar, doubleValue, 0);
 
 		tmpxVar /= yFloatValue;
-		value = eval(xVarDouble + divideAssignmentOp + yFloat);
+		value = eval(xVarDouble + divideAssignmentOp + yFloat); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("double divideAssignment float : wrong type : ", "double", typeName);
 		doubleValue = ((IJavaPrimitiveValue)value).getDoubleValue();
@@ -1550,7 +1550,7 @@ public class DoubleAssignmentOperatorsTests extends Tests {
 
 		double tmpyVar = yVarDoubleValue;
 		tmpyVar /= xFloatValue;
-		value = eval(yVarDouble + divideAssignmentOp + xFloat);
+		value = eval(yVarDouble + divideAssignmentOp + xFloat); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("double divideAssignment float : wrong type : ", "double", typeName);
 		doubleValue = ((IJavaPrimitiveValue)value).getDoubleValue();
@@ -1562,7 +1562,7 @@ public class DoubleAssignmentOperatorsTests extends Tests {
 		assertEquals("double local variable value : wrong result : ", tmpyVar, doubleValue, 0);
 
 		tmpyVar /= yFloatValue;
-		value = eval(yVarDouble + divideAssignmentOp + yFloat);
+		value = eval(yVarDouble + divideAssignmentOp + yFloat); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("double divideAssignment float : wrong type : ", "double", typeName);
 		doubleValue = ((IJavaPrimitiveValue)value).getDoubleValue();
@@ -1577,12 +1577,12 @@ public class DoubleAssignmentOperatorsTests extends Tests {
 		}
 	}
 
-	public void testDoubleDivideAssignmentDouble() throws Throwable {
+	public void testDoubleDivideAssignmentDouble() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
 		double tmpxVar = xVarDoubleValue;
 		tmpxVar /= xDoubleValue;
-		IValue value = eval(xVarDouble + divideAssignmentOp + xDouble);
+		IValue value = eval(xVarDouble + divideAssignmentOp + xDouble); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("double divideAssignment double : wrong type : ", "double", typeName);
 		double doubleValue = ((IJavaPrimitiveValue)value).getDoubleValue();
@@ -1594,7 +1594,7 @@ public class DoubleAssignmentOperatorsTests extends Tests {
 		assertEquals("double local variable value : wrong result : ", tmpxVar, doubleValue, 0);
 
 		tmpxVar /= yDoubleValue;
-		value = eval(xVarDouble + divideAssignmentOp + yDouble);
+		value = eval(xVarDouble + divideAssignmentOp + yDouble); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("double divideAssignment double : wrong type : ", "double", typeName);
 		doubleValue = ((IJavaPrimitiveValue)value).getDoubleValue();
@@ -1607,7 +1607,7 @@ public class DoubleAssignmentOperatorsTests extends Tests {
 
 		double tmpyVar = yVarDoubleValue;
 		tmpyVar /= xDoubleValue;
-		value = eval(yVarDouble + divideAssignmentOp + xDouble);
+		value = eval(yVarDouble + divideAssignmentOp + xDouble); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("double divideAssignment double : wrong type : ", "double", typeName);
 		doubleValue = ((IJavaPrimitiveValue)value).getDoubleValue();
@@ -1619,7 +1619,7 @@ public class DoubleAssignmentOperatorsTests extends Tests {
 		assertEquals("double local variable value : wrong result : ", tmpyVar, doubleValue, 0);
 
 		tmpyVar /= yDoubleValue;
-		value = eval(yVarDouble + divideAssignmentOp + yDouble);
+		value = eval(yVarDouble + divideAssignmentOp + yDouble); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("double divideAssignment double : wrong type : ", "double", typeName);
 		doubleValue = ((IJavaPrimitiveValue)value).getDoubleValue();
@@ -1636,12 +1636,12 @@ public class DoubleAssignmentOperatorsTests extends Tests {
 
 	// double %= {byte, char, short, int, long, float, double}
 
-	public void testDoubleRemainderAssignmentByte() throws Throwable {
+	public void testDoubleRemainderAssignmentByte() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
 		double tmpxVar = xVarDoubleValue;
 		tmpxVar %= xByteValue;
-		IValue value = eval(xVarDouble + remainderAssignmentOp + xByte);
+		IValue value = eval(xVarDouble + remainderAssignmentOp + xByte); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("double remainderAssignment byte : wrong type : ", "double", typeName);
 		double doubleValue = ((IJavaPrimitiveValue)value).getDoubleValue();
@@ -1653,7 +1653,7 @@ public class DoubleAssignmentOperatorsTests extends Tests {
 		assertEquals("double local variable value : wrong result : ", tmpxVar, doubleValue, 0);
 
 		tmpxVar %= yByteValue;
-		value = eval(xVarDouble + remainderAssignmentOp + yByte);
+		value = eval(xVarDouble + remainderAssignmentOp + yByte); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("double remainderAssignment byte : wrong type : ", "double", typeName);
 		doubleValue = ((IJavaPrimitiveValue)value).getDoubleValue();
@@ -1666,7 +1666,7 @@ public class DoubleAssignmentOperatorsTests extends Tests {
 
 		double tmpyVar = yVarDoubleValue;
 		tmpyVar %= xByteValue;
-		value = eval(yVarDouble + remainderAssignmentOp + xByte);
+		value = eval(yVarDouble + remainderAssignmentOp + xByte); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("double remainderAssignment byte : wrong type : ", "double", typeName);
 		doubleValue = ((IJavaPrimitiveValue)value).getDoubleValue();
@@ -1678,7 +1678,7 @@ public class DoubleAssignmentOperatorsTests extends Tests {
 		assertEquals("double local variable value : wrong result : ", tmpyVar, doubleValue, 0);
 
 		tmpyVar %= yByteValue;
-		value = eval(yVarDouble + remainderAssignmentOp + yByte);
+		value = eval(yVarDouble + remainderAssignmentOp + yByte); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("double remainderAssignment byte : wrong type : ", "double", typeName);
 		doubleValue = ((IJavaPrimitiveValue)value).getDoubleValue();
@@ -1693,12 +1693,12 @@ public class DoubleAssignmentOperatorsTests extends Tests {
 		}
 	}
 
-	public void testDoubleRemainderAssignmentChar() throws Throwable {
+	public void testDoubleRemainderAssignmentChar() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
 		double tmpxVar = xVarDoubleValue;
 		tmpxVar %= xCharValue;
-		IValue value = eval(xVarDouble + remainderAssignmentOp + xChar);
+		IValue value = eval(xVarDouble + remainderAssignmentOp + xChar); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("double remainderAssignment char : wrong type : ", "double", typeName);
 		double doubleValue = ((IJavaPrimitiveValue)value).getDoubleValue();
@@ -1710,7 +1710,7 @@ public class DoubleAssignmentOperatorsTests extends Tests {
 		assertEquals("double local variable value : wrong result : ", tmpxVar, doubleValue, 0);
 
 		tmpxVar %= yCharValue;
-		value = eval(xVarDouble + remainderAssignmentOp + yChar);
+		value = eval(xVarDouble + remainderAssignmentOp + yChar); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("double remainderAssignment char : wrong type : ", "double", typeName);
 		doubleValue = ((IJavaPrimitiveValue)value).getDoubleValue();
@@ -1723,7 +1723,7 @@ public class DoubleAssignmentOperatorsTests extends Tests {
 
 		double tmpyVar = yVarDoubleValue;
 		tmpyVar %= xCharValue;
-		value = eval(yVarDouble + remainderAssignmentOp + xChar);
+		value = eval(yVarDouble + remainderAssignmentOp + xChar); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("double remainderAssignment char : wrong type : ", "double", typeName);
 		doubleValue = ((IJavaPrimitiveValue)value).getDoubleValue();
@@ -1735,7 +1735,7 @@ public class DoubleAssignmentOperatorsTests extends Tests {
 		assertEquals("double local variable value : wrong result : ", tmpyVar, doubleValue, 0);
 
 		tmpyVar %= yCharValue;
-		value = eval(yVarDouble + remainderAssignmentOp + yChar);
+		value = eval(yVarDouble + remainderAssignmentOp + yChar); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("double remainderAssignment char : wrong type : ", "double", typeName);
 		doubleValue = ((IJavaPrimitiveValue)value).getDoubleValue();
@@ -1750,12 +1750,12 @@ public class DoubleAssignmentOperatorsTests extends Tests {
 		}
 	}
 
-	public void testDoubleRemainderAssignmentShort() throws Throwable {
+	public void testDoubleRemainderAssignmentShort() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
 		double tmpxVar = xVarDoubleValue;
 		tmpxVar %= xShortValue;
-		IValue value = eval(xVarDouble + remainderAssignmentOp + xShort);
+		IValue value = eval(xVarDouble + remainderAssignmentOp + xShort); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("double remainderAssignment short : wrong type : ", "double", typeName);
 		double doubleValue = ((IJavaPrimitiveValue)value).getDoubleValue();
@@ -1767,7 +1767,7 @@ public class DoubleAssignmentOperatorsTests extends Tests {
 		assertEquals("double local variable value : wrong result : ", tmpxVar, doubleValue, 0);
 
 		tmpxVar %= yShortValue;
-		value = eval(xVarDouble + remainderAssignmentOp + yShort);
+		value = eval(xVarDouble + remainderAssignmentOp + yShort); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("double remainderAssignment short : wrong type : ", "double", typeName);
 		doubleValue = ((IJavaPrimitiveValue)value).getDoubleValue();
@@ -1780,7 +1780,7 @@ public class DoubleAssignmentOperatorsTests extends Tests {
 
 		double tmpyVar = yVarDoubleValue;
 		tmpyVar %= xShortValue;
-		value = eval(yVarDouble + remainderAssignmentOp + xShort);
+		value = eval(yVarDouble + remainderAssignmentOp + xShort); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("double remainderAssignment short : wrong type : ", "double", typeName);
 		doubleValue = ((IJavaPrimitiveValue)value).getDoubleValue();
@@ -1792,7 +1792,7 @@ public class DoubleAssignmentOperatorsTests extends Tests {
 		assertEquals("double local variable value : wrong result : ", tmpyVar, doubleValue, 0);
 
 		tmpyVar %= yShortValue;
-		value = eval(yVarDouble + remainderAssignmentOp + yShort);
+		value = eval(yVarDouble + remainderAssignmentOp + yShort); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("double remainderAssignment short : wrong type : ", "double", typeName);
 		doubleValue = ((IJavaPrimitiveValue)value).getDoubleValue();
@@ -1807,12 +1807,12 @@ public class DoubleAssignmentOperatorsTests extends Tests {
 		}
 	}
 
-	public void testDoubleRemainderAssignmentInt() throws Throwable {
+	public void testDoubleRemainderAssignmentInt() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
 		double tmpxVar = xVarDoubleValue;
 		tmpxVar %= xIntValue;
-		IValue value = eval(xVarDouble + remainderAssignmentOp + xInt);
+		IValue value = eval(xVarDouble + remainderAssignmentOp + xInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("double remainderAssignment int : wrong type : ", "double", typeName);
 		double doubleValue = ((IJavaPrimitiveValue)value).getDoubleValue();
@@ -1824,7 +1824,7 @@ public class DoubleAssignmentOperatorsTests extends Tests {
 		assertEquals("double local variable value : wrong result : ", tmpxVar, doubleValue, 0);
 
 		tmpxVar %= yIntValue;
-		value = eval(xVarDouble + remainderAssignmentOp + yInt);
+		value = eval(xVarDouble + remainderAssignmentOp + yInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("double remainderAssignment int : wrong type : ", "double", typeName);
 		doubleValue = ((IJavaPrimitiveValue)value).getDoubleValue();
@@ -1837,7 +1837,7 @@ public class DoubleAssignmentOperatorsTests extends Tests {
 
 		double tmpyVar = yVarDoubleValue;
 		tmpyVar %= xIntValue;
-		value = eval(yVarDouble + remainderAssignmentOp + xInt);
+		value = eval(yVarDouble + remainderAssignmentOp + xInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("double remainderAssignment int : wrong type : ", "double", typeName);
 		doubleValue = ((IJavaPrimitiveValue)value).getDoubleValue();
@@ -1849,7 +1849,7 @@ public class DoubleAssignmentOperatorsTests extends Tests {
 		assertEquals("double local variable value : wrong result : ", tmpyVar, doubleValue, 0);
 
 		tmpyVar %= yIntValue;
-		value = eval(yVarDouble + remainderAssignmentOp + yInt);
+		value = eval(yVarDouble + remainderAssignmentOp + yInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("double remainderAssignment int : wrong type : ", "double", typeName);
 		doubleValue = ((IJavaPrimitiveValue)value).getDoubleValue();
@@ -1864,12 +1864,12 @@ public class DoubleAssignmentOperatorsTests extends Tests {
 		}
 	}
 
-	public void testDoubleRemainderAssignmentLong() throws Throwable {
+	public void testDoubleRemainderAssignmentLong() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
 		double tmpxVar = xVarDoubleValue;
 		tmpxVar %= xLongValue;
-		IValue value = eval(xVarDouble + remainderAssignmentOp + xLong);
+		IValue value = eval(xVarDouble + remainderAssignmentOp + xLong); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("double remainderAssignment long : wrong type : ", "double", typeName);
 		double doubleValue = ((IJavaPrimitiveValue)value).getDoubleValue();
@@ -1881,7 +1881,7 @@ public class DoubleAssignmentOperatorsTests extends Tests {
 		assertEquals("double local variable value : wrong result : ", tmpxVar, doubleValue, 0);
 
 		tmpxVar %= yLongValue;
-		value = eval(xVarDouble + remainderAssignmentOp + yLong);
+		value = eval(xVarDouble + remainderAssignmentOp + yLong); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("double remainderAssignment long : wrong type : ", "double", typeName);
 		doubleValue = ((IJavaPrimitiveValue)value).getDoubleValue();
@@ -1894,7 +1894,7 @@ public class DoubleAssignmentOperatorsTests extends Tests {
 
 		double tmpyVar = yVarDoubleValue;
 		tmpyVar %= xLongValue;
-		value = eval(yVarDouble + remainderAssignmentOp + xLong);
+		value = eval(yVarDouble + remainderAssignmentOp + xLong); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("double remainderAssignment long : wrong type : ", "double", typeName);
 		doubleValue = ((IJavaPrimitiveValue)value).getDoubleValue();
@@ -1906,7 +1906,7 @@ public class DoubleAssignmentOperatorsTests extends Tests {
 		assertEquals("double local variable value : wrong result : ", tmpyVar, doubleValue, 0);
 
 		tmpyVar %= yLongValue;
-		value = eval(yVarDouble + remainderAssignmentOp + yLong);
+		value = eval(yVarDouble + remainderAssignmentOp + yLong); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("double remainderAssignment long : wrong type : ", "double", typeName);
 		doubleValue = ((IJavaPrimitiveValue)value).getDoubleValue();
@@ -1921,12 +1921,12 @@ public class DoubleAssignmentOperatorsTests extends Tests {
 		}
 	}
 
-	public void testDoubleRemainderAssignmentFloat() throws Throwable {
+	public void testDoubleRemainderAssignmentFloat() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
 		double tmpxVar = xVarDoubleValue;
 		tmpxVar %= xFloatValue;
-		IValue value = eval(xVarDouble + remainderAssignmentOp + xFloat);
+		IValue value = eval(xVarDouble + remainderAssignmentOp + xFloat); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("double remainderAssignment float : wrong type : ", "double", typeName);
 		double doubleValue = ((IJavaPrimitiveValue)value).getDoubleValue();
@@ -1938,7 +1938,7 @@ public class DoubleAssignmentOperatorsTests extends Tests {
 		assertEquals("double local variable value : wrong result : ", tmpxVar, doubleValue, 0);
 
 		tmpxVar %= yFloatValue;
-		value = eval(xVarDouble + remainderAssignmentOp + yFloat);
+		value = eval(xVarDouble + remainderAssignmentOp + yFloat); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("double remainderAssignment float : wrong type : ", "double", typeName);
 		doubleValue = ((IJavaPrimitiveValue)value).getDoubleValue();
@@ -1951,7 +1951,7 @@ public class DoubleAssignmentOperatorsTests extends Tests {
 
 		double tmpyVar = yVarDoubleValue;
 		tmpyVar %= xFloatValue;
-		value = eval(yVarDouble + remainderAssignmentOp + xFloat);
+		value = eval(yVarDouble + remainderAssignmentOp + xFloat); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("double remainderAssignment float : wrong type : ", "double", typeName);
 		doubleValue = ((IJavaPrimitiveValue)value).getDoubleValue();
@@ -1963,7 +1963,7 @@ public class DoubleAssignmentOperatorsTests extends Tests {
 		assertEquals("double local variable value : wrong result : ", tmpyVar, doubleValue, 0);
 
 		tmpyVar %= yFloatValue;
-		value = eval(yVarDouble + remainderAssignmentOp + yFloat);
+		value = eval(yVarDouble + remainderAssignmentOp + yFloat); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("double remainderAssignment float : wrong type : ", "double", typeName);
 		doubleValue = ((IJavaPrimitiveValue)value).getDoubleValue();
@@ -1978,12 +1978,12 @@ public class DoubleAssignmentOperatorsTests extends Tests {
 		}
 	}
 
-	public void testDoubleRemainderAssignmentDouble() throws Throwable {
+	public void testDoubleRemainderAssignmentDouble() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
 		double tmpxVar = xVarDoubleValue;
 		tmpxVar %= xDoubleValue;
-		IValue value = eval(xVarDouble + remainderAssignmentOp + xDouble);
+		IValue value = eval(xVarDouble + remainderAssignmentOp + xDouble); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("double remainderAssignment double : wrong type : ", "double", typeName);
 		double doubleValue = ((IJavaPrimitiveValue)value).getDoubleValue();
@@ -1995,7 +1995,7 @@ public class DoubleAssignmentOperatorsTests extends Tests {
 		assertEquals("double local variable value : wrong result : ", tmpxVar, doubleValue, 0);
 
 		tmpxVar %= yDoubleValue;
-		value = eval(xVarDouble + remainderAssignmentOp + yDouble);
+		value = eval(xVarDouble + remainderAssignmentOp + yDouble); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("double remainderAssignment double : wrong type : ", "double", typeName);
 		doubleValue = ((IJavaPrimitiveValue)value).getDoubleValue();
@@ -2008,7 +2008,7 @@ public class DoubleAssignmentOperatorsTests extends Tests {
 
 		double tmpyVar = yVarDoubleValue;
 		tmpyVar %= xDoubleValue;
-		value = eval(yVarDouble + remainderAssignmentOp + xDouble);
+		value = eval(yVarDouble + remainderAssignmentOp + xDouble); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("double remainderAssignment double : wrong type : ", "double", typeName);
 		doubleValue = ((IJavaPrimitiveValue)value).getDoubleValue();
@@ -2020,7 +2020,7 @@ public class DoubleAssignmentOperatorsTests extends Tests {
 		assertEquals("double local variable value : wrong result : ", tmpyVar, doubleValue, 0);
 
 		tmpyVar %= yDoubleValue;
-		value = eval(yVarDouble + remainderAssignmentOp + yDouble);
+		value = eval(yVarDouble + remainderAssignmentOp + yDouble); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("double remainderAssignment double : wrong type : ", "double", typeName);
 		doubleValue = ((IJavaPrimitiveValue)value).getDoubleValue();

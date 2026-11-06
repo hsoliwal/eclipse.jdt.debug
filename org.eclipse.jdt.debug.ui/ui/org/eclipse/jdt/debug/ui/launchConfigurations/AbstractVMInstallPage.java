@@ -140,7 +140,7 @@ public abstract class AbstractVMInstallPage extends WizardPage {
 	 *
 	 * @since 3.11
 	 */
-	protected void nameChanged(String newName, boolean init) {
+	protected void nameChanged(String newName, boolean init) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		fNameStatus = Status.OK_STATUS;
 		if (newName == null || newName.trim().length() == 0) {
 			if (init) {
@@ -172,7 +172,7 @@ public abstract class AbstractVMInstallPage extends WizardPage {
 	 */
 	private boolean isDuplicateName(String name) {
 		if (fExistingNames != null) {
-			for (String n : fExistingNames) {
+			for (String n : fExistingNames) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				if (name.equals(n)) {
 					return true;
 				}
@@ -204,7 +204,7 @@ public abstract class AbstractVMInstallPage extends WizardPage {
 	 *
 	 * @param status status with message and severity
 	 */
-	protected void setStatusMessage(IStatus status) {
+	protected void setStatusMessage(IStatus status) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		if (status.isOK()) {
 			setMessage(status.getMessage());
 		} else {
@@ -239,7 +239,7 @@ public abstract class AbstractVMInstallPage extends WizardPage {
 	 */
 	protected void updatePageStatus() {
 		IStatus max = Status.OK_STATUS;
-		for (IStatus status : getVMStatus()) {
+		for (IStatus status : getVMStatus()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			if (status.getSeverity() > max.getSeverity()) {
 				max = status;
 			}

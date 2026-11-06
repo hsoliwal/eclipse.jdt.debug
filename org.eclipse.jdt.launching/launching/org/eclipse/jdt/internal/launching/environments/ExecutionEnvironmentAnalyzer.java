@@ -89,7 +89,7 @@ public class ExecutionEnvironmentAnalyzer implements IExecutionEnvironmentAnalyz
 
 	private static final String[] VM_PROPERTIES = {JAVA_SPEC_NAME, JAVA_SPEC_VERSION, JAVA_VERSION};
 	private static final String FOUNDATION = "foundation"; //$NON-NLS-1$
-	private static final Map<String, String[]> mappings = new HashMap<>();
+	private static final Map<String, String[]> mappings = new HashMap<>(); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
 
 	static {
 		// table where the key is the EE and the value is an array of EEs that it is a super-set of
@@ -129,9 +129,9 @@ public class ExecutionEnvironmentAnalyzer implements IExecutionEnvironmentAnalyz
 		mappings.put(JavaSE_27, new String[] { JavaSE_26 });
 		mappings.put(JavaSE_28, new String[] { JavaSE_27 });
 	}
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public CompatibleEnvironment[] analyze(IVMInstall vm, IProgressMonitor monitor) throws CoreException {
-		ArrayList<CompatibleEnvironment> result = new ArrayList<>();
+		ArrayList<CompatibleEnvironment> result = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 		if (!(vm instanceof IVMInstall2)) {
 			return new CompatibleEnvironment[0];
 		}
@@ -225,7 +225,7 @@ public class ExecutionEnvironmentAnalyzer implements IExecutionEnvironmentAnalyz
 		}
 
 		if (types != null) {
-			for (int i=0; i < types.size(); i++) {
+			for (int i=0; i < types.size(); i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				addEnvironment(result, types.get(i), i ==0);
 			}
 		}
@@ -236,12 +236,12 @@ public class ExecutionEnvironmentAnalyzer implements IExecutionEnvironmentAnalyz
 	 * Check a couple of known system properties for the word "foundation".
 	 */
 	private boolean isFoundation(Map<String, String> properties) {
-		for (int i=0; i < VM_PROPERTIES.length; i++) {
+		for (int i=0; i < VM_PROPERTIES.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			String value = properties.get(VM_PROPERTIES[i]);
 			if (value == null) {
 				continue;
 			}
-			for (StringTokenizer tokenizer = new StringTokenizer(value); tokenizer.hasMoreTokens(); ) {
+			for (StringTokenizer tokenizer = new StringTokenizer(value); tokenizer.hasMoreTokens(); ) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				if (FOUNDATION.equalsIgnoreCase(tokenizer.nextToken())) {
 					return true;
 				}
@@ -270,11 +270,11 @@ public class ExecutionEnvironmentAnalyzer implements IExecutionEnvironmentAnalyz
 
 	// first entry in the list is the perfect match
 	private List<String> getTypes(String type) {
-		List<String> result = new ArrayList<>();
+		List<String> result = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 		result.add(type);
 		String[] values = mappings.get(type);
 		if (values != null) {
-			for (int i=0; i<values.length; i++) {
+			for (int i=0; i<values.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				result.addAll(getTypes(values[i]));
 			}
 		}

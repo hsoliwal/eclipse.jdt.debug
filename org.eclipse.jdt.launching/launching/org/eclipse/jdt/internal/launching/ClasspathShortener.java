@@ -65,7 +65,7 @@ public class ClasspathShortener implements IProcessTempFileCreator {
 	private int lastJavaArgumentIndex;
 	private String[] envp;
 	private File processTempFilesDir;
-	private final List<File> processTempFiles = new ArrayList<>();
+	private final List<File> processTempFiles = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 	private static final String ARGFILE_TEMPDIR_NAME = "temp"; //$NON-NLS-1$
 
 	/**
@@ -96,7 +96,7 @@ public class ClasspathShortener implements IProcessTempFileCreator {
 		this.os = os;
 		this.javaVersion = javaVersion;
 		this.launch = launch;
-		this.cmdLine = new ArrayList<>(Arrays.asList(cmdLine));
+		this.cmdLine = new ArrayList<>(Arrays.asList(cmdLine)); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 		this.lastJavaArgumentIndex = lastJavaArgumentIndex;
 		this.envp = envp == null ? null : Arrays.copyOf(envp, envp.length);
 		this.processTempFilesDir = workingDir != null ? workingDir : Paths.get(".").toAbsolutePath().normalize().toFile(); //$NON-NLS-1$
@@ -135,7 +135,7 @@ public class ClasspathShortener implements IProcessTempFileCreator {
 
 	@Override
 	public List<File> getProcessTempFiles() {
-		return new ArrayList<>(processTempFiles);
+		return new ArrayList<>(processTempFiles); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 	}
 
 	/**
@@ -155,7 +155,7 @@ public class ClasspathShortener implements IProcessTempFileCreator {
 	}
 
 	private int getClasspathArgumentIndex() {
-		for (int i = 0; i <= lastJavaArgumentIndex; i++) {
+		for (int i = 0; i <= lastJavaArgumentIndex; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			String element = cmdLine.get(i);
 			if ("-cp".equals(element) || "-classpath".equals(element) || "--class-path".equals(element)) { //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 				return i + 1;
@@ -165,7 +165,7 @@ public class ClasspathShortener implements IProcessTempFileCreator {
 	}
 
 	private int getModulepathArgumentIndex() {
-		for (int i = 0; i <= lastJavaArgumentIndex; i++) {
+		for (int i = 0; i <= lastJavaArgumentIndex; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			String element = cmdLine.get(i);
 			if ("-p".equals(element) || "--module-path".equals(element)) { //$NON-NLS-1$ //$NON-NLS-2$
 				return i + 1;
@@ -174,7 +174,7 @@ public class ClasspathShortener implements IProcessTempFileCreator {
 		return -1;
 	}
 
-	private boolean shortenModulePathIfNecessary() {
+	private boolean shortenModulePathIfNecessary() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		int modulePathArgumentIndex = getModulepathArgumentIndex();
 		if (modulePathArgumentIndex == -1) {
 			return false;
@@ -194,7 +194,7 @@ public class ClasspathShortener implements IProcessTempFileCreator {
 		return false;
 	}
 
-	private boolean shortenClasspathIfNecessary() {
+	private boolean shortenClasspathIfNecessary() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		int classpathArgumentIndex = getClasspathArgumentIndex();
 		if (classpathArgumentIndex == -1) {
 			return false;
@@ -256,7 +256,7 @@ public class ClasspathShortener implements IProcessTempFileCreator {
 		return Arrays.stream(envp).map(element -> element.length() + 1).reduce((a, b) -> a + b).orElse(0);
 	}
 
-	protected int getMaxCommandLineLength() {
+	protected int getMaxCommandLineLength() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		// for Posix systems, ARG_MAX is the maximum length of argument to the exec functions including environment data.
 		// POSIX suggests to subtract 2048 additionally so that the process may safely modify its environment.
 		// see https://www.in-ulm.de/~mascheck/various/argmax/
@@ -285,23 +285,23 @@ public class ClasspathShortener implements IProcessTempFileCreator {
 		return Integer.MAX_VALUE;
 	}
 
-	private void shortenPathUsingClasspathArgumentFile(int modulePathArgumentIndex, String option) throws CoreException {
+	private void shortenPathUsingClasspathArgumentFile(int modulePathArgumentIndex, String option) throws CoreException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String path = cmdLine.get(modulePathArgumentIndex);
 		File file;
 		try {
 			IPath stateLocation = LaunchingPlugin.getDefault().getStateLocation();
 			IPath argFileTmpIPath = stateLocation.append(ARGFILE_TEMPDIR_NAME);
 			File argFileTmpDir = argFileTmpIPath.toFile();
-			if (!argFileTmpDir.exists()) {
+			if (!argFileTmpDir.exists()) { //FLLDCIM: MARK — M31 M3FILE_IO CALL
 				Files.createDirectory(argFileTmpDir.toPath());
 			}
-			File argFile = JavaLaunchingUtils.createFileForArgument(getLaunchTimeStamp(), argFileTmpDir, getLaunchConfigurationName(), "%s" //$NON-NLS-1$
+			File argFile = JavaLaunchingUtils.createFileForArgument(getLaunchTimeStamp(), argFileTmpDir, getLaunchConfigurationName(), "%s" //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 					+ option + "-arg-%s.txt"); //$NON-NLS-1$
 
-			String arg = option + " " + quoteWindowsPath(path); //$NON-NLS-1$
+			String arg = option + " " + quoteWindowsPath(path); //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 			Charset systemCharset = Platform.getSystemCharset();
 			if (!systemCharset.newEncoder().canEncode(arg)) {
-				throw new CoreException(new Status(IStatus.ERROR, LaunchingPlugin.getUniqueIdentifier(), IStatus.ERROR, "Cannot encode " + option //$NON-NLS-1$
+				throw new CoreException(new Status(IStatus.ERROR, LaunchingPlugin.getUniqueIdentifier(), IStatus.ERROR, "Cannot encode " + option //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 						+ " as argument file with system charset " //$NON-NLS-1$
 						+ systemCharset.displayName() + ".", null)); //$NON-NLS-1$
 			}
@@ -309,12 +309,12 @@ public class ClasspathShortener implements IProcessTempFileCreator {
 			argFile.deleteOnExit();
 			file = argFile;
 		} catch (IOException e) {
-			throw new CoreException(new Status(IStatus.ERROR, LaunchingPlugin.getUniqueIdentifier(), IStatus.ERROR, "Cannot create " + option //$NON-NLS-1$
+			throw new CoreException(new Status(IStatus.ERROR, LaunchingPlugin.getUniqueIdentifier(), IStatus.ERROR, "Cannot create " + option //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 					+ " argument file", e)); //$NON-NLS-1$
 		}
 
 		removeCmdLineArgs(modulePathArgumentIndex - 1, 2);
-		addCmdLineArgs(modulePathArgumentIndex - 1, '@' + file.getAbsolutePath());
+		addCmdLineArgs(modulePathArgumentIndex - 1, '@' + file.getAbsolutePath()); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		addProcessTempFile(file);
 	}
 
@@ -343,24 +343,24 @@ public class ClasspathShortener implements IProcessTempFileCreator {
 		return (boolean) result;
 	}
 
-	private File createClasspathOnlyJar(String classpath) throws CoreException {
+	private File createClasspathOnlyJar(String classpath) throws CoreException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 			File jarFile = JavaLaunchingUtils.createFileForArgument(getLaunchTimeStamp(), processTempFilesDir, getLaunchConfigurationName(), "%s-classpathOnly-%s.jar"); //$NON-NLS-1$
 			URI workingDirUri = processTempFilesDir.toURI();
-			StringBuilder manifestClasspath = new StringBuilder();
+			StringBuilder manifestClasspath = new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 			String[] classpathArray = getClasspathAsArray(classpath);
-			for (int i = 0; i < classpathArray.length; i++) {
+			for (int i = 0; i < classpathArray.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				if (i != 0) {
-					manifestClasspath.append(' ');
+					manifestClasspath.append(' '); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				}
 				File file = new File(classpathArray[i]);
 				String relativePath = URIUtil.makeRelative(file.toURI(), workingDirUri).toString();
-				manifestClasspath.append(relativePath);
+				manifestClasspath.append(relativePath); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			}
 			Manifest manifest = new Manifest();
 			manifest.getMainAttributes().put(Attributes.Name.MANIFEST_VERSION, "1.0"); //$NON-NLS-1$
 			manifest.getMainAttributes().put(Attributes.Name.CLASS_PATH, manifestClasspath.toString());
-			try (JarOutputStream target = new JarOutputStream(new FileOutputStream(jarFile), manifest)) {
+			try (JarOutputStream target = new JarOutputStream(new FileOutputStream(jarFile), manifest)) { //FLLDCIM: MARK — M31 M3FILE_IO NEW
 				target.hashCode(); // avoid warning that target is unused
 			}
 			return jarFile;
@@ -370,7 +370,7 @@ public class ClasspathShortener implements IProcessTempFileCreator {
 	}
 
 	private String[] getClasspathAsArray(String classpath) {
-		return classpath.split("" + getPathSeparatorChar()); //$NON-NLS-1$
+		return classpath.split("" + getPathSeparatorChar()); //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
 	}
 
 	protected char getPathSeparatorChar() {
@@ -393,13 +393,13 @@ public class ClasspathShortener implements IProcessTempFileCreator {
 		Map<String, String> nativeEnvironment = getNativeEnvironment();
 		String[] envp = new String[nativeEnvironment.size()];
 		int idx = 0;
-		for (Entry<String, String> entry : nativeEnvironment.entrySet()) {
+		for (Entry<String, String> entry : nativeEnvironment.entrySet()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			String value = entry.getValue();
 			if (value == null) {
 				value = ""; //$NON-NLS-1$
 			}
 			String key = entry.getKey();
-			envp[idx] = key + '=' + value;
+			envp[idx] = key + '=' + value; //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 			idx++;
 		}
 		return envp;
@@ -414,7 +414,7 @@ public class ClasspathShortener implements IProcessTempFileCreator {
 		if (envp == null) {
 			envp = getEnvpFromNativeEnvironment();
 		}
-		String classpathEnvVar = CLASSPATH_ENV_VAR_PREFIX + classpath;
+		String classpathEnvVar = CLASSPATH_ENV_VAR_PREFIX + classpath; //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		int index = getEnvClasspathIndex(envp);
 		if (index < 0) {
 			envp = Arrays.copyOf(envp, envp.length + 1);
@@ -426,7 +426,7 @@ public class ClasspathShortener implements IProcessTempFileCreator {
 	}
 
 	private void removeCmdLineArgs(int index, int length) {
-		for (int i = 0; i < length; i++) {
+		for (int i = 0; i < length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			cmdLine.remove(index);
 			lastJavaArgumentIndex--;
 		}
@@ -446,7 +446,7 @@ public class ClasspathShortener implements IProcessTempFileCreator {
 	 */
 	private int getEnvClasspathIndex(String[] env) {
 		if (env != null) {
-			for (int i = 0; i < env.length; i++) {
+			for (int i = 0; i < env.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				if (env[i].regionMatches(true, 0, CLASSPATH_ENV_VAR_PREFIX, 0, 10)) {
 					return i;
 				}
@@ -455,21 +455,21 @@ public class ClasspathShortener implements IProcessTempFileCreator {
 		return -1;
 	}
 
-	public String quoteWindowsPath(String path) {
+	public String quoteWindowsPath(String path) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		if (os.equals(Platform.OS_WIN32)) {
 			int length = path.length();
-			StringBuilder newPath = new StringBuilder(length);
+			StringBuilder newPath = new StringBuilder(length); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 			boolean insideQuote = false;
-			for (int i = 0; i < length; i++) {
+			for (int i = 0; i < length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				char c = path.charAt(i);
 				if (c == ' ' && !insideQuote) {
-					newPath.append('"');
+					newPath.append('"'); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 					insideQuote = true;
 				} else if (insideQuote) {
-					newPath.append('"');
+					newPath.append('"'); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 					insideQuote = false;
 				}
-				newPath.append(c);
+				newPath.append(c); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			}
 			return newPath.toString();
 		}

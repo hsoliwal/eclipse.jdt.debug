@@ -64,8 +64,8 @@ public final class SyntheticVariableUtils {
 	 * @return array of variables
 	 */
 	public static IVariable[] findSyntheticVariables(IVariable[] variables) throws DebugException {
-		ArrayList<IVariable> extracted = new ArrayList<>();
-		for (IVariable variable : variables) {
+		ArrayList<IVariable> extracted = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
+		for (IVariable variable : variables) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			if (variable.getName().startsWith(ANONYMOUS_VAR_PREFIX)) {
 				extracted.add(variable);
 			}

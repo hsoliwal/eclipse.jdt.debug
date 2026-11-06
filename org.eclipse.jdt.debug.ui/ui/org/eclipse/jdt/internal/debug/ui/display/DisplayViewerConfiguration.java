@@ -58,7 +58,7 @@ public class DisplayViewerConfiguration extends JavaSourceViewerConfiguration {
 	/* (non-Javadoc)
 	 * @see org.eclipse.jface.text.source.SourceViewerConfiguration#getContentAssistant(org.eclipse.jface.text.source.ISourceViewer)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public IContentAssistant getContentAssistant(ISourceViewer sourceViewer) {
 
 		ContentAssistant assistant = new ContentAssistant();

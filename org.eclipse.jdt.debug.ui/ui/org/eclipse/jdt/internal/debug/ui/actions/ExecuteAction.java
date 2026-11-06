@@ -21,7 +21,7 @@ import org.eclipse.jdt.internal.debug.ui.snippeteditor.JavaSnippetEditor;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.IWorkbenchPart;
 
-public class ExecuteAction extends EvaluateAction {
+public class ExecuteAction extends EvaluateAction { //FLLDCIM: MARK — T20  IMPLEMENTS
 
 	/**
 	 * @see org.eclipse.jdt.internal.debug.ui.actions.EvaluateAction#displayResult(org.eclipse.jdt.debug.eval.IEvaluationResult)
@@ -30,7 +30,7 @@ public class ExecuteAction extends EvaluateAction {
 	protected void displayResult(final IEvaluationResult result) {
 		if (result.hasErrors()) {
 			final Display display = JDIDebugUIPlugin.getStandardDisplay();
-			display.asyncExec(new Runnable() {
+			display.asyncExec(new Runnable() { //FLLDCIM: MARK — T08 UI_THREAD_SYNCHRONIZER CALL
 				@Override
 				public void run() {
 					if (display.isDisposed()) {

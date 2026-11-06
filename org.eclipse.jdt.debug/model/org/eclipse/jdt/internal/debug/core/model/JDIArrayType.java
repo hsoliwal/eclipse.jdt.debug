@@ -61,7 +61,7 @@ public class JDIArrayType extends JDIReferenceType implements IJavaArrayType {
 	/**
 	 * @see IJavaArrayType#getComponentType()
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public IJavaType getComponentType() throws DebugException {
 		try {
 			Type type = ((ArrayType) getUnderlyingType()).componentType();

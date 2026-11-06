@@ -44,7 +44,7 @@ public class EventDispatcherTest extends AbstractDebugTest {
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
-		jobs = Collections.synchronizedMap(new IdentityHashMap<>());
+		jobs = Collections.synchronizedMap(new IdentityHashMap<>()); //FLLDCIM: MARK — M06 M3_IDENTITY_WEAK_LANES NEW
 		jobListener = new JobChangeAdapter() {
 			@Override
 			public void aboutToRun(IJobChangeEvent event) {
@@ -65,7 +65,7 @@ public class EventDispatcherTest extends AbstractDebugTest {
 		super.tearDown();
 	}
 
-	public void test285130_bulkThreadCreation() throws Exception {
+	public void test285130_bulkThreadCreation() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		// the real goal of this test is to validate that rapidly delivered JDI events do not start large number of threads
 		// unfortunately there is no direct way to observe startup of the JDI event processing threads
 		// as approximation, assert single JDI processing Job was ever run during the test
@@ -73,8 +73,8 @@ public class EventDispatcherTest extends AbstractDebugTest {
 
 		// sanity check: count number of JDIThread thread-create events
 		AtomicInteger threadCount = new AtomicInteger();
-		IDebugEventSetListener debugListener = events -> {
-			for (DebugEvent event : events) {
+		IDebugEventSetListener debugListener = events -> { //FLLDCIM: MARK — T27  LAMBDA
+			for (DebugEvent event : events) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				if (event.getKind() == DebugEvent.CREATE && event.getSource() instanceof JDIThread) {
 					JDIThread thread = (JDIThread) event.getSource();
 					try {
@@ -89,7 +89,7 @@ public class EventDispatcherTest extends AbstractDebugTest {
 		};
 		IJavaThread suspendedThread = null;
 		try {
-			DebugPlugin.getDefault().addDebugEventListener(debugListener);
+			DebugPlugin.getDefault().addDebugEventListener(debugListener); //FLLDCIM: MARK — T27 DEBUG_EVENT_ADAPTER CALL
 			createLineBreakpoint(27, "BulkThreadCreationTest");
 			suspendedThread = launchToBreakpoint("BulkThreadCreationTest");
 		}
@@ -100,14 +100,14 @@ public class EventDispatcherTest extends AbstractDebugTest {
 		}
 
 		assertEquals("Unexpected number of JDIThread thread-create events", 1000, threadCount.get());
-		assertEquals("Unexpected number of event dispatching jobs: " + jobs.size() + " | " + jobs.keySet(), 0, jobs.size());
+		assertEquals("Unexpected number of event dispatching jobs: " + jobs.size() + " | " + jobs.keySet(), 0, jobs.size()); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 	}
 
 	/**
 	 * Tests that a conditional breakpoint with an expression that will hit a breakpoint will complete the conditional expression evaluation (bug
 	 * 269231) and that we dispatch events for conditional breakpoints in dedicated jobs.
 	 */
-	public void testConditionalExpressionEventDispatching() throws Exception {
+	public void testConditionalExpressionEventDispatching() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String typeName = "BreakpointListenerTest";
 		createConditionalLineBreakpoint(18, typeName, "foo(); return false;", true);
 		IJavaLineBreakpoint breakpoint = createLineBreakpoint(20, typeName);
@@ -124,7 +124,7 @@ public class EventDispatcherTest extends AbstractDebugTest {
 			removeAllBreakpoints();
 		}
 		// Expect to see two jobs for conditional breakpoint with 1) class prepare and 2) breakpoint hit events
-		assertEquals("Unexpected number of event dispatching jobs: " + jobs.size() + " | " + jobs.keySet(), 2, jobs.size());
+		assertEquals("Unexpected number of event dispatching jobs: " + jobs.size() + " | " + jobs.keySet(), 2, jobs.size()); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 	}
 
 }

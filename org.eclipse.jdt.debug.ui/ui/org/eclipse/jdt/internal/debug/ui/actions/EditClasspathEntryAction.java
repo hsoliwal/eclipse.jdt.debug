@@ -30,7 +30,7 @@ import org.eclipse.ui.actions.SelectionListenerAction;
 /**
  * Moves selected entries in a runtime classpath viewer up one position.
  */
-public class EditClasspathEntryAction extends RuntimeClasspathAction {
+public class EditClasspathEntryAction extends RuntimeClasspathAction { //FLLDCIM: MARK — T04  IMPLEMENTS
 
 	private final ILaunchConfiguration fConfiguration;
 
@@ -43,7 +43,7 @@ public class EditClasspathEntryAction extends RuntimeClasspathAction {
 	 *
 	 * @see IAction#run()
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public void run() {
 		List<IRuntimeClasspathEntry> targets = getOrderedSelection();
 		if (targets.size() != 1) {
@@ -53,7 +53,7 @@ public class EditClasspathEntryAction extends RuntimeClasspathAction {
 		IRuntimeClasspathEntry[] original = new IRuntimeClasspathEntry[]{entry};
 		IRuntimeClasspathEntry[] delegtes = new IRuntimeClasspathEntry[original.length];
 		IClasspathEntry[] parents = new IClasspathEntry[original.length];
-		for (int i = 0; i < delegtes.length; i++) {
+		for (int i = 0; i < delegtes.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			ClasspathEntry classpathEntry = (ClasspathEntry)original[i];
 			delegtes[i] = classpathEntry.getDelegate();
 			parents[i] = classpathEntry.getParent();
@@ -65,7 +65,7 @@ public class EditClasspathEntryAction extends RuntimeClasspathAction {
 				IRuntimeClasspathEntry[] wrappers = new IRuntimeClasspathEntry[replacements.length];
 				List<IRuntimeClasspathEntry> list = getEntriesAsList();
 				int index = 0;
-				for (int i = 0; i < list.size() && index < original.length && index < replacements.length; i++) {
+				for (int i = 0; i < list.size() && index < original.length && index < replacements.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 					Object element = list.get(i);
 					if (element == original[index]) {
 						wrappers[index] = new ClasspathEntry(replacements[index], parents[index]);
@@ -74,7 +74,7 @@ public class EditClasspathEntryAction extends RuntimeClasspathAction {
 					}
 				}
 				setEntries(list);
-				for (IRuntimeClasspathEntry wrapper : wrappers) {
+				for (IRuntimeClasspathEntry wrapper : wrappers) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 					getViewer().refresh(wrapper);
 				}
 			}

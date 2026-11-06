@@ -444,7 +444,7 @@ public class TypeNameBreakpointTests extends AbstractDebugTest {
 	private void removeLaunch() {
 		ILaunchManager launchManager = getLaunchManager();
 		ILaunch[] launches = launchManager.getLaunches();
-		assertEquals("expected exactly 1 launch but got: " + Arrays.toString(launches), 1, launches.length);
+		assertEquals("expected exactly 1 launch but got: " + Arrays.toString(launches), 1, launches.length); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		launchManager.removeLaunch(launches[0]);
 	}
 

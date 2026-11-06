@@ -31,7 +31,7 @@ public class RuntimeClasspathEntryListComparator implements Comparator<Object> {
 		List<?> list2 = (List<?>)o2;
 
 		if (list1.size() == list2.size()) {
-			for (int i = 0; i < list1.size(); i++) {
+			for (int i = 0; i < list1.size(); i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				String memento1 = (String)list1.get(i);
 				String memento2 = (String)list2.get(i);
 				if (!equalsIgnoreWhitespace(memento1, memento2)) {
@@ -43,18 +43,18 @@ public class RuntimeClasspathEntryListComparator implements Comparator<Object> {
 		return -1;
 	}
 
-	protected boolean equalsIgnoreWhitespace(String one, String two) {
+	protected boolean equalsIgnoreWhitespace(String one, String two) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		int i1 = 0;
 		int i2 = 0;
 		int l1 = one.length();
 		int l2 = two.length();
 		char ch1 = ' ';
 		char ch2 = ' ';
-		while (i1 < l1 && i2 < l2) {
-			while (i1 < l1 && Character.isWhitespace(ch1 = one.charAt(i1))) {
+		while (i1 < l1 && i2 < l2) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
+			while (i1 < l1 && Character.isWhitespace(ch1 = one.charAt(i1))) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				i1++;
 			}
-			while (i2 < l2 && Character.isWhitespace(ch2 = two.charAt(i2))) {
+			while (i2 < l2 && Character.isWhitespace(ch2 = two.charAt(i2))) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				i2++;
 			}
 			if (i1 == l1 && i2 == l2) {

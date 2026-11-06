@@ -50,7 +50,7 @@ public class JavaPrimitiveValueEditor implements IVariableValueEditor {
     /* (non-Javadoc)
      * @see org.eclipse.debug.ui.actions.IVariableValueEditor#editVariable(org.eclipse.debug.core.model.IVariable, org.eclipse.swt.widgets.Shell)
      */
-    @Override
+    @Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public boolean editVariable(IVariable variable, Shell shell) {
         try {
             String name= variable.getName();
@@ -92,7 +92,7 @@ public class JavaPrimitiveValueEditor implements IVariableValueEditor {
         return false;
     }
 
-    String formatValue(String value) {
+    String formatValue(String value) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
     	try {
 	    	switch (fSignature.charAt(0)) {
 		    	case 'I':
@@ -119,7 +119,7 @@ public class JavaPrimitiveValueEditor implements IVariableValueEditor {
         /* (non-Javadoc)
          * @see org.eclipse.jface.dialogs.IInputValidator#isValid(java.lang.String)
          */
-        @Override
+        @Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		public String isValid(String newText) {
             String type= null;
             switch (fSignature.charAt(0)) {
@@ -194,7 +194,7 @@ public class JavaPrimitiveValueEditor implements IVariableValueEditor {
 			if (newText.length() == 6) {
 				if (newText.charAt(1) == 'u') {
 					char[] chars = newText.toCharArray();
-					for (int i = 2; i < chars.length; i++) {
+					for (int i = 2; i < chars.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 						if (!isHexDigit(chars[i])) {
 							return false;
 						}
@@ -205,10 +205,10 @@ public class JavaPrimitiveValueEditor implements IVariableValueEditor {
 			return false;
 		}
 
-		private boolean isOctalEscape(String newText) {
+		private boolean isOctalEscape(String newText) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 			char[] chars= newText.toCharArray();
 			if (chars.length < 4) {
-				for (int i = 1; i < chars.length; i++) {
+				for (int i = 1; i < chars.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 					if (!isOctalDigit(chars[i])) {
 						return false;
 					}
@@ -219,7 +219,7 @@ public class JavaPrimitiveValueEditor implements IVariableValueEditor {
 				if (ch < '0' || ch > '3') {
 					return false;
 				}
-				for (int i = 2; i < chars.length; i++) {
+				for (int i = 2; i < chars.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 					if (!isOctalDigit(chars[i])) {
 						return false;
 					}

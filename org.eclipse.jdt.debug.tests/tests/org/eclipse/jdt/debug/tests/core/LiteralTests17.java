@@ -72,7 +72,7 @@ public class LiteralTests17 extends AbstractDebugTest {
 	 *
 	 * @return the {@link IEvaluationResult}
 	 */
-	IValue doEval(String snippet, String snippet2) throws Exception {
+	IValue doEval(String snippet, String snippet2) throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		ILineBreakpoint bp = createLineBreakpoint(28, LITERAL_TYPE_NAME);
 		IJavaThread thread = null;
 		try {

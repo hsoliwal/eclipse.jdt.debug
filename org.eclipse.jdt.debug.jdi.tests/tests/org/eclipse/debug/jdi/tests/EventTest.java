@@ -25,7 +25,7 @@ import com.sun.jdi.request.EventRequest;
  * Tests for JDI com.sun.jdi.event.Event.
  */
 public class EventTest extends AbstractJDITest {
-	private final HashMap<EventRequest, Event> fAllEvents = new HashMap<>();
+	private final HashMap<EventRequest, Event> fAllEvents = new HashMap<>(); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
 	/**
 	 * Creates a new test.
 	 */
@@ -39,7 +39,7 @@ public class EventTest extends AbstractJDITest {
 	/**
 	 * Init the fields that are used by this test only.
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public void localSetUp() {
 		// All events...
 
@@ -97,7 +97,7 @@ public class EventTest extends AbstractJDITest {
 	 */
 	public void testJDIRequest() {
 		Iterator<EventRequest> iterator = fAllEvents.keySet().iterator();
-		while (iterator.hasNext()) {
+		while (iterator.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			EventRequest request = iterator.next();
 			Event event = fAllEvents.get(request);
 

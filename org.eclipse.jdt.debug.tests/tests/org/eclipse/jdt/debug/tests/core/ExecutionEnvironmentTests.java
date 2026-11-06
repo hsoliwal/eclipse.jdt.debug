@@ -44,7 +44,7 @@ public class ExecutionEnvironmentTests extends AbstractDebugTest {
 	public void testGetEnvironments() throws Exception {
 		IExecutionEnvironment[] executionEnvironments = JavaRuntime.getExecutionEnvironmentsManager().getExecutionEnvironments();
 		assertTrue("Should be at least one environment", executionEnvironments.length > 0);
-		for (int i = 0; i < executionEnvironments.length; i++) {
+		for (int i = 0; i < executionEnvironments.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			IExecutionEnvironment environment = executionEnvironments[i];
 			if (environment.getId().equals(JavaProjectHelper.JAVA_SE_1_7_EE_NAME)) {
 				return;
@@ -61,7 +61,7 @@ public class ExecutionEnvironmentTests extends AbstractDebugTest {
 		assertNotNull("Missing environment J2SE-1.4", environment);
 		IVMInstall[] installs = environment.getCompatibleVMs();
 		assertTrue("Should be at least one vm install for the environment", installs.length > 0);
-		for (int i = 0; i < installs.length; i++) {
+		for (int i = 0; i < installs.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			IVMInstall install = installs[i];
 			if (install.equals(vm)) {
 				return;
@@ -86,7 +86,7 @@ public class ExecutionEnvironmentTests extends AbstractDebugTest {
 		return -1;
 
 	}
-	public void testAccessRuleParticipants() throws Exception {
+	public void testAccessRuleParticipants() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IExecutionEnvironmentsManager manager = JavaRuntime.getExecutionEnvironmentsManager();
 		IExecutionEnvironment environment = manager.getEnvironment("org.eclipse.jdt.debug.tests.environment.j2se14x");
 		assertNotNull("Missing environment j2se14x", environment);
@@ -99,7 +99,7 @@ public class ExecutionEnvironmentTests extends AbstractDebugTest {
 			return;
 		}
 		assertEquals("Wrong number of rules", libraries.length, accessRules.length);
-		for (int i = 0; i < accessRules.length; i++) {
+		for (int i = 0; i < accessRules.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			IAccessRule[] rules = accessRules[i];
 			assertEquals("wrong number of rules for lib", 4, rules.length);
 			assertEquals("Wrong rule", "secondary", rules[0].getPattern().toString());
@@ -109,7 +109,7 @@ public class ExecutionEnvironmentTests extends AbstractDebugTest {
 		}
 	}
 
-	public void testNoAccessRuleParticipants() throws Exception {
+	public void testNoAccessRuleParticipants() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IExecutionEnvironmentsManager manager = JavaRuntime.getExecutionEnvironmentsManager();
 		IExecutionEnvironment environment = manager.getEnvironment("org.eclipse.jdt.debug.tests.environment.j2se13x");
 		assertNotNull("Missing environment j2se13x", environment);
@@ -122,13 +122,13 @@ public class ExecutionEnvironmentTests extends AbstractDebugTest {
 			return;
 		}
 		assertEquals("Wrong number of rules", libraries.length, accessRules.length);
-		for (int i = 0; i < accessRules.length; i++) {
+		for (int i = 0; i < accessRules.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			IAccessRule[] rules = accessRules[i];
 			assertEquals("wrong number of rules for lib", 0, rules.length);
 		}
 	}
 
-	public void testAccessRuleParticipantsWithShortCircut() throws Exception {
+	public void testAccessRuleParticipantsWithShortCircut() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IExecutionEnvironmentsManager manager = JavaRuntime.getExecutionEnvironmentsManager();
 		IExecutionEnvironment environment = manager.getEnvironment("org.eclipse.jdt.debug.tests.environment.j2se15x");
 		assertNotNull("Missing environment j2se15x", environment);
@@ -141,7 +141,7 @@ public class ExecutionEnvironmentTests extends AbstractDebugTest {
 			return;
 		}
 		assertEquals("Wrong number of rules", libraries.length, accessRules.length);
-		for (int i = 0; i < accessRules.length; i++) {
+		for (int i = 0; i < accessRules.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			IAccessRule[] rules = accessRules[i];
 			assertEquals("wrong number of rules for lib", 1, rules.length);
 			assertEquals("Wrong rule", "**/*", rules[0].getPattern().toString());
@@ -151,12 +151,12 @@ public class ExecutionEnvironmentTests extends AbstractDebugTest {
 	/**
 	 * Tests that a project bound to an EE has access rules.
 	 */
-	public void testAccessRulesPresentOnEEProject() throws Exception {
+	public void testAccessRulesPresentOnEEProject() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		boolean foundLib = false;
 		IJavaProject project = getBoundEeProject();
 		assertTrue("BoundEE project does not exist", project.exists());
 		IClasspathEntry[] rawClasspath = project.getRawClasspath();
-		for (int i = 0; i < rawClasspath.length; i++) {
+		for (int i = 0; i < rawClasspath.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			IClasspathEntry entry = rawClasspath[i];
 			if (entry.getEntryKind() == IClasspathEntry.CPE_CONTAINER) {
 				String environmentId = JavaRuntime.getExecutionEnvironmentId(entry.getPath());
@@ -164,7 +164,7 @@ public class ExecutionEnvironmentTests extends AbstractDebugTest {
 					IClasspathContainer container = JavaCore.getClasspathContainer(entry.getPath(), project);
 					assertNotNull("missing classpath container", container);
 					IClasspathEntry[] entries = container.getClasspathEntries();
-					for (int j = 0; j < entries.length; j++) {
+					for (int j = 0; j < entries.length; j++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 						foundLib = true;
 						IClasspathEntry containerEntry = entries[j];
 						assertTrue("Missing access rules", containerEntry.getAccessRules().length > 0);
@@ -178,12 +178,12 @@ public class ExecutionEnvironmentTests extends AbstractDebugTest {
 	/**
 	 * Tests that a project bound to a specific JRE has no access rules.
 	 */
-	public void testAccessRulesNotPresentOnJREProject() throws Exception {
+	public void testAccessRulesNotPresentOnJREProject() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		boolean foundLib = false;
 		IJavaProject project = getBoundJreProject();
 		assertTrue("BoundJRE project does not exist", project.exists());
 		IClasspathEntry[] rawClasspath = project.getRawClasspath();
-		for (int i = 0; i < rawClasspath.length; i++) {
+		for (int i = 0; i < rawClasspath.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			IClasspathEntry entry = rawClasspath[i];
 			if (entry.getEntryKind() == IClasspathEntry.CPE_CONTAINER) {
 				IVMInstall install = JavaRuntime.getVMInstall(entry.getPath());
@@ -191,7 +191,7 @@ public class ExecutionEnvironmentTests extends AbstractDebugTest {
 					IClasspathContainer container = JavaCore.getClasspathContainer(entry.getPath(), project);
 					assertNotNull("missing classpath container", container);
 					IClasspathEntry[] entries = container.getClasspathEntries();
-					for (int j = 0; j < entries.length; j++) {
+					for (int j = 0; j < entries.length; j++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 						foundLib = true;
 						IClasspathEntry containerEntry = entries[j];
 						assertEquals("access rules should not be present", 0, containerEntry.getAccessRules().length);
@@ -205,7 +205,7 @@ public class ExecutionEnvironmentTests extends AbstractDebugTest {
 	/**
 	 * Tests that default access rules appear for system packages when a profile file is specified.
 	 */
-	public void testDefaultSystemPackageAccessRules() throws Exception {
+	public void testDefaultSystemPackageAccessRules() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IExecutionEnvironmentsManager manager = JavaRuntime.getExecutionEnvironmentsManager();
 		IExecutionEnvironment environment = manager.getEnvironment("org.eclipse.jdt.debug.tests.systemPackages");
 		assertNotNull("Missing environment systemPackages", environment);
@@ -214,7 +214,7 @@ public class ExecutionEnvironmentTests extends AbstractDebugTest {
 		IAccessRule[][] accessRules = environment.getAccessRules(vm, libraries, get14Project());
 		assertNotNull("Missing access rules", accessRules);
 		assertEquals("Wrong number of rules", libraries.length, accessRules.length);
-		for (int i = 0; i < accessRules.length; i++) {
+		for (int i = 0; i < accessRules.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			IAccessRule[] rules = accessRules[i];
 			assertEquals("wrong number of rules for lib", 4, rules.length);
 			assertEquals("Wrong rule", "java/**", rules[0].getPattern().toString());
@@ -265,7 +265,7 @@ public class ExecutionEnvironmentTests extends AbstractDebugTest {
 	/**
 	 * Test decoding of the latest JVM version
 	 */
-	public void testVMVersionDecoding() {
+	public void testVMVersionDecoding() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IVMInstall2 install = new IVMInstall2() {
 			@Override
 			public void setVMArgs(String vmArgs) {
@@ -278,7 +278,7 @@ public class ExecutionEnvironmentTests extends AbstractDebugTest {
 
 			@Override
 			public String getJavaVersion() {
-				return JavaCore.latestSupportedJavaVersion() + ".xyz";
+				return JavaCore.latestSupportedJavaVersion() + ".xyz"; //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 			}
 		};
 		String compliance = EECompilationParticipant.getCompilerCompliance(install);

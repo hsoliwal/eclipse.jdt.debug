@@ -37,12 +37,12 @@ public class JavaNestedWatchExpressionFilter implements IWatchExpressionFactoryA
 	@Override
 	public String createWatchExpression(Object element) throws CoreException {
 		if (element instanceof List<?> expVariablesList) {
-			StringBuilder expresion = new StringBuilder();
-			for (Object ob : expVariablesList) {
+			StringBuilder expresion = new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
+			for (Object ob : expVariablesList) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				if (ob instanceof IVariable variable) {
 					String current = variable.getName();
-					expresion.append(current);
-					expresion.append('.');
+					expresion.append(current); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+					expresion.append('.'); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				}
 			}
 			expresion.deleteCharAt(expresion.length() - 1);
@@ -54,7 +54,7 @@ public class JavaNestedWatchExpressionFilter implements IWatchExpressionFactoryA
 	@Override
 	public boolean canCreateWatchExpression(Object variable) {
 		if (variable instanceof List<?> expVariablesList) {
-			for (Object ob : expVariablesList) {
+			for (Object ob : expVariablesList) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				if (ob instanceof IVariable variable2) {
 					return checkForValidVariable(variable2);
 				}

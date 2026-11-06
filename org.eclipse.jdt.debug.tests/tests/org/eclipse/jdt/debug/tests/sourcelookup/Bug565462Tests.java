@@ -58,7 +58,7 @@ public class Bug565462Tests extends AbstractDebugTest {
 		super.setUp();
 		this.javaSE11 = JavaRuntime.getExecutionEnvironmentsManager().getEnvironment("JavaSE-11");
 		this.defaultJavaSE11VM = javaSE11.getDefaultVM();
-		Predicate<IVMInstall> hasSource = vm -> vm != null && vm.getInstallLocation() != null && new File(vm.getInstallLocation(), "lib/src.zip").isFile();
+		Predicate<IVMInstall> hasSource = vm -> vm != null && vm.getInstallLocation() != null && new File(vm.getInstallLocation(), "lib/src.zip").isFile(); //FLLDCIM: MARK — M31 M3FILE_IO CALL
 		if (!hasSource.test(defaultJavaSE11VM)) {
 			Stream.of(javaSE11.getCompatibleVMs()).filter(Objects::nonNull).filter(hasSource)
 				.findAny()
@@ -80,7 +80,7 @@ public class Bug565462Tests extends AbstractDebugTest {
 	 * Tests searching for a class with 2 Java projects in the workspace, one with {@code module=true} attribute for the JRE container, one without
 	 * that attribute.
 	 */
-	public void testFindDuplicatesBug565462() throws Exception {
+	public void testFindDuplicatesBug565462() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IJavaProject moduleProject = createJavaProject(MODULE_JRE_PROJECT_NAME);
 		boolean attributeValue = true;
 		addModuleAttribute(moduleProject, attributeValue);
@@ -90,8 +90,8 @@ public class Bug565462Tests extends AbstractDebugTest {
 		nonModuleProject.getProject().build(IncrementalProjectBuilder.FULL_BUILD, new NullProgressMonitor());
 
 		waitForBuild();
-		assertTrue("Expected Java project to have module=true attribute: " + moduleProject, isModularProject(moduleProject));
-		assertFalse("Expected Java project to not have module attribute: " + nonModuleProject, isModularProject(nonModuleProject));
+		assertTrue("Expected Java project to have module=true attribute: " + moduleProject, isModularProject(moduleProject)); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
+		assertFalse("Expected Java project to not have module attribute: " + nonModuleProject, isModularProject(nonModuleProject)); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 		moduleProject.getProject().close(new NullProgressMonitor());
 		nonModuleProject.getProject().close(new NullProgressMonitor());
@@ -101,8 +101,8 @@ public class Bug565462Tests extends AbstractDebugTest {
 		moduleProject.getProject().build(IncrementalProjectBuilder.FULL_BUILD, new NullProgressMonitor());
 		nonModuleProject.getProject().build(IncrementalProjectBuilder.FULL_BUILD, new NullProgressMonitor());
 		waitForBuild();
-		assertTrue("Expected Java project to have module=true attribute: " + moduleProject, isModularProject(moduleProject));
-		assertFalse("Expected Java project to not have module attribute: " + nonModuleProject, isModularProject(nonModuleProject));
+		assertTrue("Expected Java project to have module=true attribute: " + moduleProject, isModularProject(moduleProject)); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
+		assertFalse("Expected Java project to not have module attribute: " + nonModuleProject, isModularProject(nonModuleProject)); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 		JavaSourceLookupDirector director = new JavaSourceLookupDirector();
 		ILaunchConfiguration configuration = createLaunchConfiguration(nonModuleProject, "Main");
@@ -111,9 +111,9 @@ public class Bug565462Tests extends AbstractDebugTest {
 
 		String className = "java/lang/Class.java";
 		File srcFile = new File(JavaRuntime.computeVMInstall(configuration).getInstallLocation(), "lib/src.zip");
-		assertTrue(srcFile.getAbsolutePath() + " doesn't exist", srcFile.isFile());
+		assertTrue(srcFile.getAbsolutePath() + " doesn't exist", srcFile.isFile()); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT //FLLDCIM: MARK — M31 M3FILE_IO CALL
 		Object[] foundElements = director.findSourceElements(className);
-		assertEquals("Expected only 1 match for class " + className + " in " + JavaRuntime.computeVMInstall(configuration).getInstallLocation() + " but found: " + Arrays.toString(foundElements), 1, foundElements.length);
+		assertEquals("Expected only 1 match for class " + className + " in " + JavaRuntime.computeVMInstall(configuration).getInstallLocation() + " but found: " + Arrays.toString(foundElements), 1, foundElements.length); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 	}
 
@@ -121,7 +121,7 @@ public class Bug565462Tests extends AbstractDebugTest {
 		boolean isModularProject = isModularProject(javaProject);
 		if (isModularProject) {
 			IClasspathEntry[] classpath = javaProject.getRawClasspath();
-			for (int i = 0; i < classpath.length; ++i) {
+			for (int i = 0; i < classpath.length; ++i) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				IClasspathEntry classpathEntry = classpath[i];
 				if (classpathEntry.getEntryKind() == IClasspathEntry.CPE_CONTAINER) {
 					IPath containerPath = classpathEntry.getPath();
@@ -133,11 +133,11 @@ public class Bug565462Tests extends AbstractDebugTest {
 		}
 	}
 
-	private static void addModuleAttribute(IJavaProject javaProject, boolean attributeValue) throws JavaModelException {
+	private static void addModuleAttribute(IJavaProject javaProject, boolean attributeValue) throws JavaModelException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		boolean isModularProject = isModularProject(javaProject);
 		if (!isModularProject) {
 			IClasspathEntry[] classpath = javaProject.getRawClasspath();
-			for (int i = 0; i < classpath.length; ++i) {
+			for (int i = 0; i < classpath.length; ++i) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				IClasspathEntry classpathEntry = classpath[i];
 				if (classpathEntry.getEntryKind() == IClasspathEntry.CPE_CONTAINER) {
 					IPath containerPath = classpathEntry.getPath();
@@ -160,7 +160,7 @@ public class Bug565462Tests extends AbstractDebugTest {
 	}
 
 	private static boolean isModularClasspath(IClasspathEntry[] classpath) {
-		for (int i = 0; i < classpath.length; ++i) {
+		for (int i = 0; i < classpath.length; ++i) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			IClasspathEntry classpathEntry = classpath[i];
 			if (classpathEntry.getEntryKind() == IClasspathEntry.CPE_CONTAINER) {
 				boolean isModule = isModularEntry(classpathEntry);
@@ -172,7 +172,7 @@ public class Bug565462Tests extends AbstractDebugTest {
 
 	private static boolean isModularEntry(IClasspathEntry classpathEntry) {
 		IClasspathAttribute[] attributes = classpathEntry.getExtraAttributes();
-		for (IClasspathAttribute attribute : attributes) {
+		for (IClasspathAttribute attribute : attributes) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			String attributeName = attribute.getName();
 			if (IClasspathAttribute.MODULE.equals(attributeName)) {
 				String attributeValue = attribute.getValue();

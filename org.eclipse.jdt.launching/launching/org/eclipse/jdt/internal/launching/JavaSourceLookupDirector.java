@@ -35,7 +35,7 @@ public class JavaSourceLookupDirector extends AbstractSourceLookupDirector {
 	private static final Set<String> fFilteredTypes;
 
 	static {
-		fFilteredTypes = new HashSet<>();
+		fFilteredTypes = new HashSet<>(); //FLLDCIM: MARK — M03 M3_SET_LANES NEW
 		fFilteredTypes.add(ProjectSourceContainer.TYPE_ID);
 		fFilteredTypes.add(WorkspaceSourceContainer.TYPE_ID);
 		// can't reference UI constant

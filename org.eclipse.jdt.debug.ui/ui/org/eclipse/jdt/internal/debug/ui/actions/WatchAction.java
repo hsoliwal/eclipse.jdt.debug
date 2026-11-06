@@ -30,14 +30,14 @@ import org.eclipse.jface.viewers.IStructuredSelection;
 /**
  * Create a watch item from a selected variable
  */
-public class WatchAction extends InspectAction {
+public class WatchAction extends InspectAction { //FLLDCIM: MARK — T20  IMPLEMENTS
 
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public void run() {
 		Object selectedObject= getSelectedObject();
 		if (selectedObject instanceof IStructuredSelection selection) {
 			Iterator<IJavaVariable> elements = selection.iterator();
-			while (elements.hasNext()) {
+			while (elements.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				try {
 					createWatchExpression(elements.next().getName());
 				} catch (DebugException e) {

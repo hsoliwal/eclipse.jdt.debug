@@ -73,7 +73,7 @@ public class TestAnonymousInspect extends AbstractDebugTest {
 		try {
 			engine.evaluate(SNIPPET, frame, listener, DebugEvent.EVALUATION_IMPLICIT, false);
 			long timeoutNanos = System.nanoTime() + 5000 * 1_000_000L;
-			while (listener.fResult == null && System.nanoTime() < timeoutNanos) {
+			while (listener.fResult == null && System.nanoTime() < timeoutNanos) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				Thread.sleep(1);
 			}
 			assertFalse("The evaluation should not have errors", listener.fResult.hasErrors());

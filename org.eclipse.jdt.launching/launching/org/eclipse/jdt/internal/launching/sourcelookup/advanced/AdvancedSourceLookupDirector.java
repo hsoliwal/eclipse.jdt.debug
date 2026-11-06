@@ -41,7 +41,7 @@ public class AdvancedSourceLookupDirector extends JavaSourceLookupDirector {
 
 	@Override
 	public void initializeParticipants() {
-		final List<ISourceLookupParticipant> participants = new ArrayList<>();
+		final List<ISourceLookupParticipant> participants = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 		if (mode == null || ILaunchManager.DEBUG_MODE.equals(mode)) {
 			participants.addAll(getSourceLookupParticipants());
 		}

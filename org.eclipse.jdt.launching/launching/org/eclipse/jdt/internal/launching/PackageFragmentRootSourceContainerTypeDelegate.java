@@ -34,7 +34,7 @@ public class PackageFragmentRootSourceContainerTypeDelegate extends AbstractSour
 	/* (non-Javadoc)
 	 * @see org.eclipse.debug.internal.core.sourcelookup.ISourceContainerTypeDelegate#createSourceContainer(java.lang.String)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public ISourceContainer createSourceContainer(String memento) throws CoreException {
 		Node node = parseDocument(memento);
 		if (node.getNodeType() == Node.ELEMENT_NODE) {

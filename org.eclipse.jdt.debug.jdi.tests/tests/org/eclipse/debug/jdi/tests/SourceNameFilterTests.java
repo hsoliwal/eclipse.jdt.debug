@@ -47,7 +47,7 @@ public class SourceNameFilterTests extends AbstractJDITest {
 	 * test to make sure the source name filter capability is working to spec.
 	 * this test does not apply to non-1.6 VMs
 	 */
-	public void testAddSourceNameFilter() {
+	public void testAddSourceNameFilter() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		if(!fVM.canUseSourceNameFilters()) {
 			return;
 		}

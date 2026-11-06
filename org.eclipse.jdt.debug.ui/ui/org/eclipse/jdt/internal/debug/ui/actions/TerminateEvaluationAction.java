@@ -32,7 +32,7 @@ import org.eclipse.ui.IWorkbenchPart;
 /**
  * Attempts to terminate an evaluation running in an IJavaThread.
  */
-public class TerminateEvaluationAction implements IObjectActionDelegate, IDebugEventSetListener {
+public class TerminateEvaluationAction implements IObjectActionDelegate, IDebugEventSetListener { //FLLDCIM: MARK — T27  IMPLEMENTS
 
 	private IJavaThread fThread;
 	private boolean fTerminated;
@@ -41,14 +41,14 @@ public class TerminateEvaluationAction implements IObjectActionDelegate, IDebugE
 	public void setActivePart(IAction action, IWorkbenchPart targetPart) {
 	}
 
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public void run(IAction action) {
 		if (fThread == null) {
 			return;
 		}
-		DebugPlugin.getDefault().addDebugEventListener(this);
+		DebugPlugin.getDefault().addDebugEventListener(this); //FLLDCIM: MARK — T27 DEBUG_EVENT_ADAPTER CALL
 		Thread timerThread= new Thread(new Runnable() {
-			@Override
+			@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 			public void run() {
 				fTerminated= false;
 				try {
@@ -59,7 +59,7 @@ public class TerminateEvaluationAction implements IObjectActionDelegate, IDebugE
 				if (!fTerminated) {
 					fTerminated= true;
 					final Display display= JDIDebugUIPlugin.getStandardDisplay();
-						display.asyncExec(new Runnable() {
+						display.asyncExec(new Runnable() { //FLLDCIM: MARK — T08 UI_THREAD_SYNCHRONIZER CALL
 							@Override
 							public void run() {
 								MessageDialog dialog = new MessageDialog(display.getActiveShell(), ActionMessages.TerminateEvaluationActionTerminate_Evaluation_1, null,
@@ -100,7 +100,7 @@ public class TerminateEvaluationAction implements IObjectActionDelegate, IDebugE
 	@Override
 	public void handleDebugEvents(DebugEvent[] events) {
 		DebugEvent event;
-		for (int i= 0, numEvents= events.length; i < numEvents; i++) {
+		for (int i= 0, numEvents= events.length; i < numEvents; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			event= events[i];
 			if ((event.getKind() & DebugEvent.SUSPEND)  != 0 && event.getSource() instanceof IJavaThread && event.isEvaluation()) {
 				fTerminated= true;

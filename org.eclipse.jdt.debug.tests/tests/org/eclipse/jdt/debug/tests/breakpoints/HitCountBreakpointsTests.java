@@ -35,7 +35,7 @@ public class HitCountBreakpointsTests extends AbstractDebugTest {
 	/**
 	 * Tests resetting the hit count of a line breakpoint
 	 */
-	public void testResetHitCountBreakpoint() throws Exception {
+	public void testResetHitCountBreakpoint() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String typeName = "HitCountLooper";
 		IJavaLineBreakpoint bp = createLineBreakpoint(19, typeName);
 		bp.setHitCount(3);
@@ -51,7 +51,7 @@ public class HitCountBreakpointsTests extends AbstractDebugTest {
 			IJavaPrimitiveValue value = (IJavaPrimitiveValue)var.getValue();
 			assertNotNull("variable 'i' has no value", value);
 			int iValue = value.getIntValue();
-			assertEquals("value of 'i' should be '2', but was " + iValue, 2, iValue);
+			assertEquals("value of 'i' should be '2', but was " + iValue, 2, iValue); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 			bp.setHitCount(2);
 			IJavaThread thread2 = resumeToLineBreakpoint(thread, bp);
@@ -62,7 +62,7 @@ public class HitCountBreakpointsTests extends AbstractDebugTest {
 			value = (IJavaPrimitiveValue)var.getValue();
 			assertNotNull("variable 'i' has no value", value);
 			iValue = value.getIntValue();
-			assertEquals("value of 'i' should be '4', but was " + iValue, 4, iValue);
+			assertEquals("value of 'i' should be '4', but was " + iValue, 4, iValue); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 			resumeAndExit(thread2);
 
@@ -77,7 +77,7 @@ public class HitCountBreakpointsTests extends AbstractDebugTest {
 	 * Tests an expired hit count breakpoint, i.e. expired meaning that the count is no longer
 	 * effectual
 	 */
-	public void testExpiredHitCountBreakpoint() throws Exception {
+	public void testExpiredHitCountBreakpoint() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String typeName = "HitCountLooper";
 		IJavaLineBreakpoint bp = createLineBreakpoint(19, typeName);
 		bp.setHitCount(3);
@@ -93,7 +93,7 @@ public class HitCountBreakpointsTests extends AbstractDebugTest {
 			IJavaPrimitiveValue value = (IJavaPrimitiveValue)var.getValue();
 			assertNotNull("variable 'i' has no value", value);
 			int iValue = value.getIntValue();
-			assertEquals("value of 'i' should be '2', but was " + iValue, 2, iValue);
+			assertEquals("value of 'i' should be '2', but was " + iValue, 2, iValue); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 			resumeAndExit(thread);
 

@@ -57,7 +57,7 @@ public class SocketAttachConnector implements IVMConnector {
 	protected static AttachingConnector getAttachingConnector() throws CoreException {
 		AttachingConnector connector= null;
 		Iterator<AttachingConnector> iter= Bootstrap.virtualMachineManager().attachingConnectors().iterator();
-		while (iter.hasNext()) {
+		while (iter.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			AttachingConnector lc= iter.next();
 			if (lc.name().equals("com.sun.jdi.SocketAttach")) { //$NON-NLS-1$
 				connector= lc;
@@ -103,7 +103,7 @@ public class SocketAttachConnector implements IVMConnector {
 	/* (non-Javadoc)
 	 * @see org.eclipse.jdt.launching.IVMConnector#connect(java.util.Map, org.eclipse.core.runtime.IProgressMonitor, org.eclipse.debug.core.ILaunch)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public void connect(Map<String, String> arguments, IProgressMonitor monitor, ILaunch launch) throws CoreException {
 		SubMonitor subMonitor = SubMonitor.convert(monitor, LaunchingMessages.SocketAttachConnector_Connecting____1, 2);
 		subMonitor.subTask(LaunchingMessages.SocketAttachConnector_Configuring_connection____1);
@@ -165,7 +165,7 @@ public class SocketAttachConnector implements IVMConnector {
 	 * @param configuration the backing configuration
 	 * @return the new label for the VM
 	 */
-	protected String constructVMLabel(VirtualMachine vm, String host, String port, ILaunchConfiguration configuration) {
+	protected String constructVMLabel(VirtualMachine vm, String host, String port, ILaunchConfiguration configuration) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String name = null;
 		try {
 			name = vm.name();
@@ -181,15 +181,15 @@ public class SocketAttachConnector implements IVMConnector {
 				name = configuration.getName();
 			}
 		}
-		StringBuilder buffer = new StringBuilder(name);
+		StringBuilder buffer = new StringBuilder(name); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 		if(!"".equals(name)) { //$NON-NLS-1$
-			buffer.append(' ');
+			buffer.append(' '); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		}
-		buffer.append('[');
-		buffer.append(host);
-		buffer.append(':');
-		buffer.append(port);
-		buffer.append(']');
+		buffer.append('['); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+		buffer.append(host); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+		buffer.append(':'); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+		buffer.append(port); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+		buffer.append(']'); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		return buffer.toString();
 	}
 
@@ -209,7 +209,7 @@ public class SocketAttachConnector implements IVMConnector {
 	 */
 	@Override
 	public List<String> getArgumentOrder() {
-		List<String> list = new ArrayList<>(2);
+		List<String> list = new ArrayList<>(2); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 		list.add("hostname"); //$NON-NLS-1$
 		list.add("port"); //$NON-NLS-1$
 		return list;

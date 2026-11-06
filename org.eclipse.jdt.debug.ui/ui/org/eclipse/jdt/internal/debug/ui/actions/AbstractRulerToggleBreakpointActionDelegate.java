@@ -65,7 +65,7 @@ public abstract class AbstractRulerToggleBreakpointActionDelegate extends Abstra
 		super.dispose();
 	}
 
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public void runWithEvent(IAction action, Event event) {
 		if (currentEditor == null) {
 			return;

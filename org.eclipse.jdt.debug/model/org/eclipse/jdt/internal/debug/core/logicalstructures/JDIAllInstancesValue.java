@@ -68,7 +68,7 @@ public class JDIAllInstancesValue extends JDIArrayValue {
 	/**
 	 * @return an array of java objects that are instances of the root type
 	 */
-	protected IJavaObject[] getInstances() {
+	protected IJavaObject[] getInstances() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		if (fInstances != null) {
 			return fInstances;
 		}
@@ -179,7 +179,7 @@ public class JDIAllInstancesValue extends JDIArrayValue {
 			internalError(LogicalStructuresMessages.JDIAllInstancesValue_1);
 		}
 		IVariable[] vars = new JDIPlaceholderVariable[length];
-		for (int i = 0; i < length; i++) {
+		for (int i = 0; i < length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			vars[i] = getVariable(i + offset);
 		}
 		return vars;
@@ -298,11 +298,11 @@ public class JDIAllInstancesValue extends JDIArrayValue {
 	 * @return a string representation of this value to display in the detail
 	 *         pane
 	 */
-	public String getDetailString() {
-		StringBuilder buf = new StringBuilder();
+	public String getDetailString() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
+		StringBuilder buf = new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 		Object[] elements = getInstances();
 		if (elements.length == 0) {
-			buf.append(LogicalStructuresMessages.JDIAllInstancesValue_10);
+			buf.append(LogicalStructuresMessages.JDIAllInstancesValue_10); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		} else {
 			String length = null;
 			if (isMoreThanPreference()) {
@@ -312,12 +312,12 @@ public class JDIAllInstancesValue extends JDIArrayValue {
 				length = Integer.toString(elements.length);
 			}
 			if (elements.length == 1) {
-				buf.append(MessageFormat.format(LogicalStructuresMessages.JDIAllInstancesValue_12, length));
+				buf.append(MessageFormat.format(LogicalStructuresMessages.JDIAllInstancesValue_12, length)); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			} else {
-				buf.append(MessageFormat.format(LogicalStructuresMessages.JDIAllInstancesValue_13, length));
+				buf.append(MessageFormat.format(LogicalStructuresMessages.JDIAllInstancesValue_13, length)); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			}
-			for (Object element : elements) {
-				buf.append(element + "\n"); //$NON-NLS-1$
+			for (Object element : elements) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
+				buf.append(element + "\n"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			}
 		}
 		return buf.toString();

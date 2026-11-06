@@ -31,7 +31,7 @@ public class IntroduceParameterUnitTests extends AbstractRefactoringDebugTest {
 		super(name);
 	}
 
-	public void testExtractionFromPublicType() throws Exception {
+	public void testExtractionFromPublicType() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 			int lineNumber = 21;
 			//create breakpoint to test
@@ -54,7 +54,7 @@ public class IntroduceParameterUnitTests extends AbstractRefactoringDebugTest {
 		}
 	}//end testLineBreakPoint
 
-	public void testExtractionFromNonPublicType() throws Exception {
+	public void testExtractionFromNonPublicType() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 			int lineNumber = 40;
 			//create breakpoint to test
@@ -77,7 +77,7 @@ public class IntroduceParameterUnitTests extends AbstractRefactoringDebugTest {
 		}
 	}//end testLineBreakPoint
 
-	public void testExtractionFromInternalType() throws Exception {
+	public void testExtractionFromInternalType() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 			int lineNumber = 29;
 			//create breakpoint to test
@@ -101,7 +101,7 @@ public class IntroduceParameterUnitTests extends AbstractRefactoringDebugTest {
 	}//end testLineBreakPoint
 
 //////////////////////////////////////////////////////////////////////////////////////
-	private Refactoring setupRefactor(int lineNumber, String root, String targetPackageName, String cuName) throws Exception {
+	private Refactoring setupRefactor(int lineNumber, String root, String targetPackageName, String cuName) throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 
 		IJavaProject javaProject = get14Project();
 		ICompilationUnit cunit = getCompilationUnit(javaProject, root, targetPackageName, cuName);

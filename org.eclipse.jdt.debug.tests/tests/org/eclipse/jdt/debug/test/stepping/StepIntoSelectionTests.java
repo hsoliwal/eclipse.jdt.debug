@@ -40,7 +40,7 @@ public class StepIntoSelectionTests extends AbstractDebugTest {
 	/**
 	 * Step into 'new StepIntoSelectionClass()'
 	 */
-	public void testStepIntoSourceConstructor() throws Exception {
+	public void testStepIntoSourceConstructor() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String typeName = "org.eclipse.debug.tests.targets.StepIntoSelectionClass";
 		createLineBreakpoint(24, typeName);
 
@@ -74,7 +74,7 @@ public class StepIntoSelectionTests extends AbstractDebugTest {
 	/**
 	 * Step into 'step()'
 	 */
-	public void testStepIntoSourceMethod() throws Exception {
+	public void testStepIntoSourceMethod() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String typeName = "org.eclipse.debug.tests.targets.StepIntoSelectionClass";
 		createLineBreakpoint(26, typeName);
 
@@ -108,7 +108,7 @@ public class StepIntoSelectionTests extends AbstractDebugTest {
 	/**
 	 * Step into 'method1(int[], String[])'
 	 */
-	public void testStepIntoSourceMethodWithParameters() throws Exception {
+	public void testStepIntoSourceMethodWithParameters() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String typeName = "org.eclipse.debug.tests.targets.StepIntoSelectionClass";
 		createLineBreakpoint(39, typeName);
 
@@ -142,7 +142,7 @@ public class StepIntoSelectionTests extends AbstractDebugTest {
 	/**
 	 * Step into 'Vector.addElement(Object)'
 	 */
-	public void testStepIntoBinaryMethod() throws Exception {
+	public void testStepIntoBinaryMethod() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String typeName = "org.eclipse.debug.tests.targets.StepIntoSelectionClass";
 		createLineBreakpoint(37, typeName);
 
@@ -179,7 +179,7 @@ public class StepIntoSelectionTests extends AbstractDebugTest {
 	/**
 	 * Step into 'Integer.valueOf(i)'
 	 */
-	public void testStepIntoBinaryConstructor() throws Exception {
+	public void testStepIntoBinaryConstructor() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String typeName = "org.eclipse.debug.tests.targets.StepIntoSelectionClass";
 		createLineBreakpoint(37, typeName);
 

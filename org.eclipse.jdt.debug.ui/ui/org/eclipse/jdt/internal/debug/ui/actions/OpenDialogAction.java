@@ -22,7 +22,7 @@ import org.eclipse.jface.dialogs.IDialogSettings;
  * Abstract action that opens a dialog. Contains a prefix for dialog preference
  * settings.
  */
-public abstract class OpenDialogAction extends RuntimeClasspathAction {
+public abstract class OpenDialogAction extends RuntimeClasspathAction { //FLLDCIM: MARK — T04  IMPLEMENTS
 
 	/**
 	 * Attribute name for the last path used to open a file/directory chooser
@@ -60,7 +60,7 @@ public abstract class OpenDialogAction extends RuntimeClasspathAction {
 	 * @return value or <code>null</code> if none
 	 */
 	protected String getDialogSetting(String settingName) {
-		return getDialogSettings().get(getDialogSettingsPrefix() + "." + settingName); //$NON-NLS-1$
+		return getDialogSettings().get(getDialogSettingsPrefix() + "." + settingName); //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 	}
 
 	/**
@@ -71,7 +71,7 @@ public abstract class OpenDialogAction extends RuntimeClasspathAction {
 	 * @param settingName unqualified setting name
 	 */
 	protected void setDialogSetting(String settingName, String value) {
-		getDialogSettings().put(getDialogSettingsPrefix() + "." + settingName, value); //$NON-NLS-1$
+		getDialogSettings().put(getDialogSettingsPrefix() + "." + settingName, value); //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 	}
 
 	/**

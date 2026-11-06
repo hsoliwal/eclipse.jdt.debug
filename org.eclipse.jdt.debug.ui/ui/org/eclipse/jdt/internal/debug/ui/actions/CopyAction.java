@@ -23,7 +23,7 @@ import org.eclipse.swt.dnd.Transfer;
 /**
  * Moves selected entries in a runtime classpath viewer up one position.
  */
-public class CopyAction extends RuntimeClasspathAction {
+public class CopyAction extends RuntimeClasspathAction { //FLLDCIM: MARK — T04  IMPLEMENTS
 	RuntimeClasspathViewer fClasspathViewer;
 
 	public CopyAction(IClasspathViewer viewer) {

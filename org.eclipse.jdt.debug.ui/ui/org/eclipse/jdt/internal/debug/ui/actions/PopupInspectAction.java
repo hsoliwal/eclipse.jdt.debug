@@ -24,7 +24,7 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.texteditor.ITextEditor;
 
-public class PopupInspectAction extends InspectAction {
+public class PopupInspectAction extends InspectAction { //FLLDCIM: MARK — T20  IMPLEMENTS
 
     public static final String ACTION_DEFININITION_ID = "org.eclipse.jdt.debug.ui.commands.Inspect"; //$NON-NLS-1$
 
@@ -44,7 +44,7 @@ public class PopupInspectAction extends InspectAction {
             super.displayResult(result);
         } else {
         	expression = new JavaInspectExpression(result);
-            JDIDebugUIPlugin.getStandardDisplay().asyncExec(new Runnable() {
+            JDIDebugUIPlugin.getStandardDisplay().asyncExec(new Runnable() { //FLLDCIM: MARK — T08 UI_THREAD_SYNCHRONIZER CALL
 				@Override
 				public void run() {
                     showPopup(styledText);
@@ -54,7 +54,7 @@ public class PopupInspectAction extends InspectAction {
         evaluationCleanup();
     }
 
-    protected void showPopup(StyledText textWidget) {
+    protected void showPopup(StyledText textWidget) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
     	IWorkbenchPart part = getTargetPart();
         if (part instanceof ITextEditor) {
         	fTextEditor = (ITextEditor) part;
@@ -74,6 +74,6 @@ public class PopupInspectAction extends InspectAction {
         };
 		// Make sure the popup is shown after the BusyIndicator has focused the previous focus owner. This was a issue
 		// in MacOS which is reported under https://bugs.eclipse.org/bugs/show_bug.cgi?id=569600
-		Display.getDefault().asyncExec(displayPopup::open);
+		Display.getDefault().asyncExec(displayPopup::open); //FLLDCIM: MARK — T08 UI_THREAD_SYNCHRONIZER CALL
     }
 }

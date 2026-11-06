@@ -109,7 +109,7 @@ public class BreakpointLocationVerifierJob extends Job {
 	/* (non-Javadoc)
 	 * @see org.eclipse.core.runtime.jobs.Job#run(org.eclipse.core.runtime.IProgressMonitor)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public IStatus run(IProgressMonitor monitor) {
 		ValidBreakpointLocationLocator locator = new ValidBreakpointLocationLocator(fCunit, fLineNumber, true, fBestMatch);
 		fCunit.accept(locator);
@@ -156,7 +156,7 @@ public class BreakpointLocationVerifierJob extends Job {
 	 * @param lineNumber the number we wish to put the breakpoint on
 	 * @return the status of the line breakpoint placement
 	 */
-	public IStatus manageLineBreakpoint(String typeName, int lineNumber) {
+	public IStatus manageLineBreakpoint(String typeName, int lineNumber) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 			boolean differentLineNumber= lineNumber != fLineNumber;
 			IJavaLineBreakpoint breakpoint= JDIDebugModel.lineBreakpointExists(fBreakpoint.getMarker().getResource(), typeName, lineNumber);
@@ -207,8 +207,8 @@ public class BreakpointLocationVerifierJob extends Job {
 	/**
 	 * Create a new breakpoint at the right position.
 	 */
-	private void createNewBreakpoint(int lineNumber, String typeName) throws CoreException {
-		Map<String, Object> newAttributes = new HashMap<>(10);
+	private void createNewBreakpoint(int lineNumber, String typeName) throws CoreException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
+		Map<String, Object> newAttributes = new HashMap<>(10); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
 		int start = -1, end = -1;
 		if (fType != null) {
 			try {
@@ -235,7 +235,7 @@ public class BreakpointLocationVerifierJob extends Job {
 	 * @param message the message to display
 	 */
 	protected void report(final String message) {
-		JDIDebugUIPlugin.getStandardDisplay().asyncExec(new Runnable() {
+		JDIDebugUIPlugin.getStandardDisplay().asyncExec(new Runnable() { //FLLDCIM: MARK — T08 UI_THREAD_SYNCHRONIZER CALL
 			@Override
 			public void run() {
 				if (fStatusLine != null) {

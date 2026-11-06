@@ -22,7 +22,7 @@ import org.eclipse.ui.console.TextConsole;
 import org.eclipse.ui.console.TextConsolePage;
 import org.eclipse.ui.console.TextConsoleViewer;
 
-public class JavaStackTraceConsolePage extends TextConsolePage {
+public class JavaStackTraceConsolePage extends TextConsolePage { //FLLDCIM: MARK — T06  IMPLEMENTS
 
 	private AutoFormatSettingAction fAutoFormat;
 

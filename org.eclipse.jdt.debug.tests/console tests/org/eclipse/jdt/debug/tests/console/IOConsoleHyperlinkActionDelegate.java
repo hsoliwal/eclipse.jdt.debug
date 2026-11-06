@@ -43,7 +43,7 @@ public class IOConsoleHyperlinkActionDelegate implements IActionDelegate2, IWork
     /**
      * @see org.eclipse.ui.IActionDelegate#run(org.eclipse.jface.action.IAction)
      */
-    @Override
+    @Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public void run(IAction action) {
         final IOConsole backingconsole = new IOConsole("IO Test Console", DebugUITools.getImageDescriptor(IDebugUIConstants.IMG_ACT_RUN)); //$NON-NLS-1$
         backingconsole.setConsoleWidth(17);

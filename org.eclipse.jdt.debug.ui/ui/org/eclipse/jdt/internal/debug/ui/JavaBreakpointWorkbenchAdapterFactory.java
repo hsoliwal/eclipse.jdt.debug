@@ -30,7 +30,7 @@ import org.eclipse.ui.model.IWorkbenchAdapter;
  */
 @SuppressWarnings({ "unchecked", "deprecation" })
 public class JavaBreakpointWorkbenchAdapterFactory implements IAdapterFactory {
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public <T> T getAdapter(Object adaptableObject, Class<T> adapterType) {
 		if (adapterType != IWorkbenchAdapter.class || !(adaptableObject instanceof IJavaBreakpoint)) {
 			return null;
@@ -54,36 +54,36 @@ public class JavaBreakpointWorkbenchAdapterFactory implements IAdapterFactory {
 			 * in situations where the user is changing values (like the title bar
 			 * of the property dialog).
 			 */
-			@Override
+			@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 			public String getLabel(Object o) {
 				if (!(o instanceof IJavaBreakpoint)) {
 					return null;
 				}
 				IJavaBreakpoint breakpoint = (IJavaBreakpoint) o;
-				StringBuilder label = new StringBuilder();
+				StringBuilder label = new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 				try {
 					String type= breakpoint.getTypeName();
 					if (type != null) {
-						label.append(type);
+						label.append(type); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 					}
 				} catch (CoreException e) {
 					JDIDebugUIPlugin.log(e);
 				}
 				if (breakpoint instanceof IJavaPatternBreakpoint) {
 					try {
-						label.append(((IJavaPatternBreakpoint) breakpoint).getSourceName());
+						label.append(((IJavaPatternBreakpoint) breakpoint).getSourceName()); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 					} catch (CoreException e) {
 						JDIDebugUIPlugin.log(e);
 					}
 				} else if (breakpoint instanceof IJavaTargetPatternBreakpoint) {
 					try {
-						label.append(((IJavaTargetPatternBreakpoint) breakpoint).getSourceName());
+						label.append(((IJavaTargetPatternBreakpoint) breakpoint).getSourceName()); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 					} catch (CoreException e) {
 						JDIDebugUIPlugin.log(e);
 					}
 				} else if (breakpoint instanceof IJavaStratumLineBreakpoint) {
 					try {
-						label.append(((IJavaStratumLineBreakpoint) breakpoint).getSourceName());
+						label.append(((IJavaStratumLineBreakpoint) breakpoint).getSourceName()); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 					} catch (CoreException e) {
 						JDIDebugUIPlugin.log(e);
 					}
@@ -93,9 +93,9 @@ public class JavaBreakpointWorkbenchAdapterFactory implements IAdapterFactory {
 					try {
 						int lineNumber= lineBreakpoint.getLineNumber();
 						if (lineNumber != -1) {
-							label.append(DebugUIMessages.JavaBreakpointWorkbenchAdapterFactory_1);
-							label.append(lineNumber);
-							label.append(']');
+							label.append(DebugUIMessages.JavaBreakpointWorkbenchAdapterFactory_1); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+							label.append(lineNumber); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+							label.append(']'); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 						}
 					} catch (CoreException e) {
 						JDIDebugUIPlugin.log(e);
@@ -103,8 +103,8 @@ public class JavaBreakpointWorkbenchAdapterFactory implements IAdapterFactory {
 					try {
 						IMember member= BreakpointUtils.getMember(lineBreakpoint);
 						if (member != null) {
-							label.append(" - "); //$NON-NLS-1$
-							label.append(getJavaLabelProvider().getText(member));
+							label.append(" - "); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+							label.append(getJavaLabelProvider().getText(member)); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 						}
 					} catch (CoreException e) {
 						JDIDebugUIPlugin.log(e);

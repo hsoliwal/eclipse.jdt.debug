@@ -36,8 +36,8 @@ public class RenameNonPublicTypeUnitTests extends AbstractRefactoringDebugTest {
 		super(name);
 	}
 
-	protected void runClassLoadBreakpointTest(String src, String pack, String cunit, String fullTargetName) throws Exception {
-		String targetLineage = pack +"."+"RenamedType";
+	protected void runClassLoadBreakpointTest(String src, String pack, String cunit, String fullTargetName) throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
+		String targetLineage = pack +"."+"RenamedType"; //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		try {
 			//create breakpoint to test
 			IJavaClassPrepareBreakpoint breakpoint = createClassPrepareBreakpoint(src, pack, cunit, fullTargetName);
@@ -57,8 +57,8 @@ public class RenameNonPublicTypeUnitTests extends AbstractRefactoringDebugTest {
 		}
 	}
 
-	protected void runLineBreakpointTest(String src, String pack, String cunit, String fullTargetName, int lineNumber) throws Exception {
-		String targetLineage = pack +"."+"RenamedType";
+	protected void runLineBreakpointTest(String src, String pack, String cunit, String fullTargetName, int lineNumber) throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
+		String targetLineage = pack +"."+"RenamedType"; //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		try {
 			//create breakpoint to test
 			IJavaLineBreakpoint breakpoint = createLineBreakpoint(lineNumber, src, pack, cunit, fullTargetName);
@@ -79,8 +79,8 @@ public class RenameNonPublicTypeUnitTests extends AbstractRefactoringDebugTest {
 		}
 	}
 
-	protected void runMethodBreakpointTest(String src, String pack, String cunit, String fullTargetName, String methodName) throws Exception {
-		String targetLineage = pack +"."+"RenamedType";
+	protected void runMethodBreakpointTest(String src, String pack, String cunit, String fullTargetName, String methodName) throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
+		String targetLineage = pack +"."+"RenamedType"; //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		try {
 			//create breakpoint to test
 			IJavaMethodBreakpoint breakpoint = createMethodBreakpoint(src, pack, cunit,fullTargetName, true, false);
@@ -101,8 +101,8 @@ public class RenameNonPublicTypeUnitTests extends AbstractRefactoringDebugTest {
 		}
 	}
 
-	protected void runWatchPointTest(String src, String pack, String cunit, String fullTargetName, String fieldName) throws Exception {
-		String targetLineage = pack +"."+"RenamedType";
+	protected void runWatchPointTest(String src, String pack, String cunit, String fullTargetName, String fieldName) throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
+		String targetLineage = pack +"."+"RenamedType"; //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		try {
 			//create breakpoint to test
 			IJavaWatchpoint breakpoint = createNestedTypeWatchPoint(src, pack, cunit, fullTargetName, true, true);
@@ -127,7 +127,7 @@ public class RenameNonPublicTypeUnitTests extends AbstractRefactoringDebugTest {
 	 *
 	 * @param type TODO
 	 */
-	protected Refactoring setupRefactor(String root, String packageName, String cuName,
+	protected Refactoring setupRefactor(String root, String packageName, String cuName, //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 			String type) throws Exception {
 
 		IJavaProject javaProject = get14Project();
@@ -200,9 +200,9 @@ public class RenameNonPublicTypeUnitTests extends AbstractRefactoringDebugTest {
 	/**
 	 * Creates an exception breakpoint and adds a filter. Refactors and checks if the filter changed appropriately w/ the refactor.
 	 */
-	protected void runExceptionBreakpointTest(String src, String pack, String cunit, String targetName) throws Exception {
+	protected void runExceptionBreakpointTest(String src, String pack, String cunit, String targetName) throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String newTypeName = "RenamedType",
-		fullTargetName = pack + "."+ targetName;
+		fullTargetName = pack + "."+ targetName; //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		try {
 			//create breakpoint to test
 			IJavaExceptionBreakpoint breakpoint = createExceptionBreakpoint(fullTargetName, true, true);
@@ -213,7 +213,7 @@ public class RenameNonPublicTypeUnitTests extends AbstractRefactoringDebugTest {
 			IBreakpoint[] breakpoints = getBreakpointManager().getBreakpoints();
 			assertEquals("wrong number of breakpoints", 1, breakpoints.length);
 			breakpoint = (IJavaExceptionBreakpoint) breakpoints[0];
-			assertEquals("breakpoint attached to wrong type", pack+"."+newTypeName, breakpoint.getTypeName());
+			assertEquals("breakpoint attached to wrong type", pack+"."+newTypeName, breakpoint.getTypeName()); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 			assertTrue("Breakpoint Marker has ceased existing",breakpoint.getMarker().exists());
 		} catch (Exception e) {
 			throw e;

@@ -79,12 +79,12 @@ import com.sun.jdi.connect.Connector;
  * @since 2.0
  * @noextend This class is not intended to be sub-classed by clients.
  */
-public class JavaConnectTab extends AbstractJavaMainTab implements IPropertyChangeListener {
+public class JavaConnectTab extends AbstractJavaMainTab implements IPropertyChangeListener { //FLLDCIM: MARK — T06  IMPLEMENTS
 
 	// UI widgets
 	private Button fAllowTerminateButton;
 	private Map<String, Connector.Argument> fArgumentMap;
-	private final Map<String, FieldEditor> fFieldEditorMap = new HashMap<>();
+	private final Map<String, FieldEditor> fFieldEditorMap = new HashMap<>(); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
 	private Composite fArgumentComposite;
 	private Combo fConnectorCombo;
 
@@ -92,7 +92,7 @@ public class JavaConnectTab extends AbstractJavaMainTab implements IPropertyChan
 	private IVMConnector fConnector;
 	private final IVMConnector[] fConnectors = JavaRuntime.getVMConnectors();
 
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public void createControl(Composite parent) {
 		Font font = parent.getFont();
 		Composite comp = SWTFactory.createComposite(parent, font, 1, 1, GridData.FILL_BOTH);
@@ -105,11 +105,11 @@ public class JavaConnectTab extends AbstractJavaMainTab implements IPropertyChan
 	//connection type
 		Group group = SWTFactory.createGroup(comp, LauncherMessages.JavaConnectTab_Connect_ion_Type__7, 1, 1, GridData.FILL_HORIZONTAL);
 		String[] names = new String[fConnectors.length];
-		for (int i = 0; i < fConnectors.length; i++) {
+		for (int i = 0; i < fConnectors.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			names[i] = fConnectors[i].getName();
 		}
 		fConnectorCombo = SWTFactory.createCombo(group, SWT.READ_ONLY, 1, GridData.FILL_HORIZONTAL, names);
-		fConnectorCombo.addSelectionListener(new SelectionAdapter() {
+		fConnectorCombo.addSelectionListener(new SelectionAdapter() { //FLLDCIM: MARK — T03 SELECTION_LANE CALL
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				handleConnectorComboModified();
@@ -123,7 +123,7 @@ public class JavaConnectTab extends AbstractJavaMainTab implements IPropertyChan
 		fArgumentComposite = cgroup;
 		createVerticalSpacer(comp, 2);
 		fAllowTerminateButton = createCheckButton(comp, LauncherMessages.JavaConnectTab__Allow_termination_of_remote_VM_6);
-		fAllowTerminateButton.addSelectionListener(getDefaultListener());
+		fAllowTerminateButton.addSelectionListener(getDefaultListener()); //FLLDCIM: MARK — T03 SELECTION_LANE CALL
 
 		setControl(comp);
 		PlatformUI.getWorkbench().getHelpSystem().setHelp(getControl(), IJavaDebugHelpContextIds.LAUNCH_CONFIGURATION_DIALOG_CONNECT_TAB);
@@ -132,7 +132,7 @@ public class JavaConnectTab extends AbstractJavaMainTab implements IPropertyChan
 	/**
 	 * Update the argument area to show the selected connector's arguments
 	 */
-	private void handleConnectorComboModified() {
+	private void handleConnectorComboModified() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		int index = fConnectorCombo.getSelectionIndex();
 		if ( (index < 0) || (index >= fConnectors.length) ) {
 			return;
@@ -151,14 +151,14 @@ public class JavaConnectTab extends AbstractJavaMainTab implements IPropertyChan
 
 		// Dispose of any current child widgets in the tab holder area
 		Control[] children = fArgumentComposite.getChildren();
-		for (int i = 0; i < children.length; i++) {
+		for (int i = 0; i < children.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			children[i].dispose();
 		}
 		fFieldEditorMap.clear();
 		PreferenceStore store = new PreferenceStore();
 		// create editors
 		Iterator<String> keys = vm.getArgumentOrder().iterator();
-		while (keys.hasNext()) {
+		while (keys.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			String key = keys.next();
 			Connector.Argument arg = fArgumentMap.get(key);
 			FieldEditor field = null;
@@ -170,7 +170,7 @@ public class JavaConnectTab extends AbstractJavaMainTab implements IPropertyChan
 				String[][] namesAndValues = new String[choices.size()][2];
 				Iterator<String> iter = choices.iterator();
 				int count = 0;
-				while (iter.hasNext()) {
+				while (iter.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 					String choice = iter.next();
 					namesAndValues[count][0] = choice;
 					namesAndValues[count][1] = choice;
@@ -188,7 +188,7 @@ public class JavaConnectTab extends AbstractJavaMainTab implements IPropertyChan
 			if(field != null) {
 				field.setPreferenceStore(store);
 				field.loadDefault();
-				field.setPropertyChangeListener(this);
+				field.setPropertyChangeListener(this); //FLLDCIM: MARK — T06 PROPERTY_DELTA_SOURCE CALL
 				fFieldEditorMap.put(key, field);
 			}
 		}
@@ -221,7 +221,7 @@ public class JavaConnectTab extends AbstractJavaMainTab implements IPropertyChan
 	 * Updates the connection argument field editors from the specified configuration
 	 * @param config the config to load from
 	 */
-	private void updateConnectionFromConfig(ILaunchConfiguration config) {
+	private void updateConnectionFromConfig(ILaunchConfiguration config) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String id = null;
 		try {
 			id = config.getAttribute(IJavaLaunchConfigurationConstants.ATTR_VM_CONNECTOR, JavaRuntime.getDefaultVMConnector().getIdentifier());
@@ -233,7 +233,7 @@ public class JavaConnectTab extends AbstractJavaMainTab implements IPropertyChan
 				return;
 			}
 			Iterator<String> keys = attrMap.keySet().iterator();
-			while (keys.hasNext()) {
+			while (keys.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				String key = keys.next();
 				Connector.Argument arg = fArgumentMap.get(key);
 				FieldEditor editor = fFieldEditorMap.get(key);
@@ -255,15 +255,15 @@ public class JavaConnectTab extends AbstractJavaMainTab implements IPropertyChan
 		catch (CoreException ce) {JDIDebugUIPlugin.log(ce);}
 	}
 
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public void performApply(ILaunchConfigurationWorkingCopy config) {
 		config.setAttribute(IJavaLaunchConfigurationConstants.ATTR_PROJECT_NAME, fProjText.getText().trim());
 		config.setAttribute(IJavaLaunchConfigurationConstants.ATTR_ALLOW_TERMINATE, fAllowTerminateButton.getSelection());
 		config.setAttribute(IJavaLaunchConfigurationConstants.ATTR_VM_CONNECTOR, getSelectedConnector().getIdentifier());
 		mapResources(config);
-		Map<String, String> attrMap = new HashMap<>(fFieldEditorMap.size());
+		Map<String, String> attrMap = new HashMap<>(fFieldEditorMap.size()); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
 		Iterator<String> keys = fFieldEditorMap.keySet().iterator();
-		while (keys.hasNext()) {
+		while (keys.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			String key = keys.next();
 			FieldEditor editor = fFieldEditorMap.get(key);
 			if (!editor.isValid()) {
@@ -312,7 +312,7 @@ public class JavaConnectTab extends AbstractJavaMainTab implements IPropertyChan
 	 * @param javaElement the Java element
 	 * @param config the configuration
 	 */
-	private void initializeName(IJavaElement javaElement, ILaunchConfigurationWorkingCopy config) {
+	private void initializeName(IJavaElement javaElement, ILaunchConfigurationWorkingCopy config) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String name = EMPTY_STRING;
 		if (javaElement instanceof IMember member) {
 			if (member.isBinary()) {
@@ -361,7 +361,7 @@ public class JavaConnectTab extends AbstractJavaMainTab implements IPropertyChan
 		config.setAttribute(IJavaLaunchConfigurationConstants.ATTR_VM_CONNECTOR, JavaRuntime.getDefaultVMConnector().getIdentifier());
 	}
 
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public boolean isValid(ILaunchConfiguration config) {
 		setErrorMessage(null);
 		setMessage(null);
@@ -373,18 +373,18 @@ public class JavaConnectTab extends AbstractJavaMainTab implements IPropertyChan
 			}
 		}
 		Iterator<String> keys = fFieldEditorMap.keySet().iterator();
-		while (keys.hasNext()) {
+		while (keys.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			String key = keys.next();
 			Connector.Argument arg = fArgumentMap.get(key);
 			FieldEditor editor = fFieldEditorMap.get(key);
 			if (editor instanceof StringFieldEditor stringEditor) {
 				String value = stringEditor.getStringValue();
 				if (!arg.isValid(value)) {
-					StringBuilder label = new StringBuilder(LegacyActionTools.removeMnemonics(arg.label()));
+					StringBuilder label = new StringBuilder(LegacyActionTools.removeMnemonics(arg.label())); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 					if (label.lastIndexOf(ConnectMessages.SocketConnectionLabelSeparator) == label.length() - 1) {
 						label = label.deleteCharAt(label.length() - 1);
 					}
-					setErrorMessage(label.toString() + LauncherMessages.JavaConnectTab__is_invalid__5);
+					setErrorMessage(label.toString() + LauncherMessages.JavaConnectTab__is_invalid__5); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 					return false;
 				}
 			}

@@ -57,19 +57,19 @@ public class AddClassPrepareBreakpointAction implements IWorkbenchWindowActionDe
      * @param selection the selections form the dialog
      * @since 3.2
      */
-    private void createBreakpoints(final Object[] selection) {
+    private void createBreakpoints(final Object[] selection) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
     	try {
-			for (Object a : selection) {
+			for (Object a : selection) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				final IType type = (IType) a;
 				final IResource resource = BreakpointUtils.getBreakpointResource(type);
-				final Map<String, Object> map = new HashMap<>(10);
+				final Map<String, Object> map = new HashMap<>(10); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
 				BreakpointUtils.addJavaBreakpointAttributes(map, type);
 				int kind = IJavaClassPrepareBreakpoint.TYPE_CLASS;
 				if (!type.isClass()) {
 					kind = IJavaClassPrepareBreakpoint.TYPE_INTERFACE;
 				}
 				boolean exists = false;
-				for (IBreakpoint b : DebugPlugin.getDefault().getBreakpointManager().getBreakpoints(JDIDebugModel.getPluginIdentifier())) {
+				for (IBreakpoint b : DebugPlugin.getDefault().getBreakpointManager().getBreakpoints(JDIDebugModel.getPluginIdentifier())) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 					IJavaBreakpoint breakpoint = (IJavaBreakpoint) b;
 					if (breakpoint instanceof IJavaClassPrepareBreakpoint) {
 						String typeName = breakpoint.getTypeName();

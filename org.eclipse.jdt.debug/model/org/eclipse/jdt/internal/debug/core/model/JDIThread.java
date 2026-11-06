@@ -374,7 +374,7 @@ public class JDIThread extends JDIDebugElement implements IJavaThread {
 	 *                if the thread has been garbage collected and cannot be
 	 *                initialized
 	 */
-	protected void initialize() throws ObjectCollectedException {
+	protected void initialize() throws ObjectCollectedException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		fStackFrames = new Vector<>();
 		// system thread
 		try {
@@ -550,11 +550,11 @@ public class JDIThread extends JDIDebugElement implements IJavaThread {
 	 *                exception responsible for the failure.</li>
 	 *                </ul>
 	 */
-	protected void determineIfSystemThread() throws DebugException {
+	protected void determineIfSystemThread() throws DebugException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		fIsSystemThread = false;
 		ThreadGroupReference tgr = getUnderlyingThreadGroup();
 		fIsSystemThread = tgr != null;
-		while (tgr != null) {
+		while (tgr != null) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			String tgn = null;
 			try {
 				tgn = tgr.name();
@@ -603,7 +603,7 @@ public class JDIThread extends JDIDebugElement implements IJavaThread {
 	 * @throws DebugException
 	 *             on failure
 	 */
-	protected void determineIfDaemonThread() throws DebugException {
+	protected void determineIfDaemonThread() throws DebugException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		fIsDaemon = false;
 		try {
 			ReferenceType referenceType = getUnderlyingThread().referenceType();
@@ -649,7 +649,7 @@ public class JDIThread extends JDIDebugElement implements IJavaThread {
 	 * @throws DebugException
 	 *             if an exception occurs retrieving frames
 	 */
-	protected synchronized List<IJavaStackFrame> computeStackFrames(boolean refreshChildren)
+	protected synchronized List<IJavaStackFrame> computeStackFrames(boolean refreshChildren) //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 			throws DebugException {
 		if (isSuspended()) {
 			if (isTerminated()) {
@@ -663,7 +663,7 @@ public class JDIThread extends JDIDebugElement implements IJavaThread {
 				int newSize = frames.size();
 				int discard = oldSize - newSize; // number of old frames to
 													// discard, if any
-				for (int i = 0; i < discard; i++) {
+				for (int i = 0; i < discard; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 					JDIStackFrame invalid = (JDIStackFrame) fStackFrames
 							.remove(0);
 					invalid.bind(null, -1);
@@ -671,7 +671,7 @@ public class JDIThread extends JDIDebugElement implements IJavaThread {
 				int newFrames = newSize - oldSize; // number of frames to
 													// create, if any
 				int depth = oldSize;
-				for (int i = newFrames - 1; i >= 0; i--) {
+				for (int i = newFrames - 1; i >= 0; i--) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 					fStackFrames.add(0, newJDIStackFrame(frames.get(i), depth));
 					depth++;
 				}
@@ -680,7 +680,7 @@ public class JDIThread extends JDIDebugElement implements IJavaThread {
 																// attempt to
 																// re-bind
 				int offset = newSize - 1;
-				for (depth = 0; depth < numToRebind; depth++) {
+				for (depth = 0; depth < numToRebind; depth++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 					JDIStackFrame oldFrame = (JDIStackFrame) fStackFrames
 							.get(offset);
 					StackFrame frame = frames.get(offset);
@@ -762,7 +762,7 @@ public class JDIThread extends JDIDebugElement implements IJavaThread {
 		return computeStackFrames(true);
 	}
 
-	private List<StackFrame> getUnderlyingFrames() throws DebugException {
+	private List<StackFrame> getUnderlyingFrames() throws DebugException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		if (!isSuspended()) {
 			// Checking isSuspended here eliminates a race condition in resume
 			// between the time stack frames are preserved and the time the
@@ -806,7 +806,7 @@ public class JDIThread extends JDIDebugElement implements IJavaThread {
 	 *                <li>This thread is not suspended</li>
 	 *                </ul>
 	 */
-	protected int getUnderlyingFrameCount() throws DebugException {
+	protected int getUnderlyingFrameCount() throws DebugException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 			return fThread.frameCount();
 		} catch (RuntimeException e) {
@@ -826,7 +826,7 @@ public class JDIThread extends JDIDebugElement implements IJavaThread {
 		return -1;
 	}
 
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public void runEvaluation(IEvaluationRunnable evaluation,
 			IProgressMonitor monitor, int evaluationDetail,
 			boolean hitBreakpoints) throws DebugException {
@@ -880,7 +880,7 @@ public class JDIThread extends JDIDebugElement implements IJavaThread {
 				fEvaluationLock.notifyAll();
 			}
 			if (getBreakpoints().length == 0 && breakpoints.length > 0) {
-				for (IBreakpoint breakpoint : breakpoints) {
+				for (IBreakpoint breakpoint : breakpoints) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 					addCurrentBreakpoint(breakpoint);
 				}
 			}
@@ -1006,7 +1006,7 @@ public class JDIThread extends JDIDebugElement implements IJavaThread {
 	 *                <code>IJavaThread.ERR_INCOMPATIBLE_THREAD_STATE</code>)</li>
 	 *                </ul>
 	 */
-	protected Value invokeMethod(ClassType receiverClass,
+	protected Value invokeMethod(ClassType receiverClass, //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 			ObjectReference receiverObject, Method method, List<? extends Value> args,
 			boolean invokeNonvirtual) throws DebugException {
 		if (receiverClass != null && receiverObject != null) {
@@ -1119,7 +1119,7 @@ public class JDIThread extends JDIDebugElement implements IJavaThread {
 	 *                <code>IJavaThread.ERR_INCOMPATIBLE_THREAD_STATE</code>)</li>
 	 *                </ul>
 	 */
-	protected Value invokeMethod(InterfaceType receiverInterface,
+	protected Value invokeMethod(InterfaceType receiverInterface, //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 			Method method, List<? extends Value> args) throws DebugException {
 		Value result = null;
 		int timeout = getRequestTimeout();
@@ -1207,7 +1207,7 @@ public class JDIThread extends JDIDebugElement implements IJavaThread {
 	 *                exception responsible for the failure.</li>
 	 *                </ul>
 	 */
-	protected ObjectReference newInstance(ClassType receiverClass,
+	protected ObjectReference newInstance(ClassType receiverClass, //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 			Method constructor, List<? extends Value> args) throws DebugException {
 		if (isInvokingMethod()) {
 			requestFailed(
@@ -1319,7 +1319,7 @@ public class JDIThread extends JDIDebugElement implements IJavaThread {
 		}
 	}
 
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public String getName() throws DebugException {
 		try {
 			fPreviousName = fThread.name();
@@ -1355,7 +1355,7 @@ public class JDIThread extends JDIDebugElement implements IJavaThread {
 	 *             if an exception occurs retrieving the priority
 	 * @see IThread#getPriority
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public int getPriority() throws DebugException {
 		// to get the priority, we must get the value from the "priority" field
 		Field p = null;
@@ -1417,7 +1417,7 @@ public class JDIThread extends JDIDebugElement implements IJavaThread {
 		}
 	}
 
-	private boolean handleSuspendForBreakpointInternal(JavaBreakpoint breakpoint) {
+	private boolean handleSuspendForBreakpointInternal(JavaBreakpoint breakpoint) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		int policy = IJavaBreakpoint.SUSPEND_THREAD;
 		synchronized (this) {
 			if (fClientSuspendRequest) {
@@ -1593,7 +1593,7 @@ public class JDIThread extends JDIDebugElement implements IJavaThread {
 		}
 	}
 
-	private void completeBreakpointHandlingInternal(JavaBreakpoint breakpoint, boolean suspend, boolean queue, EventSet set) {
+	private void completeBreakpointHandlingInternal(JavaBreakpoint breakpoint, boolean suspend, boolean queue, EventSet set) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		synchronized (this) {
 			try {
 				int policy = breakpoint.getSuspendPolicy();
@@ -1652,7 +1652,7 @@ public class JDIThread extends JDIDebugElement implements IJavaThread {
 		return fIsVirtualThread;
 	}
 
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public String getThreadGroupName() throws DebugException {
 		if (fThreadGroupName == null) {
 			ThreadGroupReference tgr = getUnderlyingThreadGroup();
@@ -1686,7 +1686,7 @@ public class JDIThread extends JDIDebugElement implements IJavaThread {
 	public synchronized boolean isOutOfSynch() throws DebugException {
 		if (isSuspended() && ((JDIDebugTarget) getDebugTarget()).hasHCRFailed()) {
 			List<IJavaStackFrame> frames = computeStackFrames();
-			for(IJavaStackFrame frame : frames) {
+			for(IJavaStackFrame frame : frames) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				if(((JDIStackFrame)frame).isOutOfSynch()) {
 					return true;
 				}
@@ -1737,7 +1737,7 @@ public class JDIThread extends JDIDebugElement implements IJavaThread {
 	 * @throws DebugException
 	 *             if an exception occurs trying to resume the thread
 	 */
-	private synchronized void resumeThread(boolean fireNotification)
+	private synchronized void resumeThread(boolean fireNotification) //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 			throws DebugException {
 		if (!isSuspended() || (isPerformingEvaluation() && !isInvokingMethod())) {
 			return;
@@ -1791,7 +1791,7 @@ public class JDIThread extends JDIDebugElement implements IJavaThread {
 	 */
 	protected synchronized void preserveStackFrames() {
 		fRefreshChildren = true;
-		for(IJavaStackFrame frame : fStackFrames) {
+		for(IJavaStackFrame frame : fStackFrames) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			((JDIStackFrame)frame).setUnderlyingStackFrame(null);
 		}
 	}
@@ -1901,7 +1901,7 @@ public class JDIThread extends JDIDebugElement implements IJavaThread {
 	 * @throws DebugException
 	 *             if an exception occurs
 	 */
-	protected boolean shouldDoExtraStepInto(Location location)
+	protected boolean shouldDoExtraStepInto(Location location) //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 			throws DebugException {
 		if (getOriginalStepKind() != StepRequest.STEP_INTO) {
 			return false;
@@ -1976,7 +1976,7 @@ public class JDIThread extends JDIDebugElement implements IJavaThread {
 	 * @throws DebugException
 	 *             if thread does not suspend before timeout
 	 */
-	protected void prepareForClientSuspend() throws DebugException {
+	protected void prepareForClientSuspend() throws DebugException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		// note that a suspend request has started
 		synchronized (this) {
 			// this will abort notification to pending breakpoint listeners
@@ -2033,7 +2033,7 @@ public class JDIThread extends JDIDebugElement implements IJavaThread {
 	 * Suspends the underlying thread asynchronously and fires notification when
 	 * the underlying thread is suspended.
 	 */
-	protected synchronized void suspendUnderlyingThread() {
+	protected synchronized void suspendUnderlyingThread() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		if (fIsSuspending) {
 			return;
 		}
@@ -2052,7 +2052,7 @@ public class JDIThread extends JDIDebugElement implements IJavaThread {
 						null);
 				long stop = System.currentTimeMillis() + timeout;
 				boolean suspended = isUnderlyingThreadSuspended();
-				while (System.currentTimeMillis() < stop && !suspended) {
+				while (System.currentTimeMillis() < stop && !suspended) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 					try {
 						Thread.sleep(50);
 					} catch (InterruptedException e1) {
@@ -2106,7 +2106,7 @@ public class JDIThread extends JDIDebugElement implements IJavaThread {
 	 * @throws DebugException
 	 *             if an exception occurs
 	 */
-	protected synchronized void resumedByVM() throws DebugException {
+	protected synchronized void resumedByVM() throws DebugException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		fClientSuspendRequest = false;
 		setRunning(true);
 		clearMethodResult();
@@ -2117,7 +2117,7 @@ public class JDIThread extends JDIDebugElement implements IJavaThread {
 		// is no greater than 1. @see Bugs 23328 and 27622
 		ThreadReference thread = fThread;
 		try {
-			while (thread.suspendCount() > 1) {
+			while (thread.suspendCount() > 1) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				thread.resume();
 			}
 		} catch (ObjectCollectedException e) {
@@ -2152,7 +2152,7 @@ public class JDIThread extends JDIDebugElement implements IJavaThread {
 	 *                exception responsible for the failure.</li>
 	 *                </ul>
 	 */
-	protected void dropToFrame(IStackFrame frame) throws DebugException {
+	protected void dropToFrame(IStackFrame frame) throws DebugException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		JDIDebugTarget target = (JDIDebugTarget) getDebugTarget();
 		if (target.canPopFrames()) {
 			// JDK 1.4 support
@@ -2178,7 +2178,7 @@ public class JDIThread extends JDIDebugElement implements IJavaThread {
 		}
 	}
 
-	protected void popFrame(IStackFrame frame) throws DebugException {
+	protected void popFrame(IStackFrame frame) throws DebugException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		JDIDebugTarget target = (JDIDebugTarget) getDebugTarget();
 		if (target.canPopFrames()) {
 			// JDK 1.4 support
@@ -2190,7 +2190,7 @@ public class JDIThread extends JDIDebugElement implements IJavaThread {
 				int lastSize = fStackFrames.size() + 1; // Set up to pass the
 														// first test
 				int size = fStackFrames.size();
-				while (size < lastSize && size > desiredSize) {
+				while (size < lastSize && size > desiredSize) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 					// Keep popping frames until the stack stops getting smaller
 					// or popFrame is gone.
 					// see Bug 8054
@@ -2255,12 +2255,12 @@ public class JDIThread extends JDIDebugElement implements IJavaThread {
 		}
 	}
 
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public IJavaVariable findVariable(String varName) throws DebugException {
 		if (isSuspended()) {
 			try {
 				IStackFrame[] stackFrames = getStackFrames();
-				for (IStackFrame stackFrame : stackFrames) {
+				for (IStackFrame stackFrame : stackFrames) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 					IJavaStackFrame sf = (IJavaStackFrame) stackFrame;
 					IJavaVariable var = sf.findVariable(varName);
 					if (var != null) {
@@ -2322,7 +2322,7 @@ public class JDIThread extends JDIDebugElement implements IJavaThread {
 	 *                supported on the underlying VM</li>
 	 *                </ul>
 	 */
-	protected ThreadGroupReference getUnderlyingThreadGroup()
+	protected ThreadGroupReference getUnderlyingThreadGroup() //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 			throws DebugException {
 		if (fThreadGroup == null) {
 			try {
@@ -2454,7 +2454,7 @@ public class JDIThread extends JDIDebugElement implements IJavaThread {
 		 *                exception responsible for the failure.</li>
 		 *                </ul>
 		 */
-		protected void step() throws DebugException {
+		protected void step() throws DebugException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 			ISchedulingRule rule = getThreadRule();
 			try {
 				Job.getJobManager().beginRule(rule, null);
@@ -2545,7 +2545,7 @@ public class JDIThread extends JDIDebugElement implements IJavaThread {
 		 *                exception responsible for the failure.</li>
 		 *                </ul>
 		 */
-		protected StepRequest createStepRequest(int kind) throws DebugException {
+		protected StepRequest createStepRequest(int kind) throws DebugException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 			EventRequestManager manager = getEventRequestManager();
 			if (manager == null) {
 				requestFailed(
@@ -2738,7 +2738,7 @@ public class JDIThread extends JDIDebugElement implements IJavaThread {
 		 * Deletes this handler's step request from the underlying VM and
 		 * removes this handler as an event listener.
 		 */
-		protected void deleteStepRequest() {
+		protected void deleteStepRequest() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 			try {
 				if (fCurrentMethodExitRequest != null) {
 					removeJDIEventListener(this, fCurrentMethodExitRequest);
@@ -2791,7 +2791,7 @@ public class JDIThread extends JDIDebugElement implements IJavaThread {
 		 * @param request
 		 *            the request to augment
 		 */
-		protected void attachFiltersToStepRequest(StepRequest request) {
+		protected void attachFiltersToStepRequest(StepRequest request) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 
 			if (applyStepFilters() && isStepFiltersEnabled()) {
 				Location currentLocation = getOriginalStepLocation();
@@ -2813,7 +2813,7 @@ public class JDIThread extends JDIDebugElement implements IJavaThread {
 				// }
 				// }
 				if (activeFilters != null) {
-					for (String activeFilter : activeFilters) {
+					for (String activeFilter : activeFilters) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 						request.addClassExclusionFilter(activeFilter);
 					}
 				}
@@ -2840,7 +2840,7 @@ public class JDIThread extends JDIDebugElement implements IJavaThread {
 		 * @see IJDIEventListener#handleEvent(Event, JDIDebugTarget, boolean,
 		 *      EventSet)
 		 */
-		@Override
+		@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		public boolean handleEvent(Event event, JDIDebugTarget target,
 				boolean suspendVote, EventSet eventSet) {
 			try {
@@ -2999,7 +2999,7 @@ public class JDIThread extends JDIDebugElement implements IJavaThread {
 		 * @return <code>true</code> if the {@link Method} {@link Location}
 		 *         should be filtered, <code>false</code> otherwise
 		 */
-		protected boolean locationIsFiltered(Method method, boolean orig) {
+		protected boolean locationIsFiltered(Method method, boolean orig) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 			if (isStepFiltersEnabled()) {
 				JDIDebugTarget target = getJavaDebugTarget();
 				if ((target.isFilterStaticInitializers() && method.isStaticInitializer())
@@ -3010,7 +3010,7 @@ public class JDIThread extends JDIDebugElement implements IJavaThread {
 					return true;
 				}
 				if(!orig) {
-					for (IStepFilter contributedFilter : DebugPlugin.getStepFilters(JDIDebugPlugin.getUniqueIdentifier())) {
+					for (IStepFilter contributedFilter : DebugPlugin.getStepFilters(JDIDebugPlugin.getUniqueIdentifier())) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 						if (contributedFilter.isFiltered(method)) {
 							return true;
 						}
@@ -3125,7 +3125,7 @@ public class JDIThread extends JDIDebugElement implements IJavaThread {
 		 *            the next execution location
 		 * @return <code>true</code> if the instruction should be skipped, <code>false</code> otherwise
 		 */
-		private boolean skipImmediateInstructionsOnStepping(Location toBeStepped) {
+		private boolean skipImmediateInstructionsOnStepping(Location toBeStepped) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 			if (fStepOverLocation == null && fOriginalStepLocation == null) {
 				return false;
 			}
@@ -3299,7 +3299,7 @@ public class JDIThread extends JDIDebugElement implements IJavaThread {
 		 * @see IJDIEventListener#handleEvent(Event, JDIDebugTarget, boolean,
 		 *      EventSet)
 		 */
-		@Override
+		@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		public boolean handleEvent(Event event, JDIDebugTarget target,
 				boolean suspendVote, EventSet eventSet) {
 			try {
@@ -3459,7 +3459,7 @@ public class JDIThread extends JDIDebugElement implements IJavaThread {
 		 *                exception responsible for the failure.</li>
 		 *                </ul>
 		 */
-		@Override
+		@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		protected StepRequest createStepRequest() throws DebugException {
 			EventRequestManager manager = getEventRequestManager();
 			if (manager == null) {
@@ -3529,7 +3529,7 @@ public class JDIThread extends JDIDebugElement implements IJavaThread {
 		return isSuspended() && getOwnedMonitors().length > 0;
 	}
 
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public IJavaObject[] getOwnedMonitors() throws DebugException {
 		try {
 			JDIDebugTarget target = (JDIDebugTarget) getDebugTarget();
@@ -3538,7 +3538,7 @@ public class JDIThread extends JDIDebugElement implements IJavaThread {
 					.size()];
 			Iterator<ObjectReference> itr = ownedMonitors.iterator();
 			int i = 0;
-			while (itr.hasNext()) {
+			while (itr.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				ObjectReference element = itr.next();
 				javaOwnedMonitors[i] = new JDIObjectValue(target, element);
 				i++;
@@ -3610,7 +3610,7 @@ public class JDIThread extends JDIDebugElement implements IJavaThread {
 			return fRunnables.isEmpty();
 		}
 
-		@Override
+		@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		public IStatus run(IProgressMonitor monitor) {
 			fRunningAsyncJob = true;
 			Object[] runnables;
@@ -3622,7 +3622,7 @@ public class JDIThread extends JDIDebugElement implements IJavaThread {
 			MultiStatus failed = null;
 			monitor.beginTask(JDIDebugModelMessages.JDIThread_39, runnables.length);
 			int i = 0;
-			while (i < runnables.length && !isTerminated()
+			while (i < runnables.length && !isTerminated() //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 					&& !monitor.isCanceled()) {
 				try {
 					((Runnable) runnables[i]).run();
@@ -3684,7 +3684,7 @@ public class JDIThread extends JDIDebugElement implements IJavaThread {
 		return getUnderlyingFrameCount();
 	}
 
-	protected void forceReturn(IJavaValue value) throws DebugException {
+	protected void forceReturn(IJavaValue value) throws DebugException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		if (!isSuspended()) {
 			return;
 		}

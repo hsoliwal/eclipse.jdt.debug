@@ -86,7 +86,7 @@ public class EventRequestManagerImpl extends MirrorImpl implements EventRequestM
 		private final Hashtable<RequestID, RT> enabledrequests;
 
 		private EventRequestType() {
-			requests = Collections.synchronizedList(new ArrayList<>());
+			requests = Collections.synchronizedList(new ArrayList<>()); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 			enabledrequests= new Hashtable<>();
 		}
 
@@ -349,7 +349,7 @@ public class EventRequestManagerImpl extends MirrorImpl implements EventRequestM
 	boolean existsEnabledStepRequest(ThreadReferenceImpl threadImpl) {
 		Enumeration<StepRequest> enumeration = STEP_TYPE.enabledrequests.elements();
 		StepRequestImpl step;
-		while (enumeration.hasMoreElements()) {
+		while (enumeration.hasMoreElements()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			step = (StepRequestImpl)enumeration.nextElement();
 			if (step.thread() == threadImpl)
 				return true;
@@ -382,7 +382,7 @@ public class EventRequestManagerImpl extends MirrorImpl implements EventRequestM
 	/* (non-Javadoc)
 	 * @see com.sun.jdi.request.EventRequestManager#deleteEventRequest(com.sun.jdi.request.EventRequest)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public void deleteEventRequest(EventRequest req) {
 		// Disable request, note that this also causes the event request to be removed from fEnabledRequests.
 		try {
@@ -431,7 +431,7 @@ public class EventRequestManagerImpl extends MirrorImpl implements EventRequestM
 	@Override
 	public void deleteEventRequests(List<? extends EventRequest> requests) throws VMMismatchException {
 		Iterator<? extends EventRequest> iter = requests.iterator();
-		while(iter.hasNext()) {
+		while(iter.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			Object obj = iter.next();
 			deleteEventRequest((EventRequest)obj);
 		}
@@ -565,7 +565,7 @@ public class EventRequestManagerImpl extends MirrorImpl implements EventRequestM
     	return MONITOR_WAITED_TYPE.getUnmodifiableList();
     }
 
-	public void removeRequestIDMapping(EventRequestImpl req) {
+	public void removeRequestIDMapping(EventRequestImpl req) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		if (req instanceof AccessWatchpointRequestImpl) {
 			ACCESS_WATCHPOINT_TYPE.enabledrequests.remove(req.requestID());
 		} else if (req instanceof BreakpointRequestImpl) {
@@ -604,7 +604,7 @@ public class EventRequestManagerImpl extends MirrorImpl implements EventRequestM
 	/**
 	 * Maps a request ID to requests.
 	 */
-	public void addRequestIDMapping(EventRequestImpl req) {
+	public void addRequestIDMapping(EventRequestImpl req) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		if (req instanceof AccessWatchpointRequestImpl) {
 			ACCESS_WATCHPOINT_TYPE.enabledrequests.put(req.requestID(), (AccessWatchpointRequestImpl) req);
 		} else if (req instanceof BreakpointRequestImpl) {
@@ -643,7 +643,7 @@ public class EventRequestManagerImpl extends MirrorImpl implements EventRequestM
 	/**
 	 * Find Request that matches event.
 	 */
-	public EventRequest findRequest(EventImpl event) {
+	public EventRequest findRequest(EventImpl event) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		if (event instanceof AccessWatchpointEventImpl) {
 			return ACCESS_WATCHPOINT_TYPE.enabledrequests.get(event.requestID());
 		} else if (event instanceof BreakpointEventImpl) {

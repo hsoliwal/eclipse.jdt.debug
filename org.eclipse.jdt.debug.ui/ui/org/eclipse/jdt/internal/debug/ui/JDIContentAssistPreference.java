@@ -68,7 +68,7 @@ public class JDIContentAssistPreference {
 		return null;
 	}
 
-	private static void configureDisplayProcessor(ContentAssistant assistant, IPreferenceStore store) {
+	private static void configureDisplayProcessor(ContentAssistant assistant, IPreferenceStore store) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		JavaDebugContentAssistProcessor dcp= getDisplayProcessor(assistant);
 		if (dcp == null) {
 			return;
@@ -88,7 +88,7 @@ public class JDIContentAssistPreference {
 		dcp.orderProposalsAlphabetically(enabled);
 	}
 
-	private static void configureJavaSnippetProcessor(ContentAssistant assistant, IPreferenceStore store) {
+	private static void configureJavaSnippetProcessor(ContentAssistant assistant, IPreferenceStore store) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		JavaSnippetCompletionProcessor cp= getJavaSnippetProcessor(assistant);
 		if (cp == null) {
 			return;
@@ -112,7 +112,7 @@ public class JDIContentAssistPreference {
 	/**
 	 * Configure the given content assistant from the preference store.
 	 */
-	public static void configure(ContentAssistant assistant, IColorManager manager) {
+	public static void configure(ContentAssistant assistant, IColorManager manager) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 
 		IPreferenceStore store= getPreferenceStore();
 
@@ -175,7 +175,7 @@ public class JDIContentAssistPreference {
 	 * Changes the configuration of the given content assistant according to the given property
 	 * change event.
 	 */
-	public static void changeConfiguration(ContentAssistant assistant, PropertyChangeEvent event) {
+	public static void changeConfiguration(ContentAssistant assistant, PropertyChangeEvent event) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 
 		IPreferenceStore store= getPreferenceStore();
 		String p= event.getProperty();

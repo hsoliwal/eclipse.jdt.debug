@@ -26,7 +26,7 @@ public class ExceptionBreakpointDetailPane extends AbstractDetailPane {
 	/**
 	 * Identifier for this detail pane editor
 	 */
-	public static final String DETAIL_PANE_EXCEPTION_BREAKPOINT = JDIDebugUIPlugin.getUniqueIdentifier() + ".DETAIL_PANE_EXCEPTION_BREAKPOINT"; //$NON-NLS-1$
+	public static final String DETAIL_PANE_EXCEPTION_BREAKPOINT = JDIDebugUIPlugin.getUniqueIdentifier() + ".DETAIL_PANE_EXCEPTION_BREAKPOINT"; //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 	public ExceptionBreakpointDetailPane() {
 		super(BreakpointMessages.ExceptionBreakpointDetailPane_0, BreakpointMessages.ExceptionBreakpointDetailPane_0, DETAIL_PANE_EXCEPTION_BREAKPOINT);

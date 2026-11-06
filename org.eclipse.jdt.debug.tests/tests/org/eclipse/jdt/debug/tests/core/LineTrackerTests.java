@@ -54,7 +54,7 @@ public class LineTrackerTests extends AbstractDebugTest implements IConsoleLineT
 
 	protected IJavaDebugTarget fTarget;
 
-	protected List<String> fLinesRead = new ArrayList<>();
+	protected List<String> fLinesRead = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 
 	protected boolean fStarted = false;
 
@@ -88,7 +88,7 @@ public class LineTrackerTests extends AbstractDebugTest implements IConsoleLineT
     }
 
 
-	public void testSimpleLineCounter() throws Exception {
+	public void testSimpleLineCounter() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		ConsoleLineTracker.setDelegate(this);
 		fTarget = null;
 		try {
@@ -107,8 +107,8 @@ public class LineTrackerTests extends AbstractDebugTest implements IConsoleLineT
 				fLinesRead.remove(0);
 			}
 			assertEquals("Wrong number of lines output", 11, fLinesRead.size());
-			for (int i = 0; i < 10; i++) {
-				assertEquals("Line " + i + " not equal", fLines[i], fLinesRead.get(i));
+			for (int i = 0; i < 10; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
+				assertEquals("Line " + i + " not equal", fLines[i], fLinesRead.get(i)); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 			}
 			assertEquals("Should be an empty last line", IInternalDebugCoreConstants.EMPTY_STRING, fLinesRead.get(10));
 		} finally {
@@ -120,7 +120,7 @@ public class LineTrackerTests extends AbstractDebugTest implements IConsoleLineT
 	/**
 	 * This program prints the final line without a new line
 	 */
-	public void testNoPrintln() throws Exception {
+	public void testNoPrintln() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		ConsoleLineTracker.setDelegate(this);
 		fTarget = null;
 		try {
@@ -138,8 +138,8 @@ public class LineTrackerTests extends AbstractDebugTest implements IConsoleLineT
 				fLinesRead.remove(0);
 			}
 			assertEquals("Wrong number of lines", 10, fLinesRead.size());
-			for (int i = 0; i < 10; i++) {
-				assertEquals("Line " + i + " not equal", fLines[i], fLinesRead.get(i));
+			for (int i = 0; i < 10; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
+				assertEquals("Line " + i + " not equal", fLines[i], fLinesRead.get(i)); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 			}
 		} finally {
 			ConsoleLineTracker.setDelegate(null);
@@ -150,7 +150,7 @@ public class LineTrackerTests extends AbstractDebugTest implements IConsoleLineT
 	/**
 	 * Test 10,000 lines of output.
 	 */
-	public void testFlood() throws Exception {
+	public void testFlood() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		ConsoleLineTracker.setDelegate(this);
 		ILaunch launch = null;
 		final IPreferenceStore debugPrefStore = DebugUIPlugin.getDefault().getPreferenceStore();
@@ -177,13 +177,13 @@ public class LineTrackerTests extends AbstractDebugTest implements IConsoleLineT
 		}
 	}
 
-	public void testHyperLink() throws Exception {
+	public void testHyperLink() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	    try {
 			ConsoleLineTracker.setDelegate(this);
 			fTarget = launchAndTerminate("ThrowsNPE");
 			long startTime = System.nanoTime();
 			long timeOut = 6000 * 1_000_000L;
-			while (ConsoleLineTracker.getDocument() == null) {
+			while (ConsoleLineTracker.getDocument() == null) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				if (System.nanoTime() - startTime > timeOut) {
 					break;
 				}
@@ -196,7 +196,7 @@ public class LineTrackerTests extends AbstractDebugTest implements IConsoleLineT
 	    }
 	}
 
-	public void testJavaExceptionHyperLink() throws Exception {
+	public void testJavaExceptionHyperLink() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		ConsoleLineTracker.setDelegate(this);
 		fTarget = null;
 		IPreferenceStore jdiUIPreferences = JDIDebugUIPlugin.getDefault().getPreferenceStore();
@@ -218,7 +218,7 @@ public class LineTrackerTests extends AbstractDebugTest implements IConsoleLineT
 
 			// should be 1 exception hyperlink
 			int total = 0;
-			for (int i = 0; i < hyperlinks.length; i++) {
+			for (int i = 0; i < hyperlinks.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				IHyperlink hyperlink = hyperlinks[i];
 				if (hyperlink instanceof JavaExceptionHyperLink) {
 					total++;
@@ -229,7 +229,7 @@ public class LineTrackerTests extends AbstractDebugTest implements IConsoleLineT
 			assertEquals("Wrong number of exception hyperlinks", 1, total);
 			IBreakpoint[] breakpoints = DebugPlugin.getDefault().getBreakpointManager().getBreakpoints(JDIDebugModel.getPluginIdentifier());
 			IJavaExceptionBreakpoint foundBreakpoint = null;
-			for (int i = 0; i < breakpoints.length; i++) {
+			for (int i = 0; i < breakpoints.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				IBreakpoint breakpoint = breakpoints[i];
 				if (breakpoint instanceof IJavaExceptionBreakpoint) {
 					IJavaExceptionBreakpoint exceptionBreakpoint = (IJavaExceptionBreakpoint) breakpoint;
@@ -246,7 +246,7 @@ public class LineTrackerTests extends AbstractDebugTest implements IConsoleLineT
 			exLink.linkActivated();
 			breakpoints = DebugPlugin.getDefault().getBreakpointManager().getBreakpoints(JDIDebugModel.getPluginIdentifier());
 			foundBreakpoint = null;
-			for (int i = 0; i < breakpoints.length; i++) {
+			for (int i = 0; i < breakpoints.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				IBreakpoint breakpoint = breakpoints[i];
 				if (breakpoint instanceof IJavaExceptionBreakpoint) {
 					IJavaExceptionBreakpoint exceptionBreakpoint = (IJavaExceptionBreakpoint) breakpoint;
@@ -311,7 +311,7 @@ public class LineTrackerTests extends AbstractDebugTest implements IConsoleLineT
 	/**
 	 * Tests that stack traces appear with hyperlinks
 	 */
-	public void testStackTraces() throws Exception {
+	public void testStackTraces() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		ConsoleLineTracker.setDelegate(this);
 		fTarget = null;
 		IPreferenceStore jdiUIPreferences = JDIDebugUIPlugin.getDefault().getPreferenceStore();
@@ -331,7 +331,7 @@ public class LineTrackerTests extends AbstractDebugTest implements IConsoleLineT
 			IHyperlink[] hyperlinks = console.getHyperlinks();
 			// should be 100 exception hyperlinks
 			int total = 0;
-			for (int i = 0; i < hyperlinks.length; i++) {
+			for (int i = 0; i < hyperlinks.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
                 IHyperlink hyperlink = hyperlinks[i];
                 if (hyperlink instanceof JavaExceptionHyperLink) {
                     total++;
@@ -347,7 +347,7 @@ public class LineTrackerTests extends AbstractDebugTest implements IConsoleLineT
 		}
 	}
 
-	public void testStringConcatenation() throws Exception {
+	public void testStringConcatenation() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	    ConsoleLineTracker.setDelegate(this);
 	    String typeName = "PrintConcatenation";
 		createConditionalLineBreakpoint(23, typeName, "System.out.println(\"var = \" + foo); return false;", true);
@@ -375,7 +375,7 @@ public class LineTrackerTests extends AbstractDebugTest implements IConsoleLineT
 	    }
 	}
 
-	public void testIntConcatenation() throws Exception {
+	public void testIntConcatenation() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	    ConsoleLineTracker.setDelegate(this);
 	    String typeName = "PrintConcatenation";
 		createConditionalLineBreakpoint(23, typeName, "System.out.println(\"var = \" + x); return false;", true);
@@ -406,7 +406,7 @@ public class LineTrackerTests extends AbstractDebugTest implements IConsoleLineT
 	private void dumpOnError(int expectedLines) {
         if (fLinesRead.size() != expectedLines) {
 	    	Iterator<String> lines = fLinesRead.iterator();
-	    	while (lines.hasNext()) {
+	    	while (lines.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				String line = lines.next();
 				System.out.println(line);
 			}

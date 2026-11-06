@@ -52,7 +52,7 @@ import org.eclipse.swt.widgets.Display;
 
 public class CompareObjectWithClipboard extends ObjectActionDelegate {
 
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public void run(IAction action) {
 		IStructuredSelection selection = getCurrentSelection();
 		if (selection == null) {
@@ -139,12 +139,12 @@ public class CompareObjectWithClipboard extends ObjectActionDelegate {
 			compareVariable("[]", title, clipboard); //$NON-NLS-1$
 			return;
 		}
-		StringBuilder arrBuilder = new StringBuilder("["); //$NON-NLS-1$
-		for (IVariable variableTemp : variables) {
-			arrBuilder.append(variableTemp.getValue() + ", "); //$NON-NLS-1$
+		StringBuilder arrBuilder = new StringBuilder("["); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
+		for (IVariable variableTemp : variables) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
+			arrBuilder.append(variableTemp.getValue() + ", "); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		}
 		arrBuilder.delete(arrBuilder.length() - 2, arrBuilder.length());
-		arrBuilder.append("]"); //$NON-NLS-1$
+		arrBuilder.append("]"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		compareVariable(arrBuilder.toString(), title, clipboard);
 	}
 
@@ -158,7 +158,7 @@ public class CompareObjectWithClipboard extends ObjectActionDelegate {
 	 * @param clipboardContent
 	 *            Active clipboard content
 	 */
-	private void compareVariable(String variableValue, String variableName, String clipboardContent) {
+	private void compareVariable(String variableValue, String variableName, String clipboardContent) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 
 		class StringTypedElement implements ITypedElement, IStreamContentAccessor {
 			private final String name;
@@ -197,7 +197,7 @@ public class CompareObjectWithClipboard extends ObjectActionDelegate {
 		config.setRightLabel("Contents in clipboard"); //$NON-NLS-1$
 		config.setLeftEditable(false);
 		config.setRightEditable(false);
-		CompareEditorInput compareInput = new CompareEditorInput(config) {
+		CompareEditorInput compareInput = new CompareEditorInput(config) { //FLLDCIM: MARK — T09  ANONYMOUS
 			@Override
 			protected Object prepareInput(IProgressMonitor monitor) throws InvocationTargetException, InterruptedException {
 				return new DiffNode(variable, clipboard);
@@ -223,7 +223,7 @@ public class CompareObjectWithClipboard extends ObjectActionDelegate {
 		}
 	}
 
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public void selectionChanged(IAction action, ISelection selection) {
 		if (selection instanceof IStructuredSelection ss) {
 			if (ss.getFirstElement() instanceof IExpression expression) {

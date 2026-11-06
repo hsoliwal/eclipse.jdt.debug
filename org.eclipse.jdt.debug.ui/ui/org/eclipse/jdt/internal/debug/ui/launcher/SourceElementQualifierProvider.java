@@ -42,7 +42,7 @@ public class SourceElementQualifierProvider extends LabelProvider implements ILa
 	/* (non-Javadoc)
 	 * @see org.eclipse.jface.viewers.ILabelProvider#getText(java.lang.Object)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public String getText(Object element) {
 		if (element instanceof IJavaElement) {
 			IJavaElement parent = ((IJavaElement)element).getParent();

@@ -52,7 +52,7 @@ import org.eclipse.swt.widgets.Widget;
 /**
  * @since 3.2
  */
-public class JavaThreadEventHandler extends ThreadEventHandler implements IPropertyChangeListener, TreeListener {
+public class JavaThreadEventHandler extends ThreadEventHandler implements IPropertyChangeListener, TreeListener { //FLLDCIM: MARK — T06  IMPLEMENTS
 
 	private boolean fDisplayMonitors;
 	private Tree fTree;
@@ -71,10 +71,10 @@ public class JavaThreadEventHandler extends ThreadEventHandler implements IPrope
 		Control control = viewer.getControl();
 		if (control instanceof Tree) {
 			fTree = (Tree) control;
-			fTree.getDisplay().asyncExec(new Runnable() {
+			fTree.getDisplay().asyncExec(new Runnable() { //FLLDCIM: MARK — T08 UI_THREAD_SYNCHRONIZER CALL
 				@Override
 				public void run() {
-					fTree.addTreeListener(JavaThreadEventHandler.this);
+					fTree.addTreeListener(JavaThreadEventHandler.this); //FLLDCIM: MARK — T22 EXPAND_STATE_LANE CALL
 				}
 			});
 		}
@@ -93,7 +93,7 @@ public class JavaThreadEventHandler extends ThreadEventHandler implements IPrope
 		super.dispose();
 	}
 
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	protected ModelDelta addPathToThread(ModelDelta delta, IThread thread) {
 		if (JavaElementContentProvider.isDisplayThreadGroups()) {
 			ILaunch launch = thread.getLaunch();
@@ -101,17 +101,17 @@ public class JavaThreadEventHandler extends ThreadEventHandler implements IPrope
 			Object[] launchChildren = launch.getChildren();
 			delta = delta.addNode(launch, indexOf(launches, launch), IModelDelta.NO_CHANGE, launchChildren.length);
 			IJavaDebugTarget debugTarget = (IJavaDebugTarget) thread.getDebugTarget();
-			List<IJavaThreadGroup> groups = new ArrayList<>();
+			List<IJavaThreadGroup> groups = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 			try{
 				delta = delta.addNode(debugTarget, indexOf(launchChildren, debugTarget), IModelDelta.NO_CHANGE, debugTarget.getRootThreadGroups().length);
 				IJavaThread javaThread = (IJavaThread) thread;
 				IJavaThreadGroup threadGroup = javaThread.getThreadGroup();
-				while (threadGroup != null) {
+				while (threadGroup != null) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 					groups.add(0, threadGroup);
 					threadGroup = threadGroup.getThreadGroup();
 				}
 				Iterator<IJavaThreadGroup> iterator = groups.iterator();
-				while (iterator.hasNext()) {
+				while (iterator.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 					IJavaThreadGroup group = iterator.next();
 					int index = -1;
 					IJavaThreadGroup parent = group.getThreadGroup();
@@ -145,7 +145,7 @@ public class JavaThreadEventHandler extends ThreadEventHandler implements IPrope
 	    return fDisplayMonitors;
 	}
 
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	protected int indexOf(IStackFrame frame) {
 		int index = 0;
 		if (isDisplayMonitors()) {
@@ -182,7 +182,7 @@ public class JavaThreadEventHandler extends ThreadEventHandler implements IPrope
 	 */
 	private void waitIfEvaluationRuns(IJavaThread thread, final long maxWaitTimeMillis) {
 		long start = System.currentTimeMillis();
-		while (thread.isPerformingEvaluation() && !thread.isTerminated()) {
+		while (thread.isPerformingEvaluation() && !thread.isTerminated()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			try {
 				Thread.sleep(50);
 			}
@@ -201,7 +201,7 @@ public class JavaThreadEventHandler extends ThreadEventHandler implements IPrope
 	 * @param thread thread
 	 * @return number of children
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	protected int childCount(IThread thread) {
 		try {
 			IJavaThread jThread = (IJavaThread) thread;
@@ -243,7 +243,7 @@ public class JavaThreadEventHandler extends ThreadEventHandler implements IPrope
 	/* (non-Javadoc)
 	 * @see org.eclipse.debug.internal.ui.viewers.update.ThreadEventHandler#handlesEvent(org.eclipse.debug.core.DebugEvent)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	protected boolean handlesEvent(DebugEvent event) {
 		if (super.handlesEvent(event)) {
 			Object source = event.getSource();
@@ -325,7 +325,7 @@ public class JavaThreadEventHandler extends ThreadEventHandler implements IPrope
 	 * @param event thread start/death event
 	 * @return <code>true</code> if the thread group is missing
 	 */
-	private boolean isMissingRequiredThreadGroup(DebugEvent event) {
+	private boolean isMissingRequiredThreadGroup(DebugEvent event) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		if (JavaElementContentProvider.isDisplayThreadGroups()) {
 			Object source = event.getSource();
 			if (source instanceof IJavaThread) {

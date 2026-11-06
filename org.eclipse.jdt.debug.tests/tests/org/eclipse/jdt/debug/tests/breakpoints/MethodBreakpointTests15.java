@@ -92,9 +92,9 @@ public class MethodBreakpointTests15 extends AbstractDebugUiTests {
 		}
 	}
 
-	public void testGenericArrayEntryBreakpoints() throws Exception {
+	public void testGenericArrayEntryBreakpoints() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String typeName = "a.b.c.GenericMethodEntryTest";
-		List<IJavaMethodBreakpoint> bps = new ArrayList<>();
+		List<IJavaMethodBreakpoint> bps = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 		// func(T[] arr, int m, int n) - entry
 		bps.add(createMethodBreakpoint(typeName, "func", "([Ljava/lang/Comparable;II)I", true, false));
 		// func(int m, int n)

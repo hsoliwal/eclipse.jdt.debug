@@ -34,13 +34,13 @@ public class LaunchConfigurationITypeMoveParticipant extends MoveParticipant {
 	/* (non-Javadoc)
 	 * @see org.eclipse.ltk.core.refactoring.participants.RefactoringParticipant#initialize(java.lang.Object)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	protected boolean initialize(Object element) {
 		fType= (IType)element;
 		try {
 			// check that the type is no a local, and is no declared in a local type
 			IType declaringType= fType;
-			while (declaringType != null) {
+			while (declaringType != null) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				if (fType.isLocal()) {
 					return false;
 				}

@@ -27,7 +27,7 @@ public class JDIDebugUIPreferenceInitializer extends AbstractPreferenceInitializ
 		super();
 	}
 
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public void initializeDefaultPreferences() {
 		IPreferenceStore store = JDIDebugUIPlugin.getDefault().getPreferenceStore();
 		store.setDefault(IJDIPreferencesConstants.PREF_SUSPEND_ON_COMPILATION_ERRORS, true);
@@ -55,10 +55,10 @@ public class JDIDebugUIPreferenceInitializer extends AbstractPreferenceInitializ
 		store.setDefault(IJDIPreferencesConstants.PREF_ACTIVE_CUSTOM_FRAME_FILTER_LIST, ""); //$NON-NLS-1$
 		store.setDefault(IJDIPreferencesConstants.PREF_INACTIVE_CUSTOM_FRAME_FILTER_LIST, ""); //$NON-NLS-1$
 
-		store.setDefault(IDebugUIConstants.ID_VARIABLE_VIEW + "." + IJDIPreferencesConstants.PREF_SHOW_CONSTANTS, false); //$NON-NLS-1$
-		store.setDefault(IDebugUIConstants.ID_EXPRESSION_VIEW + "." + IJDIPreferencesConstants.PREF_SHOW_CONSTANTS, false); //$NON-NLS-1$
-		store.setDefault(IDebugUIConstants.ID_VARIABLE_VIEW + "." + IJDIPreferencesConstants.PREF_SHOW_STATIC_VARIABLES, false); //$NON-NLS-1$
-		store.setDefault(IDebugUIConstants.ID_EXPRESSION_VIEW + "." + IJDIPreferencesConstants.PREF_SHOW_STATIC_VARIABLES, false); //$NON-NLS-1$
+		store.setDefault(IDebugUIConstants.ID_VARIABLE_VIEW + "." + IJDIPreferencesConstants.PREF_SHOW_CONSTANTS, false); //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
+		store.setDefault(IDebugUIConstants.ID_EXPRESSION_VIEW + "." + IJDIPreferencesConstants.PREF_SHOW_CONSTANTS, false); //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
+		store.setDefault(IDebugUIConstants.ID_VARIABLE_VIEW + "." + IJDIPreferencesConstants.PREF_SHOW_STATIC_VARIABLES, false); //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
+		store.setDefault(IDebugUIConstants.ID_EXPRESSION_VIEW + "." + IJDIPreferencesConstants.PREF_SHOW_STATIC_VARIABLES, false); //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 		store.setDefault(IJDIPreferencesConstants.PREF_SHOW_CHAR, false);
 		store.setDefault(IJDIPreferencesConstants.PREF_SHOW_HEX, false);

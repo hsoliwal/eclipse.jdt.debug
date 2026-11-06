@@ -32,12 +32,12 @@ public class ByteAssignmentOperatorsTests extends Tests {
 
 	// byte += {byte, char, short, int, long, float, double}
 
-	public void testBytePlusAssignmentByte() throws Throwable {
+	public void testBytePlusAssignmentByte() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
 		byte tmpxVar = xVarByteValue;
 		tmpxVar += xByteValue;
-		IValue value = eval(xVarByte + plusAssignmentOp + xByte);
+		IValue value = eval(xVarByte + plusAssignmentOp + xByte); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("byte plusAssignment byte : wrong type : ", "byte", typeName);
 		byte byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -49,7 +49,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 		assertEquals("byte local variable value : wrong result : ", tmpxVar, byteValue);
 
 		tmpxVar += yByteValue;
-		value = eval(xVarByte + plusAssignmentOp + yByte);
+		value = eval(xVarByte + plusAssignmentOp + yByte); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte plusAssignment byte : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -62,7 +62,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 
 		byte tmpyVar = yVarByteValue;
 		tmpyVar += xByteValue;
-		value = eval(yVarByte + plusAssignmentOp + xByte);
+		value = eval(yVarByte + plusAssignmentOp + xByte); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte plusAssignment byte : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -74,7 +74,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 		assertEquals("byte local variable value : wrong result : ", tmpyVar, byteValue);
 
 		tmpyVar += yByteValue;
-		value = eval(yVarByte + plusAssignmentOp + yByte);
+		value = eval(yVarByte + plusAssignmentOp + yByte); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte plusAssignment byte : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -89,12 +89,12 @@ public class ByteAssignmentOperatorsTests extends Tests {
 		}
 	}
 
-	public void testBytePlusAssignmentChar() throws Throwable {
+	public void testBytePlusAssignmentChar() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
 		byte tmpxVar = xVarByteValue;
 		tmpxVar += xCharValue;
-		IValue value = eval(xVarByte + plusAssignmentOp + xChar);
+		IValue value = eval(xVarByte + plusAssignmentOp + xChar); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("byte plusAssignment char : wrong type : ", "byte", typeName);
 		byte byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -106,7 +106,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 		assertEquals("byte local variable value : wrong result : ", tmpxVar, byteValue);
 
 		tmpxVar += yCharValue;
-		value = eval(xVarByte + plusAssignmentOp + yChar);
+		value = eval(xVarByte + plusAssignmentOp + yChar); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte plusAssignment char : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -119,7 +119,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 
 		byte tmpyVar = yVarByteValue;
 		tmpyVar += xCharValue;
-		value = eval(yVarByte + plusAssignmentOp + xChar);
+		value = eval(yVarByte + plusAssignmentOp + xChar); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte plusAssignment char : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -131,7 +131,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 		assertEquals("byte local variable value : wrong result : ", tmpyVar, byteValue);
 
 		tmpyVar += yCharValue;
-		value = eval(yVarByte + plusAssignmentOp + yChar);
+		value = eval(yVarByte + plusAssignmentOp + yChar); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte plusAssignment char : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -146,12 +146,12 @@ public class ByteAssignmentOperatorsTests extends Tests {
 		}
 	}
 
-	public void testBytePlusAssignmentShort() throws Throwable {
+	public void testBytePlusAssignmentShort() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
 		byte tmpxVar = xVarByteValue;
 		tmpxVar += xShortValue;
-		IValue value = eval(xVarByte + plusAssignmentOp + xShort);
+		IValue value = eval(xVarByte + plusAssignmentOp + xShort); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("byte plusAssignment short : wrong type : ", "byte", typeName);
 		byte byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -163,7 +163,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 		assertEquals("byte local variable value : wrong result : ", tmpxVar, byteValue);
 
 		tmpxVar += yShortValue;
-		value = eval(xVarByte + plusAssignmentOp + yShort);
+		value = eval(xVarByte + plusAssignmentOp + yShort); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte plusAssignment short : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -176,7 +176,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 
 		byte tmpyVar = yVarByteValue;
 		tmpyVar += xShortValue;
-		value = eval(yVarByte + plusAssignmentOp + xShort);
+		value = eval(yVarByte + plusAssignmentOp + xShort); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte plusAssignment short : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -188,7 +188,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 		assertEquals("byte local variable value : wrong result : ", tmpyVar, byteValue);
 
 		tmpyVar += yShortValue;
-		value = eval(yVarByte + plusAssignmentOp + yShort);
+		value = eval(yVarByte + plusAssignmentOp + yShort); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte plusAssignment short : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -203,12 +203,12 @@ public class ByteAssignmentOperatorsTests extends Tests {
 		}
 	}
 
-	public void testBytePlusAssignmentInt() throws Throwable {
+	public void testBytePlusAssignmentInt() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
 		byte tmpxVar = xVarByteValue;
 		tmpxVar += xIntValue;
-		IValue value = eval(xVarByte + plusAssignmentOp + xInt);
+		IValue value = eval(xVarByte + plusAssignmentOp + xInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("byte plusAssignment int : wrong type : ", "byte", typeName);
 		byte byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -220,7 +220,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 		assertEquals("byte local variable value : wrong result : ", tmpxVar, byteValue);
 
 		tmpxVar += yIntValue;
-		value = eval(xVarByte + plusAssignmentOp + yInt);
+		value = eval(xVarByte + plusAssignmentOp + yInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte plusAssignment int : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -233,7 +233,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 
 		byte tmpyVar = yVarByteValue;
 		tmpyVar += xIntValue;
-		value = eval(yVarByte + plusAssignmentOp + xInt);
+		value = eval(yVarByte + plusAssignmentOp + xInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte plusAssignment int : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -245,7 +245,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 		assertEquals("byte local variable value : wrong result : ", tmpyVar, byteValue);
 
 		tmpyVar += yIntValue;
-		value = eval(yVarByte + plusAssignmentOp + yInt);
+		value = eval(yVarByte + plusAssignmentOp + yInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte plusAssignment int : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -260,12 +260,12 @@ public class ByteAssignmentOperatorsTests extends Tests {
 		}
 	}
 
-	public void testBytePlusAssignmentLong() throws Throwable {
+	public void testBytePlusAssignmentLong() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
 		byte tmpxVar = xVarByteValue;
 		tmpxVar += xLongValue;
-		IValue value = eval(xVarByte + plusAssignmentOp + xLong);
+		IValue value = eval(xVarByte + plusAssignmentOp + xLong); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("byte plusAssignment long : wrong type : ", "byte", typeName);
 		byte byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -277,7 +277,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 		assertEquals("byte local variable value : wrong result : ", tmpxVar, byteValue);
 
 		tmpxVar += yLongValue;
-		value = eval(xVarByte + plusAssignmentOp + yLong);
+		value = eval(xVarByte + plusAssignmentOp + yLong); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte plusAssignment long : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -290,7 +290,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 
 		byte tmpyVar = yVarByteValue;
 		tmpyVar += xLongValue;
-		value = eval(yVarByte + plusAssignmentOp + xLong);
+		value = eval(yVarByte + plusAssignmentOp + xLong); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte plusAssignment long : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -302,7 +302,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 		assertEquals("byte local variable value : wrong result : ", tmpyVar, byteValue);
 
 		tmpyVar += yLongValue;
-		value = eval(yVarByte + plusAssignmentOp + yLong);
+		value = eval(yVarByte + plusAssignmentOp + yLong); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte plusAssignment long : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -317,12 +317,12 @@ public class ByteAssignmentOperatorsTests extends Tests {
 		}
 	}
 
-	public void testBytePlusAssignmentFloat() throws Throwable {
+	public void testBytePlusAssignmentFloat() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
 		byte tmpxVar = xVarByteValue;
 		tmpxVar += xFloatValue;
-		IValue value = eval(xVarByte + plusAssignmentOp + xFloat);
+		IValue value = eval(xVarByte + plusAssignmentOp + xFloat); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("byte plusAssignment float : wrong type : ", "byte", typeName);
 		byte byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -334,7 +334,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 		assertEquals("byte local variable value : wrong result : ", tmpxVar, byteValue);
 
 		tmpxVar += yFloatValue;
-		value = eval(xVarByte + plusAssignmentOp + yFloat);
+		value = eval(xVarByte + plusAssignmentOp + yFloat); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte plusAssignment float : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -347,7 +347,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 
 		byte tmpyVar = yVarByteValue;
 		tmpyVar += xFloatValue;
-		value = eval(yVarByte + plusAssignmentOp + xFloat);
+		value = eval(yVarByte + plusAssignmentOp + xFloat); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte plusAssignment float : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -359,7 +359,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 		assertEquals("byte local variable value : wrong result : ", tmpyVar, byteValue);
 
 		tmpyVar += yFloatValue;
-		value = eval(yVarByte + plusAssignmentOp + yFloat);
+		value = eval(yVarByte + plusAssignmentOp + yFloat); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte plusAssignment float : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -374,12 +374,12 @@ public class ByteAssignmentOperatorsTests extends Tests {
 		}
 	}
 
-	public void testBytePlusAssignmentDouble() throws Throwable {
+	public void testBytePlusAssignmentDouble() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
 		byte tmpxVar = xVarByteValue;
 		tmpxVar += xDoubleValue;
-		IValue value = eval(xVarByte + plusAssignmentOp + xDouble);
+		IValue value = eval(xVarByte + plusAssignmentOp + xDouble); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("byte plusAssignment double : wrong type : ", "byte", typeName);
 		byte byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -391,7 +391,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 		assertEquals("byte local variable value : wrong result : ", tmpxVar, byteValue);
 
 		tmpxVar += yDoubleValue;
-		value = eval(xVarByte + plusAssignmentOp + yDouble);
+		value = eval(xVarByte + plusAssignmentOp + yDouble); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte plusAssignment double : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -404,7 +404,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 
 		byte tmpyVar = yVarByteValue;
 		tmpyVar += xDoubleValue;
-		value = eval(yVarByte + plusAssignmentOp + xDouble);
+		value = eval(yVarByte + plusAssignmentOp + xDouble); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte plusAssignment double : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -416,7 +416,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 		assertEquals("byte local variable value : wrong result : ", tmpyVar, byteValue);
 
 		tmpyVar += yDoubleValue;
-		value = eval(yVarByte + plusAssignmentOp + yDouble);
+		value = eval(yVarByte + plusAssignmentOp + yDouble); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte plusAssignment double : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -433,12 +433,12 @@ public class ByteAssignmentOperatorsTests extends Tests {
 
 	// byte -= {byte, char, short, int, long, float, double}
 
-	public void testByteMinusAssignmentByte() throws Throwable {
+	public void testByteMinusAssignmentByte() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
 		byte tmpxVar = xVarByteValue;
 		tmpxVar -= xByteValue;
-		IValue value = eval(xVarByte + minusAssignmentOp + xByte);
+		IValue value = eval(xVarByte + minusAssignmentOp + xByte); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("byte minusAssignment byte : wrong type : ", "byte", typeName);
 		byte byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -450,7 +450,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 		assertEquals("byte local variable value : wrong result : ", tmpxVar, byteValue);
 
 		tmpxVar -= yByteValue;
-		value = eval(xVarByte + minusAssignmentOp + yByte);
+		value = eval(xVarByte + minusAssignmentOp + yByte); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte minusAssignment byte : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -463,7 +463,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 
 		byte tmpyVar = yVarByteValue;
 		tmpyVar -= xByteValue;
-		value = eval(yVarByte + minusAssignmentOp + xByte);
+		value = eval(yVarByte + minusAssignmentOp + xByte); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte minusAssignment byte : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -475,7 +475,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 		assertEquals("byte local variable value : wrong result : ", tmpyVar, byteValue);
 
 		tmpyVar -= yByteValue;
-		value = eval(yVarByte + minusAssignmentOp + yByte);
+		value = eval(yVarByte + minusAssignmentOp + yByte); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte minusAssignment byte : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -490,12 +490,12 @@ public class ByteAssignmentOperatorsTests extends Tests {
 		}
 	}
 
-	public void testByteMinusAssignmentChar() throws Throwable {
+	public void testByteMinusAssignmentChar() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
 		byte tmpxVar = xVarByteValue;
 		tmpxVar -= xCharValue;
-		IValue value = eval(xVarByte + minusAssignmentOp + xChar);
+		IValue value = eval(xVarByte + minusAssignmentOp + xChar); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("byte minusAssignment char : wrong type : ", "byte", typeName);
 		byte byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -507,7 +507,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 		assertEquals("byte local variable value : wrong result : ", tmpxVar, byteValue);
 
 		tmpxVar -= yCharValue;
-		value = eval(xVarByte + minusAssignmentOp + yChar);
+		value = eval(xVarByte + minusAssignmentOp + yChar); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte minusAssignment char : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -520,7 +520,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 
 		byte tmpyVar = yVarByteValue;
 		tmpyVar -= xCharValue;
-		value = eval(yVarByte + minusAssignmentOp + xChar);
+		value = eval(yVarByte + minusAssignmentOp + xChar); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte minusAssignment char : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -532,7 +532,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 		assertEquals("byte local variable value : wrong result : ", tmpyVar, byteValue);
 
 		tmpyVar -= yCharValue;
-		value = eval(yVarByte + minusAssignmentOp + yChar);
+		value = eval(yVarByte + minusAssignmentOp + yChar); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte minusAssignment char : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -547,12 +547,12 @@ public class ByteAssignmentOperatorsTests extends Tests {
 		}
 	}
 
-	public void testByteMinusAssignmentShort() throws Throwable {
+	public void testByteMinusAssignmentShort() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
 		byte tmpxVar = xVarByteValue;
 		tmpxVar -= xShortValue;
-		IValue value = eval(xVarByte + minusAssignmentOp + xShort);
+		IValue value = eval(xVarByte + minusAssignmentOp + xShort); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("byte minusAssignment short : wrong type : ", "byte", typeName);
 		byte byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -564,7 +564,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 		assertEquals("byte local variable value : wrong result : ", tmpxVar, byteValue);
 
 		tmpxVar -= yShortValue;
-		value = eval(xVarByte + minusAssignmentOp + yShort);
+		value = eval(xVarByte + minusAssignmentOp + yShort); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte minusAssignment short : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -577,7 +577,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 
 		byte tmpyVar = yVarByteValue;
 		tmpyVar -= xShortValue;
-		value = eval(yVarByte + minusAssignmentOp + xShort);
+		value = eval(yVarByte + minusAssignmentOp + xShort); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte minusAssignment short : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -589,7 +589,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 		assertEquals("byte local variable value : wrong result : ", tmpyVar, byteValue);
 
 		tmpyVar -= yShortValue;
-		value = eval(yVarByte + minusAssignmentOp + yShort);
+		value = eval(yVarByte + minusAssignmentOp + yShort); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte minusAssignment short : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -604,12 +604,12 @@ public class ByteAssignmentOperatorsTests extends Tests {
 		}
 	}
 
-	public void testByteMinusAssignmentInt() throws Throwable {
+	public void testByteMinusAssignmentInt() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
 		byte tmpxVar = xVarByteValue;
 		tmpxVar -= xIntValue;
-		IValue value = eval(xVarByte + minusAssignmentOp + xInt);
+		IValue value = eval(xVarByte + minusAssignmentOp + xInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("byte minusAssignment int : wrong type : ", "byte", typeName);
 		byte byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -621,7 +621,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 		assertEquals("byte local variable value : wrong result : ", tmpxVar, byteValue);
 
 		tmpxVar -= yIntValue;
-		value = eval(xVarByte + minusAssignmentOp + yInt);
+		value = eval(xVarByte + minusAssignmentOp + yInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte minusAssignment int : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -634,7 +634,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 
 		byte tmpyVar = yVarByteValue;
 		tmpyVar -= xIntValue;
-		value = eval(yVarByte + minusAssignmentOp + xInt);
+		value = eval(yVarByte + minusAssignmentOp + xInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte minusAssignment int : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -646,7 +646,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 		assertEquals("byte local variable value : wrong result : ", tmpyVar, byteValue);
 
 		tmpyVar -= yIntValue;
-		value = eval(yVarByte + minusAssignmentOp + yInt);
+		value = eval(yVarByte + minusAssignmentOp + yInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte minusAssignment int : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -661,12 +661,12 @@ public class ByteAssignmentOperatorsTests extends Tests {
 		}
 	}
 
-	public void testByteMinusAssignmentLong() throws Throwable {
+	public void testByteMinusAssignmentLong() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
 		byte tmpxVar = xVarByteValue;
 		tmpxVar -= xLongValue;
-		IValue value = eval(xVarByte + minusAssignmentOp + xLong);
+		IValue value = eval(xVarByte + minusAssignmentOp + xLong); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("byte minusAssignment long : wrong type : ", "byte", typeName);
 		byte byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -678,7 +678,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 		assertEquals("byte local variable value : wrong result : ", tmpxVar, byteValue);
 
 		tmpxVar -= yLongValue;
-		value = eval(xVarByte + minusAssignmentOp + yLong);
+		value = eval(xVarByte + minusAssignmentOp + yLong); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte minusAssignment long : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -691,7 +691,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 
 		byte tmpyVar = yVarByteValue;
 		tmpyVar -= xLongValue;
-		value = eval(yVarByte + minusAssignmentOp + xLong);
+		value = eval(yVarByte + minusAssignmentOp + xLong); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte minusAssignment long : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -703,7 +703,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 		assertEquals("byte local variable value : wrong result : ", tmpyVar, byteValue);
 
 		tmpyVar -= yLongValue;
-		value = eval(yVarByte + minusAssignmentOp + yLong);
+		value = eval(yVarByte + minusAssignmentOp + yLong); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte minusAssignment long : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -718,12 +718,12 @@ public class ByteAssignmentOperatorsTests extends Tests {
 		}
 	}
 
-	public void testByteMinusAssignmentFloat() throws Throwable {
+	public void testByteMinusAssignmentFloat() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
 		byte tmpxVar = xVarByteValue;
 		tmpxVar -= xFloatValue;
-		IValue value = eval(xVarByte + minusAssignmentOp + xFloat);
+		IValue value = eval(xVarByte + minusAssignmentOp + xFloat); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("byte minusAssignment float : wrong type : ", "byte", typeName);
 		byte byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -735,7 +735,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 		assertEquals("byte local variable value : wrong result : ", tmpxVar, byteValue);
 
 		tmpxVar -= yFloatValue;
-		value = eval(xVarByte + minusAssignmentOp + yFloat);
+		value = eval(xVarByte + minusAssignmentOp + yFloat); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte minusAssignment float : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -748,7 +748,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 
 		byte tmpyVar = yVarByteValue;
 		tmpyVar -= xFloatValue;
-		value = eval(yVarByte + minusAssignmentOp + xFloat);
+		value = eval(yVarByte + minusAssignmentOp + xFloat); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte minusAssignment float : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -760,7 +760,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 		assertEquals("byte local variable value : wrong result : ", tmpyVar, byteValue);
 
 		tmpyVar -= yFloatValue;
-		value = eval(yVarByte + minusAssignmentOp + yFloat);
+		value = eval(yVarByte + minusAssignmentOp + yFloat); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte minusAssignment float : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -775,12 +775,12 @@ public class ByteAssignmentOperatorsTests extends Tests {
 		}
 	}
 
-	public void testByteMinusAssignmentDouble() throws Throwable {
+	public void testByteMinusAssignmentDouble() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
 		byte tmpxVar = xVarByteValue;
 		tmpxVar -= xDoubleValue;
-		IValue value = eval(xVarByte + minusAssignmentOp + xDouble);
+		IValue value = eval(xVarByte + minusAssignmentOp + xDouble); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("byte minusAssignment double : wrong type : ", "byte", typeName);
 		byte byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -792,7 +792,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 		assertEquals("byte local variable value : wrong result : ", tmpxVar, byteValue);
 
 		tmpxVar -= yDoubleValue;
-		value = eval(xVarByte + minusAssignmentOp + yDouble);
+		value = eval(xVarByte + minusAssignmentOp + yDouble); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte minusAssignment double : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -805,7 +805,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 
 		byte tmpyVar = yVarByteValue;
 		tmpyVar -= xDoubleValue;
-		value = eval(yVarByte + minusAssignmentOp + xDouble);
+		value = eval(yVarByte + minusAssignmentOp + xDouble); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte minusAssignment double : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -817,7 +817,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 		assertEquals("byte local variable value : wrong result : ", tmpyVar, byteValue);
 
 		tmpyVar -= yDoubleValue;
-		value = eval(yVarByte + minusAssignmentOp + yDouble);
+		value = eval(yVarByte + minusAssignmentOp + yDouble); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte minusAssignment double : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -834,12 +834,12 @@ public class ByteAssignmentOperatorsTests extends Tests {
 
 	// byte *= {byte, char, short, int, long, float, double}
 
-	public void testByteMultiplyAssignmentByte() throws Throwable {
+	public void testByteMultiplyAssignmentByte() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
 		byte tmpxVar = xVarByteValue;
 		tmpxVar *= xByteValue;
-		IValue value = eval(xVarByte + multiplyAssignmentOp + xByte);
+		IValue value = eval(xVarByte + multiplyAssignmentOp + xByte); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("byte multiplyAssignment byte : wrong type : ", "byte", typeName);
 		byte byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -851,7 +851,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 		assertEquals("byte local variable value : wrong result : ", tmpxVar, byteValue);
 
 		tmpxVar *= yByteValue;
-		value = eval(xVarByte + multiplyAssignmentOp + yByte);
+		value = eval(xVarByte + multiplyAssignmentOp + yByte); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte multiplyAssignment byte : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -864,7 +864,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 
 		byte tmpyVar = yVarByteValue;
 		tmpyVar *= xByteValue;
-		value = eval(yVarByte + multiplyAssignmentOp + xByte);
+		value = eval(yVarByte + multiplyAssignmentOp + xByte); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte multiplyAssignment byte : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -876,7 +876,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 		assertEquals("byte local variable value : wrong result : ", tmpyVar, byteValue);
 
 		tmpyVar *= yByteValue;
-		value = eval(yVarByte + multiplyAssignmentOp + yByte);
+		value = eval(yVarByte + multiplyAssignmentOp + yByte); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte multiplyAssignment byte : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -891,12 +891,12 @@ public class ByteAssignmentOperatorsTests extends Tests {
 		}
 	}
 
-	public void testByteMultiplyAssignmentChar() throws Throwable {
+	public void testByteMultiplyAssignmentChar() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
 		byte tmpxVar = xVarByteValue;
 		tmpxVar *= xCharValue;
-		IValue value = eval(xVarByte + multiplyAssignmentOp + xChar);
+		IValue value = eval(xVarByte + multiplyAssignmentOp + xChar); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("byte multiplyAssignment char : wrong type : ", "byte", typeName);
 		byte byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -908,7 +908,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 		assertEquals("byte local variable value : wrong result : ", tmpxVar, byteValue);
 
 		tmpxVar *= yCharValue;
-		value = eval(xVarByte + multiplyAssignmentOp + yChar);
+		value = eval(xVarByte + multiplyAssignmentOp + yChar); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte multiplyAssignment char : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -921,7 +921,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 
 		byte tmpyVar = yVarByteValue;
 		tmpyVar *= xCharValue;
-		value = eval(yVarByte + multiplyAssignmentOp + xChar);
+		value = eval(yVarByte + multiplyAssignmentOp + xChar); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte multiplyAssignment char : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -933,7 +933,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 		assertEquals("byte local variable value : wrong result : ", tmpyVar, byteValue);
 
 		tmpyVar *= yCharValue;
-		value = eval(yVarByte + multiplyAssignmentOp + yChar);
+		value = eval(yVarByte + multiplyAssignmentOp + yChar); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte multiplyAssignment char : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -948,12 +948,12 @@ public class ByteAssignmentOperatorsTests extends Tests {
 		}
 	}
 
-	public void testByteMultiplyAssignmentShort() throws Throwable {
+	public void testByteMultiplyAssignmentShort() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
 		byte tmpxVar = xVarByteValue;
 		tmpxVar *= xShortValue;
-		IValue value = eval(xVarByte + multiplyAssignmentOp + xShort);
+		IValue value = eval(xVarByte + multiplyAssignmentOp + xShort); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("byte multiplyAssignment short : wrong type : ", "byte", typeName);
 		byte byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -965,7 +965,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 		assertEquals("byte local variable value : wrong result : ", tmpxVar, byteValue);
 
 		tmpxVar *= yShortValue;
-		value = eval(xVarByte + multiplyAssignmentOp + yShort);
+		value = eval(xVarByte + multiplyAssignmentOp + yShort); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte multiplyAssignment short : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -978,7 +978,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 
 		byte tmpyVar = yVarByteValue;
 		tmpyVar *= xShortValue;
-		value = eval(yVarByte + multiplyAssignmentOp + xShort);
+		value = eval(yVarByte + multiplyAssignmentOp + xShort); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte multiplyAssignment short : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -990,7 +990,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 		assertEquals("byte local variable value : wrong result : ", tmpyVar, byteValue);
 
 		tmpyVar *= yShortValue;
-		value = eval(yVarByte + multiplyAssignmentOp + yShort);
+		value = eval(yVarByte + multiplyAssignmentOp + yShort); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte multiplyAssignment short : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -1005,12 +1005,12 @@ public class ByteAssignmentOperatorsTests extends Tests {
 		}
 	}
 
-	public void testByteMultiplyAssignmentInt() throws Throwable {
+	public void testByteMultiplyAssignmentInt() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
 		byte tmpxVar = xVarByteValue;
 		tmpxVar *= xIntValue;
-		IValue value = eval(xVarByte + multiplyAssignmentOp + xInt);
+		IValue value = eval(xVarByte + multiplyAssignmentOp + xInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("byte multiplyAssignment int : wrong type : ", "byte", typeName);
 		byte byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -1022,7 +1022,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 		assertEquals("byte local variable value : wrong result : ", tmpxVar, byteValue);
 
 		tmpxVar *= yIntValue;
-		value = eval(xVarByte + multiplyAssignmentOp + yInt);
+		value = eval(xVarByte + multiplyAssignmentOp + yInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte multiplyAssignment int : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -1035,7 +1035,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 
 		byte tmpyVar = yVarByteValue;
 		tmpyVar *= xIntValue;
-		value = eval(yVarByte + multiplyAssignmentOp + xInt);
+		value = eval(yVarByte + multiplyAssignmentOp + xInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte multiplyAssignment int : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -1047,7 +1047,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 		assertEquals("byte local variable value : wrong result : ", tmpyVar, byteValue);
 
 		tmpyVar *= yIntValue;
-		value = eval(yVarByte + multiplyAssignmentOp + yInt);
+		value = eval(yVarByte + multiplyAssignmentOp + yInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte multiplyAssignment int : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -1062,12 +1062,12 @@ public class ByteAssignmentOperatorsTests extends Tests {
 		}
 	}
 
-	public void testByteMultiplyAssignmentLong() throws Throwable {
+	public void testByteMultiplyAssignmentLong() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
 		byte tmpxVar = xVarByteValue;
 		tmpxVar *= xLongValue;
-		IValue value = eval(xVarByte + multiplyAssignmentOp + xLong);
+		IValue value = eval(xVarByte + multiplyAssignmentOp + xLong); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("byte multiplyAssignment long : wrong type : ", "byte", typeName);
 		byte byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -1079,7 +1079,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 		assertEquals("byte local variable value : wrong result : ", tmpxVar, byteValue);
 
 		tmpxVar *= yLongValue;
-		value = eval(xVarByte + multiplyAssignmentOp + yLong);
+		value = eval(xVarByte + multiplyAssignmentOp + yLong); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte multiplyAssignment long : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -1092,7 +1092,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 
 		byte tmpyVar = yVarByteValue;
 		tmpyVar *= xLongValue;
-		value = eval(yVarByte + multiplyAssignmentOp + xLong);
+		value = eval(yVarByte + multiplyAssignmentOp + xLong); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte multiplyAssignment long : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -1104,7 +1104,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 		assertEquals("byte local variable value : wrong result : ", tmpyVar, byteValue);
 
 		tmpyVar *= yLongValue;
-		value = eval(yVarByte + multiplyAssignmentOp + yLong);
+		value = eval(yVarByte + multiplyAssignmentOp + yLong); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte multiplyAssignment long : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -1119,12 +1119,12 @@ public class ByteAssignmentOperatorsTests extends Tests {
 		}
 	}
 
-	public void testByteMultiplyAssignmentFloat() throws Throwable {
+	public void testByteMultiplyAssignmentFloat() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
 		byte tmpxVar = xVarByteValue;
 		tmpxVar *= xFloatValue;
-		IValue value = eval(xVarByte + multiplyAssignmentOp + xFloat);
+		IValue value = eval(xVarByte + multiplyAssignmentOp + xFloat); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("byte multiplyAssignment float : wrong type : ", "byte", typeName);
 		byte byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -1136,7 +1136,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 		assertEquals("byte local variable value : wrong result : ", tmpxVar, byteValue);
 
 		tmpxVar *= yFloatValue;
-		value = eval(xVarByte + multiplyAssignmentOp + yFloat);
+		value = eval(xVarByte + multiplyAssignmentOp + yFloat); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte multiplyAssignment float : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -1149,7 +1149,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 
 		byte tmpyVar = yVarByteValue;
 		tmpyVar *= xFloatValue;
-		value = eval(yVarByte + multiplyAssignmentOp + xFloat);
+		value = eval(yVarByte + multiplyAssignmentOp + xFloat); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte multiplyAssignment float : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -1161,7 +1161,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 		assertEquals("byte local variable value : wrong result : ", tmpyVar, byteValue);
 
 		tmpyVar *= yFloatValue;
-		value = eval(yVarByte + multiplyAssignmentOp + yFloat);
+		value = eval(yVarByte + multiplyAssignmentOp + yFloat); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte multiplyAssignment float : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -1176,12 +1176,12 @@ public class ByteAssignmentOperatorsTests extends Tests {
 		}
 	}
 
-	public void testByteMultiplyAssignmentDouble() throws Throwable {
+	public void testByteMultiplyAssignmentDouble() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
 		byte tmpxVar = xVarByteValue;
 		tmpxVar *= xDoubleValue;
-		IValue value = eval(xVarByte + multiplyAssignmentOp + xDouble);
+		IValue value = eval(xVarByte + multiplyAssignmentOp + xDouble); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("byte multiplyAssignment double : wrong type : ", "byte", typeName);
 		byte byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -1193,7 +1193,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 		assertEquals("byte local variable value : wrong result : ", tmpxVar, byteValue);
 
 		tmpxVar *= yDoubleValue;
-		value = eval(xVarByte + multiplyAssignmentOp + yDouble);
+		value = eval(xVarByte + multiplyAssignmentOp + yDouble); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte multiplyAssignment double : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -1206,7 +1206,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 
 		byte tmpyVar = yVarByteValue;
 		tmpyVar *= xDoubleValue;
-		value = eval(yVarByte + multiplyAssignmentOp + xDouble);
+		value = eval(yVarByte + multiplyAssignmentOp + xDouble); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte multiplyAssignment double : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -1218,7 +1218,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 		assertEquals("byte local variable value : wrong result : ", tmpyVar, byteValue);
 
 		tmpyVar *= yDoubleValue;
-		value = eval(yVarByte + multiplyAssignmentOp + yDouble);
+		value = eval(yVarByte + multiplyAssignmentOp + yDouble); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte multiplyAssignment double : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -1235,12 +1235,12 @@ public class ByteAssignmentOperatorsTests extends Tests {
 
 	// byte /= {byte, char, short, int, long, float, double}
 
-	public void testByteDivideAssignmentByte() throws Throwable {
+	public void testByteDivideAssignmentByte() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
 		byte tmpxVar = xVarByteValue;
 		tmpxVar /= xByteValue;
-		IValue value = eval(xVarByte + divideAssignmentOp + xByte);
+		IValue value = eval(xVarByte + divideAssignmentOp + xByte); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("byte divideAssignment byte : wrong type : ", "byte", typeName);
 		byte byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -1252,7 +1252,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 		assertEquals("byte local variable value : wrong result : ", tmpxVar, byteValue);
 
 		tmpxVar /= yByteValue;
-		value = eval(xVarByte + divideAssignmentOp + yByte);
+		value = eval(xVarByte + divideAssignmentOp + yByte); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte divideAssignment byte : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -1265,7 +1265,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 
 		byte tmpyVar = yVarByteValue;
 		tmpyVar /= xByteValue;
-		value = eval(yVarByte + divideAssignmentOp + xByte);
+		value = eval(yVarByte + divideAssignmentOp + xByte); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte divideAssignment byte : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -1277,7 +1277,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 		assertEquals("byte local variable value : wrong result : ", tmpyVar, byteValue);
 
 		tmpyVar /= yByteValue;
-		value = eval(yVarByte + divideAssignmentOp + yByte);
+		value = eval(yVarByte + divideAssignmentOp + yByte); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte divideAssignment byte : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -1292,12 +1292,12 @@ public class ByteAssignmentOperatorsTests extends Tests {
 		}
 	}
 
-	public void testByteDivideAssignmentChar() throws Throwable {
+	public void testByteDivideAssignmentChar() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
 		byte tmpxVar = xVarByteValue;
 		tmpxVar /= xCharValue;
-		IValue value = eval(xVarByte + divideAssignmentOp + xChar);
+		IValue value = eval(xVarByte + divideAssignmentOp + xChar); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("byte divideAssignment char : wrong type : ", "byte", typeName);
 		byte byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -1309,7 +1309,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 		assertEquals("byte local variable value : wrong result : ", tmpxVar, byteValue);
 
 		tmpxVar /= yCharValue;
-		value = eval(xVarByte + divideAssignmentOp + yChar);
+		value = eval(xVarByte + divideAssignmentOp + yChar); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte divideAssignment char : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -1322,7 +1322,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 
 		byte tmpyVar = yVarByteValue;
 		tmpyVar /= xCharValue;
-		value = eval(yVarByte + divideAssignmentOp + xChar);
+		value = eval(yVarByte + divideAssignmentOp + xChar); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte divideAssignment char : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -1334,7 +1334,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 		assertEquals("byte local variable value : wrong result : ", tmpyVar, byteValue);
 
 		tmpyVar /= yCharValue;
-		value = eval(yVarByte + divideAssignmentOp + yChar);
+		value = eval(yVarByte + divideAssignmentOp + yChar); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte divideAssignment char : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -1349,12 +1349,12 @@ public class ByteAssignmentOperatorsTests extends Tests {
 		}
 	}
 
-	public void testByteDivideAssignmentShort() throws Throwable {
+	public void testByteDivideAssignmentShort() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
 		byte tmpxVar = xVarByteValue;
 		tmpxVar /= xShortValue;
-		IValue value = eval(xVarByte + divideAssignmentOp + xShort);
+		IValue value = eval(xVarByte + divideAssignmentOp + xShort); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("byte divideAssignment short : wrong type : ", "byte", typeName);
 		byte byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -1366,7 +1366,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 		assertEquals("byte local variable value : wrong result : ", tmpxVar, byteValue);
 
 		tmpxVar /= yShortValue;
-		value = eval(xVarByte + divideAssignmentOp + yShort);
+		value = eval(xVarByte + divideAssignmentOp + yShort); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte divideAssignment short : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -1379,7 +1379,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 
 		byte tmpyVar = yVarByteValue;
 		tmpyVar /= xShortValue;
-		value = eval(yVarByte + divideAssignmentOp + xShort);
+		value = eval(yVarByte + divideAssignmentOp + xShort); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte divideAssignment short : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -1391,7 +1391,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 		assertEquals("byte local variable value : wrong result : ", tmpyVar, byteValue);
 
 		tmpyVar /= yShortValue;
-		value = eval(yVarByte + divideAssignmentOp + yShort);
+		value = eval(yVarByte + divideAssignmentOp + yShort); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte divideAssignment short : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -1406,12 +1406,12 @@ public class ByteAssignmentOperatorsTests extends Tests {
 		}
 	}
 
-	public void testByteDivideAssignmentInt() throws Throwable {
+	public void testByteDivideAssignmentInt() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
 		byte tmpxVar = xVarByteValue;
 		tmpxVar /= xIntValue;
-		IValue value = eval(xVarByte + divideAssignmentOp + xInt);
+		IValue value = eval(xVarByte + divideAssignmentOp + xInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("byte divideAssignment int : wrong type : ", "byte", typeName);
 		byte byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -1423,7 +1423,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 		assertEquals("byte local variable value : wrong result : ", tmpxVar, byteValue);
 
 		tmpxVar /= yIntValue;
-		value = eval(xVarByte + divideAssignmentOp + yInt);
+		value = eval(xVarByte + divideAssignmentOp + yInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte divideAssignment int : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -1436,7 +1436,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 
 		byte tmpyVar = yVarByteValue;
 		tmpyVar /= xIntValue;
-		value = eval(yVarByte + divideAssignmentOp + xInt);
+		value = eval(yVarByte + divideAssignmentOp + xInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte divideAssignment int : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -1448,7 +1448,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 		assertEquals("byte local variable value : wrong result : ", tmpyVar, byteValue);
 
 		tmpyVar /= yIntValue;
-		value = eval(yVarByte + divideAssignmentOp + yInt);
+		value = eval(yVarByte + divideAssignmentOp + yInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte divideAssignment int : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -1463,12 +1463,12 @@ public class ByteAssignmentOperatorsTests extends Tests {
 		}
 	}
 
-	public void testByteDivideAssignmentLong() throws Throwable {
+	public void testByteDivideAssignmentLong() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
 		byte tmpxVar = xVarByteValue;
 		tmpxVar /= xLongValue;
-		IValue value = eval(xVarByte + divideAssignmentOp + xLong);
+		IValue value = eval(xVarByte + divideAssignmentOp + xLong); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("byte divideAssignment long : wrong type : ", "byte", typeName);
 		byte byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -1480,7 +1480,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 		assertEquals("byte local variable value : wrong result : ", tmpxVar, byteValue);
 
 		tmpxVar /= yLongValue;
-		value = eval(xVarByte + divideAssignmentOp + yLong);
+		value = eval(xVarByte + divideAssignmentOp + yLong); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte divideAssignment long : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -1493,7 +1493,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 
 		byte tmpyVar = yVarByteValue;
 		tmpyVar /= xLongValue;
-		value = eval(yVarByte + divideAssignmentOp + xLong);
+		value = eval(yVarByte + divideAssignmentOp + xLong); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte divideAssignment long : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -1505,7 +1505,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 		assertEquals("byte local variable value : wrong result : ", tmpyVar, byteValue);
 
 		tmpyVar /= yLongValue;
-		value = eval(yVarByte + divideAssignmentOp + yLong);
+		value = eval(yVarByte + divideAssignmentOp + yLong); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte divideAssignment long : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -1520,12 +1520,12 @@ public class ByteAssignmentOperatorsTests extends Tests {
 		}
 	}
 
-	public void testByteDivideAssignmentFloat() throws Throwable {
+	public void testByteDivideAssignmentFloat() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
 		byte tmpxVar = xVarByteValue;
 		tmpxVar /= xFloatValue;
-		IValue value = eval(xVarByte + divideAssignmentOp + xFloat);
+		IValue value = eval(xVarByte + divideAssignmentOp + xFloat); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("byte divideAssignment float : wrong type : ", "byte", typeName);
 		byte byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -1537,7 +1537,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 		assertEquals("byte local variable value : wrong result : ", tmpxVar, byteValue);
 
 		tmpxVar /= yFloatValue;
-		value = eval(xVarByte + divideAssignmentOp + yFloat);
+		value = eval(xVarByte + divideAssignmentOp + yFloat); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte divideAssignment float : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -1550,7 +1550,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 
 		byte tmpyVar = yVarByteValue;
 		tmpyVar /= xFloatValue;
-		value = eval(yVarByte + divideAssignmentOp + xFloat);
+		value = eval(yVarByte + divideAssignmentOp + xFloat); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte divideAssignment float : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -1562,7 +1562,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 		assertEquals("byte local variable value : wrong result : ", tmpyVar, byteValue);
 
 		tmpyVar /= yFloatValue;
-		value = eval(yVarByte + divideAssignmentOp + yFloat);
+		value = eval(yVarByte + divideAssignmentOp + yFloat); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte divideAssignment float : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -1577,12 +1577,12 @@ public class ByteAssignmentOperatorsTests extends Tests {
 		}
 	}
 
-	public void testByteDivideAssignmentDouble() throws Throwable {
+	public void testByteDivideAssignmentDouble() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
 		byte tmpxVar = xVarByteValue;
 		tmpxVar /= xDoubleValue;
-		IValue value = eval(xVarByte + divideAssignmentOp + xDouble);
+		IValue value = eval(xVarByte + divideAssignmentOp + xDouble); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("byte divideAssignment double : wrong type : ", "byte", typeName);
 		byte byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -1594,7 +1594,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 		assertEquals("byte local variable value : wrong result : ", tmpxVar, byteValue);
 
 		tmpxVar /= yDoubleValue;
-		value = eval(xVarByte + divideAssignmentOp + yDouble);
+		value = eval(xVarByte + divideAssignmentOp + yDouble); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte divideAssignment double : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -1607,7 +1607,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 
 		byte tmpyVar = yVarByteValue;
 		tmpyVar /= xDoubleValue;
-		value = eval(yVarByte + divideAssignmentOp + xDouble);
+		value = eval(yVarByte + divideAssignmentOp + xDouble); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte divideAssignment double : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -1619,7 +1619,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 		assertEquals("byte local variable value : wrong result : ", tmpyVar, byteValue);
 
 		tmpyVar /= yDoubleValue;
-		value = eval(yVarByte + divideAssignmentOp + yDouble);
+		value = eval(yVarByte + divideAssignmentOp + yDouble); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte divideAssignment double : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -1636,12 +1636,12 @@ public class ByteAssignmentOperatorsTests extends Tests {
 
 	// byte %= {byte, char, short, int, long, float, double}
 
-	public void testByteRemainderAssignmentByte() throws Throwable {
+	public void testByteRemainderAssignmentByte() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
 		byte tmpxVar = xVarByteValue;
 		tmpxVar %= xByteValue;
-		IValue value = eval(xVarByte + remainderAssignmentOp + xByte);
+		IValue value = eval(xVarByte + remainderAssignmentOp + xByte); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("byte remainderAssignment byte : wrong type : ", "byte", typeName);
 		byte byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -1653,7 +1653,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 		assertEquals("byte local variable value : wrong result : ", tmpxVar, byteValue);
 
 		tmpxVar %= yByteValue;
-		value = eval(xVarByte + remainderAssignmentOp + yByte);
+		value = eval(xVarByte + remainderAssignmentOp + yByte); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte remainderAssignment byte : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -1666,7 +1666,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 
 		byte tmpyVar = yVarByteValue;
 		tmpyVar %= xByteValue;
-		value = eval(yVarByte + remainderAssignmentOp + xByte);
+		value = eval(yVarByte + remainderAssignmentOp + xByte); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte remainderAssignment byte : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -1678,7 +1678,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 		assertEquals("byte local variable value : wrong result : ", tmpyVar, byteValue);
 
 		tmpyVar %= yByteValue;
-		value = eval(yVarByte + remainderAssignmentOp + yByte);
+		value = eval(yVarByte + remainderAssignmentOp + yByte); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte remainderAssignment byte : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -1693,12 +1693,12 @@ public class ByteAssignmentOperatorsTests extends Tests {
 		}
 	}
 
-	public void testByteRemainderAssignmentChar() throws Throwable {
+	public void testByteRemainderAssignmentChar() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
 		byte tmpxVar = xVarByteValue;
 		tmpxVar %= xCharValue;
-		IValue value = eval(xVarByte + remainderAssignmentOp + xChar);
+		IValue value = eval(xVarByte + remainderAssignmentOp + xChar); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("byte remainderAssignment char : wrong type : ", "byte", typeName);
 		byte byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -1710,7 +1710,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 		assertEquals("byte local variable value : wrong result : ", tmpxVar, byteValue);
 
 		tmpxVar %= yCharValue;
-		value = eval(xVarByte + remainderAssignmentOp + yChar);
+		value = eval(xVarByte + remainderAssignmentOp + yChar); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte remainderAssignment char : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -1723,7 +1723,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 
 		byte tmpyVar = yVarByteValue;
 		tmpyVar %= xCharValue;
-		value = eval(yVarByte + remainderAssignmentOp + xChar);
+		value = eval(yVarByte + remainderAssignmentOp + xChar); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte remainderAssignment char : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -1735,7 +1735,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 		assertEquals("byte local variable value : wrong result : ", tmpyVar, byteValue);
 
 		tmpyVar %= yCharValue;
-		value = eval(yVarByte + remainderAssignmentOp + yChar);
+		value = eval(yVarByte + remainderAssignmentOp + yChar); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte remainderAssignment char : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -1750,12 +1750,12 @@ public class ByteAssignmentOperatorsTests extends Tests {
 		}
 	}
 
-	public void testByteRemainderAssignmentShort() throws Throwable {
+	public void testByteRemainderAssignmentShort() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
 		byte tmpxVar = xVarByteValue;
 		tmpxVar %= xShortValue;
-		IValue value = eval(xVarByte + remainderAssignmentOp + xShort);
+		IValue value = eval(xVarByte + remainderAssignmentOp + xShort); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("byte remainderAssignment short : wrong type : ", "byte", typeName);
 		byte byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -1767,7 +1767,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 		assertEquals("byte local variable value : wrong result : ", tmpxVar, byteValue);
 
 		tmpxVar %= yShortValue;
-		value = eval(xVarByte + remainderAssignmentOp + yShort);
+		value = eval(xVarByte + remainderAssignmentOp + yShort); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte remainderAssignment short : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -1780,7 +1780,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 
 		byte tmpyVar = yVarByteValue;
 		tmpyVar %= xShortValue;
-		value = eval(yVarByte + remainderAssignmentOp + xShort);
+		value = eval(yVarByte + remainderAssignmentOp + xShort); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte remainderAssignment short : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -1792,7 +1792,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 		assertEquals("byte local variable value : wrong result : ", tmpyVar, byteValue);
 
 		tmpyVar %= yShortValue;
-		value = eval(yVarByte + remainderAssignmentOp + yShort);
+		value = eval(yVarByte + remainderAssignmentOp + yShort); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte remainderAssignment short : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -1807,12 +1807,12 @@ public class ByteAssignmentOperatorsTests extends Tests {
 		}
 	}
 
-	public void testByteRemainderAssignmentInt() throws Throwable {
+	public void testByteRemainderAssignmentInt() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
 		byte tmpxVar = xVarByteValue;
 		tmpxVar %= xIntValue;
-		IValue value = eval(xVarByte + remainderAssignmentOp + xInt);
+		IValue value = eval(xVarByte + remainderAssignmentOp + xInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("byte remainderAssignment int : wrong type : ", "byte", typeName);
 		byte byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -1824,7 +1824,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 		assertEquals("byte local variable value : wrong result : ", tmpxVar, byteValue);
 
 		tmpxVar %= yIntValue;
-		value = eval(xVarByte + remainderAssignmentOp + yInt);
+		value = eval(xVarByte + remainderAssignmentOp + yInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte remainderAssignment int : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -1837,7 +1837,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 
 		byte tmpyVar = yVarByteValue;
 		tmpyVar %= xIntValue;
-		value = eval(yVarByte + remainderAssignmentOp + xInt);
+		value = eval(yVarByte + remainderAssignmentOp + xInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte remainderAssignment int : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -1849,7 +1849,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 		assertEquals("byte local variable value : wrong result : ", tmpyVar, byteValue);
 
 		tmpyVar %= yIntValue;
-		value = eval(yVarByte + remainderAssignmentOp + yInt);
+		value = eval(yVarByte + remainderAssignmentOp + yInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte remainderAssignment int : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -1864,12 +1864,12 @@ public class ByteAssignmentOperatorsTests extends Tests {
 		}
 	}
 
-	public void testByteRemainderAssignmentLong() throws Throwable {
+	public void testByteRemainderAssignmentLong() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
 		byte tmpxVar = xVarByteValue;
 		tmpxVar %= xLongValue;
-		IValue value = eval(xVarByte + remainderAssignmentOp + xLong);
+		IValue value = eval(xVarByte + remainderAssignmentOp + xLong); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("byte remainderAssignment long : wrong type : ", "byte", typeName);
 		byte byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -1881,7 +1881,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 		assertEquals("byte local variable value : wrong result : ", tmpxVar, byteValue);
 
 		tmpxVar %= yLongValue;
-		value = eval(xVarByte + remainderAssignmentOp + yLong);
+		value = eval(xVarByte + remainderAssignmentOp + yLong); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte remainderAssignment long : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -1894,7 +1894,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 
 		byte tmpyVar = yVarByteValue;
 		tmpyVar %= xLongValue;
-		value = eval(yVarByte + remainderAssignmentOp + xLong);
+		value = eval(yVarByte + remainderAssignmentOp + xLong); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte remainderAssignment long : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -1906,7 +1906,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 		assertEquals("byte local variable value : wrong result : ", tmpyVar, byteValue);
 
 		tmpyVar %= yLongValue;
-		value = eval(yVarByte + remainderAssignmentOp + yLong);
+		value = eval(yVarByte + remainderAssignmentOp + yLong); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte remainderAssignment long : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -1921,12 +1921,12 @@ public class ByteAssignmentOperatorsTests extends Tests {
 		}
 	}
 
-	public void testByteRemainderAssignmentFloat() throws Throwable {
+	public void testByteRemainderAssignmentFloat() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
 		byte tmpxVar = xVarByteValue;
 		tmpxVar %= xFloatValue;
-		IValue value = eval(xVarByte + remainderAssignmentOp + xFloat);
+		IValue value = eval(xVarByte + remainderAssignmentOp + xFloat); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("byte remainderAssignment float : wrong type : ", "byte", typeName);
 		byte byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -1938,7 +1938,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 		assertEquals("byte local variable value : wrong result : ", tmpxVar, byteValue);
 
 		tmpxVar %= yFloatValue;
-		value = eval(xVarByte + remainderAssignmentOp + yFloat);
+		value = eval(xVarByte + remainderAssignmentOp + yFloat); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte remainderAssignment float : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -1951,7 +1951,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 
 		byte tmpyVar = yVarByteValue;
 		tmpyVar %= xFloatValue;
-		value = eval(yVarByte + remainderAssignmentOp + xFloat);
+		value = eval(yVarByte + remainderAssignmentOp + xFloat); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte remainderAssignment float : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -1963,7 +1963,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 		assertEquals("byte local variable value : wrong result : ", tmpyVar, byteValue);
 
 		tmpyVar %= yFloatValue;
-		value = eval(yVarByte + remainderAssignmentOp + yFloat);
+		value = eval(yVarByte + remainderAssignmentOp + yFloat); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte remainderAssignment float : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -1978,12 +1978,12 @@ public class ByteAssignmentOperatorsTests extends Tests {
 		}
 	}
 
-	public void testByteRemainderAssignmentDouble() throws Throwable {
+	public void testByteRemainderAssignmentDouble() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
 		byte tmpxVar = xVarByteValue;
 		tmpxVar %= xDoubleValue;
-		IValue value = eval(xVarByte + remainderAssignmentOp + xDouble);
+		IValue value = eval(xVarByte + remainderAssignmentOp + xDouble); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("byte remainderAssignment double : wrong type : ", "byte", typeName);
 		byte byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -1995,7 +1995,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 		assertEquals("byte local variable value : wrong result : ", tmpxVar, byteValue);
 
 		tmpxVar %= yDoubleValue;
-		value = eval(xVarByte + remainderAssignmentOp + yDouble);
+		value = eval(xVarByte + remainderAssignmentOp + yDouble); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte remainderAssignment double : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -2008,7 +2008,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 
 		byte tmpyVar = yVarByteValue;
 		tmpyVar %= xDoubleValue;
-		value = eval(yVarByte + remainderAssignmentOp + xDouble);
+		value = eval(yVarByte + remainderAssignmentOp + xDouble); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte remainderAssignment double : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -2020,7 +2020,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 		assertEquals("byte local variable value : wrong result : ", tmpyVar, byteValue);
 
 		tmpyVar %= yDoubleValue;
-		value = eval(yVarByte + remainderAssignmentOp + yDouble);
+		value = eval(yVarByte + remainderAssignmentOp + yDouble); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte remainderAssignment double : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -2037,12 +2037,12 @@ public class ByteAssignmentOperatorsTests extends Tests {
 
 	// byte <<= {byte, char, short, int, long, float, double}
 
-	public void testByteLeftShiftAssignmentByte() throws Throwable {
+	public void testByteLeftShiftAssignmentByte() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
 		byte tmpxVar = xVarByteValue;
 		tmpxVar <<= xByteValue;
-		IValue value = eval(xVarByte + leftShiftAssignmentOp + xByte);
+		IValue value = eval(xVarByte + leftShiftAssignmentOp + xByte); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("byte leftShiftAssignment byte : wrong type : ", "byte", typeName);
 		byte byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -2054,7 +2054,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 		assertEquals("byte local variable value : wrong result : ", tmpxVar, byteValue);
 
 		tmpxVar <<= yByteValue;
-		value = eval(xVarByte + leftShiftAssignmentOp + yByte);
+		value = eval(xVarByte + leftShiftAssignmentOp + yByte); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte leftShiftAssignment byte : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -2067,7 +2067,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 
 		byte tmpyVar = yVarByteValue;
 		tmpyVar <<= xByteValue;
-		value = eval(yVarByte + leftShiftAssignmentOp + xByte);
+		value = eval(yVarByte + leftShiftAssignmentOp + xByte); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte leftShiftAssignment byte : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -2079,7 +2079,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 		assertEquals("byte local variable value : wrong result : ", tmpyVar, byteValue);
 
 		tmpyVar <<= yByteValue;
-		value = eval(yVarByte + leftShiftAssignmentOp + yByte);
+		value = eval(yVarByte + leftShiftAssignmentOp + yByte); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte leftShiftAssignment byte : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -2094,12 +2094,12 @@ public class ByteAssignmentOperatorsTests extends Tests {
 		}
 	}
 
-	public void testByteLeftShiftAssignmentChar() throws Throwable {
+	public void testByteLeftShiftAssignmentChar() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
 		byte tmpxVar = xVarByteValue;
 		tmpxVar <<= xCharValue;
-		IValue value = eval(xVarByte + leftShiftAssignmentOp + xChar);
+		IValue value = eval(xVarByte + leftShiftAssignmentOp + xChar); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("byte leftShiftAssignment char : wrong type : ", "byte", typeName);
 		byte byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -2111,7 +2111,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 		assertEquals("byte local variable value : wrong result : ", tmpxVar, byteValue);
 
 		tmpxVar <<= yCharValue;
-		value = eval(xVarByte + leftShiftAssignmentOp + yChar);
+		value = eval(xVarByte + leftShiftAssignmentOp + yChar); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte leftShiftAssignment char : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -2124,7 +2124,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 
 		byte tmpyVar = yVarByteValue;
 		tmpyVar <<= xCharValue;
-		value = eval(yVarByte + leftShiftAssignmentOp + xChar);
+		value = eval(yVarByte + leftShiftAssignmentOp + xChar); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte leftShiftAssignment char : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -2136,7 +2136,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 		assertEquals("byte local variable value : wrong result : ", tmpyVar, byteValue);
 
 		tmpyVar <<= yCharValue;
-		value = eval(yVarByte + leftShiftAssignmentOp + yChar);
+		value = eval(yVarByte + leftShiftAssignmentOp + yChar); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte leftShiftAssignment char : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -2151,12 +2151,12 @@ public class ByteAssignmentOperatorsTests extends Tests {
 		}
 	}
 
-	public void testByteLeftShiftAssignmentShort() throws Throwable {
+	public void testByteLeftShiftAssignmentShort() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
 		byte tmpxVar = xVarByteValue;
 		tmpxVar <<= xShortValue;
-		IValue value = eval(xVarByte + leftShiftAssignmentOp + xShort);
+		IValue value = eval(xVarByte + leftShiftAssignmentOp + xShort); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("byte leftShiftAssignment short : wrong type : ", "byte", typeName);
 		byte byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -2168,7 +2168,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 		assertEquals("byte local variable value : wrong result : ", tmpxVar, byteValue);
 
 		tmpxVar <<= yShortValue;
-		value = eval(xVarByte + leftShiftAssignmentOp + yShort);
+		value = eval(xVarByte + leftShiftAssignmentOp + yShort); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte leftShiftAssignment short : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -2181,7 +2181,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 
 		byte tmpyVar = yVarByteValue;
 		tmpyVar <<= xShortValue;
-		value = eval(yVarByte + leftShiftAssignmentOp + xShort);
+		value = eval(yVarByte + leftShiftAssignmentOp + xShort); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte leftShiftAssignment short : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -2193,7 +2193,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 		assertEquals("byte local variable value : wrong result : ", tmpyVar, byteValue);
 
 		tmpyVar <<= yShortValue;
-		value = eval(yVarByte + leftShiftAssignmentOp + yShort);
+		value = eval(yVarByte + leftShiftAssignmentOp + yShort); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte leftShiftAssignment short : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -2208,12 +2208,12 @@ public class ByteAssignmentOperatorsTests extends Tests {
 		}
 	}
 
-	public void testByteLeftShiftAssignmentInt() throws Throwable {
+	public void testByteLeftShiftAssignmentInt() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
 		byte tmpxVar = xVarByteValue;
 		tmpxVar <<= xIntValue;
-		IValue value = eval(xVarByte + leftShiftAssignmentOp + xInt);
+		IValue value = eval(xVarByte + leftShiftAssignmentOp + xInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("byte leftShiftAssignment int : wrong type : ", "byte", typeName);
 		byte byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -2225,7 +2225,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 		assertEquals("byte local variable value : wrong result : ", tmpxVar, byteValue);
 
 		tmpxVar <<= yIntValue;
-		value = eval(xVarByte + leftShiftAssignmentOp + yInt);
+		value = eval(xVarByte + leftShiftAssignmentOp + yInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte leftShiftAssignment int : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -2238,7 +2238,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 
 		byte tmpyVar = yVarByteValue;
 		tmpyVar <<= xIntValue;
-		value = eval(yVarByte + leftShiftAssignmentOp + xInt);
+		value = eval(yVarByte + leftShiftAssignmentOp + xInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte leftShiftAssignment int : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -2250,7 +2250,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 		assertEquals("byte local variable value : wrong result : ", tmpyVar, byteValue);
 
 		tmpyVar <<= yIntValue;
-		value = eval(yVarByte + leftShiftAssignmentOp + yInt);
+		value = eval(yVarByte + leftShiftAssignmentOp + yInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte leftShiftAssignment int : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -2265,12 +2265,12 @@ public class ByteAssignmentOperatorsTests extends Tests {
 		}
 	}
 
-	public void testByteLeftShiftAssignmentLong() throws Throwable {
+	public void testByteLeftShiftAssignmentLong() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
 		byte tmpxVar = xVarByteValue;
 		tmpxVar <<= xLongValue;
-		IValue value = eval(xVarByte + leftShiftAssignmentOp + xLong);
+		IValue value = eval(xVarByte + leftShiftAssignmentOp + xLong); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("byte leftShiftAssignment long : wrong type : ", "byte", typeName);
 		byte byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -2282,7 +2282,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 		assertEquals("byte local variable value : wrong result : ", tmpxVar, byteValue);
 
 		tmpxVar <<= yLongValue;
-		value = eval(xVarByte + leftShiftAssignmentOp + yLong);
+		value = eval(xVarByte + leftShiftAssignmentOp + yLong); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte leftShiftAssignment long : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -2295,7 +2295,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 
 		byte tmpyVar = yVarByteValue;
 		tmpyVar <<= xLongValue;
-		value = eval(yVarByte + leftShiftAssignmentOp + xLong);
+		value = eval(yVarByte + leftShiftAssignmentOp + xLong); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte leftShiftAssignment long : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -2307,7 +2307,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 		assertEquals("byte local variable value : wrong result : ", tmpyVar, byteValue);
 
 		tmpyVar <<= yLongValue;
-		value = eval(yVarByte + leftShiftAssignmentOp + yLong);
+		value = eval(yVarByte + leftShiftAssignmentOp + yLong); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte leftShiftAssignment long : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -2324,12 +2324,12 @@ public class ByteAssignmentOperatorsTests extends Tests {
 
 	// byte >>= {byte, char, short, int, long, float, double}
 
-	public void testByteRightShiftAssignmentByte() throws Throwable {
+	public void testByteRightShiftAssignmentByte() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
 		byte tmpxVar = xVarByteValue;
 		tmpxVar >>= xByteValue;
-		IValue value = eval(xVarByte + rightShiftAssignmentOp + xByte);
+		IValue value = eval(xVarByte + rightShiftAssignmentOp + xByte); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("byte rightShiftAssignment byte : wrong type : ", "byte", typeName);
 		byte byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -2341,7 +2341,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 		assertEquals("byte local variable value : wrong result : ", tmpxVar, byteValue);
 
 		tmpxVar >>= yByteValue;
-		value = eval(xVarByte + rightShiftAssignmentOp + yByte);
+		value = eval(xVarByte + rightShiftAssignmentOp + yByte); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte rightShiftAssignment byte : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -2354,7 +2354,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 
 		byte tmpyVar = yVarByteValue;
 		tmpyVar >>= xByteValue;
-		value = eval(yVarByte + rightShiftAssignmentOp + xByte);
+		value = eval(yVarByte + rightShiftAssignmentOp + xByte); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte rightShiftAssignment byte : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -2366,7 +2366,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 		assertEquals("byte local variable value : wrong result : ", tmpyVar, byteValue);
 
 		tmpyVar >>= yByteValue;
-		value = eval(yVarByte + rightShiftAssignmentOp + yByte);
+		value = eval(yVarByte + rightShiftAssignmentOp + yByte); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte rightShiftAssignment byte : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -2381,12 +2381,12 @@ public class ByteAssignmentOperatorsTests extends Tests {
 		}
 	}
 
-	public void testByteRightShiftAssignmentChar() throws Throwable {
+	public void testByteRightShiftAssignmentChar() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
 		byte tmpxVar = xVarByteValue;
 		tmpxVar >>= xCharValue;
-		IValue value = eval(xVarByte + rightShiftAssignmentOp + xChar);
+		IValue value = eval(xVarByte + rightShiftAssignmentOp + xChar); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("byte rightShiftAssignment char : wrong type : ", "byte", typeName);
 		byte byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -2398,7 +2398,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 		assertEquals("byte local variable value : wrong result : ", tmpxVar, byteValue);
 
 		tmpxVar >>= yCharValue;
-		value = eval(xVarByte + rightShiftAssignmentOp + yChar);
+		value = eval(xVarByte + rightShiftAssignmentOp + yChar); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte rightShiftAssignment char : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -2411,7 +2411,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 
 		byte tmpyVar = yVarByteValue;
 		tmpyVar >>= xCharValue;
-		value = eval(yVarByte + rightShiftAssignmentOp + xChar);
+		value = eval(yVarByte + rightShiftAssignmentOp + xChar); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte rightShiftAssignment char : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -2423,7 +2423,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 		assertEquals("byte local variable value : wrong result : ", tmpyVar, byteValue);
 
 		tmpyVar >>= yCharValue;
-		value = eval(yVarByte + rightShiftAssignmentOp + yChar);
+		value = eval(yVarByte + rightShiftAssignmentOp + yChar); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte rightShiftAssignment char : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -2438,12 +2438,12 @@ public class ByteAssignmentOperatorsTests extends Tests {
 		}
 	}
 
-	public void testByteRightShiftAssignmentShort() throws Throwable {
+	public void testByteRightShiftAssignmentShort() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
 		byte tmpxVar = xVarByteValue;
 		tmpxVar >>= xShortValue;
-		IValue value = eval(xVarByte + rightShiftAssignmentOp + xShort);
+		IValue value = eval(xVarByte + rightShiftAssignmentOp + xShort); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("byte rightShiftAssignment short : wrong type : ", "byte", typeName);
 		byte byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -2455,7 +2455,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 		assertEquals("byte local variable value : wrong result : ", tmpxVar, byteValue);
 
 		tmpxVar >>= yShortValue;
-		value = eval(xVarByte + rightShiftAssignmentOp + yShort);
+		value = eval(xVarByte + rightShiftAssignmentOp + yShort); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte rightShiftAssignment short : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -2468,7 +2468,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 
 		byte tmpyVar = yVarByteValue;
 		tmpyVar >>= xShortValue;
-		value = eval(yVarByte + rightShiftAssignmentOp + xShort);
+		value = eval(yVarByte + rightShiftAssignmentOp + xShort); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte rightShiftAssignment short : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -2480,7 +2480,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 		assertEquals("byte local variable value : wrong result : ", tmpyVar, byteValue);
 
 		tmpyVar >>= yShortValue;
-		value = eval(yVarByte + rightShiftAssignmentOp + yShort);
+		value = eval(yVarByte + rightShiftAssignmentOp + yShort); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte rightShiftAssignment short : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -2495,12 +2495,12 @@ public class ByteAssignmentOperatorsTests extends Tests {
 		}
 	}
 
-	public void testByteRightShiftAssignmentInt() throws Throwable {
+	public void testByteRightShiftAssignmentInt() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
 		byte tmpxVar = xVarByteValue;
 		tmpxVar >>= xIntValue;
-		IValue value = eval(xVarByte + rightShiftAssignmentOp + xInt);
+		IValue value = eval(xVarByte + rightShiftAssignmentOp + xInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("byte rightShiftAssignment int : wrong type : ", "byte", typeName);
 		byte byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -2512,7 +2512,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 		assertEquals("byte local variable value : wrong result : ", tmpxVar, byteValue);
 
 		tmpxVar >>= yIntValue;
-		value = eval(xVarByte + rightShiftAssignmentOp + yInt);
+		value = eval(xVarByte + rightShiftAssignmentOp + yInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte rightShiftAssignment int : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -2525,7 +2525,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 
 		byte tmpyVar = yVarByteValue;
 		tmpyVar >>= xIntValue;
-		value = eval(yVarByte + rightShiftAssignmentOp + xInt);
+		value = eval(yVarByte + rightShiftAssignmentOp + xInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte rightShiftAssignment int : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -2537,7 +2537,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 		assertEquals("byte local variable value : wrong result : ", tmpyVar, byteValue);
 
 		tmpyVar >>= yIntValue;
-		value = eval(yVarByte + rightShiftAssignmentOp + yInt);
+		value = eval(yVarByte + rightShiftAssignmentOp + yInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte rightShiftAssignment int : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -2552,12 +2552,12 @@ public class ByteAssignmentOperatorsTests extends Tests {
 		}
 	}
 
-	public void testByteRightShiftAssignmentLong() throws Throwable {
+	public void testByteRightShiftAssignmentLong() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
 		byte tmpxVar = xVarByteValue;
 		tmpxVar >>= xLongValue;
-		IValue value = eval(xVarByte + rightShiftAssignmentOp + xLong);
+		IValue value = eval(xVarByte + rightShiftAssignmentOp + xLong); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("byte rightShiftAssignment long : wrong type : ", "byte", typeName);
 		byte byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -2569,7 +2569,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 		assertEquals("byte local variable value : wrong result : ", tmpxVar, byteValue);
 
 		tmpxVar >>= yLongValue;
-		value = eval(xVarByte + rightShiftAssignmentOp + yLong);
+		value = eval(xVarByte + rightShiftAssignmentOp + yLong); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte rightShiftAssignment long : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -2582,7 +2582,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 
 		byte tmpyVar = yVarByteValue;
 		tmpyVar >>= xLongValue;
-		value = eval(yVarByte + rightShiftAssignmentOp + xLong);
+		value = eval(yVarByte + rightShiftAssignmentOp + xLong); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte rightShiftAssignment long : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -2594,7 +2594,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 		assertEquals("byte local variable value : wrong result : ", tmpyVar, byteValue);
 
 		tmpyVar >>= yLongValue;
-		value = eval(yVarByte + rightShiftAssignmentOp + yLong);
+		value = eval(yVarByte + rightShiftAssignmentOp + yLong); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte rightShiftAssignment long : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -2611,12 +2611,12 @@ public class ByteAssignmentOperatorsTests extends Tests {
 
 	// byte >>>= {byte, char, short, int, long, float, double}
 
-	public void testByteUnsignedRightShiftAssignmentByte() throws Throwable {
+	public void testByteUnsignedRightShiftAssignmentByte() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
 		byte tmpxVar = xVarByteValue;
 		tmpxVar >>>= xByteValue;
-		IValue value = eval(xVarByte + unsignedRightShiftAssignmentOp + xByte);
+		IValue value = eval(xVarByte + unsignedRightShiftAssignmentOp + xByte); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("byte unsignedRightShiftAssignment byte : wrong type : ", "byte", typeName);
 		byte byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -2628,7 +2628,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 		assertEquals("byte local variable value : wrong result : ", tmpxVar, byteValue);
 
 		tmpxVar >>>= yByteValue;
-		value = eval(xVarByte + unsignedRightShiftAssignmentOp + yByte);
+		value = eval(xVarByte + unsignedRightShiftAssignmentOp + yByte); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte unsignedRightShiftAssignment byte : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -2641,7 +2641,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 
 		byte tmpyVar = yVarByteValue;
 		tmpyVar >>>= xByteValue;
-		value = eval(yVarByte + unsignedRightShiftAssignmentOp + xByte);
+		value = eval(yVarByte + unsignedRightShiftAssignmentOp + xByte); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte unsignedRightShiftAssignment byte : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -2653,7 +2653,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 		assertEquals("byte local variable value : wrong result : ", tmpyVar, byteValue);
 
 		tmpyVar >>>= yByteValue;
-		value = eval(yVarByte + unsignedRightShiftAssignmentOp + yByte);
+		value = eval(yVarByte + unsignedRightShiftAssignmentOp + yByte); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte unsignedRightShiftAssignment byte : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -2668,12 +2668,12 @@ public class ByteAssignmentOperatorsTests extends Tests {
 		}
 	}
 
-	public void testByteUnsignedRightShiftAssignmentChar() throws Throwable {
+	public void testByteUnsignedRightShiftAssignmentChar() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
 		byte tmpxVar = xVarByteValue;
 		tmpxVar >>>= xCharValue;
-		IValue value = eval(xVarByte + unsignedRightShiftAssignmentOp + xChar);
+		IValue value = eval(xVarByte + unsignedRightShiftAssignmentOp + xChar); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("byte unsignedRightShiftAssignment char : wrong type : ", "byte", typeName);
 		byte byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -2685,7 +2685,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 		assertEquals("byte local variable value : wrong result : ", tmpxVar, byteValue);
 
 		tmpxVar >>>= yCharValue;
-		value = eval(xVarByte + unsignedRightShiftAssignmentOp + yChar);
+		value = eval(xVarByte + unsignedRightShiftAssignmentOp + yChar); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte unsignedRightShiftAssignment char : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -2698,7 +2698,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 
 		byte tmpyVar = yVarByteValue;
 		tmpyVar >>>= xCharValue;
-		value = eval(yVarByte + unsignedRightShiftAssignmentOp + xChar);
+		value = eval(yVarByte + unsignedRightShiftAssignmentOp + xChar); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte unsignedRightShiftAssignment char : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -2710,7 +2710,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 		assertEquals("byte local variable value : wrong result : ", tmpyVar, byteValue);
 
 		tmpyVar >>>= yCharValue;
-		value = eval(yVarByte + unsignedRightShiftAssignmentOp + yChar);
+		value = eval(yVarByte + unsignedRightShiftAssignmentOp + yChar); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte unsignedRightShiftAssignment char : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -2725,12 +2725,12 @@ public class ByteAssignmentOperatorsTests extends Tests {
 		}
 	}
 
-	public void testByteUnsignedRightShiftAssignmentShort() throws Throwable {
+	public void testByteUnsignedRightShiftAssignmentShort() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
 		byte tmpxVar = xVarByteValue;
 		tmpxVar >>>= xShortValue;
-		IValue value = eval(xVarByte + unsignedRightShiftAssignmentOp + xShort);
+		IValue value = eval(xVarByte + unsignedRightShiftAssignmentOp + xShort); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("byte unsignedRightShiftAssignment short : wrong type : ", "byte", typeName);
 		byte byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -2742,7 +2742,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 		assertEquals("byte local variable value : wrong result : ", tmpxVar, byteValue);
 
 		tmpxVar >>>= yShortValue;
-		value = eval(xVarByte + unsignedRightShiftAssignmentOp + yShort);
+		value = eval(xVarByte + unsignedRightShiftAssignmentOp + yShort); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte unsignedRightShiftAssignment short : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -2755,7 +2755,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 
 		byte tmpyVar = yVarByteValue;
 		tmpyVar >>>= xShortValue;
-		value = eval(yVarByte + unsignedRightShiftAssignmentOp + xShort);
+		value = eval(yVarByte + unsignedRightShiftAssignmentOp + xShort); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte unsignedRightShiftAssignment short : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -2767,7 +2767,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 		assertEquals("byte local variable value : wrong result : ", tmpyVar, byteValue);
 
 		tmpyVar >>>= yShortValue;
-		value = eval(yVarByte + unsignedRightShiftAssignmentOp + yShort);
+		value = eval(yVarByte + unsignedRightShiftAssignmentOp + yShort); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte unsignedRightShiftAssignment short : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -2782,12 +2782,12 @@ public class ByteAssignmentOperatorsTests extends Tests {
 		}
 	}
 
-	public void testByteUnsignedRightShiftAssignmentInt() throws Throwable {
+	public void testByteUnsignedRightShiftAssignmentInt() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
 		byte tmpxVar = xVarByteValue;
 		tmpxVar >>>= xIntValue;
-		IValue value = eval(xVarByte + unsignedRightShiftAssignmentOp + xInt);
+		IValue value = eval(xVarByte + unsignedRightShiftAssignmentOp + xInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("byte unsignedRightShiftAssignment int : wrong type : ", "byte", typeName);
 		byte byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -2799,7 +2799,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 		assertEquals("byte local variable value : wrong result : ", tmpxVar, byteValue);
 
 		tmpxVar >>>= yIntValue;
-		value = eval(xVarByte + unsignedRightShiftAssignmentOp + yInt);
+		value = eval(xVarByte + unsignedRightShiftAssignmentOp + yInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte unsignedRightShiftAssignment int : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -2812,7 +2812,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 
 		byte tmpyVar = yVarByteValue;
 		tmpyVar >>>= xIntValue;
-		value = eval(yVarByte + unsignedRightShiftAssignmentOp + xInt);
+		value = eval(yVarByte + unsignedRightShiftAssignmentOp + xInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte unsignedRightShiftAssignment int : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -2824,7 +2824,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 		assertEquals("byte local variable value : wrong result : ", tmpyVar, byteValue);
 
 		tmpyVar >>>= yIntValue;
-		value = eval(yVarByte + unsignedRightShiftAssignmentOp + yInt);
+		value = eval(yVarByte + unsignedRightShiftAssignmentOp + yInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte unsignedRightShiftAssignment int : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -2839,12 +2839,12 @@ public class ByteAssignmentOperatorsTests extends Tests {
 		}
 	}
 
-	public void testByteUnsignedRightShiftAssignmentLong() throws Throwable {
+	public void testByteUnsignedRightShiftAssignmentLong() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
 		byte tmpxVar = xVarByteValue;
 		tmpxVar >>>= xLongValue;
-		IValue value = eval(xVarByte + unsignedRightShiftAssignmentOp + xLong);
+		IValue value = eval(xVarByte + unsignedRightShiftAssignmentOp + xLong); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("byte unsignedRightShiftAssignment long : wrong type : ", "byte", typeName);
 		byte byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -2856,7 +2856,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 		assertEquals("byte local variable value : wrong result : ", tmpxVar, byteValue);
 
 		tmpxVar >>>= yLongValue;
-		value = eval(xVarByte + unsignedRightShiftAssignmentOp + yLong);
+		value = eval(xVarByte + unsignedRightShiftAssignmentOp + yLong); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte unsignedRightShiftAssignment long : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -2869,7 +2869,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 
 		byte tmpyVar = yVarByteValue;
 		tmpyVar >>>= xLongValue;
-		value = eval(yVarByte + unsignedRightShiftAssignmentOp + xLong);
+		value = eval(yVarByte + unsignedRightShiftAssignmentOp + xLong); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte unsignedRightShiftAssignment long : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -2881,7 +2881,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 		assertEquals("byte local variable value : wrong result : ", tmpyVar, byteValue);
 
 		tmpyVar >>>= yLongValue;
-		value = eval(yVarByte + unsignedRightShiftAssignmentOp + yLong);
+		value = eval(yVarByte + unsignedRightShiftAssignmentOp + yLong); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte unsignedRightShiftAssignment long : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -2898,12 +2898,12 @@ public class ByteAssignmentOperatorsTests extends Tests {
 
 	// byte |= {byte, char, short, int, long, float, double}
 
-	public void testByteOrAssignmentByte() throws Throwable {
+	public void testByteOrAssignmentByte() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
 		byte tmpxVar = xVarByteValue;
 		tmpxVar |= xByteValue;
-		IValue value = eval(xVarByte + orAssignmentOp + xByte);
+		IValue value = eval(xVarByte + orAssignmentOp + xByte); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("byte orAssignment byte : wrong type : ", "byte", typeName);
 		byte byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -2915,7 +2915,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 		assertEquals("byte local variable value : wrong result : ", tmpxVar, byteValue);
 
 		tmpxVar |= yByteValue;
-		value = eval(xVarByte + orAssignmentOp + yByte);
+		value = eval(xVarByte + orAssignmentOp + yByte); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte orAssignment byte : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -2928,7 +2928,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 
 		byte tmpyVar = yVarByteValue;
 		tmpyVar |= xByteValue;
-		value = eval(yVarByte + orAssignmentOp + xByte);
+		value = eval(yVarByte + orAssignmentOp + xByte); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte orAssignment byte : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -2940,7 +2940,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 		assertEquals("byte local variable value : wrong result : ", tmpyVar, byteValue);
 
 		tmpyVar |= yByteValue;
-		value = eval(yVarByte + orAssignmentOp + yByte);
+		value = eval(yVarByte + orAssignmentOp + yByte); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte orAssignment byte : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -2955,12 +2955,12 @@ public class ByteAssignmentOperatorsTests extends Tests {
 		}
 	}
 
-	public void testByteOrAssignmentChar() throws Throwable {
+	public void testByteOrAssignmentChar() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
 		byte tmpxVar = xVarByteValue;
 		tmpxVar |= xCharValue;
-		IValue value = eval(xVarByte + orAssignmentOp + xChar);
+		IValue value = eval(xVarByte + orAssignmentOp + xChar); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("byte orAssignment char : wrong type : ", "byte", typeName);
 		byte byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -2972,7 +2972,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 		assertEquals("byte local variable value : wrong result : ", tmpxVar, byteValue);
 
 		tmpxVar |= yCharValue;
-		value = eval(xVarByte + orAssignmentOp + yChar);
+		value = eval(xVarByte + orAssignmentOp + yChar); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte orAssignment char : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -2985,7 +2985,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 
 		byte tmpyVar = yVarByteValue;
 		tmpyVar |= xCharValue;
-		value = eval(yVarByte + orAssignmentOp + xChar);
+		value = eval(yVarByte + orAssignmentOp + xChar); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte orAssignment char : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -2997,7 +2997,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 		assertEquals("byte local variable value : wrong result : ", tmpyVar, byteValue);
 
 		tmpyVar |= yCharValue;
-		value = eval(yVarByte + orAssignmentOp + yChar);
+		value = eval(yVarByte + orAssignmentOp + yChar); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte orAssignment char : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -3012,12 +3012,12 @@ public class ByteAssignmentOperatorsTests extends Tests {
 		}
 	}
 
-	public void testByteOrAssignmentShort() throws Throwable {
+	public void testByteOrAssignmentShort() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
 		byte tmpxVar = xVarByteValue;
 		tmpxVar |= xShortValue;
-		IValue value = eval(xVarByte + orAssignmentOp + xShort);
+		IValue value = eval(xVarByte + orAssignmentOp + xShort); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("byte orAssignment short : wrong type : ", "byte", typeName);
 		byte byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -3029,7 +3029,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 		assertEquals("byte local variable value : wrong result : ", tmpxVar, byteValue);
 
 		tmpxVar |= yShortValue;
-		value = eval(xVarByte + orAssignmentOp + yShort);
+		value = eval(xVarByte + orAssignmentOp + yShort); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte orAssignment short : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -3042,7 +3042,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 
 		byte tmpyVar = yVarByteValue;
 		tmpyVar |= xShortValue;
-		value = eval(yVarByte + orAssignmentOp + xShort);
+		value = eval(yVarByte + orAssignmentOp + xShort); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte orAssignment short : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -3054,7 +3054,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 		assertEquals("byte local variable value : wrong result : ", tmpyVar, byteValue);
 
 		tmpyVar |= yShortValue;
-		value = eval(yVarByte + orAssignmentOp + yShort);
+		value = eval(yVarByte + orAssignmentOp + yShort); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte orAssignment short : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -3069,12 +3069,12 @@ public class ByteAssignmentOperatorsTests extends Tests {
 		}
 	}
 
-	public void testByteOrAssignmentInt() throws Throwable {
+	public void testByteOrAssignmentInt() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
 		byte tmpxVar = xVarByteValue;
 		tmpxVar |= xIntValue;
-		IValue value = eval(xVarByte + orAssignmentOp + xInt);
+		IValue value = eval(xVarByte + orAssignmentOp + xInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("byte orAssignment int : wrong type : ", "byte", typeName);
 		byte byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -3086,7 +3086,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 		assertEquals("byte local variable value : wrong result : ", tmpxVar, byteValue);
 
 		tmpxVar |= yIntValue;
-		value = eval(xVarByte + orAssignmentOp + yInt);
+		value = eval(xVarByte + orAssignmentOp + yInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte orAssignment int : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -3099,7 +3099,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 
 		byte tmpyVar = yVarByteValue;
 		tmpyVar |= xIntValue;
-		value = eval(yVarByte + orAssignmentOp + xInt);
+		value = eval(yVarByte + orAssignmentOp + xInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte orAssignment int : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -3111,7 +3111,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 		assertEquals("byte local variable value : wrong result : ", tmpyVar, byteValue);
 
 		tmpyVar |= yIntValue;
-		value = eval(yVarByte + orAssignmentOp + yInt);
+		value = eval(yVarByte + orAssignmentOp + yInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte orAssignment int : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -3126,12 +3126,12 @@ public class ByteAssignmentOperatorsTests extends Tests {
 		}
 	}
 
-	public void testByteOrAssignmentLong() throws Throwable {
+	public void testByteOrAssignmentLong() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
 		byte tmpxVar = xVarByteValue;
 		tmpxVar |= xLongValue;
-		IValue value = eval(xVarByte + orAssignmentOp + xLong);
+		IValue value = eval(xVarByte + orAssignmentOp + xLong); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("byte orAssignment long : wrong type : ", "byte", typeName);
 		byte byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -3143,7 +3143,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 		assertEquals("byte local variable value : wrong result : ", tmpxVar, byteValue);
 
 		tmpxVar |= yLongValue;
-		value = eval(xVarByte + orAssignmentOp + yLong);
+		value = eval(xVarByte + orAssignmentOp + yLong); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte orAssignment long : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -3156,7 +3156,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 
 		byte tmpyVar = yVarByteValue;
 		tmpyVar |= xLongValue;
-		value = eval(yVarByte + orAssignmentOp + xLong);
+		value = eval(yVarByte + orAssignmentOp + xLong); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte orAssignment long : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -3168,7 +3168,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 		assertEquals("byte local variable value : wrong result : ", tmpyVar, byteValue);
 
 		tmpyVar |= yLongValue;
-		value = eval(yVarByte + orAssignmentOp + yLong);
+		value = eval(yVarByte + orAssignmentOp + yLong); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte orAssignment long : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -3185,12 +3185,12 @@ public class ByteAssignmentOperatorsTests extends Tests {
 
 	// byte &= {byte, char, short, int, long, float, double}
 
-	public void testByteAndAssignmentByte() throws Throwable {
+	public void testByteAndAssignmentByte() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
 		byte tmpxVar = xVarByteValue;
 		tmpxVar &= xByteValue;
-		IValue value = eval(xVarByte + andAssignmentOp + xByte);
+		IValue value = eval(xVarByte + andAssignmentOp + xByte); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("byte andAssignment byte : wrong type : ", "byte", typeName);
 		byte byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -3202,7 +3202,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 		assertEquals("byte local variable value : wrong result : ", tmpxVar, byteValue);
 
 		tmpxVar &= yByteValue;
-		value = eval(xVarByte + andAssignmentOp + yByte);
+		value = eval(xVarByte + andAssignmentOp + yByte); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte andAssignment byte : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -3215,7 +3215,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 
 		byte tmpyVar = yVarByteValue;
 		tmpyVar &= xByteValue;
-		value = eval(yVarByte + andAssignmentOp + xByte);
+		value = eval(yVarByte + andAssignmentOp + xByte); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte andAssignment byte : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -3227,7 +3227,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 		assertEquals("byte local variable value : wrong result : ", tmpyVar, byteValue);
 
 		tmpyVar &= yByteValue;
-		value = eval(yVarByte + andAssignmentOp + yByte);
+		value = eval(yVarByte + andAssignmentOp + yByte); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte andAssignment byte : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -3242,12 +3242,12 @@ public class ByteAssignmentOperatorsTests extends Tests {
 		}
 	}
 
-	public void testByteAndAssignmentChar() throws Throwable {
+	public void testByteAndAssignmentChar() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
 		byte tmpxVar = xVarByteValue;
 		tmpxVar &= xCharValue;
-		IValue value = eval(xVarByte + andAssignmentOp + xChar);
+		IValue value = eval(xVarByte + andAssignmentOp + xChar); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("byte andAssignment char : wrong type : ", "byte", typeName);
 		byte byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -3259,7 +3259,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 		assertEquals("byte local variable value : wrong result : ", tmpxVar, byteValue);
 
 		tmpxVar &= yCharValue;
-		value = eval(xVarByte + andAssignmentOp + yChar);
+		value = eval(xVarByte + andAssignmentOp + yChar); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte andAssignment char : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -3272,7 +3272,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 
 		byte tmpyVar = yVarByteValue;
 		tmpyVar &= xCharValue;
-		value = eval(yVarByte + andAssignmentOp + xChar);
+		value = eval(yVarByte + andAssignmentOp + xChar); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte andAssignment char : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -3284,7 +3284,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 		assertEquals("byte local variable value : wrong result : ", tmpyVar, byteValue);
 
 		tmpyVar &= yCharValue;
-		value = eval(yVarByte + andAssignmentOp + yChar);
+		value = eval(yVarByte + andAssignmentOp + yChar); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte andAssignment char : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -3299,12 +3299,12 @@ public class ByteAssignmentOperatorsTests extends Tests {
 		}
 	}
 
-	public void testByteAndAssignmentShort() throws Throwable {
+	public void testByteAndAssignmentShort() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
 		byte tmpxVar = xVarByteValue;
 		tmpxVar &= xShortValue;
-		IValue value = eval(xVarByte + andAssignmentOp + xShort);
+		IValue value = eval(xVarByte + andAssignmentOp + xShort); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("byte andAssignment short : wrong type : ", "byte", typeName);
 		byte byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -3316,7 +3316,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 		assertEquals("byte local variable value : wrong result : ", tmpxVar, byteValue);
 
 		tmpxVar &= yShortValue;
-		value = eval(xVarByte + andAssignmentOp + yShort);
+		value = eval(xVarByte + andAssignmentOp + yShort); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte andAssignment short : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -3329,7 +3329,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 
 		byte tmpyVar = yVarByteValue;
 		tmpyVar &= xShortValue;
-		value = eval(yVarByte + andAssignmentOp + xShort);
+		value = eval(yVarByte + andAssignmentOp + xShort); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte andAssignment short : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -3341,7 +3341,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 		assertEquals("byte local variable value : wrong result : ", tmpyVar, byteValue);
 
 		tmpyVar &= yShortValue;
-		value = eval(yVarByte + andAssignmentOp + yShort);
+		value = eval(yVarByte + andAssignmentOp + yShort); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte andAssignment short : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -3356,12 +3356,12 @@ public class ByteAssignmentOperatorsTests extends Tests {
 		}
 	}
 
-	public void testByteAndAssignmentInt() throws Throwable {
+	public void testByteAndAssignmentInt() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
 		byte tmpxVar = xVarByteValue;
 		tmpxVar &= xIntValue;
-		IValue value = eval(xVarByte + andAssignmentOp + xInt);
+		IValue value = eval(xVarByte + andAssignmentOp + xInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("byte andAssignment int : wrong type : ", "byte", typeName);
 		byte byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -3373,7 +3373,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 		assertEquals("byte local variable value : wrong result : ", tmpxVar, byteValue);
 
 		tmpxVar &= yIntValue;
-		value = eval(xVarByte + andAssignmentOp + yInt);
+		value = eval(xVarByte + andAssignmentOp + yInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte andAssignment int : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -3386,7 +3386,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 
 		byte tmpyVar = yVarByteValue;
 		tmpyVar &= xIntValue;
-		value = eval(yVarByte + andAssignmentOp + xInt);
+		value = eval(yVarByte + andAssignmentOp + xInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte andAssignment int : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -3398,7 +3398,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 		assertEquals("byte local variable value : wrong result : ", tmpyVar, byteValue);
 
 		tmpyVar &= yIntValue;
-		value = eval(yVarByte + andAssignmentOp + yInt);
+		value = eval(yVarByte + andAssignmentOp + yInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte andAssignment int : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -3413,12 +3413,12 @@ public class ByteAssignmentOperatorsTests extends Tests {
 		}
 	}
 
-	public void testByteAndAssignmentLong() throws Throwable {
+	public void testByteAndAssignmentLong() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
 		byte tmpxVar = xVarByteValue;
 		tmpxVar &= xLongValue;
-		IValue value = eval(xVarByte + andAssignmentOp + xLong);
+		IValue value = eval(xVarByte + andAssignmentOp + xLong); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("byte andAssignment long : wrong type : ", "byte", typeName);
 		byte byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -3430,7 +3430,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 		assertEquals("byte local variable value : wrong result : ", tmpxVar, byteValue);
 
 		tmpxVar &= yLongValue;
-		value = eval(xVarByte + andAssignmentOp + yLong);
+		value = eval(xVarByte + andAssignmentOp + yLong); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte andAssignment long : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -3443,7 +3443,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 
 		byte tmpyVar = yVarByteValue;
 		tmpyVar &= xLongValue;
-		value = eval(yVarByte + andAssignmentOp + xLong);
+		value = eval(yVarByte + andAssignmentOp + xLong); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte andAssignment long : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -3455,7 +3455,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 		assertEquals("byte local variable value : wrong result : ", tmpyVar, byteValue);
 
 		tmpyVar &= yLongValue;
-		value = eval(yVarByte + andAssignmentOp + yLong);
+		value = eval(yVarByte + andAssignmentOp + yLong); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte andAssignment long : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -3472,12 +3472,12 @@ public class ByteAssignmentOperatorsTests extends Tests {
 
 	// byte ^= {byte, char, short, int, long, float, double}
 
-	public void testByteXorAssignmentByte() throws Throwable {
+	public void testByteXorAssignmentByte() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
 		byte tmpxVar = xVarByteValue;
 		tmpxVar ^= xByteValue;
-		IValue value = eval(xVarByte + xorAssignmentOp + xByte);
+		IValue value = eval(xVarByte + xorAssignmentOp + xByte); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("byte xorAssignment byte : wrong type : ", "byte", typeName);
 		byte byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -3489,7 +3489,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 		assertEquals("byte local variable value : wrong result : ", tmpxVar, byteValue);
 
 		tmpxVar ^= yByteValue;
-		value = eval(xVarByte + xorAssignmentOp + yByte);
+		value = eval(xVarByte + xorAssignmentOp + yByte); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte xorAssignment byte : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -3502,7 +3502,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 
 		byte tmpyVar = yVarByteValue;
 		tmpyVar ^= xByteValue;
-		value = eval(yVarByte + xorAssignmentOp + xByte);
+		value = eval(yVarByte + xorAssignmentOp + xByte); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte xorAssignment byte : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -3514,7 +3514,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 		assertEquals("byte local variable value : wrong result : ", tmpyVar, byteValue);
 
 		tmpyVar ^= yByteValue;
-		value = eval(yVarByte + xorAssignmentOp + yByte);
+		value = eval(yVarByte + xorAssignmentOp + yByte); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte xorAssignment byte : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -3529,12 +3529,12 @@ public class ByteAssignmentOperatorsTests extends Tests {
 		}
 	}
 
-	public void testByteXorAssignmentChar() throws Throwable {
+	public void testByteXorAssignmentChar() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
 		byte tmpxVar = xVarByteValue;
 		tmpxVar ^= xCharValue;
-		IValue value = eval(xVarByte + xorAssignmentOp + xChar);
+		IValue value = eval(xVarByte + xorAssignmentOp + xChar); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("byte xorAssignment char : wrong type : ", "byte", typeName);
 		byte byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -3546,7 +3546,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 		assertEquals("byte local variable value : wrong result : ", tmpxVar, byteValue);
 
 		tmpxVar ^= yCharValue;
-		value = eval(xVarByte + xorAssignmentOp + yChar);
+		value = eval(xVarByte + xorAssignmentOp + yChar); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte xorAssignment char : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -3559,7 +3559,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 
 		byte tmpyVar = yVarByteValue;
 		tmpyVar ^= xCharValue;
-		value = eval(yVarByte + xorAssignmentOp + xChar);
+		value = eval(yVarByte + xorAssignmentOp + xChar); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte xorAssignment char : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -3571,7 +3571,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 		assertEquals("byte local variable value : wrong result : ", tmpyVar, byteValue);
 
 		tmpyVar ^= yCharValue;
-		value = eval(yVarByte + xorAssignmentOp + yChar);
+		value = eval(yVarByte + xorAssignmentOp + yChar); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte xorAssignment char : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -3586,12 +3586,12 @@ public class ByteAssignmentOperatorsTests extends Tests {
 		}
 	}
 
-	public void testByteXorAssignmentShort() throws Throwable {
+	public void testByteXorAssignmentShort() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
 		byte tmpxVar = xVarByteValue;
 		tmpxVar ^= xShortValue;
-		IValue value = eval(xVarByte + xorAssignmentOp + xShort);
+		IValue value = eval(xVarByte + xorAssignmentOp + xShort); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("byte xorAssignment short : wrong type : ", "byte", typeName);
 		byte byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -3603,7 +3603,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 		assertEquals("byte local variable value : wrong result : ", tmpxVar, byteValue);
 
 		tmpxVar ^= yShortValue;
-		value = eval(xVarByte + xorAssignmentOp + yShort);
+		value = eval(xVarByte + xorAssignmentOp + yShort); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte xorAssignment short : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -3616,7 +3616,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 
 		byte tmpyVar = yVarByteValue;
 		tmpyVar ^= xShortValue;
-		value = eval(yVarByte + xorAssignmentOp + xShort);
+		value = eval(yVarByte + xorAssignmentOp + xShort); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte xorAssignment short : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -3628,7 +3628,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 		assertEquals("byte local variable value : wrong result : ", tmpyVar, byteValue);
 
 		tmpyVar ^= yShortValue;
-		value = eval(yVarByte + xorAssignmentOp + yShort);
+		value = eval(yVarByte + xorAssignmentOp + yShort); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte xorAssignment short : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -3643,12 +3643,12 @@ public class ByteAssignmentOperatorsTests extends Tests {
 		}
 	}
 
-	public void testByteXorAssignmentInt() throws Throwable {
+	public void testByteXorAssignmentInt() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
 		byte tmpxVar = xVarByteValue;
 		tmpxVar ^= xIntValue;
-		IValue value = eval(xVarByte + xorAssignmentOp + xInt);
+		IValue value = eval(xVarByte + xorAssignmentOp + xInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("byte xorAssignment int : wrong type : ", "byte", typeName);
 		byte byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -3660,7 +3660,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 		assertEquals("byte local variable value : wrong result : ", tmpxVar, byteValue);
 
 		tmpxVar ^= yIntValue;
-		value = eval(xVarByte + xorAssignmentOp + yInt);
+		value = eval(xVarByte + xorAssignmentOp + yInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte xorAssignment int : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -3673,7 +3673,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 
 		byte tmpyVar = yVarByteValue;
 		tmpyVar ^= xIntValue;
-		value = eval(yVarByte + xorAssignmentOp + xInt);
+		value = eval(yVarByte + xorAssignmentOp + xInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte xorAssignment int : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -3685,7 +3685,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 		assertEquals("byte local variable value : wrong result : ", tmpyVar, byteValue);
 
 		tmpyVar ^= yIntValue;
-		value = eval(yVarByte + xorAssignmentOp + yInt);
+		value = eval(yVarByte + xorAssignmentOp + yInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte xorAssignment int : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -3700,12 +3700,12 @@ public class ByteAssignmentOperatorsTests extends Tests {
 		}
 	}
 
-	public void testByteXorAssignmentLong() throws Throwable {
+	public void testByteXorAssignmentLong() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
 		byte tmpxVar = xVarByteValue;
 		tmpxVar ^= xLongValue;
-		IValue value = eval(xVarByte + xorAssignmentOp + xLong);
+		IValue value = eval(xVarByte + xorAssignmentOp + xLong); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("byte xorAssignment long : wrong type : ", "byte", typeName);
 		byte byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -3717,7 +3717,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 		assertEquals("byte local variable value : wrong result : ", tmpxVar, byteValue);
 
 		tmpxVar ^= yLongValue;
-		value = eval(xVarByte + xorAssignmentOp + yLong);
+		value = eval(xVarByte + xorAssignmentOp + yLong); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte xorAssignment long : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -3730,7 +3730,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 
 		byte tmpyVar = yVarByteValue;
 		tmpyVar ^= xLongValue;
-		value = eval(yVarByte + xorAssignmentOp + xLong);
+		value = eval(yVarByte + xorAssignmentOp + xLong); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte xorAssignment long : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -3742,7 +3742,7 @@ public class ByteAssignmentOperatorsTests extends Tests {
 		assertEquals("byte local variable value : wrong result : ", tmpyVar, byteValue);
 
 		tmpyVar ^= yLongValue;
-		value = eval(yVarByte + xorAssignmentOp + yLong);
+		value = eval(yVarByte + xorAssignmentOp + yLong); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("byte xorAssignment long : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();

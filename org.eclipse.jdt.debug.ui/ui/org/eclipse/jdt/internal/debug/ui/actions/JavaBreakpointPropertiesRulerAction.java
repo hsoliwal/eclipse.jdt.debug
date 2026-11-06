@@ -43,13 +43,13 @@ public class JavaBreakpointPropertiesRulerAction extends RulerBreakpointAction i
 	 */
 	public JavaBreakpointPropertiesRulerAction(ITextEditor editor, IVerticalRulerInfo info) {
 		super(editor, info);
-		setText(ActionMessages.JavaBreakpointPropertiesRulerAction_Breakpoint__Properties_1 + '\t' + DebugUIPlugin.formatKeyBindingString(SWT.MOD1, ActionMessages.JavaBreakpointPropertiesRulerAction_0));
+		setText(ActionMessages.JavaBreakpointPropertiesRulerAction_Breakpoint__Properties_1 + '\t' + DebugUIPlugin.formatKeyBindingString(SWT.MOD1, ActionMessages.JavaBreakpointPropertiesRulerAction_0)); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 	}
 	
 	/**
 	 * @see org.eclipse.jface.action.Action#run()
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public void run() {
 		if (getBreakpoint() != null) {
 			PropertyDialogAction action=

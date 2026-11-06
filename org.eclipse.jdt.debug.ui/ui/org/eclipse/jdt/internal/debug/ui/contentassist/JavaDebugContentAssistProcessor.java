@@ -132,7 +132,7 @@ public class JavaDebugContentAssistProcessor implements IContentAssistProcessor 
 	/**
 	 * @see IContentAssistProcessor#computeCompletionProposals(ITextViewer, int)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public ICompletionProposal[] computeCompletionProposals(ITextViewer viewer, int documentOffset) {
         setErrorMessage(null);
 		try {
@@ -146,7 +146,7 @@ public class JavaDebugContentAssistProcessor implements IContentAssistProcessor 
 			}
 			char[][] localVariableNames = new char[numLocals][];
 			char[][] localVariableTypeNames = new char[numLocals][];
-			for (int i = 0; i < numLocals; i++) {
+			for (int i = 0; i < numLocals; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				localVariableNames[i] = locals[0][i].toCharArray();
 				localVariableTypeNames[i] = locals[1][i].toCharArray();
 			}
@@ -163,7 +163,7 @@ public class JavaDebugContentAssistProcessor implements IContentAssistProcessor 
 				 localVariableTypeNames, localVariableNames,
 				 localModifiers, fContext.isStatic(), fCollector);
 
-			List<IJavaCompletionProposal> total = new ArrayList<>();
+			List<IJavaCompletionProposal> total = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 			total.addAll(Arrays.asList(fCollector.getJavaCompletionProposals()));
 
 			if (fJavaEngine != null) {

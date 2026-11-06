@@ -38,7 +38,7 @@ import org.eclipse.jface.util.PropertyChangeEvent;
 /**
  * Manager for the thread and monitor model.
  */
-public class ThreadMonitorManager implements IDebugEventSetListener, IPropertyChangeListener {
+public class ThreadMonitorManager implements IDebugEventSetListener, IPropertyChangeListener { //FLLDCIM: MARK — T27  IMPLEMENTS
 
 	private static ThreadMonitorManager fDefaultManager;
 
@@ -64,22 +64,22 @@ public class ThreadMonitorManager implements IDebugEventSetListener, IPropertyCh
 	}
 
 	private ThreadMonitorManager() {
-		fJavaMonitorThreads= new HashMap<>();
-		fJavaMonitors= new HashMap<>();
+		fJavaMonitorThreads= new HashMap<>(); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
+		fJavaMonitors= new HashMap<>(); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
 		IPreferenceStore preferenceStore = JDIDebugUIPlugin.getDefault().getPreferenceStore();
 		preferenceStore.addPropertyChangeListener(this);
 		fIsEnabled= preferenceStore.getBoolean(IJavaDebugUIConstants.PREF_SHOW_MONITOR_THREAD_INFO);
 		if (fIsEnabled) {
-			DebugPlugin.getDefault().addDebugEventListener(this);
+			DebugPlugin.getDefault().addDebugEventListener(this); //FLLDCIM: MARK — T27 DEBUG_EVENT_ADAPTER CALL
 		}
 	}
 
 	/* (non-Javadoc)
 	 * @see org.eclipse.debug.core.IDebugEventSetListener#handleDebugEvents(org.eclipse.debug.core.DebugEvent[])
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public void handleDebugEvents(DebugEvent[] events) {
-		for (int i= 0; i < events.length; i++) {
+		for (int i= 0; i < events.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			DebugEvent debugEvent= events[i];
 			Object eventSource= debugEvent.getSource();
 			int eventKind= debugEvent.getKind();
@@ -124,10 +124,10 @@ public class ThreadMonitorManager implements IDebugEventSetListener, IPropertyCh
 
 	private void handleSuspendResume() {
 		JavaMonitorThread[] threads = getJavaMonitorThreads();
-		for (int i = 0; i < threads.length; i++) {
+		for (int i = 0; i < threads.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			threads[i].setToUpdate();
 		}
-		DebugPlugin.getDefault().asyncExec(new RefreshAndDetectDeadlock());
+		DebugPlugin.getDefault().asyncExec(new RefreshAndDetectDeadlock()); //FLLDCIM: MARK — T08 UI_THREAD_SYNCHRONIZER CALL
 	}
 
 	private void handleThreadTerminate(IJavaThread thread) {
@@ -149,7 +149,7 @@ public class ThreadMonitorManager implements IDebugEventSetListener, IPropertyCh
 			debugElements = new IDebugElement[map.size()];
 			debugElements =	map.keySet().toArray(debugElements);
 		}
-		for(int i = 0; i < debugElements.length; ++i) {
+		for(int i = 0; i < debugElements.length; ++i) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			if (debugElements[i].getDebugTarget().equals(debugTarget)) {
 				synchronized(map) {
 					map.remove(debugElements[i]);
@@ -167,7 +167,7 @@ public class ThreadMonitorManager implements IDebugEventSetListener, IPropertyCh
 			if (javaMonitorThread == null) {
 				javaMonitorThread= new JavaMonitorThread(thread, originalThread);
 				fJavaMonitorThreads.put(thread, javaMonitorThread);
-				DebugPlugin.getDefault().asyncExec(new DetectDeadlock());
+				DebugPlugin.getDefault().asyncExec(new DetectDeadlock()); //FLLDCIM: MARK — T08 UI_THREAD_SYNCHRONIZER CALL
 			} else if (originalThread != null) {
 				javaMonitorThread.setOriginalThread(originalThread);
 			}
@@ -228,7 +228,7 @@ public class ThreadMonitorManager implements IDebugEventSetListener, IPropertyCh
 		@Override
 		public void run() {
 			JavaMonitorThread[] threads= getJavaMonitorThreads();
-			for (int i = 0; i < threads.length; i++) {
+			for (int i = 0; i < threads.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				threads[i].refresh();
 			}
 			super.run();
@@ -236,16 +236,16 @@ public class ThreadMonitorManager implements IDebugEventSetListener, IPropertyCh
 	}
 
 	class DetectDeadlock implements Runnable {
-		@Override
+		@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		public void run() {
 			JavaMonitorThread[] threads= getJavaMonitorThreads();
 			JavaMonitor[] monitors= getJavaMonitors();
-			List<Object> inDeadlock= new ArrayList<>();
-			for (int i = 0; i < threads.length; i++) {
+			List<Object> inDeadlock= new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
+			for (int i = 0; i < threads.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				JavaMonitorThread thread= threads[i];
-				List<JavaMonitorThread> threadStack= new ArrayList<>();
-				List<JavaMonitor> monitorStack= new ArrayList<>();
-				while (thread != null) {
+				List<JavaMonitorThread> threadStack= new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
+				List<JavaMonitor> monitorStack= new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
+				while (thread != null) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 					boolean isInDeadlock= false;
 					if (inDeadlock.contains(thread) || threadStack.contains(thread)) {
 						isInDeadlock= true;
@@ -263,21 +263,21 @@ public class ThreadMonitorManager implements IDebugEventSetListener, IPropertyCh
 					}
 					if (isInDeadlock) {
 						// is in a deadlock, set the elements of the back trace as 'in a deadlock'
-						for (Iterator<JavaMonitorThread> iter = threadStack.iterator(); iter.hasNext();) {
+						for (Iterator<JavaMonitorThread> iter = threadStack.iterator(); iter.hasNext();) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 							inDeadlock.add(iter.next());
 						}
-						for (Iterator<JavaMonitor> iter = monitorStack.iterator(); iter.hasNext();) {
+						for (Iterator<JavaMonitor> iter = monitorStack.iterator(); iter.hasNext();) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 							inDeadlock.add(iter.next());
 						}
 						thread= null;
 					}
 				}
 			}
-			for (int i = 0; i < threads.length; i++) {
+			for (int i = 0; i < threads.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				JavaMonitorThread thread= threads[i];
 				thread.setInDeadlock(inDeadlock.contains(thread));
 			}
-			for (int i = 0; i < monitors.length; i++) {
+			for (int i = 0; i < monitors.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				JavaMonitor monitor= monitors[i];
 				monitor.setInDeadlock(inDeadlock.contains(monitor));
 			}
@@ -292,7 +292,7 @@ public class ThreadMonitorManager implements IDebugEventSetListener, IPropertyCh
 		if (event.getProperty().equals(IJavaDebugUIConstants.PREF_SHOW_MONITOR_THREAD_INFO)) {
 			fIsEnabled= JDIDebugUIPreferenceInitializer.getBoolean(event);
 			if (fIsEnabled) {
-				DebugPlugin.getDefault().addDebugEventListener(this);
+				DebugPlugin.getDefault().addDebugEventListener(this); //FLLDCIM: MARK — T27 DEBUG_EVENT_ADAPTER CALL
 			} else {
 				DebugPlugin.getDefault().removeDebugEventListener(this);
 			}

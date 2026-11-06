@@ -28,7 +28,7 @@ import org.eclipse.ui.IActionDelegate;
  * Toggles whether a breakpoint suspends a VM or only
  * the event thread.
  */
-public class BreakpointSuspendPolicyToggleAction extends BreakpointToggleAction {
+public class BreakpointSuspendPolicyToggleAction extends BreakpointToggleAction { //FLLDCIM: MARK — T20  IMPLEMENTS
 
 	/**
 	 * What the current policy of the action is
@@ -60,7 +60,7 @@ public class BreakpointSuspendPolicyToggleAction extends BreakpointToggleAction 
 	@Override
 	public boolean isEnabledFor(IStructuredSelection selection) {
 		Iterator<?> iter= selection.iterator();
-		while (iter.hasNext()) {
+		while (iter.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			Object element = iter.next();
 			if (!(element instanceof IJavaBreakpoint)) {
 				return false;

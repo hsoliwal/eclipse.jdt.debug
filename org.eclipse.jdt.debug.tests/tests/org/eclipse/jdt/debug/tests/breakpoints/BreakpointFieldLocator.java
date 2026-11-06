@@ -79,7 +79,7 @@ public class BreakpointFieldLocator extends ASTVisitor {
 	public boolean visit(CompilationUnit node) {
 		// visit only the type declarations
 		List<TypeDeclaration> types = node.types();
-		for (Iterator<TypeDeclaration> iter = types.iterator(); iter.hasNext() && !fFound;) {
+		for (Iterator<TypeDeclaration> iter = types.iterator(); iter.hasNext() && !fFound;) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			iter.next().accept(this);
 		}
 		return false;
@@ -99,7 +99,7 @@ public class BreakpointFieldLocator extends ASTVisitor {
 				fFound= true;
 				return false;
 			}
-			for (Iterator<VariableDeclarationFragment> iter = fragments.iterator(); iter.hasNext() && !fFound;) {
+			for (Iterator<VariableDeclarationFragment> iter = fragments.iterator(); iter.hasNext() && !fFound;) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				iter.next().accept(this);
 			}
 		}
@@ -114,13 +114,13 @@ public class BreakpointFieldLocator extends ASTVisitor {
 		if (containsPosition(node)) {
 			// visit the field declarations
 			FieldDeclaration[] fields = node.getFields();
-			for (int i = 0, length = fields.length; i < length && !fFound; i++) {
+			for (int i = 0, length = fields.length; i < length && !fFound; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				fields[i].accept(this);
 			}
 			if (!fFound) {
 				// visit inner types
 				TypeDeclaration[] types = node.getTypes();
-				for (int i = 0, length = types.length; i < length && !fFound; i++) {
+				for (int i = 0, length = types.length; i < length && !fFound; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 					types[i].accept(this);
 				}
 			}
@@ -145,16 +145,16 @@ public class BreakpointFieldLocator extends ASTVisitor {
 	 * Compute the name of the type which contains this node.
 	 * Result will be the name of the type or the inner type which contains this node, but not of the local or anonymous type.
 	 */
-	private String computeTypeName(ASTNode node) {
+	private String computeTypeName(ASTNode node) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String typeName = null;
 		ASTNode newnode = node;
-		while (!(newnode instanceof CompilationUnit)) {
+		while (!(newnode instanceof CompilationUnit)) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			if (newnode instanceof AbstractTypeDeclaration) {
 				String identifier= ((AbstractTypeDeclaration)newnode).getName().getIdentifier();
 				if (typeName == null) {
 					typeName= identifier;
 				} else {
-					typeName= identifier + "$" + typeName; //$NON-NLS-1$
+					typeName= identifier + "$" + typeName; //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 				}
 			}
 			newnode= newnode.getParent();
@@ -163,13 +163,13 @@ public class BreakpointFieldLocator extends ASTVisitor {
 		String packageIdentifier= ""; //$NON-NLS-1$
 		if (packageDecl != null) {
 			Name packageName= packageDecl.getName();
-			while (packageName.isQualifiedName()) {
+			while (packageName.isQualifiedName()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				QualifiedName qualifiedName= (QualifiedName) packageName;
-				packageIdentifier= qualifiedName.getName().getIdentifier() + "." + packageIdentifier; //$NON-NLS-1$
+				packageIdentifier= qualifiedName.getName().getIdentifier() + "." + packageIdentifier; //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 				packageName= qualifiedName.getQualifier();
 			}
-			packageIdentifier= ((SimpleName)packageName).getIdentifier() + "." + packageIdentifier; //$NON-NLS-1$
+			packageIdentifier= ((SimpleName)packageName).getIdentifier() + "." + packageIdentifier; //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		}
-		return packageIdentifier + typeName;
+		return packageIdentifier + typeName; //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 	}
 }

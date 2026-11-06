@@ -51,7 +51,7 @@ public class CompositeSourceContainer extends org.eclipse.debug.core.sourcelooku
 	@Override
 	public void dispose() {
 		super.dispose();
-		for (ISourceContainer member : members) {
+		for (ISourceContainer member : members) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			member.dispose();
 		}
 		Arrays.fill(members, null);

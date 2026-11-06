@@ -34,7 +34,7 @@ public abstract class JavaElementContentProvider extends ElementContentProvider 
 
 	static {
 		IPreferenceStore preferenceStore = JDIDebugUIPlugin.getDefault().getPreferenceStore();
-		preferenceStore.addPropertyChangeListener(new IPropertyChangeListener() {
+		preferenceStore.addPropertyChangeListener(new IPropertyChangeListener() { //FLLDCIM: MARK — T06  ANONYMOUS
 			@Override
 			public void propertyChange(PropertyChangeEvent event) {
 				if (event.getProperty().equals(IJavaDebugUIConstants.PREF_SHOW_MONITOR_THREAD_INFO)) {

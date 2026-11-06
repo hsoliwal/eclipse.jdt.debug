@@ -45,7 +45,7 @@ public class JDWPTests extends AbstractDebugTest {
 	 * Sends a request to the VirtualMachine Command Set (byte 1) to ask for
 	 * the VM Capabilities (byte 12)
 	 */
-	public void testCapabilities() throws Exception {
+	public void testCapabilities() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String typeName = "Breakpoints";
 		ILineBreakpoint bp = createLineBreakpoint(55, typeName);
 
@@ -62,7 +62,7 @@ public class JDWPTests extends AbstractDebugTest {
 			assertEquals("Unexpected error code in reply packet", 0, packet.errorCode());
 			DataInputStream replyData = packet.dataInStream();
 			// should be 7 booleans in reply
-			for (int i = 0; i < 7; i++) {
+			for (int i = 0; i < 7; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				replyData.readBoolean();
 			}
 			assertEquals("Should be no available bytes", 0, replyData.available());
@@ -76,7 +76,7 @@ public class JDWPTests extends AbstractDebugTest {
 	 * Sends a request to the VirtualMachine Command Set (byte 1) to ask
 	 * for ClassesBySignature (byte 2)
 	 */
-	public void testClassesBySingature() throws Exception {
+	public void testClassesBySingature() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String typeName = "Breakpoints";
 		ILineBreakpoint bp = createLineBreakpoint(55, typeName);
 

@@ -53,7 +53,7 @@ public class TestDetailPaneFactory implements IDetailPaneFactory {
 	 */
 	@Override
 	public Set<String> getDetailPaneTypes(IStructuredSelection selection) {
-		Set<String> possibleIDs = new HashSet<>(2);
+		Set<String> possibleIDs = new HashSet<>(2); //FLLDCIM: MARK — M03 M3_SET_LANES NEW
 		if (selection != null){
 			if (selection.size() == 1 && selection.getFirstElement() instanceof IJavaVariable){
 				possibleIDs.add(SimpleDetailPane.ID);

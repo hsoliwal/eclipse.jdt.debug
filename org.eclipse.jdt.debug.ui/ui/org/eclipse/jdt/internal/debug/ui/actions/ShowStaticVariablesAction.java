@@ -19,7 +19,7 @@ import org.eclipse.jdt.internal.debug.ui.IJDIPreferencesConstants;
 /**
  * Shows non-final static variables
  */
-public class ShowStaticVariablesAction extends ToggleBooleanPreferenceAction {
+public class ShowStaticVariablesAction extends ToggleBooleanPreferenceAction { //FLLDCIM: MARK — T23  IMPLEMENTS
 
 	public ShowStaticVariablesAction() {
 		super();

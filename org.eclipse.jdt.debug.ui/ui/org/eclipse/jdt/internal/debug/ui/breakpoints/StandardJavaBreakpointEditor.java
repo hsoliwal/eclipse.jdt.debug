@@ -100,13 +100,13 @@ public class StandardJavaBreakpointEditor extends AbstractJavaBreakpointEditor {
 	 * @param parent
 	 *            the parent composite
 	 */
-	protected void createTriggerPointButton(Composite parent) {
+	protected void createTriggerPointButton(Composite parent) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		Composite composite = SWTFactory.createComposite(parent, parent.getFont(), 2, 1, 0, 0, 0);
 		fTriggerPointButton = createCheckButton(composite, PropertyPageMessages.JavaBreakpointPage_12);
 		fTriggerPointButton.setEnabled(true);
 		fTriggerPointButton.setSelection(isTriggerPoint());
-		fTriggerPointButton.addSelectionListener(new SelectionAdapter() {
-			@Override
+		fTriggerPointButton.addSelectionListener(new SelectionAdapter() { //FLLDCIM: MARK — T03 SELECTION_LANE CALL
+			@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 			public void widgetSelected(SelectionEvent event) {
 				boolean resumeOnHitEnabled = fResumeOnHit.isEnabled();
 				if (resumeOnHitEnabled) {
@@ -140,7 +140,7 @@ public class StandardJavaBreakpointEditor extends AbstractJavaBreakpointEditor {
 		});
 		fResumeOnHit = SWTFactory.createRadioButton(composite, PropertyPageMessages.BreakpointResumeOnHit, 1);
 		fResumeOnHit.setLayoutData(new GridData());
-		fResumeOnHit.addSelectionListener(new SelectionAdapter() {
+		fResumeOnHit.addSelectionListener(new SelectionAdapter() { //FLLDCIM: MARK — T03 SELECTION_LANE CALL
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				if (javaBpConditionEditor != null) {
@@ -159,13 +159,13 @@ public class StandardJavaBreakpointEditor extends AbstractJavaBreakpointEditor {
 		});
 	}
 
-	protected Control createStandardControls(Composite parent) {
+	protected Control createStandardControls(Composite parent) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		Composite comp = SWTFactory.createComposite(parent, parent.getFont(), 1, 1, 0, 0, 0);
 		fDisableOnHit = SWTFactory.createCheckButton(comp, PropertyPageMessages.BreakpointDisableOnHit, null, false, 2);
 		Composite composite = SWTFactory.createComposite(parent, parent.getFont(), 4, 1, 0, 0, 0);
 		fHitCountButton = SWTFactory.createCheckButton(composite, processMnemonics(PropertyPageMessages.JavaBreakpointPage_4), null, false, 1);
 		fHitCountButton.setLayoutData(new GridData());
-		fHitCountButton.addSelectionListener(new SelectionAdapter() {
+		fHitCountButton.addSelectionListener(new SelectionAdapter() { //FLLDCIM: MARK — T03 SELECTION_LANE CALL
 			@Override
 			public void widgetSelected(SelectionEvent event) {
 				boolean enabled = fHitCountButton.getSelection();
@@ -179,7 +179,7 @@ public class StandardJavaBreakpointEditor extends AbstractJavaBreakpointEditor {
 		fHitCountText = SWTFactory.createSingleText(composite, 1);
 		GridData gd = (GridData) fHitCountText.getLayoutData();
 		gd.minimumWidth = 50;
-		fHitCountText.addModifyListener(new ModifyListener() {
+		fHitCountText.addModifyListener(new ModifyListener() { //FLLDCIM: MARK — T02 TEXT_INPUT_DEBOUNCE CALL
 			@Override
 			public void modifyText(ModifyEvent e) {
 				setDirty(PROP_HIT_COUNT);
@@ -192,21 +192,21 @@ public class StandardJavaBreakpointEditor extends AbstractJavaBreakpointEditor {
 		fSuspendThread.setLayoutData(new GridData());
 		fSuspendVM = SWTFactory.createRadioButton(radios, processMnemonics(PropertyPageMessages.JavaBreakpointPage_8), 1);
 		fSuspendVM.setLayoutData(new GridData());
-		fSuspendThread.addSelectionListener(new SelectionAdapter() {
+		fSuspendThread.addSelectionListener(new SelectionAdapter() { //FLLDCIM: MARK — T03 SELECTION_LANE CALL
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				setConditionTextToSuspend();
 				setDirty(PROP_SUSPEND_POLICY);
 			}
 		});
-		fSuspendVM.addSelectionListener(new SelectionAdapter() {
+		fSuspendVM.addSelectionListener(new SelectionAdapter() { //FLLDCIM: MARK — T03 SELECTION_LANE CALL
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				setConditionTextToSuspend();
 				setDirty(PROP_SUSPEND_POLICY);
 			}
 		});
-		fDisableOnHit.addSelectionListener(new SelectionAdapter() {
+		fDisableOnHit.addSelectionListener(new SelectionAdapter() { //FLLDCIM: MARK — T03 SELECTION_LANE CALL
 			@Override
 			public void widgetSelected(SelectionEvent event) {
 				boolean enabled = fDisableOnHit.getSelection();
@@ -215,7 +215,7 @@ public class StandardJavaBreakpointEditor extends AbstractJavaBreakpointEditor {
 				}
 			}
 		});
-		composite.addDisposeListener(new DisposeListener() {
+		composite.addDisposeListener(new DisposeListener() { //FLLDCIM: MARK — T01 LIFECYCLE_RESIDENCY CALL
 			@Override
 			public void widgetDisposed(DisposeEvent e) {
 				dispose();
@@ -255,7 +255,7 @@ public class StandardJavaBreakpointEditor extends AbstractJavaBreakpointEditor {
 	 * @param breakpoint the breakpoint to edit or <code>null</code> if none
 	 * @exception CoreException if unable to access breakpoint attributes
 	 */
-	protected void setBreakpoint(IJavaBreakpoint breakpoint) throws CoreException {
+	protected void setBreakpoint(IJavaBreakpoint breakpoint) throws CoreException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		fBreakpoint = breakpoint;
 		boolean enabled = false;
 		boolean hasHitCount = false;
@@ -311,7 +311,7 @@ public class StandardJavaBreakpointEditor extends AbstractJavaBreakpointEditor {
 	/* (non-Javadoc)
 	 * @see org.eclipse.jdt.internal.debug.ui.breakpoints.AbstractJavaBreakpointEditor#doSave()
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public void doSave() throws CoreException {
 		if (fBreakpoint != null) {
 			int suspendPolicy = IJavaBreakpoint.SUSPEND_THREAD;
@@ -372,7 +372,7 @@ public class StandardJavaBreakpointEditor extends AbstractJavaBreakpointEditor {
 		button.setText(text);
 		GridData gd = new GridData(SWT.BEGINNING);
 		button.setLayoutData(gd);
-		button.addSelectionListener(new SelectionAdapter() {
+		button.addSelectionListener(new SelectionAdapter() { //FLLDCIM: MARK — T03 SELECTION_LANE CALL
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				setDirty(propId);

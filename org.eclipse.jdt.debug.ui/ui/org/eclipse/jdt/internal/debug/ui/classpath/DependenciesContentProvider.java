@@ -21,7 +21,7 @@ import org.eclipse.jdt.launching.IRuntimeClasspathEntry;
  * Content provider that maintains a list of classpath entries which are shown in a tree
  * viewer.
  */
-public class DependenciesContentProvider extends ClasspathContentProvider {
+public class DependenciesContentProvider extends ClasspathContentProvider { //FLLDCIM: MARK — M22  IMPLEMENTS
 
 	public DependenciesContentProvider(JavaClasspathTab tab) {
 		super(tab);
@@ -44,7 +44,7 @@ public class DependenciesContentProvider extends ClasspathContentProvider {
 	@Override
 	public void setEntries(IRuntimeClasspathEntry[] entries) {
 		model.removeAll();
-		for (IRuntimeClasspathEntry entry : entries) {
+		for (IRuntimeClasspathEntry entry : entries) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			switch (entry.getClasspathProperty()) {
 			case IRuntimeClasspathEntry.MODULE_PATH:
 				model.addEntry(DependencyModel.MODULE_PATH, entry);

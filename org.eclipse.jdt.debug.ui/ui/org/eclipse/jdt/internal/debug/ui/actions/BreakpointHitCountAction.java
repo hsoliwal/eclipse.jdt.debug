@@ -57,7 +57,7 @@ public class BreakpointHitCountAction extends ObjectActionDelegate {
 		/* (non-Javadoc)
 		 * @see org.eclipse.jface.dialogs.InputDialog#createDialogArea(org.eclipse.swt.widgets.Composite)
 		 */
-		@Override
+		@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		protected Control createDialogArea(Composite parent) {
 			Composite area= (Composite)super.createDialogArea(parent);
 
@@ -69,7 +69,7 @@ public class BreakpointHitCountAction extends ObjectActionDelegate {
 			checkbox.setText(ActionMessages.BreakpointHitCountAction_Enable_Hit_Count_1);
 			checkbox.setSelection(true);
 			fHitCountEnabled = true;
-			checkbox.addSelectionListener(new SelectionListener() {
+			checkbox.addSelectionListener(new SelectionListener() { //FLLDCIM: MARK — T03 SELECTION_LANE CALL
 				@Override
 				public void widgetSelected(SelectionEvent e) {
 					fHitCountEnabled = checkbox.getSelection();
@@ -98,7 +98,7 @@ public class BreakpointHitCountAction extends ObjectActionDelegate {
 	/**
 	 * @see IActionDelegate#run(IAction)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public void run(IAction action) {
 		IStructuredSelection selection= getCurrentSelection();
 		if (selection == null) {
@@ -109,7 +109,7 @@ public class BreakpointHitCountAction extends ObjectActionDelegate {
 			return;
 		}
 
-		while (itr.hasNext()) {
+		while (itr.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			IJavaBreakpoint breakpoint= itr.next();
 			try {
 				int oldHitCount= breakpoint.getHitCount();
@@ -126,7 +126,7 @@ public class BreakpointHitCountAction extends ObjectActionDelegate {
 		}
 	}
 
-	protected int hitCountDialog(IJavaBreakpoint breakpoint) {
+	protected int hitCountDialog(IJavaBreakpoint breakpoint) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String title= ActionMessages.BreakpointHitCountAction_Set_Breakpoint_Hit_Count_2;
 		String message= ActionMessages.BreakpointHitCountAction__Enter_the_new_hit_count_for_the_breakpoint__3;
 		IInputValidator validator= new IInputValidator() {

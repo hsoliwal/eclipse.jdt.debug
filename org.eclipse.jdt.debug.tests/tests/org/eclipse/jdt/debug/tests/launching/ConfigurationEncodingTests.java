@@ -58,7 +58,7 @@ public class ConfigurationEncodingTests extends AbstractDebugTest {
 	 * Tests that if no encoding is set on the configuration and there is no encoding changes to the workspace pref
 	 * than the encoding retrieved for the configuration matches the system encoding
 	 */
-	public void testGetSystemDefaultEncoding() throws CoreException {
+	public void testGetSystemDefaultEncoding() throws CoreException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String oldencoding = ResourcesPlugin.getEncoding();
 		String defaultEncoding = getDefaultEncoding();
 		String systemEncoding = Platform.getSystemCharset().name();
@@ -101,7 +101,7 @@ public class ConfigurationEncodingTests extends AbstractDebugTest {
 	/**
 	 * Tests that if a specific encoding is set on the configuration itself that that is the encoding returned
 	 */
-	public void testGetSpecificConfigurationEncoding() throws CoreException {
+	public void testGetSpecificConfigurationEncoding() throws CoreException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String oldencoding = ResourcesPlugin.getEncoding();
 		ILaunchConfiguration config = getLaunchConfiguration("LaunchHistoryTest");
 		assertNotNull("the configuration could not be found", config);
@@ -132,7 +132,7 @@ public class ConfigurationEncodingTests extends AbstractDebugTest {
 	 * Tests that if there is no specified encoding for the config itself, and there is a mapped resource,
 	 * the encoding will come from the mapped resource (if a specific one is set)
 	 */
-	public void testGetSpecificResourceEncoding() throws CoreException {
+	public void testGetSpecificResourceEncoding() throws CoreException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String oldencoding = ResourcesPlugin.getEncoding();
 		ILaunchConfiguration config = getLaunchConfiguration("LaunchHistoryTest");
 		assertNotNull("the configuration could not be found", config);
@@ -163,7 +163,7 @@ public class ConfigurationEncodingTests extends AbstractDebugTest {
 	 * Tests that if there is no specific encoding set on the config and there is more than one mapped resource,
 	 * the first mapped resource is used to derive the encoding
 	 */
-	public void testGetSpecificResourcesEncoding() throws CoreException {
+	public void testGetSpecificResourcesEncoding() throws CoreException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String oldencoding = ResourcesPlugin.getEncoding();
 		IFile res = (IFile) getResource("MigrationTests.java"),
 		res2 = (IFile) getResource("MigrationTests2.java");

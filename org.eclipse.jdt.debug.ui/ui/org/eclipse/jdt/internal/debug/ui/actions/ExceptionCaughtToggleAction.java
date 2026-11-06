@@ -24,7 +24,7 @@ import org.eclipse.jface.viewers.IStructuredSelection;
 /**
  * Toggles the caught state of an exception breakpoint
  */
-public class ExceptionCaughtToggleAction extends BreakpointToggleAction {
+public class ExceptionCaughtToggleAction extends BreakpointToggleAction { //FLLDCIM: MARK — T20  IMPLEMENTS
 
 	/**
 	 * @see BreakpointToggleAction#getToggleState(IJavaBreakpoint)
@@ -52,7 +52,7 @@ public class ExceptionCaughtToggleAction extends BreakpointToggleAction {
 	@Override
 	public boolean isEnabledFor(IStructuredSelection selection) {
 		Iterator<?> iter= selection.iterator();
-		while (iter.hasNext()) {
+		while (iter.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			Object element = iter.next();
 			if (!(element instanceof IJavaExceptionBreakpoint)) {
 				return false;

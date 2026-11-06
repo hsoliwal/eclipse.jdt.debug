@@ -52,11 +52,11 @@ public class ContributedTabTests extends AbstractDebugTest {
 		javagroup.createTabs(getLaunchConfigurationDialog(IDebugUIConstants.ID_DEBUG_LAUNCH_GROUP), ILaunchManager.DEBUG_MODE);
 		ILaunchConfigurationTab[] tabs = javagroup.getTabs();
 		assertTrue("Wrong number of tabs", tabs.length >= 11); //$NON-NLS-1$
-		Set<Class<? extends ILaunchConfigurationTab>> tabset = new HashSet<>();
-		for(int i = 0; i < tabs.length; i++) {
+		Set<Class<? extends ILaunchConfigurationTab>> tabset = new HashSet<>(); //FLLDCIM: MARK — M03 M3_SET_LANES NEW
+		for(int i = 0; i < tabs.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			tabset.add(tabs[i].getClass());
 		}
-		Set<Class<? extends ILaunchConfigurationTab>> contribs = new HashSet<>();
+		Set<Class<? extends ILaunchConfigurationTab>> contribs = new HashSet<>(); //FLLDCIM: MARK — M03 M3_SET_LANES NEW
 		contribs.add(ContributedTestTab1.class);
 		contribs.add(JavaAlernateModeTab.class);
 		assertTrue("java tab group should contain all contributed tabs", tabset.containsAll(contribs)); //$NON-NLS-1$
@@ -72,7 +72,7 @@ public class ContributedTabTests extends AbstractDebugTest {
 		ILaunchConfigurationTab[] tabs = javagroup.getTabs();
 		int idx = 0;
 		boolean found = false;
-		for (int i = 0; i < tabs.length; i++) {
+		for (int i = 0; i < tabs.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			idx = i;
 			if (tabs[i].getClass().equals(ContributedTestTab1.class)) {
 				found = true;
@@ -104,11 +104,11 @@ public class ContributedTabTests extends AbstractDebugTest {
 		assertNotNull("java tab group cannot be null", javagroup); //$NON-NLS-1$
 		javagroup.createTabs(getLaunchConfigurationDialog(IDebugUIConstants.ID_DEBUG_LAUNCH_GROUP), ILaunchManager.DEBUG_MODE);
 		ILaunchConfigurationTab[] tabs = javagroup.getTabs();
-		HashSet<Class<? extends ILaunchConfigurationTab>> tabset = new HashSet<>();
-		for (int i = 0; i < tabs.length; i++) {
+		HashSet<Class<? extends ILaunchConfigurationTab>> tabset = new HashSet<>(); //FLLDCIM: MARK — M03 M3_SET_LANES NEW
+		for (int i = 0; i < tabs.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			tabset.add(tabs[i].getClass());
 		}
-		HashSet<Class<? extends ILaunchConfigurationTab>> contribs = new HashSet<>();
+		HashSet<Class<? extends ILaunchConfigurationTab>> contribs = new HashSet<>(); //FLLDCIM: MARK — M03 M3_SET_LANES NEW
 		contribs.add(ContributedTestTab2.class);
 		contribs.add(ContributedTestTab3.class);
 		assertTrue("the tab set must only contain test tab 2 and test tab 3", tabset.containsAll(contribs)); //$NON-NLS-1$

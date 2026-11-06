@@ -51,7 +51,7 @@ public class PerfVariableDetailTests extends AbstractDebugPerformanceTest implem
     /**
      * Tests the performance of calculating the 'toString' method
      */
-    public void testToStringDetails() throws Exception {
+    public void testToStringDetails() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
         // just in case
     	tagAsSummary("Computing variable toString() details iteratively", Dimension.ELAPSED_PROCESS);
         removeAllBreakpoints();
@@ -69,7 +69,7 @@ public class PerfVariableDetailTests extends AbstractDebugPerformanceTest implem
         	IValue value = variable.getValue();
 
         	// warm up
-        	for (int i = 0; i < 100; i++) {
+        	for (int i = 0; i < 100; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
         		synchronized (fLock) {
         			presentation.computeDetail(value, this);
         			fLock.wait(30000);
@@ -77,9 +77,9 @@ public class PerfVariableDetailTests extends AbstractDebugPerformanceTest implem
         	}
 
         	// test
-        	for (int i = 0; i < 300; i++) {
+        	for (int i = 0; i < 300; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
         		startMeasuring();
-        		for (int j = 0; j < 150; j++) {
+        		for (int j = 0; j < 150; j++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 	        		synchronized (fLock) {
 	        			presentation.computeDetail(value, this);
 	        			fLock.wait(30000);

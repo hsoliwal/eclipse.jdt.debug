@@ -92,7 +92,7 @@ public class ObjectReferenceTest extends AbstractJDITest {
 		JDITestSuite suite = (JDITestSuite) super.suite();
 		Vector<?> testNames = getAllMatchingTests("testLast");
 		Iterator<?> iterator = testNames.iterator();
-		while (iterator.hasNext()) {
+		while (iterator.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			String name = (String) iterator.next();
 			suite.addTest(new JDITestCase(this, name));
 		}
@@ -137,13 +137,13 @@ public class ObjectReferenceTest extends AbstractJDITest {
 	 * Test JDI getValue(Field), getValues(List) and setValue(Field,Value)
 	 * and JDWP 'Object - Get Fields Values' and 'Object - Set Fields Values'.
 	 */
-	public void testJDIGetSetValues() {
+	public void testJDIGetSetValues() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		// setup
 		ReferenceType type = fObject.referenceType();
 		List<?> fields = type.fields();
 		ListIterator<?> iterator = fields.listIterator();
 		List<Field> instanceFields = new LinkedList<>();
-		while (iterator.hasNext()) {
+		while (iterator.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			Field field = (Field) iterator.next();
 			if (!field.isStatic()) {
 				instanceFields.add(field);
@@ -197,7 +197,7 @@ public class ObjectReferenceTest extends AbstractJDITest {
 	/**
 	 * Test JDI invokeMethod.
 	 */
-	public void testJDIInvokeMethod() {
+	public void testJDIInvokeMethod() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		// Make sure the entire VM is not suspended before we start a new thread
 		// (otherwise this new thread will start suspended and we will never get the
 		// ThreadStart event)
@@ -214,7 +214,7 @@ public class ObjectReferenceTest extends AbstractJDITest {
 		ClassType ct = (ClassType) fObject.referenceType();
 		Method inv =
 			ct.concreteMethodByName("invoke3", "(Ljava/lang/String;Ljava/lang/Object;)I");
-		List<StringReference> args = new ArrayList<>();
+		List<StringReference> args = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 		args.add(fVM.mirrorOf("888"));
 		args.add(null);
 		Exception oops = null;
@@ -237,7 +237,7 @@ public class ObjectReferenceTest extends AbstractJDITest {
 	/**
 	 * Test JDI invokeMethod - failure.
 	 */
-	public void testJDIInvokeMethodFail() {
+	public void testJDIInvokeMethodFail() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		// Make sure the entire VM is not suspended before we start a new thread
 		// (otherwise this new thread will start suspended and we will never get the
 		// ThreadStart event)
@@ -255,7 +255,7 @@ public class ObjectReferenceTest extends AbstractJDITest {
 		Method inv = ct.concreteMethodByName("invoke4", "()J");
 		Exception good = null, oops = null;
 		try {
-			fObject.invokeMethod(thread, inv, new ArrayList<>(), 0);
+			fObject.invokeMethod(thread, inv, new ArrayList<>(), 0); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 		} catch (ClassNotLoadedException exc) {
 			oops = exc;
 		} catch (IncompatibleThreadStateException exc) {

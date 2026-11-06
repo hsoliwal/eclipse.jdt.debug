@@ -40,7 +40,7 @@ public class StandardClasspathProvider implements IRuntimeClasspathProvider {
 	/* (non-Javadoc)
 	 * @see org.eclipse.jdt.launching.IRuntimeClasspathProvider#computeUnresolvedClasspath(org.eclipse.debug.core.ILaunchConfiguration)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public IRuntimeClasspathEntry[] computeUnresolvedClasspath(ILaunchConfiguration configuration) throws CoreException {
 		boolean useDefault = configuration.getAttribute(IJavaLaunchConfigurationConstants.ATTR_DEFAULT_CLASSPATH, true);
 		boolean isModular = JavaRuntime.isModularConfiguration(configuration);
@@ -65,7 +65,7 @@ public class StandardClasspathProvider implements IRuntimeClasspathProvider {
 			IRuntimeClasspathEntry projEntry = isModular ? JavaRuntime.computeModularJREEntry(proj) : JavaRuntime.computeJREEntry(proj);
 			if (jreEntry != null && projEntry != null) {
 				if (!jreEntry.equals(projEntry)) {
-					for (int i = 0; i < entries.length; i++) {
+					for (int i = 0; i < entries.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 						IRuntimeClasspathEntry entry = entries[i];
 						if (entry.equals(projEntry)) {
 							entries[i] = jreEntry;
@@ -90,12 +90,12 @@ public class StandardClasspathProvider implements IRuntimeClasspathProvider {
 	/* (non-Javadoc)
 	 * @see org.eclipse.jdt.launching.IRuntimeClasspathProvider#resolveClasspath(org.eclipse.jdt.launching.IRuntimeClasspathEntry[], org.eclipse.debug.core.ILaunchConfiguration)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public IRuntimeClasspathEntry[] resolveClasspath(IRuntimeClasspathEntry[] entries, ILaunchConfiguration configuration) throws CoreException {
 		// use an ordered set to avoid duplicates
 		int javaRuntimeVersion = JavaProject.NO_RELEASE;
 		Set<IRuntimeClasspathEntry> all = new LinkedHashSet<>(entries.length);
-		for (int i = 0; i < entries.length; i++) {
+		for (int i = 0; i < entries.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			IRuntimeClasspathEntry entry = entries[i];
 			if (entry.getType() == IRuntimeClasspathEntry.CONTAINER) {
 				IPath path = entry.getPath();
@@ -103,7 +103,7 @@ public class StandardClasspathProvider implements IRuntimeClasspathProvider {
 					IVMInstall vm = JREContainerInitializer.resolveVM(path);
 					if (vm instanceof IVMInstall2 vmi2) {
 						try {
-							String javaVersion = vmi2.getJavaVersion().split("\\.")[0]; //$NON-NLS-1$
+							String javaVersion = vmi2.getJavaVersion().split("\\.")[0]; //$NON-NLS-1$ //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
 							javaRuntimeVersion = Integer.parseInt(javaVersion);
 						} catch (RuntimeException rte) {
 							// can't be used then!
@@ -112,9 +112,9 @@ public class StandardClasspathProvider implements IRuntimeClasspathProvider {
 				}
 			}
 		}
-		for (int i = 0; i < entries.length; i++) {
+		for (int i = 0; i < entries.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			IRuntimeClasspathEntry[] resolved = JavaRuntime.resolveRuntimeClasspathEntry(entries[i], configuration, javaRuntimeVersion);
-			for (int j = 0; j < resolved.length; j++) {
+			for (int j = 0; j < resolved.length; j++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				all.add(resolved[j]);
 			}
 		}
@@ -137,7 +137,7 @@ public class StandardClasspathProvider implements IRuntimeClasspathProvider {
 		IRuntimeClasspathEntry[] rtes = new IRuntimeClasspathEntry[entries.size()];
 		Iterator<String> iter = entries.iterator();
 		int i = 0;
-		while (iter.hasNext()) {
+		while (iter.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			rtes[i] = JavaRuntime.newRuntimeClasspathEntry(iter.next());
 			i++;
 		}

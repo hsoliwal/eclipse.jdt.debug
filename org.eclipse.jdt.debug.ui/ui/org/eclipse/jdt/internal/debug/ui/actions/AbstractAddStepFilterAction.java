@@ -38,7 +38,7 @@ public abstract class AbstractAddStepFilterAction extends ObjectActionDelegate {
 	/**
 	 * @see org.eclipse.ui.IActionDelegate#run(org.eclipse.jface.action.IAction)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public void run(IAction action) {
 
 		// Make sure there is a current selection
@@ -49,7 +49,7 @@ public abstract class AbstractAddStepFilterAction extends ObjectActionDelegate {
 
 		// For each selected stack frame, add a corresponding active step filter
 		Iterator<IJavaStackFrame> itr = selection.iterator();
-		while (itr.hasNext()) {
+		while (itr.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			IJavaStackFrame frame = itr.next();
 			String pattern = generateStepFilterPattern(frame);
 			if (pattern != null) {
@@ -61,14 +61,14 @@ public abstract class AbstractAddStepFilterAction extends ObjectActionDelegate {
 	/**
 	 * Make the specified pattern an active step filter.
 	 */
-	private void addActiveStepFilter(String pattern) {
+	private void addActiveStepFilter(String pattern) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 
 		// Get the active & inactive filter preferences and convert them to Lists
 		IPreferenceStore prefStore = getPreferenceStore();
 		String[] activeArray = JavaDebugOptionsManager.parseList(prefStore.getString(IJDIPreferencesConstants.PREF_ACTIVE_FILTERS_LIST));
 		String[] inactiveArray = JavaDebugOptionsManager.parseList(prefStore.getString(IJDIPreferencesConstants.PREF_INACTIVE_FILTERS_LIST));
-		List<String> activeList = new ArrayList<>(Arrays.asList(activeArray));
-		List<String> inactiveList = new ArrayList<>(Arrays.asList(inactiveArray));
+		List<String> activeList = new ArrayList<>(Arrays.asList(activeArray)); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
+		List<String> inactiveList = new ArrayList<>(Arrays.asList(inactiveArray)); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 
 		// If the pattern is already in the active list, there's nothing to do
 		// (it can't/shouldn't be in the inactive list)

@@ -64,7 +64,7 @@ public class InterfaceTypeTest extends AbstractJDITest {
 	public void testJDIAllMethods() {
 		boolean found = false;
 		Iterator<?> it = fType.allMethods().iterator();
-		while (it.hasNext()) {
+		while (it.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			Method mth = (Method) it.next();
 			if (mth.name().equals("print")) {
 				found = true;

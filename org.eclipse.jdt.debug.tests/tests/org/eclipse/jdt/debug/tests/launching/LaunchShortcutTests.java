@@ -146,10 +146,10 @@ public class LaunchShortcutTests extends AbstractDebugTest {
 	 * @since 3.3
 	 */
 	public List<LaunchShortcutExtension> getApplicableLaunchShortcuts(String typeid) {
-		List<LaunchShortcutExtension> list = new ArrayList<>();
+		List<LaunchShortcutExtension> list = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 		LaunchShortcutExtension ext = null;
 		List<LaunchShortcutExtension> shortcuts = getLaunchConfigurationManager().getLaunchShortcuts();
-		for(int i = 0; i < shortcuts.size(); i++) {
+		for(int i = 0; i < shortcuts.size(); i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			ext = shortcuts.get(i);
 			if(ext.getAssociatedConfigurationTypes().contains(typeid) && !WorkbenchActivityHelper.filterItem(ext)) {
 				list.add(ext);

@@ -131,7 +131,7 @@ public class JavaDebugUtils {
 	 * @exception CoreException
 	 *                if unable to retrieve the source name
 	 */
-	public static String getSourceName(Object object) throws CoreException {
+	public static String getSourceName(Object object) throws CoreException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		if (object instanceof String) {
 			// assume it's a file name
 			return (String) object;
@@ -197,7 +197,7 @@ public class JavaDebugUtils {
 	 *            with <code>$</code> character
 	 * @return a source file path corresponding to the type name
 	 */
-	public static String generateSourceName(String qualifiedTypeName) {
+	public static String generateSourceName(String qualifiedTypeName) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		int index = qualifiedTypeName.lastIndexOf('.');
 		if (index < 0) {
 			index = 0;
@@ -211,7 +211,7 @@ public class JavaDebugUtils {
 			// likely a proxy class (see bug 40815)
 			qualifiedTypeName = null;
 		} else {
-			qualifiedTypeName = qualifiedTypeName + ".java"; //$NON-NLS-1$
+			qualifiedTypeName = qualifiedTypeName + ".java"; //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		}
 		return qualifiedTypeName;
 	}
@@ -226,7 +226,7 @@ public class JavaDebugUtils {
 	 *            java element containing the type
 	 * @return type
 	 */
-	private static IType resolveType(final String qualifiedName,
+	private static IType resolveType(final String qualifiedName, //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 			IJavaElement javaElement) {
 		IType type = null;
 		String[] typeNames = getNestedTypeNames(qualifiedName);
@@ -238,7 +238,7 @@ public class JavaDebugUtils {
 			type = (IType) javaElement;
 		}
 		if (type != null) {
-			for (int i = 1; i < typeNames.length; i++) {
+			for (int i = 1; i < typeNames.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				String innerTypeName = typeNames[i];
 
 				class ResultException extends RuntimeException {
@@ -330,7 +330,7 @@ public class JavaDebugUtils {
 	 * @return corresponding {@link IJavaElement} or <code>null</code>
 	 * @since 3.4.0
 	 */
-	public static IJavaElement getJavaElement(Object sourceElement) {
+	public static IJavaElement getJavaElement(Object sourceElement) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IJavaElement javaElement = null;
 		if (sourceElement instanceof IJavaElement) {
 			javaElement = (IJavaElement) sourceElement;
@@ -378,7 +378,7 @@ public class JavaDebugUtils {
 	 * @throws CoreException
 	 *             if an exception occurs
 	 */
-	public static Object resolveSourceElement(Object object, String stratum, ILaunch launch) throws CoreException {
+	public static Object resolveSourceElement(Object object, String stratum, ILaunch launch) throws CoreException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		ISourceLocator sourceLocator = launch.getSourceLocator();
 		if (stratum != null && object instanceof IDebugElement) {
 			IDebugTarget debugTarget = ((IDebugElement) object).getDebugTarget();
@@ -411,7 +411,7 @@ public class JavaDebugUtils {
 	 * @return the {@link IJavaProject} or <code>null</code>
 	 * @since 3.8.0
 	 */
-	public static IJavaProject resolveJavaProject(IJavaStackFrame frame) {
+	public static IJavaProject resolveJavaProject(IJavaStackFrame frame) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		ILaunch launch = frame.getLaunch();
 		if(launch != null) {
 			try {
@@ -443,7 +443,7 @@ public class JavaDebugUtils {
 					String typeName = declaringType.getName();
 					IJavaModel model = JavaCore.create(ResourcesPlugin.getWorkspace().getRoot());
 
-					for (IJavaProject jp : model.getJavaProjects()) {
+					for (IJavaProject jp : model.getJavaProjects()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 						try {
 							if (jp.findType(typeName) != null) {
 								return jp;
@@ -476,8 +476,8 @@ public class JavaDebugUtils {
 			typeName = typeName.substring(index + 1);
 		}
 		index = typeName.indexOf('$');
-		List<String> list = new ArrayList<>(1);
-		while (index >= 0) {
+		List<String> list = new ArrayList<>(1); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
+		while (index >= 0) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			list.add(typeName.substring(0, index));
 			typeName = typeName.substring(index + 1);
 			index = typeName.indexOf('$');
@@ -507,8 +507,8 @@ public class JavaDebugUtils {
 		}
 		path = path.replace('.', IPath.SEPARATOR);
 		path += "."; //$NON-NLS-1$
-		for (String ext : javaLikeExtensions) {
-			IJavaElement element = project.findElement(new Path(path + ext));
+		for (String ext : javaLikeExtensions) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
+			IJavaElement element = project.findElement(new Path(path + ext)); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 			if (element != null) {
 				return element;
 			}

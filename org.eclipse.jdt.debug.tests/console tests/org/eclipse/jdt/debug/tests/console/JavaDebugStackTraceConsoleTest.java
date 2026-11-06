@@ -44,7 +44,7 @@ public class JavaDebugStackTraceConsoleTest extends AbstractJavaStackTraceConsol
 		super(name);
 	}
 
-	public void testLinkNavigation() throws Exception {
+	public void testLinkNavigation() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String projectName = JavaDebugStackTraceConsoleTest.class.getSimpleName();
 		IJavaProject project = createProject(projectName, "testfiles/source/", JavaProjectHelper.JAVA_SE_1_8_EE_NAME, true);
 		waitForBuild();
@@ -53,12 +53,12 @@ public class JavaDebugStackTraceConsoleTest extends AbstractJavaStackTraceConsol
 		consoleDocumentWithText("SomeClass.someMethod() line: 26");
 
 		IHyperlink[] hyperlinks = fConsole.getHyperlinks();
-		assertEquals("Wrong hyperlinks, listing all links: " + allLinks(),
+		assertEquals("Wrong hyperlinks, listing all links: " + allLinks(), //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 				2, hyperlinks.length);
 
 		String expectedText = "\t\tsomeField = new Vector();";
 		try {
-			for (IHyperlink hyperlink : hyperlinks) {
+			for (IHyperlink hyperlink : hyperlinks) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				closeAllEditors();
 				hyperlink.linkActivated();
 				IEditorPart editor = waitForEditorOpen();
@@ -89,7 +89,7 @@ public class JavaDebugStackTraceConsoleTest extends AbstractJavaStackTraceConsol
 		consoleDocumentWithText("SomeClass.someMethod() line: 11");
 
 		String[] matchTexts = linkTextsAtPositions(0, 24);
-		assertArrayEquals("Wrong hyperlinks, listing all links: " + allLinks(),
+		assertArrayEquals("Wrong hyperlinks, listing all links: " + allLinks(), //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 				new String[] { "SomeClass", "line: 11" }, matchTexts);
 	}
 
@@ -97,7 +97,7 @@ public class JavaDebugStackTraceConsoleTest extends AbstractJavaStackTraceConsol
 		consoleDocumentWithText("\t \t SomeClass.someMethod() line: 11  \t\t ");
 
 		String[] matchTexts = linkTextsAtPositions(4, 28);
-		assertArrayEquals("Wrong hyperlinks, listing all links: " + allLinks(),
+		assertArrayEquals("Wrong hyperlinks, listing all links: " + allLinks(), //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 				new String[] { "SomeClass", "line: 11" }, matchTexts);
 	}
 
@@ -105,14 +105,14 @@ public class JavaDebugStackTraceConsoleTest extends AbstractJavaStackTraceConsol
 		consoleDocumentWithText("SomeClass$5.someMethod() line: 1155");
 
 		String[] matchTexts = linkTextsAtPositions(0, 26);
-		assertArrayEquals("Wrong hyperlinks, listing all links: " + allLinks(),
+		assertArrayEquals("Wrong hyperlinks, listing all links: " + allLinks(), //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 				new String[] { "SomeClass", "line: 1155" }, matchTexts);
 
 
 		consoleDocumentWithText("SomeClass2$Inner1$Inner2.someMethod() line: 1256");
 
 		matchTexts = linkTextsAtPositions(0, 39);
-		assertArrayEquals("Wrong hyperlinks, listing all links: " + allLinks(),
+		assertArrayEquals("Wrong hyperlinks, listing all links: " + allLinks(), //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 				new String[] { "SomeClass2", "line: 1256" }, matchTexts);
 	}
 
@@ -120,7 +120,7 @@ public class JavaDebugStackTraceConsoleTest extends AbstractJavaStackTraceConsol
 		consoleDocumentWithText("Subtype(Type).someMethod() line: 999");
 
 		String[] matchTexts = linkTextsAtPositions(9, 28);
-		assertArrayEquals("Wrong hyperlinks, listing all links: " + allLinks(),
+		assertArrayEquals("Wrong hyperlinks, listing all links: " + allLinks(), //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 				new String[] { "Type", "line: 999" }, matchTexts);
 	}
 
@@ -128,7 +128,7 @@ public class JavaDebugStackTraceConsoleTest extends AbstractJavaStackTraceConsol
 		consoleDocumentWithText("somewhere1.somewhere2.SomeClass.someMethod() line: 123");
 
 		String[] matchTexts = linkTextsAtPositions(0, 46);
-		assertArrayEquals("Wrong hyperlinks, listing all links: " + allLinks(),
+		assertArrayEquals("Wrong hyperlinks, listing all links: " + allLinks(), //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 				new String[] { "somewhere1.somewhere2.SomeClass", "line: 123" }, matchTexts);
 	}
 
@@ -136,7 +136,7 @@ public class JavaDebugStackTraceConsoleTest extends AbstractJavaStackTraceConsol
 		consoleDocumentWithText("SomeClass<SomeType>.someMethod() line: 504");
 
 		String[] matchTexts = linkTextsAtPositions(0, 34);
-		assertArrayEquals("Wrong hyperlinks, listing all links: " + allLinks(),
+		assertArrayEquals("Wrong hyperlinks, listing all links: " + allLinks(), //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 				new String[] { "SomeClass", "line: 504" }, matchTexts);
 	}
 
@@ -144,7 +144,7 @@ public class JavaDebugStackTraceConsoleTest extends AbstractJavaStackTraceConsol
 		consoleDocumentWithText("Subtype<T>(Type<K>).someMethod() line: 704");
 
 		String[] matchTexts = linkTextsAtPositions(12, 34);
-		assertArrayEquals("Wrong hyperlinks, listing all links: " + allLinks(),
+		assertArrayEquals("Wrong hyperlinks, listing all links: " + allLinks(), //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 				new String[] { "Type", "line: 704" }, matchTexts);
 	}
 
@@ -152,68 +152,68 @@ public class JavaDebugStackTraceConsoleTest extends AbstractJavaStackTraceConsol
 		consoleDocumentWithText("ReferencePipeline$Head<E_IN,E_OUT>.forEach(Consumer<? super E_OUT>) line: 658");
 
 		String[] matchTexts = linkTextsAtPositions(0, 69);
-		assertArrayEquals("Wrong hyperlinks, listing all links: " + allLinks(), new String[] { "ReferencePipeline", "line: 658" }, matchTexts);
+		assertArrayEquals("Wrong hyperlinks, listing all links: " + allLinks(), new String[] { "ReferencePipeline", "line: 658" }, matchTexts); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 	}
 
-	public void testMethodParameters() throws Exception {
+	public void testMethodParameters() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		consoleDocumentWithText("Some3Class.someMethod(SomeType[]) line: 301");
 
 		String[] matchTexts = linkTextsAtPositions(0, 36);
-		assertArrayEquals("Wrong hyperlinks, listing all links: " + allLinks(),
+		assertArrayEquals("Wrong hyperlinks, listing all links: " + allLinks(), //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 				new String[] { "Some3Class", "line: 301" }, matchTexts);
 
 
 		consoleDocumentWithText("SomeClass55.someMethod(Type1, SomeType2...) line: 111");
 
 		matchTexts = linkTextsAtPositions(0, 45);
-		assertArrayEquals("Wrong hyperlinks, listing all links: " + allLinks(),
+		assertArrayEquals("Wrong hyperlinks, listing all links: " + allLinks(), //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 				new String[] { "SomeClass55", "line: 111" }, matchTexts);
 
 
 		consoleDocumentWithText("Some1Class101.someMethod(Type1<Type10>, SomeType2) line: 1");
 
 		matchTexts = linkTextsAtPositions(0, 52);
-		assertArrayEquals("Wrong hyperlinks, listing all links: " + allLinks(),
+		assertArrayEquals("Wrong hyperlinks, listing all links: " + allLinks(), //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 				new String[] { "Some1Class101", "line: 1" }, matchTexts);
 
 
 		consoleDocumentWithText("Some1101Class101.someMethod(Type1<?>, SomeType2<?>) line: 12");
 
 		matchTexts = linkTextsAtPositions(0, 53);
-		assertArrayEquals("Wrong hyperlinks, listing all links: " + allLinks(),
+		assertArrayEquals("Wrong hyperlinks, listing all links: " + allLinks(), //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 				new String[] { "Some1101Class101", "line: 12" }, matchTexts);
 	}
 
-	public void testMixedCases() throws Exception {
+	public void testMixedCases() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		consoleDocumentWithText("org.somewhere.Some3Class.someMethod(org.eclipse.SomeType<?>) line: 3011\t");
 
 		String[] matchTexts = linkTextsAtPositions(0, 62);
-		assertArrayEquals("Wrong hyperlinks, listing all links: " + allLinks(),
+		assertArrayEquals("Wrong hyperlinks, listing all links: " + allLinks(), //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 				new String[] { "org.somewhere.Some3Class", "line: 3011" }, matchTexts);
 
 
 		consoleDocumentWithText("  org.SomeClass55(org.eclipse.SuperClass).myMethod(org.Type1<com.SomeType3>, com.SomeType2...) line: 10 ");
 
 		matchTexts = linkTextsAtPositions(19, 96);
-		assertArrayEquals("Wrong hyperlinks, listing all links: " + allLinks(),
+		assertArrayEquals("Wrong hyperlinks, listing all links: " + allLinks(), //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 				new String[] { "org.eclipse.SuperClass", "line: 10" }, matchTexts);
 
 
 		consoleDocumentWithText("\torg.MyType(somewhere1.somewhere2.Some1Class101$org.Type<com.AnotherType>).toString(java.lang.String[], int) line: 2 ");
 
 		matchTexts = linkTextsAtPositions(13, 110);
-		assertArrayEquals("Wrong hyperlinks, listing all links: " + allLinks(),
+		assertArrayEquals("Wrong hyperlinks, listing all links: " + allLinks(), //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 				new String[] { "somewhere1.somewhere2.Some1Class101", "line: 2" }, matchTexts);
 
 
 		consoleDocumentWithText(" org.MyType2(somewhere1.somewhere2.Some1Class105<my.Type>$org.Type<com.AnotherType>$com.InnerType).toString(java.lang.List<org.SomeClass>, byte, long,double) line: 5   ");
 
 		matchTexts = linkTextsAtPositions(14, 159);
-		assertArrayEquals("Wrong hyperlinks, listing all links: " + allLinks(),
+		assertArrayEquals("Wrong hyperlinks, listing all links: " + allLinks(), //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 				new String[] { "somewhere1.somewhere2.Some1Class105", "line: 5" }, matchTexts);
 	}
 
-	public void testStackTraceDetectionWithColors() throws Exception {
+	public void testStackTraceDetectionWithColors() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String exception = ""
 				+ "Caused by\033[m: java.lang.NullPointerException: \033[1;31mCannot invoke \"org.eclipse.equinox.internal.provisional.p2.core.eventbus.IProvisioningEventBus.addListener(org.eclipse.equinox.internal.provisional.p2.core.eventbus.ProvisioningListener)\" because \"this.eventBus\" is null\033[m\n"
 				+ "    \033[1mat\033[m org.eclipse.equinox.internal.p2.repository.helpers.AbstractRepositoryManager.<init> (\033[1mAbstractRepositoryManager.java:107\033[m)\n"
@@ -228,14 +228,14 @@ public class JavaDebugStackTraceConsoleTest extends AbstractJavaStackTraceConsol
 
 		Position[] positions = allLinkPositions();
 		int[] offsets = new int[positions.length];
-		for (int i = 0; i < offsets.length; i++) {
+		for (int i = 0; i < offsets.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			offsets[i] = positions[i].getOffset();
 		}
 
 		String[] matchTexts = linkTextsAtPositions(offsets);
 		String[] expected = { "java.lang.NullPointerException", "AbstractRepositoryManager.java:107", "ArtifactRepositoryManager.java:41",
 				"Method.java:568", "Launcher.java:282", "Launcher.java:225", "Launcher.java:406", "Launcher.java:347" };
-		assertArrayEquals("Wrong hyperlinks, listing all links: " + allLinks(), expected, matchTexts);
+		assertArrayEquals("Wrong hyperlinks, listing all links: " + allLinks(), expected, matchTexts); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 	}
 
 	private static String getSelectedText(IEditorPart editor) {
@@ -252,7 +252,7 @@ public class JavaDebugStackTraceConsoleTest extends AbstractJavaStackTraceConsol
 		AtomicReference<IEditorPart> editor = new AtomicReference<>();
 		sync(() -> editor.set(getActivePage().getActiveEditor()));
 		long timeoutNanos = System.nanoTime() + 30_000 * 1_000_000L;
-		while (editor.get() == null && System.nanoTime() < timeoutNanos) {
+		while (editor.get() == null && System.nanoTime() < timeoutNanos) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			waitForJobs();
 			sync(() -> editor.set(getActivePage().getActiveEditor()));
 		}

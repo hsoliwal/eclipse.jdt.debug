@@ -68,7 +68,7 @@ public class JavaSnippetEditorTest extends AbstractDebugUiTests {
 	/**
 	 * Tests if we can open scrapbook editor and evaluate 2+2 expression
 	 */
-	public void testEvaluation() throws Exception {
+	public void testEvaluation() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		JavaSnippetEditor snippetEditor = (JavaSnippetEditor) openEditor(scrapbook);
 		processUiEvents();
 		IDocumentProvider documentProvider = snippetEditor.getDocumentProvider();
@@ -92,12 +92,12 @@ public class JavaSnippetEditorTest extends AbstractDebugUiTests {
 
 		// Evaluation runs in a separated thread (not a job), so let wait for it
 		long timeoutNanos = System.nanoTime() + 60_000 * 1_000_000L;
-		while (snippetEditor.isEvaluating() && System.nanoTime() < timeoutNanos) {
+		while (snippetEditor.isEvaluating() && System.nanoTime() < timeoutNanos) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			processUiEvents(1000);
 		}
 
 		String newText = document.get();
-		assertEquals("Editor should show evaluation result", EXPRESSION + "(int) 4", newText);
+		assertEquals("Editor should show evaluation result", EXPRESSION + "(int) 4", newText); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 	}
 
 }

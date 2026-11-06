@@ -43,7 +43,7 @@ public class LambdaExpressionEvalTest extends AbstractDebugTest {
 		assertEquals("value is not 1", "1", value.getValueString());
 	}
 
-	public void testBug573589_EvalLambdaExpressionInBinaryType_WithStaticImportInImports_ExpectSuccessfulEval() throws Exception {
+	public void testBug573589_EvalLambdaExpressionInBinaryType_WithStaticImportInImports_ExpectSuccessfulEval() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IPath container = new Path(JavaTestPlugin.getDefault().getFileInPlugin(new Path("./testresources/bug573589/classes")).getAbsolutePath());
 		JavaProjectHelper.addLibrary(getProjectContext(), container);
 		waitForBuild();
@@ -63,7 +63,7 @@ public class LambdaExpressionEvalTest extends AbstractDebugTest {
 		}
 	}
 
-	public void testBug573589_EvalLambdaExpressionInBinaryTypeAttachedSource_WithStaticImportInImports_ExpectSuccessfulEval() throws Exception {
+	public void testBug573589_EvalLambdaExpressionInBinaryTypeAttachedSource_WithStaticImportInImports_ExpectSuccessfulEval() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IPath container = new Path(JavaTestPlugin.getDefault().getFileInPlugin(new Path("./testresources/bug573589/classes")).getAbsolutePath());
 		IPath src = new Path(JavaTestPlugin.getDefault().getFileInPlugin(new Path("./testresources/bug573589/src")).getAbsolutePath());
 		JavaProjectHelper.addLibrary(getProjectContext(), container, src, container);

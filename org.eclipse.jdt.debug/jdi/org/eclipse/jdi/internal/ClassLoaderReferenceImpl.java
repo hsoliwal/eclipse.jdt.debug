@@ -56,13 +56,13 @@ public class ClassLoaderReferenceImpl extends ObjectReferenceImpl implements Cla
 	 * @return Returns a list of all loaded classes that were defined by this
 	 *          class loader.
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public List<ReferenceType> definedClasses() {
 		// Note that this information should not be cached.
 		List<ReferenceType> visibleClasses = visibleClasses();
-		List<ReferenceType> result = new ArrayList<>(visibleClasses.size());
+		List<ReferenceType> result = new ArrayList<>(visibleClasses.size()); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 		Iterator<ReferenceType> iter = visibleClasses.iterator();
-		while (iter.hasNext()) {
+		while (iter.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			try {
 				ReferenceType type = iter.next();
 				// Note that classLoader() is null for the bootstrap
@@ -79,7 +79,7 @@ public class ClassLoaderReferenceImpl extends ObjectReferenceImpl implements Cla
 	/* (non-Javadoc)
 	 * @see com.sun.jdi.ClassLoaderReference#visibleClasses()
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public List<ReferenceType> visibleClasses() {
 		// Note that this information should not be cached.
 		initJdwpRequest();
@@ -89,8 +89,8 @@ public class ClassLoaderReferenceImpl extends ObjectReferenceImpl implements Cla
 			defaultReplyErrorHandler(replyPacket.errorCode());
 			DataInputStream replyData = replyPacket.dataInStream();
 			int nrOfElements = readInt("elements", replyData); //$NON-NLS-1$
-			List<ReferenceType> elements = new ArrayList<>(nrOfElements);
-			for (int i = 0; i < nrOfElements; i++) {
+			List<ReferenceType> elements = new ArrayList<>(nrOfElements); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
+			for (int i = 0; i < nrOfElements; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				ReferenceTypeImpl elt = ReferenceTypeImpl.readWithTypeTag(this, replyData);
 				if (elt == null)
 					continue;

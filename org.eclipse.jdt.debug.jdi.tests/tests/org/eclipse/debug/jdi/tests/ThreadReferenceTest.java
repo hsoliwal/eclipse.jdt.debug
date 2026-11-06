@@ -161,7 +161,7 @@ public class ThreadReferenceTest extends AbstractJDITest {
 	/**
 	 * Test JDI stop(ObjectReference).
 	 */
-	public void testJDIStop() {
+	public void testJDIStop() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		// Make sure the entire VM is not suspended before we start a new thread
 		// (otherwise this new thread will start suspended and we will never get the
 		// ThreadStart event)
@@ -235,7 +235,7 @@ public class ThreadReferenceTest extends AbstractJDITest {
 	/**
 	 * Test JDI addPlatformThreadsOnlyFilter() is skipped in old JDK version ({@code <=18}).
 	 */
-	public void testJDIPlatformThreadsOnlyFilter() {
+	public void testJDIPlatformThreadsOnlyFilter() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		// Make sure the entire VM is not suspended before we start a new thread
 		// (otherwise this new thread will start suspended and we will never get the
 		// ThreadStart event)

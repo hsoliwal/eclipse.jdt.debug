@@ -27,7 +27,7 @@ import org.eclipse.jface.util.PropertyChangeEvent;
  * preference storage.
  *
  */
-public final class StackFramePresentationProvider implements IPropertyChangeListener {
+public final class StackFramePresentationProvider implements IPropertyChangeListener { //FLLDCIM: MARK — T06  IMPLEMENTS
 
 	private static final Set<String> JAR_ICON = Set.of(StackFrameCategorizer.CATEGORY_LIBRARY.name(), StackFrameCategorizer.CATEGORY_SYNTHETIC.name(), StackFrameCategorizer.CATEGORY_PLATFORM.name());
 	private final IPreferenceStore store;

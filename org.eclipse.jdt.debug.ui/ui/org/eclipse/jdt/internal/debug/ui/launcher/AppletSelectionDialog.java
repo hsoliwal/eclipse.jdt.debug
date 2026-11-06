@@ -96,7 +96,7 @@ public class AppletSelectionDialog extends TwoPaneElementSelector {
 	 * If the search is canceled, return <code>null</code>.
 	 * @return the array of {@link IType}s
 	 */
-	private IType[] getAppletTypes() {
+	private IType[] getAppletTypes() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		// Populate an array of java projects with either the project specified in
 		// the constructor, or ALL projects in the workspace if no project was specified
 		final IJavaProject[] javaProjects;
@@ -113,12 +113,12 @@ public class AppletSelectionDialog extends TwoPaneElementSelector {
 		// For each java project, calculate the Applet types it contains and add
 		// them to the results
 		final int projectCount = javaProjects.length;
-		final Set<IType> results = new HashSet<>(projectCount);
+		final Set<IType> results = new HashSet<>(projectCount); //FLLDCIM: MARK — M03 M3_SET_LANES NEW
 		boolean canceled = false;
 		try {
-			fRunnableContext.run(true, true, monitor -> {
+			fRunnableContext.run(true, true, monitor -> { //FLLDCIM: MARK — T09  LAMBDA
 				SubMonitor subMon = SubMonitor.convert(monitor, LauncherMessages.AppletSelectionDialog_Searching____1, projectCount);
-				for (IJavaProject javaProject : javaProjects) {
+				for (IJavaProject javaProject : javaProjects) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 					results.addAll(AppletLaunchConfigurationUtils.collectAppletTypesInProject(subMon.split(1), javaProject));
 				}
 				subMon.done();

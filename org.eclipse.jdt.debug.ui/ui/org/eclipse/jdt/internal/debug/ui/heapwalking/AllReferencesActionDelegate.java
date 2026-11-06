@@ -42,7 +42,7 @@ import org.eclipse.swt.widgets.TreeItem;
  */
 public class AllReferencesActionDelegate extends BaseInstanceActionDelegate {
 
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public void run(IAction action) {
 		IStructuredSelection currentSelection = getCurrentSelection();
 		if (currentSelection != null && (currentSelection.getFirstElement() instanceof IJavaVariable)){
@@ -54,7 +54,7 @@ public class AllReferencesActionDelegate extends BaseInstanceActionDelegate {
 						PopupInspectAction.ACTION_DEFININITION_ID,
 						new JavaInspectExpression(NLS.bind(Messages.AllReferencesActionDelegate_1, var.getName()), referenceList));
 				ipd.open();
-				ipd.getTreeViewer().addDoubleClickListener(doubleClick -> handleDoubleClick(action, doubleClick));
+				ipd.getTreeViewer().addDoubleClickListener(doubleClick -> handleDoubleClick(action, doubleClick)); //FLLDCIM: MARK — T05 VIEWER_OPEN CALL
 
 			} catch (DebugException e) {
 				JDIDebugUIPlugin.statusDialog(e.getStatus());

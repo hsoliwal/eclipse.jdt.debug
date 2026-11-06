@@ -26,7 +26,7 @@ public class ClasspathModel extends AbstractClasspathEntry {
 	private ClasspathGroup bootstrapEntries;
 	private ClasspathGroup userEntries;
 
-	public Object addEntry(Object entry) {
+	public Object addEntry(Object entry) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		if (entry instanceof ClasspathGroup) {
 			if (!childEntries.contains(entry)) {
 				childEntries.add((ClasspathGroup) entry);
@@ -36,7 +36,7 @@ public class ClasspathModel extends AbstractClasspathEntry {
 		}
 		ClasspathEntry newEntry= createEntry((IRuntimeClasspathEntry)entry, null);
 		Iterator<IClasspathEntry> entries= childEntries.iterator();
-		while (entries.hasNext()) {
+		while (entries.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			Object element = entries.next();
 			if (element instanceof ClasspathGroup) {
 				if(((ClasspathGroup)element).contains(newEntry)) {
@@ -50,7 +50,7 @@ public class ClasspathModel extends AbstractClasspathEntry {
 		return newEntry;
 	}
 
-	public Object addEntry(int entryType, IRuntimeClasspathEntry entry) {
+	public Object addEntry(int entryType, IRuntimeClasspathEntry entry) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IClasspathEntry entryParent= null;
 		switch (entryType) {
 			case BOOTSTRAP :
@@ -65,7 +65,7 @@ public class ClasspathModel extends AbstractClasspathEntry {
 
 		ClasspathEntry newEntry= createEntry(entry, entryParent);
 		Iterator<IClasspathEntry> entries= childEntries.iterator();
-		while (entries.hasNext()) {
+		while (entries.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			Object element = entries.next();
 			if (element instanceof ClasspathGroup) {
 				if(((ClasspathGroup)element).contains(newEntry)) {
@@ -145,7 +145,7 @@ public class ClasspathModel extends AbstractClasspathEntry {
 
 	public void removeAll(Object[] entries) {
 
-		for (Object object : entries) {
+		for (Object object : entries) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			if (object instanceof ClasspathEntry) {
 				IClasspathEntry entryParent= ((ClasspathEntry)object).getParent();
 				if (entryParent instanceof ClasspathGroup) {
@@ -164,7 +164,7 @@ public class ClasspathModel extends AbstractClasspathEntry {
 			getBootstrapEntry();
 		}
 		bootstrapEntries.removeAll();
-		for (IRuntimeClasspathEntry entry : entries) {
+		for (IRuntimeClasspathEntry entry : entries) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			bootstrapEntries.addEntry(new ClasspathEntry(entry, bootstrapEntries), null);
 		}
 	}
@@ -173,7 +173,7 @@ public class ClasspathModel extends AbstractClasspathEntry {
 
 		ClasspathGroup group= new ClasspathGroup(name, entryParent, canBeRemoved);
 
-		for (IRuntimeClasspathEntry entry : entries) {
+		for (IRuntimeClasspathEntry entry : entries) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			group.addEntry(new ClasspathEntry(entry, group), null);
 		}
 
@@ -188,7 +188,7 @@ public class ClasspathModel extends AbstractClasspathEntry {
 			getUserEntry();
 		}
 		userEntries.removeAll();
-		for (IRuntimeClasspathEntry entry : entries) {
+		for (IRuntimeClasspathEntry entry : entries) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			userEntries.addEntry(new ClasspathEntry(entry, userEntries), null);
 		}
 	}

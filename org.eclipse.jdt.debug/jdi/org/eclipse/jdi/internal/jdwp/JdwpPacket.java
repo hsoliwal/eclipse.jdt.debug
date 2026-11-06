@@ -119,7 +119,7 @@ public abstract class JdwpPacket {
 	/**
 	 * Constructs a JdwpPacket from a byte[].
 	 */
-	public static JdwpPacket build(byte[] bytes) throws IOException {
+	public static JdwpPacket build(byte[] bytes) throws IOException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		// length (int)
 		int a = (bytes[0] & 0xff) << 24;
 		int b = (bytes[1] & 0xff) << 16;
@@ -160,7 +160,7 @@ public abstract class JdwpPacket {
 		return packet;
 	}
 
-	public byte[] getPacketAsBytes() throws IOException {
+	public byte[] getPacketAsBytes() throws IOException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		int len = getLength();
 		byte[] bytes = new byte[len];
 
@@ -194,7 +194,7 @@ public abstract class JdwpPacket {
 	/**
 	 * Retrieves constant mappings.
 	 */
-	public static void getConstantMaps() {
+	public static void getConstantMaps() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		if (fgFlagStrings != null) {
 			return;
 		}
@@ -202,7 +202,7 @@ public abstract class JdwpPacket {
 		Field[] fields = JdwpPacket.class.getDeclaredFields();
 		fgFlagStrings = new String[8];
 
-		for (Field field : fields) {
+		for (Field field : fields) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			if ((field.getModifiers() & Modifier.PUBLIC) == 0
 					|| (field.getModifiers() & Modifier.STATIC) == 0
 					|| (field.getModifiers() & Modifier.FINAL) == 0) {
@@ -219,7 +219,7 @@ public abstract class JdwpPacket {
 			try {
 				byte value = field.getByte(null);
 
-				for (int j = 0; j < fgFlagStrings.length; j++) {
+				for (int j = 0; j < fgFlagStrings.length; j++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 					if ((1 << j & value) != 0) {
 						fgFlagStrings[j] = name;
 						break;

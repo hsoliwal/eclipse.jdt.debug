@@ -107,14 +107,14 @@ public abstract class AbstractDebugViewTests extends AbstractDebugUiTests {
 	 * @param expectedBreakpointHitsCount
 	 *            the number of times that the breakpoint is expected to be hit
 	 */
-	protected void doTestWrongSelection(int iterations, String typeName, String breakpointMethodName, int expectedBreakpointHitsCount) throws Exception {
+	protected void doTestWrongSelection(int iterations, String typeName, String breakpointMethodName, int expectedBreakpointHitsCount) throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		waitForNonConsoleJobs();
 		assertNoErrorMarkersExist();
 		setPreferenceToShowSystemThreads();
 
 		// Collect failures to have a better idea of what broke and how many times it broke
-		List<AssertionError> failedAssertions = new ArrayList<>();
-		for (int i = 0; i < iterations; ++i) {
+		List<AssertionError> failedAssertions = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
+		for (int i = 0; i < iterations; ++i) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 
 			IJavaThread thread = null;
 			try {
@@ -156,9 +156,9 @@ public abstract class AbstractDebugViewTests extends AbstractDebugUiTests {
 				// skip this test on Mac - see bug 516024
 				return;
 			}
-			throw new TestAgainException("Unexpected selection: " + Arrays.toString(selectedText));
+			throw new TestAgainException("Unexpected selection: " + Arrays.toString(selectedText)); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		}
-		assertEquals("Unexpected selection: " + Arrays.toString(selectedText), 1, selected.length);
+		assertEquals("Unexpected selection: " + Arrays.toString(selectedText), 1, selected.length); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		IJavaStackFrame selectedFrame = selectedFrame(selected);
 
 		assertEquals("\"breakpointMethod\" should be selected after reaching breakpoint", selectedFrame.getMethodName(), breakpointMethodName);
@@ -180,7 +180,7 @@ public abstract class AbstractDebugViewTests extends AbstractDebugUiTests {
 
 	protected IJavaThread launchToBreakpoint(String typeName, int expectedBreakpointHitsCount) throws Exception {
 		ILaunchConfiguration config = getLaunchConfiguration(getProjectContext(), typeName);
-		assertNotNull("Could not locate launch configuration for " + typeName, config); //$NON-NLS-1$
+		assertNotNull("Could not locate launch configuration for " + typeName, config); //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 		DebugEventWaiter waiter = new BreakpointWaiter(expectedBreakpointHitsCount);
 		waiter.setTimeout(DEFAULT_TIMEOUT);
@@ -217,7 +217,7 @@ public abstract class AbstractDebugViewTests extends AbstractDebugUiTests {
 		IJavaStackFrame selectedFrame = (IJavaStackFrame) sync(() -> {
 			Object data = selectedTreeItem.getData();
 			assertNotNull("No data for selected frame in the tree?", data);
-			assertEquals("Wrong object selected: " + data, JDIStackFrame.class, data.getClass());
+			assertEquals("Wrong object selected: " + data, JDIStackFrame.class, data.getClass()); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 			return data;
 		});
 		return selectedFrame;
@@ -233,7 +233,7 @@ public abstract class AbstractDebugViewTests extends AbstractDebugUiTests {
 		return Arrays.toString(Arrays.stream(childrenData).map(x -> Objects.toString(x)).toArray());
 	}
 
-	protected TreeItem[] getSelectedItemsFromDebugView(boolean wait) throws Exception {
+	protected TreeItem[] getSelectedItemsFromDebugView(boolean wait) throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		return sync(() -> {
 			Tree tree = (Tree) debugView.getViewer().getControl();
 			TreeItem[] selected = tree.getSelection();
@@ -243,11 +243,11 @@ public abstract class AbstractDebugViewTests extends AbstractDebugUiTests {
 			long timeoutNanos = System.nanoTime() + 10000 * 1_000_000L;
 
 			// At least on GTK3 it takes some time until we see the viewer selection propagated to the SWT tree
-			while (selected.length != 1 && System.nanoTime() < timeoutNanos) {
+			while (selected.length != 1 && System.nanoTime() < timeoutNanos) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				TreeViewer treeViewer = (TreeViewer) debugView.getViewer();
-				treeViewer.refresh(true);
+				treeViewer.refresh(true); //FLLDCIM: MARK — M21 FULL_REBUILD_TO_DELTA CALL
 				processUiEvents(500);
-				TestUtil.log(IStatus.INFO, getName(), "Waiting for selection, current size: " + selected.length);
+				TestUtil.log(IStatus.INFO, getName(), "Waiting for selection, current size: " + selected.length); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 				selected = tree.getSelection();
 			}
 			return selected;
@@ -284,7 +284,7 @@ public abstract class AbstractDebugViewTests extends AbstractDebugUiTests {
 		assertEquals("expected Debug View to be activate", debugView, sync(() -> getActivePage().getActivePart()));
 	}
 
-	protected static class BreakpointWaiter extends DebugElementKindEventDetailWaiter {
+	protected static class BreakpointWaiter extends DebugElementKindEventDetailWaiter { //FLLDCIM: MARK — T27  IMPLEMENTS
 
 		private final int expectedHitCount;
 		private int hitCount;
@@ -292,7 +292,7 @@ public abstract class AbstractDebugViewTests extends AbstractDebugUiTests {
 		public BreakpointWaiter(int expectedHitCount) {
 			super(DebugEvent.SUSPEND, IJavaThread.class, DebugEvent.BREAKPOINT);
 			this.expectedHitCount = expectedHitCount;
-			assertTrue("expected hit count should be positive, instead is: " + expectedHitCount, expectedHitCount > 0);
+			assertTrue("expected hit count should be positive, instead is: " + expectedHitCount, expectedHitCount > 0); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 			hitCount = 0;
 		}
 

@@ -88,8 +88,8 @@ public class CompareElementsDiffView extends EditorPart implements IEditorInput 
 	}
 
 	public CompareElementsDiffView() {
-		results = new ArrayList<>();
-		objectNames = new ArrayList<>();
+		results = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
+		objectNames = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 	}
 	@Override
 	public void init(IEditorSite site, IEditorInput input) throws PartInitException {
@@ -107,7 +107,7 @@ public class CompareElementsDiffView extends EditorPart implements IEditorInput 
 		return false;
 	}
 
-	@SuppressWarnings({ "nls", "unchecked" })
+	@SuppressWarnings({ "nls", "unchecked" }) //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	@Override
 	public void createPartControl(Composite parent) {
 		GridLayout topLayout = new GridLayout();
@@ -120,7 +120,7 @@ public class CompareElementsDiffView extends EditorPart implements IEditorInput 
 		Label l = new Label(parent, SWT.None);
 		fntData = new FontData("Arial", 17, SWT.BOLD);
 		fnt1 = new Font(parent.getDisplay(), fntData);
-		l.setText("\n" + DebugUIMessages.ComparisionMultiHeader);
+		l.setText("\n" + DebugUIMessages.ComparisionMultiHeader); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		l.setFont(fnt1);
 		l.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, true, false));
 		Color rowColor = null;
@@ -134,14 +134,14 @@ public class CompareElementsDiffView extends EditorPart implements IEditorInput 
 		GridData tableData = new GridData(GridData.FILL_BOTH);
 		table.setLayoutData(tableData);
 		List<String> headers = headerSelection(elementTypeName);
-		for (String header : headers) {
+		for (String header : headers) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			TableColumn column = new TableColumn(table, SWT.BOLD);
 			column.setText(header);
 			column.setWidth(200);
 			column.setResizable(true);
 			column.setAlignment(SWT.CENTER);
 		}
-		for (int i = 0; i < results.size(); i++) {
+		for (int i = 0; i < results.size(); i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			Map<String, Object> temp = results.get(i);
 			TableItem row = new TableItem(table, SWT.NONE);
 			Map<String, Object> contentsToShow = (Map<String, Object>) temp.get(objectNames.get(i));
@@ -160,7 +160,7 @@ public class CompareElementsDiffView extends EditorPart implements IEditorInput 
 				} else if (contentsToShow.containsKey("Values")) {
 					String missingValExtracted = contentsToShow.get("MultiValues").toString();
 					elements = "Missing contents from ";
-					elements = elements + missingValExtracted.substring(1, missingValExtracted.length() - 1);
+					elements = elements + missingValExtracted.substring(1, missingValExtracted.length() - 1); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 					elements = elements.replace('[', '{');
 					elements = elements.replace(']', '}');
 					elements = elements.replace("=", "-");
@@ -170,7 +170,7 @@ public class CompareElementsDiffView extends EditorPart implements IEditorInput 
 					rowColor = display.getSystemColor(SWT.COLOR_DARK_GREEN);
 				}
 				int count = i + 1;
-				String SlNo = "\t " + count;
+				String SlNo = "\t " + count; //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 				elements = replaceToSingular(elements);
 				row.setText(new String[] { SlNo, objectNames.get(i), elements, size, refType });
 				row.setBackground(rowColor);
@@ -183,7 +183,7 @@ public class CompareElementsDiffView extends EditorPart implements IEditorInput 
 					rowColor = display.getSystemColor(SWT.COLOR_DARK_RED);
 				}
 				int count = i + 1;
-				String SlNo = "\t " + count;
+				String SlNo = "\t " + count; //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 				row.setText(new String[] { SlNo, objectNames.get(i), elements, size, refType });
 				row.setBackground(rowColor);
 				row.setForeground(display.getSystemColor(SWT.COLOR_WHITE));
@@ -200,12 +200,12 @@ public class CompareElementsDiffView extends EditorPart implements IEditorInput 
 				}
 				if (contentsToShow.containsKey("MapValues")) {
 					String missingValExtracted = contentsToShow.get("MultiMapValues").toString();
-					forVal = "Missing values : " + missingValExtracted.substring(1, missingValExtracted.length() - 1);
+					forVal = "Missing values : " + missingValExtracted.substring(1, missingValExtracted.length() - 1); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 					rowColor = display.getSystemColor(SWT.COLOR_DARK_RED);
 				}
 				if (contentsToShow.containsKey("MapKeys")) {
 					String missingKeyExtracted = contentsToShow.get("MultiMapKeys").toString();
-					forKey = "Missing keys : " + missingKeyExtracted.substring(1, missingKeyExtracted.length() - 1);
+					forKey = "Missing keys : " + missingKeyExtracted.substring(1, missingKeyExtracted.length() - 1); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 					rowColor = display.getSystemColor(SWT.COLOR_DARK_RED);
 				}
 				if (forVal == null) {
@@ -215,7 +215,7 @@ public class CompareElementsDiffView extends EditorPart implements IEditorInput 
 					forKey = "Contains every key of others";
 				}
 				int count = i + 1;
-				String SlNo = "\t " + count;
+				String SlNo = "\t " + count; //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 				row.setText(new String[] { SlNo, objectNames.get(i), forKey, forVal, size, refType });
 				row.setBackground(rowColor);
 				if (forVal.contains("Contains")) {
@@ -235,10 +235,10 @@ public class CompareElementsDiffView extends EditorPart implements IEditorInput 
 				if (contentsToShow.containsKey("fields")) {
 					Map<String, String> field = (Map<String, String>) contentsToShow.get("fields");
 					int count = i + 1;
-					String SlNo = "\t " + count;
+					String SlNo = "\t " + count; //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 					con[0] = SlNo;
 					con[1] = objectNames.get(i);
-					for (int j = 2; j < con.length; j++) {
+					for (int j = 2; j < con.length; j++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 						con[j] = field.get(fieldNames.get(j));
 						if (field.get(fieldNames.get(j)).contains("Same") && !field.get(fieldNames.get(j)).contains("diffe")) {
 							cellColor = display.getSystemColor(SWT.COLOR_DARK_GREEN);
@@ -252,12 +252,12 @@ public class CompareElementsDiffView extends EditorPart implements IEditorInput 
 					row.setForeground(display.getSystemColor(SWT.COLOR_WHITE));
 				} else {
 					int count = i + 1;
-					String SlNo = "\t " + count;
+					String SlNo = "\t " + count; //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 					Set<String> same = (Set<String>) contentsToShow.get("REF_SAME");
 					Set<String> diff = (Set<String>) contentsToShow.get("REF_DIFF");
 					con[0] = SlNo;
 					con[1] = objectNames.get(i);
-					for (int j = 2; j < con.length; j++) {
+					for (int j = 2; j < con.length; j++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 						if (!same.isEmpty()) {
 							cellColor = display.getSystemColor(SWT.COLOR_DARK_GREEN);
 							con[j] = NLS.bind(DebugUIMessages.ObjectsReferenceSameAndDifferent, new Object[] { same.toString(), diff.toString() });
@@ -278,14 +278,14 @@ public class CompareElementsDiffView extends EditorPart implements IEditorInput 
 					rowColor = display.getSystemColor(SWT.COLOR_DARK_RED);
 				}
 				int count = i + 1;
-				String SlNo = "\t " + count;
+				String SlNo = "\t " + count; //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 				row.setText(new String[] { SlNo, objectNames.get(i), elements, refType });
 				row.setBackground(rowColor);
 				row.setForeground(display.getSystemColor(SWT.COLOR_WHITE));
 			}
 
 		}
-		for (TableColumn column : table.getColumns()) {
+		for (TableColumn column : table.getColumns()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			column.pack();
 		}
 		Dialog.applyDialogFont(parent);
@@ -298,7 +298,7 @@ public class CompareElementsDiffView extends EditorPart implements IEditorInput 
 	 *            Type of the objects
 	 * @return Returns a List of column values
 	 */
-	@SuppressWarnings("nls")
+	@SuppressWarnings("nls") //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	private List<String> headerSelection(String type) {
 
 		if (type.equals("Sets") || type.equals("Lists") || type.equals("Arrays") || type.equals("Queues") || type.equals("Deques")
@@ -327,7 +327,7 @@ public class CompareElementsDiffView extends EditorPart implements IEditorInput 
 	 *            message content
 	 * @return String that contains singular type name
 	 */
-	@SuppressWarnings("nls")
+	@SuppressWarnings("nls") //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	private String replaceToSingular(String content) {
 		if (content.contains("Sets")) {
 			content = content.replace("Sets", "Set");
@@ -381,7 +381,7 @@ public class CompareElementsDiffView extends EditorPart implements IEditorInput 
 	}
 
 	protected String getText() {
-		return getEditorInput().getName() + "\n"; //$NON-NLS-1$
+		return getEditorInput().getName() + "\n"; //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 	}
 
 	/**
@@ -390,7 +390,7 @@ public class CompareElementsDiffView extends EditorPart implements IEditorInput 
 	protected void closeEditor() {
 		dispose();
 		final IEditorPart editor = this;
-		DebugUIPlugin.getStandardDisplay().syncExec(() -> {
+		DebugUIPlugin.getStandardDisplay().syncExec(() -> { //FLLDCIM: MARK — T08 UI_THREAD_SYNCHRONIZER CALL
 			IWorkbenchWindow activeWorkbenchWindow = DebugUIPlugin.getActiveWorkbenchWindow();
 			if (activeWorkbenchWindow != null) {
 				IWorkbenchPage activePage = activeWorkbenchWindow.getActivePage();
@@ -419,13 +419,13 @@ public class CompareElementsDiffView extends EditorPart implements IEditorInput 
 	/**
 	 * Initialize this editor.
 	 */
-	protected void initialize() {
-		fLaunchesListener = new ILaunchesListener2() {
+	protected void initialize() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
+		fLaunchesListener = new ILaunchesListener2() { //FLLDCIM: MARK — T27  ANONYMOUS
 			@Override
 			public void launchesTerminated(ILaunch[] launches) {
 				Object artifact = getArtifact();
 				if (artifact instanceof IDebugElement element) {
-					for (ILaunch launch : launches) {
+					for (ILaunch launch : launches) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 						if (launch.equals(element.getLaunch())) {
 							closeEditor();
 							return;

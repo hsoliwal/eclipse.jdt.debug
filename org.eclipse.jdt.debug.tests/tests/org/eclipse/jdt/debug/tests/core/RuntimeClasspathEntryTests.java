@@ -46,7 +46,7 @@ public class RuntimeClasspathEntryTests extends AbstractDebugTest {
 		assertEquals("Entries should be equal", entry, restored);
 	}
 
-	public void testJRELIBVariableEntry() throws Exception {
+	public void testJRELIBVariableEntry() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IClasspathEntry cpe = JavaCore.newVariableEntry(new Path(JavaRuntime.JRELIB_VARIABLE), new Path(JavaRuntime.JRESRC_VARIABLE), new Path(JavaRuntime.JRESRCROOT_VARIABLE));
 
 		IRuntimeClasspathEntry entry = JavaRuntime.newVariableRuntimeClasspathEntry(new Path(JavaRuntime.JRELIB_VARIABLE));

@@ -36,7 +36,7 @@ public class ArrayTests extends AbstractDebugTest {
 		super(name);
 	}
 
-	public void testGetSize() throws Exception {
+	public void testGetSize() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String typeName = "ArrayTests";
 		ILineBreakpoint bp = createLineBreakpoint(22, typeName);
 
@@ -56,7 +56,7 @@ public class ArrayTests extends AbstractDebugTest {
 	}
 
 
-	public void testGetVariable() throws Exception {
+	public void testGetVariable() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String typeName = "ArrayTests";
 		ILineBreakpoint bp = createLineBreakpoint(22, typeName);
 
@@ -78,7 +78,7 @@ public class ArrayTests extends AbstractDebugTest {
 		}
 	}
 
-	public void testGetVariableRange() throws Exception {
+	public void testGetVariableRange() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String typeName = "ArrayTests";
 		ILineBreakpoint bp = createLineBreakpoint(22, typeName);
 
@@ -93,7 +93,7 @@ public class ArrayTests extends AbstractDebugTest {
 			assertNotNull(array);
 			IVariable[] variables = array.getVariables(50, 15);
 			assertNotNull(variables);
-			for (int i = 0; i < 15; i++) {
+			for (int i = 0; i < 15; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				assertEquals("Wrong value", ((IJavaDebugTarget)frame.getDebugTarget()).newValue(50 + i), variables[i].getValue());
 			}
 
@@ -103,7 +103,7 @@ public class ArrayTests extends AbstractDebugTest {
 		}
 	}
 
-	public void testSetValueRange() throws Exception {
+	public void testSetValueRange() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String typeName = "ByteArrayTests";
 		ILineBreakpoint bp = createLineBreakpoint(30, typeName);
 
@@ -118,13 +118,13 @@ public class ArrayTests extends AbstractDebugTest {
 			assertNotNull(array);
 			IJavaValue[] replacements = new IJavaValue[5000];
 			IJavaDebugTarget target = (IJavaDebugTarget) frame.getDebugTarget();
-			for (int i = 0; i < replacements.length; i++) {
+			for (int i = 0; i < replacements.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				replacements[i] = target.newValue((byte)-1);
 			}
 			array.setValues(2500, 5000, replacements, 0);
 			// verify new values
 			IJavaValue[] values = array.getValues();
-			for (int i = 0; i < values.length; i++) {
+			for (int i = 0; i < values.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				byte byteValue = ((IJavaPrimitiveValue)values[i]).getByteValue();
 				if (i < 2500) {
 					assertNotEquals((byte) -1, byteValue);
@@ -140,7 +140,7 @@ public class ArrayTests extends AbstractDebugTest {
 		}
 	}
 
-	public void testCreateArray() throws Exception {
+	public void testCreateArray() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String typeName = "ByteArrayTests";
 		ILineBreakpoint bp = createLineBreakpoint(35, typeName);
 
@@ -164,14 +164,14 @@ public class ArrayTests extends AbstractDebugTest {
 			IJavaArray  array = (IJavaArray) v.getValue();
 
 			IJavaValue[] replacements = new IJavaValue[6000];
-			for (int i = 0; i < replacements.length; i++) {
+			for (int i = 0; i < replacements.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				replacements[i] = target.newValue((byte)23);
 			}
 			array.setValues(replacements);
 			// verify new values
 			IJavaValue[] values = array.getValues();
 			assertEquals(6000, array.getLength());
-			for (int i = 0; i < values.length; i++) {
+			for (int i = 0; i < values.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				byte byteValue = ((IJavaPrimitiveValue)values[i]).getByteValue();
 				assertEquals((byte)23, byteValue);
 			}
@@ -186,7 +186,7 @@ public class ArrayTests extends AbstractDebugTest {
 	 *
 	 * @see "https://bugs.eclipse.org/bugs/show_bug.cgi?id=359450"
 	 */
-	public void testSetZeroLengthArray() throws Exception {
+	public void testSetZeroLengthArray() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String typeName = "ByteArrayTests";
 		ILineBreakpoint bp = createLineBreakpoint(35, typeName);
 
@@ -219,7 +219,7 @@ public class ArrayTests extends AbstractDebugTest {
 	 *
 	 * @see "https://bugs.eclipse.org/bugs/show_bug.cgi?id=359450"
 	 */
-	public void testSetBadLowerIndexArray() throws Exception {
+	public void testSetBadLowerIndexArray() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String typeName = "ByteArrayTests";
 		ILineBreakpoint bp = createLineBreakpoint(35, typeName);
 
@@ -258,7 +258,7 @@ public class ArrayTests extends AbstractDebugTest {
 	 *
 	 * @see "https://bugs.eclipse.org/bugs/show_bug.cgi?id=359450"
 	 */
-	public void testSetBadUpperIndexArray() throws Exception {
+	public void testSetBadUpperIndexArray() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String typeName = "ByteArrayTests";
 		ILineBreakpoint bp = createLineBreakpoint(35, typeName);
 
@@ -298,7 +298,7 @@ public class ArrayTests extends AbstractDebugTest {
 	 *
 	 * @see "https://bugs.eclipse.org/bugs/show_bug.cgi?id=359450"
 	 */
-	public void testSetExactUpperIndexArray() throws Exception {
+	public void testSetExactUpperIndexArray() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String typeName = "ByteArrayTests";
 		ILineBreakpoint bp = createLineBreakpoint(35, typeName);
 
@@ -338,7 +338,7 @@ public class ArrayTests extends AbstractDebugTest {
 	 *
 	 * @see "https://bugs.eclipse.org/bugs/show_bug.cgi?id=359450"
 	 */
-	public void testSetBadLowerSrcIndexArray() throws Exception {
+	public void testSetBadLowerSrcIndexArray() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String typeName = "ByteArrayTests";
 		ILineBreakpoint bp = createLineBreakpoint(35, typeName);
 
@@ -378,7 +378,7 @@ public class ArrayTests extends AbstractDebugTest {
 	 *
 	 * @see "https://bugs.eclipse.org/bugs/show_bug.cgi?id=359450"
 	 */
-	public void testSetBadUpperSrcIndexArray() throws Exception {
+	public void testSetBadUpperSrcIndexArray() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String typeName = "ByteArrayTests";
 		ILineBreakpoint bp = createLineBreakpoint(35, typeName);
 
@@ -418,7 +418,7 @@ public class ArrayTests extends AbstractDebugTest {
 	 *
 	 * @see "https://bugs.eclipse.org/bugs/show_bug.cgi?id=359450"
 	 */
-	public void testSetExactSrcIndexArray() throws Exception {
+	public void testSetExactSrcIndexArray() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String typeName = "ByteArrayTests";
 		ILineBreakpoint bp = createLineBreakpoint(35, typeName);
 
@@ -458,7 +458,7 @@ public class ArrayTests extends AbstractDebugTest {
 	 *
 	 * @see "https://bugs.eclipse.org/bugs/show_bug.cgi?id=359450"
 	 */
-	public void testSetBadLowerLengthArray() throws Exception {
+	public void testSetBadLowerLengthArray() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String typeName = "ByteArrayTests";
 		ILineBreakpoint bp = createLineBreakpoint(35, typeName);
 
@@ -498,7 +498,7 @@ public class ArrayTests extends AbstractDebugTest {
 	 *
 	 * @see "https://bugs.eclipse.org/bugs/show_bug.cgi?id=359450"
 	 */
-	public void testSetMinus1LengthArray() throws Exception {
+	public void testSetMinus1LengthArray() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String typeName = "ByteArrayTests";
 		ILineBreakpoint bp = createLineBreakpoint(35, typeName);
 
@@ -536,7 +536,7 @@ public class ArrayTests extends AbstractDebugTest {
 	 *
 	 * @see "https://bugs.eclipse.org/bugs/show_bug.cgi?id=359450"
 	 */
-	public void testSetBadLengthPlusIndexArray() throws Exception {
+	public void testSetBadLengthPlusIndexArray() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String typeName = "ByteArrayTests";
 		ILineBreakpoint bp = createLineBreakpoint(35, typeName);
 
@@ -576,7 +576,7 @@ public class ArrayTests extends AbstractDebugTest {
 	 *
 	 * @see "https://bugs.eclipse.org/bugs/show_bug.cgi?id=359450"
 	 */
-	public void testSetBadLengthPlusSrcIndexArray() throws Exception {
+	public void testSetBadLengthPlusSrcIndexArray() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String typeName = "ByteArrayTests";
 		ILineBreakpoint bp = createLineBreakpoint(35, typeName);
 
@@ -615,7 +615,7 @@ public class ArrayTests extends AbstractDebugTest {
 	 *
 	 * @see "https://bugs.eclipse.org/bugs/show_bug.cgi?id=359450"
 	 */
-	public void testSetLongerSrcArray() throws Exception {
+	public void testSetLongerSrcArray() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String typeName = "ByteArrayTests";
 		ILineBreakpoint bp = createLineBreakpoint(35, typeName);
 

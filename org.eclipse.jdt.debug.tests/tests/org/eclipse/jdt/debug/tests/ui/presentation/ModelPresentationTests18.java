@@ -49,7 +49,7 @@ public class ModelPresentationTests18 extends AbstractDebugTest {
 	 *
 	 * Test for Bug 542989.
 	 */
-	public void testClosureVariableText() throws Exception {
+	public void testClosureVariableText() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String typeName = "ClosureVariableTest_Bug542989";
 		ILineBreakpoint bp = createLineBreakpoint(18, typeName);
 
@@ -62,7 +62,7 @@ public class ModelPresentationTests18 extends AbstractDebugTest {
 			assertTrue("Did not stopped in lambda context.", LambdaUtils.isLambdaFrame(frame));
 			String closureVariableName = new JDILambdaVariable(null).getName();
 			IVariable closure = findVariable(frame, closureVariableName);
-			assertNotNull("Could not find variable '" + closureVariableName + "'", closure);
+			assertNotNull("Could not find variable '" + closureVariableName + "'", closure); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 			pres.setAttribute(IDebugModelPresentation.DISPLAY_VARIABLE_TYPE_NAMES, Boolean.TRUE);
 			String text = pres.getText(closure);

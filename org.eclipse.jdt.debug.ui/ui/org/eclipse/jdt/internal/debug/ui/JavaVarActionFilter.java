@@ -56,7 +56,7 @@ public class JavaVarActionFilter implements IActionFilter {
 	 * @return the set of predefined types
 	 */
 	private static Set<String> initPrimitiveTypes() {
-		HashSet<String> set = new HashSet<>(8);
+		HashSet<String> set = new HashSet<>(8); //FLLDCIM: MARK — M03 M3_SET_LANES NEW
 		set.add("short"); //$NON-NLS-1$
 		set.add("int"); //$NON-NLS-1$
 		set.add("long"); //$NON-NLS-1$
@@ -75,7 +75,7 @@ public class JavaVarActionFilter implements IActionFilter {
 	 * @return the set of predefined primitive arrays types
 	 */
 	private static Set<String> initArrays() {
-		HashSet<String> set = new HashSet<>(8);
+		HashSet<String> set = new HashSet<>(8); //FLLDCIM: MARK — M03 M3_SET_LANES NEW
 		set.add("short[]"); //$NON-NLS-1$
 		set.add("int[]"); //$NON-NLS-1$
 		set.add("long[]"); //$NON-NLS-1$
@@ -111,7 +111,7 @@ public class JavaVarActionFilter implements IActionFilter {
 	 * @param obj the obj to test
 	 * @return true if the object is primitive, false otherwise
 	 */
-	protected boolean isPrimitiveType(Object obj) {
+	protected boolean isPrimitiveType(Object obj) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		if(obj instanceof IJavaVariable) {
 			try {
 				return !fgPrimitiveTypes.contains(removeArray(((IJavaVariable) obj).getReferenceTypeName()));
@@ -189,7 +189,7 @@ public class JavaVarActionFilter implements IActionFilter {
 	/* (non-Javadoc)
 	 * @see org.eclipse.ui.IActionFilter#testAttribute(java.lang.Object, java.lang.String, java.lang.String)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public boolean testAttribute(Object target, String name, String value) {
 		if (target instanceof IJavaVariable) {
 			IJavaVariable var = (IJavaVariable) target;

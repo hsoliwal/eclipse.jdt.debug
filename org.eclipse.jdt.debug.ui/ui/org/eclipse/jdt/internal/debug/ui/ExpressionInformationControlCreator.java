@@ -287,10 +287,10 @@ public class ExpressionInformationControlCreator implements IInformationControlC
 		/* (non-Javadoc)
 		 * @see org.eclipse.jface.text.AbstractInformationControl#createContent(org.eclipse.swt.widgets.Composite)
 		 */
-		@Override
+		@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		protected void createContent(Composite parent) {
 
-	        fSashForm = new SashForm(parent, parent.getStyle());
+	        fSashForm = new SashForm(parent, parent.getStyle()); //FLLDCIM: MARK — M26 SPLIT_PANEL NEW
 	        fSashForm.setOrientation(SWT.VERTICAL);
 
 		    // update presentation context
@@ -300,7 +300,7 @@ public class ExpressionInformationControlCreator implements IInformationControlC
 	        	// copy over properties
 	        	IPresentationContext copy = ((TreeModelViewer)view.getViewer()).getPresentationContext();
 	        	String[] properties = copy.getProperties();
-	        	for (int i = 0; i < properties.length; i++) {
+	        	for (int i = 0; i < properties.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 					String key = properties[i];
 					fContext.setProperty(key, copy.getProperty(key));
 				}
@@ -314,8 +314,8 @@ public class ExpressionInformationControlCreator implements IInformationControlC
 	        	StructuredViewer structuredViewer = (StructuredViewer) view.getViewer();
 	            if (structuredViewer != null) {
 	                ViewerFilter[] filters = structuredViewer.getFilters();
-	                for (int i = 0; i < filters.length; i++) {
-	                    fViewer.addFilter(filters[i]);
+	                for (int i = 0; i < filters.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
+	                    fViewer.addFilter(filters[i]); //FLLDCIM: MARK — T23 FILTER_LANE CALL
 	                }
 	            }
 	        }
@@ -332,7 +332,7 @@ public class ExpressionInformationControlCreator implements IInformationControlC
 	        fDetailPane.display(null); // Bring up the default pane so the user doesn't see an empty composite
 
 	        fTree = fViewer.getTree();
-	        fTree.addSelectionListener(new SelectionListener() {
+	        fTree.addSelectionListener(new SelectionListener() { //FLLDCIM: MARK — T03 SELECTION_LANE CALL
 	            @Override
 				public void widgetSelected(SelectionEvent e) {
 	            	fDetailPane.display((IStructuredSelection)fViewer.getSelection());
@@ -452,7 +452,7 @@ public class ExpressionInformationControlCreator implements IInformationControlC
 		public void setInput(Object input) {
 			if (input instanceof IVariable) {
 				fVariable = (IVariable) input;
-		        fViewer.setInput(new TreeRoot());
+		        fViewer.setInput(new TreeRoot()); //FLLDCIM: MARK — M21 FULL_REBUILD_TO_DELTA CALL
 			}
 		}
 

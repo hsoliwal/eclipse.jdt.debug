@@ -41,7 +41,7 @@ abstract class BaseInstanceActionDelegate extends ObjectActionDelegate implement
 		openInEditor(action, selection);
 	}
 
-	private void openInEditor(IAction action, Object selection) {
+	private void openInEditor(IAction action, Object selection) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		if (selection instanceof JDIFieldVariable) {
 			var openAction = new OpenVariableConcreteTypeAction();
 			openAction.setActivePart(action, getPart());

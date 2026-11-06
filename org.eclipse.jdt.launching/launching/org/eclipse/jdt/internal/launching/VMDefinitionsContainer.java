@@ -110,9 +110,9 @@ public class VMDefinitionsContainer {
 	 * Constructs an empty VM container
 	 */
 	public VMDefinitionsContainer() {
-		fVMTypeToVMMap = new HashMap<>(10);
-		fInvalidVMList = new ArrayList<>(10);
-		fVMList = new ArrayList<>(10);
+		fVMTypeToVMMap = new HashMap<>(10); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
+		fInvalidVMList = new ArrayList<>(10); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
+		fVMList = new ArrayList<>(10); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 	}
 
 	/**
@@ -130,7 +130,7 @@ public class VMDefinitionsContainer {
 			IVMInstallType vmInstallType = vm.getVMInstallType();
 			List<IVMInstall> vmList = fVMTypeToVMMap.get(vmInstallType);
 			if (vmList == null) {
-				vmList = new ArrayList<>(3);
+				vmList = new ArrayList<>(3); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 				fVMTypeToVMMap.put(vmInstallType, vmList);
 			}
 			vmList.add(vm);
@@ -154,7 +154,7 @@ public class VMDefinitionsContainer {
 	 */
 	public void addVMList(List<IVMInstall> vmList) {
 		Iterator<IVMInstall> iterator = vmList.iterator();
-		while (iterator.hasNext()) {
+		while (iterator.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			addVM(iterator.next());
 		}
 	}
@@ -189,7 +189,7 @@ public class VMDefinitionsContainer {
 	 */
 	public List<IVMInstall> getValidVMList() {
 		List<IVMInstall> vms = getVMList();
-		List<IVMInstall> resultList = new ArrayList<>(vms.size());
+		List<IVMInstall> resultList = new ArrayList<>(vms.size()); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 		resultList.addAll(vms);
 		resultList.removeAll(fInvalidVMList);
 		return resultList;
@@ -246,7 +246,7 @@ public class VMDefinitionsContainer {
 	 * @return String the results of flattening this object into XML
 	 * @throws CoreException if serialization of the XML document failed
 	 */
-	public String getAsXML() throws CoreException {
+	public String getAsXML() throws CoreException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 
 		// Create the Document and the top-level node
 		Document doc = DebugPlugin.newDocument();
@@ -266,7 +266,7 @@ public class VMDefinitionsContainer {
 		// Create a node for each install type represented in this container
 		Set<IVMInstallType> vmInstallTypeSet = getVMTypeToVMMap().keySet();
 		Iterator<IVMInstallType> keyIterator = vmInstallTypeSet.iterator();
-		while (keyIterator.hasNext()) {
+		while (keyIterator.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			IVMInstallType vmInstallType = keyIterator.next();
 			Element vmTypeElement = vmTypeAsElement(doc, vmInstallType);
 			config.appendChild(vmTypeElement);
@@ -292,7 +292,7 @@ public class VMDefinitionsContainer {
 		// For each VM of the specified type, create a subordinate node for it
 		List<IVMInstall> vmList = getVMTypeToVMMap().get(vmType);
 		Iterator<IVMInstall> vmIterator = vmList.iterator();
-		while (vmIterator.hasNext()) {
+		while (vmIterator.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			IVMInstall vm = vmIterator.next();
 			Element vmElement = vmAsElement(doc, vm);
 			element.appendChild(vmElement);
@@ -308,7 +308,7 @@ public class VMDefinitionsContainer {
 	 * @param vm the {@link IVMInstall} to create an {@link Element} for
 	 * @return the new {@link Element} representing the given {@link IVMInstall}
 	 */
-	private Element vmAsElement(Document doc, IVMInstall vm) {
+	private Element vmAsElement(Document doc, IVMInstall vm) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 
 		// Create the node for the VM and set its 'id' & 'name' attributes
 		Element element= doc.createElement("vm");        //$NON-NLS-1$
@@ -344,9 +344,9 @@ public class VMDefinitionsContainer {
 		} else {
 			String[] vmArgs = vm.getVMArguments();
 			if (vmArgs != null && vmArgs.length > 0) {
-				StringBuilder buffer = new StringBuilder();
-				for (int i = 0; i < vmArgs.length; i++) {
-					buffer.append(vmArgs[i] + " "); //$NON-NLS-1$
+				StringBuilder buffer = new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
+				for (int i = 0; i < vmArgs.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
+					buffer.append(vmArgs[i] + " "); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				}
 				element.setAttribute("vmargs", buffer.toString()); //$NON-NLS-1$
 			}
@@ -358,7 +358,7 @@ public class VMDefinitionsContainer {
 			if (!attributes.isEmpty()) {
 				Element attrElement = doc.createElement("attributeMap"); //$NON-NLS-1$
 				Iterator<Entry<String, String>> iterator = attributes.entrySet().iterator();
-				while (iterator.hasNext()) {
+				while (iterator.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 					Entry<String, String> entry = iterator.next();
 					Element entryElement = doc.createElement("entry"); //$NON-NLS-1$
 					entryElement.setAttribute("key", entry.getKey()); //$NON-NLS-1$
@@ -380,9 +380,9 @@ public class VMDefinitionsContainer {
 	 * @param locations the array of {@link LibraryLocation}s to create an {@link Element} for
 	 * @return the new {@link Element} for the given {@link LibraryLocation}s
 	 */
-	private static Element libraryLocationsAsElement(Document doc, LibraryLocation[] locations) {
+	private static Element libraryLocationsAsElement(Document doc, LibraryLocation[] locations) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		Element root = doc.createElement("libraryLocations");       //$NON-NLS-1$
-		for (int i = 0; i < locations.length; i++) {
+		for (int i = 0; i < locations.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			Element element = doc.createElement("libraryLocation");  //$NON-NLS-1$
 			element.setAttribute("jreJar", locations[i].getSystemLibraryPath().toString()); //$NON-NLS-1$
 			element.setAttribute("jreSrc", locations[i].getSystemLibrarySourcePath().toString()); //$NON-NLS-1$
@@ -438,7 +438,7 @@ public class VMDefinitionsContainer {
 	 * </ul>
 	 * @since 3.2
 	 */
-	public static void parseXMLIntoContainer(InputStream inputStream, VMDefinitionsContainer container) throws IOException {
+	public static void parseXMLIntoContainer(InputStream inputStream, VMDefinitionsContainer container) throws IOException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 
 
 		// Do the parsing and obtain the top-level node
@@ -467,7 +467,7 @@ public class VMDefinitionsContainer {
 		// Traverse the parsed structure and populate the VMType to VM Map
 		NodeList list = config.getChildNodes();
 		int length = list.getLength();
-		for (int i = 0; i < length; ++i) {
+		for (int i = 0; i < length; ++i) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			Node node = list.item(i);
 			short type = node.getNodeType();
 			if (type == Node.ELEMENT_NODE) {
@@ -486,20 +486,20 @@ public class VMDefinitionsContainer {
 	 * @param vmTypeElement the {@link Element} to populate the {@link VMDefinitionsContainer} from
 	 * @param container the {@link VMDefinitionsContainer} to populate from the {@link Element}
 	 */
-	private static void populateVMTypes(Element vmTypeElement, VMDefinitionsContainer container) {
+	private static void populateVMTypes(Element vmTypeElement, VMDefinitionsContainer container) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		// Retrieve the 'id' attribute and the corresponding VM type object
 		String id = vmTypeElement.getAttribute("id");         //$NON-NLS-1$
 		IVMInstallType vmType= JavaRuntime.getVMInstallType(id);
 		if (vmType != null) {
 			// For each VM child node, populate the container with a subordinate node
 			NodeList vmNodeList = vmTypeElement.getElementsByTagName("vm"); //$NON-NLS-1$
-			for (int i = 0; i < vmNodeList.getLength(); ++i) {
+			for (int i = 0; i < vmNodeList.getLength(); ++i) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				populateVMForType(vmType, (Element) vmNodeList.item(i), container);
 			}
 		} else {
 			// status information for removed VMs (missing VM type)
 			NodeList vmNodeList = vmTypeElement.getElementsByTagName("vm"); //$NON-NLS-1$
-			for (int i = 0; i < vmNodeList.getLength(); ++i) {
+			for (int i = 0; i < vmNodeList.getLength(); ++i) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				Element vmElement = (Element) vmNodeList.item(i);
 				String installPath= vmElement.getAttribute("path"); //$NON-NLS-1$
 				String name = vmElement.getAttribute("name"); //$NON-NLS-1$
@@ -527,7 +527,7 @@ public class VMDefinitionsContainer {
 	 * @param vmElement XML element
 	 * @param container container to add VM to
 	 */
-	private static void populateVMForType(IVMInstallType vmType, Element vmElement, VMDefinitionsContainer container) {
+	private static void populateVMForType(IVMInstallType vmType, Element vmElement, VMDefinitionsContainer container) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String id= vmElement.getAttribute("id"); //$NON-NLS-1$
 		if (id != null) {
 
@@ -565,7 +565,7 @@ public class VMDefinitionsContainer {
 			if(!changed) {
 				NodeList list = vmElement.getChildNodes();
 				int length = list.getLength();
-				for (int i = 0; i < length; ++i) {
+				for (int i = 0; i < length; ++i) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 					Node node = list.item(i);
 					short type = node.getNodeType();
 					if (type == Node.ELEMENT_NODE) {
@@ -578,7 +578,7 @@ public class VMDefinitionsContainer {
 							setLibraryLocations(vmStandin, subElement);
 						} else if (subElementName.equals("attributeMap")) { //$NON-NLS-1$
 							NodeList entries = subElement.getElementsByTagName("entry"); //$NON-NLS-1$
-							for (int j = 0; j < entries.getLength(); j++) {
+							for (int j = 0; j < entries.getLength(); j++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 								Node entryNode = entries.item(j);
 								if (entryNode instanceof Element entryElement) {
 									String key = entryElement.getAttribute("key"); //$NON-NLS-1$
@@ -631,7 +631,7 @@ public class VMDefinitionsContainer {
 	 * @param libLocationElement the {@link Element} to parse the {@link LibraryLocation} from
 	 * @return the new {@link LibraryLocation} or <code>null</code> if the {@link Element} was malformed
 	 */
-	private static LibraryLocation getLibraryLocation(Element libLocationElement) {
+	private static LibraryLocation getLibraryLocation(Element libLocationElement) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String jreJar= libLocationElement.getAttribute("jreJar"); //$NON-NLS-1$
 		String jreSrc= libLocationElement.getAttribute("jreSrc"); //$NON-NLS-1$
 		String pkgRoot= libLocationElement.getAttribute("pkgRoot"); //$NON-NLS-1$
@@ -678,8 +678,8 @@ public class VMDefinitionsContainer {
 	private static void setLibraryLocations(IVMInstall vm, Element libLocationsElement) {
 		NodeList list = libLocationsElement.getChildNodes();
 		int length = list.getLength();
-		List<LibraryLocation> locations = new ArrayList<>(length);
-		for (int i = 0; i < length; ++i) {
+		List<LibraryLocation> locations = new ArrayList<>(length); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
+		for (int i = 0; i < length; ++i) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			Node node = list.item(i);
 			short type = node.getNodeType();
 			if (type == Node.ELEMENT_NODE) {

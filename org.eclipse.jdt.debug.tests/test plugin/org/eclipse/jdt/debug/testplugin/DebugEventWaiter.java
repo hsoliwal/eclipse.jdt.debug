@@ -30,7 +30,7 @@ import org.eclipse.swt.widgets.Display;
  * NOTE: <code>DebugEventWaiter</code> objects are intended for
  * one time use only!
  */
-public class DebugEventWaiter implements IDebugEventSetListener {
+public class DebugEventWaiter implements IDebugEventSetListener { //FLLDCIM: MARK — T27  IMPLEMENTS
 	/**
 	 * The kind of event the waiter is waiting for
 	 */
@@ -77,7 +77,7 @@ public class DebugEventWaiter implements IDebugEventSetListener {
 		fEventType= eventType;
 		fTimeout= DEFAULT_TIMEOUT;
 
-		fDebugPlugin.addDebugEventListener(this);
+		fDebugPlugin.addDebugEventListener(this); //FLLDCIM: MARK — T27 DEBUG_EVENT_ADAPTER CALL
 	}
 
 	/**
@@ -112,7 +112,7 @@ public class DebugEventWaiter implements IDebugEventSetListener {
 	@Override
 	public synchronized void handleDebugEvents(DebugEvent[] events) {
 		//printReceived(events);
-		for (int i = 0; i < events.length; i++) {
+		for (int i = 0; i < events.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			if (accept(events[i])) {
 				fEvent= events[i];
 				fEventSet = events;
@@ -127,8 +127,8 @@ public class DebugEventWaiter implements IDebugEventSetListener {
 	 * Prints a message indicating which event was received.
 	 */
 	protected void printReceived(DebugEvent[] events) {
-		for (int i = 0; i < events.length; i++) {
-			System.out.println(this +" got " + events[i]);
+		for (int i = 0; i < events.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
+			System.out.println(this +" got " + events[i]); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		}
 	}
 
@@ -151,12 +151,12 @@ public class DebugEventWaiter implements IDebugEventSetListener {
 	 * if no event was accepted.
 	 * @return the source of the event or <code>null</code>
 	 */
-	public synchronized Object waitForEvent() {
+	public synchronized Object waitForEvent() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		if (fEvent == null) {
 			try {
 				if (enableUIEventLoopProcessing && Display.getCurrent() != null) {
 					long timeoutNanos = System.nanoTime() + fTimeout * 1_000_000L;
-					while (fEvent == null && System.nanoTime() < timeoutNanos) {
+					while (fEvent == null && System.nanoTime() < timeoutNanos) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 						wait(1);
 						TestUtil.runEventLoop();
 					}

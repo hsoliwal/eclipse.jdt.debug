@@ -38,7 +38,7 @@ public class StepResultTests extends AbstractDebugTest {
 		super(name);
 	}
 
-	public void testReturnValueAfterStepReturn() throws Exception {
+	public void testReturnValueAfterStepReturn() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String typeName = "StepResult1";
 		ILineBreakpoint bp1 = createLineBreakpoint(28, "StepResult1");
 		bp1.setEnabled(true);
@@ -97,7 +97,7 @@ public class StepResultTests extends AbstractDebugTest {
 	/**
 	 * test that if the step return is aborted by some other break point, no return value of a recursive invocation is shown
 	 */
-	public void testNoReturnValueAfterAbortedStepReturn() throws Exception {
+	public void testNoReturnValueAfterAbortedStepReturn() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String typeName = "StepResult1";
 		ILineBreakpoint bp2A = createLineBreakpoint(49, "StepResult1");
 		bp2A.setEnabled(true);
@@ -141,7 +141,7 @@ public class StepResultTests extends AbstractDebugTest {
 		}
 	}
 
-	public void testNoReturnValueAfterStepReturnWithException() throws Exception {
+	public void testNoReturnValueAfterStepReturnWithException() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String typeName = "StepResult1";
 		ILineBreakpoint bp3A = createLineBreakpoint(41, "StepResult1");
 		bp3A.setEnabled(true);
@@ -169,7 +169,7 @@ public class StepResultTests extends AbstractDebugTest {
 		}
 	}
 
-	public void testReturnValueAfterStepReturnInStatic() throws Exception {
+	public void testReturnValueAfterStepReturnInStatic() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String typeName = "StepResult1";
 		ILineBreakpoint bp4 = createLineBreakpoint(56, "StepResult1");
 		bp4.setEnabled(true);
@@ -195,7 +195,7 @@ public class StepResultTests extends AbstractDebugTest {
 		}
 	}
 
-	public void testReturnValueAfterStepReturnViaInterface() throws Exception {
+	public void testReturnValueAfterStepReturnViaInterface() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String typeName = "StepResult1";
 		ILineBreakpoint bp5 = createLineBreakpoint(66, "StepResult1");
 		bp5.setEnabled(true);
@@ -221,7 +221,7 @@ public class StepResultTests extends AbstractDebugTest {
 		}
 	}
 
-	public void testHasExitedWithExceptionFor5BytesDistance() throws Exception {
+	public void testHasExitedWithExceptionFor5BytesDistance() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String typeName = "StepResult1";
 		ILineBreakpoint bp3 = createLineBreakpoint(41, "StepResult1");
 		bp3.setEnabled(true);
@@ -257,7 +257,7 @@ public class StepResultTests extends AbstractDebugTest {
 		}
 	}
 
-	public void testStepReturn_ExceptionWithFinallyAndEmptyCatch() throws Exception {
+	public void testStepReturn_ExceptionWithFinallyAndEmptyCatch() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String typeName = "StepResult2";
 		ILineBreakpoint bp6 = createLineBreakpoint(38, "StepResult2");
 		bp6.setEnabled(true);
@@ -293,7 +293,7 @@ public class StepResultTests extends AbstractDebugTest {
 		}
 	}
 
-	public void testStepOver_ExceptionWithFinallyAndEmptyCatch() throws Exception {
+	public void testStepOver_ExceptionWithFinallyAndEmptyCatch() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String typeName = "StepResult2";
 		ILineBreakpoint bp6 = createLineBreakpoint(38, "StepResult2");
 		bp6.setEnabled(true);
@@ -339,7 +339,7 @@ public class StepResultTests extends AbstractDebugTest {
 		}
 	}
 
-	public void testStepOver() throws Exception {
+	public void testStepOver() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String typeName = "StepResult3";
 		ILineBreakpoint bp7 = createLineBreakpoint(22, "StepResult3");
 		bp7.setEnabled(true);
@@ -409,7 +409,7 @@ public class StepResultTests extends AbstractDebugTest {
 		}
 	}
 
-	public void testStepInto() throws Exception {
+	public void testStepInto() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String typeName = "StepResult3";
 		ILineBreakpoint bp8 = createLineBreakpoint(31, "StepResult3");
 		bp8.setEnabled(true);
@@ -479,7 +479,7 @@ public class StepResultTests extends AbstractDebugTest {
 		}
 	}
 
-	public void testStepUncaught() throws Exception {
+	public void testStepUncaught() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IPreferenceStore preferenceStore = JDIDebugUIPlugin.getDefault().getPreferenceStore();
 		boolean origPrefValue = preferenceStore.getBoolean(IJDIPreferencesConstants.PREF_SUSPEND_ON_UNCAUGHT_EXCEPTIONS);
 		preferenceStore.setValue(IJDIPreferencesConstants.PREF_SUSPEND_ON_UNCAUGHT_EXCEPTIONS, true);
@@ -511,7 +511,7 @@ public class StepResultTests extends AbstractDebugTest {
 		}
 	}
 
-	public void testMethodResultOnMethodExitAndExceptionBreakpoints() throws Exception {
+	public void testMethodResultOnMethodExitAndExceptionBreakpoints() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IPreferenceStore preferenceStore = JDIDebugUIPlugin.getDefault().getPreferenceStore();
 		boolean origPrefValue = preferenceStore.getBoolean(IJDIPreferencesConstants.PREF_SUSPEND_ON_UNCAUGHT_EXCEPTIONS);
 		preferenceStore.setValue(IJDIPreferencesConstants.PREF_SUSPEND_ON_UNCAUGHT_EXCEPTIONS, true);
@@ -540,7 +540,7 @@ public class StepResultTests extends AbstractDebugTest {
 		}
 	}
 
-	public void testNoReturnValueAfterStepReturnWhichExceedsTimeout() throws Exception {
+	public void testNoReturnValueAfterStepReturnWhichExceedsTimeout() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IEclipsePreferences node = DefaultScope.INSTANCE.getNode(JDIDebugPlugin.getUniqueIdentifier());
 		int origPrefValue = node.getInt(JDIDebugModel.PREF_SHOW_STEP_TIMEOUT, JDIDebugModel.DEF_SHOW_STEP_TIMEOUT);
 		node.putInt(JDIDebugModel.PREF_SHOW_STEP_TIMEOUT, -1);

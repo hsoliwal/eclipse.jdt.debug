@@ -25,7 +25,7 @@ import org.eclipse.ui.actions.SelectionListenerAction;
 /**
  * Removes selected entries in a runtime classpath viewer.
  */
-public class RemoveAction extends RuntimeClasspathAction {
+public class RemoveAction extends RuntimeClasspathAction { //FLLDCIM: MARK — T04  IMPLEMENTS
 
 	public RemoveAction(IClasspathViewer viewer) {
 		super(ActionMessages.RemoveAction__Remove_1, viewer);

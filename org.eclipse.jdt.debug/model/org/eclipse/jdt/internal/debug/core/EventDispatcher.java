@@ -81,7 +81,7 @@ public class EventDispatcher implements Runnable {
 	 * Queue of debug model events to fire, created when processing events on
 	 * the target VM. Keyed by event sets, processed independently.
 	 */
-	private final Map<EventSet, List<DebugEvent>> fSetToQueue = new HashMap<>();
+	private final Map<EventSet, List<DebugEvent>> fSetToQueue = new HashMap<>(); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
 
 	/**
 	 * Constructs a new event dispatcher listening for events originating from
@@ -91,7 +91,7 @@ public class EventDispatcher implements Runnable {
 	 *            the target this event dispatcher belongs to
 	 */
 	public EventDispatcher(JDIDebugTarget target) {
-		fEventHandlers = new HashMap<>(10);
+		fEventHandlers = new HashMap<>(10); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
 		fTarget = target;
 		fShutdown = false;
 	}
@@ -102,20 +102,20 @@ public class EventDispatcher implements Runnable {
 	 * @param eventSet
 	 *            events to dispatch
 	 */
-	private void dispatch(EventSet eventSet) {
+	private void dispatch(EventSet eventSet) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		if (isShutdown()) {
 			return;
 		}
 		if (JDIDebugOptions.DEBUG_JDI_EVENTS) {
 			EventIterator eventIter = eventSet.eventIterator();
-			StringBuilder buf = new StringBuilder("JDI Event Set: {\n"); //$NON-NLS-1$
-			while (eventIter.hasNext()) {
-				buf.append(eventIter.next());
+			StringBuilder buf = new StringBuilder("JDI Event Set: {\n"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
+			while (eventIter.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
+				buf.append(eventIter.next()); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				if (eventIter.hasNext()) {
-					buf.append(", "); //$NON-NLS-1$
+					buf.append(", "); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				}
 			}
-			buf.append("}\n"); //$NON-NLS-1$
+			buf.append("}\n"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			JDIDebugOptions.trace(buf.toString());
 		}
 		EventIterator iter = eventSet.eventIterator();
@@ -124,7 +124,7 @@ public class EventDispatcher implements Runnable {
 		boolean resume = true;
 		int index = -1;
 		List<Event> deferredEvents = null;
-		while (iter.hasNext()) {
+		while (iter.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			index++;
 			if (isShutdown()) {
 				return;
@@ -144,7 +144,7 @@ public class EventDispatcher implements Runnable {
 					try {
 						if (((IJavaLineBreakpoint) listener).isConditionEnabled()) {
 							if (deferredEvents == null) {
-								deferredEvents = new ArrayList<>(5);
+								deferredEvents = new ArrayList<>(5); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 							}
 							deferredEvents.add(event);
 							continue;
@@ -183,7 +183,7 @@ public class EventDispatcher implements Runnable {
 		// process deferred conditional breakpoint events
 		if (deferredEvents != null) {
 			Iterator<Event> deferredIter = deferredEvents.iterator();
-			while (deferredIter.hasNext()) {
+			while (deferredIter.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				if (isShutdown()) {
 					return;
 				}
@@ -208,12 +208,12 @@ public class EventDispatcher implements Runnable {
 			}
 		}
 
-		List<Runnable> threadDeathRunnables = new ArrayList<>();
+		List<Runnable> threadDeathRunnables = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 
 		// notify handlers of the end result
 		index = -1;
 		iter = eventSet.eventIterator();
-		while (iter.hasNext()) {
+		while (iter.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			index++;
 			Event event = iter.nextEvent();
 			// notify registered listener, if any
@@ -232,7 +232,7 @@ public class EventDispatcher implements Runnable {
 		fireEvents(eventSet);
 
 		// Queue runnables which will remove terminated threads once other queued events are proceeded
-		threadDeathRunnables.forEach(runnable -> DebugPlugin.getDefault().asyncExec(runnable));
+		threadDeathRunnables.forEach(runnable -> DebugPlugin.getDefault().asyncExec(runnable)); //FLLDCIM: MARK — T08 UI_THREAD_SYNCHRONIZER CALL
 
 		if (vote && resume) {
 			try {
@@ -249,9 +249,9 @@ public class EventDispatcher implements Runnable {
 		}
 	}
 
-	private boolean requiresExpressionEvaluation(EventSet eventSet) {
+	private boolean requiresExpressionEvaluation(EventSet eventSet) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		EventIterator iter = eventSet.eventIterator();
-		while (iter.hasNext()) {
+		while (iter.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			Event event = iter.nextEvent();
 			if (event == null) {
 				continue;
@@ -285,7 +285,7 @@ public class EventDispatcher implements Runnable {
 		@Override
 		public String toString() {
 			try {
-				return super.toString() + " for [" + fTarget.getName() + "]"; //$NON-NLS-1$ //$NON-NLS-2$
+				return super.toString() + " for [" + fTarget.getName() + "]"; //$NON-NLS-1$ //$NON-NLS-2$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 			}
 			catch (DebugException e) {
 				return super.toString();
@@ -300,12 +300,12 @@ public class EventDispatcher implements Runnable {
 	 *
 	 * @see #shutdown()
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public void run() {
 		VirtualMachine vm = fTarget.getVM();
 		if (vm != null) {
 			EventQueue q = vm.eventQueue();
-			while (!isShutdown()) {
+			while (!isShutdown()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				try {
 					EventSet eventSet;
 					try {
@@ -400,7 +400,7 @@ public class EventDispatcher implements Runnable {
 		synchronized (fSetToQueue) {
 			List<DebugEvent> list = fSetToQueue.get(set);
 			if (list == null) {
-				list = new ArrayList<>(5);
+				list = new ArrayList<>(5); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 				fSetToQueue.put(set, list);
 			}
 			list.add(event);
@@ -434,15 +434,15 @@ public class EventDispatcher implements Runnable {
 				}
 			} catch (VMDisconnectedException e) {
 				if (fTarget.isAvailable()) {
-					JDIDebugPlugin.logError("Failed to enable GC for event: " + event, e); //$NON-NLS-1$
+					JDIDebugPlugin.logError("Failed to enable GC for event: " + event, e); //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 				}
 			} catch (Throwable t) {
-				JDIDebugPlugin.logError("Failed to enable GC for event: " + event, t); //$NON-NLS-1$
+				JDIDebugPlugin.logError("Failed to enable GC for event: " + event, t); //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 			}
 		}
 	}
 
 	private static void logHandleEventError(IJDIEventListener listener, Event event, Throwable t) {
-		JDIDebugPlugin.logError("Exception occurred while notifying listener: " + listener + ", with event: " + event, t); //$NON-NLS-1$ //$NON-NLS-2$
+		JDIDebugPlugin.logError("Exception occurred while notifying listener: " + listener + ", with event: " + event, t); //$NON-NLS-1$ //$NON-NLS-2$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 	}
 }

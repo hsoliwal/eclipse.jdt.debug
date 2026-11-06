@@ -49,7 +49,7 @@ public class JavaMigrationDelegate implements ILaunchConfigurationMigrationDeleg
 	/* (non-Javadoc)
 	 * @see org.eclipse.debug.core.ILaunchConfigurationMigrationDelegate#isCandidate()
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public boolean isCandidate(ILaunchConfiguration candidate) throws CoreException {
 		String pName = candidate.getAttribute(IJavaLaunchConfigurationConstants.ATTR_PROJECT_NAME, EMPTY_STRING);
 		if(pName.equals(EMPTY_STRING)) {
@@ -94,7 +94,7 @@ public class JavaMigrationDelegate implements ILaunchConfigurationMigrationDeleg
 	 *
 	 * @throws CoreException if there is an error
 	 */
-	static IResource getResource(ILaunchConfiguration candidate) throws CoreException {
+	static IResource getResource(ILaunchConfiguration candidate) throws CoreException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IResource resource = null;
 		String pname = candidate.getAttribute(IJavaLaunchConfigurationConstants.ATTR_PROJECT_NAME, EMPTY_STRING);
 		if(Path.ROOT.isValidSegment(pname)) {

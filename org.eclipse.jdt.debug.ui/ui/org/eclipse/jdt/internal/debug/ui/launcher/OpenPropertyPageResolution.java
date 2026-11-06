@@ -83,7 +83,7 @@ public class OpenPropertyPageResolution implements IMarkerResolution2 {
 	 */
 	@Override
 	public void run(IMarker marker) {
-		UIJob job = new UIJob(""){ //$NON-NLS-1$
+		UIJob job = new UIJob(""){ //$NON-NLS-1$ //FLLDCIM: MARK — T09  ANONYMOUS
 			@Override
 			public IStatus runInUIThread(IProgressMonitor monitor) {
 				SWTFactory.showPropertyPage(

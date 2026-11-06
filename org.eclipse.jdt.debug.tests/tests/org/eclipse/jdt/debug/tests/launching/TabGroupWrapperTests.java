@@ -49,20 +49,20 @@ public class TabGroupWrapperTests extends AbstractDebugTest {
 	 * Checks to make sure that all of the controls of the tabs (including contributed ones) are disposed on a call to the tab group
 	 * wrapper class
 	 */
-	public void testDisposeAllTabs() throws CoreException {
+	public void testDisposeAllTabs() throws CoreException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		ILaunchConfigurationTabGroup javagroup = getJavaLaunchGroup();
 		assertNotNull("java tab group cannot be null", javagroup); //$NON-NLS-1$
 		javagroup.createTabs(getLaunchConfigurationDialog(IDebugUIConstants.ID_RUN_LAUNCH_GROUP), ILaunchManager.RUN_MODE);
 		ILaunchConfigurationTab[] tabs = javagroup.getTabs();
 		assertTrue("there must be more than 0 tabs", tabs.length > 0); //$NON-NLS-1$
 		//dispose all returned tabs
-		for(int i = 0; i < tabs.length; i++) {
+		for(int i = 0; i < tabs.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			tabs[i].dispose();
 		}
 		//get the tabs from the tab group again
 		tabs = javagroup.getTabs();
 		boolean alldisposed = true;
-		for(int i = 0; i < tabs.length; i++) {
+		for(int i = 0; i < tabs.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			alldisposed &= tabs[i].getControl() == null;
 		}
 		assertTrue("All of the controls must be disposed", alldisposed); //$NON-NLS-1$

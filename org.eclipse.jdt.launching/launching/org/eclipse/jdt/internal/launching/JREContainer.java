@@ -142,7 +142,7 @@ public class JREContainer implements IClasspathContainer {
 		/* (non-Javadoc)
 		 * @see java.lang.Object#equals(java.lang.Object)
 		 */
-		@Override
+		@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		public boolean equals(Object obj) {
 			IAccessRule[][] rules = null;
 			if(obj instanceof RuleEntry) {
@@ -156,7 +156,7 @@ public class JREContainer implements IClasspathContainer {
 			}
 			if(rules != null) {
 				if (fRules.length == rules.length) {
-					for (int i = 0; i < fRules.length; i++) {
+					for (int i = 0; i < fRules.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 						if (!rulesEqual(fRules[i], rules[i])){
 							return false;
 						}
@@ -181,7 +181,7 @@ public class JREContainer implements IClasspathContainer {
 			if (a.length != b.length){
 				return false;
 			}
-			for (int j = 0; j < a.length; j++) {
+			for (int j = 0; j < a.length; j++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				if (!a[j].equals(b[j])) {
 					return false;
 				}
@@ -252,7 +252,7 @@ public class JREContainer implements IClasspathContainer {
 	 * @param project project the resolution is for
 	 * @return classpath entries
 	 */
-	private static IClasspathEntry[] getClasspathEntries(IVMInstall vm, IPath containerPath, IJavaProject project) {
+	private static IClasspathEntry[] getClasspathEntries(IVMInstall vm, IPath containerPath, IJavaProject project) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String id = JavaRuntime.getExecutionEnvironmentId(containerPath);
 		IClasspathEntry[] entries = null;
 		if (id == null) {
@@ -264,7 +264,7 @@ public class JREContainer implements IClasspathContainer {
 			}
 		} else {
 			if (LaunchingPlugin.DEBUG_JRE_CONTAINER) {
-				LaunchingPlugin.trace("\tEE:\t" + id); //$NON-NLS-1$
+				LaunchingPlugin.trace("\tEE:\t" + id); //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 			}
 			// dynamically compute entries when bound to an EE
 			entries = computeClasspathEntries(vm, project, id);
@@ -281,7 +281,7 @@ public class JREContainer implements IClasspathContainer {
 	 * @param environmentId execution environment the resolution is for, or <code>null</code>
 	 * @return classpath entries
 	 */
-	@SuppressWarnings("unlikely-arg-type")
+	@SuppressWarnings("unlikely-arg-type") //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	private static IClasspathEntry[] computeClasspathEntries(IVMInstall vm, IJavaProject project, String environmentId) {
 		LibraryLocation[] libs = vm.getLibraryLocations();
 		boolean overrideJavaDoc = false;
@@ -305,8 +305,8 @@ public class JREContainer implements IClasspathContainer {
 				return entry.getClasspathEntries();
 			}
 		}
-		List<IClasspathEntry> entries = new ArrayList<>(libs.length);
-		for (int i = 0; i < libs.length; i++) {
+		List<IClasspathEntry> entries = new ArrayList<>(libs.length); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
+		for (int i = 0; i < libs.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			if (!libs[i].getSystemLibraryPath().isEmpty()) {
 				IPath sourcePath = libs[i].getSystemLibrarySourcePath();
 				if (sourcePath.isEmpty()) {
@@ -334,7 +334,7 @@ public class JREContainer implements IClasspathContainer {
 		return cpEntries;
 	}
 
-	private static IClasspathAttribute[] buildClasspathAttributes(final IVMInstall vm, final LibraryLocation lib, final boolean overrideJavaDoc) {
+	private static IClasspathAttribute[] buildClasspathAttributes(final IVMInstall vm, final LibraryLocation lib, final boolean overrideJavaDoc) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 
 		List<IClasspathAttribute> classpathAttributes = new LinkedList<>();
 		// process the javadoc location
@@ -380,14 +380,14 @@ public class JREContainer implements IClasspathContainer {
 	@Override
 	public IClasspathEntry[] getClasspathEntries() {
 		if (LaunchingPlugin.DEBUG_JRE_CONTAINER) {
-			LaunchingPlugin.trace("<JRE_CONTAINER> getClasspathEntries() " + this.toString()); //$NON-NLS-1$
-			LaunchingPlugin.trace("\tJRE:\t" + fVMInstall.getName()); //$NON-NLS-1$
-			LaunchingPlugin.trace("\tPath:\t" + getPath().toString()); //$NON-NLS-1$
-			LaunchingPlugin.trace("\tProj:\t" + fProject.getProject().getName()); //$NON-NLS-1$
+			LaunchingPlugin.trace("<JRE_CONTAINER> getClasspathEntries() " + this.toString()); //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
+			LaunchingPlugin.trace("\tJRE:\t" + fVMInstall.getName()); //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
+			LaunchingPlugin.trace("\tPath:\t" + getPath().toString()); //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
+			LaunchingPlugin.trace("\tProj:\t" + fProject.getProject().getName()); //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		}
 		IClasspathEntry[] entries = getClasspathEntries(fVMInstall, getPath(), fProject);
 		if (LaunchingPlugin.DEBUG_JRE_CONTAINER) {
-			LaunchingPlugin.trace("\tResolved " + entries.length + " entries:");  //$NON-NLS-1$//$NON-NLS-2$
+			LaunchingPlugin.trace("\tResolved " + entries.length + " entries:");  //$NON-NLS-1$//$NON-NLS-2$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		}
 		return entries;
 	}

@@ -212,7 +212,7 @@ public class JavaSnippetEditor extends AbstractDecoratedTextEditor implements ID
 			this.fDisplay = display;
 			this.fLock= lock;
 		}
-		@Override
+		@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		public void run() {
 			try {
 				synchronized (this.fLock) {
@@ -223,7 +223,7 @@ public class JavaSnippetEditor extends AbstractDecoratedTextEditor implements ID
 			} finally {
 				// Make sure that all events in the asynchronous event queue
 				// are dispatched.
-				this.fDisplay.syncExec(new Runnable() {
+				this.fDisplay.syncExec(new Runnable() { //FLLDCIM: MARK — T08 UI_THREAD_SYNCHRONIZER CALL
 					@Override
 					public void run() {
 						// do nothing
@@ -235,7 +235,7 @@ public class JavaSnippetEditor extends AbstractDecoratedTextEditor implements ID
 
 				// Force the event loop to return from sleep () so that
 				// it stops event dispatching.
-				this.fDisplay.asyncExec(null);
+				this.fDisplay.asyncExec(null); //FLLDCIM: MARK — T08 UI_THREAD_SYNCHRONIZER CALL
 			}
 		}
 		/**
@@ -243,7 +243,7 @@ public class JavaSnippetEditor extends AbstractDecoratedTextEditor implements ID
 		 */
 		protected void block() {
 			if (this.fDisplay == Display.getCurrent()) {
-				while (this.fContinueEventDispatching) {
+				while (this.fContinueEventDispatching) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 					if (!this.fDisplay.readAndDispatch()) {
 						this.fDisplay.sleep();
 					}
@@ -256,14 +256,14 @@ public class JavaSnippetEditor extends AbstractDecoratedTextEditor implements ID
 	 * Listens for part activation to set scrapbook active system property
 	 * for action enablement.
 	 */
-	private final IPartListener2 fActivationListener = new IPartListener2() {
+	private final IPartListener2 fActivationListener = new IPartListener2() { //FLLDCIM: MARK — T20  ANONYMOUS
 
 		@Override
 		public void partActivated(IWorkbenchPartReference partRef) {
 			if ("org.eclipse.jdt.debug.ui.SnippetEditor".equals(partRef.getId())) { //$NON-NLS-1$
-				System.setProperty(JDIDebugUIPlugin.getUniqueIdentifier() + ".scrapbookActive", "true"); //$NON-NLS-1$ //$NON-NLS-2$
+				System.setProperty(JDIDebugUIPlugin.getUniqueIdentifier() + ".scrapbookActive", "true"); //$NON-NLS-1$ //$NON-NLS-2$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 			} else {
-				System.setProperty(JDIDebugUIPlugin.getUniqueIdentifier() + ".scrapbookActive", "false"); //$NON-NLS-1$ //$NON-NLS-2$
+				System.setProperty(JDIDebugUIPlugin.getUniqueIdentifier() + ".scrapbookActive", "false"); //$NON-NLS-1$ //$NON-NLS-2$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 			}
 		}
 
@@ -304,7 +304,7 @@ public class JavaSnippetEditor extends AbstractDecoratedTextEditor implements ID
 				PreferenceConstants.getPreferenceStore(),
 				EditorsUI.getPreferenceStore()});
 		setSourceViewerConfiguration(new JavaSnippetViewerConfiguration(JDIDebugUIPlugin.getDefault().getJavaTextTools(), store, this));
-		this.fSnippetStateListeners = new ArrayList<>(4);
+		this.fSnippetStateListeners = new ArrayList<>(4); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 		setPreferenceStore(store);
 		setEditorContextMenuId("#JavaSnippetEditorContext"); //$NON-NLS-1$
 		setRulerContextMenuId("#JavaSnippetRulerContext"); //$NON-NLS-1$
@@ -389,7 +389,7 @@ public class JavaSnippetEditor extends AbstractDecoratedTextEditor implements ID
 		return this.fEvaluating;
 	}
 
-	public void evalSelection(int resultMode) {
+	public void evalSelection(int resultMode) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		if (!isInJavaProject()) {
 			reportNotInJavaProjectError();
 			return;
@@ -423,7 +423,7 @@ public class JavaSnippetEditor extends AbstractDecoratedTextEditor implements ID
 	 * Checks if the page has been copied/moved to a different project or the project has been renamed.
 	 * Updates the launch configuration template if a copy/move/rename has occurred.
 	 */
-	protected void checkCurrentProject() {
+	protected void checkCurrentProject() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IFile file= getFile();
 		if (file == null) {
 			return;
@@ -447,7 +447,7 @@ public class JavaSnippetEditor extends AbstractDecoratedTextEditor implements ID
 		}
 	}
 
-	protected void buildAndLaunch() {
+	protected void buildAndLaunch() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IJavaProject javaProject= getJavaProject();
 		if (javaProject == null) {
 			return;
@@ -486,8 +486,8 @@ public class JavaSnippetEditor extends AbstractDecoratedTextEditor implements ID
 		}
 	}
 
-	protected boolean performIncrementalBuild() {
-		IRunnableWithProgress r= new IRunnableWithProgress() {
+	protected boolean performIncrementalBuild() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
+		IRunnableWithProgress r= new IRunnableWithProgress() { //FLLDCIM: MARK — T09  ANONYMOUS
 			@Override
 			public void run(IProgressMonitor pm) throws InvocationTargetException {
 				try {
@@ -517,7 +517,7 @@ public class JavaSnippetEditor extends AbstractDecoratedTextEditor implements ID
 		if (this.fVM != null) {
 			DebugPlugin.getDefault().addDebugEventFilter(this);
 			try {
-				for (IThread thread : this.fVM.getThreads()) {
+				for (IThread thread : this.fVM.getThreads()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 					if (thread.isSuspended()) {
 						thread.resume();
 					}
@@ -528,7 +528,7 @@ public class JavaSnippetEditor extends AbstractDecoratedTextEditor implements ID
 		}
 	}
 
-	protected void setImports(String[] imports) {
+	protected void setImports(String[] imports) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		this.fImports= imports;
 		IFile file= getFile();
 		if (file == null) {
@@ -580,7 +580,7 @@ public class JavaSnippetEditor extends AbstractDecoratedTextEditor implements ID
 		return this.fJavaProject;
 	}
 
-	protected void shutDownVM() {
+	protected void shutDownVM() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		DebugPlugin.getDefault().removeDebugEventFilter(this);
 
 		// The real shut down
@@ -638,7 +638,7 @@ public class JavaSnippetEditor extends AbstractDecoratedTextEditor implements ID
 			@Override
 			public void run() {
 				if (JavaSnippetEditor.this.fSnippetStateListeners != null) {
-					for (ISnippetStateChangedListener listener : new ArrayList<>(JavaSnippetEditor.this.fSnippetStateListeners)) {
+					for (ISnippetStateChangedListener listener : new ArrayList<>(JavaSnippetEditor.this.fSnippetStateListeners)) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 						listener.snippetStateChanged(JavaSnippetEditor.this);
 					}
 				}
@@ -646,11 +646,11 @@ public class JavaSnippetEditor extends AbstractDecoratedTextEditor implements ID
 		};
 		Shell shell= getShell();
 		if (shell != null) {
-			getShell().getDisplay().asyncExec(r);
+			getShell().getDisplay().asyncExec(r); //FLLDCIM: MARK — T08 UI_THREAD_SYNCHRONIZER CALL
 		}
 	}
 
-	protected void evaluate(String snippet) {
+	protected void evaluate(String snippet) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		if (getThread() == null) {
 			WaitThread eThread= new WaitThread(Display.getCurrent(), this);
 			eThread.start();
@@ -679,7 +679,7 @@ public class JavaSnippetEditor extends AbstractDecoratedTextEditor implements ID
 	/* (non-Javadoc)
 	 * @see org.eclipse.jdt.debug.eval.IEvaluationListener#evaluationComplete(org.eclipse.jdt.debug.eval.IEvaluationResult)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public void evaluationComplete(IEvaluationResult result) {
 			boolean severeErrors = false;
 			if (result.hasErrors()) {
@@ -712,7 +712,7 @@ public class JavaSnippetEditor extends AbstractDecoratedTextEditor implements ID
 	 * Make the expression view visible or open one
 	 * if required.
 	 */
-	protected void showExpressionView() {
+	protected void showExpressionView() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		Runnable r = new Runnable() {
 			@Override
 			public void run() {
@@ -775,24 +775,24 @@ public class JavaSnippetEditor extends AbstractDecoratedTextEditor implements ID
 		showError(status);
 	}
 
-	protected void displayResult(IJavaValue result) {
-		StringBuilder resultString= new StringBuilder();
+	protected void displayResult(IJavaValue result) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
+		StringBuilder resultString= new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 		try {
 			IJavaType type = result.getJavaType();
 			if (type != null) {
 				String sig= type.getSignature();
 				if ("V".equals(sig)) { //$NON-NLS-1$
-					resultString.append(SnippetMessages.getString("SnippetEditor.noreturnvalue")); //$NON-NLS-1$
+					resultString.append(SnippetMessages.getString("SnippetEditor.noreturnvalue")); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				} else {
 					if (sig != null) {
-						resultString.append(SnippetMessages.getFormattedString("SnippetEditor.typename", result.getReferenceTypeName())); //$NON-NLS-1$
+						resultString.append(SnippetMessages.getFormattedString("SnippetEditor.typename", result.getReferenceTypeName())); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 					} else {
-						resultString.append(" "); //$NON-NLS-1$
+						resultString.append(" "); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 					}
-                    resultString.append(DisplayAction.trimDisplayResult(evaluateToString(result)));
+                    resultString.append(DisplayAction.trimDisplayResult(evaluateToString(result))); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				}
 			} else {
-				resultString.append(DisplayAction.trimDisplayResult(result.getValueString()));
+				resultString.append(DisplayAction.trimDisplayResult(result.getValueString())); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			}
 		} catch(DebugException e) {
 			JDIDebugUIPlugin.log(e);
@@ -843,13 +843,13 @@ public class JavaSnippetEditor extends AbstractDecoratedTextEditor implements ID
 		this.notifyAll();
 	}
 
-	protected void showAllErrors(final String[] errors) {
+	protected void showAllErrors(final String[] errors) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IDocument document = getSourceViewer().getDocument();
 		String delimiter = document.getLegalLineDelimiters()[0];
 
-		final StringBuilder errorString = new StringBuilder();
-		for (String error : errors) {
-			errorString.append(error + delimiter);
+		final StringBuilder errorString = new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
+		for (String error : errors) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
+			errorString.append(error + delimiter); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		}
 
 		Runnable r = new Runnable() {
@@ -876,7 +876,7 @@ public class JavaSnippetEditor extends AbstractDecoratedTextEditor implements ID
 	}
 
 
-	protected void showException(Throwable exception) {
+	protected void showException(Throwable exception) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		if (exception instanceof DebugException) {
 			DebugException de = (DebugException)exception;
 			Throwable t= de.getStatus().getException();
@@ -904,7 +904,7 @@ public class JavaSnippetEditor extends AbstractDecoratedTextEditor implements ID
 		async(r);
 	}
 
-	protected void showUnderlyingException(Throwable t) {
+	protected void showUnderlyingException(Throwable t) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		if (t instanceof InvocationException) {
 			InvocationException ie= (InvocationException)t;
 			ObjectReference ref= ie.exception();
@@ -1004,7 +1004,7 @@ public class JavaSnippetEditor extends AbstractDecoratedTextEditor implements ID
 		if (path1.length != path2.length) {
 			return false;
 		}
-		for (int i= 0; i < path1.length; i++) {
+		for (int i= 0; i < path1.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			if (!path1[i].equals(path2[i])) {
 				return false;
 			}
@@ -1012,7 +1012,7 @@ public class JavaSnippetEditor extends AbstractDecoratedTextEditor implements ID
 		return true;
 	}
 
-	protected synchronized void evaluationStarts() {
+	protected synchronized void evaluationStarts() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		if (this.fThread != null) {
 			try {
 				IThread thread = this.fThread;
@@ -1085,9 +1085,9 @@ public class JavaSnippetEditor extends AbstractDecoratedTextEditor implements ID
 	/**
 	 * @see IDebugEventFilter#filterDebugEvents(DebugEvent[])
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public DebugEvent[] filterDebugEvents(DebugEvent[] events) {
-		for (DebugEvent e : events) {
+		for (DebugEvent e : events) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			Object source = e.getSource();
 			if (source instanceof IDebugElement) {
 				IDebugElement de = (IDebugElement)source;
@@ -1101,7 +1101,7 @@ public class JavaSnippetEditor extends AbstractDecoratedTextEditor implements ID
 									vmTerminated();
 								}
 							};
-							getShell().getDisplay().asyncExec(r);
+							getShell().getDisplay().asyncExec(r); //FLLDCIM: MARK — T08 UI_THREAD_SYNCHRONIZER CALL
 						}
 					}
 				} else if (de instanceof IJavaThread) {
@@ -1127,7 +1127,7 @@ public class JavaSnippetEditor extends AbstractDecoratedTextEditor implements ID
 								} else if (e.getDetail() == DebugEvent.BREAKPOINT && bps.length > 0) {
 									if (bps[0].equals(ScrapbookLauncher.getDefault().getMagicBreakpoint(jt.getDebugTarget()))) {
 										// locate the 'eval' method and step over
-										for (IStackFrame stackframe : jt.getStackFrames()) {
+										for (IStackFrame stackframe : jt.getStackFrames()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 											IJavaStackFrame frame = (IJavaStackFrame) stackframe;
 											if (frame.getReceivingTypeName().equals(SCRAPBOOK_MAIN1_TYPE)
 													&& frame.getName().equals(SCRAPBOOK_MAIN1_METHOD)) {
@@ -1163,7 +1163,7 @@ public class JavaSnippetEditor extends AbstractDecoratedTextEditor implements ID
 	/* (non-Javadoc)
 	 * @see org.eclipse.ui.texteditor.AbstractTextEditor#handlePreferenceStoreChanged(org.eclipse.jface.util.PropertyChangeEvent)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	protected void handlePreferenceStoreChanged(PropertyChangeEvent event) {
 		JDISourceViewer isv= (JDISourceViewer) getSourceViewer();
 		if (isv != null) {
@@ -1286,9 +1286,9 @@ public class JavaSnippetEditor extends AbstractDecoratedTextEditor implements ID
 		}
 		String message = Util.ZERO_LENGTH_STRING;
 		if (projectName != null) {
-			message = projectName + SnippetMessages.getString("JavaSnippetEditor._is_not_a_Java_Project._n_1"); //$NON-NLS-1$
+			message = projectName + SnippetMessages.getString("JavaSnippetEditor._is_not_a_Java_Project._n_1"); //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		}
-		showError(message + SnippetMessages.getString("JavaSnippetEditor.Unable_to_perform_evaluation_outside_of_a_Java_Project_2")); //$NON-NLS-1$
+		showError(message + SnippetMessages.getString("JavaSnippetEditor.Unable_to_perform_evaluation_outside_of_a_Java_Project_2")); //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 	}
 
 	/**
@@ -1296,7 +1296,7 @@ public class JavaSnippetEditor extends AbstractDecoratedTextEditor implements ID
 	 * of a file resource and saves the document there.
 	 * @see org.eclipse.ui.texteditor.AbstractTextEditor#performSaveAs(org.eclipse.core.runtime.IProgressMonitor)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	protected void performSaveAs(IProgressMonitor progressMonitor) {
 		Shell shell= getSite().getShell();
 		SaveAsDialog dialog= new SaveAsDialog(shell);
@@ -1314,7 +1314,7 @@ public class JavaSnippetEditor extends AbstractDecoratedTextEditor implements ID
 		IFile file= workspace.getRoot().getFile(path);
 		final IEditorInput newInput= new FileEditorInput(file);
 
-		WorkspaceModifyOperation op= new WorkspaceModifyOperation() {
+		WorkspaceModifyOperation op= new WorkspaceModifyOperation() { //FLLDCIM: MARK — T09  ANONYMOUS
 			@Override
 			public void execute(final IProgressMonitor monitor) throws CoreException {
 				IDocumentProvider dp= getDocumentProvider();
@@ -1331,7 +1331,7 @@ public class JavaSnippetEditor extends AbstractDecoratedTextEditor implements ID
 		} catch (InvocationTargetException x) {
 			JDIDebugUIPlugin.log(x);
 			String title= SnippetMessages.getString("JavaSnippetEditor.Problems_During_Save_As..._3");  //$NON-NLS-1$
-			String msg= SnippetMessages.getString("JavaSnippetEditor.Save_could_not_be_completed.__4") +  x.getTargetException().getMessage(); //$NON-NLS-1$
+			String msg= SnippetMessages.getString("JavaSnippetEditor.Save_could_not_be_completed.__4") +  x.getTargetException().getMessage(); //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 			MessageDialog.openError(shell, title, msg);
 		} finally {
 			getDocumentProvider().changed(newInput);
@@ -1434,7 +1434,7 @@ public class JavaSnippetEditor extends AbstractDecoratedTextEditor implements ID
 	protected void async(Runnable r) {
 		Control control= getVerticalRuler().getControl();
 		if (!control.isDisposed()) {
-			control.getDisplay().asyncExec(r);
+			control.getDisplay().asyncExec(r); //FLLDCIM: MARK — T08 UI_THREAD_SYNCHRONIZER CALL
 		}
 	}
 

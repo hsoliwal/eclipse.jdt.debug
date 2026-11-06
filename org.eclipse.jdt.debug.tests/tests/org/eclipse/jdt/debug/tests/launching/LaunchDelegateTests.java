@@ -85,7 +85,7 @@ public class LaunchDelegateTests extends AbstractDebugTest {
 		ILaunchManager manager = getLaunchManager();
 		ILaunchConfigurationType type = manager.getLaunchConfigurationType(IJavaLaunchConfigurationConstants.ID_JAVA_APPLICATION);
 		assertNotNull("Missing java application launch config type", type); //$NON-NLS-1$
-		HashSet<String> modes = new HashSet<>();
+		HashSet<String> modes = new HashSet<>(); //FLLDCIM: MARK — M03 M3_SET_LANES NEW
 		modes.add("alternate"); //$NON-NLS-1$
 		modes.add(ILaunchManager.DEBUG_MODE);
 		assertTrue("Should support mixed mode (alternate/debug)", type.supportsModeCombination(modes)); //$NON-NLS-1$
@@ -98,17 +98,17 @@ public class LaunchDelegateTests extends AbstractDebugTest {
 	/**
 	 * Tests if the java launch delegate was found as one of the delegates for debug mode.
 	 */
-	public void testSingleDebugModeDelegate() throws CoreException {
+	public void testSingleDebugModeDelegate() throws CoreException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		ILaunchManager manager = getLaunchManager();
 		ILaunchConfigurationType type = manager.getLaunchConfigurationType(IJavaLaunchConfigurationConstants.ID_JAVA_APPLICATION);
 		assertNotNull("Missing java application launch config type", type); //$NON-NLS-1$
-		HashSet<String> modes = new HashSet<>();
+		HashSet<String> modes = new HashSet<>(); //FLLDCIM: MARK — M03 M3_SET_LANES NEW
 		modes.add(ILaunchManager.DEBUG_MODE);
 		assertTrue("Should support mode (debug)", type.supportsModeCombination(modes)); //$NON-NLS-1$
 		ILaunchDelegate[] delegates = type.getDelegates(modes);
 		assertTrue("missing delegate", delegates.length > 0); //$NON-NLS-1$
 		boolean found = false;
-		for(int i = 0; i < delegates.length; i++) {
+		for(int i = 0; i < delegates.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			if(delegates[i].getDelegate().getClass().getName().endsWith("JavaLaunchDelegate")) { //$NON-NLS-1$
 				found = true;
 				break;
@@ -124,7 +124,7 @@ public class LaunchDelegateTests extends AbstractDebugTest {
 		ILaunchManager manager = getLaunchManager();
 		ILaunchConfigurationType type = manager.getLaunchConfigurationType(IJavaLaunchConfigurationConstants.ID_JAVA_APPLICATION);
 		assertNotNull("Missing java application launch config type", type); //$NON-NLS-1$
-		HashSet<String> modes = new HashSet<>();
+		HashSet<String> modes = new HashSet<>(); //FLLDCIM: MARK — M03 M3_SET_LANES NEW
 		modes.add("alternate"); //$NON-NLS-1$
 		assertTrue("Should support mode (alternate)", type.supportsModeCombination(modes)); //$NON-NLS-1$
 		ILaunchDelegate[] delegates = type.getDelegates(modes);
@@ -143,9 +143,9 @@ public class LaunchDelegateTests extends AbstractDebugTest {
 		assertNotNull("Missing java application launch config type", type); //$NON-NLS-1$
 		String[][] modesavail = {{"alternate"}, {"debug", "alternate"}, {"debug", "alternate2"}}; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$
 		HashSet<String> modes = null;
-		for(int i = 0; i < modesavail.length; i++) {
-			modes = new HashSet<>(Arrays.asList(modesavail[i]));
-			assertTrue("Should support modes "+modes.toString(), type.supportsModeCombination(modes)); //$NON-NLS-1$
+		for(int i = 0; i < modesavail.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
+			modes = new HashSet<>(Arrays.asList(modesavail[i])); //FLLDCIM: MARK — M03 M3_SET_LANES NEW
+			assertTrue("Should support modes "+modes.toString(), type.supportsModeCombination(modes)); //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 			ILaunchDelegate[] delegates = type.getDelegates(modes);
 			assertTrue("missing delegate", delegates.length > 0); //$NON-NLS-1$
 			assertEquals("Wrong number of delegates", 1, delegates.length); //$NON-NLS-1$
@@ -160,17 +160,17 @@ public class LaunchDelegateTests extends AbstractDebugTest {
 		ILaunchManager manager = getLaunchManager();
 		ILaunchConfigurationType type = manager.getLaunchConfigurationType(IJavaLaunchConfigurationConstants.ID_JAVA_APPLICATION);
 		assertNotNull("Missing java application launch config type", type); //$NON-NLS-1$
-		HashSet<String> modes = new HashSet<>();
+		HashSet<String> modes = new HashSet<>(); //FLLDCIM: MARK — M03 M3_SET_LANES NEW
 		modes.add("alternate2"); //$NON-NLS-1$
 		assertTrue("Should support mode 'alternate2'", type.supportsModeCombination(modes)); //$NON-NLS-1$
 		ILaunchDelegate[] delegates = type.getDelegates(modes);
 		assertTrue("missing delegate", delegates.length > 0); //$NON-NLS-1$
-		assertEquals("Wrong number of delegates, should be 2 only "+delegates.length+" found", 2, delegates.length); //$NON-NLS-1$ //$NON-NLS-2$
-		HashSet<Class<? extends ILaunchConfigurationDelegate>> dels = new HashSet<>();
-		for(int i = 0; i < delegates.length; i++) {
+		assertEquals("Wrong number of delegates, should be 2 only "+delegates.length+" found", 2, delegates.length); //$NON-NLS-1$ //$NON-NLS-2$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
+		HashSet<Class<? extends ILaunchConfigurationDelegate>> dels = new HashSet<>(); //FLLDCIM: MARK — M03 M3_SET_LANES NEW
+		for(int i = 0; i < delegates.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			dels.add(delegates[i].getDelegate().getClass());
 		}
-		HashSet<Object> ds = new HashSet<>(Arrays.asList(new Object[] {TestLaunchDelegate1.class, TestLaunchDelegate2.class}));
+		HashSet<Object> ds = new HashSet<>(Arrays.asList(new Object[] {TestLaunchDelegate1.class, TestLaunchDelegate2.class})); //FLLDCIM: MARK — M03 M3_SET_LANES NEW
 		assertTrue("There must be only TestLaunchDelegate1 and TestLaunchDelegate2 as registered delegates for the mode alternate2 and the local java type", ds.containsAll(dels)); //$NON-NLS-1$
 	}
 
@@ -181,9 +181,9 @@ public class LaunchDelegateTests extends AbstractDebugTest {
 		ILaunchManager manager = getLaunchManager();
 		ILaunchConfigurationType type = manager.getLaunchConfigurationType(IJavaLaunchConfigurationConstants.ID_JAVA_APPLICATION);
 		assertNotNull("Missing java application launch config type", type); //$NON-NLS-1$
-		HashSet<String> modes = new HashSet<>();
+		HashSet<String> modes = new HashSet<>(); //FLLDCIM: MARK — M03 M3_SET_LANES NEW
 		modes.add("alternate2"); //$NON-NLS-1$
 		modes.add("foo"); //$NON-NLS-1$
-		assertFalse("Should not support modes: " + modes.toString(), type.supportsModeCombination(modes)); //$NON-NLS-1$
+		assertFalse("Should not support modes: " + modes.toString(), type.supportsModeCombination(modes)); //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 	}
 }

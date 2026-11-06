@@ -74,7 +74,7 @@ public class AllInstancesActionDelegate extends BaseInstanceActionDelegate imple
 	/* (non-Javadoc)
 	 * @see org.eclipse.ui.IActionDelegate#run(org.eclipse.jface.action.IAction)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public void run(IAction action) {
 		if (getPart() != null){
 			ISelectionProvider provider = getPart().getSite().getSelectionProvider();
@@ -122,7 +122,7 @@ public class AllInstancesActionDelegate extends BaseInstanceActionDelegate imple
 	 *
 	 * @param selectedElement a method, type, or variable
 	 */
-	protected void runForSelection(IAction action, Object selectedElement) {
+	protected void runForSelection(IAction action, Object selectedElement) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		if (selectedElement != null){
 
 			IJavaType type = null;
@@ -205,7 +205,7 @@ public class AllInstancesActionDelegate extends BaseInstanceActionDelegate imple
 		JDIAllInstancesValue aiv = new JDIAllInstancesValue(target, rtype);
 		InspectPopupDialog ipd = new InspectPopupDialog(getShell(), getAnchor(), PopupInspectAction.ACTION_DEFININITION_ID, new JavaInspectExpression(NLS.bind(Messages.AllInstancesActionDelegate_2, name), aiv));
 		ipd.open();
-		ipd.getTreeViewer().addDoubleClickListener(event -> handleDoubleClick(action, event));
+		ipd.getTreeViewer().addDoubleClickListener(event -> handleDoubleClick(action, event)); //FLLDCIM: MARK — T05 VIEWER_OPEN CALL
 	}
 
 	 /**
@@ -214,7 +214,7 @@ public class AllInstancesActionDelegate extends BaseInstanceActionDelegate imple
      * @param part the currently active workbench part
      */
     protected void report(final String message, final IWorkbenchPart part) {
-        JDIDebugUIPlugin.getStandardDisplay().asyncExec(new Runnable() {
+        JDIDebugUIPlugin.getStandardDisplay().asyncExec(new Runnable() { //FLLDCIM: MARK — T08 UI_THREAD_SYNCHRONIZER CALL
             @Override
 			public void run() {
                 IEditorStatusLine statusLine = part.getAdapter(IEditorStatusLine.class);
@@ -234,7 +234,7 @@ public class AllInstancesActionDelegate extends BaseInstanceActionDelegate imple
 	 *
 	 * @return anchor point or <code>null</code> if one could not be obtained
 	 */
-    protected Point getAnchor() {
+    protected Point getAnchor() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 
     	// If it's a debug view (variables or expressions), get the location of the selected item
     	IDebugView debugView = getPart().getAdapter(IDebugView.class);

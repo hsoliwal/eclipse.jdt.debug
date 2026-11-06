@@ -31,7 +31,7 @@ public class LaunchingPreferenceInitializer extends AbstractPreferenceInitialize
 	/* (non-Javadoc)
 	 * @see org.eclipse.core.runtime.preferences.AbstractPreferenceInitializer#initializeDefaultPreferences()
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public void initializeDefaultPreferences() {
 		IEclipsePreferences dnode = DefaultScope.INSTANCE.getNode(LaunchingPlugin.ID_PLUGIN);
 		if(dnode == null) {
@@ -52,7 +52,7 @@ public class LaunchingPreferenceInitializer extends AbstractPreferenceInitialize
 		// NOTE: only the pref's default value is initialized to avoid deadlock (we don't set the
 		// associated JavaCore options, as this can trigger a job to touch the project (see
 		// bug https://bugs.eclipse.org/bugs/show_bug.cgi?id=260445)
-		String launchFilter = "*." + ILaunchConfiguration.LAUNCH_CONFIGURATION_FILE_EXTENSION; //$NON-NLS-1$
+		String launchFilter = "*." + ILaunchConfiguration.LAUNCH_CONFIGURATION_FILE_EXTENSION; //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		dnode = DefaultScope.INSTANCE.getNode(JavaCore.PLUGIN_ID);
 		if(dnode == null) {
 			return;
@@ -61,22 +61,22 @@ public class LaunchingPreferenceInitializer extends AbstractPreferenceInitialize
 		//https://bugs.eclipse.org/bugs/show_bug.cgi?id=395366
 		String val = dnode.get(JavaCore.CORE_JAVA_BUILD_RESOURCE_COPY_FILTER, (String)null);
 		if(val != null && !"".equals(val)) { //$NON-NLS-1$
-			String[] filters = val.split(","); //$NON-NLS-1$
-			StringBuilder buff = new StringBuilder();
+			String[] filters = val.split(","); //$NON-NLS-1$ //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
+			StringBuilder buff = new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 			boolean found = false;
-			for (int i = 0; i < filters.length; i++) {
+			for (int i = 0; i < filters.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				if(launchFilter.equals(val)) {
 					found = true;
 					break;
 				}
 				String filter = filters[i].trim();
-				buff.append(filter);
+				buff.append(filter); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				if(i < filters.length-1) {
-					buff.append(',');
+					buff.append(','); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				}
 			}
 			if(!found) {
-				launchFilter = buff.append(',').append(launchFilter).toString();
+				launchFilter = buff.append(',').append(launchFilter).toString(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				dnode.put(JavaCore.CORE_JAVA_BUILD_RESOURCE_COPY_FILTER, launchFilter);
 			}
 		}

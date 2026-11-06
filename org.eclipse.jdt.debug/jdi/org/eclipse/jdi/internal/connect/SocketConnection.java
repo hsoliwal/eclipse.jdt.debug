@@ -67,7 +67,7 @@ public class SocketConnection extends Connection {
 	 *
 	 * @see com.sun.jdi.connect.spi.Connection#readPacket()
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public byte[] readPacket() throws IOException {
 		DataInputStream stream;
 		synchronized (this) {
@@ -104,7 +104,7 @@ public class SocketConnection extends Connection {
 	 *
 	 * @see com.sun.jdi.connect.spi.Connection#writePacket(byte[])
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public void writePacket(byte[] packet) throws IOException {
 		if (!isOpen()) {
 			throw new ClosedConnectionException();
@@ -115,13 +115,13 @@ public class SocketConnection extends Connection {
 		}
 		if (packet.length < 11) {
 			throw new IllegalArgumentException(
-					"Invalid JDWP Packet, must be at least 11 bytes. PacketSize:" + packet.length); //$NON-NLS-1$
+					"Invalid JDWP Packet, must be at least 11 bytes. PacketSize:" + packet.length); //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		}
 
 		int packetSize = getPacketLength(packet);
 		if (packetSize < 11) {
 			throw new IllegalArgumentException(
-					"Invalid JDWP Packet, must be at least 11 bytes. PacketSize:" + packetSize); //$NON-NLS-1$
+					"Invalid JDWP Packet, must be at least 11 bytes. PacketSize:" + packetSize); //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		}
 
 		if (packetSize > packet.length) {

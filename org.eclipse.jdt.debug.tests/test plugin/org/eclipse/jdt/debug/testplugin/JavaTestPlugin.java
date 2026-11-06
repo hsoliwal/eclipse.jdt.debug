@@ -89,7 +89,7 @@ public class JavaTestPlugin extends AbstractUIPlugin {
 	public File getFileInPlugin(IPath path) {
 		try {
 			Bundle bundle = getDefault().getBundle();
-			URL installURL = bundle.getEntry("/" + path.toString());
+			URL installURL = bundle.getEntry("/" + path.toString()); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 			if (installURL == null) {
 				return null;
 			}

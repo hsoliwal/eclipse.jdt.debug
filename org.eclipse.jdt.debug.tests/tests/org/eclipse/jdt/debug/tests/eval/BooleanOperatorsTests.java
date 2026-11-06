@@ -32,28 +32,28 @@ public class BooleanOperatorsTests extends Tests {
 
 	// boolean | boolean
 
-	public void testBooleanOrBoolean() throws Throwable {
+	public void testBooleanOrBoolean() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xBoolean + orOp + xBoolean);
+		IValue value = eval(xBoolean + orOp + xBoolean); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("boolean or boolean : wrong type : ", "boolean", typeName);
 		boolean booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
 		assertEquals("boolean or boolean : wrong result : ", xBooleanValue | xBooleanValue, booleanValue);
 
-		value = eval(xBoolean + orOp + yBoolean);
+		value = eval(xBoolean + orOp + yBoolean); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("boolean or boolean : wrong type : ", "boolean", typeName);
 		booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
 		assertEquals("boolean or boolean : wrong result : ", xBooleanValue | yBooleanValue, booleanValue);
 
-		value = eval(yBoolean + orOp + xBoolean);
+		value = eval(yBoolean + orOp + xBoolean); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("boolean or boolean : wrong type : ", "boolean", typeName);
 		booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
 		assertEquals("boolean or boolean : wrong result : ", yBooleanValue | xBooleanValue, booleanValue);
 
-		value = eval(yBoolean + orOp + yBoolean);
+		value = eval(yBoolean + orOp + yBoolean); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("boolean or boolean : wrong type : ", "boolean", typeName);
 		booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
@@ -65,28 +65,28 @@ public class BooleanOperatorsTests extends Tests {
 
 	// boolean & boolean
 
-	public void testBooleanAndBoolean() throws Throwable {
+	public void testBooleanAndBoolean() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xBoolean + andOp + xBoolean);
+		IValue value = eval(xBoolean + andOp + xBoolean); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("boolean and boolean : wrong type : ", "boolean", typeName);
 		boolean booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
 		assertEquals("boolean and boolean : wrong result : ", xBooleanValue & xBooleanValue, booleanValue);
 
-		value = eval(xBoolean + andOp + yBoolean);
+		value = eval(xBoolean + andOp + yBoolean); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("boolean and boolean : wrong type : ", "boolean", typeName);
 		booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
 		assertEquals("boolean and boolean : wrong result : ", xBooleanValue & yBooleanValue, booleanValue);
 
-		value = eval(yBoolean + andOp + xBoolean);
+		value = eval(yBoolean + andOp + xBoolean); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("boolean and boolean : wrong type : ", "boolean", typeName);
 		booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
 		assertEquals("boolean and boolean : wrong result : ", yBooleanValue & xBooleanValue, booleanValue);
 
-		value = eval(yBoolean + andOp + yBoolean);
+		value = eval(yBoolean + andOp + yBoolean); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("boolean and boolean : wrong type : ", "boolean", typeName);
 		booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
@@ -98,28 +98,28 @@ public class BooleanOperatorsTests extends Tests {
 
 	// boolean ^ boolean
 
-	public void testBooleanXorBoolean() throws Throwable {
+	public void testBooleanXorBoolean() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xBoolean + xorOp + xBoolean);
+		IValue value = eval(xBoolean + xorOp + xBoolean); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("boolean xor boolean : wrong type : ", "boolean", typeName);
 		boolean booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
 		assertEquals("boolean xor boolean : wrong result : ", xBooleanValue ^ xBooleanValue, booleanValue);
 
-		value = eval(xBoolean + xorOp + yBoolean);
+		value = eval(xBoolean + xorOp + yBoolean); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("boolean xor boolean : wrong type : ", "boolean", typeName);
 		booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
 		assertEquals("boolean xor boolean : wrong result : ", xBooleanValue ^ yBooleanValue, booleanValue);
 
-		value = eval(yBoolean + xorOp + xBoolean);
+		value = eval(yBoolean + xorOp + xBoolean); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("boolean xor boolean : wrong type : ", "boolean", typeName);
 		booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
 		assertEquals("boolean xor boolean : wrong result : ", yBooleanValue ^ xBooleanValue, booleanValue);
 
-		value = eval(yBoolean + xorOp + yBoolean);
+		value = eval(yBoolean + xorOp + yBoolean); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("boolean xor boolean : wrong type : ", "boolean", typeName);
 		booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
@@ -131,16 +131,16 @@ public class BooleanOperatorsTests extends Tests {
 
 	// ! boolean
 
-	public void testNotBoolean() throws Throwable {
+	public void testNotBoolean() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(notOp + xBoolean);
+		IValue value = eval(notOp + xBoolean); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("not boolean : wrong type : ", "boolean", typeName);
 		boolean booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
 		assertEquals("not boolean : wrong result : ", ! xBooleanValue, booleanValue);
 
-		value = eval(notOp + yBoolean);
+		value = eval(notOp + yBoolean); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("not boolean : wrong type : ", "boolean", typeName);
 		booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();

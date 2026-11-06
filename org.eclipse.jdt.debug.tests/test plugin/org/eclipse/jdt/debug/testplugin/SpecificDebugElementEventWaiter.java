@@ -21,7 +21,7 @@ import org.eclipse.debug.core.model.IDebugElement;
  * on a *specific* debug element.  Contrast this with DebugElementKindEventWaiter which is similar,
  * but is used to wait for a certain type of event on a *kind* of debug element (thread, debug target, etc.)
  */
-public class SpecificDebugElementEventWaiter extends DebugEventWaiter {
+public class SpecificDebugElementEventWaiter extends DebugEventWaiter { //FLLDCIM: MARK — T27  IMPLEMENTS
 
 	protected IDebugElement fDebugElement;
 

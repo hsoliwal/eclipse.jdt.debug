@@ -31,7 +31,7 @@ import org.eclipse.jface.action.IAction;
 /**
  * Adds an internal jar to the runtime class path.
  */
-public class AddJarAction extends RuntimeClasspathAction {
+public class AddJarAction extends RuntimeClasspathAction { //FLLDCIM: MARK — T04  IMPLEMENTS
 
 	public AddJarAction(IClasspathViewer viewer) {
 		super(ActionMessages.AddJarAction_Add__JARs_1, viewer);
@@ -49,7 +49,7 @@ public class AddJarAction extends RuntimeClasspathAction {
 
 		if (paths != null && paths.length > 0) {
 			IRuntimeClasspathEntry[] res= new IRuntimeClasspathEntry[paths.length];
-			for (int i= 0; i < res.length; i++) {
+			for (int i= 0; i < res.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				IResource elem= ResourcesPlugin.getWorkspace().getRoot().getFile(paths[i]);
 				res[i]= JavaRuntime.newArchiveRuntimeClasspathEntry(elem);
 			}
@@ -63,9 +63,9 @@ public class AddJarAction extends RuntimeClasspathAction {
 	 */
 	protected IPath[] getSelectedJars() {
 		List<IRuntimeClasspathEntry> list = getEntriesAsList();
-		List<IPath> jars = new ArrayList<>();
+		List<IPath> jars = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 		Iterator<IRuntimeClasspathEntry> iter = list.iterator();
-		while (iter.hasNext()) {
+		while (iter.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			IRuntimeClasspathEntry entry = iter.next();
 			if (entry.getType() == IRuntimeClasspathEntry.ARCHIVE) {
 				IResource res = entry.getResource();

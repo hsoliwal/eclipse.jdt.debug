@@ -62,7 +62,7 @@ public class ClasspathShortenerTests extends AbstractDebugTest {
 	@Override
 	protected void tearDown() throws Exception {
 		if (classpathShortener != null) {
-			classpathShortener.getProcessTempFiles().forEach(file -> file.delete());
+			classpathShortener.getProcessTempFiles().forEach(file -> file.delete()); //FLLDCIM: MARK — M31 M3FILE_IO CALL
 		}
 		super.tearDown();
 	}
@@ -108,7 +108,7 @@ public class ClasspathShortenerTests extends AbstractDebugTest {
 		assertTrue(result);
 	}
 
-	public void testForceClasspathOnlyJar() throws Exception {
+	public void testForceClasspathOnlyJar() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		// Given
 		String classpath = getClasspathOrModulePath(userHomePath("/workspace/myProject/bin"), userHomePath("/workspace/myProject/lib/lib 1.jar"));
 		String[] cmdLine = new String[] { JAVA_10_PATH, ENCODING_ARG, "-classpath", classpath, MAIN_CLASS, "-arg1", "arg2" };
@@ -132,7 +132,7 @@ public class ClasspathShortenerTests extends AbstractDebugTest {
 		assertNotEquals("Second Classpath jar file location not found", -1, index);
 	}
 
-	public void testArgFileUsedForLongClasspathOnJava9() throws Exception {
+	public void testArgFileUsedForLongClasspathOnJava9() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		// Given
 		String classpath = getClasspathOrModulePath(userHomePath("/workspace/myProject/bin"), userHomePath("/workspace/myProject/lib/lib 1.jar"));
 		String[] cmdLine = new String[] { JAVA_10_PATH, ENCODING_ARG, "-cp", classpath, MAIN_CLASS, "-arg1", "arg2" };
@@ -145,13 +145,13 @@ public class ClasspathShortenerTests extends AbstractDebugTest {
 		// Then
 		assertTrue(result);
 		assertEquals(1, classpathShortener.getProcessTempFiles().size());
-		assertArrayEquals(new String[] { JAVA_10_PATH, ENCODING_ARG, "@" + classpathShortener.getProcessTempFiles().get(0).getAbsolutePath(),
+		assertArrayEquals(new String[] { JAVA_10_PATH, ENCODING_ARG, "@" + classpathShortener.getProcessTempFiles().get(0).getAbsolutePath(), //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 				MAIN_CLASS, "-arg1", "arg2" }, classpathShortener.getCmdLine());
-		assertEquals("-classpath "
+		assertEquals("-classpath " //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 				+ classpathShortener.quoteWindowsPath(classpath), getFileContents(classpathShortener.getProcessTempFiles().get(0)));
 	}
 
-	public void testArgFileUsedForLongModulePath() throws Exception {
+	public void testArgFileUsedForLongModulePath() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		// Given
 		String modulepath = getClasspathOrModulePath(userHomePath("/workspace/myProject/bin"), userHomePath("/workspace/myProject/lib/lib 1.jar"));
 		String[] cmdLine = new String[] { JAVA_10_PATH, ENCODING_ARG, "-p", modulepath, MAIN_CLASS, "-arg1", "arg2" };
@@ -164,13 +164,13 @@ public class ClasspathShortenerTests extends AbstractDebugTest {
 		// Then
 		assertTrue(result);
 		assertEquals(1, classpathShortener.getProcessTempFiles().size());
-		assertArrayEquals(new String[] { JAVA_10_PATH, ENCODING_ARG, "@" + classpathShortener.getProcessTempFiles().get(0).getAbsolutePath(),
+		assertArrayEquals(new String[] { JAVA_10_PATH, ENCODING_ARG, "@" + classpathShortener.getProcessTempFiles().get(0).getAbsolutePath(), //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 				MAIN_CLASS, "-arg1", "arg2" }, classpathShortener.getCmdLine());
-		assertEquals("--module-path "
+		assertEquals("--module-path " //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 				+ classpathShortener.quoteWindowsPath(modulepath), getFileContents(classpathShortener.getProcessTempFiles().get(0)));
 	}
 
-	public void testLongClasspathAndLongModulePath() throws Exception {
+	public void testLongClasspathAndLongModulePath() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		// Given
 		String classpath = getClasspathOrModulePath(userHomePath("/workspace/myProject/lib/lib 2.jar"), userHomePath("/workspace/myProject/lib/lib 3.jar"));
 		String modulepath = getClasspathOrModulePath(userHomePath("/workspace/myProject/bin"), userHomePath("/workspace/myProject/lib/lib 1.jar"));
@@ -184,16 +184,16 @@ public class ClasspathShortenerTests extends AbstractDebugTest {
 		// Then
 		assertTrue(result);
 		assertEquals(2, classpathShortener.getProcessTempFiles().size());
-		assertArrayEquals(new String[] { JAVA_10_PATH, ENCODING_ARG, "@" + classpathShortener.getProcessTempFiles().get(0).getAbsolutePath(),
-				"@" + classpathShortener.getProcessTempFiles().get(1).getAbsolutePath(), MAIN_CLASS, "-arg1",
+		assertArrayEquals(new String[] { JAVA_10_PATH, ENCODING_ARG, "@" + classpathShortener.getProcessTempFiles().get(0).getAbsolutePath(), //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
+				"@" + classpathShortener.getProcessTempFiles().get(1).getAbsolutePath(), MAIN_CLASS, "-arg1", //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 				"arg2" }, classpathShortener.getCmdLine());
-		assertEquals("-classpath "
+		assertEquals("-classpath " //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 				+ classpathShortener.quoteWindowsPath(classpath), getFileContents(classpathShortener.getProcessTempFiles().get(0)));
-		assertEquals("--module-path "
+		assertEquals("--module-path " //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 				+ classpathShortener.quoteWindowsPath(modulepath), getFileContents(classpathShortener.getProcessTempFiles().get(1)));
 	}
 
-	public void testClasspathOnlyJarUsedForLongClasspathOnJava8() throws Exception {
+	public void testClasspathOnlyJarUsedForLongClasspathOnJava8() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		// Given
 		String classpath = getClasspathOrModulePath(userHomePath("/workspace/myProject/bin"), userHomePath("/workspace/myProject/lib/lib 1.jar"));
 		String[] cmdLine = new String[] { JAVA_8_PATH, ENCODING_ARG, "-cp", classpath, MAIN_CLASS, "-arg1", "arg2" };
@@ -218,7 +218,7 @@ public class ClasspathShortenerTests extends AbstractDebugTest {
 		assertNotEquals("Second Classpath jar file location not found", -1, index);
 	}
 
-	public void testClasspathEnvVariableUsedForLongClasspathOnJava8OnWindows() {
+	public void testClasspathEnvVariableUsedForLongClasspathOnJava8OnWindows() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		// Given
 		String classpath = getClasspathOrModulePath(userHomePath("/workspace/myProject/bin"), userHomePath("/workspace/myProject/lib/lib 1.jar"));
 		String[] cmdLine = new String[] { JAVA_8_PATH, ENCODING_ARG, "-cp", classpath, MAIN_CLASS, "-arg1", "arg2" };
@@ -226,7 +226,7 @@ public class ClasspathShortenerTests extends AbstractDebugTest {
 		classpathShortener.setMaxCommandLineLength(100);
 
 		// When
-		Map<String, String> nativeEnvironment = new LinkedHashMap<>();
+		Map<String, String> nativeEnvironment = new LinkedHashMap<>(); //FLLDCIM: MARK — M04 M3_ORDERED_LANES NEW
 		nativeEnvironment.put("PATH", "C:\\WINDOWS\\System32;C:\\WINDOWS");
 		classpathShortener.setNativeEnvironment(nativeEnvironment);
 		boolean result = classpathShortener.shortenCommandLineIfNecessary();
@@ -235,11 +235,11 @@ public class ClasspathShortenerTests extends AbstractDebugTest {
 		assertTrue(result);
 		assertEquals(0, classpathShortener.getProcessTempFiles().size());
 		assertArrayEquals(new String[] { "PATH=C:\\WINDOWS\\System32;C:\\WINDOWS",
-				"CLASSPATH=" + classpath }, classpathShortener.getEnvp());
+				"CLASSPATH=" + classpath }, classpathShortener.getEnvp()); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		assertArrayEquals(new String[] { JAVA_8_PATH, ENCODING_ARG, MAIN_CLASS, "-arg1", "arg2" }, classpathShortener.getCmdLine());
 	}
 
-	public void testClasspathUsedOnWindowsWhenEnvp() {
+	public void testClasspathUsedOnWindowsWhenEnvp() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		// Given
 		String classpath = getClasspathOrModulePath(userHomePath("/workspace/myProject/bin"), userHomePath("/workspace/myProject/lib/lib 1.jar"));
 		String[] cmdLine = new String[] { JAVA_8_PATH, ENCODING_ARG, "-cp", classpath, MAIN_CLASS, "-arg1", "arg2" };
@@ -254,11 +254,11 @@ public class ClasspathShortenerTests extends AbstractDebugTest {
 		assertTrue(result);
 		assertEquals(0, classpathShortener.getProcessTempFiles().size());
 		assertArrayEquals(new String[] { "MYVAR1=value1", "MYVAR2=value2",
-				"CLASSPATH=" + classpath }, classpathShortener.getEnvp());
+				"CLASSPATH=" + classpath }, classpathShortener.getEnvp()); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		assertArrayEquals(new String[] { JAVA_8_PATH, ENCODING_ARG, MAIN_CLASS, "-arg1", "arg2" }, classpathShortener.getCmdLine());
 	}
 
-	public void testClasspathInEnvironmentReplacedOnWindows() {
+	public void testClasspathInEnvironmentReplacedOnWindows() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		// Given
 		String classpath = getClasspathOrModulePath(userHomePath("/workspace/myProject/bin"), userHomePath("/workspace/myProject/lib/lib 1.jar"));
 		String[] cmdLine = new String[] { JAVA_8_PATH, ENCODING_ARG, "-cp", classpath, MAIN_CLASS, "-arg1", "arg2" };
@@ -266,7 +266,7 @@ public class ClasspathShortenerTests extends AbstractDebugTest {
 		classpathShortener.setMaxCommandLineLength(100);
 
 		// When
-		Map<String, String> nativeEnvironment = new LinkedHashMap<>();
+		Map<String, String> nativeEnvironment = new LinkedHashMap<>(); //FLLDCIM: MARK — M04 M3_ORDERED_LANES NEW
 		nativeEnvironment.put("PATH", "C:\\WINDOWS\\System32;C:\\WINDOWS");
 		nativeEnvironment.put("CLASSPATH", "C:\\myJars\\jar1.jar");
 		classpathShortener.setNativeEnvironment(nativeEnvironment);
@@ -276,16 +276,16 @@ public class ClasspathShortenerTests extends AbstractDebugTest {
 		assertTrue(result);
 		assertEquals(0, classpathShortener.getProcessTempFiles().size());
 		assertArrayEquals(new String[] { "PATH=C:\\WINDOWS\\System32;C:\\WINDOWS",
-				"CLASSPATH=" + classpath }, classpathShortener.getEnvp());
+				"CLASSPATH=" + classpath }, classpathShortener.getEnvp()); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		assertArrayEquals(new String[] { JAVA_8_PATH, ENCODING_ARG, MAIN_CLASS, "-arg1", "arg2" }, classpathShortener.getCmdLine());
 	}
 
 	private String getFileContents(File file) throws IOException {
-		return new String(Files.readAllBytes(file.toPath()), StandardCharsets.UTF_8);
+		return new String(Files.readAllBytes(file.toPath()), StandardCharsets.UTF_8); //FLLDCIM: MARK — M31 M3FILE_IO CALL
 	}
 
 	private String getClasspathAttributeFromJarManifest(File jarFile) throws FileNotFoundException, IOException {
-		try (JarInputStream jarStream = new JarInputStream(new FileInputStream(jarFile))) {
+		try (JarInputStream jarStream = new JarInputStream(new FileInputStream(jarFile))) { //FLLDCIM: MARK — M31 M3FILE_IO NEW
 			Manifest mf = jarStream.getManifest();
 			return mf.getMainAttributes().getValue(Attributes.Name.CLASS_PATH);
 		}
@@ -294,7 +294,7 @@ public class ClasspathShortenerTests extends AbstractDebugTest {
 	private List<File> getClasspathJarsFromJarManifest(File jarFile) throws FileNotFoundException, IOException {
 		File parentDir = jarFile.getParentFile();
 		String classpath = getClasspathAttributeFromJarManifest(jarFile);
-		return Arrays.stream(classpath.split(" ")).map(relativePath -> {
+		return Arrays.stream(classpath.split(" ")).map(relativePath -> { //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
 			try {
 				return new File(URIUtil.makeAbsolute(new URI(relativePath), parentDir.toURI()));
 			} catch (URISyntaxException e) {
@@ -304,7 +304,7 @@ public class ClasspathShortenerTests extends AbstractDebugTest {
 	}
 
 	private String userHomePath(String path) {
-		return userHome + path;
+		return userHome + path; //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 	}
 
 	private String getClasspathOrModulePath(String... classpathElements) {
@@ -316,7 +316,7 @@ public class ClasspathShortenerTests extends AbstractDebugTest {
 		private boolean allowToUseClasspathOnlyJar = false;
 		private int maxArgLength = Integer.MAX_VALUE;
 		private int maxCommandLineLength = Integer.MAX_VALUE;
-		private Map<String, String> nativeEnvironment = new HashMap<>();
+		private Map<String, String> nativeEnvironment = new HashMap<>(); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
 
 		public ClasspathShortenerForTest(String os, String javaVersion, String[] cmdLine, int classpathArgumentIndex, String[] envp) {
 			super(os, javaVersion, new MockLaunch(), cmdLine, classpathArgumentIndex, null, envp);

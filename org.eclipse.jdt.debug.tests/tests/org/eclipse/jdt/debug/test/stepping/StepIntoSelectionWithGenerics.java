@@ -54,7 +54,7 @@ public class StepIntoSelectionWithGenerics extends AbstractDebugTest {
 	/**
 	 * Tests stepping into a method of a top-level class that is generified
 	 */
-	public void testStepIntoSelection1() throws Exception {
+	public void testStepIntoSelection1() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		createLineBreakpoint(33, qtypename);
 
 		IJavaThread thread= null;
@@ -66,9 +66,9 @@ public class StepIntoSelectionWithGenerics extends AbstractDebugTest {
 			IJavaProject jp = cu.getJavaProject();
 			NullProgressMonitor monitor = new NullProgressMonitor();
 			IType type = jp.findType(qtypename, monitor);
-			assertTrue("The top-level type"+qtypename+" must exist", type.exists());
+			assertTrue("The top-level type"+qtypename+" must exist", type.exists()); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 			IMethod method = type.getMethod(mname, new String[0]);
-			assertTrue("Could not find method "+mname+" in type "+qtypename, method.exists());
+			assertTrue("Could not find method "+mname+" in type "+qtypename, method.exists()); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 			StepIntoSelectionHandler handler = new StepIntoSelectionHandler(thread, (IJavaStackFrame)thread.getTopStackFrame(), method);
 			DebugElementEventWaiter waiter = new DebugElementEventWaiter(DebugEvent.SUSPEND, thread);
@@ -78,7 +78,7 @@ public class StepIntoSelectionWithGenerics extends AbstractDebugTest {
 			thread = (IJavaThread)source;
 
 			IJavaStackFrame frame = (IJavaStackFrame)thread.getTopStackFrame();
-			assertEquals("Should be in StepIntoSelectionWithGenerics."+mname, mname, frame.getMethodName());
+			assertEquals("Should be in StepIntoSelectionWithGenerics."+mname, mname, frame.getMethodName()); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 			assertEquals("Should be stopped on line", 29, frame.getLineNumber());
 
 		} finally {
@@ -90,7 +90,7 @@ public class StepIntoSelectionWithGenerics extends AbstractDebugTest {
 	/**
 	 * Tests stepping into a method of an inner class that is generified
 	 */
-	public void testStepIntoSelection2() throws Exception {
+	public void testStepIntoSelection2() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		createLineBreakpoint(34, qtypename);
 
 		IJavaThread thread= null;
@@ -102,11 +102,11 @@ public class StepIntoSelectionWithGenerics extends AbstractDebugTest {
 			IJavaProject jp = cu.getJavaProject();
 			NullProgressMonitor monitor = new NullProgressMonitor();
 			IType type = jp.findType(qtypename, monitor);
-			assertTrue("The top-level type"+qtypename+" must exist", type.exists());
-			type = jp.findType(qtypename+".InnerClazz", monitor);
+			assertTrue("The top-level type"+qtypename+" must exist", type.exists()); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
+			type = jp.findType(qtypename+".InnerClazz", monitor); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 			assertNotNull("The iner type InnerClazz must not be null", type);
 			IMethod method = type.getMethod(mname, new String[0]);
-			assertTrue("Could not find method "+mname+" in type InnerClazz", method.exists());
+			assertTrue("Could not find method "+mname+" in type InnerClazz", method.exists()); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 			StepIntoSelectionHandler handler = new StepIntoSelectionHandler(thread, (IJavaStackFrame)thread.getTopStackFrame(), method);
 			DebugElementEventWaiter waiter = new DebugElementEventWaiter(DebugEvent.SUSPEND, thread);
@@ -116,7 +116,7 @@ public class StepIntoSelectionWithGenerics extends AbstractDebugTest {
 			thread = (IJavaThread)source;
 
 			IJavaStackFrame frame = (IJavaStackFrame)thread.getTopStackFrame();
-			assertEquals("Should be in InnerClazz."+mname, mname, frame.getMethodName());
+			assertEquals("Should be in InnerClazz."+mname, mname, frame.getMethodName()); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 			assertEquals("Should be stopped on line", 24, frame.getLineNumber());
 
 		} finally {
@@ -128,7 +128,7 @@ public class StepIntoSelectionWithGenerics extends AbstractDebugTest {
 	/**
 	 * Tests stepping into a method of an inner-inner class that is generified
 	 */
-	public void testStepIntoSelection3() throws Exception {
+	public void testStepIntoSelection3() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		createLineBreakpoint(35, qtypename);
 
 		IJavaThread thread= null;
@@ -140,11 +140,11 @@ public class StepIntoSelectionWithGenerics extends AbstractDebugTest {
 			IJavaProject jp = cu.getJavaProject();
 			NullProgressMonitor monitor = new NullProgressMonitor();
 			IType type = jp.findType(qtypename, monitor);
-			assertTrue("The top-level type"+qtypename+" must exist", type.exists());
-			type = jp.findType(qtypename+".InnerClazz.InnerClazz2", monitor);
+			assertTrue("The top-level type"+qtypename+" must exist", type.exists()); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
+			type = jp.findType(qtypename+".InnerClazz.InnerClazz2", monitor); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 			assertNotNull("The inner type InnerClazz2 must not be null", type);
 			IMethod method = type.getMethod(mname, new String[0]);
-			assertTrue("Could not find method "+mname+" in type InnerClazz2", method.exists());
+			assertTrue("Could not find method "+mname+" in type InnerClazz2", method.exists()); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 			StepIntoSelectionHandler handler = new StepIntoSelectionHandler(thread, (IJavaStackFrame)thread.getTopStackFrame(), method);
 			DebugElementEventWaiter waiter = new DebugElementEventWaiter(DebugEvent.SUSPEND, thread);
@@ -154,7 +154,7 @@ public class StepIntoSelectionWithGenerics extends AbstractDebugTest {
 			thread = (IJavaThread)source;
 
 			IJavaStackFrame frame = (IJavaStackFrame)thread.getTopStackFrame();
-			assertEquals("Should be in InnerClazz2."+mname, mname, frame.getMethodName());
+			assertEquals("Should be in InnerClazz2."+mname, mname, frame.getMethodName()); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 			assertEquals("Should be stopped on line", 20, frame.getLineNumber());
 
 		} finally {

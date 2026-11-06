@@ -77,15 +77,15 @@ public class JDTDebugRefactoringUtil {
 	 * @return the <code>Change</code> for this outer type
 	 * @since 3.2
 	 */
-	protected static Change createChangesForOuterTypeChange(ILaunchConfiguration config, IType type, String newfqname, String pname) throws CoreException {
+	protected static Change createChangesForOuterTypeChange(ILaunchConfiguration config, IType type, String newfqname, String pname) throws CoreException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IType[] innerTypes = type.getTypes();
 		if(innerTypes.length == 0) {
 			return null;
 		}
 		Change change = null;
 		String mtname = config.getAttribute(IJavaLaunchConfigurationConstants.ATTR_MAIN_TYPE_NAME, (String)null);
-		for (int i= 0; i < innerTypes.length; i++) {
-			String newTypeName = newfqname + '$' + innerTypes[i].getElementName();
+		for (int i= 0; i < innerTypes.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
+			String newTypeName = newfqname + '$' + innerTypes[i].getElementName(); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 			// if it matches, check the type
 			if (innerTypes[i].getFullyQualifiedName().equals(mtname)) {
 				return new LaunchConfigurationProjectMainTypeChange(config, newTypeName, pname);
@@ -107,10 +107,10 @@ public class JDTDebugRefactoringUtil {
 	 * @since 3.2
 	 */
 	public static Change createChangesForPackageMove(IPackageFragment pfragment, IPackageFragmentRoot destination) throws CoreException {
-		List<Change> changes = new ArrayList<>();
+		List<Change> changes = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 		ILaunchConfiguration[] configs = getJavaTypeLaunchConfigurations(pfragment.getJavaProject().getElementName());
 		String mtname = null;
-		for (int i= 0; i < configs.length; i++) {
+		for (int i= 0; i < configs.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			mtname = configs[i].getAttribute(IJavaLaunchConfigurationConstants.ATTR_MAIN_TYPE_NAME, (String)null);
 			if(mtname != null) {
 				if(mtname.lastIndexOf(pfragment.getElementName()) > -1) {
@@ -131,11 +131,11 @@ public class JDTDebugRefactoringUtil {
 	 * @return the Change for the renaming
 	 * @since 3.2
 	 */
-	public static Change createChangesForPackageRename(IPackageFragment pfragment, String newname) throws CoreException {
-		List<Change> changes = new ArrayList<>();
+	public static Change createChangesForPackageRename(IPackageFragment pfragment, String newname) throws CoreException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
+		List<Change> changes = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 		ILaunchConfiguration[] configs = getJavaTypeLaunchConfigurations(pfragment.getJavaProject().getElementName());
 		String mtname;
-		for (int i= 0; i < configs.length; i++) {
+		for (int i= 0; i < configs.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			mtname = configs[i].getAttribute(IJavaLaunchConfigurationConstants.ATTR_MAIN_TYPE_NAME, (String)null);
 			if(mtname != null) {
 				String pkname = ""; //$NON-NLS-1$
@@ -144,7 +144,7 @@ public class JDTDebugRefactoringUtil {
 					pkname = mtname.substring(0, index);
 				}
 				if (pfragment.getElementName().equals(pkname)) {
-					String ntname = newname + '.' + mtname.substring(index + 1);
+					String ntname = newname + '.' + mtname.substring(index + 1); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 					changes.add(new LaunchConfigurationProjectMainTypeChange(configs[i], ntname, null));
 				}
 			}
@@ -166,10 +166,10 @@ public class JDTDebugRefactoringUtil {
 	 * @since 3.2
 	 */
 	public static Change createChangesForProjectRename(IJavaProject project, String newname) throws CoreException {
-		List<Change> changes = new ArrayList<>();
+		List<Change> changes = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 		ILaunchConfiguration[] configs = getJavaTypeLaunchConfigurations(project.getElementName());
 		LaunchConfigurationProjectMainTypeChange change = null;
-		for (int i= 0; i < configs.length; i++) {
+		for (int i= 0; i < configs.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			change = new LaunchConfigurationProjectMainTypeChange(configs[i], null, newname);
             String newcname = computeNewContainerName(configs[i]);
             if (newcname != null) {
@@ -190,10 +190,10 @@ public class JDTDebugRefactoringUtil {
 	 * @return the Change for the module rename
 	 */
 	public static Change createChangesForModuleRename(IModuleDescription module, String newname) throws CoreException {
-		List<Change> changes = new ArrayList<>();
+		List<Change> changes = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 		ILaunchConfiguration[] configs = getJavaTypeLaunchConfigurationsForModule(module.getElementName());
 		LaunchConfigurationProjectMainTypeChange change = null;
-		for (int i = 0; i < configs.length; i++) {
+		for (int i = 0; i < configs.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			change = new LaunchConfigurationProjectMainTypeChange(configs[i], null, newname);
 			String newcname = computeNewContainerName(configs[i]);
 			if (newcname != null) {
@@ -212,12 +212,12 @@ public class JDTDebugRefactoringUtil {
 	 * @return the <code>Change</code> for changing the specified type
 	 * @since 3.2
 	 */
-	protected static Change createChangesForTypeChange(IType type, String newfqname, String pname) throws CoreException {
-		List<Change> changes = new ArrayList<>();
+	protected static Change createChangesForTypeChange(IType type, String newfqname, String pname) throws CoreException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
+		List<Change> changes = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 		String typename = type.getFullyQualifiedName();
 		ILaunchConfiguration[] configs = getJavaTypeLaunchConfigurations(type.getJavaProject().getElementName());
 		String mtname;
-		for (int i= 0; i < configs.length; i++) {
+		for (int i= 0; i < configs.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			mtname = configs[i].getAttribute(IJavaLaunchConfigurationConstants.ATTR_MAIN_TYPE_NAME, (String)null);
 			if (typename.equals(mtname)) {
 				changes.add(new LaunchConfigurationProjectMainTypeChange(configs[i], newfqname, pname));
@@ -247,11 +247,11 @@ public class JDTDebugRefactoringUtil {
 		}
 		String newfqname = type.getElementName();
 		if (destination instanceof IType) {
-			newfqname = ((IType)destination).getFullyQualifiedName() + '$' + type.getElementName();
+			newfqname = ((IType)destination).getFullyQualifiedName() + '$' + type.getElementName(); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		}
 		else if (destination instanceof IPackageFragment) {
 			if (!((IPackageFragment) destination).isDefaultPackage()) {
-				newfqname = destination.getElementName() + '.' + type.getElementName();
+				newfqname = destination.getElementName() + '.' + type.getElementName(); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 			}
 		}
 		return createChangesForTypeChange(type, newfqname, newpname);
@@ -270,11 +270,11 @@ public class JDTDebugRefactoringUtil {
 		if (dtype == null) {
 			IPackageFragment packageFragment = type.getPackageFragment();
 			if (!packageFragment.isDefaultPackage()) {
-				newfqname = packageFragment.getElementName() + '.' + newname;
+				newfqname = packageFragment.getElementName() + '.' + newname; //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 			}
 		}
 		else {
-			newfqname = dtype.getFullyQualifiedName() + '$' + newname;
+			newfqname = dtype.getFullyQualifiedName() + '$' + newname; //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		}
 		return createChangesForTypeChange(type, newfqname, null);
 	}
@@ -285,12 +285,12 @@ public class JDTDebugRefactoringUtil {
 	 * @return the list of java type launch configurations that have the specified project attribute
 	 * @since 3.2
 	 */
-	protected static ILaunchConfiguration[] getJavaTypeLaunchConfigurations(String pname) {
+	protected static ILaunchConfiguration[] getJavaTypeLaunchConfigurations(String pname) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 			ILaunchConfiguration[] configs = DebugPlugin.getDefault().getLaunchManager().getLaunchConfigurations();
-			ArrayList<ILaunchConfiguration> list = new ArrayList<>();
+			ArrayList<ILaunchConfiguration> list = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 			String attrib;
-			for(int i = 0; i < configs.length; i++) {
+			for(int i = 0; i < configs.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				attrib = configs[i].getAttribute(IJavaLaunchConfigurationConstants.ATTR_PROJECT_NAME, (String)null);
 				if(attrib != null) {
 					if(attrib.equals(pname)) {
@@ -311,12 +311,12 @@ public class JDTDebugRefactoringUtil {
 	 *            the module attribute to compare against
 	 * @return the list of java type launch configurations that have the specified module attribute
 	 */
-	protected static ILaunchConfiguration[] getJavaTypeLaunchConfigurationsForModule(String pname) {
+	protected static ILaunchConfiguration[] getJavaTypeLaunchConfigurationsForModule(String pname) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 			ILaunchConfiguration[] configs = DebugPlugin.getDefault().getLaunchManager().getLaunchConfigurations();
-			ArrayList<ILaunchConfiguration> list = new ArrayList<>();
+			ArrayList<ILaunchConfiguration> list = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 			String attrib;
-			for (int i = 0; i < configs.length; i++) {
+			for (int i = 0; i < configs.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				attrib = configs[i].getAttribute(IJavaLaunchConfigurationConstants.ATTR_MODULE_NAME, (String) null);
 				if (attrib != null) {
 					if (attrib.equals(pname)) {

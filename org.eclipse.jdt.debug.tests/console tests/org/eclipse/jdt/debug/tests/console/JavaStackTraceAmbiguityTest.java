@@ -30,17 +30,17 @@ public class JavaStackTraceAmbiguityTest extends AbstractJavaStackTraceConsoleTe
 		super(name);
 	}
 
-	public void testLinkNavigationTrueForNoParameters() throws Exception {
+	public void testLinkNavigationTrueForNoParameters() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String projectName = "StackTest";
 		IJavaProject project = createProject(projectName, "testfiles/AmbiguityTest/", JavaProjectHelper.JAVA_SE_1_8_EE_NAME, false);
 		waitForBuild();
 		waitForJobs();
 		consoleDocumentWithText("Sample.tes3() line: 31");
 		IHyperlink[] hyperlinks = fConsole.getHyperlinks();
-		assertEquals("Wrong hyperlinks, listing all links: " + allLinks(), 2, hyperlinks.length);
+		assertEquals("Wrong hyperlinks, listing all links: " + allLinks(), 2, hyperlinks.length); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String expectedText = "System.out.println(\"Expected_Zero_Parameter\");";
 		try {
-			for (IHyperlink hyperlink : hyperlinks) {
+			for (IHyperlink hyperlink : hyperlinks) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				closeAllEditors();
 				hyperlink.linkActivated();
 				IEditorPart editor = waitForEditorOpen();
@@ -57,17 +57,17 @@ public class JavaStackTraceAmbiguityTest extends AbstractJavaStackTraceConsoleTe
 		}
 	}
 
-	public void testLinkNavigationTrueForSingleParameter() throws Exception {
+	public void testLinkNavigationTrueForSingleParameter() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String projectName = "StackTest";
 		IJavaProject project = createProject(projectName, "testfiles/AmbiguityTest/", JavaProjectHelper.JAVA_SE_1_8_EE_NAME, false);
 		waitForBuild();
 		waitForJobs();
 		consoleDocumentWithText("Sample.tes3(int) line: 31");
 		IHyperlink[] hyperlinks = fConsole.getHyperlinks();
-		assertEquals("Wrong hyperlinks, listing all links: " + allLinks(), 2, hyperlinks.length);
+		assertEquals("Wrong hyperlinks, listing all links: " + allLinks(), 2, hyperlinks.length); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String expectedText = "System.out.println(\"Expected_Single_Parameter\");";
 		try {
-			for (IHyperlink hyperlink : hyperlinks) {
+			for (IHyperlink hyperlink : hyperlinks) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				closeAllEditors();
 				hyperlink.linkActivated();
 				IEditorPart editor = waitForEditorOpen();
@@ -84,17 +84,17 @@ public class JavaStackTraceAmbiguityTest extends AbstractJavaStackTraceConsoleTe
 		}
 	}
 
-	public void testLinkNavigationTrueForMultipleParameters() throws Exception {
+	public void testLinkNavigationTrueForMultipleParameters() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String projectName = "StackTest";
 		IJavaProject project = createProject(projectName, "testfiles/AmbiguityTest/", JavaProjectHelper.JAVA_SE_1_8_EE_NAME, false);
 		waitForBuild();
 		waitForJobs();
 		consoleDocumentWithText("Sample.tes3(int, String) line: 31");
 		IHyperlink[] hyperlinks = fConsole.getHyperlinks();
-		assertEquals("Wrong hyperlinks, listing all links: " + allLinks(), 2, hyperlinks.length);
+		assertEquals("Wrong hyperlinks, listing all links: " + allLinks(), 2, hyperlinks.length); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String expectedText = "System.out.println(\"Expected_Multiple_Parameter\");";
 		try {
-			for (IHyperlink hyperlink : hyperlinks) {
+			for (IHyperlink hyperlink : hyperlinks) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				closeAllEditors();
 				hyperlink.linkActivated();
 				IEditorPart editor = waitForEditorOpen();
@@ -111,17 +111,17 @@ public class JavaStackTraceAmbiguityTest extends AbstractJavaStackTraceConsoleTe
 		}
 	}
 
-	public void testLinkNavigationTrueForMultipleParameters_Three() throws Exception {
+	public void testLinkNavigationTrueForMultipleParameters_Three() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String projectName = "StackTest";
 		IJavaProject project = createProject(projectName, "testfiles/AmbiguityTest/", JavaProjectHelper.JAVA_SE_1_8_EE_NAME, false);
 		waitForBuild();
 		waitForJobs();
 		consoleDocumentWithText("Sample.tes3(int, String,Sample) line: 34");
 		IHyperlink[] hyperlinks = fConsole.getHyperlinks();
-		assertEquals("Wrong hyperlinks, listing all links: " + allLinks(), 2, hyperlinks.length);
+		assertEquals("Wrong hyperlinks, listing all links: " + allLinks(), 2, hyperlinks.length); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String expectedText = "System.out.println(\"Expected_Multiple_Parameter_Three\");";
 		try {
-			for (IHyperlink hyperlink : hyperlinks) {
+			for (IHyperlink hyperlink : hyperlinks) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				closeAllEditors();
 				hyperlink.linkActivated();
 				IEditorPart editor = waitForEditorOpen();
@@ -138,17 +138,17 @@ public class JavaStackTraceAmbiguityTest extends AbstractJavaStackTraceConsoleTe
 		}
 	}
 
-	public void testLinkNavigationTrueForOneNormalAndOneFullyQualifiedArguments() throws Exception {
+	public void testLinkNavigationTrueForOneNormalAndOneFullyQualifiedArguments() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String projectName = "StackTest";
 		IJavaProject project = createProject(projectName, "testfiles/AmbiguityTest/", JavaProjectHelper.JAVA_SE_1_8_EE_NAME, false);
 		waitForBuild();
 		waitForJobs();
 		consoleDocumentWithText("Sample.tesComplex(String[], URL[]) line: 37");
 		IHyperlink[] hyperlinks = fConsole.getHyperlinks();
-		assertEquals("Wrong hyperlinks, listing all links: " + allLinks(), 2, hyperlinks.length);
+		assertEquals("Wrong hyperlinks, listing all links: " + allLinks(), 2, hyperlinks.length); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String expectedText = "System.out.println(\"Expected_One_normal_&_One_fully_qualified\");";
 		try {
-			for (IHyperlink hyperlink : hyperlinks) {
+			for (IHyperlink hyperlink : hyperlinks) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				closeAllEditors();
 				hyperlink.linkActivated();
 				IEditorPart editor = waitForEditorOpen();
@@ -165,17 +165,17 @@ public class JavaStackTraceAmbiguityTest extends AbstractJavaStackTraceConsoleTe
 		}
 	}
 
-	public void testLinkNavigationTrueForBothFullyQualifiedArguments() throws Exception {
+	public void testLinkNavigationTrueForBothFullyQualifiedArguments() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String projectName = "StackTest";
 		IJavaProject project = createProject(projectName, "testfiles/AmbiguityTest/", JavaProjectHelper.JAVA_SE_1_8_EE_NAME, false);
 		waitForBuild();
 		waitForJobs();
 		consoleDocumentWithText("Sample.tesComplex(Object, URL[]) line: 37");
 		IHyperlink[] hyperlinks = fConsole.getHyperlinks();
-		assertEquals("Wrong hyperlinks, listing all links: " + allLinks(), 2, hyperlinks.length);
+		assertEquals("Wrong hyperlinks, listing all links: " + allLinks(), 2, hyperlinks.length); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String expectedText = "System.out.println(\"Expected_both_fully_qualified\");";
 		try {
-			for (IHyperlink hyperlink : hyperlinks) {
+			for (IHyperlink hyperlink : hyperlinks) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				closeAllEditors();
 				hyperlink.linkActivated();
 				IEditorPart editor = waitForEditorOpen();
@@ -192,17 +192,17 @@ public class JavaStackTraceAmbiguityTest extends AbstractJavaStackTraceConsoleTe
 		}
 	}
 
-	public void testLinkNavigationTrueForSingleVarArgs() throws Exception {
+	public void testLinkNavigationTrueForSingleVarArgs() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String projectName = "StackTest";
 		IJavaProject project = createProject(projectName, "testfiles/AmbiguityTest/", JavaProjectHelper.JAVA_SE_1_8_EE_NAME, false);
 		waitForBuild();
 		waitForJobs();
 		consoleDocumentWithText("Sample.testMethod(Object...) line: 43");
 		IHyperlink[] hyperlinks = fConsole.getHyperlinks();
-		assertEquals("Wrong hyperlinks, listing all links: " + allLinks(), 2, hyperlinks.length);
+		assertEquals("Wrong hyperlinks, listing all links: " + allLinks(), 2, hyperlinks.length); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String expectedText = "System.out.println(\"Expected_oneVarArgs\");";
 		try {
-			for (IHyperlink hyperlink : hyperlinks) {
+			for (IHyperlink hyperlink : hyperlinks) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				closeAllEditors();
 				hyperlink.linkActivated();
 				IEditorPart editor = waitForEditorOpen();
@@ -219,17 +219,17 @@ public class JavaStackTraceAmbiguityTest extends AbstractJavaStackTraceConsoleTe
 		}
 	}
 
-	public void testLinkNavigationTrueForSingleVarArgsAndOneNormal() throws Exception {
+	public void testLinkNavigationTrueForSingleVarArgsAndOneNormal() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String projectName = "StackTest";
 		IJavaProject project = createProject(projectName, "testfiles/AmbiguityTest/", JavaProjectHelper.JAVA_SE_1_8_EE_NAME, false);
 		waitForBuild();
 		waitForJobs();
 		consoleDocumentWithText("Sample.testMethod(Object,Object...) line: 40");
 		IHyperlink[] hyperlinks = fConsole.getHyperlinks();
-		assertEquals("Wrong hyperlinks, listing all links: " + allLinks(), 2, hyperlinks.length);
+		assertEquals("Wrong hyperlinks, listing all links: " + allLinks(), 2, hyperlinks.length); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String expectedText = "System.out.println(\"Expected_oneNormal&oneVarArgs\");";
 		try {
-			for (IHyperlink hyperlink : hyperlinks) {
+			for (IHyperlink hyperlink : hyperlinks) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				closeAllEditors();
 				hyperlink.linkActivated();
 				IEditorPart editor = waitForEditorOpen();
@@ -246,17 +246,17 @@ public class JavaStackTraceAmbiguityTest extends AbstractJavaStackTraceConsoleTe
 		}
 	}
 
-	public void testLinkNavigationTrueForGenerics() throws Exception {
+	public void testLinkNavigationTrueForGenerics() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String projectName = "StackTest";
 		IJavaProject project = createProject(projectName, "testfiles/AmbiguityTest/", JavaProjectHelper.JAVA_SE_1_8_EE_NAME, false);
 		waitForBuild();
 		waitForJobs();
 		consoleDocumentWithText("SampleGenerics<E>(SampleGenerics).remove() line: 25");
 		IHyperlink[] hyperlinks = fConsole.getHyperlinks();
-		assertEquals("Wrong hyperlinks, listing all links: " + allLinks(), 2, hyperlinks.length);
+		assertEquals("Wrong hyperlinks, listing all links: " + allLinks(), 2, hyperlinks.length); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String expectedText = "System.out.print(\"EXPECTED_GENERICS\");";
 		try {
-			for (IHyperlink hyperlink : hyperlinks) {
+			for (IHyperlink hyperlink : hyperlinks) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				closeAllEditors();
 				hyperlink.linkActivated();
 				IEditorPart editor = waitForEditorOpen();
@@ -273,17 +273,17 @@ public class JavaStackTraceAmbiguityTest extends AbstractJavaStackTraceConsoleTe
 		}
 	}
 
-	public void testLinkNavigationTrueForInnerClass() throws Exception {
+	public void testLinkNavigationTrueForInnerClass() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String projectName = "StackTest";
 		IJavaProject project = createProject(projectName, "testfiles/AmbiguityTest/", JavaProjectHelper.JAVA_SE_1_8_EE_NAME, false);
 		waitForBuild();
 		waitForJobs();
 		consoleDocumentWithText("InnerClassTest$innerL1.check() line: 23");
 		IHyperlink[] hyperlinks = fConsole.getHyperlinks();
-		assertEquals("Wrong hyperlinks, listing all links: " + allLinks(), 2, hyperlinks.length);
+		assertEquals("Wrong hyperlinks, listing all links: " + allLinks(), 2, hyperlinks.length); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String expectedText = "System.out.println(\"EXPECTED_INNERCLASS\");";
 		try {
-			for (IHyperlink hyperlink : hyperlinks) {
+			for (IHyperlink hyperlink : hyperlinks) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				closeAllEditors();
 				hyperlink.linkActivated();
 				IEditorPart editor = waitForEditorOpen();
@@ -300,17 +300,17 @@ public class JavaStackTraceAmbiguityTest extends AbstractJavaStackTraceConsoleTe
 		}
 	}
 
-	public void testLinkNavigationTrueForInnerClassMultilevel() throws Exception {
+	public void testLinkNavigationTrueForInnerClassMultilevel() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String projectName = "StackTest";
 		IJavaProject project = createProject(projectName, "testfiles/AmbiguityTest/", JavaProjectHelper.JAVA_SE_1_8_EE_NAME, false);
 		waitForBuild();
 		waitForJobs();
 		consoleDocumentWithText("InnerClassTest$innerL1$innerL2.check2() line: 27");
 		IHyperlink[] hyperlinks = fConsole.getHyperlinks();
-		assertEquals("Wrong hyperlinks, listing all links: " + allLinks(), 2, hyperlinks.length);
+		assertEquals("Wrong hyperlinks, listing all links: " + allLinks(), 2, hyperlinks.length); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String expectedText = "System.out.println(\"EXPECTED_INNER-INNER_CLASS\");";
 		try {
-			for (IHyperlink hyperlink : hyperlinks) {
+			for (IHyperlink hyperlink : hyperlinks) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				closeAllEditors();
 				hyperlink.linkActivated();
 				IEditorPart editor = waitForEditorOpen();
@@ -327,17 +327,17 @@ public class JavaStackTraceAmbiguityTest extends AbstractJavaStackTraceConsoleTe
 		}
 	}
 
-	public void testLinkNavigationTrueForInnerClassParameters() throws Exception {
+	public void testLinkNavigationTrueForInnerClassParameters() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String projectName = "StackTest";
 		IJavaProject project = createProject(projectName, "testfiles/AmbiguityTest/", JavaProjectHelper.JAVA_SE_1_8_EE_NAME, false);
 		waitForBuild();
 		waitForJobs();
 		consoleDocumentWithText("MyScheduledExecutor(Worker).doWork(MyScheduledExecutor$Wor) line: 20");
 		IHyperlink[] hyperlinks = fConsole.getHyperlinks();
-		assertEquals("Wrong hyperlinks, listing all links: " + allLinks(), 2, hyperlinks.length);
+		assertEquals("Wrong hyperlinks, listing all links: " + allLinks(), 2, hyperlinks.length); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String expectedText = "System.out.println(\"Expected_Result\");";
 		try {
-			for (IHyperlink hyperlink : hyperlinks) {
+			for (IHyperlink hyperlink : hyperlinks) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				closeAllEditors();
 				hyperlink.linkActivated();
 				IEditorPart editor = waitForEditorOpen();
@@ -354,17 +354,17 @@ public class JavaStackTraceAmbiguityTest extends AbstractJavaStackTraceConsoleTe
 		}
 	}
 
-	public void testLinkNavigationTrueForInnerClassMultiParameters() throws Exception {
+	public void testLinkNavigationTrueForInnerClassMultiParameters() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String projectName = "StackTest";
 		IJavaProject project = createProject(projectName, "testfiles/AmbiguityTest/", JavaProjectHelper.JAVA_SE_1_8_EE_NAME, false);
 		waitForBuild();
 		waitForJobs();
 		consoleDocumentWithText("MyScheduledExecutor(Worker).doWorkParams(MyScheduledExecutor$Wor,MyScheduledExecutor$Ran) line: 23");
 		IHyperlink[] hyperlinks = fConsole.getHyperlinks();
-		assertEquals("Wrong hyperlinks, listing all links: " + allLinks(), 2, hyperlinks.length);
+		assertEquals("Wrong hyperlinks, listing all links: " + allLinks(), 2, hyperlinks.length); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String expectedText = "System.out.println(\"Expected_Result\");";
 		try {
-			for (IHyperlink hyperlink : hyperlinks) {
+			for (IHyperlink hyperlink : hyperlinks) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				closeAllEditors();
 				hyperlink.linkActivated();
 				IEditorPart editor = waitForEditorOpen();
@@ -381,17 +381,17 @@ public class JavaStackTraceAmbiguityTest extends AbstractJavaStackTraceConsoleTe
 		}
 	}
 
-	public void testLinkNavigationTrueForLinksWithNoProperMethodSignature() throws Exception {
+	public void testLinkNavigationTrueForLinksWithNoProperMethodSignature() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String projectName = "StackTest";
 		IJavaProject project = createProject(projectName, "testfiles/AmbiguityTest/", JavaProjectHelper.JAVA_SE_1_8_EE_NAME, false);
 		waitForBuild();
 		waitForJobs();
 		consoleDocumentWithText("Sample.testBlank(Sample.java:40)");
 		IHyperlink[] hyperlinks = fConsole.getHyperlinks();
-		assertEquals("Wrong hyperlinks, listing all links: " + allLinks(), 1, hyperlinks.length);
+		assertEquals("Wrong hyperlinks, listing all links: " + allLinks(), 1, hyperlinks.length); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String expectedText = "System.out.println(\"Expected_No_Signature\");";
 		try {
-			for (IHyperlink hyperlink : hyperlinks) {
+			for (IHyperlink hyperlink : hyperlinks) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				closeAllEditors();
 				hyperlink.linkActivated();
 				IEditorPart editor = waitForEditorOpen();
@@ -408,17 +408,17 @@ public class JavaStackTraceAmbiguityTest extends AbstractJavaStackTraceConsoleTe
 		}
 	}
 
-	public void testLinkNavigationTrueForLinksWithVarArgs() throws Exception {
+	public void testLinkNavigationTrueForLinksWithVarArgs() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String projectName = "StackTest";
 		IJavaProject project = createProject(projectName, "testfiles/AmbiguityTest/", JavaProjectHelper.JAVA_SE_1_8_EE_NAME, false);
 		waitForBuild();
 		waitForJobs();
 		consoleDocumentWithText("Sample.tes2(Object, Object...) line: 40 ");
 		IHyperlink[] hyperlinks = fConsole.getHyperlinks();
-		assertEquals("Wrong hyperlinks, listing all links: " + allLinks(), 2, hyperlinks.length);
+		assertEquals("Wrong hyperlinks, listing all links: " + allLinks(), 2, hyperlinks.length); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String expectedText = "System.out.println(\"Expected_VarArgs\");";
 		try {
-			for (IHyperlink hyperlink : hyperlinks) {
+			for (IHyperlink hyperlink : hyperlinks) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				closeAllEditors();
 				hyperlink.linkActivated();
 				IEditorPart editor = waitForEditorOpen();
@@ -435,17 +435,17 @@ public class JavaStackTraceAmbiguityTest extends AbstractJavaStackTraceConsoleTe
 		}
 	}
 
-	public void testLinkNavigationTrueForLinksWithSingleSpaceBeforeSignature() throws Exception {
+	public void testLinkNavigationTrueForLinksWithSingleSpaceBeforeSignature() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String projectName = "StackTest";
 		IJavaProject project = createProject(projectName, "testfiles/AmbiguityTest/", JavaProjectHelper.JAVA_SE_1_8_EE_NAME, false);
 		waitForBuild();
 		waitForJobs();
 		consoleDocumentWithText("at a.Sample.testBlank (Sample.java:40)");
 		IHyperlink[] hyperlinks = fConsole.getHyperlinks();
-		assertEquals("Wrong hyperlinks, listing all links: " + allLinks(), 1, hyperlinks.length);
+		assertEquals("Wrong hyperlinks, listing all links: " + allLinks(), 1, hyperlinks.length); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String expectedText = "System.out.println(\"Expected_No_Signature\");";
 		try {
-			for (IHyperlink hyperlink : hyperlinks) {
+			for (IHyperlink hyperlink : hyperlinks) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				closeAllEditors();
 				hyperlink.linkActivated();
 				IEditorPart editor = waitForEditorOpen();
@@ -462,17 +462,17 @@ public class JavaStackTraceAmbiguityTest extends AbstractJavaStackTraceConsoleTe
 		}
 	}
 
-	public void testLinkNavigationTrueForLinksWithMultiSpaceBeforeSignature() throws Exception {
+	public void testLinkNavigationTrueForLinksWithMultiSpaceBeforeSignature() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String projectName = "StackTest";
 		IJavaProject project = createProject(projectName, "testfiles/AmbiguityTest/", JavaProjectHelper.JAVA_SE_1_8_EE_NAME, false);
 		waitForBuild();
 		waitForJobs();
 		consoleDocumentWithText("at a.Sample.testBlank\t\t(Sample.java:40)");
 		IHyperlink[] hyperlinks = fConsole.getHyperlinks();
-		assertEquals("Wrong hyperlinks, listing all links: " + allLinks(), 1, hyperlinks.length);
+		assertEquals("Wrong hyperlinks, listing all links: " + allLinks(), 1, hyperlinks.length); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String expectedText = "System.out.println(\"Expected_No_Signature\");";
 		try {
-			for (IHyperlink hyperlink : hyperlinks) {
+			for (IHyperlink hyperlink : hyperlinks) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				closeAllEditors();
 				hyperlink.linkActivated();
 				IEditorPart editor = waitForEditorOpen();
@@ -489,17 +489,17 @@ public class JavaStackTraceAmbiguityTest extends AbstractJavaStackTraceConsoleTe
 		}
 	}
 
-	public void testLinkNavigationTrueForLinksWithTimeStamps1() throws Exception {
+	public void testLinkNavigationTrueForLinksWithTimeStamps1() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String projectName = "StackTest";
 		IJavaProject project = createProject(projectName, "testfiles/AmbiguityTest/", JavaProjectHelper.JAVA_SE_1_8_EE_NAME, false);
 		waitForBuild();
 		waitForJobs();
 		consoleDocumentWithText("250420 12:59:13.999 (SampleGenerics.java:25) Hello");
 		IHyperlink[] hyperlinks = fConsole.getHyperlinks();
-		assertEquals("Wrong hyperlinks, listing all links: " + allLinks(), 1, hyperlinks.length);
+		assertEquals("Wrong hyperlinks, listing all links: " + allLinks(), 1, hyperlinks.length); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String expectedText = "System.out.print(\"EXPECTED_GENERICS\");";
 		try {
-			for (IHyperlink hyperlink : hyperlinks) {
+			for (IHyperlink hyperlink : hyperlinks) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				closeAllEditors();
 				hyperlink.linkActivated();
 				IEditorPart editor = waitForEditorOpen();
@@ -515,17 +515,17 @@ public class JavaStackTraceAmbiguityTest extends AbstractJavaStackTraceConsoleTe
 			project.getProject().delete(force, new NullProgressMonitor());
 		}
 	}
-	public void testLinkNavigationTrueForLinksWithTimeStamps2() throws Exception {
+	public void testLinkNavigationTrueForLinksWithTimeStamps2() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String projectName = "StackTest";
 		IJavaProject project = createProject(projectName, "testfiles/AmbiguityTest/", JavaProjectHelper.JAVA_SE_1_8_EE_NAME, false);
 		waitForBuild();
 		waitForJobs();
 		consoleDocumentWithText("2025-04-20 12.01.23 (SampleGenerics.java:25) Hello");
 		IHyperlink[] hyperlinks = fConsole.getHyperlinks();
-		assertEquals("Wrong hyperlinks, listing all links: " + allLinks(), 1, hyperlinks.length);
+		assertEquals("Wrong hyperlinks, listing all links: " + allLinks(), 1, hyperlinks.length); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String expectedText = "System.out.print(\"EXPECTED_GENERICS\");";
 		try {
-			for (IHyperlink hyperlink : hyperlinks) {
+			for (IHyperlink hyperlink : hyperlinks) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				closeAllEditors();
 				hyperlink.linkActivated();
 				IEditorPart editor = waitForEditorOpen();
@@ -560,7 +560,7 @@ public class JavaStackTraceAmbiguityTest extends AbstractJavaStackTraceConsoleTe
 		sync(() -> editor[0] = getActivePage().getActiveEditor());
 		long timeout = 30_000;
 		long start = System.currentTimeMillis();
-		while (editor[0] == null && System.currentTimeMillis() - start < timeout) {
+		while (editor[0] == null && System.currentTimeMillis() - start < timeout) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			waitForJobs();
 			sync(() -> editor[0] = getActivePage().getActiveEditor());
 		}

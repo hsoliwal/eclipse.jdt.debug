@@ -60,7 +60,7 @@ public class AbstractRefactoringDebugTest extends AbstractDebugTest {
 	 * Performs the given refactoring. If a {@link CoreException} occurs during the refactoring, we trap it and throw a {@link TestAgainException} to
 	 * try the test again.
 	 */
-	public void performRefactor(final Refactoring refactoring) throws Exception {
+	public void performRefactor(final Refactoring refactoring) throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		if(refactoring == null) {
 			return;
 		}
@@ -96,7 +96,7 @@ public class AbstractRefactoringDebugTest extends AbstractDebugTest {
 	/**
 	 * Cleans up refactored files and reverts the source.
 	 */
-	private void doClean() throws Exception {
+	private void doClean() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IJavaProject javaProject = get14Project();
 		IProject project = javaProject.getProject();
 		IFolder folder = project.getFolder("src");

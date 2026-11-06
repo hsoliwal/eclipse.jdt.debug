@@ -31,9 +31,9 @@ public class ControlAccessibleListener extends AccessibleAdapter {
 
 	public static void addListener(Control comp, String name) {
 		//strip mnemonic
-		StringBuilder stripped = new StringBuilder();
-		for (String str : name.split("&")) { //$NON-NLS-1$
-			stripped.append(str);
+		StringBuilder stripped = new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
+		for (String str : name.split("&")) { //$NON-NLS-1$ //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
+			stripped.append(str); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		}
 		comp.getAccessible().addAccessibleListener(new ControlAccessibleListener(stripped.toString()));
 	}

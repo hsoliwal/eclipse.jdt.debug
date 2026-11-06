@@ -59,7 +59,7 @@ public class DebugSelectionTests extends AbstractDebugUiTests {
 	/**
 	 * Resume at lambda chain and at each resume expect selecting the next lambda expression.
 	 */
-	public void testLambdaEditorSelection() throws Exception {
+	public void testLambdaEditorSelection() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IJavaThread thread = null;
 		try {
 			String typeName = "selectiontests.LambdaSelectionTest";
@@ -80,7 +80,7 @@ public class DebugSelectionTests extends AbstractDebugUiTests {
 
 	private static void waitForSelection(String expectedSelection, long timeout) throws InterruptedException {
 		long s = System.currentTimeMillis();
-		while (System.currentTimeMillis() - s < timeout) {
+		while (System.currentTimeMillis() - s < timeout) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			if (expectedSelection.equals(getActiveEditorSelectionText())) {
 				return;
 			}

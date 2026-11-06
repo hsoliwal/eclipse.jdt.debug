@@ -34,7 +34,7 @@ public class InstanceOfOperator extends CompoundInstruction {
 	/*
 	 * @see Instruction#execute()
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public void execute() throws CoreException {
 		IJavaType type = (IJavaType) pop();
 		IJavaValue value = popValue();

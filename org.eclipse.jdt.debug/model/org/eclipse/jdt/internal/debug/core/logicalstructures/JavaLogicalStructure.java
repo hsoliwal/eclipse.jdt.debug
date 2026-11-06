@@ -133,7 +133,7 @@ public class JavaLogicalStructure implements ILogicalStructureType, ILogicalStru
 		 *            the snippet to evaluate
 		 * @return the <code>IJavaValue</code> from the evaluation
 		 */
-		public IJavaValue evaluate(String snippet) throws DebugException {
+		public IJavaValue evaluate(String snippet) throws DebugException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 			Map<String, String> compileOptions =
 					Collections.singletonMap(CompilerOptions.OPTION_JdtDebugCompileMode, JavaCore.ENABLED);
 			ICompiledExpression compiledExpression = fEvaluationEngine
@@ -189,7 +189,7 @@ public class JavaLogicalStructure implements ILogicalStructureType, ILogicalStru
 		private void log(String[] messages) {
 			if (isContributed()) {
 				String log = Arrays.asList(messages).stream().collect(Collectors.joining("\n")); //$NON-NLS-1$
-				String error = String.format("Error while evaluating '%s' logical structure for type %s with the value '%s'", //$NON-NLS-1$
+				String error = String.format("Error while evaluating '%s' logical structure for type %s with the value '%s'", //$NON-NLS-1$ //FLLDCIM: MARK — M11 FORMAT_PRECOMPUTE CALL
 						getDescription(), getQualifiedTypeName(), getValue());
 				JDIDebugPlugin.log(new Status(IStatus.ERROR, JDIDebugPlugin.getUniqueIdentifier(), IStatus.ERROR, error, new IllegalStateException(log)));
 			}
@@ -211,7 +211,7 @@ public class JavaLogicalStructure implements ILogicalStructureType, ILogicalStru
 	/**
 	 * Constructor from configuration element.
 	 */
-	public JavaLogicalStructure(IConfigurationElement configurationElement)
+	public JavaLogicalStructure(IConfigurationElement configurationElement) //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 			throws CoreException {
 		fType = configurationElement.getAttribute("type"); //$NON-NLS-1$
 		if (fType == null) {
@@ -235,7 +235,7 @@ public class JavaLogicalStructure implements ILogicalStructureType, ILogicalStru
 					LogicalStructuresMessages.JavaLogicalStructures_1, null));
 		}
 		fVariables = new String[variableElements.length][2];
-		for (int j = 0; j < fVariables.length; j++) {
+		for (int j = 0; j < fVariables.length; j++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			String variableName = variableElements[j].getAttribute("name"); //$NON-NLS-1$
 			if (variableName == null) {
 				throw new CoreException(
@@ -276,7 +276,7 @@ public class JavaLogicalStructure implements ILogicalStructureType, ILogicalStru
 	/**
 	 * @see org.eclipse.debug.core.model.ILogicalStructureTypeDelegate#getLogicalStructure(IValue)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public IValue getLogicalStructure(IValue value) throws CoreException {
 		if (!(value instanceof IJavaObject)) {
 			return value;
@@ -306,7 +306,7 @@ public class JavaLogicalStructure implements ILogicalStructureType, ILogicalStru
 			if (fValue == null) {
 				// evaluate each variable
 				JDIPlaceholderVariable[] variables = new JDIPlaceholderVariable[fVariables.length];
-				for (int i = 0; i < fVariables.length; i++) {
+				for (int i = 0; i < fVariables.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 					variables[i] = new JDIPlaceholderVariable(fVariables[i][0],
 							evaluationBlock.evaluate(fVariables[i][1]),
 							javaValue);
@@ -350,7 +350,7 @@ public class JavaLogicalStructure implements ILogicalStructureType, ILogicalStru
 	 * @return the <code>IJavaReferenceType</code> from the specified
 	 *         <code>IJavaObject</code>
 	 */
-	private IJavaReferenceType getType(IJavaObject value) {
+	private IJavaReferenceType getType(IJavaObject value) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 			IJavaType type = value.getJavaType();
 			if (!(type instanceof IJavaClassType)) {
@@ -366,7 +366,7 @@ public class JavaLogicalStructure implements ILogicalStructureType, ILogicalStru
 				return null;
 			}
 			IJavaClassType superClass = classType.getSuperclass();
-			while (superClass != null) {
+			while (superClass != null) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				if (superClass.getName().equals(fType)) {
 					// found the type, it's a super class
 					return superClass;
@@ -374,7 +374,7 @@ public class JavaLogicalStructure implements ILogicalStructureType, ILogicalStru
 				superClass = superClass.getSuperclass();
 			}
 			IJavaInterfaceType[] superInterfaces = classType.getAllInterfaces();
-			for (IJavaInterfaceType superInterface : superInterfaces) {
+			for (IJavaInterfaceType superInterface : superInterfaces) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				if (superInterface.getName().equals(fType)) {
 					// found the type, it's a super interface
 					return superInterface;
@@ -394,7 +394,7 @@ public class JavaLogicalStructure implements ILogicalStructureType, ILogicalStru
 	 * @return the current stack frame context, or a valid stack frame for the
 	 *         given value.
 	 */
-	private IJavaStackFrame getStackFrame(IValue value) throws CoreException {
+	private IJavaStackFrame getStackFrame(IValue value) throws CoreException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IStatusHandler handler = getStackFrameProvider();
 		if (handler != null) {
 			IJavaStackFrame stackFrame = (IJavaStackFrame) handler
@@ -409,7 +409,7 @@ public class JavaLogicalStructure implements ILogicalStructureType, ILogicalStru
 				.getAdapter(IJavaDebugTarget.class);
 		if (javaTarget != null) {
 			IThread[] threads = javaTarget.getThreads();
-			for (IThread thread : threads) {
+			for (IThread thread : threads) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				if (thread.isSuspended()) {
 					return (IJavaStackFrame) thread.getTopStackFrame();
 				}
@@ -553,6 +553,6 @@ public class JavaLogicalStructure implements ILogicalStructureType, ILogicalStru
 	 */
 	@Override
 	public String getId() {
-		return JDIDebugPlugin.getUniqueIdentifier() + fType + fDescription;
+		return JDIDebugPlugin.getUniqueIdentifier() + fType + fDescription; //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 	}
 }

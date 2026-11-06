@@ -63,7 +63,7 @@ public class JavaMonitorThread extends PlatformObject {
 	/**
 	 * List of JavaOwningThread and JavaWaitingThread associated with this thread.
 	 */
-	private final List<IDebugElement> fElements= new ArrayList<>();
+	private final List<IDebugElement> fElements= new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 
 	/**
 	 * JavaWaitingThread object used to return the JavaOwnedMonitor for this
@@ -168,7 +168,7 @@ public class JavaMonitorThread extends PlatformObject {
 	 * @return <code>true</code> if the contended monitor or
 	 * the owned monitors changed.
 	 */
-	private boolean update() {
+	private boolean update() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		boolean changed= false;
 		synchronized(this) {
 			if (!fToUpdate) {
@@ -195,7 +195,7 @@ public class JavaMonitorThread extends PlatformObject {
 					ThreadMonitorManager threadMonitorManager= ThreadMonitorManager.getDefault();
 					if (changed || fOwnedMonitors.length != ownedMonitors.length) {
 						// if we know it changed, we can just create the new list.
-						for (int i= 0; i < ownedMonitors.length; i++) {
+						for (int i= 0; i < ownedMonitors.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 							tmp[i]= threadMonitorManager.getJavaMonitor(ownedMonitors[i]);
 						}
 						changed= true;
@@ -203,8 +203,8 @@ public class JavaMonitorThread extends PlatformObject {
 						// we need to check in the new list contains the same monitors as the
 						// previous list
 						int sameMonitor= 0;
-						for (int i= 0; i < ownedMonitors.length; i++) {
-							for (int j= 0; j < fOwnedMonitors.length; j++) {
+						for (int i= 0; i < ownedMonitors.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
+							for (int j= 0; j < fOwnedMonitors.length; j++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 								if (ownedMonitors[i].equals(fOwnedMonitors[j].getMonitor())) {
 									sameMonitor++;
 									break;
@@ -240,13 +240,13 @@ public class JavaMonitorThread extends PlatformObject {
 	 * send a change event for theJavaWaitingThread and JavaOwningThread
 	 * associated with this thread
 	 */
-	private void fireChangeEvent(int detail) {
+	private void fireChangeEvent(int detail) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		Object[] elements= fElements.toArray();
-		List<Object> changedElement= new ArrayList<>();
+		List<Object> changedElement= new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 		if (fOriginalThread != null) {
 			changedElement.add(fOriginalThread);
 		}
-		for (int i= 0; i < elements.length; i++) {
+		for (int i= 0; i < elements.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			Object element= elements[i];
 			// the two 'base' elements are not part of the hierarchy, they are
 			// used to get the children of the Thread.
@@ -256,7 +256,7 @@ public class JavaMonitorThread extends PlatformObject {
 		}
 		DebugEvent[] changeEvents= new DebugEvent[changedElement.size()];
 		int i= 0;
-		for (Iterator<Object> iter= changedElement.iterator(); iter.hasNext();) {
+		for (Iterator<Object> iter= changedElement.iterator(); iter.hasNext();) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 		    changeEvents[i++]= new DebugEvent(iter.next(), DebugEvent.CHANGE, detail);
         }
 		DebugPlugin.getDefault().fireDebugEventSet(changeEvents);
@@ -269,7 +269,7 @@ public class JavaMonitorThread extends PlatformObject {
 				fContendedMonitor.setToUpdate();
 			}
 			if (fOwnedMonitors != null) {
-				for (int i= 0; i < fOwnedMonitors.length; i++) {
+				for (int i= 0; i < fOwnedMonitors.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 					fOwnedMonitors[i].setToUpdate();
 				}
 			}
@@ -289,7 +289,7 @@ public class JavaMonitorThread extends PlatformObject {
 			if (fContendedMonitor != null) {
 				fContendedMonitor.refresh();
 			}
-			for (int i= 0; i < fOwnedMonitors.length; i++) {
+			for (int i= 0; i < fOwnedMonitors.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				fOwnedMonitors[i].refresh();
 			}
 		}

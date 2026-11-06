@@ -46,7 +46,7 @@ public class ArrayInitializerInstruction extends ArrayInstruction {
 				fTypeSignature.replace('/', '.'), fDimensions);
 		IJavaArray array = arrayType.newInstance(fLength);
 
-		for (int i = fLength - 1; i >= 0; i--) {
+		for (int i = fLength - 1; i >= 0; i--) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			array.setValue(i, popValue());
 		}
 

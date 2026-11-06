@@ -54,21 +54,21 @@ public class MultiReleaseLaunchTests extends AbstractDebugUiTests {
 	private static final RequiredJavaVersion JAVA_17 = new RequiredJavaVersion(17, 20);
 	private static final RequiredJavaVersion JAVA_21 = new RequiredJavaVersion(21, Integer.MAX_VALUE);
 
-	private List<Runnable> disposeVms = new ArrayList<>();
+	private List<Runnable> disposeVms = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 
 	public MultiReleaseLaunchTests(String name) {
 		super(name);
 	}
 
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	protected void setUp() throws Exception {
 		super.setUp();
 		// see https://github.com/eclipse-jdt/eclipse.jdt.debug/issues/843
 		if (!Platform.OS.isLinux()) { // JUnit 3, don't use assumeTrue, the thrown AssumptionViolatedException is treated as an error
 			return;
 		}
-		final Set<File> existingLocations = new HashSet<>();
-		List<RequiredJavaVersion> requiredJavaVersions = new ArrayList<>(List.of(JAVA_11, JAVA_17, JAVA_21));
+		final Set<File> existingLocations = new HashSet<>(); //FLLDCIM: MARK — M03 M3_SET_LANES NEW
+		List<RequiredJavaVersion> requiredJavaVersions = new ArrayList<>(List.of(JAVA_11, JAVA_17, JAVA_21)); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 		removeExistingJavaVersions(requiredJavaVersions, existingLocations);
 		if (!requiredJavaVersions.isEmpty()) {
 			final File rootDir = new File(System.getProperty(JVM_SEARCH_BASE, "/opt/tools/java/openjdk/"));
@@ -81,18 +81,18 @@ public class MultiReleaseLaunchTests extends AbstractDebugUiTests {
 				}
 			}
 		}
-		assertTrue("The following java versions are required by this test but can not be found: "
+		assertTrue("The following java versions are required by this test but can not be found: " //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 				+ requiredJavaVersions, requiredJavaVersions.isEmpty());
 	}
 
-	private void matchInstallationsFrom(final File rootDir, List<RequiredJavaVersion> requiredJavaVersions, final Set<File> existingLocations) {
-		final List<File> locations = new ArrayList<>();
-		final List<IVMInstallType> types = new ArrayList<>();
+	private void matchInstallationsFrom(final File rootDir, List<RequiredJavaVersion> requiredJavaVersions, final Set<File> existingLocations) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
+		final List<File> locations = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
+		final List<IVMInstallType> types = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 		DetectVMInstallationsJob.search(rootDir, locations, types, existingLocations, new NullProgressMonitor());
-		for (int i = 0; i < locations.size(); i++) {
+		for (int i = 0; i < locations.size(); i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			File location = locations.get(i);
 			IVMInstallType type = types.get(i);
-			String id = "MultiReleaseLaunchTests-" + UUID.randomUUID() + "-" + i;
+			String id = "MultiReleaseLaunchTests-" + UUID.randomUUID() + "-" + i; //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 			VMStandin workingCopy = new VMStandin(type, id);
 			workingCopy.setInstallLocation(location);
 			workingCopy.setName(id);
@@ -116,32 +116,32 @@ public class MultiReleaseLaunchTests extends AbstractDebugUiTests {
 		return getMultireleaseProject();
 	}
 
-	public void testMultiReleaseLaunch() throws Exception {
+	public void testMultiReleaseLaunch() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		// see https://github.com/eclipse-jdt/eclipse.jdt.debug/issues/843
 		if (!Platform.OS.isLinux()) { // JUnit 3, don't use assumeTrue, the thrown AssumptionViolatedException is treated as an error
 			return;
 		}
 		ILaunchConfiguration config = getLaunchConfiguration("p.Main");
 		Properties result = launchAndReadResult(config, 11);
-		assertTrue("Was not launched with a proper Java installation " + result, JAVA_11.matches(result.getProperty("Java")));
-		assertEquals("X should be executed from Java 11 version: " + result, "11", result.get("X"));
-		assertNull("Y should not be executed from Java 11 version: " + result, result.get("Y"));
-		assertNull("Z should not be executed from Java 11 version: " + result, result.get("Z"));
+		assertTrue("Was not launched with a proper Java installation " + result, JAVA_11.matches(result.getProperty("Java"))); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
+		assertEquals("X should be executed from Java 11 version: " + result, "11", result.get("X")); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
+		assertNull("Y should not be executed from Java 11 version: " + result, result.get("Y")); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
+		assertNull("Z should not be executed from Java 11 version: " + result, result.get("Z")); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		Properties result17 = launchAndReadResult(config, 17);
-		assertTrue("Was not launched with a proper Java installation " + result17, JAVA_17.matches(result17.getProperty("Java")));
-		assertEquals("X should be executed from Java 17 version: " + result17, "17", result17.get("X"));
-		assertEquals("Y should be executed from Java 11 version: " + result17, "11", result17.get("Y"));
-		assertNull("Z should not be executed from Java 17 version: " + result17, result17.get("Z"));
+		assertTrue("Was not launched with a proper Java installation " + result17, JAVA_17.matches(result17.getProperty("Java"))); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
+		assertEquals("X should be executed from Java 17 version: " + result17, "17", result17.get("X")); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
+		assertEquals("Y should be executed from Java 11 version: " + result17, "11", result17.get("Y")); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
+		assertNull("Z should not be executed from Java 17 version: " + result17, result17.get("Z")); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		Properties result21 = launchAndReadResult(config, 21);
-		assertTrue("Was not launched with a proper Java installation " + result21, JAVA_21.matches(result21.getProperty("Java")));
-		assertEquals("X should be executed from Java 17 version: " + result21, "17", result21.get("X"));
-		assertEquals("Y should be executed from Java 21 version: " + result21, "21", result21.get("Y"));
-		assertEquals("Z should be executed from Java 17 version: " + result21, "17", result21.get("Z"));
+		assertTrue("Was not launched with a proper Java installation " + result21, JAVA_21.matches(result21.getProperty("Java"))); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
+		assertEquals("X should be executed from Java 17 version: " + result21, "17", result21.get("X")); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
+		assertEquals("Y should be executed from Java 21 version: " + result21, "21", result21.get("Y")); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
+		assertEquals("Z should be executed from Java 17 version: " + result21, "17", result21.get("Z")); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 	}
 
 	private Properties launchAndReadResult(ILaunchConfiguration config, int javaVersion) throws Exception {
 		ILaunchConfigurationWorkingCopy workingCopy = config.getWorkingCopy();
-		workingCopy.setAttribute("org.eclipse.jdt.launching.JRE_CONTAINER", "org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-"
+		workingCopy.setAttribute("org.eclipse.jdt.launching.JRE_CONTAINER", "org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-" //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 				+ javaVersion + "/");
 		Properties properties = new Properties();
 		IJavaDebugTarget target = launchAndTerminate(workingCopy.doSave(), DEFAULT_TIMEOUT);
@@ -158,7 +158,7 @@ public class MultiReleaseLaunchTests extends AbstractDebugUiTests {
 	private static int getJavaVersion(IVMInstall install) {
 		if (install instanceof IVMInstall2 vm) {
 			try {
-				String javaVersion = vm.getJavaVersion().split("\\.")[0]; //$NON-NLS-1$
+				String javaVersion = vm.getJavaVersion().split("\\.")[0]; //$NON-NLS-1$ //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
 				return Integer.parseInt(javaVersion);
 			} catch (RuntimeException rte) {
 				// can't know then...
@@ -169,9 +169,9 @@ public class MultiReleaseLaunchTests extends AbstractDebugUiTests {
 
 	private static void removeExistingJavaVersions(Collection<RequiredJavaVersion> requiredJavaVersions, Set<File> existingLocations) {
 		IVMInstallType[] installTypes = JavaRuntime.getVMInstallTypes();
-		for (IVMInstallType installType : installTypes) {
+		for (IVMInstallType installType : installTypes) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			IVMInstall[] vmInstalls = installType.getVMInstalls();
-			for (IVMInstall install : vmInstalls) {
+			for (IVMInstall install : vmInstalls) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				if (requiredJavaVersions.isEmpty()) {
 					return;
 				}
@@ -183,7 +183,7 @@ public class MultiReleaseLaunchTests extends AbstractDebugUiTests {
 
 	protected static boolean removeIfMatch(Collection<RequiredJavaVersion> requiredJavaVersions, IVMInstall install) {
 		int javaVersion = getJavaVersion(install);
-		for (Iterator<RequiredJavaVersion> iterator = requiredJavaVersions.iterator(); iterator.hasNext();) {
+		for (Iterator<RequiredJavaVersion> iterator = requiredJavaVersions.iterator(); iterator.hasNext();) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			if (iterator.next().matches(javaVersion)) {
 				iterator.remove();
 				return true;

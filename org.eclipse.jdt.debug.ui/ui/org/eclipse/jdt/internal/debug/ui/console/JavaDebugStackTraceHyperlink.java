@@ -37,13 +37,13 @@ public class JavaDebugStackTraceHyperlink extends JavaStackTraceHyperlink {
 
 	static final String LINE_PREFIX = "line: "; //$NON-NLS-1$
 
-	private static final Pattern LINE_PATTERN = Pattern.compile(".*(" + LINE_PREFIX + "\\d+)"); //$NON-NLS-1$ //$NON-NLS-2$
+	private static final Pattern LINE_PATTERN = Pattern.compile(".*(" + LINE_PREFIX + "\\d+)"); //$NON-NLS-1$ //$NON-NLS-2$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
 
 	public JavaDebugStackTraceHyperlink(TextConsole console) {
 		super(console);
 	}
 
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	protected String getLinkText() throws CoreException {
 		try {
 			TextConsole console = getConsole();
@@ -89,8 +89,8 @@ public class JavaDebugStackTraceHyperlink extends JavaStackTraceHyperlink {
 
 	public static LinkSubstring extractLineText(String linkText) {
 		LinkSubstring lineText = null;
-		Matcher matcher = LINE_PATTERN.matcher(linkText);
-		if (matcher.matches()) {
+		Matcher matcher = LINE_PATTERN.matcher(linkText); //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
+		if (matcher.matches()) { //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
 			int groupCount = matcher.groupCount();
 			int groupIndex = 1;
 			if (groupIndex <= groupCount) {
@@ -102,7 +102,7 @@ public class JavaDebugStackTraceHyperlink extends JavaStackTraceHyperlink {
 		return lineText;
 	}
 
-	public static LinkSubstring extractTypeName(String linkText) {
+	public static LinkSubstring extractTypeName(String linkText) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		boolean hasLeadingSubtype = false;
 		int startIndex = 0;
 		int indexOfOpeningBracket = linkText.indexOf('(');

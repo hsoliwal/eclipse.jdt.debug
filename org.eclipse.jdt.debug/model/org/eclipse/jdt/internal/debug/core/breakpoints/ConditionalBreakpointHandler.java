@@ -101,7 +101,7 @@ public class ConditionalBreakpointHandler implements IJavaBreakpointListener {
 		 *            evaluation result
 		 * @return vote
 		 */
-		private int determineVote(IEvaluationResult result) {
+		private int determineVote(IEvaluationResult result) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 			if (result.isTerminated()) {
 				// indicates the user terminated the evaluation
 				return SUSPEND;
@@ -204,7 +204,7 @@ public class ConditionalBreakpointHandler implements IJavaBreakpointListener {
 			DebugException exception) {
 	}
 
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public int breakpointHit(IJavaThread thread, IJavaBreakpoint breakpoint) {
 		if (breakpoint instanceof IJavaLineBreakpoint) {
 			JavaLineBreakpoint lineBreakpoint = (JavaLineBreakpoint) breakpoint;
@@ -341,7 +341,7 @@ public class ConditionalBreakpointHandler implements IJavaBreakpointListener {
 	private Message[] getMessages(ICompiledExpression expression) {
 		String[] errorMessages = expression.getErrorMessages();
 		Message[] messages = new Message[errorMessages.length];
-		for (int i = 0; i < messages.length; i++) {
+		for (int i = 0; i < messages.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			messages[i] = new Message(errorMessages[i], -1);
 		}
 		return messages;

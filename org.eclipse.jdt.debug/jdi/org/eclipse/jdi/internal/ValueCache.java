@@ -57,7 +57,7 @@ public class ValueCache {
 	 */
 	private void cleanup() {
 		Reference<?> ref;
-		while ((ref = refQueue.poll()) != null) {
+		while ((ref = refQueue.poll()) != null) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			Object key = refTable.get(ref);
 			if (key != null)
 				cacheTable.remove(key);
@@ -97,12 +97,12 @@ public class ValueCache {
 	 */
 	public Collection<Object> values() {
 		cleanup();
-		List<Object> returnValues = new ArrayList<>();
+		List<Object> returnValues = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 		synchronized (cacheTable) {
 			Iterator<SoftReference<Object>> iter = cacheTable.values().iterator();
 			SoftReference<Object> ref;
 			Object value;
-			while (iter.hasNext()) {
+			while (iter.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				ref = iter.next();
 				value = ref.get();
 				if (value != null) {
@@ -119,12 +119,12 @@ public class ValueCache {
 	 */
 	public Collection<Object> valuesWithType(Class<?> type) {
 		cleanup();
-		List<Object> returnValues = new ArrayList<>();
+		List<Object> returnValues = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 		synchronized (cacheTable) {
 			Iterator<SoftReference<Object>> iter = cacheTable.values().iterator();
 			SoftReference<Object> ref;
 			Object value;
-			while (iter.hasNext()) {
+			while (iter.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				ref = iter.next();
 				value = ref.get();
 				if (value != null && value.getClass().equals(type)) {

@@ -79,23 +79,23 @@ public class VirtualThreadsDebugViewTests extends AbstractDebugUiTests {
 		return get23Project();
 	}
 
-	public void testVirtualThreadDebugView() throws Exception {
+	public void testVirtualThreadDebugView() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		sync(() -> TestUtil.waitForJobs(getName(), 1000, 10000, ProcessConsole.class));
 		final String typeName = "Main21";
 		final int bpLine = 19;
 
-		IJavaBreakpoint bp = createLineBreakpoint(bpLine, "", typeName + ".java", typeName);
+		IJavaBreakpoint bp = createLineBreakpoint(bpLine, "", typeName + ".java", typeName); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		bp.setSuspendPolicy(IJavaBreakpoint.SUSPEND_THREAD);
 		IFile file = (IFile) bp.getMarker().getResource();
-		assertEquals(typeName + ".java", file.getName());
+		assertEquals(typeName + ".java", file.getName()); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 		IJavaThread mainThread = null;
 		try {
 			mainThread = launchToBreakpoint(typeName);
 			assertNotNull("Launch unsuccessful", mainThread);
 			openEditorInDebug(file);
-			Display.getDefault().asyncExec(new Runnable() {
-				@Override
+			Display.getDefault().asyncExec(new Runnable() { //FLLDCIM: MARK — T08 UI_THREAD_SYNCHRONIZER CALL
+				@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 				public void run() {
 					IDebugView debugViewer = (IDebugView) getActivePage().findView(IDebugUIConstants.ID_DEBUG_VIEW);
 					ISelection currentSelection = debugViewer.getViewer().getSelection();

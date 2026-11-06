@@ -154,7 +154,7 @@ public class ClasspathProviderTests extends AbstractDebugTest {
 		IRuntimeClasspathEntry entry = JavaRuntime.newRuntimeContainerClasspathEntry(new Path(JavaRuntime.JRE_CONTAINER), IRuntimeClasspathEntry.BOOTSTRAP_CLASSES);
 		IRuntimeClasspathEntry[] resolved = JavaRuntime.resolveRuntimeClasspathEntry(entry, get14Project());
 		// each resolved entry should be on the bootpath
-		for (int i = 0; i < resolved.length; i++) {
+		for (int i = 0; i < resolved.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			assertEquals("Entry should be on bootpath", IRuntimeClasspathEntry.BOOTSTRAP_CLASSES, resolved[i].getClasspathProperty());
 		}
 	}
@@ -202,7 +202,7 @@ public class ClasspathProviderTests extends AbstractDebugTest {
 		runtimeClasspathEntry.setClasspathProperty(IRuntimeClasspathEntry.BOOTSTRAP_CLASSES);
 		IRuntimeClasspathEntry[] resolved = JavaRuntime.resolveRuntimeClasspathEntry(runtimeClasspathEntry, project);
 		assertEquals("Should be 3 resolved entries", 3, resolved.length); // two specific entries & default entry
-		for (int i = 0; i < resolved.length; i++) {
+		for (int i = 0; i < resolved.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			IRuntimeClasspathEntry entry = resolved[i];
 			assertEquals("Resolved entry should be on bootpath", IRuntimeClasspathEntry.BOOTSTRAP_CLASSES, entry.getClasspathProperty());
 		}
@@ -273,7 +273,7 @@ public class ClasspathProviderTests extends AbstractDebugTest {
 		IRuntimeClasspathEntry entry = JavaRuntime.newRuntimeContainerClasspathEntry(new Path(JavaRuntime.JRE_CONTAINER), IRuntimeClasspathEntry.USER_CLASSES);
 		IRuntimeClasspathEntry[] resolved = JavaRuntime.resolveRuntimeClasspathEntry(entry, get14Project());
 		// each resolved entry should be on the bootpath
-		for (int i = 0; i < resolved.length; i++) {
+		for (int i = 0; i < resolved.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			assertEquals("Entry should be on user classpath", IRuntimeClasspathEntry.USER_CLASSES, resolved[i].getClasspathProperty());
 		}
 	}
@@ -322,7 +322,7 @@ public class ClasspathProviderTests extends AbstractDebugTest {
 		runtimeClasspathEntry.setClasspathProperty(IRuntimeClasspathEntry.USER_CLASSES);
 		IRuntimeClasspathEntry[] resolved = JavaRuntime.resolveRuntimeClasspathEntry(runtimeClasspathEntry, project);
 		assertEquals("Should be 3 resolved entries", 3, resolved.length); // two specific entries & default entry
-		for (int i = 0; i < resolved.length; i++) {
+		for (int i = 0; i < resolved.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			IRuntimeClasspathEntry entry = resolved[i];
 			assertEquals("Resolved entry should be on user classpath", IRuntimeClasspathEntry.USER_CLASSES, entry.getClasspathProperty());
 		}
@@ -393,7 +393,7 @@ public class ClasspathProviderTests extends AbstractDebugTest {
 		IRuntimeClasspathEntry entry = JavaRuntime.newRuntimeContainerClasspathEntry(new Path(JavaRuntime.JRE_CONTAINER), IRuntimeClasspathEntry.STANDARD_CLASSES);
 		IRuntimeClasspathEntry[] resolved = JavaRuntime.resolveRuntimeClasspathEntry(entry, get14Project());
 		// each resolved entry should be on the bootpath
-		for (int i = 0; i < resolved.length; i++) {
+		for (int i = 0; i < resolved.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			assertEquals("Entry should be on default bootpath", IRuntimeClasspathEntry.STANDARD_CLASSES, resolved[i].getClasspathProperty());
 		}
 	}
@@ -443,7 +443,7 @@ public class ClasspathProviderTests extends AbstractDebugTest {
 		runtimeClasspathEntry.setClasspathProperty(IRuntimeClasspathEntry.STANDARD_CLASSES);
 		IRuntimeClasspathEntry[] resolved = JavaRuntime.resolveRuntimeClasspathEntry(runtimeClasspathEntry, project);
 		assertEquals("Should be 3 resolved entries", 3, resolved.length); // two specific entries & default entry
-		for (int i = 0; i < resolved.length; i++) {
+		for (int i = 0; i < resolved.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			IRuntimeClasspathEntry entry = resolved[i];
 			assertEquals("Resolved entry should be on default bootpath", IRuntimeClasspathEntry.STANDARD_CLASSES, entry.getClasspathProperty());
 		}
@@ -454,7 +454,7 @@ public class ClasspathProviderTests extends AbstractDebugTest {
 	 * Tests that default classpath computation works for a project with mulitple
 	 * output locations.
 	 */
-	public void testMultiOutputDefaultClasspath() throws Exception {
+	public void testMultiOutputDefaultClasspath() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IJavaProject project = getMultiOutputProject();
 		String[] entries = JavaRuntime.computeDefaultRuntimeClassPath(project);
 		IProject p = project.getProject();
@@ -463,13 +463,13 @@ public class ClasspathProviderTests extends AbstractDebugTest {
 		String location1 = bin1.getLocation().toOSString();
 		String location2 = bin2.getLocation().toOSString();
 
-		List<String> list = new ArrayList<>();
-		for (int i = 0; i < entries.length; i++) {
+		List<String> list = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
+		for (int i = 0; i < entries.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			list.add(entries[i]);
 		}
 
-		assertTrue("Classpath is missing " + location1, list.contains(location1));
-		assertTrue("Classpath is missing " + location2, list.contains(location2));
+		assertTrue("Classpath is missing " + location1, list.contains(location1)); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
+		assertTrue("Classpath is missing " + location2, list.contains(location2)); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 	}
 
@@ -484,19 +484,19 @@ public class ClasspathProviderTests extends AbstractDebugTest {
 		IFolder bin = ResourcesPlugin.getWorkspace().getRoot().getFolder(project.getOutputLocation());
 		String location = bin.getLocation().toOSString();
 
-		List<String> list = new ArrayList<>();
-		for (int i = 0; i < entries.length; i++) {
+		List<String> list = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
+		for (int i = 0; i < entries.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			list.add(entries[i]);
 		}
 
-		assertTrue("Classpath is missing " + location, list.contains(location));
+		assertTrue("Classpath is missing " + location, list.contains(location)); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 	}
 
 	/**
 	 * Tests that a buildpath with a relative (../..) classpath entry will resolve properly.
 	 */
-	public void testRelativeClasspathEntry() throws Exception {
+	public void testRelativeClasspathEntry() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
         // create a project with a relative classpath entry
         IProject pro = ResourcesPlugin.getWorkspace().getRoot().getProject("RelativeCP");
         assertFalse("Project should not exist", pro.exists());
@@ -514,21 +514,21 @@ public class ClasspathProviderTests extends AbstractDebugTest {
         // test runtime class path resolution
         String[] entries = JavaRuntime.computeDefaultRuntimeClassPath(project);
         String jarPath = get14Project().getProject().getLocation().append("src").append("A.jar").toOSString();
-        List<String> list = new ArrayList<>();
-		for (int i = 0; i < entries.length; i++) {
+        List<String> list = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
+		for (int i = 0; i < entries.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			list.add(entries[i]);
 		}
 
         // delete the project
         pro.delete(false, null);
 
-        assertTrue("Classpath is missing " + jarPath, list.contains(jarPath));
+        assertTrue("Classpath is missing " + jarPath, list.contains(jarPath)); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 	}
 
 	/**
 	 * Tests that a variable with a relative (../..) path will resolve properly.
 	 */
-	public void testVariableWithRelativePath() throws Exception {
+	public void testVariableWithRelativePath() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
         // create a project with a relative classpath entry
         IProject pro = ResourcesPlugin.getWorkspace().getRoot().getProject("RelativeVar");
         assertFalse("Project should not exist", pro.exists());
@@ -548,14 +548,14 @@ public class ClasspathProviderTests extends AbstractDebugTest {
         // test runtime class path resolution
         String[] entries = JavaRuntime.computeDefaultRuntimeClassPath(project);
         String jarPath = get14Project().getProject().getLocation().append("src").append("A.jar").toOSString();
-        List<String> list = new ArrayList<>();
-		for (int i = 0; i < entries.length; i++) {
+        List<String> list = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
+		for (int i = 0; i < entries.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			list.add(entries[i]);
 		}
 
         // delete the project
         pro.delete(false, null);
 
-        assertTrue("Classpath is missing " + jarPath, list.contains(jarPath));
+        assertTrue("Classpath is missing " + jarPath, list.contains(jarPath)); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 	}
 }

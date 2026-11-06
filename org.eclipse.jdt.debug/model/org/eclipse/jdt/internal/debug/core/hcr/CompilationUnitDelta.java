@@ -68,7 +68,7 @@ public class CompilationUnitDelta {
 	/**
 	 * Creates a new <code>CompilationUnitDelta</code> object that calculates and stores the changes of the given CU since some point in time.
 	 */
-	public CompilationUnitDelta(ICompilationUnit cu, long timestamp)
+	public CompilationUnitDelta(ICompilationUnit cu, long timestamp) //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 			throws CoreException {
 
 		if (cu.isWorkingCopy()) {
@@ -92,7 +92,7 @@ public class CompilationUnitDelta {
 
 		IFileState found = null;
 		// find edition just before the given time stamp
-		for (IFileState state : states) {
+		for (IFileState state : states) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			long d = state.getModificationTime();
 			if (d < timestamp) {
 				found = state;
@@ -126,7 +126,7 @@ public class CompilationUnitDelta {
 	 * </ul>
 	 * after the initial timestamp.
 	 */
-	public boolean hasChanged(String className, String methodName, String signature) {
+	public boolean hasChanged(String className, String methodName, String signature) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		if (!fHasHistory) {
 			return false; // optimistic: we have no history, so assume that
 							// member hasn't changed
@@ -191,20 +191,20 @@ public class CompilationUnitDelta {
 	/**
 	 * Returns null if an error occurred.
 	 */
-	private char[] readString(InputStream is) {
+	private char[] readString(InputStream is) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		if (is == null) {
 			return null;
 		}
 		BufferedReader reader = null;
 		try {
-			StringBuilder buffer = new StringBuilder();
+			StringBuilder buffer = new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 			char[] part = new char[2048];
 			int read = 0;
 			reader = new BufferedReader(new InputStreamReader(is,
 					ResourcesPlugin.getEncoding()));
 
-			while ((read = reader.read(part)) != -1) {
-				buffer.append(part, 0, read);
+			while ((read = reader.read(part)) != -1) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
+				buffer.append(part, 0, read); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			}
 
 			char[] b = new char[buffer.length()];

@@ -183,7 +183,7 @@ public class JdwpCommandPacket extends JdwpPacket {
 	public static final int HCR_CAPABILITIES = 5 + (CSET_HOT_CODE_REPLACEMENT << 8);
 
 	/** Mapping of command codes to strings. */
-	private static Map<Integer, String> fgCommandMap = null;
+	private static Map<Integer, String> fgCommandMap = null; //FLLDCIM: MARK — M10 M3_PRIMITIVE_LANES FIELD
 
 	/** Next id to be assigned. */
 	private static int fgNextId = 1;
@@ -259,7 +259,7 @@ public class JdwpCommandPacket extends JdwpPacket {
 	/**
 	 * Retrieves constant mappings.
 	 */
-	public static void getConstantMaps() {
+	public static void getConstantMaps() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		if (fgCommandMap != null) {
 			return;
 		}
@@ -267,8 +267,8 @@ public class JdwpCommandPacket extends JdwpPacket {
 		Field[] fields = JdwpCommandPacket.class.getDeclaredFields();
 
 		// First get the set names.
-		Map<Integer, String> setNames = new HashMap<>(fields.length);
-		for (Field field : fields) {
+		Map<Integer, String> setNames = new HashMap<>(fields.length); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW //FLLDCIM: MARK — M10 M3_PRIMITIVE_LANES LOCAL_VARIABLE
+		for (Field field : fields) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			if ((field.getModifiers() & Modifier.PUBLIC) == 0
 					|| (field.getModifiers() & Modifier.STATIC) == 0
 					|| (field.getModifiers() & Modifier.FINAL) == 0) {
@@ -293,8 +293,8 @@ public class JdwpCommandPacket extends JdwpPacket {
 		}
 
 		// Get the commands.
-		fgCommandMap = new HashMap<>();
-		for (Field field : fields) {
+		fgCommandMap = new HashMap<>(); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
+		for (Field field : fields) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			if ((field.getModifiers() & Modifier.PUBLIC) == 0
 					|| (field.getModifiers() & Modifier.STATIC) == 0
 					|| (field.getModifiers() & Modifier.FINAL) == 0) {
@@ -312,7 +312,7 @@ public class JdwpCommandPacket extends JdwpPacket {
 				int value = val.intValue();
 				int set = value >>> 8;
 				String setName = setNames.get(Integer.valueOf(set));
-				String entryName = setName + " - " + removePrefix(name); //$NON-NLS-1$
+				String entryName = setName + " - " + removePrefix(name); //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 				fgCommandMap.put(val, entryName);
 
@@ -346,293 +346,293 @@ public class JdwpCommandPacket extends JdwpPacket {
 	 *
 	 * @see java.lang.Object#toString()
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public String toString() {
-		StringBuilder buffer = new StringBuilder();
-		buffer.append('[');
-		buffer.append(getId());
-		buffer.append("] "); //$NON-NLS-1$
+		StringBuilder buffer = new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
+		buffer.append('['); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+		buffer.append(getId()); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+		buffer.append("] "); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		switch (getCommand()) {
 
 		/** Commands VirtualMachine. */
 		case VM_VERSION:
-			buffer.append("VM_VERSION"); //$NON-NLS-1$
+			buffer.append("VM_VERSION"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			break;
 		case VM_CLASSES_BY_SIGNATURE:
-			buffer.append("VM_CLASSES_BY_SIGNATURE"); //$NON-NLS-1$
+			buffer.append("VM_CLASSES_BY_SIGNATURE"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			break;
 		case VM_ALL_CLASSES:
-			buffer.append("VM_ALL_CLASSES"); //$NON-NLS-1$
+			buffer.append("VM_ALL_CLASSES"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			break;
 		case VM_ALL_THREADS:
-			buffer.append("VM_ALL_THREADS"); //$NON-NLS-1$
+			buffer.append("VM_ALL_THREADS"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			break;
 		case VM_TOP_LEVEL_THREAD_GROUPS:
-			buffer.append("VM_TOP_LEVEL_THREAD_GROUPS"); //$NON-NLS-1$
+			buffer.append("VM_TOP_LEVEL_THREAD_GROUPS"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			break;
 		case VM_DISPOSE:
-			buffer.append("VM_DISPOSE"); //$NON-NLS-1$
+			buffer.append("VM_DISPOSE"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			break;
 		case VM_ID_SIZES:
-			buffer.append("VM_ID_SIZES"); //$NON-NLS-1$
+			buffer.append("VM_ID_SIZES"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			break;
 		case VM_SUSPEND:
-			buffer.append("VM_SUSPEND"); //$NON-NLS-1$
+			buffer.append("VM_SUSPEND"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			break;
 		case VM_RESUME:
-			buffer.append("VM_RESUME"); //$NON-NLS-1$
+			buffer.append("VM_RESUME"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			break;
 		case VM_EXIT:
-			buffer.append("VM_EXIT"); //$NON-NLS-1$
+			buffer.append("VM_EXIT"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			break;
 		case VM_CREATE_STRING:
-			buffer.append("VM_CREATE_STRING"); //$NON-NLS-1$
+			buffer.append("VM_CREATE_STRING"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			break;
 		case VM_CAPABILITIES:
-			buffer.append("VM_CAPABILITIES"); //$NON-NLS-1$
+			buffer.append("VM_CAPABILITIES"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			break;
 		case VM_CLASS_PATHS:
-			buffer.append("VM_CLASS_PATHS"); //$NON-NLS-1$
+			buffer.append("VM_CLASS_PATHS"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			break;
 		case VM_DISPOSE_OBJECTS:
-			buffer.append("VM_DISPOSE_OBJECTS"); //$NON-NLS-1$
+			buffer.append("VM_DISPOSE_OBJECTS"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			break;
 		case VM_HOLD_EVENTS:
-			buffer.append("VM_HOLD_EVENTS"); //$NON-NLS-1$
+			buffer.append("VM_HOLD_EVENTS"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			break;
 		case VM_RELEASE_EVENTS:
-			buffer.append("VM_RELEASE_EVENTS"); //$NON-NLS-1$
+			buffer.append("VM_RELEASE_EVENTS"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			break;
 		case VM_CAPABILITIES_NEW:
-			buffer.append("VM_CAPABILITIES_NEW"); //$NON-NLS-1$
+			buffer.append("VM_CAPABILITIES_NEW"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			break;
 		case VM_REDEFINE_CLASSES:
-			buffer.append("VM_REDEFINE_CLASSES"); //$NON-NLS-1$
+			buffer.append("VM_REDEFINE_CLASSES"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			break;
 		case VM_SET_DEFAULT_STRATUM:
-			buffer.append("VM_SET_DEFAULT_STRATUM"); //$NON-NLS-1$
+			buffer.append("VM_SET_DEFAULT_STRATUM"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			break;
 		case VM_ALL_CLASSES_WITH_GENERIC:
-			buffer.append("VM_ALL_CLASSES_WITH_GENERIC"); //$NON-NLS-1$
+			buffer.append("VM_ALL_CLASSES_WITH_GENERIC"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			break;
 
 		/** Commands ReferenceType. */
 		case RT_SIGNATURE:
-			buffer.append("RT_SIGNATURE"); //$NON-NLS-1$
+			buffer.append("RT_SIGNATURE"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			break;
 		case RT_CLASS_LOADER:
-			buffer.append("RT_CLASS_LOADER"); //$NON-NLS-1$
+			buffer.append("RT_CLASS_LOADER"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			break;
 		case RT_MODIFIERS:
-			buffer.append("RT_MODIFIERS"); //$NON-NLS-1$
+			buffer.append("RT_MODIFIERS"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			break;
 		case RT_FIELDS:
-			buffer.append("RT_FIELDS"); //$NON-NLS-1$
+			buffer.append("RT_FIELDS"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			break;
 		case RT_METHODS:
-			buffer.append("RT_METHODS"); //$NON-NLS-1$
+			buffer.append("RT_METHODS"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			break;
 		case RT_GET_VALUES:
-			buffer.append("RT_GET_VALUES"); //$NON-NLS-1$
+			buffer.append("RT_GET_VALUES"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			break;
 		case RT_SOURCE_FILE:
-			buffer.append("RT_SOURCE_FILE"); //$NON-NLS-1$
+			buffer.append("RT_SOURCE_FILE"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			break;
 		case RT_NESTED_TYPES:
-			buffer.append("RT_NESTED_TYPES"); //$NON-NLS-1$
+			buffer.append("RT_NESTED_TYPES"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			break;
 		case RT_STATUS:
-			buffer.append("RT_STATUS"); //$NON-NLS-1$
+			buffer.append("RT_STATUS"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			break;
 		case RT_INTERFACES:
-			buffer.append("RT_INTERFACES"); //$NON-NLS-1$
+			buffer.append("RT_INTERFACES"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			break;
 		case RT_CLASS_OBJECT:
-			buffer.append("RT_CLASS_OBJECT"); //$NON-NLS-1$
+			buffer.append("RT_CLASS_OBJECT"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			break;
 		case RT_SOURCE_DEBUG_EXTENSION:
-			buffer.append("RT_SOURCE_DEBUG_EXTENSION"); //$NON-NLS-1$
+			buffer.append("RT_SOURCE_DEBUG_EXTENSION"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			break;
 		case RT_SIGNATURE_WITH_GENERIC:
-			buffer.append("RT_SIGNATURE_WITH_GENERIC"); //$NON-NLS-1$
+			buffer.append("RT_SIGNATURE_WITH_GENERIC"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			break;
 		case RT_FIELDS_WITH_GENERIC:
-			buffer.append("RT_FIELDS_WITH_GENERIC"); //$NON-NLS-1$
+			buffer.append("RT_FIELDS_WITH_GENERIC"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			break;
 		case RT_METHODS_WITH_GENERIC:
-			buffer.append("RT_METHODS_WITH_GENERIC"); //$NON-NLS-1$
+			buffer.append("RT_METHODS_WITH_GENERIC"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			break;
 
 		/** Commands ClassType. */
 		case CT_SUPERCLASS:
-			buffer.append("CT_SUPERCLASS"); //$NON-NLS-1$
+			buffer.append("CT_SUPERCLASS"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			break;
 		case CT_SET_VALUES:
-			buffer.append("CT_SET_VALUES"); //$NON-NLS-1$
+			buffer.append("CT_SET_VALUES"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			break;
 		case CT_INVOKE_METHOD:
-			buffer.append("CT_INVOKE_METHOD"); //$NON-NLS-1$
+			buffer.append("CT_INVOKE_METHOD"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			break;
 		case CT_NEW_INSTANCE:
-			buffer.append("CT_NEW_INSTANCE"); //$NON-NLS-1$
+			buffer.append("CT_NEW_INSTANCE"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			break;
 
 		/** Commands ArrayType. */
 		case AT_NEW_INSTANCE:
-			buffer.append("AT_NEW_INSTANCE"); //$NON-NLS-1$
+			buffer.append("AT_NEW_INSTANCE"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			break;
 
 		/** Commands Method. */
 		case M_LINE_TABLE:
-			buffer.append("M_LINE_TABLE"); //$NON-NLS-1$
+			buffer.append("M_LINE_TABLE"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			break;
 		case M_VARIABLE_TABLE:
-			buffer.append("M_VARIABLE_TABLE"); //$NON-NLS-1$
+			buffer.append("M_VARIABLE_TABLE"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			break;
 		case M_BYTECODES:
-			buffer.append("M_BYTECODES"); //$NON-NLS-1$
+			buffer.append("M_BYTECODES"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			break;
 		case M_OBSOLETE:
-			buffer.append("M_OBSOLETE"); //$NON-NLS-1$
+			buffer.append("M_OBSOLETE"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			break;
 		case M_VARIABLE_TABLE_WITH_GENERIC:
-			buffer.append("M_VARIABLE_TABLE_WITH_GENERIC"); //$NON-NLS-1$
+			buffer.append("M_VARIABLE_TABLE_WITH_GENERIC"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			break;
 
 		/** Commands ObjectReference. */
 		case OR_REFERENCE_TYPE:
-			buffer.append("OR_REFERENCE_TYPE"); //$NON-NLS-1$
+			buffer.append("OR_REFERENCE_TYPE"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			break;
 		case OR_GET_VALUES:
-			buffer.append("OR_GET_VALUES"); //$NON-NLS-1$
+			buffer.append("OR_GET_VALUES"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			break;
 		case OR_SET_VALUES:
-			buffer.append("OR_SET_VALUES"); //$NON-NLS-1$
+			buffer.append("OR_SET_VALUES"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			break;
 		case OR_MONITOR_INFO:
-			buffer.append("OR_MONITOR_INFO"); //$NON-NLS-1$
+			buffer.append("OR_MONITOR_INFO"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			break;
 		case OR_INVOKE_METHOD:
-			buffer.append("OR_INVOKE_METHOD"); //$NON-NLS-1$
+			buffer.append("OR_INVOKE_METHOD"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			break;
 		case OR_DISABLE_COLLECTION:
-			buffer.append("OR_DISABLE_COLLECTION"); //$NON-NLS-1$
+			buffer.append("OR_DISABLE_COLLECTION"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			break;
 		case OR_ENABLE_COLLECTION:
-			buffer.append("OR_ENABLE_COLLECTION"); //$NON-NLS-1$
+			buffer.append("OR_ENABLE_COLLECTION"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			break;
 		case OR_IS_COLLECTED:
-			buffer.append("OR_IS_COLLECTED"); //$NON-NLS-1$
+			buffer.append("OR_IS_COLLECTED"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			break;
 
 		/** Commands StringReference. */
 		case SR_VALUE:
-			buffer.append("SR_VALUE"); //$NON-NLS-1$
+			buffer.append("SR_VALUE"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			break;
 
 		/** Commands ThreadReference. */
 		case TR_NAME:
-			buffer.append("TR_NAME"); //$NON-NLS-1$
+			buffer.append("TR_NAME"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			break;
 		case TR_SUSPEND:
-			buffer.append("TR_SUSPEND"); //$NON-NLS-1$
+			buffer.append("TR_SUSPEND"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			break;
 		case TR_RESUME:
-			buffer.append("TR_RESUME"); //$NON-NLS-1$
+			buffer.append("TR_RESUME"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			break;
 		case TR_STATUS:
-			buffer.append("TR_STATUS"); //$NON-NLS-1$
+			buffer.append("TR_STATUS"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			break;
 		case TR_THREAD_GROUP:
-			buffer.append("TR_THREAD_GROUP"); //$NON-NLS-1$
+			buffer.append("TR_THREAD_GROUP"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			break;
 		case TR_FRAMES:
-			buffer.append("TR_FRAMES"); //$NON-NLS-1$
+			buffer.append("TR_FRAMES"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			break;
 		case TR_FRAME_COUNT:
-			buffer.append("TR_FRAME_COUNT"); //$NON-NLS-1$
+			buffer.append("TR_FRAME_COUNT"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			break;
 		case TR_OWNED_MONITORS:
-			buffer.append("TR_OWNED_MONITORS"); //$NON-NLS-1$
+			buffer.append("TR_OWNED_MONITORS"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			break;
 		case TR_CURRENT_CONTENDED_MONITOR:
-			buffer.append("TR_CURRENT_CONTENDED_MONITOR"); //$NON-NLS-1$
+			buffer.append("TR_CURRENT_CONTENDED_MONITOR"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			break;
 		case TR_STOP:
-			buffer.append("TR_STOP"); //$NON-NLS-1$
+			buffer.append("TR_STOP"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			break;
 		case TR_INTERRUPT:
-			buffer.append("TR_INTERRUPT"); //$NON-NLS-1$
+			buffer.append("TR_INTERRUPT"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			break;
 		case TR_SUSPEND_COUNT:
-			buffer.append("TR_SUSPEND_COUNT"); //$NON-NLS-1$
+			buffer.append("TR_SUSPEND_COUNT"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			break;
 
 		/** Commands ThreadGroupReference. */
 		case TGR_NAME:
-			buffer.append("TGR_NAME"); //$NON-NLS-1$
+			buffer.append("TGR_NAME"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			break;
 		case TGR_PARENT:
-			buffer.append("TGR_PARENT"); //$NON-NLS-1$
+			buffer.append("TGR_PARENT"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			break;
 		case TGR_CHILDREN:
-			buffer.append("TGR_CHILDREN"); //$NON-NLS-1$
+			buffer.append("TGR_CHILDREN"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			break;
 
 		/** Commands ArrayReference. */
 		case AR_LENGTH:
-			buffer.append("AR_LENGTH"); //$NON-NLS-1$
+			buffer.append("AR_LENGTH"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			break;
 		case AR_GET_VALUES:
-			buffer.append("AR_GET_VALUES"); //$NON-NLS-1$
+			buffer.append("AR_GET_VALUES"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			break;
 		case AR_SET_VALUES:
-			buffer.append("AR_SET_VALUES"); //$NON-NLS-1$
+			buffer.append("AR_SET_VALUES"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			break;
 
 		/** Commands ClassLoaderReference. */
 		case CLR_VISIBLE_CLASSES:
-			buffer.append("CLR_VISIBLE_CLASSES"); //$NON-NLS-1$
+			buffer.append("CLR_VISIBLE_CLASSES"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			break;
 
 		/** Commands EventRequest. */
 		case ER_SET:
-			buffer.append("ER_SET"); //$NON-NLS-1$
+			buffer.append("ER_SET"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			break;
 		case ER_CLEAR:
-			buffer.append("ER_CLEAR"); //$NON-NLS-1$
+			buffer.append("ER_CLEAR"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			break;
 		case ER_CLEAR_ALL_BREAKPOINTS:
-			buffer.append("ER_CLEAR_ALL_BREAKPOINTS"); //$NON-NLS-1$
+			buffer.append("ER_CLEAR_ALL_BREAKPOINTS"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			break;
 
 		/** Commands StackFrame. */
 		case SF_GET_VALUES:
-			buffer.append("SF_GET_VALUES"); //$NON-NLS-1$
+			buffer.append("SF_GET_VALUES"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			break;
 		case SF_SET_VALUES:
-			buffer.append("SF_SET_VALUES"); //$NON-NLS-1$
+			buffer.append("SF_SET_VALUES"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			break;
 		case SF_THIS_OBJECT:
-			buffer.append("SF_THIS_OBJECT"); //$NON-NLS-1$
+			buffer.append("SF_THIS_OBJECT"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			break;
 		case SF_POP_FRAME:
-			buffer.append("SF_POP_FRAME"); //$NON-NLS-1$
+			buffer.append("SF_POP_FRAME"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			break;
 
 		/** Commands ClassObjectReference. */
 		case COR_REFLECTED_TYPE:
-			buffer.append("COR_REFLECTED_TYPE"); //$NON-NLS-1$
+			buffer.append("COR_REFLECTED_TYPE"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			break;
 
 		/** Commands Event. */
 		case E_COMPOSITE:
-			buffer.append("E_COMPOSITE"); //$NON-NLS-1$
+			buffer.append("E_COMPOSITE"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			break;
 
 		default:
-			buffer.append("UNKNOWN COMMAND: "); //$NON-NLS-1$
-			buffer.append(getCommand());
+			buffer.append("UNKNOWN COMMAND: "); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+			buffer.append(getCommand()); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			break;
 		}
 		return buffer.toString();

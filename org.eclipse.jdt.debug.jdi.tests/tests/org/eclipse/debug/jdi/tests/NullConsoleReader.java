@@ -44,7 +44,7 @@ public class NullConsoleReader extends AbstractReader {
 		try {
 			int size = 0;
 			byte[] buffer = new byte[1024];
-			while (!fIsStopping && (size = fInput.read(buffer)) != -1) {
+			while (!fIsStopping && (size = fInput.read(buffer)) != -1) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				if (out instanceof PrintStream o) {
 					o.write(buffer, 0, size);
 				}

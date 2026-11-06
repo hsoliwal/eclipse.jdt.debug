@@ -77,11 +77,11 @@ public class IOConsoleEchoActionDelegate implements IActionDelegate2, IWorkbench
     /**
      * Actually runs the test
      */
-    public void runTest(IOConsole console) {
+    public void runTest(IOConsole console) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
         final Display display = Display.getDefault();
 
         final IOConsoleInputStream in = console.getInputStream();
-        display.asyncExec(new Runnable() {
+        display.asyncExec(new Runnable() { //FLLDCIM: MARK — T08 UI_THREAD_SYNCHRONIZER CALL
             @Override
 			public void run() {
                 in.setColor(display.getSystemColor(SWT.COLOR_BLUE));
@@ -91,7 +91,7 @@ public class IOConsoleEchoActionDelegate implements IActionDelegate2, IWorkbench
         manager.addConsoles(new IConsole[] { console });
 
         final IOConsoleOutputStream out = console.newOutputStream();
-        Display.getDefault().asyncExec(new Runnable() {
+        Display.getDefault().asyncExec(new Runnable() { //FLLDCIM: MARK — T08 UI_THREAD_SYNCHRONIZER CALL
             @Override
 			public void run() {
                 out.setColor(Display.getDefault().getSystemColor(SWT.COLOR_GREEN));
@@ -101,7 +101,7 @@ public class IOConsoleEchoActionDelegate implements IActionDelegate2, IWorkbench
 
         PrintStream ps = new PrintStream(out);
         ps.println("Any text entered should be echoed back"); //$NON-NLS-1$
-        for(;;) {
+        for(;;) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
             byte[] b = new byte[1024];
             int bRead = 0;
             try {

@@ -83,14 +83,14 @@ public class VirtualMachineTest extends AbstractJDITest {
 	/**
 	 * Returns all tests
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	protected Test suite() {
 		JDITestSuite suite = new JDITestSuite(this);
 
 		// Tests that run before the program is started
 		Vector<?> testNames = getAllMatchingTests("testNotStarted");
 		Iterator<?> iterator = testNames.iterator();
-		while (iterator.hasNext()) {
+		while (iterator.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			String name = (String) iterator.next();
 			suite.addTest(new JDITestCase(this, name));
 		}
@@ -101,7 +101,7 @@ public class VirtualMachineTest extends AbstractJDITest {
 		// Tests that run after the program has started
 		testNames = getAllMatchingTests("testStarted");
 		iterator = testNames.iterator();
-		while (iterator.hasNext()) {
+		while (iterator.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			String name = (String) iterator.next();
 			suite.addTest(new JDITestCase(this, name));
 		}
@@ -109,7 +109,7 @@ public class VirtualMachineTest extends AbstractJDITest {
 		// All other tests
 		testNames = getAllMatchingTests("testJDI");
 		iterator = testNames.iterator();
-		while (iterator.hasNext()) {
+		while (iterator.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			String name = (String) iterator.next();
 			suite.addTest(new JDITestCase(this, name));
 		}
@@ -273,7 +273,7 @@ public class VirtualMachineTest extends AbstractJDITest {
 		List<?> classes = fVM.allClasses();
 		Iterator<?> iterator = classes.listIterator();
 		int i = 0;
-		while (iterator.hasNext()) {
+		while (iterator.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			assertTrue(Integer.toString(i++), iterator.next() instanceof ReferenceType);
 		}
 	}
@@ -285,7 +285,7 @@ public class VirtualMachineTest extends AbstractJDITest {
 		List<?> threads = fVM.allThreads();
 		Iterator<?> iterator = threads.listIterator();
 		int i = 0;
-		while (iterator.hasNext()) {
+		while (iterator.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			assertTrue(Integer.toString(i++), iterator.next() instanceof ThreadReference);
 		}
 	}
@@ -300,7 +300,7 @@ public class VirtualMachineTest extends AbstractJDITest {
 	 * Test JDI allClasses() and JDWP 'VM- Get all classes'
 	 * once the test program has been started.
 	 */
-	public void testStartedAllClasses() {
+	public void testStartedAllClasses() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 
 		// The test program has started, the number of classes is != 0
 		List<?> classes = fVM.allClasses();
@@ -310,7 +310,7 @@ public class VirtualMachineTest extends AbstractJDITest {
 		String[] names = new String[classes.size()];
 		ListIterator<?> iterator = classes.listIterator();
 		int i = 0;
-		while (iterator.hasNext()) {
+		while (iterator.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			ReferenceType type = (ReferenceType) iterator.next();
 			names[i++] = type.name();
 		}
@@ -322,22 +322,22 @@ public class VirtualMachineTest extends AbstractJDITest {
 				"java.util.Date",
 				"org.eclipse.debug.jdi.tests.program.Printable",
 				"org.eclipse.debug.jdi.tests.program.MainClass" };
-		for (int j = 0; j < expected.length; j++) {
+		for (int j = 0; j < expected.length; j++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			boolean isIncluded = false;
-			iteration : for (int k = 0; k < names.length; k++) {
+			iteration : for (int k = 0; k < names.length; k++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				if (names[k].equals(expected[j])) {
 					isIncluded = true;
 					break iteration;
 				}
 			}
-			assertTrue("2." + j, isIncluded);
+			assertTrue("2." + j, isIncluded); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		}
 	}
 	/**
 	 * Test JDI allThreads() and JDWP 'VM - Get all threads'
 	 * once the test program has been started.
 	 */
-	public void testStartedAllThreads() {
+	public void testStartedAllThreads() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 
 		// The test program has started, the number of threads is != 0
 		List<?> threads = fVM.allThreads();
@@ -347,7 +347,7 @@ public class VirtualMachineTest extends AbstractJDITest {
 		String[] names = new String[threads.size()];
 		ListIterator<?> iterator = threads.listIterator();
 		int i = 0;
-		while (iterator.hasNext()) {
+		while (iterator.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			ThreadReference thread = (ThreadReference) iterator.next();
 			names[i++] = thread.name();
 		}
@@ -355,8 +355,8 @@ public class VirtualMachineTest extends AbstractJDITest {
 		// Check that they contain at least the expected names
 		String[] expected = new String[] { "Test Thread" };
 		boolean isIncluded = false;
-		iteration : for (int j = 0; j < expected.length; j++) {
-			for (int k = 0; k < names.length; k++) {
+		iteration : for (int j = 0; j < expected.length; j++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
+			for (int k = 0; k < names.length; k++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				if (expected[j].equals(names[k])) {
 					isIncluded = true;
 					break iteration;
@@ -368,7 +368,7 @@ public class VirtualMachineTest extends AbstractJDITest {
 	/**
 	 * Test JDI classesByName() once the test program has been started.
 	 */
-	public void testStartedClassesByName() {
+	public void testStartedClassesByName() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 
 		// The test program has started, the number of java.lang.Object is 1
 		List<?> classes = fVM.classesByName("java.lang.Object");
@@ -378,26 +378,26 @@ public class VirtualMachineTest extends AbstractJDITest {
 		String[] names = new String[classes.size()];
 		ListIterator<?> iterator = classes.listIterator();
 		int i = 0;
-		while (iterator.hasNext()) {
+		while (iterator.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			ReferenceType type = (ReferenceType) iterator.next();
 			names[i++] = type.name();
 		}
 
 		// Check that they are all "java.lang.Object"
-		for (int j = 0; j < names.length; j++) {
-			assertEquals("2." + j, "java.lang.Object", names[j]);
+		for (int j = 0; j < names.length; j++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
+			assertEquals("2." + j, "java.lang.Object", names[j]); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		}
 	}
 	/**
 	 * Test JDI suspend() and resume() once the test program has been started.
 	 */
-	public void testStartedSuspendResume() {
+	public void testStartedSuspendResume() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		// Suspend
 		fVM.suspend();
 		ListIterator<?> threads = fVM.allThreads().listIterator();
-		while (threads.hasNext()) {
+		while (threads.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			ThreadReference thread = (ThreadReference) threads.next();
-			assertTrue("1." + thread.name(), thread.isSuspended());
+			assertTrue("1." + thread.name(), thread.isSuspended()); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		}
 
 		// Resume
@@ -410,9 +410,9 @@ public class VirtualMachineTest extends AbstractJDITest {
 		threads = fVM.allThreads().listIterator();
 		ThreadReference suspended = getThread();
 		suspended.suspend();
-		while (threads.hasNext()) {
+		while (threads.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			ThreadReference thread = (ThreadReference) threads.next();
-			assertTrue("2." + thread.name(), thread.isSuspended());
+			assertTrue("2." + thread.name(), thread.isSuspended()); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		}
 
 		// Resume VM and ensure that the one thread that was suspended is still suspended

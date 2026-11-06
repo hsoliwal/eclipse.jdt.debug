@@ -62,8 +62,8 @@ public class MethodImpl extends TypeComponentImpl implements Method, Locatable {
 	private List<LocalVariable> fVariables = null;
 	private long fLowestValidCodeIndex = -1;
 	private long fHighestValidCodeIndex = -1;
-	private Map<Long, Integer> fCodeIndexToLine = null;
-	private Map<Integer, List<Long>> fLineToCodeIndexes = null;
+	private Map<Long, Integer> fCodeIndexToLine = null; //FLLDCIM: MARK — M10 M3_PRIMITIVE_LANES FIELD
+	private Map<Integer, List<Long>> fLineToCodeIndexes = null; //FLLDCIM: MARK — M10 M3_PRIMITIVE_LANES FIELD
 	private Map<String, Map<String, List<Location>>> fStratumAllLineLocations = null;
 	private int fArgumentSlotsCount = -1;
 	private List<LocalVariable> fArguments = null;
@@ -142,7 +142,7 @@ public class MethodImpl extends TypeComponentImpl implements Method, Locatable {
 	/**
 	 * Gets line table from VM.
 	 */
-	private void getLineTable() throws AbsentInformationException {
+	private void getLineTable() throws AbsentInformationException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		if (isObsolete()) {
 			return;
 		}
@@ -176,15 +176,15 @@ public class MethodImpl extends TypeComponentImpl implements Method, Locatable {
 			fLowestValidCodeIndex = readLong("lowest index", replyData); //$NON-NLS-1$
 			fHighestValidCodeIndex = readLong("highest index", replyData); //$NON-NLS-1$
 			int nrOfElements = readInt("elements", replyData); //$NON-NLS-1$
-			fCodeIndexToLine = new HashMap<>();
-			fLineToCodeIndexes = new HashMap<>();
+			fCodeIndexToLine = new HashMap<>(); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
+			fLineToCodeIndexes = new HashMap<>(); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
 			if (nrOfElements == 0) {
 				throw new AbsentInformationException(
 						JDIMessages.MethodImpl_Got_empty_line_number_table_for_this_method_3);
 			}
 			fCodeIndexTable = new long[nrOfElements];
 			fJavaStratumLineNumberTable = new int[nrOfElements];
-			for (int i = 0; i < nrOfElements; i++) {
+			for (int i = 0; i < nrOfElements; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				long lineCodeIndex = readLong("code index", replyData); //$NON-NLS-1$
 				Long lineCodeIndexLong = Long.valueOf(lineCodeIndex);
 				int lineNr = readInt("line nr", replyData); //$NON-NLS-1$
@@ -196,9 +196,9 @@ public class MethodImpl extends TypeComponentImpl implements Method, Locatable {
 				fCodeIndexTable[i] = lineCodeIndex;
 				fJavaStratumLineNumberTable[i] = lineNr;
 
-				List<Long> lineNrEntry = fLineToCodeIndexes.get(lineNrInt);
+				List<Long> lineNrEntry = fLineToCodeIndexes.get(lineNrInt); //FLLDCIM: MARK — M10 M3_PRIMITIVE_LANES LOCAL_VARIABLE
 				if (lineNrEntry == null) {
-					lineNrEntry = new ArrayList<>();
+					lineNrEntry = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 					fLineToCodeIndexes.put(lineNrInt, lineNrEntry);
 				}
 				lineNrEntry.add(lineCodeIndexLong);
@@ -216,7 +216,7 @@ public class MethodImpl extends TypeComponentImpl implements Method, Locatable {
 	 * @return Returns the line number that corresponds to the given
 	 *         lineCodeIndex.
 	 */
-	protected int javaStratumLineNumber(long lineCodeIndex)
+	protected int javaStratumLineNumber(long lineCodeIndex) //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 			throws AbsentInformationException {
 		if (isAbstract() || isNative() || isObsolete()) {
 			return -1;
@@ -230,14 +230,14 @@ public class MethodImpl extends TypeComponentImpl implements Method, Locatable {
 		Integer lineNrObj;
 		long index = lineCodeIndex;
 		// Search for the line where this code index is located.
-		do {
+		do { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			lineCodeIndexObj = Long.valueOf(index);
 			lineNrObj = javaStratumCodeIndexToLine().get(lineCodeIndexObj);
 		} while (lineNrObj == null && --index >= fLowestValidCodeIndex);
 		if (lineNrObj == null) {
 			if (lineCodeIndex >= fLowestValidCodeIndex) {
 				index = lineCodeIndex;
-				do {
+				do { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 					lineCodeIndexObj = Long.valueOf(index);
 					lineNrObj = javaStratumCodeIndexToLine().get(lineCodeIndexObj);
 				} while (lineNrObj == null && ++index <= fHighestValidCodeIndex);
@@ -261,7 +261,7 @@ public class MethodImpl extends TypeComponentImpl implements Method, Locatable {
 	/* (non-Javadoc)
 	 * @see com.sun.jdi.Method#arguments()
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public List<LocalVariable> arguments() throws AbsentInformationException {
 		if (isNative() || isAbstract()) {
 			throw new AbsentInformationException(JDIMessages.MethodImpl_No_local_variable_information_available_9);
@@ -270,9 +270,9 @@ public class MethodImpl extends TypeComponentImpl implements Method, Locatable {
 			return fArguments;
 		}
 
-		List<LocalVariable> result = new ArrayList<>();
+		List<LocalVariable> result = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 		Iterator<LocalVariable> iter = variables().iterator();
-		while (iter.hasNext()) {
+		while (iter.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			LocalVariable var = iter.next();
 			if (var.isArgument()) {
 				result.add(var);
@@ -291,8 +291,8 @@ public class MethodImpl extends TypeComponentImpl implements Method, Locatable {
 		if (fArgumentTypeNames != null) {
 			return fArgumentTypeNames;
 		}
-		List<String> result = new ArrayList<>();
-		for (String signature : argumentTypeSignatures()) {
+		List<String> result = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
+		for (String signature : argumentTypeSignatures()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			result.add(TypeImpl.signatureToName(signature));
 		}
 
@@ -321,11 +321,11 @@ public class MethodImpl extends TypeComponentImpl implements Method, Locatable {
 		if (fArgumentTypes != null) {
 			return fArgumentTypes;
 		}
-		List<Type> result = new ArrayList<>();
+		List<Type> result = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 		Iterator<String> iter = argumentTypeSignatures().iterator();
 		ClassLoaderReference classLoaderRef = declaringType().classLoader();
 		VirtualMachineImpl vm = virtualMachineImpl();
-		while (iter.hasNext()) {
+		while (iter.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			String argumentTypeSignature = iter.next();
 			result.add(TypeImpl.create(vm, argumentTypeSignature, classLoaderRef));
 		}
@@ -336,7 +336,7 @@ public class MethodImpl extends TypeComponentImpl implements Method, Locatable {
 	/**
 	 * @return Returns an array containing the bytecodes for this method.
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public byte[] bytecodes() {
 		if (fByteCodes != null) {
 			return fByteCodes;
@@ -392,7 +392,7 @@ public class MethodImpl extends TypeComponentImpl implements Method, Locatable {
 	 *         {@link Method} is less than, equal to, or greater than the specified
 	 *         {@link Method}.
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public int compareTo(Method method) {
 		if (method == null || !method.getClass().equals(this.getClass())) {
 			throw new ClassCastException(
@@ -516,7 +516,7 @@ public class MethodImpl extends TypeComponentImpl implements Method, Locatable {
 	/* (non-Javadoc)
 	 * @see com.sun.jdi.Method#variables()
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public List<LocalVariable> variables() throws AbsentInformationException {
 		if (isNative() || isAbstract()) {
 			throw new AbsentInformationException(JDIMessages.MethodImpl_No_local_variable_information_available_9);
@@ -545,8 +545,8 @@ public class MethodImpl extends TypeComponentImpl implements Method, Locatable {
 			DataInputStream replyData = replyPacket.dataInStream();
 			fArgumentSlotsCount = readInt("arg count", replyData); //$NON-NLS-1$
 			int nrOfElements = readInt("elements", replyData); //$NON-NLS-1$
-			List<LocalVariable> variables = new ArrayList<>(nrOfElements);
-			for (int i = 0; i < nrOfElements; i++) {
+			List<LocalVariable> variables = new ArrayList<>(nrOfElements); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
+			for (int i = 0; i < nrOfElements; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				long codeIndex = readLong("code index", replyData); //$NON-NLS-1$
 				String name = readString("name", replyData); //$NON-NLS-1$
 				String signature = readString("signature", replyData); //$NON-NLS-1$
@@ -581,7 +581,7 @@ public class MethodImpl extends TypeComponentImpl implements Method, Locatable {
 		}
 	}
 
-	private List<LocalVariable> inferArguments() throws AbsentInformationException {
+	private List<LocalVariable> inferArguments() throws AbsentInformationException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		// infer arguments, if possible
 
 		// try to generate the right generic signature for each argument
@@ -592,7 +592,7 @@ public class MethodImpl extends TypeComponentImpl implements Method, Locatable {
 			genericSignatures = new String[signatures.length];
 		} else {
 			genericSignatures = GenericSignature.getParameterTypes(genericSignature).toArray(new String[0]);
-			for (int i = 0; i < genericSignatures.length; i++) {
+			for (int i = 0; i < genericSignatures.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				if (genericSignatures[i].equals(signatures[i])) {
 					genericSignatures[i] = null;
 				}
@@ -605,9 +605,9 @@ public class MethodImpl extends TypeComponentImpl implements Method, Locatable {
 		}
 		if (signatures.length > 0) {
 			fArgumentSlotsCount = signatures.length;
-			fVariables = new ArrayList<>(fArgumentSlotsCount);
-			for (int i = 0; i < signatures.length; i++) {
-				String name = "arg" + i; //$NON-NLS-1$
+			fVariables = new ArrayList<>(fArgumentSlotsCount); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
+			for (int i = 0; i < signatures.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
+				String name = "arg" + i; //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 				LocalVariableImpl localVar = new LocalVariableImpl(virtualMachineImpl(), this, 0, name, signatures[i], genericSignatures[i], -1, slot, true);
 				fVariables.add(localVar);
 				slot++;
@@ -625,8 +625,8 @@ public class MethodImpl extends TypeComponentImpl implements Method, Locatable {
 	@Override
 	public List<LocalVariable> variablesByName(String name) throws AbsentInformationException {
 		Iterator<LocalVariable> iter = variables().iterator();
-		List<LocalVariable> result = new ArrayList<>();
-		while (iter.hasNext()) {
+		List<LocalVariable> result = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
+		while (iter.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			LocalVariable var = iter.next();
 			if (var.name().equals(name)) {
 				result.add(var);
@@ -638,7 +638,7 @@ public class MethodImpl extends TypeComponentImpl implements Method, Locatable {
 	/**
 	 * @see com.sun.jdi.Locatable#location()
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public Location location() {
 		if (isAbstract()) {
 			return null;
@@ -690,7 +690,7 @@ public class MethodImpl extends TypeComponentImpl implements Method, Locatable {
 	/**
 	 * @return Reads JDWP representation and returns new instance.
 	 */
-	protected static MethodImpl readWithReferenceTypeWithTag(MirrorImpl target,
+	protected static MethodImpl readWithReferenceTypeWithTag(MirrorImpl target, //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 			DataInputStream in) throws IOException {
 		VirtualMachineImpl vmImpl = target.virtualMachineImpl();
 		// See Location.
@@ -722,7 +722,7 @@ public class MethodImpl extends TypeComponentImpl implements Method, Locatable {
 	/**
 	 * @return Reads JDWP representation and returns new instance.
 	 */
-	protected static MethodImpl readWithNameSignatureModifiers(
+	protected static MethodImpl readWithNameSignatureModifiers( //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 			ReferenceTypeImpl target, ReferenceTypeImpl referenceType,
 			boolean withGenericSignature, DataInputStream in)
 			throws IOException {
@@ -756,7 +756,7 @@ public class MethodImpl extends TypeComponentImpl implements Method, Locatable {
 	/**
 	 * Retrieves constant mappings.
 	 */
-	public static void getConstantMaps() {
+	public static void getConstantMaps() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		if (fgInvokeOptions != null) {
 			return;
 		}
@@ -764,7 +764,7 @@ public class MethodImpl extends TypeComponentImpl implements Method, Locatable {
 		Field[] fields = MethodImpl.class.getDeclaredFields();
 		fgInvokeOptions = new String[32];
 
-		for (Field field : fields) {
+		for (Field field : fields) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			if ((field.getModifiers() & Modifier.PUBLIC) == 0
 					|| (field.getModifiers() & java.lang.reflect.Modifier.STATIC) == 0
 					|| (field.getModifiers() & Modifier.FINAL) == 0) {
@@ -776,7 +776,7 @@ public class MethodImpl extends TypeComponentImpl implements Method, Locatable {
 
 				if (name.startsWith("INVOKE_")) { //$NON-NLS-1$
 					int value = field.getInt(null);
-					for (int j = 0; j < fgInvokeOptions.length; j++) {
+					for (int j = 0; j < fgInvokeOptions.length; j++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 						if ((1 << j & value) != 0) {
 							fgInvokeOptions[j] = name;
 							break;
@@ -821,7 +821,7 @@ public class MethodImpl extends TypeComponentImpl implements Method, Locatable {
 	/* (non-Javadoc)
 	 * @see com.sun.jdi.Method#allLineLocations(java.lang.String, java.lang.String)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public List<Location> allLineLocations(String stratum, String sourceName)	throws AbsentInformationException {
 		if (isAbstract() || isNative()) {
 			return Collections.EMPTY_LIST;
@@ -833,14 +833,14 @@ public class MethodImpl extends TypeComponentImpl implements Method, Locatable {
 		Map<String, List<Location>> sourceNameAllLineLocations = null;
 		if (fStratumAllLineLocations == null) { // the stratum map doesn't
 												// exist, create it
-			fStratumAllLineLocations = new HashMap<>();
+			fStratumAllLineLocations = new HashMap<>(); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
 		} else {
 			// get the source name map
 			sourceNameAllLineLocations = fStratumAllLineLocations.get(stratum);
 		}
 		if (sourceNameAllLineLocations == null) { // the source name map doesn't
 													// exist, create it
-			sourceNameAllLineLocations = new HashMap<>();
+			sourceNameAllLineLocations = new HashMap<>(); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
 			fStratumAllLineLocations.put(stratum, sourceNameAllLineLocations);
 		} else {
 			// get the line locations
@@ -873,16 +873,16 @@ public class MethodImpl extends TypeComponentImpl implements Method, Locatable {
 	 * or/and the VM). Return an empty list if there is not executable code at
 	 * the specified lines.
 	 */
-	protected List<Location> javaStratumLocationsOfLines(List<Integer> javaLines)	throws AbsentInformationException {
-		Set<Long> tmpLocations = new TreeSet<>();
-		for (Integer key : javaLines) {
-			List<Long> indexes = javaStratumLineToCodeIndexes(key.intValue());
+	protected List<Location> javaStratumLocationsOfLines(List<Integer> javaLines)	throws AbsentInformationException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD //FLLDCIM: MARK — M10 M3_PRIMITIVE_LANES PARAMETER
+		Set<Long> tmpLocations = new TreeSet<>(); //FLLDCIM: MARK — M10 M3_PRIMITIVE_LANES LOCAL_VARIABLE
+		for (Integer key : javaLines) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
+			List<Long> indexes = javaStratumLineToCodeIndexes(key.intValue()); //FLLDCIM: MARK — M10 M3_PRIMITIVE_LANES LOCAL_VARIABLE
 			if (indexes != null) {
 				tmpLocations.addAll(indexes);
 			}
 		}
-		List<Location> locations = new ArrayList<>();
-		for (Long location : tmpLocations) {
+		List<Location> locations = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
+		for (Long location : tmpLocations) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			long index = location.longValue();
 			int position = Arrays.binarySearch(fCodeIndexTable, index);
 			if(position < 0) {

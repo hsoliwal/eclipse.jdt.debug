@@ -59,12 +59,12 @@ public class ViewManagementTests extends AbstractDebugUiTests implements IPerspe
 	/**
 	 * List of view ids expecting to open.
 	 */
-	private final List<String> fExpectingOpenEvents = new ArrayList<>();
+	private final List<String> fExpectingOpenEvents = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 
 	/**
 	 * List of view ids expecting to close.
 	 */
-	private final List<String> fExpectingCloseEvents = new ArrayList<>();
+	private final List<String> fExpectingCloseEvents = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 
 	/**
 	 * Constructor
@@ -103,7 +103,7 @@ public class ViewManagementTests extends AbstractDebugUiTests implements IPerspe
 	 * Tests that context views auto-open in debug perspective.
 	 * Both context views should auto-open.
 	 */
-	public void testAutoOpenDebugPerspective() throws Exception {
+	public void testAutoOpenDebugPerspective() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		if (HAS_BUG_420778) {
 			return;
 		}
@@ -134,7 +134,7 @@ public class ViewManagementTests extends AbstractDebugUiTests implements IPerspe
 	 * Tests that context views auto-open in debug perspective, and auto close on termination.
 	 * View "two" should auto-close.
 	 */
-	public void testAutoCloseDebugPerspective() throws Exception {
+	public void testAutoCloseDebugPerspective() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		if (HAS_BUG_420778) {
 			return;
 		}
@@ -161,7 +161,7 @@ public class ViewManagementTests extends AbstractDebugUiTests implements IPerspe
 				fEventLock.wait(DEFAULT_TIMEOUT);
 			}
 			assertTrue(buildRemainingEventsMessage(), checkComplete());
-			assertTrue("View " + VIEW_ONE + " should be open", isViewOpen(window, VIEW_ONE));
+			assertTrue("View " + VIEW_ONE + " should be open", isViewOpen(window, VIEW_ONE)); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		} finally {
 			terminateAndRemove(thread);
 			removeAllBreakpoints();
@@ -173,7 +173,7 @@ public class ViewManagementTests extends AbstractDebugUiTests implements IPerspe
 	 * Tests that context views auto-open in java perspective.
 	 * Both context views should auto-open as well as standard debug views.
 	 */
-	public void testAutoOpenJavaPerspective() throws Exception {
+	public void testAutoOpenJavaPerspective() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		if (HAS_BUG_420778) {
 			return;
 		}
@@ -209,7 +209,7 @@ public class ViewManagementTests extends AbstractDebugUiTests implements IPerspe
 	 * Tests that context views auto-open and close in java perspective.
 	 * All views should auto-close in non-standard debug perspective.
 	 */
-	public void testAutoCloseJavaPerspective() throws Exception {
+	public void testAutoCloseJavaPerspective() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		if (HAS_BUG_420778) {
 			return;
 		}
@@ -252,7 +252,7 @@ public class ViewManagementTests extends AbstractDebugUiTests implements IPerspe
 	}
 
 	protected String buildRemainingEventsMessage() {
-		StringBuilder buffer = new StringBuilder();
+		StringBuilder buffer = new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 		partsMessage("Parts did not open: ", fExpectingOpenEvents, buffer);
 		partsMessage("Parts did not close: ", fExpectingCloseEvents, buffer);
 		return buffer.toString();
@@ -261,11 +261,11 @@ public class ViewManagementTests extends AbstractDebugUiTests implements IPerspe
 	private void partsMessage(String header, List<String> partIds, StringBuilder buffer) {
 		String[] ids = partIds.toArray(new String[partIds.size()]);
 		if (ids.length > 0) {
-			buffer.append(header);
-			for (int i = 0; i < ids.length; i++) {
-				buffer.append(ids[i]);
+			buffer.append(header); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+			for (int i = 0; i < ids.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
+				buffer.append(ids[i]); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				if (i < (ids.length - 1)) {
-					buffer.append(", ");
+					buffer.append(", "); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				}
 			}
 		}
@@ -275,7 +275,7 @@ public class ViewManagementTests extends AbstractDebugUiTests implements IPerspe
 	 * Adds ids of views to 'expecting open' queue.
 	 */
 	protected void expectingViewOpenEvents(IWorkbenchWindow window, String[] viewIds) {
-		for (int i = 0; i < viewIds.length; i++) {
+		for (int i = 0; i < viewIds.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			fExpectingOpenEvents.add(viewIds[i]);
 		}
 		window.addPerspectiveListener(this);
@@ -285,7 +285,7 @@ public class ViewManagementTests extends AbstractDebugUiTests implements IPerspe
 	 * Adds ids of views to 'expecting open' queue.
 	 */
 	protected void expectingViewCloseEvents(IWorkbenchWindow window, String[] viewIds) {
-		for (int i = 0; i < viewIds.length; i++) {
+		for (int i = 0; i < viewIds.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			fExpectingCloseEvents.add(viewIds[i]);
 		}
 		window.addPerspectiveListener(this);

@@ -57,7 +57,7 @@ public class JavaMonitor {
 	 * The List of JavaContendedMonitor and JavaOwnedMonitor associated with this
 	 * monitor.
 	 */
-	private final List<PlatformObject> fElements= new ArrayList<>();
+	private final List<PlatformObject> fElements= new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 
 	public JavaMonitor(IJavaObject monitor) {
 		fMonitor= monitor;
@@ -113,7 +113,7 @@ public class JavaMonitor {
 	 * @return <code>true</code> if the owning thread or
 	 * the waiting threads changed.
 	 */
-	private boolean update() {
+	private boolean update() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		boolean changed= false;
 		boolean toRemove= false;
 		ThreadMonitorManager threadMonitorManager= ThreadMonitorManager.getDefault();
@@ -143,7 +143,7 @@ public class JavaMonitor {
 						JavaMonitorThread[] tmp= new JavaMonitorThread[waitingThreads.length];
 						if (changed || fWaitingThreads.length != waitingThreads.length) {
 							// if we know it changed, we can just create the new list
-							for (int i= 0; i < waitingThreads.length; i++) {
+							for (int i= 0; i < waitingThreads.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 								tmp[i]= threadMonitorManager.getJavaMonitorThread(waitingThreads[i], null);
 							}
 							changed= true;
@@ -151,8 +151,8 @@ public class JavaMonitor {
 							// we need to check in the new list contains the same threads as the
 							// previous list
 							int sameThread= 0;
-							for (int i= 0; i < waitingThreads.length; i++) {
-								for (int j= 0; j < fWaitingThreads.length; j++) {
+							for (int i= 0; i < waitingThreads.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
+								for (int j= 0; j < fWaitingThreads.length; j++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 									if (fWaitingThreads[i].getThread().equals(waitingThreads[i])) {
 										sameThread++;
 										break;
@@ -190,7 +190,7 @@ public class JavaMonitor {
 	private void fireChangeEvent(int detail) {
 		Object[] elements= fElements.toArray();
 		DebugEvent[] changeEvents= new DebugEvent[elements.length];
-		for (int i= 0; i < elements.length; i++) {
+		for (int i= 0; i < elements.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			changeEvents[i]= new DebugEvent(elements[i], DebugEvent.CHANGE, detail);
 		}
 		DebugPlugin.getDefault().fireDebugEventSet(changeEvents);
@@ -203,7 +203,7 @@ public class JavaMonitor {
 				fOwningThread.setToUpdate();
 			}
 			if (fWaitingThreads != null) {
-				for (int i= 0; i < fWaitingThreads.length; i++) {
+				for (int i= 0; i < fWaitingThreads.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 					fWaitingThreads[i].setToUpdate();
 				}
 			}
@@ -223,7 +223,7 @@ public class JavaMonitor {
 			if (fOwningThread != null) {
 				fOwningThread.refresh();
 			}
-			for (int i= 0; i < fWaitingThreads.length; i++) {
+			for (int i= 0; i < fWaitingThreads.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				fWaitingThreads[i].refresh();
 			}
 		}

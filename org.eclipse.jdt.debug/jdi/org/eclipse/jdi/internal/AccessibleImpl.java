@@ -119,7 +119,7 @@ public abstract class AccessibleImpl extends MirrorImpl implements Accessible {
 	/**
 	 * Retrieves constant mappings.
 	 */
-	public static void getConstantMaps() {
+	public static void getConstantMaps() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		if (fgModifiers != null) {
 			return;
 		}
@@ -127,7 +127,7 @@ public abstract class AccessibleImpl extends MirrorImpl implements Accessible {
 		Field[] fields = AccessibleImpl.class.getDeclaredFields();
 		fgModifiers = new String[32];
 
-		for (Field field : fields) {
+		for (Field field : fields) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			int modifiers = field.getModifiers();
 			if ((modifiers & Modifier.PUBLIC) == 0
 					|| (modifiers & Modifier.STATIC) == 0
@@ -144,7 +144,7 @@ public abstract class AccessibleImpl extends MirrorImpl implements Accessible {
 			try {
 				int value = field.getInt(null);
 
-				for (int j = 0; j < 32; j++) {
+				for (int j = 0; j < 32; j++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 					if ((1 << j & value) != 0) {
 						fgModifiers[j] = name;
 						break;

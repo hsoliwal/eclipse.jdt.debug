@@ -60,12 +60,12 @@ public class JavaExceptionHyperLink extends JavaStackTraceHyperlink {
 	/**
 	 * @see org.eclipse.debug.ui.console.IConsoleHyperlink#linkActivated()
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public void linkActivated() {
 		try {
 			// check for an existing breakpoint
 			IBreakpoint[] breakpoints = DebugPlugin.getDefault().getBreakpointManager().getBreakpoints(JDIDebugModel.getPluginIdentifier());
-			for (int i = 0; i < breakpoints.length; i++) {
+			for (int i = 0; i < breakpoints.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				IBreakpoint breakpoint = breakpoints[i];
 				if (breakpoint instanceof IJavaExceptionBreakpoint exceptionBreakpoint) {
 					if (fExceptionName.equals(exceptionBreakpoint.getTypeName())) {
@@ -97,7 +97,7 @@ public class JavaExceptionHyperLink extends JavaStackTraceHyperlink {
 	/* (non-Javadoc)
 	 * @see org.eclipse.jdt.internal.debug.ui.console.JavaStackTraceHyperlink#processSearchResult(java.lang.Object, java.lang.String, int)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	protected void processSearchResult(Object source, String typeName, int lineNumber) {
 		boolean isCreateExceptionBreakpointDisabled = !Platform.getPreferencesService().getBoolean(JDIDebugPlugin.getUniqueIdentifier(), JDIDebugModel.PREF_CREATE_EXCEPTION_BREAKPOINTS_ON_CLICK, true, null);
 		if (isCreateExceptionBreakpointDisabled) {
@@ -115,7 +115,7 @@ public class JavaExceptionHyperLink extends JavaStackTraceHyperlink {
 			} else if (source instanceof IType) {
 				type = (IType) source;
 			}
-			Map<String, Object> map = new HashMap<>();
+			Map<String, Object> map = new HashMap<>(); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
 			if (type != null) {
 				res = BreakpointUtils.getBreakpointResource(type);
 				BreakpointUtils.addJavaBreakpointAttributes(map, type);

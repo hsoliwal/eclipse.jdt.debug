@@ -53,8 +53,8 @@ public class EventSetImpl extends MirrorImpl implements EventSet {
 	 */
 	public EventSetImpl(VirtualMachineImpl vmImpl, EventImpl[] events) {
 		this(vmImpl);
-		fEvents = new ArrayList<>(events.length);
-		for (EventImpl event : events)
+		fEvents = new ArrayList<>(events.length); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
+		for (EventImpl event : events) //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			fEvents.add(event);
 	}
 
@@ -63,7 +63,7 @@ public class EventSetImpl extends MirrorImpl implements EventSet {
 	 */
 	public EventSetImpl(VirtualMachineImpl vmImpl, EventImpl event) {
 		this(vmImpl);
-		fEvents = new ArrayList<>(1);
+		fEvents = new ArrayList<>(1); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 		fEvents.add(event);
 	}
 
@@ -89,7 +89,7 @@ public class EventSetImpl extends MirrorImpl implements EventSet {
 			return EventRequest.SUSPEND_ALL;
 		default:
 			throw new InternalException(
-					EventMessages.EventSetImpl_Invalid_suspend_policy_encountered___1
+					EventMessages.EventSetImpl_Invalid_suspend_policy_encountered___1 //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 							+ fSuspendPolicy);
 		}
 	}
@@ -110,7 +110,7 @@ public class EventSetImpl extends MirrorImpl implements EventSet {
 			break;
 		default:
 			throw new InternalException(
-					EventMessages.EventSetImpl_Invalid_suspend_policy_encountered___1
+					EventMessages.EventSetImpl_Invalid_suspend_policy_encountered___1 //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 							+ fSuspendPolicy);
 		}
 	}
@@ -118,7 +118,7 @@ public class EventSetImpl extends MirrorImpl implements EventSet {
 	/**
 	 * Resumes threads that were suspended by this event set.
 	 */
-	private void resumeThreads() {
+	private void resumeThreads() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		if (fEvents.size() == 1) {
 			// Most event sets have only one event.
 			// Avoid expensive object creation.
@@ -131,8 +131,8 @@ public class EventSetImpl extends MirrorImpl implements EventSet {
 			return;
 		}
 		Iterator<Event> iter = fEvents.iterator();
-		List<ThreadReference> resumedThreads = new ArrayList<>(fEvents.size());
-		while (iter.hasNext()) {
+		List<ThreadReference> resumedThreads = new ArrayList<>(fEvents.size()); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
+		while (iter.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			EventImpl event = (EventImpl)iter.next();
 			ThreadReference thread = event.thread();
 			if (thread == null) {
@@ -144,7 +144,7 @@ public class EventSetImpl extends MirrorImpl implements EventSet {
 			}
 		}
 		Iterator<ThreadReference> resumeIter = resumedThreads.iterator();
-		while (resumeIter.hasNext()) {
+		while (resumeIter.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			resumeIter.next().resume();
 		}
 	}
@@ -152,7 +152,7 @@ public class EventSetImpl extends MirrorImpl implements EventSet {
 	/**
 	 * @return Returns EventSetImpl that was read from InputStream.
 	 */
-	public static EventSetImpl read(MirrorImpl target, DataInputStream in)
+	public static EventSetImpl read(MirrorImpl target, DataInputStream in) //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 			throws IOException {
 		VirtualMachineImpl vmImpl = target.virtualMachineImpl();
 		EventSetImpl eventSet = new EventSetImpl(vmImpl);
@@ -163,9 +163,9 @@ public class EventSetImpl extends MirrorImpl implements EventSet {
 		// Read size.
 		int size = target.readInt("size", in); //$NON-NLS-1$
 		// Create event list.
-		eventSet.fEvents = new ArrayList<>(size);
+		eventSet.fEvents = new ArrayList<>(size); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 
-		while (size-- > 0) {
+		while (size-- > 0) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			EventImpl event = EventImpl.read(target, in);
 
 			// If event == null than it is an event that must not be given to

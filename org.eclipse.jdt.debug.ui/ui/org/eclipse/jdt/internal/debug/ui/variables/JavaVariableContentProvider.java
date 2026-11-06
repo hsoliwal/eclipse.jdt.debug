@@ -42,7 +42,7 @@ public class JavaVariableContentProvider extends VariableContentProvider {
 	/* (non-Javadoc)
 	 * @see org.eclipse.debug.internal.ui.model.elements.VariableContentProvider#getChildren(java.lang.Object, int, int, org.eclipse.debug.internal.ui.viewers.model.provisional.IPresentationContext, org.eclipse.debug.internal.ui.viewers.model.provisional.IViewerUpdate)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	protected Object[] getChildren(Object parent, int index, int length, IPresentationContext context, IViewerUpdate monitor) throws CoreException {
 		try {
 			Object[] variables = getAllChildren(parent, context);
@@ -108,7 +108,7 @@ public class JavaVariableContentProvider extends VariableContentProvider {
 	 * @param parent element to display references as a child for
 	 * @return whether to display references as a child of the given parent
 	 */
-	public static boolean displayReferencesAsChild(Object parent) throws DebugException{
+	public static boolean displayReferencesAsChild(Object parent) throws DebugException{ //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		// Note, this method is used by the JavaExpressionContentProvider as well as the JavaVariableContentProvider
 		// Only display references if the target can support it
 		if (HeapWalkingManager.supportsHeapWalking(parent)){

@@ -23,7 +23,7 @@ import org.eclipse.ui.IWorkbenchPart;
  *
  * @since 3.12
  */
-public class RetargetToggleLambdaEntryBreakpointAction extends RetargetToggleBreakpointAction {
+public class RetargetToggleLambdaEntryBreakpointAction extends RetargetToggleBreakpointAction { //FLLDCIM: MARK — T20  IMPLEMENTS
 
 	@Override
 	protected void performAction(Object target, ISelection selection, IWorkbenchPart part) throws CoreException {

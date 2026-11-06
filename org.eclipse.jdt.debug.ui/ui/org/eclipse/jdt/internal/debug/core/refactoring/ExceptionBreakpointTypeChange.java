@@ -52,7 +52,7 @@ public class ExceptionBreakpointTypeChange extends ExceptionBreakpointChange {
 	 */
 	@Override
 	public Change perform(IProgressMonitor pm) throws CoreException {
-		Map<String, Object> map = new HashMap<>();
+		Map<String, Object> map = new HashMap<>(); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
 		BreakpointUtils.addJavaBreakpointAttributes(map, fDestType);
 		IResource resource = BreakpointUtils.getBreakpointResource(fDestType);
 		IJavaExceptionBreakpoint breakpoint = JDIDebugModel.createExceptionBreakpoint(

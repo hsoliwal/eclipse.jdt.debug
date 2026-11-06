@@ -37,7 +37,7 @@ import org.eclipse.ui.IWorkbenchPart;
 /**
  * Provides a general toggle action for breakpoints to reuse
  */
-public abstract class BreakpointToggleAction implements IObjectActionDelegate, IBreakpointsListener, IPartListener {
+public abstract class BreakpointToggleAction implements IObjectActionDelegate, IBreakpointsListener, IPartListener { //FLLDCIM: MARK — T20  IMPLEMENTS
 
 	private IStructuredSelection fSelection;
 	private IAction fAction;
@@ -50,7 +50,7 @@ public abstract class BreakpointToggleAction implements IObjectActionDelegate, I
 	public void run(IAction action) {
 		IStructuredSelection selection= getStructuredSelection();
 		Iterator<IJavaBreakpoint> itr= selection.iterator();
-		while (itr.hasNext()) {
+		while (itr.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			try {
 				IJavaBreakpoint breakpoint= itr.next();
 				doAction(breakpoint);
@@ -65,7 +65,7 @@ public abstract class BreakpointToggleAction implements IObjectActionDelegate, I
 	/**
 	 * @see IActionDelegate#selectionChanged(IAction, ISelection)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public void selectionChanged(IAction action, ISelection selection) {
 		setAction(action);
 		if (selection.isEmpty()) {
@@ -176,7 +176,7 @@ public abstract class BreakpointToggleAction implements IObjectActionDelegate, I
 			IStructuredSelection selection= getStructuredSelection();
 			if (selection != null) {
 				IBreakpoint selectedBreakpoint= (IBreakpoint)selection.getFirstElement();
-				for (IBreakpoint breakpoint : breakpoints) {
+				for (IBreakpoint breakpoint : breakpoints) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 					if (selectedBreakpoint.equals(breakpoint)) {
 						selectionChanged(getAction(), selection);
 						return;

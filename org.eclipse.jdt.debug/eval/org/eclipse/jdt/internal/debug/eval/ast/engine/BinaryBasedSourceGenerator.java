@@ -62,13 +62,13 @@ public class BinaryBasedSourceGenerator {
 	private final int fSourceMajorLevel;
 	private int fSourceMinorLevel;
 
-	public BinaryBasedSourceGenerator(String[] localTypesNames,
+	public BinaryBasedSourceGenerator(String[] localTypesNames, //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 			String[] localVariables, boolean isInStaticMethod,
 			String sourceLevel) {
 		fLocalVariableTypeNames = localTypesNames;
 		fLocalVariableNames = localVariables;
 		fIsInStaticMethod = isInStaticMethod;
-		fImports = new HashSet<>();
+		fImports = new HashSet<>(); //FLLDCIM: MARK — M03 M3_SET_LANES NEW
 		int index = sourceLevel.indexOf('.');
 		String num;
 		if (index != -1) {
@@ -98,7 +98,7 @@ public class BinaryBasedSourceGenerator {
 	/**
 	 * Build source for a class type (static context)
 	 */
-	public void buildSourceStatic(IJavaReferenceType type) {
+	public void buildSourceStatic(IJavaReferenceType type) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		Type underlyingType = ((JDIReferenceType) type).getUnderlyingType();
 		if (!(underlyingType instanceof ReferenceType refType)) {
 			return;
@@ -108,7 +108,7 @@ public class BinaryBasedSourceGenerator {
 		String packageName = getPackageName(refType.name());
 		int packageEndPos = 0;
 		if (packageName != null) {
-			fSource.insert(0, "package " + packageName + ";\n"); //$NON-NLS-1$ //$NON-NLS-2$
+			fSource.insert(0, "package " + packageName + ";\n"); //$NON-NLS-1$ //$NON-NLS-2$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 			packageEndPos = 10 + packageName.length();
 			fCodeSnippetPosition += packageEndPos;
 		}
@@ -122,41 +122,41 @@ public class BinaryBasedSourceGenerator {
 
 	protected String getUniqueMethodName(String methodName, ReferenceType type) {
 		List<Method> methods = type.methodsByName(methodName);
-		while (!methods.isEmpty()) {
+		while (!methods.isEmpty()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			methodName += '_';
 			methods = type.methodsByName(methodName);
 		}
 		return methodName;
 	}
 
-	private StringBuilder buildRunMethod(ReferenceType type) {
-		StringBuilder source = new StringBuilder();
+	private StringBuilder buildRunMethod(ReferenceType type) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
+		StringBuilder source = new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 
 		if (isInStaticMethod()) {
-			source.append("static "); //$NON-NLS-1$
+			source.append("static "); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		}
 
-		source.append("void "); //$NON-NLS-1$
-		source.append(getUniqueMethodName(RUN_METHOD_NAME, type));
-		source.append('(');
-		for (int i = 0, length = fLocalVariableNames.length; i < length; i++) {
+		source.append("void "); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+		source.append(getUniqueMethodName(RUN_METHOD_NAME, type)); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+		source.append('('); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+		for (int i = 0, length = fLocalVariableNames.length; i < length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			String varType = getDotName(fLocalVariableTypeNames[i]);
 			addToImports(varType);
-			source.append(varType);
-			source.append(' ');
-			source.append(fLocalVariableNames[i]);
+			source.append(varType); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+			source.append(' '); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+			source.append(fLocalVariableNames[i]); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			if (i + 1 < length)
 			 {
-				source.append(", "); //$NON-NLS-1$
+				source.append(", "); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			}
 		}
-		source.append(") throws Throwable {"); //$NON-NLS-1$
-		source.append('\n');
+		source.append(") throws Throwable {"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+		source.append('\n'); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		fCodeSnippetPosition = source.length();
 		fRunMethodStartOffset = fCodeSnippetPosition;
 
-		source.append('\n');
-		source.append('}').append('\n');
+		source.append('\n'); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+		source.append('}').append('\n'); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		fRunMethodLength = source.length();
 		return source;
 	}
@@ -167,12 +167,12 @@ public class BinaryBasedSourceGenerator {
 		}
 	}
 
-	private StringBuilder buildTypeDeclaration(ReferenceType referenceType,
+	private StringBuilder buildTypeDeclaration(ReferenceType referenceType, //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 			StringBuilder buffer, String nestedTypeName) {
 
 		Field thisField = null;
 
-		for (Field field : referenceType.visibleFields()) {
+		for (Field field : referenceType.visibleFields()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			if (field.name().startsWith("this$")) { //$NON-NLS-1$
 				thisField = field;
 				break;
@@ -186,7 +186,7 @@ public class BinaryBasedSourceGenerator {
 			String packageName = getPackageName(referenceType.name());
 			int packageEndPos = 0;
 			if (packageName != null) {
-				source.insert(0, "package " + packageName + ";\n"); //$NON-NLS-1$ //$NON-NLS-2$
+				source.insert(0, "package " + packageName + ";\n"); //$NON-NLS-1$ //$NON-NLS-2$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 				packageEndPos = 10 + packageName.length();
 				fCodeSnippetPosition += packageEndPos;
 			}
@@ -211,10 +211,10 @@ public class BinaryBasedSourceGenerator {
 		return source;
 	}
 
-	private StringBuilder buildTypeDeclaration(ReferenceType referenceType,
+	private StringBuilder buildTypeDeclaration(ReferenceType referenceType, //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 			StringBuilder buffer, String nestedTypeName,
 			boolean hasEnclosingInstance) {
-		StringBuilder source = new StringBuilder();
+		StringBuilder source = new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 
 		String typeName = referenceType.name();
 
@@ -226,43 +226,43 @@ public class BinaryBasedSourceGenerator {
 			List<InterfaceType> interfaceList = classType.interfaces();
 			String superClassName = classType.superclass().name();
 			if (hasEnclosingInstance) {
-				source.append("void "); //$NON-NLS-1$
-				source.append(getUniqueMethodName(EVAL_METHOD_NAME,
+				source.append("void "); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+				source.append(getUniqueMethodName(EVAL_METHOD_NAME, //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 						referenceType));
-				source.append("() {\nnew "); //$NON-NLS-1$
+				source.append("() {\nnew "); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				if (!interfaceList.isEmpty()) {
-					source.append(getDotName(interfaceList
+					source.append(getDotName(interfaceList //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 							.get(0).name()));
 				} else {
-					source.append(getDotName(superClassName));
+					source.append(getDotName(superClassName)); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				}
-				source.append("()"); //$NON-NLS-1$
+				source.append("()"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			} else {
-				source.append("public class ").append(ANONYMOUS_CLASS_NAME).append(" "); //$NON-NLS-1$ //$NON-NLS-2$
+				source.append("public class ").append(ANONYMOUS_CLASS_NAME).append(" "); //$NON-NLS-1$ //$NON-NLS-2$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				if (!interfaceList.isEmpty()) {
-					source.append(" implements ").append(getDotName(interfaceList.get(0).name())); //$NON-NLS-1$
+					source.append(" implements ").append(getDotName(interfaceList.get(0).name())); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				} else {
-					source.append(" extends ").append(getDotName(superClassName)); //$NON-NLS-1$
+					source.append(" extends ").append(getDotName(superClassName)); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				}
 			}
 
 		} else {
 			if (referenceType.isFinal()) {
-				source.append("final "); //$NON-NLS-1$
+				source.append("final "); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			}
 
 			if (referenceType.isStatic()) {
-				source.append("static "); //$NON-NLS-1$
+				source.append("static "); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			}
 
 			if (referenceType instanceof ClassType classType) {
 				if (classType.isAbstract()) {
-					source.append("abstract "); //$NON-NLS-1$
+					source.append("abstract "); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				}
 
-				source.append("class "); //$NON-NLS-1$
+				source.append("class "); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 
-				source.append(getSimpleName(typeName)).append(' ');
+				source.append(getSimpleName(typeName)).append(' '); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 
 				String genericSignature = referenceType.genericSignature();
 				if (genericSignature != null
@@ -270,37 +270,37 @@ public class BinaryBasedSourceGenerator {
 					String[] typeParameters = Signature
 							.getTypeParameters(genericSignature);
 					if (typeParameters.length > 0) {
-						source.append('<');
-						source.append(Signature
+						source.append('<'); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+						source.append(Signature //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 								.getTypeVariable(typeParameters[0]));
 						String[] typeParameterBounds = Signature
 								.getTypeParameterBounds(typeParameters[0]);
-						source.append(" extends ").append(toSourceSignature(typeParameterBounds[0])); //$NON-NLS-1$
-						for (int i = 1; i < typeParameterBounds.length; i++) {
-							source.append(" & ").append(toSourceSignature(typeParameterBounds[i])); //$NON-NLS-1$
+						source.append(" extends ").append(toSourceSignature(typeParameterBounds[0])); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+						for (int i = 1; i < typeParameterBounds.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
+							source.append(" & ").append(toSourceSignature(typeParameterBounds[i])); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 						}
-						for (int j = 1; j < typeParameters.length; j++) {
-							source.append(',')
+						for (int j = 1; j < typeParameters.length; j++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
+							source.append(',') //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 									.append(Signature
 											.getTypeVariable(typeParameters[j]));
 							typeParameterBounds = Signature
 									.getTypeParameterBounds(typeParameters[j]);
-							source.append(" extends ").append(toSourceSignature(typeParameterBounds[0])); //$NON-NLS-1$
-							for (int i = 1; i < typeParameterBounds.length; i++) {
-								source.append(" & ").append(toSourceSignature(typeParameterBounds[i])); //$NON-NLS-1$
+							source.append(" extends ").append(toSourceSignature(typeParameterBounds[0])); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+							for (int i = 1; i < typeParameterBounds.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
+								source.append(" & ").append(toSourceSignature(typeParameterBounds[i])); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 							}
 						}
-						source.append("> "); //$NON-NLS-1$
+						source.append("> "); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 					}
 					String[] superClassInterfaces = SignatureExt
 							.getTypeSuperClassInterfaces(genericSignature);
 					int length = superClassInterfaces.length;
 					if (length > 0) {
-						source.append("extends ").append(toSourceSignature(superClassInterfaces[0])); //$NON-NLS-1$
+						source.append("extends ").append(toSourceSignature(superClassInterfaces[0])); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 						if (length > 1) {
-							source.append(" implements ").append(toSourceSignature(superClassInterfaces[1])); //$NON-NLS-1$
-							for (int i = 2; i < length; i++) {
-								source.append(',')
+							source.append(" implements ").append(toSourceSignature(superClassInterfaces[1])); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+							for (int i = 2; i < length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
+								source.append(',') //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 										.append(toSourceSignature(superClassInterfaces[1]));
 							}
 						}
@@ -309,23 +309,23 @@ public class BinaryBasedSourceGenerator {
 
 					ClassType superClass = classType.superclass();
 					if (superClass != null) {
-						source.append("extends ").append(getDotName(superClass.name())).append(' '); //$NON-NLS-1$
+						source.append("extends ").append(getDotName(superClass.name())).append(' '); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 					}
 
 					List<InterfaceType> interfaces;
 					try {
 						interfaces = classType.interfaces();
 					} catch (ClassNotPreparedException e) {
-						return new StringBuilder();
+						return new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 					}
 					if (!interfaces.isEmpty()) {
-						source.append("implements "); //$NON-NLS-1$
+						source.append("implements "); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 						Iterator<InterfaceType> iterator = interfaces.iterator();
 						InterfaceType interface_ = iterator
 								.next();
-						source.append(getDotName(interface_.name()));
-						while (iterator.hasNext()) {
-							source.append(',')
+						source.append(getDotName(interface_.name())); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+						while (iterator.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
+							source.append(',') //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 									.append(getDotName(iterator
 											.next().name()));
 						}
@@ -333,63 +333,63 @@ public class BinaryBasedSourceGenerator {
 				}
 			} else if (referenceType instanceof InterfaceType) {
 				if (buffer != null) {
-					source.append("abstract class "); //$NON-NLS-1$
-					source.append(getSimpleName(typeName)).append("___ implements "); //$NON-NLS-1$
-					source.append(typeName.replace('$', '.')).append(" {\n"); //$NON-NLS-1$
+					source.append("abstract class "); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+					source.append(getSimpleName(typeName)).append("___ implements "); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+					source.append(typeName.replace('$', '.')).append(" {\n"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 					fCodeSnippetPosition += source.length();
-					source.append(buffer).append("}\n"); //$NON-NLS-1$
+					source.append(buffer).append("}\n"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 					return source;
 				}
-				source.append("interface "); //$NON-NLS-1$
-				source.append(getSimpleName(typeName));
+				source.append("interface "); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+				source.append(getSimpleName(typeName)); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				}
 		}
 
-		source.append(" {\n"); //$NON-NLS-1$
+		source.append(" {\n"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 
 		if (buffer != null && !(referenceType instanceof InterfaceType)) {
 			fCodeSnippetPosition += source.length();
-			source.append(buffer);
+			source.append(buffer); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		}
 
-		for (Field field : referenceType.fields()) {
+		for (Field field : referenceType.fields()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			if (!field.name().startsWith("this$")) { //$NON-NLS-1$
-				source.append(buildFieldDeclaration(field));
+				source.append(buildFieldDeclaration(field)); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			}
 		}
 
-		for (Method method : referenceType.methods()) {
+		for (Method method : referenceType.methods()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			if (!method.isConstructor() && !method.isStaticInitializer()
 				&& !method.isBridge()) {
-				source.append(buildMethodDeclaration(method));
+				source.append(buildMethodDeclaration(method)); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			} else if (method.isConstructor()) {
-				source.append(buildMethodDeclaration(method, getSimpleName(referenceType.name())));
+				source.append(buildMethodDeclaration(method, getSimpleName(referenceType.name()))); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			}
 		}
 
 		List<ReferenceType> nestedTypes = referenceType.nestedTypes();
 		if (nestedTypeName == null) {
-			for (ReferenceType nestedType : nestedTypes) {
+			for (ReferenceType nestedType : nestedTypes) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				if (isADirectInnerType(typeName, nestedType.name())) {
-					source.append(buildTypeDeclaration(nestedType, null, null,
+					source.append(buildTypeDeclaration(nestedType, null, null, //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 						true));
 				}
 			}
 		} else {
-			for (ReferenceType nestedType : nestedTypes) {
+			for (ReferenceType nestedType : nestedTypes) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				if (!nestedTypeName.equals(nestedType.name())
 					&& isADirectInnerType(typeName, nestedType.name())) {
-					source.append(buildTypeDeclaration(nestedType, null, null,
+					source.append(buildTypeDeclaration(nestedType, null, null, //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 						true));
 				}
 			}
 		}
 
 		if (isAnonymousType && hasEnclosingInstance) {
-			source.append("};\n"); //$NON-NLS-1$
+			source.append("};\n"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		}
 
-		source.append("}\n"); //$NON-NLS-1$
+		source.append("}\n"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 
 		return source;
 	}
@@ -398,28 +398,28 @@ public class BinaryBasedSourceGenerator {
 		return Signature.toString(superIfc).replace('/', '.');
 	}
 
-	private StringBuilder buildFieldDeclaration(Field field) {
-		StringBuilder source = new StringBuilder();
+	private StringBuilder buildFieldDeclaration(Field field) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
+		StringBuilder source = new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 
 		if (field.isFinal()) {
-			source.append("final "); //$NON-NLS-1$
+			source.append("final "); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		}
 
 		if (field.isStatic()) {
-			source.append("static "); //$NON-NLS-1$
+			source.append("static "); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		}
 
 		if (field.isPublic()) {
-			source.append("public "); //$NON-NLS-1$
+			source.append("public "); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		} else if (field.isPrivate()) {
-			source.append("private "); //$NON-NLS-1$
+			source.append("private "); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		} else if (field.isProtected()) {
-			source.append("protected "); //$NON-NLS-1$
+			source.append("protected "); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		}
 
 		String dotName = getDotName(field.typeName());
 		addToImports(dotName);
-		source.append(dotName).append(' ')
+		source.append(dotName).append(' ') //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				.append(field.name()).append(';').append('\n');
 
 		return source;
@@ -429,29 +429,29 @@ public class BinaryBasedSourceGenerator {
 		return buildMethodDeclaration(method, null);
 	}
 
-	private StringBuilder buildMethodDeclaration(Method method, String methodName) {
-		StringBuilder source = new StringBuilder();
+	private StringBuilder buildMethodDeclaration(Method method, String methodName) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
+		StringBuilder source = new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 
 		if (method.isFinal()) {
-			source.append("final "); //$NON-NLS-1$
+			source.append("final "); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		}
 
 		if (method.isStatic()) {
-			source.append("static "); //$NON-NLS-1$
+			source.append("static "); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		}
 
 		if (method.isNative()) {
-			source.append("native "); //$NON-NLS-1$
+			source.append("native "); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		} else if (method.isAbstract()) {
-			source.append("abstract "); //$NON-NLS-1$
+			source.append("abstract "); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		}
 
 		if (method.isPublic()) {
-			source.append("public "); //$NON-NLS-1$
+			source.append("public "); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		} else if (method.isPrivate()) {
-			source.append("private "); //$NON-NLS-1$
+			source.append("private "); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		} else if (method.isProtected()) {
-			source.append("protected "); //$NON-NLS-1$
+			source.append("protected "); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		}
 
 		String genericSignature = method.genericSignature();
@@ -459,42 +459,42 @@ public class BinaryBasedSourceGenerator {
 			String[] typeParameters = Signature
 					.getTypeParameters(genericSignature);
 			if (typeParameters.length > 0) {
-				source.append('<');
-				source.append(Signature.getTypeVariable(typeParameters[0]));
+				source.append('<'); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+				source.append(Signature.getTypeVariable(typeParameters[0])); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				String[] typeParameterBounds = Signature
 						.getTypeParameterBounds(typeParameters[0]);
-				source.append(" extends ").append(Signature.toString(typeParameterBounds[0]).replace('/', '.')); //$NON-NLS-1$
-				for (int i = 1; i < typeParameterBounds.length; i++) {
-					source.append(" & ").append(Signature.toString(typeParameterBounds[i]).replace('/', '.')); //$NON-NLS-1$
+				source.append(" extends ").append(Signature.toString(typeParameterBounds[0]).replace('/', '.')); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+				for (int i = 1; i < typeParameterBounds.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
+					source.append(" & ").append(Signature.toString(typeParameterBounds[i]).replace('/', '.')); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				}
-				for (int j = 1; j < typeParameters.length; j++) {
-					source.append(',').append(
+				for (int j = 1; j < typeParameters.length; j++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
+					source.append(',').append( //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 							Signature.getTypeVariable(typeParameters[j]));
 					typeParameterBounds = Signature
 							.getTypeParameterBounds(typeParameters[j]);
-					source.append(" extends ").append(Signature.toString(typeParameterBounds[0]).replace('/', '.')); //$NON-NLS-1$
-					for (int i = 1; i < typeParameterBounds.length; i++) {
-						source.append(" & ").append(Signature.toString(typeParameterBounds[i]).replace('/', '.')); //$NON-NLS-1$
+					source.append(" extends ").append(Signature.toString(typeParameterBounds[0]).replace('/', '.')); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+					for (int i = 1; i < typeParameterBounds.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
+						source.append(" & ").append(Signature.toString(typeParameterBounds[i]).replace('/', '.')); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 					}
 				}
-				source.append("> "); //$NON-NLS-1$
+				source.append("> "); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			}
 
 			if (!method.isConstructor()) {
-				source.append(Signature.toString(Signature.getReturnType(genericSignature)).replace('/', '.')).append(' ');
+				source.append(Signature.toString(Signature.getReturnType(genericSignature)).replace('/', '.')).append(' '); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			}
-			source.append((methodName == null) ? method.name() : methodName).append('(');
+			source.append((methodName == null) ? method.name() : methodName).append('('); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 
 			String[] parameterTypes = Signature
 					.getParameterTypes(genericSignature);
 			int i = 0;
 			if (parameterTypes.length != 0) {
-				source.append(
+				source.append( //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 						Signature.toString(parameterTypes[0]).replace('/', '.'))
 						.append(" arg").append(i++); //$NON-NLS-1$
 				if (method.isVarArgs()) {
-					for (int j = 1; j < parameterTypes.length - 1; j++) {
-						source.append(',')
+					for (int j = 1; j < parameterTypes.length - 1; j++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
+						source.append(',') //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 								.append(Signature.toString(parameterTypes[j])
 										.replace('/', '.'))
 								.append(" arg").append(i++); //$NON-NLS-1$
@@ -502,68 +502,68 @@ public class BinaryBasedSourceGenerator {
 					String typeName = Signature.toString(
 							parameterTypes[parameterTypes.length - 1]).replace(
 							'/', '.');
-					source.append(',')
+					source.append(',') //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 							.append(typeName.substring(0, typeName.length() - 2))
 							.append("...").append(" arg").append(i++); //$NON-NLS-1$ //$NON-NLS-2$
 				} else {
-					for (int j = 1; j < parameterTypes.length; j++) {
-						source.append(',')
+					for (int j = 1; j < parameterTypes.length; j++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
+						source.append(',') //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 								.append(Signature.toString(parameterTypes[j])
 										.replace('/', '.'))
 								.append(" arg").append(i++); //$NON-NLS-1$
 					}
 				}
 			}
-			source.append(')');
+			source.append(')'); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		} else {
 			if (!method.isConstructor()) {
-				source.append(getDotName(method.returnTypeName())).append(' ');
+				source.append(getDotName(method.returnTypeName())).append(' '); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			}
-			source.append((methodName == null) ? method.name() : methodName).append('(');
+			source.append((methodName == null) ? method.name() : methodName).append('('); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 
 			List<String> arguments = method.argumentTypeNames();
 			int i = 0;
 			if (!arguments.isEmpty()) {
 				Iterator<String> iterator = arguments.iterator();
-				source.append(getDotName(iterator.next()))
+				source.append(getDotName(iterator.next())) //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 						.append(" arg").append(i++); //$NON-NLS-1$
 				if (method.isVarArgs()) {
-					while (iterator.hasNext()) {
-						source.append(',');
+					while (iterator.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
+						source.append(','); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 						String argName = getDotName(iterator.next());
 						if (!iterator.hasNext()) {
-							source.append(
+							source.append( //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 									argName.substring(0, argName.length() - 2))
 									.append("..."); //$NON-NLS-1$
 						} else {
-							source.append(argName);
+							source.append(argName); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 						}
-						source.append(" arg").append(i++); //$NON-NLS-1$
+						source.append(" arg").append(i++); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 					}
 				} else {
-					while (iterator.hasNext()) {
-						source.append(',')
+					while (iterator.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
+						source.append(',') //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 								.append(getDotName(iterator.next()))
 								.append(" arg").append(i++); //$NON-NLS-1$
 					}
 				}
 			}
-			source.append(')');
+			source.append(')'); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		}
 
 		if (method.isAbstract() || method.isNative()) {
 			// No body for abstract and native methods
-			source.append(";\n"); //$NON-NLS-1$
+			source.append(";\n"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		} else {
-			source.append('{').append('\n');
-			source.append(getReturnStatement(method.returnTypeName()));
-			source.append('}').append('\n');
+			source.append('{').append('\n'); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+			source.append(getReturnStatement(method.returnTypeName())); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+			source.append('}').append('\n'); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		}
 
 		return source;
 	}
 
-	private String getReturnStatement(String returnTypeName) {
+	private String getReturnStatement(String returnTypeName) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String typeName = getSimpleName(returnTypeName);
 		if (typeName.charAt(typeName.length() - 1) == ']') {
 			return "return null;\n"; //$NON-NLS-1$

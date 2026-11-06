@@ -65,7 +65,7 @@ public class JDIDebugPlugin extends Plugin implements IEclipsePreferences.IPrefe
 	 *
 	 * @since 3.11
 	 */
-	public static final String PREF_ENABLE_HCR = JDIDebugPlugin
+	public static final String PREF_ENABLE_HCR = JDIDebugPlugin //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 			.getUniqueIdentifier() + ".enable_hcr"; //$NON-NLS-1$
 
 	/**
@@ -74,7 +74,7 @@ public class JDIDebugPlugin extends Plugin implements IEclipsePreferences.IPrefe
 	 *
 	 * @since 3.2
 	 */
-	public static final String PREF_DEFAULT_BREAKPOINT_SUSPEND_POLICY = JDIDebugPlugin
+	public static final String PREF_DEFAULT_BREAKPOINT_SUSPEND_POLICY = JDIDebugPlugin //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 			.getUniqueIdentifier() + ".default_breakpoint_suspend_policy"; //$NON-NLS-1$
 
 	/**
@@ -83,7 +83,7 @@ public class JDIDebugPlugin extends Plugin implements IEclipsePreferences.IPrefe
 	 *
 	 * @since 3.3.1
 	 */
-	public static final String PREF_DEFAULT_WATCHPOINT_SUSPEND_POLICY = JDIDebugPlugin
+	public static final String PREF_DEFAULT_WATCHPOINT_SUSPEND_POLICY = JDIDebugPlugin //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 			.getUniqueIdentifier() + "default_watchpoint_suspend_policy"; //$NON-NLS-1$
 
 	/**
@@ -92,7 +92,7 @@ public class JDIDebugPlugin extends Plugin implements IEclipsePreferences.IPrefe
 	 *
 	 * @since 3.3
 	 */
-	public static final String PREF_SHOW_REFERENCES_IN_VAR_VIEW = JDIDebugPlugin
+	public static final String PREF_SHOW_REFERENCES_IN_VAR_VIEW = JDIDebugPlugin //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 			.getUniqueIdentifier() + ".show_references_in_var_view"; //$NON-NLS-1$
 
 	/**
@@ -101,7 +101,7 @@ public class JDIDebugPlugin extends Plugin implements IEclipsePreferences.IPrefe
 	 *
 	 * @since 3.3
 	 */
-	public static final String PREF_ALL_REFERENCES_MAX_COUNT = JDIDebugPlugin
+	public static final String PREF_ALL_REFERENCES_MAX_COUNT = JDIDebugPlugin //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 			.getUniqueIdentifier() + "._all_references_max_count"; //$NON-NLS-1$
 
 	/**
@@ -110,7 +110,7 @@ public class JDIDebugPlugin extends Plugin implements IEclipsePreferences.IPrefe
 	 *
 	 * @since 3.3
 	 */
-	public static final String PREF_ALL_INSTANCES_MAX_COUNT = JDIDebugPlugin
+	public static final String PREF_ALL_INSTANCES_MAX_COUNT = JDIDebugPlugin //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 			.getUniqueIdentifier() + ".all_instances_max_count"; //$NON-NLS-1$
 
 	/**
@@ -118,7 +118,7 @@ public class JDIDebugPlugin extends Plugin implements IEclipsePreferences.IPrefe
 	 *
 	 * @since 3.11
 	 */
-	public static final String PREF_ENABLE_ADVANCED_SOURCELOOKUP = JDIDebugPlugin
+	public static final String PREF_ENABLE_ADVANCED_SOURCELOOKUP = JDIDebugPlugin //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 			.getUniqueIdentifier() + ".enable_advanced_sourcelookup"; //$NON-NLS-1$
 
 	/**
@@ -292,7 +292,7 @@ public class JDIDebugPlugin extends Plugin implements IEclipsePreferences.IPrefe
 		fgPlugin = this;
 	}
 
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public void start(BundleContext context) throws Exception {
 		super.start(context);
 		new JDIDebugOptions(context);
@@ -364,7 +364,7 @@ public class JDIDebugPlugin extends Plugin implements IEclipsePreferences.IPrefe
 	 * @see org.osgi.framework.BundleActivator#stop(org.osgi.framework.BundleContext)
 	 * @see org.eclipse.core.runtime.Plugin#shutdown()
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public void stop(BundleContext context) throws Exception {
 		try {
 			IEclipsePreferences node = getInstancePreferences();
@@ -375,7 +375,7 @@ public class JDIDebugPlugin extends Plugin implements IEclipsePreferences.IPrefe
 			ILaunchManager launchManager = DebugPlugin.getDefault()
 					.getLaunchManager();
 			IDebugTarget[] targets = launchManager.getDebugTargets();
-			for (IDebugTarget target : targets) {
+			for (IDebugTarget target : targets) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				if (target instanceof JDIDebugTarget) {
 					((JDIDebugTarget) target).shutdown();
 				}
@@ -400,7 +400,7 @@ public class JDIDebugPlugin extends Plugin implements IEclipsePreferences.IPrefe
 					JDIDebugModel.DEF_REQUEST_TIMEOUT,
 					null);
 			IDebugTarget[] targets = DebugPlugin.getDefault().getLaunchManager().getDebugTargets();
-			for (IDebugTarget target : targets) {
+			for (IDebugTarget target : targets) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				if (target instanceof IJavaDebugTarget) {
 					((IJavaDebugTarget) target).setRequestTimeout(value);
 				}
@@ -570,7 +570,7 @@ public class JDIDebugPlugin extends Plugin implements IEclipsePreferences.IPrefe
 		 * Iterates through listeners calling this notifier's safe runnable.
 		 * @param breakpoint the breakpoint to notify about
 		 */
-		protected void notifyListeners(IJavaBreakpoint breakpoint) {
+		protected void notifyListeners(IJavaBreakpoint breakpoint) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 			fBreakpoint = breakpoint;
 			String[] ids = null;
 			try {
@@ -580,7 +580,7 @@ public class JDIDebugPlugin extends Plugin implements IEclipsePreferences.IPrefe
 			}
 			// breakpoint specific listener extensions
 			if (ids != null && ids.length > 0) {
-				for (String id : ids) {
+				for (String id : ids) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 					fListener = fJavaBreakpointManager
 							.getBreakpointListener(id);
 					if (fListener != null) {
@@ -592,13 +592,13 @@ public class JDIDebugPlugin extends Plugin implements IEclipsePreferences.IPrefe
 			IJavaBreakpointListener[] global = fJavaBreakpointManager
 					.getGlobalListeners();
 			if (global.length > 0) {
-				for (IJavaBreakpointListener element : global) {
+				for (IJavaBreakpointListener element : global) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 					fListener = element;
 					SafeRunner.run(this);
 				}
 			}
 			// programmatic global listeners
-			for (IJavaBreakpointListener listener : fBreakpointListeners) {
+			for (IJavaBreakpointListener listener : fBreakpointListeners) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				fListener = listener;
 				SafeRunner.run(this);
 			}
@@ -644,7 +644,7 @@ public class JDIDebugPlugin extends Plugin implements IEclipsePreferences.IPrefe
 		/**
 		 * @see org.eclipse.core.runtime.ISafeRunnable#run()
 		 */
-		@Override
+		@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		public void run() throws Exception {
 			switch (fKind) {
 			case ADDING:

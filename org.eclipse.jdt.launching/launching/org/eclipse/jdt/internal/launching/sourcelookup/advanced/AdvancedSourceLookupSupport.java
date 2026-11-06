@@ -36,10 +36,10 @@ import org.eclipse.jdt.internal.launching.LaunchingPlugin;
 public class AdvancedSourceLookupSupport {
 
 	// TODO consider moving to LaunchingPlugin
-	public static final String ID_sourceContainerResolvers = LaunchingPlugin.ID_PLUGIN + ".sourceContainerResolvers"; //$NON-NLS-1$
+	public static final String ID_sourceContainerResolvers = LaunchingPlugin.ID_PLUGIN + ".sourceContainerResolvers"; //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 	// TODO consider moving to LaunchingPlugin
-	public static final String ID_workspaceProjectDescribers = LaunchingPlugin.ID_PLUGIN + ".workspaceProjectDescribers"; //$NON-NLS-1$
+	public static final String ID_workspaceProjectDescribers = LaunchingPlugin.ID_PLUGIN + ".workspaceProjectDescribers"; //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 	private static BackgroundProcessingJob backgroundJob;
 
@@ -77,7 +77,7 @@ public class AdvancedSourceLookupSupport {
 		return getWorkspaceJavaProjects0(monitor);
 	}
 
-	private static WorkspaceProjectSourceContainers getWorkspaceJavaProjects0(IProgressMonitor monitor) throws CoreException {
+	private static WorkspaceProjectSourceContainers getWorkspaceJavaProjects0(IProgressMonitor monitor) throws CoreException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		// this is convoluted, but I could not think of a simpler implementation
 
 		// when monitor==null, we are most likely on UI thread and must not block, hence immediate return
@@ -87,7 +87,7 @@ public class AdvancedSourceLookupSupport {
 
 		// when monitor!=null, try to get the lock but check for cancellation periodically
 		try {
-			while (!workspaceProjectsLock.tryLock(500, TimeUnit.MILLISECONDS)) {
+			while (!workspaceProjectsLock.tryLock(500, TimeUnit.MILLISECONDS)) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				if (monitor.isCanceled()) {
 					return workspaceProjects;
 				}
@@ -118,7 +118,7 @@ public class AdvancedSourceLookupSupport {
 	}
 
 	public static String getJavaagentString() {
-		return "-javaagent:\"" + getJavaagentLocation() + "\""; //$NON-NLS-1$ //$NON-NLS-2$
+		return "-javaagent:\"" + getJavaagentLocation() + "\""; //$NON-NLS-1$ //$NON-NLS-2$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 	}
 
 	public static String getJavaagentLocation() {

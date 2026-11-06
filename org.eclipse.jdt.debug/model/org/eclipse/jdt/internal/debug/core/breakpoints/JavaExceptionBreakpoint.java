@@ -55,8 +55,11 @@ import com.sun.jdi.request.EventRequest;
 import com.sun.jdi.request.EventRequestManager;
 import com.sun.jdi.request.ExceptionRequest;
 
-public class JavaExceptionBreakpoint extends JavaBreakpoint implements
+public class JavaExceptionBreakpoint extends JavaBreakpoint implements //FLLDCIM: MARK — T27  IMPLEMENTS
 		IJavaExceptionBreakpoint {
+	private static final Pattern FILTER_DOT_PATTERN = Pattern.compile("\\."); //$NON-NLS-1$
+	private static final Pattern FILTER_STAR_PATTERN = Pattern.compile("\\*"); //$NON-NLS-1$
+
 
 	public static final String JAVA_EXCEPTION_BREAKPOINT = "org.eclipse.jdt.debug.javaExceptionBreakpointMarker"; //$NON-NLS-1$
 
@@ -163,11 +166,11 @@ public class JavaExceptionBreakpoint extends JavaBreakpoint implements
 	 *                if unable to create the associated marker due to a lower
 	 *                level exception.
 	 */
-	public JavaExceptionBreakpoint(final IResource resource,
+	public JavaExceptionBreakpoint(final IResource resource, //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 			final String exceptionName, final boolean caught,
 			final boolean uncaught, final boolean checked, final boolean add,
 			final Map<String, Object> attributes) throws DebugException {
-		IWorkspaceRunnable wr = _ -> {
+		IWorkspaceRunnable wr = unused -> { //FLLDCIM: MARK — T09  LAMBDA
 			// add attributes
 			attributes.put(IBreakpoint.ID, getModelIdentifier());
 			attributes.put(TYPE_NAME, exceptionName);
@@ -190,7 +193,7 @@ public class JavaExceptionBreakpoint extends JavaBreakpoint implements
 	 * type is thrown. The request is returned installed, configured, and
 	 * enabled as appropriate for this breakpoint.
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	protected EventRequest[] newRequests(JDIDebugTarget target,
 			ReferenceType type) throws CoreException {
 		if (!isCaught() && !isUncaught()) {
@@ -375,7 +378,7 @@ public class JavaExceptionBreakpoint extends JavaBreakpoint implements
 		return result;
 	}
 
-	private boolean handleBreakpointEventInternal(Event event, JDIThread thread, boolean suspendVote) {
+	private boolean handleBreakpointEventInternal(Event event, JDIThread thread, boolean suspendVote) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		if (event instanceof ExceptionEvent) {
 			ObjectReference ex = ((ExceptionEvent) event).exception();
 			fLastTarget = thread.getJavaDebugTarget();
@@ -404,7 +407,7 @@ public class JavaExceptionBreakpoint extends JavaBreakpoint implements
 			setExceptionName(name);
 			disableTriggerPoint(event);
 			IBreakpoint[] allBreakpoints = DebugPlugin.getDefault().getBreakpointManager().getBreakpoints();
-			for (IBreakpoint iBreakpoint : allBreakpoints) {
+			for (IBreakpoint iBreakpoint : allBreakpoints) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				if (iBreakpoint instanceof JavaExceptionBreakpoint) {
 					JavaExceptionBreakpoint jExceptionBreakpoint = (JavaExceptionBreakpoint)iBreakpoint;
 					try {
@@ -458,7 +461,7 @@ public class JavaExceptionBreakpoint extends JavaBreakpoint implements
 	 */
 	private boolean isSubclass(ClassType type, String typeName) {
 		type = type.superclass();
-		while (type != null) {
+		while (type != null) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			if (type.name().equals(typeName)) {
 				return true;
 			}
@@ -491,7 +494,7 @@ public class JavaExceptionBreakpoint extends JavaBreakpoint implements
 	 *         package
 	 */
 	protected boolean filtersIncludeDefaultPackage(String[] filters) {
-		for (String filter : filters) {
+		for (String filter : filters) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			if (filter.length() == 0 || (filter.indexOf('.') == -1)) {
 				return true;
 			}
@@ -512,16 +515,16 @@ public class JavaExceptionBreakpoint extends JavaBreakpoint implements
 	 */
 	protected boolean matchesFilters(String[] filters, String typeName,
 			boolean defaultPackage) {
-		for (String filter2 : filters) {
+		for (String filter2 : filters) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			String filter = filter2;
 			if (defaultPackage && filter.length() == 0) {
 				return true;
 			}
 
-			filter = filter.replaceAll("\\.", "\\\\."); //$NON-NLS-1$//$NON-NLS-2$
-			filter = filter.replaceAll("\\*", "\\.\\*"); //$NON-NLS-1$//$NON-NLS-2$
-			Pattern pattern = Pattern.compile(filter);
-			if (pattern.matcher(typeName).find()) {
+			filter = FILTER_DOT_PATTERN.matcher(filter).replaceAll("\\\\."); //$NON-NLS-1$//$NON-NLS-2$ //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
+			filter = FILTER_STAR_PATTERN.matcher(filter).replaceAll("\\.\\*"); //$NON-NLS-1$//$NON-NLS-2$ //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
+			Pattern pattern = Pattern.compile(filter); //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
+			if (pattern.matcher(typeName).find()) { //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
 				return true;
 			}
 		}
@@ -588,7 +591,7 @@ public class JavaExceptionBreakpoint extends JavaBreakpoint implements
 	 * configureRequest(com.sun.jdi.request.EventRequest,
 	 * org.eclipse.jdt.internal.debug.core.model.JDIDebugTarget)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	protected void configureRequest(EventRequest eRequest, JDIDebugTarget target)
 			throws CoreException {
 		String[] iFilters = getInclusionClassFilters();
@@ -613,15 +616,15 @@ public class JavaExceptionBreakpoint extends JavaBreakpoint implements
 	 * Serializes the array of Strings into one comma separated String. Removes
 	 * duplicates.
 	 */
-	protected String serializeList(String[] list) {
+	protected String serializeList(String[] list) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		if (list == null) {
 			return ""; //$NON-NLS-1$
 		}
-		Set<String> set = new HashSet<>(list.length);
-		StringBuilder buffer = new StringBuilder();
-		for (int i = 0; i < list.length; i++) {
+		Set<String> set = new HashSet<>(list.length); //FLLDCIM: MARK — M03 M3_SET_LANES NEW
+		StringBuilder buffer = new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
+		for (int i = 0; i < list.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			if (i > 0 && i < list.length) {
-				buffer.append(',');
+				buffer.append(','); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			}
 			String pattern = list[i];
 			if (!set.contains(pattern)) {
@@ -629,7 +632,7 @@ public class JavaExceptionBreakpoint extends JavaBreakpoint implements
 					// serialize the default package
 					pattern = "."; //$NON-NLS-1$
 				}
-				buffer.append(pattern);
+				buffer.append(pattern); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				set.add(pattern);
 			}
 		}
@@ -640,9 +643,9 @@ public class JavaExceptionBreakpoint extends JavaBreakpoint implements
 	 * Parses the comma separated String into an array of Strings
 	 */
 	protected String[] parseList(String listString) {
-		List<String> list = new ArrayList<>(10);
+		List<String> list = new ArrayList<>(10); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 		StringTokenizer tokenizer = new StringTokenizer(listString, ","); //$NON-NLS-1$
-		while (tokenizer.hasMoreTokens()) {
+		while (tokenizer.hasMoreTokens()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			String token = tokenizer.nextToken();
 			if (token.equals(".")) { //$NON-NLS-1$
 				// serialized form for the default package

@@ -67,7 +67,7 @@ public class JavaClasspathTabTests extends AbstractDebugUiTests {
 	 *
 	 * @throws Exception if project setup or the classpath tab interaction fails
 	 */
-	public void testDefaultClasspathWithExportedAndNonExportedDuplicate() throws Exception {
+	public void testDefaultClasspathWithExportedAndNonExportedDuplicate() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IJavaProject application = null;
 		IJavaProject dependency = null;
 		IJavaProject intermediate = null;
@@ -94,7 +94,7 @@ public class JavaClasspathTabTests extends AbstractDebugUiTests {
 			ILaunchConfigurationWorkingCopy workingCopy = configuration.getWorkingCopy();
 			applyClasspathTab(configuration, workingCopy, dependency);
 
-			assertFalse("Default classpath attribute must remain unset (actual: " //$NON-NLS-1$
+			assertFalse("Default classpath attribute must remain unset (actual: " //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 					+ workingCopy.getAttribute(IJavaLaunchConfigurationConstants.ATTR_DEFAULT_CLASSPATH, true) + ')',
 					workingCopy.hasAttribute(IJavaLaunchConfigurationConstants.ATTR_DEFAULT_CLASSPATH));
 			assertFalse("Custom classpath attribute must remain unset", //$NON-NLS-1$
@@ -119,7 +119,7 @@ public class JavaClasspathTabTests extends AbstractDebugUiTests {
 	 * @throws Exception if launch-configuration setup or classpath tab
 	 *             interaction fails
 	 */
-	public void testCustomClasspath() throws Exception {
+	public void testCustomClasspath() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		ILaunchConfiguration configuration = createLaunchConfiguration(get14Project(), "CustomClasspath", true); //$NON-NLS-1$
 		try {
 			IRuntimeClasspathEntry customEntry = JavaRuntime.newArchiveRuntimeClasspathEntry(new Path("/CustomClasspath.jar")); //$NON-NLS-1$
@@ -150,7 +150,7 @@ public class JavaClasspathTabTests extends AbstractDebugUiTests {
 	 * @param dependency the dependency whose duplicate entries are expected, or
 	 *            <code>null</code> when no duplicate check is required
 	 */
-	private void applyClasspathTab(ILaunchConfiguration configuration, ILaunchConfigurationWorkingCopy workingCopy, IJavaProject dependency) {
+	private void applyClasspathTab(ILaunchConfiguration configuration, ILaunchConfigurationWorkingCopy workingCopy, IJavaProject dependency) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		sync(() -> {
 			Composite parent = new Composite(JDIDebugUIPlugin.getActiveWorkbenchShell(), SWT.NONE);
 			try {
@@ -179,7 +179,7 @@ public class JavaClasspathTabTests extends AbstractDebugUiTests {
 	private int countEntriesForProject(IRuntimeClasspathEntry[] entries, IJavaProject project) {
 		int count = 0;
 		IPath projectPath = project.getProject().getFullPath();
-		for (IRuntimeClasspathEntry entry : entries) {
+		for (IRuntimeClasspathEntry entry : entries) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			if (projectPath.equals(entry.getPath())) {
 				count++;
 			}

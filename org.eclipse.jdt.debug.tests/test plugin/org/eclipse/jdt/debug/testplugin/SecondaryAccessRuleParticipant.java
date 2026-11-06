@@ -47,7 +47,7 @@ public class SecondaryAccessRuleParticipant implements IAccessRuleParticipant {
 			ar = new IAccessRule[0];
 		}
 		IAccessRule[][] rules = new IAccessRule[libraries.length][];
-		for (int i = 0; i < libraries.length; i++) {
+		for (int i = 0; i < libraries.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			rules[i] = ar;
 		}
 		return rules;

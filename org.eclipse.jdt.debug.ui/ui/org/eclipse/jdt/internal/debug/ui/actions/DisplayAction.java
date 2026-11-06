@@ -33,16 +33,16 @@ import org.eclipse.ui.IWorkbenchPart;
 /**
  * Displays the result of an evaluation in the display view
  */
-public class DisplayAction extends EvaluateAction {
+public class DisplayAction extends EvaluateAction { //FLLDCIM: MARK — T20  IMPLEMENTS
 
 	/**
 	 * @see EvaluateAction#displayResult(IEvaluationResult)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	protected void displayResult(final IEvaluationResult evaluationResult) {
 		if (evaluationResult.hasErrors()) {
 			final Display display = JDIDebugUIPlugin.getStandardDisplay();
-			display.asyncExec(new Runnable() {
+			display.asyncExec(new Runnable() { //FLLDCIM: MARK — T08 UI_THREAD_SYNCHRONIZER CALL
 				@Override
 				public void run() {
 					if (display.isDisposed()) {
@@ -84,10 +84,10 @@ public class DisplayAction extends EvaluateAction {
 		}
 	}
 
-	protected void displayStringResult(final String snippet,final String resultString) {
+	protected void displayStringResult(final String snippet,final String resultString) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		final IDataDisplay directDisplay= getDirectDataDisplay();
 		final Display display= JDIDebugUIPlugin.getStandardDisplay();
-		display.asyncExec(new Runnable() {
+		display.asyncExec(new Runnable() { //FLLDCIM: MARK — T08 UI_THREAD_SYNCHRONIZER CALL
 			@Override
 			public void run() {
 				if (!display.isDisposed()) {
@@ -123,7 +123,7 @@ public class DisplayAction extends EvaluateAction {
     public static String trimDisplayResult(String result) {
         int max = DebugUITools.getPreferenceStore().getInt(IDebugUIConstants.PREF_MAX_DETAIL_LENGTH);
         if (max > 0 && result.length() > max) {
-            result = result.substring(0, max) + "..."; //$NON-NLS-1$
+            result = result.substring(0, max) + "..."; //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
         }
         return result;
     }

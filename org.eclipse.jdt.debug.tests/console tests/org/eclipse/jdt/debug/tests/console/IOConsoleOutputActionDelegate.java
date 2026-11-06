@@ -57,7 +57,7 @@ public class IOConsoleOutputActionDelegate implements IActionDelegate2, IWorkben
     /**
      * @see org.eclipse.ui.IActionDelegate#run(org.eclipse.jface.action.IAction)
      */
-    @Override
+    @Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public void run(IAction action) {
         IOConsole console = new IOConsole("Test IOConsole", null, DebugUITools.getImageDescriptor(IDebugUIConstants.IMG_ACT_RUN)); //$NON-NLS-1$
 		IConsoleManager manager = ConsolePlugin.getDefault().getConsoleManager();
@@ -68,13 +68,13 @@ public class IOConsoleOutputActionDelegate implements IActionDelegate2, IWorkben
 			@Override
 			public void run() {
 				long start = System.nanoTime();
-				for (int i = 0; i < 1000; i++) {
+				for (int i = 0; i < 1000; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 					stream.print(Integer.toString(i));
 					stream.print(": Testing..."); //$NON-NLS-1$
 					stream.print("one..."); //$NON-NLS-1$
 					stream.println("two.... three...."); //$NON-NLS-1$
 				}
-				stream.println("Total time ms: " + (System.nanoTime() - start) / 1_000_000L); //$NON-NLS-1$
+				stream.println("Total time ms: " + (System.nanoTime() - start) / 1_000_000L); //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 			}
 		};
 		new Thread(r).start();

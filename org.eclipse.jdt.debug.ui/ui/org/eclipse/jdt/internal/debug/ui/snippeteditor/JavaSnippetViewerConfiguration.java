@@ -45,7 +45,7 @@ public class JavaSnippetViewerConfiguration extends JavaSourceViewerConfiguratio
 	/**
 	 * @see SourceViewerConfiguration#getContentAssistant(ISourceViewer)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public IContentAssistant getContentAssistant(ISourceViewer sourceViewer) {
 
 		ContentAssistant assistant = new ContentAssistant();

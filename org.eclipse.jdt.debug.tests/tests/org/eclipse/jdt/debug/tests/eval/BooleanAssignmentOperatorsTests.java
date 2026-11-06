@@ -32,12 +32,12 @@ public class BooleanAssignmentOperatorsTests extends Tests {
 
 	// boolean |= boolean
 
-	public void testBooleanOrAssignmentBoolean() throws Throwable {
+	public void testBooleanOrAssignmentBoolean() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
 		boolean tmpxVar = xVarBooleanValue;
 		tmpxVar |= xBooleanValue;
-		IValue value = eval(xVarBoolean + orAssignmentOp + xBoolean);
+		IValue value = eval(xVarBoolean + orAssignmentOp + xBoolean); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("boolean orAssignment boolean : wrong type : ", "boolean", typeName);
 		boolean booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
@@ -49,7 +49,7 @@ public class BooleanAssignmentOperatorsTests extends Tests {
 		assertEquals("boolean local variable value : wrong result : ", tmpxVar, booleanValue);
 
 		tmpxVar |= yBooleanValue;
-		value = eval(xVarBoolean + orAssignmentOp + yBoolean);
+		value = eval(xVarBoolean + orAssignmentOp + yBoolean); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("boolean orAssignment boolean : wrong type : ", "boolean", typeName);
 		booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
@@ -62,7 +62,7 @@ public class BooleanAssignmentOperatorsTests extends Tests {
 
 		boolean tmpyVar = yVarBooleanValue;
 		tmpyVar |= xBooleanValue;
-		value = eval(yVarBoolean + orAssignmentOp + xBoolean);
+		value = eval(yVarBoolean + orAssignmentOp + xBoolean); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("boolean orAssignment boolean : wrong type : ", "boolean", typeName);
 		booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
@@ -74,7 +74,7 @@ public class BooleanAssignmentOperatorsTests extends Tests {
 		assertEquals("boolean local variable value : wrong result : ", tmpyVar, booleanValue);
 
 		tmpyVar |= yBooleanValue;
-		value = eval(yVarBoolean + orAssignmentOp + yBoolean);
+		value = eval(yVarBoolean + orAssignmentOp + yBoolean); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("boolean orAssignment boolean : wrong type : ", "boolean", typeName);
 		booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
@@ -91,12 +91,12 @@ public class BooleanAssignmentOperatorsTests extends Tests {
 
 	// boolean &= boolean
 
-	public void testBooleanAndAssignmentBoolean() throws Throwable {
+	public void testBooleanAndAssignmentBoolean() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
 		boolean tmpxVar = xVarBooleanValue;
 		tmpxVar &= xBooleanValue;
-		IValue value = eval(xVarBoolean + andAssignmentOp + xBoolean);
+		IValue value = eval(xVarBoolean + andAssignmentOp + xBoolean); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("boolean andAssignment boolean : wrong type : ", "boolean", typeName);
 		boolean booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
@@ -108,7 +108,7 @@ public class BooleanAssignmentOperatorsTests extends Tests {
 		assertEquals("boolean local variable value : wrong result : ", tmpxVar, booleanValue);
 
 		tmpxVar &= yBooleanValue;
-		value = eval(xVarBoolean + andAssignmentOp + yBoolean);
+		value = eval(xVarBoolean + andAssignmentOp + yBoolean); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("boolean andAssignment boolean : wrong type : ", "boolean", typeName);
 		booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
@@ -121,7 +121,7 @@ public class BooleanAssignmentOperatorsTests extends Tests {
 
 		boolean tmpyVar = yVarBooleanValue;
 		tmpyVar &= xBooleanValue;
-		value = eval(yVarBoolean + andAssignmentOp + xBoolean);
+		value = eval(yVarBoolean + andAssignmentOp + xBoolean); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("boolean andAssignment boolean : wrong type : ", "boolean", typeName);
 		booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
@@ -133,7 +133,7 @@ public class BooleanAssignmentOperatorsTests extends Tests {
 		assertEquals("boolean local variable value : wrong result : ", tmpyVar, booleanValue);
 
 		tmpyVar &= yBooleanValue;
-		value = eval(yVarBoolean + andAssignmentOp + yBoolean);
+		value = eval(yVarBoolean + andAssignmentOp + yBoolean); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("boolean andAssignment boolean : wrong type : ", "boolean", typeName);
 		booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
@@ -150,12 +150,12 @@ public class BooleanAssignmentOperatorsTests extends Tests {
 
 	// boolean ^= boolean
 
-	public void testBooleanXorAssignmentBoolean() throws Throwable {
+	public void testBooleanXorAssignmentBoolean() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
 		boolean tmpxVar = xVarBooleanValue;
 		tmpxVar ^= xBooleanValue;
-		IValue value = eval(xVarBoolean + xorAssignmentOp + xBoolean);
+		IValue value = eval(xVarBoolean + xorAssignmentOp + xBoolean); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("boolean xorAssignment boolean : wrong type : ", "boolean", typeName);
 		boolean booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
@@ -167,7 +167,7 @@ public class BooleanAssignmentOperatorsTests extends Tests {
 		assertEquals("boolean local variable value : wrong result : ", tmpxVar, booleanValue);
 
 		tmpxVar ^= yBooleanValue;
-		value = eval(xVarBoolean + xorAssignmentOp + yBoolean);
+		value = eval(xVarBoolean + xorAssignmentOp + yBoolean); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("boolean xorAssignment boolean : wrong type : ", "boolean", typeName);
 		booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
@@ -180,7 +180,7 @@ public class BooleanAssignmentOperatorsTests extends Tests {
 
 		boolean tmpyVar = yVarBooleanValue;
 		tmpyVar ^= xBooleanValue;
-		value = eval(yVarBoolean + xorAssignmentOp + xBoolean);
+		value = eval(yVarBoolean + xorAssignmentOp + xBoolean); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("boolean xorAssignment boolean : wrong type : ", "boolean", typeName);
 		booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
@@ -192,7 +192,7 @@ public class BooleanAssignmentOperatorsTests extends Tests {
 		assertEquals("boolean local variable value : wrong result : ", tmpyVar, booleanValue);
 
 		tmpyVar ^= yBooleanValue;
-		value = eval(yVarBoolean + xorAssignmentOp + yBoolean);
+		value = eval(yVarBoolean + xorAssignmentOp + yBoolean); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("boolean xorAssignment boolean : wrong type : ", "boolean", typeName);
 		booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();

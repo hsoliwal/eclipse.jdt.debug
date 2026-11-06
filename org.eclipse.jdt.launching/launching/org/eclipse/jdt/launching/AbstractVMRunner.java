@@ -130,14 +130,14 @@ public abstract class AbstractVMRunner implements IVMRunner {
 	 * @return a single space-delimited string
 	 */
 	protected String getCmdLineAsString(String[] cmdLine) {
-		StringBuilder buff = new StringBuilder();
-		for (int i = 0; i < cmdLine.length; i++) {
-			buff.append(cmdLine[i]);
+		StringBuilder buff = new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
+		for (int i = 0; i < cmdLine.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
+			buff.append(cmdLine[i]); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			if (i != cmdLine.length - 1) {
 				if (cmdLine[i + 1].startsWith("-")) { //$NON-NLS-1$
-					buff.append("\n"); //$NON-NLS-1$
+					buff.append("\n"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				} else {
-					buff.append(' ');
+					buff.append(' '); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				}
 			}
 		}
@@ -150,7 +150,7 @@ public abstract class AbstractVMRunner implements IVMRunner {
 	 * @return default process attribute map for Java processes
 	 */
 	protected Map<String, String> getDefaultProcessMap() {
-		Map<String, String> map = new HashMap<>();
+		Map<String, String> map = new HashMap<>(); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
 		map.put(IProcess.ATTR_PROCESS_TYPE, IJavaLaunchConfigurationConstants.ID_JAVA_PROCESS_TYPE);
 		return map;
 	}
@@ -184,7 +184,7 @@ public abstract class AbstractVMRunner implements IVMRunner {
 	 *  and VM install
 	 * @since 3.0
 	 */
-	protected String[] combineVmArgs(VMRunnerConfiguration configuration, IVMInstall vmInstall) {
+	protected String[] combineVmArgs(VMRunnerConfiguration configuration, IVMInstall vmInstall) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String[] launchVMArgs= configuration.getVMArguments();
 		String[] vmVMArgs = vmInstall.getVMArguments();
 		if (vmVMArgs == null || vmVMArgs.length == 0) {
@@ -192,7 +192,7 @@ public abstract class AbstractVMRunner implements IVMRunner {
 		}
 		// string substitution
 		IStringVariableManager manager = VariablesPlugin.getDefault().getStringVariableManager();
-		for (int i = 0; i < vmVMArgs.length; i++) {
+		for (int i = 0; i < vmVMArgs.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			try {
 				vmVMArgs[i] = manager.performStringSubstitution(vmVMArgs[i], false);
 			} catch (CoreException e) {

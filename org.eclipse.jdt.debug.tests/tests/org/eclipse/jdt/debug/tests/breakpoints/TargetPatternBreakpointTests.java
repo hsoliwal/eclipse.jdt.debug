@@ -46,11 +46,11 @@ public class TargetPatternBreakpointTests extends AbstractDebugTest implements I
 	/**
 	 * Tests that several pattern breakpoints are suspending properly
 	 */
-	public void testTargetPatternBreakpoints() throws Exception {
+	public void testTargetPatternBreakpoints() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		JDIDebugPlugin.getDefault().addJavaBreakpointListener(this);
 
 		String sourceName = "Breakpoints.java";
-		List<IJavaTargetPatternBreakpoint> bps = new ArrayList<>();
+		List<IJavaTargetPatternBreakpoint> bps = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 		// anonymous class
 		bps.add(createTargetPatternBreakpoint(46, sourceName));
 		// blocks
@@ -95,7 +95,7 @@ public class TargetPatternBreakpointTests extends AbstractDebugTest implements I
 		try {
 			thread= launchToBreakpoint("Breakpoints", false);
 			assertNotNull("Breakpoint not hit within timeout period", thread);
-			while (!bps.isEmpty()) {
+			while (!bps.isEmpty()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				IBreakpoint hit = getBreakpoint(thread);
 				assertNotNull("suspended, but not by breakpoint", hit);
 				assertTrue("hit un-registered breakpoint", bps.contains(hit));

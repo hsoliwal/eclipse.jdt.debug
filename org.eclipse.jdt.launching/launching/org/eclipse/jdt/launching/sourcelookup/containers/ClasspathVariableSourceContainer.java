@@ -39,7 +39,7 @@ public class ClasspathVariableSourceContainer extends CompositeSourceContainer {
 	 * Unique identifier for Java project source container type
 	 * (value <code>org.eclipse.jdt.launching.sourceContainer.classpathVariable</code>).
 	 */
-	public static final String TYPE_ID = LaunchingPlugin.getUniqueIdentifier() + ".sourceContainer.classpathVariable";   //$NON-NLS-1$
+	public static final String TYPE_ID = LaunchingPlugin.getUniqueIdentifier() + ".sourceContainer.classpathVariable";   //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 	/**
 	 * Constructs a new source container on the given variable and suffix.

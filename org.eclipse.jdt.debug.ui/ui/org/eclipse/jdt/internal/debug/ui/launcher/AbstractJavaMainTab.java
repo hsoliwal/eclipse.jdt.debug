@@ -58,7 +58,7 @@ public abstract class AbstractJavaMainTab extends JavaLaunchTab {
  * A listener which handles widget change events for the controls
  * in this tab.
  */
-private class WidgetListener implements ModifyListener, SelectionListener {
+private class WidgetListener implements ModifyListener, SelectionListener { //FLLDCIM: MARK — T02  IMPLEMENTS
 
 	@Override
 	public void modifyText(ModifyEvent e) {
@@ -94,7 +94,7 @@ protected static final String EMPTY_STRING = Util.ZERO_LENGTH_STRING;
 	 * chooses a project for the type of java launch config that it is
 	 * @return the selected project or <code>null</code> if none
 	 */
-	private IJavaProject chooseJavaProject() {
+	private IJavaProject chooseJavaProject() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		ILabelProvider labelProvider= new JavaElementLabelProvider(JavaElementLabelProvider.SHOW_DEFAULT);
 		ElementListSelectionDialog dialog= new ElementListSelectionDialog(getShell(), labelProvider);
 		dialog.setTitle(LauncherMessages.AbstractJavaMainTab_4);
@@ -121,10 +121,10 @@ protected static final String EMPTY_STRING = Util.ZERO_LENGTH_STRING;
 	protected void createProjectEditor(Composite parent) {
 		Group group = SWTFactory.createGroup(parent, LauncherMessages.AbstractJavaMainTab_0, 2, 1, GridData.FILL_HORIZONTAL);
 		fProjText = SWTFactory.createSingleText(group, 1);
-		fProjText.addModifyListener(fListener);
+		fProjText.addModifyListener(fListener); //FLLDCIM: MARK — T02 TEXT_INPUT_DEBOUNCE CALL
 		ControlAccessibleListener.addListener(fProjText, group.getText());
 		fProjButton = createPushButton(group, LauncherMessages.AbstractJavaMainTab_1, null);
-		fProjButton.addSelectionListener(fListener);
+		fProjButton.addSelectionListener(fListener); //FLLDCIM: MARK — T03 SELECTION_LANE CALL
 	}
 
 	/**

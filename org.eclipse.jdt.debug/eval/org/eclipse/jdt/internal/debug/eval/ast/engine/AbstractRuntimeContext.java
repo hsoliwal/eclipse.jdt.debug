@@ -118,7 +118,7 @@ public abstract class AbstractRuntimeContext implements IRuntimeContext {
 	 * @throws CoreException
 	 *             if loading fails
 	 */
-	protected IJavaClassObject classForName(String qualifiedName,
+	protected IJavaClassObject classForName(String qualifiedName, //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 			IJavaObject loader) throws CoreException {
 		String tname = qualifiedName;
 		if (tname.startsWith("[")) { //$NON-NLS-1$
@@ -127,7 +127,7 @@ public abstract class AbstractRuntimeContext implements IRuntimeContext {
 		IJavaType[] types = getVM().getJavaTypes(tname);
 		if (types != null && types.length > 0) {
 			// find the one with the right class loader
-			for (IJavaType type2 : types) {
+			for (IJavaType type2 : types) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				if ( type2 instanceof IJavaReferenceType type){
 					IJavaObject cloader = type.getClassLoaderObject();
 					if (isCompatibleLoader(loader, cloader)) {
@@ -200,7 +200,7 @@ public abstract class AbstractRuntimeContext implements IRuntimeContext {
 	 *            class loader of other class
 	 * @return whether compatible
 	 */
-	private boolean isCompatibleLoader(IJavaObject recLoader,
+	private boolean isCompatibleLoader(IJavaObject recLoader, //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 			IJavaObject otherLoader) throws CoreException {
 		if (recLoader == null || otherLoader == null) {
 			// if either class is a bootstrap loader, then they are compatible
@@ -213,7 +213,7 @@ public abstract class AbstractRuntimeContext implements IRuntimeContext {
 		}
 		// check parent loaders
 		IJavaObject parent = getParentLoader(recLoader);
-		while (parent != null) {
+		while (parent != null) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			if (parent.equals(otherLoader)) {
 				return true;
 			}
@@ -230,7 +230,7 @@ public abstract class AbstractRuntimeContext implements IRuntimeContext {
 	 *            class loader object
 	 * @return parent class loader or <code>null</code>
 	 */
-	private IJavaObject getParentLoader(IJavaObject loader)
+	private IJavaObject getParentLoader(IJavaObject loader) //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 			throws CoreException {
 		// to avoid message send, first check for 'parent' field
 		IJavaFieldVariable field = loader.getField("parent", false); //$NON-NLS-1$

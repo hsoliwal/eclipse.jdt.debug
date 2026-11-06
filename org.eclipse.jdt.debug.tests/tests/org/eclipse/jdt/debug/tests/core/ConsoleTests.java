@@ -77,7 +77,7 @@ public class ConsoleTests extends AbstractDebugTest {
 	 * Test that when a process is removed from a launch, the associated
 	 * console is closed.
 	 */
-	public void testRemoveProcess() throws Exception {
+	public void testRemoveProcess() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String typeName = "Breakpoints";
 		IJavaDebugTarget target = null;
 		try {
@@ -87,7 +87,7 @@ public class ConsoleTests extends AbstractDebugTest {
 			assertNotNull("Missing VM process", process);
 			ILaunch launch = target.getLaunch();
 			// make sure the console exists
-			DebugUIPlugin.getStandardDisplay().syncExec(new Runnable() {
+			DebugUIPlugin.getStandardDisplay().syncExec(new Runnable() { //FLLDCIM: MARK — T08 UI_THREAD_SYNCHRONIZER CALL
 				@Override
 				public void run() {
 					IConsole console = DebugUITools.getConsole(otherTarget);
@@ -96,7 +96,7 @@ public class ConsoleTests extends AbstractDebugTest {
 			});
 			launch.removeProcess(process);
 			// make sure the console is gone
-			DebugUIPlugin.getStandardDisplay().syncExec(new Runnable() {
+			DebugUIPlugin.getStandardDisplay().syncExec(new Runnable() { //FLLDCIM: MARK — T08 UI_THREAD_SYNCHRONIZER CALL
 				@Override
 				public void run() {
 					IConsole console = DebugUITools.getConsole(otherTarget);
@@ -136,7 +136,7 @@ public class ConsoleTests extends AbstractDebugTest {
 	 * @throws Exception
 	 *             if test failed
 	 */
-	public void testConsoleOutputSynchronization() throws Exception {
+	public void testConsoleOutputSynchronization() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String typeName = "OutSync";
 		ILaunch launch = null;
 		try {
@@ -166,7 +166,7 @@ public class ConsoleTests extends AbstractDebugTest {
 	 * @throws Exception
 	 *             if test failed
 	 */
-	public void testConsoleOutputSynchronization2() throws Exception {
+	public void testConsoleOutputSynchronization2() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String typeName = "OutSync2";
 		ILaunch launch = null;
 		try {
@@ -191,7 +191,7 @@ public class ConsoleTests extends AbstractDebugTest {
 	 * @throws Exception
 	 *             if test failed
 	 */
-	public void testConsoleErrorColoring() throws Exception {
+	public void testConsoleErrorColoring() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String typeName = "OutSync";
 		IJavaDebugTarget target = null;
 		try {
@@ -269,7 +269,7 @@ public class ConsoleTests extends AbstractDebugTest {
 	 * @throws Exception
 	 *             if the test gets in trouble
 	 */
-	private void utf8OutputTest(int numAscii, int numUmlaut, int repetitions) throws Exception {
+	private void utf8OutputTest(int numAscii, int numUmlaut, int repetitions) throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		final String typeName = "ConsoleOutputUmlaut";
 
 		final IPreferenceStore debugPrefStore = DebugUIPlugin.getDefault().getPreferenceStore();
@@ -309,7 +309,7 @@ public class ConsoleTests extends AbstractDebugTest {
 			debugPrefStore.setValue(IDebugPreferenceConstants.CONSOLE_WRAP, false);
 			if (launch != null) {
 				if (launch.getProcesses() != null) {
-					for (IProcess process : launch.getProcesses()) {
+					for (IProcess process : launch.getProcesses()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 						process.terminate();
 					}
 				}
@@ -320,7 +320,7 @@ public class ConsoleTests extends AbstractDebugTest {
 
 	private static void checkExitValue(IProcess process) throws DebugException, InterruptedException {
 		long start = System.currentTimeMillis();
-		while (!process.isTerminated() && System.currentTimeMillis() - start < DEFAULT_TIMEOUT) {
+		while (!process.isTerminated() && System.currentTimeMillis() - start < DEFAULT_TIMEOUT) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			TestUtil.runEventLoop();
 			Thread.sleep(50);
 		}

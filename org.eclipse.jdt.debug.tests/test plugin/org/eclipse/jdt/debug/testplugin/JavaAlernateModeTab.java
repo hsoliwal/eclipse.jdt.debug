@@ -42,7 +42,7 @@ public class JavaAlernateModeTab extends AbstractLaunchConfigurationTab implemen
 	 * @return the set of modes this tab supports
 	 */
 	public Set<String> getModes() {
-		HashSet<String> modes = new HashSet<>();
+		HashSet<String> modes = new HashSet<>(); //FLLDCIM: MARK — M03 M3_SET_LANES NEW
 		modes.add("alternate");
 		return modes;
 	}
@@ -110,7 +110,7 @@ public class JavaAlernateModeTab extends AbstractLaunchConfigurationTab implemen
 	public void createControl(Composite parent) {
 		fAlternateModeCheckBox = new Button(parent, SWT.CHECK);
 		fAlternateModeCheckBox.setText("Check &me for 'alternate' mode");
-		fAlternateModeCheckBox.addSelectionListener(new SelectionAdapter() {
+		fAlternateModeCheckBox.addSelectionListener(new SelectionAdapter() { //FLLDCIM: MARK — T03 SELECTION_LANE CALL
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				updateLaunchConfigurationDialog();
@@ -137,7 +137,7 @@ public class JavaAlernateModeTab extends AbstractLaunchConfigurationTab implemen
 			setWidget(configuration);
 		}
 		else {
-			DebugUIPlugin.getStandardDisplay().syncExec(new Runnable() {
+			DebugUIPlugin.getStandardDisplay().syncExec(new Runnable() { //FLLDCIM: MARK — T08 UI_THREAD_SYNCHRONIZER CALL
 				@Override
 				public void run() {
 					setWidget(configuration);

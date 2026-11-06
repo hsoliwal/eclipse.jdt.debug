@@ -47,7 +47,7 @@ public class ClasspathContainerSourceContainer extends CompositeSourceContainer 
 	 * Unique identifier for Java project source container type
 	 * (value <code>org.eclipse.jdt.launching.sourceContainer.classpathContainer</code>).
 	 */
-	public static final String TYPE_ID = LaunchingPlugin.getUniqueIdentifier() + ".sourceContainer.classpathContainer";   //$NON-NLS-1$
+	public static final String TYPE_ID = LaunchingPlugin.getUniqueIdentifier() + ".sourceContainer.classpathContainer";   //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 	/**
 	 * Constructs a new source container for the given classpath container.

@@ -98,10 +98,10 @@ public class JDIArrayEntryVariable extends JDIModificationVariable {
 	 */
 	@Override
 	public String getName() {
-		return "[" + getIndex() + "]"; //$NON-NLS-2$ //$NON-NLS-1$
+		return "[" + getIndex() + "]"; //$NON-NLS-2$ //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 	}
 
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	protected void setJDIValue(Value value) throws DebugException {
 		ArrayReference ar = getArrayReference();
 		if (ar == null) {
@@ -170,7 +170,7 @@ public class JDIArrayEntryVariable extends JDIModificationVariable {
 		if (lastLeft < 0) {
 			return typeName;
 		}
-		StringBuilder buffer = new StringBuilder(typeName);
+		StringBuilder buffer = new StringBuilder(typeName); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 		buffer.replace(lastLeft, lastLeft + 2, ""); //$NON-NLS-1$
 		return buffer.toString();
 	}
@@ -199,7 +199,7 @@ public class JDIArrayEntryVariable extends JDIModificationVariable {
 	 *
 	 * @see org.eclipse.jdt.debug.core.IJavaVariable#getGenericSignature()
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public String getGenericSignature() throws DebugException {
 		try {
 			ReferenceType referenceType = getArrayReference().referenceType();
@@ -222,7 +222,7 @@ public class JDIArrayEntryVariable extends JDIModificationVariable {
 	/**
 	 * @see JDIVariable#getUnderlyingType()
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	protected Type getUnderlyingType() throws DebugException {
 		try {
 			return ((ArrayType) getArrayReference().type()).componentType();

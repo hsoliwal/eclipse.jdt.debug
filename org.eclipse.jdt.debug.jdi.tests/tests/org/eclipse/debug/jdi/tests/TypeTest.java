@@ -64,7 +64,7 @@ public class TypeTest extends AbstractJDITest {
 	/**
 	 * Init the fields that are used by this test only.
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public void localSetUp() {
 		// Get reference types
 		fArrayType = getArrayType();
@@ -108,7 +108,7 @@ public class TypeTest extends AbstractJDITest {
 	/**
 	 * Test JDI signature().
 	 */
-	public void testJDISignature() {
+	public void testJDISignature() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		assertEquals("1", "[Ljava/lang/String;", fArrayType.signature());
 		assertEquals("2", "Lorg/eclipse/debug/jdi/tests/program/MainClass;", fClassType.signature());
 		assertEquals("3", "Lorg/eclipse/debug/jdi/tests/program/Printable;", fInterfaceType.signature());
@@ -143,7 +143,7 @@ public class TypeTest extends AbstractJDITest {
 	/**
 	 * Test JDI typeName().
 	 */
-	public void testJDITypeName() {
+	public void testJDITypeName() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		assertEquals("1", "java.lang.String[]", fArrayType.name());
 		assertEquals("2", "org.eclipse.debug.jdi.tests.program.MainClass", fClassType.name());
 		assertEquals("3", "org.eclipse.debug.jdi.tests.program.Printable", fInterfaceType.name());

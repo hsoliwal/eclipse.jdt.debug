@@ -64,11 +64,11 @@ public class DetailPaneManagerTests extends AbstractDebugTest {
 	 * Tests that the manager makes correct default selection when
 	 * one or more detail panes are available.
 	 */
-	public void testGetUserPreferredDetailPane() {
-		String id = fManager.getUserPreferredDetailPane(new HashSet<>());
+	public void testGetUserPreferredDetailPane() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
+		String id = fManager.getUserPreferredDetailPane(new HashSet<>()); //FLLDCIM: MARK — M03 M3_SET_LANES NEW
 		assertNull("Incorrect pane ID", id);
 
-		Set<String> detailPanes = new HashSet<>();
+		Set<String> detailPanes = new HashSet<>(); //FLLDCIM: MARK — M03 M3_SET_LANES NEW
 		detailPanes.add("NewPane1");
 		id = fManager.getUserPreferredDetailPane(detailPanes);
 		assertNull("Incorrect pane ID", id);
@@ -91,7 +91,7 @@ public class DetailPaneManagerTests extends AbstractDebugTest {
 	 * Tests that the manager can remember which detail pane is
 	 * currently the preferred pane.
 	 */
-	public void testSetPreferredDetailPane() {
+	public void testSetPreferredDetailPane() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		fManager.setPreferredDetailPane(null, null);
 		String id = fManager.getUserPreferredDetailPane(null);
 		assertNull("Incorrect pane ID", id);
@@ -100,7 +100,7 @@ public class DetailPaneManagerTests extends AbstractDebugTest {
 		id = fManager.getUserPreferredDetailPane(null);
 		assertNull("Incorrect pane ID", id);
 
-		Set<String> detailPanes = new HashSet<>();
+		Set<String> detailPanes = new HashSet<>(); //FLLDCIM: MARK — M03 M3_SET_LANES NEW
 		detailPanes.add("Example1");
 		fManager.setPreferredDetailPane(detailPanes, "Example1");
 		id = fManager.getUserPreferredDetailPane(detailPanes);
@@ -123,7 +123,7 @@ public class DetailPaneManagerTests extends AbstractDebugTest {
 	 * Tests that the manager can determine the preferred pane
 	 * given a selection.
 	 */
-	public void testGetPreferredPaneFromSelection() {
+	public void testGetPreferredPaneFromSelection() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IStructuredSelection selection = null;
 		String id = fManager.getPreferredPaneFromSelection(selection);
 		assertEquals("Incorrect pane ID", DefaultDetailPane.ID, id);
@@ -163,7 +163,7 @@ public class DetailPaneManagerTests extends AbstractDebugTest {
 	 * Tests that the manager returns all possible panes that can be used
 	 * for a given selection.
 	 */
-	public void testGetAvailablePaneIDs() {
+	public void testGetAvailablePaneIDs() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IStructuredSelection selection = null;
 		Set<String> result = fManager.getAvailablePaneIDs(selection);
 		assertTrue("Set was incorrect",result.size()==1 && result.contains(DefaultDetailPane.ID));

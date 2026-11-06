@@ -47,7 +47,7 @@ public class SourceLookupTests extends AbstractDebugTest {
 		IResource resource = javaProject.getProject().getFile("src/A.jar");
 		IPackageFragmentRoot packageFragmentRoot = javaProject.getPackageFragmentRoot(resource);
 		assertTrue("package fragment root should exist", packageFragmentRoot.exists());
-		for (int i = 0; i < roots.length; i++) {
+		for (int i = 0; i < roots.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			IPackageFragmentRoot root = roots[i];
 			if (packageFragmentRoot.equals(root)) {
 				return;
@@ -59,7 +59,7 @@ public class SourceLookupTests extends AbstractDebugTest {
 	/**
 	 * see Bug 37545
 	 */
-	public void testStackFrameReuse() throws Exception {
+	public void testStackFrameReuse() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String typeName = "org.eclipse.debug.tests.targets.CallStack";
 		createLineBreakpoint(31, "org.eclipse.debug.tests.targets.ClassOne");
 		createLineBreakpoint(31, "org.eclipse.debug.tests.targets.ClassTwo");
@@ -78,7 +78,7 @@ public class SourceLookupTests extends AbstractDebugTest {
 
 			IPackageFragment[] fragments = get14Project().getPackageFragments();
 			IPackageFragment fragment = null;
-			for (int i = 0; i < fragments.length; i++) {
+			for (int i = 0; i < fragments.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				if (fragments[i].getElementName().equals("org.eclipse.debug.tests.targets")) {
 					fragment = fragments[i];
 					break;
@@ -134,7 +134,7 @@ public class SourceLookupTests extends AbstractDebugTest {
 	 * Tests source lookup in an anonymous inner type, in the default package.
 	 * Must debug since we do not know name of type.
 	 */
-	public void testDefAnonInnerType() throws Exception {
+	public void testDefAnonInnerType() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String typeName = "Breakpoints";
 		createLineBreakpoint(43, typeName);
 		ICompilationUnit expectedSource = getCompilationUnit(get14Project(), "src", IInternalDebugCoreConstants.EMPTY_STRING, "Breakpoints.java");
@@ -160,7 +160,7 @@ public class SourceLookupTests extends AbstractDebugTest {
 	 * Tests source lookup in a named local type, in the default package.
 	 * Must debug to test this, since we do no know name of local type.
 	 */
-	public void testDefLocalType() throws Exception {
+	public void testDefLocalType() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String typeName = "Breakpoints";
 		createLineBreakpoint(30, typeName);
 		ICompilationUnit expectedSource = getCompilationUnit(get14Project(), "src", IInternalDebugCoreConstants.EMPTY_STRING, "Breakpoints.java");

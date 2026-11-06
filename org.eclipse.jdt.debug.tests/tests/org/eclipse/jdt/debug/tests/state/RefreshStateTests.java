@@ -44,7 +44,7 @@ public class RefreshStateTests extends AbstractDebugTest {
 	/**
 	 * Resume a thread behind the scenes and ensure model state updates appropriately.
 	 */
-	public void testThreadHasResumed() throws Exception {
+	public void testThreadHasResumed() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String typeName = "org.eclipse.debug.tests.targets.CallLoop";
 		ILineBreakpoint bp = createLineBreakpoint(19, "org.eclipse.debug.tests.targets.Looper");
 
@@ -82,7 +82,7 @@ public class RefreshStateTests extends AbstractDebugTest {
 	/**
 	 * Resume all threads behind the scenes and ensure model state updates appropriately.
 	 */
-	public void testAllThreadsResumed() throws Exception {
+	public void testAllThreadsResumed() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String typeName = "org.eclipse.debug.tests.targets.CallLoop";
 		IJavaLineBreakpoint bp = createLineBreakpoint(19, "org.eclipse.debug.tests.targets.Looper");
 		bp.setSuspendPolicy(IJavaBreakpoint.SUSPEND_VM);
@@ -93,7 +93,7 @@ public class RefreshStateTests extends AbstractDebugTest {
 			IJavaDebugTarget jdiTarget = (IJavaDebugTarget) thread.getDebugTarget();
 			// Resume each thread (set 11, command 3)
 			IThread[] threads = jdiTarget.getThreads();
-			for (int i = 0; i < threads.length; i++) {
+			for (int i = 0; i < threads.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				IJavaThread jThread = (IJavaThread) threads[i];
 				IJavaObject reference = jThread.getThreadObject();
 				ByteArrayOutputStream outBytes = new ByteArrayOutputStream();
@@ -123,7 +123,7 @@ public class RefreshStateTests extends AbstractDebugTest {
 	/**
 	 * Suspend a thread behind the scenes and ensure model state updates appropriately.
 	 */
-	public void testThreadHasSuspended() throws Exception {
+	public void testThreadHasSuspended() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String typeName = "org.eclipse.debug.tests.targets.CallLoop";
 		ILineBreakpoint bp = createLineBreakpoint(19, "org.eclipse.debug.tests.targets.Looper");
 
@@ -170,7 +170,7 @@ public class RefreshStateTests extends AbstractDebugTest {
 	/**
 	 * Suspend all threads behind the scenes and ensure model state updates appropriately.
 	 */
-	public void testAllThreadsSuspended() throws Exception {
+	public void testAllThreadsSuspended() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String typeName = "org.eclipse.debug.tests.targets.CallLoop";
 		ILineBreakpoint bp = createLineBreakpoint(19, "org.eclipse.debug.tests.targets.Looper");
 
@@ -186,7 +186,7 @@ public class RefreshStateTests extends AbstractDebugTest {
 			assertFalse("Model should now be running", thread.isSuspended());
 
 			IThread[] threads = jdiTarget.getThreads();
-			for (int i = 0; i < threads.length; i++) {
+			for (int i = 0; i < threads.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				IJavaThread jThread = (IJavaThread) threads[i];
 				// suspend each thread with a JDWP command (set 11, command 2)
 				IJavaObject reference = jThread.getThreadObject();
@@ -220,7 +220,7 @@ public class RefreshStateTests extends AbstractDebugTest {
 	/**
 	 * Suspend the entire target behind the scenes and ensure model state updates appropriately.
 	 */
-	public void testTargetHasSuspended() throws Exception {
+	public void testTargetHasSuspended() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String typeName = "org.eclipse.debug.tests.targets.CallLoop";
 		ILineBreakpoint bp = createLineBreakpoint(19, "org.eclipse.debug.tests.targets.Looper");
 
@@ -266,7 +266,7 @@ public class RefreshStateTests extends AbstractDebugTest {
 	/**
 	 * Resume a target behind the scenes and ensure model state updates appropriately.
 	 */
-	public void testTargetHasResumed() throws Exception {
+	public void testTargetHasResumed() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String typeName = "org.eclipse.debug.tests.targets.CallLoop";
 		IJavaLineBreakpoint bp = createLineBreakpoint(19, "org.eclipse.debug.tests.targets.Looper");
 		bp.setSuspendPolicy(IJavaBreakpoint.SUSPEND_VM);

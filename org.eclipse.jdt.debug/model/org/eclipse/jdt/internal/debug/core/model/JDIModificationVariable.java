@@ -55,7 +55,7 @@ public abstract class JDIModificationVariable extends JDIVariable {
 	 * @throws DebugException
 	 *             if there is a problem generating the value
 	 */
-	protected Value generateVMValue(String expression) throws DebugException {
+	protected Value generateVMValue(String expression) throws DebugException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		VirtualMachine vm = getVM();
 		if (vm == null) {
 			requestFailed(

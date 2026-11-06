@@ -44,7 +44,7 @@ public abstract class BinaryOperator extends CompoundInstruction {
 		}
 	}
 
-	private void executeAssignment() throws CoreException {
+	private void executeAssignment() throws CoreException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IJavaValue value = popValue();
 		IJavaVariable variable = (IJavaVariable) pop();
 		IJavaValue variableValue = (IJavaValue) variable.getValue();
@@ -82,7 +82,7 @@ public abstract class BinaryOperator extends CompoundInstruction {
 		push(variableValue);
 	}
 
-	private void executeBinary() throws CoreException {
+	private void executeBinary() throws CoreException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IJavaValue right = popValue();
 		IJavaValue left = popValue();
 

@@ -87,9 +87,9 @@ public class JavaApplicationLaunchShortcut extends JavaLaunchShortcut {
 	 * @return corresponding Java elements
 	 * @since 3.5
 	 */
-	protected IJavaElement[] getJavaElements(Object[] objects) {
-		List<IJavaElement> list= new ArrayList<>(objects.length);
-		for (int i = 0; i < objects.length; i++) {
+	protected IJavaElement[] getJavaElements(Object[] objects) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
+		List<IJavaElement> list= new ArrayList<>(objects.length); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
+		for (int i = 0; i < objects.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			Object object = objects[i];
 			if (object instanceof IAdaptable adapt) {
 				IJavaElement element = adapt.getAdapter(IJavaElement.class);
@@ -108,7 +108,7 @@ public class JavaApplicationLaunchShortcut extends JavaLaunchShortcut {
 		return list.toArray(new IJavaElement[list.size()]);
 	}
 
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	protected ILaunchConfiguration createConfiguration(IType type) {
 		ILaunchConfiguration config = null;
 		ILaunchConfigurationWorkingCopy wc = null;
@@ -146,7 +146,7 @@ public class JavaApplicationLaunchShortcut extends JavaLaunchShortcut {
 		return DebugPlugin.getDefault().getLaunchManager();
 	}
 
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	protected IType[] findTypes(Object[] elements, IRunnableContext context) throws InterruptedException, CoreException {
 		try {
 			if(elements.length == 1) {

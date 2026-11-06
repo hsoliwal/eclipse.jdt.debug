@@ -46,8 +46,8 @@ public class PinnedFieldsEdgeCaseTests extends AbstractDebugTest {
 	private static final String PINNED_FIELDS_KEY = PinnedFieldsManager.getPreferenceKey(VIEW_ID);
 
 	private final IPresentationContext fContext = new PresentationContext(VIEW_ID);
-	private final String fShowStaticsKey = IDebugUIConstants.ID_VARIABLE_VIEW + "." + IJDIPreferencesConstants.PREF_SHOW_STATIC_VARIABLES;
-	private final String fShowConstantsKey = IDebugUIConstants.ID_VARIABLE_VIEW + "." + IJDIPreferencesConstants.PREF_SHOW_CONSTANTS;
+	private final String fShowStaticsKey = IDebugUIConstants.ID_VARIABLE_VIEW + "." + IJDIPreferencesConstants.PREF_SHOW_STATIC_VARIABLES; //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
+	private final String fShowConstantsKey = IDebugUIConstants.ID_VARIABLE_VIEW + "." + IJDIPreferencesConstants.PREF_SHOW_CONSTANTS; //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 	private boolean fShowStatics;
 	private boolean fShowConstants;
 
@@ -101,8 +101,8 @@ public class PinnedFieldsEdgeCaseTests extends AbstractDebugTest {
 
 		List<String> names = names(filter(fields));
 
-		assertFalse("hidden static field shown: " + names, names.contains("staticCounter"));
-		assertFalse("hidden constant shown: " + names, names.contains("CONSTANT"));
+		assertFalse("hidden static field shown: " + names, names.contains("staticCounter")); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
+		assertFalse("hidden constant shown: " + names, names.contains("CONSTANT")); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		assertEquals("text", names.get(0));
 		// the hidden pins are not displayed, so they are skipped when moving the displayed ones
 		assertFalse(manager().canMovePin(VIEW_ID, field(object, "text"), filter(fields), true));
@@ -126,7 +126,7 @@ public class PinnedFieldsEdgeCaseTests extends AbstractDebugTest {
 		manager().setPinned(VIEW_ID, List.of(field(inner, "other")), true);
 
 		assertEquals("other", names(filter(fields)).get(0));
-		assertEquals(TYPE_NAME + "$Inner#other", getStore().getString(PINNED_FIELDS_KEY));
+		assertEquals(TYPE_NAME + "$Inner#other", getStore().getString(PINNED_FIELDS_KEY)); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 	}
 
 	public void testFieldOfGenericClass() throws Exception {
@@ -136,14 +136,14 @@ public class PinnedFieldsEdgeCaseTests extends AbstractDebugTest {
 		manager().setPinned(VIEW_ID, List.of(field(box, "value")), true);
 
 		assertEquals("value", names(filter(fields)).get(0));
-		assertEquals(TYPE_NAME + "$Box#value", getStore().getString(PINNED_FIELDS_KEY));
+		assertEquals(TYPE_NAME + "$Box#value", getStore().getString(PINNED_FIELDS_KEY)); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 	}
 
 	public void testFieldOfJdkClass() throws Exception {
 		IJavaObject list = (IJavaObject) field(getThis(), "list").getValue();
 		IVariable[] fields = list.getVariables();
 		IJavaFieldVariable size = field(list, "size");
-		assertNotNull("ArrayList.size not found in " + names(fields), size);
+		assertNotNull("ArrayList.size not found in " + names(fields), size); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 		manager().setPinned(VIEW_ID, List.of(size), true);
 
@@ -204,25 +204,25 @@ public class PinnedFieldsEdgeCaseTests extends AbstractDebugTest {
 		IVariable[] fields = getThis().getVariables();
 		int shown = filter(fields).length;
 
-		getStore().setValue(PINNED_FIELDS_KEY, ",,#bad,noSeparator, ,Unknown#field," + TYPE_NAME + "#text," + TYPE_NAME + "#text");
+		getStore().setValue(PINNED_FIELDS_KEY, ",,#bad,noSeparator, ,Unknown#field," + TYPE_NAME + "#text," + TYPE_NAME + "#text"); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 		assertTrue(manager().hasPinnedFields(VIEW_ID));
 		assertEquals("text", names(filter(fields)).get(0));
 		assertEquals("no field should be added or lost", shown, filter(fields).length);
 	}
 
-	public void testConcurrentReadsAndWrites() throws Exception {
+	public void testConcurrentReadsAndWrites() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IJavaObject object = getThis();
 		IVariable[] fields = object.getVariables();
 		IJavaFieldVariable text = field(object, "text");
 		IJavaFieldVariable primitive = field(object, "primitive");
 		AtomicReference<Throwable> failure = new AtomicReference<>();
 		AtomicBoolean writing = new AtomicBoolean(true);
-		List<Thread> readers = new ArrayList<>();
-		for (int i = 0; i < 4; i++) {
+		List<Thread> readers = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
+		for (int i = 0; i < 4; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			Thread reader = new Thread(() -> {
 				try {
-					while (writing.get()) {
+					while (writing.get()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 						Object[] result = manager().movePinnedFirst(VIEW_ID, fields);
 						assertEquals(fields.length, result.length);
 						manager().isPinned(VIEW_ID, text);
@@ -230,12 +230,12 @@ public class PinnedFieldsEdgeCaseTests extends AbstractDebugTest {
 				} catch (Throwable t) {
 					failure.compareAndSet(null, t);
 				}
-			}, "Pinned fields reader " + i);
+			}, "Pinned fields reader " + i); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 			readers.add(reader);
 			reader.start();
 		}
 		try {
-			for (int i = 0; i < 200; i++) {
+			for (int i = 0; i < 200; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				manager().setPinned(VIEW_ID, List.of(text, primitive), true);
 				manager().movePin(VIEW_ID, primitive, fields, true);
 				manager().setPinned(VIEW_ID, List.of(text), false);
@@ -244,7 +244,7 @@ public class PinnedFieldsEdgeCaseTests extends AbstractDebugTest {
 		} finally {
 			writing.set(false);
 		}
-		for (Thread reader : readers) {
+		for (Thread reader : readers) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			reader.join();
 		}
 		if (failure.get() != null) {
@@ -267,7 +267,7 @@ public class PinnedFieldsEdgeCaseTests extends AbstractDebugTest {
 	}
 
 	private static IJavaFieldVariable field(IJavaObject object, String name) throws Exception {
-		for (IVariable variable : object.getVariables()) {
+		for (IVariable variable : object.getVariables()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			if (variable instanceof IJavaFieldVariable field && field.getName().equals(name)) {
 				return field;
 			}
@@ -280,8 +280,8 @@ public class PinnedFieldsEdgeCaseTests extends AbstractDebugTest {
 	}
 
 	private static List<String> names(Object[] variables) throws Exception {
-		List<String> names = new ArrayList<>();
-		for (Object variable : variables) {
+		List<String> names = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
+		for (Object variable : variables) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			names.add(((IVariable) variable).getName());
 		}
 		return names;
@@ -298,7 +298,7 @@ public class PinnedFieldsEdgeCaseTests extends AbstractDebugTest {
 	private IJavaStackFrame topFrame() throws Exception {
 		long end = System.currentTimeMillis() + DEFAULT_TIMEOUT;
 		IJavaStackFrame frame = (IJavaStackFrame) fThread.getTopStackFrame();
-		while (frame == null && System.currentTimeMillis() < end) {
+		while (frame == null && System.currentTimeMillis() < end) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			Thread.sleep(50);
 			frame = (IJavaStackFrame) fThread.getTopStackFrame();
 		}

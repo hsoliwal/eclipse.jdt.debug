@@ -49,7 +49,7 @@ public class JreResolutionGenerator implements IMarkerResolutionGenerator2 {
 	/**
 	 * @see org.eclipse.ui.IMarkerResolutionGenerator#getResolutions(org.eclipse.core.resources.IMarker)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public IMarkerResolution[] getResolutions(IMarker marker) {
 		try {
 			if(JavaRuntime.JRE_CONTAINER_MARKER.equals(marker.getType())) {
@@ -58,7 +58,7 @@ public class JreResolutionGenerator implements IMarkerResolutionGenerator2 {
 						JREsPreferencePage.ID }, LauncherMessages.JreResolutionGenerator_open_ee_prefs, LauncherMessages.JreResolutionGenerator_opens_ee_prefs);
 				IJavaProject project = getJavaProject(marker);
 				IPath container = null;
-				for (IClasspathEntry entry : project.getRawClasspath()) {
+				for (IClasspathEntry entry : project.getRawClasspath()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 					if (entry.getEntryKind() == IClasspathEntry.CPE_CONTAINER) {
 						IPath path = entry.getPath();
 						if (JavaRuntime.JRE_CONTAINER.equals(path.segment(0))) {

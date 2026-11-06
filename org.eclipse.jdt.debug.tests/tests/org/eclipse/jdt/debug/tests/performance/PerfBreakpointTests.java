@@ -46,7 +46,7 @@ public class PerfBreakpointTests extends AbstractDebugPerformanceTest implements
     /**
      * Tests the performance of line breakpoint creation
      */
-    public void testLineBreakpointCreation() throws Exception {
+    public void testLineBreakpointCreation() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
         tagAsSummary("Install Line Breakpoints", Dimension.ELAPSED_PROCESS);
         String typeName = "LargeSourceFile";
         IResource resource = getBreakpointResource(typeName);
@@ -59,11 +59,11 @@ public class PerfBreakpointTests extends AbstractDebugPerformanceTest implements
             DebugPlugin.getDefault().getBreakpointManager().addBreakpointListener(this);
 
             int[] lineNumbers = new int[150];
-            for (int i = 0; i < lineNumbers.length; i++) {
+            for (int i = 0; i < lineNumbers.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
                 lineNumbers[i] = 18 + i;
             }
 
-            for (int i = 0; i < 10; i++) {
+            for (int i = 0; i < 10; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
                 createLineBreakpoints(resource, typeName, lineNumbers);
                 waitForBreakpointCount(lineNumbers.length);
                 removeAllBreakpoints();
@@ -71,7 +71,7 @@ public class PerfBreakpointTests extends AbstractDebugPerformanceTest implements
                 breakpointCount = 0;
             }
 
-            for (int i = 0; i < 100; i++) {
+            for (int i = 0; i < 100; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
                 System.gc();
                 startMeasuring();
                 createLineBreakpoints(resource, typeName, lineNumbers);
@@ -94,7 +94,7 @@ public class PerfBreakpointTests extends AbstractDebugPerformanceTest implements
     /**
      * Tests the performance of breakpoint removal
      */
-    public void testBreakpointRemoval() throws Exception {
+    public void testBreakpointRemoval() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
         String typeName = "LargeSourceFile";
         IResource resource = getBreakpointResource(typeName);
 
@@ -107,11 +107,11 @@ public class PerfBreakpointTests extends AbstractDebugPerformanceTest implements
             manager.addBreakpointListener(this);
 
             int[] lineNumbers = new int[50];
-            for (int i = 0; i < lineNumbers.length; i++) {
+            for (int i = 0; i < lineNumbers.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
                 lineNumbers[i] = 18 + i;
             }
 
-            for (int i = 0; i < 10; i++) {
+            for (int i = 0; i < 10; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
                 createLineBreakpoints(resource, typeName, lineNumbers);
                 waitForBreakpointCount(lineNumbers.length);
                 IBreakpoint[] breakpoints = manager.getBreakpoints();
@@ -121,11 +121,11 @@ public class PerfBreakpointTests extends AbstractDebugPerformanceTest implements
             }
 
             lineNumbers = new int[250];
-            for (int i = 0; i < lineNumbers.length; i++) {
+            for (int i = 0; i < lineNumbers.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
                 lineNumbers[i] = 15 + i;
             }
 
-            for (int i = 0; i < 150; i++) {
+            for (int i = 0; i < 150; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
                 createLineBreakpoints(resource, typeName, lineNumbers);
                 waitForBreakpointCount(lineNumbers.length);
                 IBreakpoint[] breakpoints = manager.getBreakpoints();
@@ -149,7 +149,7 @@ public class PerfBreakpointTests extends AbstractDebugPerformanceTest implements
     /**
      * Tests the performance of method entry breakpoint creation
      */
-    public void testMethodEntryBreakpointCreation() throws Exception {
+    public void testMethodEntryBreakpointCreation() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
         tagAsSummary("Install Method Entry Breakpoints", Dimension.ELAPSED_PROCESS);
         String typeName = "LargeSourceFile";
         IProject project = get14Project().getProject();
@@ -163,11 +163,11 @@ public class PerfBreakpointTests extends AbstractDebugPerformanceTest implements
             manager.addBreakpointListener(this);
 
             String[] methods = new String[300];
-            for (int i = 0; i < methods.length; i++) {
-                methods[i] = "method"+(i+1);
+            for (int i = 0; i < methods.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
+                methods[i] = "method"+(i+1); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
             }
 
-            for (int i = 0; i < 10; i++) {
+            for (int i = 0; i < 10; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
                 createMethodEntryBreakpoints(project, typeName, methods);
                 waitForBreakpointCount(methods.length);
                 removeAllBreakpoints();
@@ -175,7 +175,7 @@ public class PerfBreakpointTests extends AbstractDebugPerformanceTest implements
 
             }
 
-            for (int i = 0; i < 100; i++) {
+            for (int i = 0; i < 100; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
                 System.gc();
                 startMeasuring();
                 createMethodEntryBreakpoints(project, typeName, methods);
@@ -198,7 +198,7 @@ public class PerfBreakpointTests extends AbstractDebugPerformanceTest implements
     /**
      * Tests the performance of watchpoint creation
      */
-    public void testWatchpointCreation() throws Exception {
+    public void testWatchpointCreation() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
         tagAsSummary("Install Watchpoints", Dimension.ELAPSED_PROCESS);
         String typeName = "LotsOfFields";
         IResource resource = getBreakpointResource(typeName);
@@ -212,18 +212,18 @@ public class PerfBreakpointTests extends AbstractDebugPerformanceTest implements
             manager.addBreakpointListener(this);
 
             String[] fields = new String[300];
-            for (int i = 0; i < fields.length; i++) {
-                fields[i] = "field_"+(i+1);
+            for (int i = 0; i < fields.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
+                fields[i] = "field_"+(i+1); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
             }
 
-            for (int i = 0; i < 10; i++) {
+            for (int i = 0; i < 10; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
                 createWatchpoints(resource, typeName, fields);
                 waitForBreakpointCount(fields.length);
                 removeAllBreakpoints();
                 waitForBreakpointCount(0);
             }
 
-            for (int i = 0; i < 100; i++) {
+            for (int i = 0; i < 100; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
                 System.gc();
                 startMeasuring();
                 createWatchpoints(resource, typeName, fields);
@@ -248,17 +248,17 @@ public class PerfBreakpointTests extends AbstractDebugPerformanceTest implements
      */
     private synchronized void waitForBreakpointCount(int i) throws Exception {
 		long timeoutNanos = System.nanoTime() + 60000 * 1_000_000L;
-		while (breakpointCount != i && System.nanoTime() < timeoutNanos) {
+		while (breakpointCount != i && System.nanoTime() < timeoutNanos) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
             wait(30000);
         }
-        assertEquals("Expected " + i + " breakpoints, notified of " + breakpointCount, i, breakpointCount);
+        assertEquals("Expected " + i + " breakpoints, notified of " + breakpointCount, i, breakpointCount); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
     }
 
     /**
      * Creates line breakpoints on the specified line numbers in the given type name with the given resource
      */
     private void createLineBreakpoints(IResource resource, String typeName, int[] lineNumbers) throws CoreException {
-        for (int i = 0; i < lineNumbers.length; i++) {
+        for (int i = 0; i < lineNumbers.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
             JDIDebugModel.createLineBreakpoint(resource, typeName, lineNumbers[i], -1, -1, 0, true, null);
         }
     }
@@ -267,7 +267,7 @@ public class PerfBreakpointTests extends AbstractDebugPerformanceTest implements
      * Creates method entry breakpoints on the specified methods in the given type name in the specified project
      */
     private void createMethodEntryBreakpoints(IProject project, String typeName, String[] methods) throws CoreException {
-        for (int i = 0; i < methods.length; i++) {
+        for (int i = 0; i < methods.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
             String methodName = methods[i];
             JDIDebugModel.createMethodBreakpoint(project, typeName, methodName, "()V", true, false, false, -1, -1, -1, 0, true, null);
         }
@@ -277,7 +277,7 @@ public class PerfBreakpointTests extends AbstractDebugPerformanceTest implements
      * Creates watchpoints on the specified fields of the specified resource with the given type name
      */
     private void createWatchpoints(IResource resource, String typeName, String[] fields) throws Exception {
-        for(int i = 0; i < fields.length; i++) {
+        for(int i = 0; i < fields.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
             IJavaWatchpoint wp = JDIDebugModel.createWatchpoint(resource, typeName, fields[i], -1, -1, -1, 0, true, null);
             wp.setAccess(true);
             wp.setModification(true);

@@ -36,7 +36,7 @@ public class RenamePackageUnitTests extends AbstractRefactoringDebugTest {
 		super(name);
 	}
 
-	protected void runClassLoadBreakpointTest(String src, String pack, String cunit, String fullTargetName, String targetLineage) throws Exception {
+	protected void runClassLoadBreakpointTest(String src, String pack, String cunit, String fullTargetName, String targetLineage) throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 			//create breakpoint to test
 			IJavaClassPrepareBreakpoint breakpoint = createClassPrepareBreakpoint(src, pack, cunit, fullTargetName);
@@ -56,7 +56,7 @@ public class RenamePackageUnitTests extends AbstractRefactoringDebugTest {
 		}
 	}
 
-	protected void runLineBreakpointTest(String src, String pack, String cunit, String fullTargetName, String targetsLineage, int lineNumber) throws Exception {
+	protected void runLineBreakpointTest(String src, String pack, String cunit, String fullTargetName, String targetsLineage, int lineNumber) throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 			//create breakpoint to test
 			IJavaLineBreakpoint breakpoint = createLineBreakpoint(lineNumber, src, pack, cunit, fullTargetName);
@@ -77,7 +77,7 @@ public class RenamePackageUnitTests extends AbstractRefactoringDebugTest {
 		}
 	}
 
-	protected void runMethodBreakpointTest(String src, String pack, String cunit, String fullTargetName, String targetLineage, String methodName) throws Exception {
+	protected void runMethodBreakpointTest(String src, String pack, String cunit, String fullTargetName, String targetLineage, String methodName) throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 			//create breakpoint to test
 			IJavaMethodBreakpoint breakpoint = createMethodBreakpoint(src, pack, cunit,fullTargetName, true, false);
@@ -98,7 +98,7 @@ public class RenamePackageUnitTests extends AbstractRefactoringDebugTest {
 		}
 	}
 
-	protected void runWatchPointTest(String src, String pack, String cunit, String fullTargetName, String targetLineage, String fieldName) throws Exception {
+	protected void runWatchPointTest(String src, String pack, String cunit, String fullTargetName, String targetLineage, String fieldName) throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 			//create breakpoint to test
 			IJavaWatchpoint breakpoint = createNestedTypeWatchPoint(src, pack, cunit, fullTargetName, true, true);
@@ -119,7 +119,7 @@ public class RenamePackageUnitTests extends AbstractRefactoringDebugTest {
 		}
 	}
 
-	protected Refactoring setupRefactor(String root, String packageName, String cuName) throws Exception {
+	protected Refactoring setupRefactor(String root, String packageName, String cuName) throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IJavaProject javaProject = get14Project();
 		ICompilationUnit cunit = getCompilationUnit(javaProject, root, packageName, cuName);
 		IPackageFragment packageFragment = (IPackageFragment )cunit.getParent();

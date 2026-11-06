@@ -65,12 +65,12 @@ import org.eclipse.jdt.launching.sourcelookup.containers.PackageFragmentRootSour
  * to be used from UI thread.
  */
 public class WorkspaceProjectSourceContainers {
-	private final IElementChangedListener changeListener = new IElementChangedListener() {
+	private final IElementChangedListener changeListener = new IElementChangedListener() { //FLLDCIM: MARK — T31  ANONYMOUS
 		@Override
 		public void elementChanged(ElementChangedEvent event) {
 			try {
-				final Set<IJavaProject> remove = new HashSet<>();
-				final Set<IJavaProject> add = new HashSet<>();
+				final Set<IJavaProject> remove = new HashSet<>(); //FLLDCIM: MARK — M03 M3_SET_LANES NEW
+				final Set<IJavaProject> add = new HashSet<>(); //FLLDCIM: MARK — M03 M3_SET_LANES NEW
 
 				processDelta(event.getDelta(), remove, add);
 
@@ -83,7 +83,7 @@ public class WorkspaceProjectSourceContainers {
 			}
 		}
 
-		private void processDelta(final IJavaElementDelta delta, Set<IJavaProject> remove, Set<IJavaProject> add) throws CoreException {
+		private void processDelta(final IJavaElementDelta delta, Set<IJavaProject> remove, Set<IJavaProject> add) throws CoreException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 			// TODO review, this looks too complicated to add/remove java projects
 
 			final IJavaElement element = delta.getElement();
@@ -123,16 +123,16 @@ public class WorkspaceProjectSourceContainers {
 		}
 
 		private void processChangedChildren(IJavaElementDelta delta, Set<IJavaProject> remove, Set<IJavaProject> add) throws CoreException {
-			for (IJavaElementDelta childDelta : delta.getAffectedChildren()) {
+			for (IJavaElementDelta childDelta : delta.getAffectedChildren()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				processDelta(childDelta, remove, add);
 			}
 		}
 	};
 
 	private static class JavaProjectDescriptionBuilder implements IJavaProjectSourceDescription {
-		final Set<File> locations = new HashSet<>();
-		final List<Supplier<ISourceContainer>> factories = new ArrayList<>();
-		final Map<File, IPackageFragmentRoot> dependencyLocations = new HashMap<>();
+		final Set<File> locations = new HashSet<>(); //FLLDCIM: MARK — M03 M3_SET_LANES NEW
+		final List<Supplier<ISourceContainer>> factories = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
+		final Map<File, IPackageFragmentRoot> dependencyLocations = new HashMap<>(); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
 
 		@Override
 		public void addLocation(File location) {
@@ -201,24 +201,24 @@ public class WorkspaceProjectSourceContainers {
 	/**
 	 * Maps project classes location to project description.
 	 */
-	private final Map<File, JavaProjectDescription> locations = new HashMap<>();
+	private final Map<File, JavaProjectDescription> locations = new HashMap<>(); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
 
 	/**
 	 * Maps project dependency hash to project descriptions. Hash-based source lookup is useful when runtime uses copies of jars used by the
 	 * workspace.
 	 */
-	private final Map<Object, Collection<JavaProjectDescription>> hashes = new HashMap<>();
+	private final Map<Object, Collection<JavaProjectDescription>> hashes = new HashMap<>(); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
 
 	/**
 	 * Maps java project to project description.
 	 */
-	private final Map<IJavaProject, JavaProjectDescription> projects = new HashMap<>();
+	private final Map<IJavaProject, JavaProjectDescription> projects = new HashMap<>(); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
 
 	/**
 	 * Creates and returns new source containers for the workspace project identified by the given location. Returns {@code null} if there is no such
 	 * workspace project.
 	 */
-	public ISourceContainer createProjectContainer(File projectLocation) {
+	public ISourceContainer createProjectContainer(File projectLocation) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		Hasher hasher = FileHashing.hasher(); // use long-lived hasher
 
 		JavaProjectDescription description = getProjectByLocation(projectLocation);
@@ -235,8 +235,8 @@ public class WorkspaceProjectSourceContainers {
 			return null;
 		}
 
-		List<ISourceContainer> containers = new ArrayList<>();
-		for (Supplier<ISourceContainer> factory : description.sourceContainerFactories) {
+		List<ISourceContainer> containers = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
+		for (Supplier<ISourceContainer> factory : description.sourceContainerFactories) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			containers.add(factory.get());
 		}
 
@@ -253,7 +253,7 @@ public class WorkspaceProjectSourceContainers {
 		Collection<JavaProjectDescription> projects;
 		synchronized (lock) {
 			projects = hashes.get(hasher.hash(projectLocation));
-			return projects != null ? new HashSet<>(projects) : Collections.emptySet();
+			return projects != null ? new HashSet<>(projects) : Collections.emptySet(); //FLLDCIM: MARK — M03 M3_SET_LANES NEW
 		}
 	}
 
@@ -261,7 +261,7 @@ public class WorkspaceProjectSourceContainers {
 	 * Creates and returns new source container for the workspace project classpath entry identified by the given project and entry locations. Returns
 	 * {@code null} if there is no such project classpath entry or if the classpath entry does not have associated sources.
 	 */
-	public ISourceContainer createClasspathEntryContainer(File projectLocation, File entryLocation) {
+	public ISourceContainer createClasspathEntryContainer(File projectLocation, File entryLocation) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		Hasher hasher = FileHashing.hasher(); // use long-lived hasher
 
 		JavaProjectDescription projectByLocation = getProjectByLocation(projectLocation);
@@ -269,7 +269,7 @@ public class WorkspaceProjectSourceContainers {
 		IPackageFragmentRoot dependency = getProjectDependency(projectByLocation, entryLocation, hasher);
 
 		if (dependency == null && projectByLocation == null) {
-			for (JavaProjectDescription projectByHash : getProjectsByHash(projectLocation, hasher)) {
+			for (JavaProjectDescription projectByHash : getProjectsByHash(projectLocation, hasher)) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				dependency = getProjectDependency(projectByHash, entryLocation, hasher);
 				if (dependency != null) {
 					break;
@@ -301,10 +301,10 @@ public class WorkspaceProjectSourceContainers {
 		return dependency;
 	}
 
-	public void initialize(IProgressMonitor monitor) throws CoreException {
+	public void initialize(IProgressMonitor monitor) throws CoreException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		// note that initialization and java element change events are processed by the same background job
 		// this guarantees the events aren't lost when they are delivered while the initialization is running
-		JavaCore.addElementChangedListener(changeListener);
+		JavaCore.addElementChangedListener(changeListener); //FLLDCIM: MARK — T31 JAVA_ELEMENT_DELTA_ADAPTER CALL
 
 		final IJavaModel javaModel = JavaCore.create(ResourcesPlugin.getWorkspace().getRoot());
 		final IJavaProject[] javaProjects = javaModel.getJavaProjects();
@@ -317,7 +317,7 @@ public class WorkspaceProjectSourceContainers {
 		Hasher hasher = FileHashing.newHasher(); // short-lived hasher for bulk workspace indexing
 
 		List<IWorkspaceProjectDescriber> describers = getJavaProjectDescribers();
-		for (IJavaProject project : javaProjects) {
+		for (IJavaProject project : javaProjects) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			addJavaProject(project, describers, hasher, progress.split(1));
 		}
 	}
@@ -331,14 +331,14 @@ public class WorkspaceProjectSourceContainers {
 		}
 	}
 
-	private void addJavaProject(IJavaProject project, List<IWorkspaceProjectDescriber> describers, FileHashing.Hasher hasher, IProgressMonitor monitor) throws CoreException {
+	private void addJavaProject(IJavaProject project, List<IWorkspaceProjectDescriber> describers, FileHashing.Hasher hasher, IProgressMonitor monitor) throws CoreException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		if (project == null) {
 			throw new IllegalArgumentException();
 		}
 
 		JavaProjectDescriptionBuilder builder = new JavaProjectDescriptionBuilder();
 
-		for (IWorkspaceProjectDescriber describer : describers) {
+		for (IWorkspaceProjectDescriber describer : describers) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			describer.describeProject(project, builder);
 		}
 
@@ -349,7 +349,7 @@ public class WorkspaceProjectSourceContainers {
 		// make binary project support little easier to implement
 		locations.forEach(location -> dependencies.remove(location));
 
-		Set<Object> hashes = new HashSet<>();
+		Set<Object> hashes = new HashSet<>(); //FLLDCIM: MARK — M03 M3_SET_LANES NEW
 		locations.forEach(location -> {
 			Object hash = hasher.hash(location);
 			if (hash != null) {
@@ -357,19 +357,19 @@ public class WorkspaceProjectSourceContainers {
 			}
 		});
 
-		Map<Object, IPackageFragmentRoot> dependencyHashes = new HashMap<>();
+		Map<Object, IPackageFragmentRoot> dependencyHashes = new HashMap<>(); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
 		dependencies.forEach((location, packageFragmentRoot) -> dependencyHashes.put(hasher.hash(location), packageFragmentRoot));
 
 		JavaProjectDescription info = new JavaProjectDescription(locations, hashes, factories, dependencies, dependencyHashes);
 
 		synchronized (this.lock) {
-			for (File location : locations) {
+			for (File location : locations) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				this.locations.put(location, info);
 			}
-			for (Object hash : hashes) {
+			for (Object hash : hashes) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				Collection<JavaProjectDescription> hashProjects = this.hashes.get(hash);
 				if (hashProjects == null) {
-					hashProjects = new HashSet<>();
+					hashProjects = new HashSet<>(); //FLLDCIM: MARK — M03 M3_SET_LANES NEW
 					this.hashes.put(hash, hashProjects);
 				}
 				hashProjects.add(info);
@@ -380,14 +380,14 @@ public class WorkspaceProjectSourceContainers {
 		SubMonitor.done(monitor);
 	}
 
-	protected List<IWorkspaceProjectDescriber> getJavaProjectDescribers() {
-		List<IWorkspaceProjectDescriber> result = new ArrayList<>();
+	protected List<IWorkspaceProjectDescriber> getJavaProjectDescribers() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
+		List<IWorkspaceProjectDescriber> result = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 
 		IExtensionRegistry registry = Platform.getExtensionRegistry();
 
 		IConfigurationElement[] elements = registry.getConfigurationElementsFor(AdvancedSourceLookupSupport.ID_workspaceProjectDescribers);
 
-		for (IConfigurationElement element : elements) {
+		for (IConfigurationElement element : elements) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			if ("describer".equals(element.getName())) { //$NON-NLS-1$
 				try {
 					result.add((IWorkspaceProjectDescriber) element.createExecutableExtension("class")); //$NON-NLS-1$
@@ -402,17 +402,17 @@ public class WorkspaceProjectSourceContainers {
 		return result;
 	}
 
-	private void removeJavaProject(IJavaProject project) {
+	private void removeJavaProject(IJavaProject project) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		if (project == null) {
 			throw new IllegalArgumentException();
 		}
 		synchronized (lock) {
 			JavaProjectDescription description = projects.remove(project);
 			if (description != null) {
-				for (File location : description.classesLocations) {
+				for (File location : description.classesLocations) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 					locations.remove(location);
 				}
-				for (Object hash : description.classesLocationsHashes) {
+				for (Object hash : description.classesLocationsHashes) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 					Collection<JavaProjectDescription> hashProjects = hashes.get(hash);
 					if (hashProjects != null) {
 						hashProjects.remove(description);
@@ -429,12 +429,12 @@ public class WorkspaceProjectSourceContainers {
 		SubMonitor progress = SubMonitor.convert(monitor, 1 + add.size());
 
 		progress.split(1);
-		for (IJavaProject project : remove) {
+		for (IJavaProject project : remove) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			removeJavaProject(project);
 		}
 		List<IWorkspaceProjectDescriber> describers = getJavaProjectDescribers();
 		Hasher hasher = FileHashing.newHasher();
-		for (IJavaProject project : add) {
+		for (IJavaProject project : add) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			addJavaProject(project, describers, hasher, progress.split(1));
 		}
 	}

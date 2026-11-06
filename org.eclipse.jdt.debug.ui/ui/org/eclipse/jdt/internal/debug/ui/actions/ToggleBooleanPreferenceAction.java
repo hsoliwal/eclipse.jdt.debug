@@ -22,7 +22,7 @@ import org.eclipse.swt.custom.BusyIndicator;
 /**
  * Toggle to display the thread and monitor information in the debug view.
  */
-public abstract class ToggleBooleanPreferenceAction extends ViewFilterAction {
+public abstract class ToggleBooleanPreferenceAction extends ViewFilterAction { //FLLDCIM: MARK — T23  IMPLEMENTS
 
 	/* (non-Javadoc)
 	 * This method is not actually called - this action is not a filter. Instead
@@ -47,7 +47,7 @@ public abstract class ToggleBooleanPreferenceAction extends ViewFilterAction {
 				// note, this uses the pref key, not the composite key - the prefs are global, not view specific.
 				IPreferenceStore store = getPreferenceStore();
 				store.setValue(getViewKey(), getValue());
-				viewer.refresh();
+				viewer.refresh(); //FLLDCIM: MARK — M21 FULL_REBUILD_TO_DELTA CALL
 			}
 		});
 	}

@@ -170,9 +170,9 @@ public class JavaBreakpointListenerTests extends AbstractDebugTest implements IJ
 	 */
 	class Collector implements IJavaBreakpointListener {
 
-		public List<IJavaBreakpoint> HIT = new ArrayList<>();
-		public List<IJavaLineBreakpoint> COMPILATION_ERRORS = new ArrayList<>();
-		public List<IJavaLineBreakpoint> RUNTIME_ERRORS = new ArrayList<>();
+		public List<IJavaBreakpoint> HIT = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
+		public List<IJavaLineBreakpoint> COMPILATION_ERRORS = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
+		public List<IJavaLineBreakpoint> RUNTIME_ERRORS = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 
 		@Override
 		public void addingBreakpoint(IJavaDebugTarget target, IJavaBreakpoint breakpoint) {
@@ -230,7 +230,7 @@ public class JavaBreakpointListenerTests extends AbstractDebugTest implements IJ
 	/**
 	 * Tests the functionality of a single line breakpoint
 	 */
-	public void testLineBreakpoint() throws Exception {
+	public void testLineBreakpoint() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IJavaLineBreakpoint breakpoint = createLineBreakpoint(57, "Breakpoints");
 		fBreakpoint = breakpoint;
 		resetCallbacks();
@@ -283,7 +283,7 @@ public class JavaBreakpointListenerTests extends AbstractDebugTest implements IJ
 	/**
 	 * Tests the functionality of an exception breakpoint
 	 */
-	public void testExceptionBreakpoint() throws Exception {
+	public void testExceptionBreakpoint() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IJavaExceptionBreakpoint breakpoint = createExceptionBreakpoint("java.lang.NullPointerException", true, true);
 		fBreakpoint = breakpoint;
 		resetCallbacks();
@@ -347,7 +347,7 @@ public class JavaBreakpointListenerTests extends AbstractDebugTest implements IJ
 	/**
 	 * Tests the functionality of a method breakpoint
 	 */
-	public void testMethodBreakpoint() throws Exception {
+	public void testMethodBreakpoint() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IJavaMethodBreakpoint breakpoint = createMethodBreakpoint("DropTests", "method4", "()V", true, false);
 		fBreakpoint = breakpoint;
 		resetCallbacks();
@@ -410,7 +410,7 @@ public class JavaBreakpointListenerTests extends AbstractDebugTest implements IJ
 	/**
 	 * Vote: Install 3, Don't Care 0, Don't Install 0 == INSTALL
 	 */
-	public void testUnanimousInstallVote() throws Exception {
+	public void testUnanimousInstallVote() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IJavaLineBreakpoint breakpoint = createLineBreakpoint(57, "Breakpoints");
 		InstallVoter v1 = new InstallVoter(SUSPEND, breakpoint);
 		InstallVoter v2 = new InstallVoter(SUSPEND, breakpoint);
@@ -435,7 +435,7 @@ public class JavaBreakpointListenerTests extends AbstractDebugTest implements IJ
 	/**
 	 * Vote: Install 0, Don't Care 3, Don't Install 0 == INSTALL
 	 */
-	public void testDontCareInstallVote() throws Exception {
+	public void testDontCareInstallVote() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IJavaLineBreakpoint breakpoint = createLineBreakpoint(57, "Breakpoints");
 		InstallVoter v1 = new InstallVoter(DONT_CARE, breakpoint);
 		InstallVoter v2 = new InstallVoter(DONT_CARE, breakpoint);
@@ -460,7 +460,7 @@ public class JavaBreakpointListenerTests extends AbstractDebugTest implements IJ
 	/**
 	 * Vote: Install 1, Don't Care 2, Don't Install 0 == INSTALL
 	 */
-	public void testInstallDontCareVote() throws Exception {
+	public void testInstallDontCareVote() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IJavaLineBreakpoint breakpoint = createLineBreakpoint(57, "Breakpoints");
 		InstallVoter v1 = new InstallVoter(SUSPEND, breakpoint);
 		InstallVoter v2 = new InstallVoter(DONT_CARE, breakpoint);
@@ -485,7 +485,7 @@ public class JavaBreakpointListenerTests extends AbstractDebugTest implements IJ
 	/**
 	 * Vote: Install 1, Don't Care 0, Don't Install 2 == INSTALL
 	 */
-	public void testInstallDontVote() throws Exception {
+	public void testInstallDontVote() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IJavaLineBreakpoint breakpoint = createLineBreakpoint(57, "Breakpoints");
 		InstallVoter v1 = new InstallVoter(SUSPEND, breakpoint);
 		InstallVoter v2 = new InstallVoter(DONT_SUSPEND, breakpoint);
@@ -510,7 +510,7 @@ public class JavaBreakpointListenerTests extends AbstractDebugTest implements IJ
 	/**
 	 * Vote: Install 0, Don't Care 1, Don't Install 2 = RESUME
 	 */
-	public void testDontInstallVote() throws Exception {
+	public void testDontInstallVote() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IJavaLineBreakpoint breakpoint1 = createLineBreakpoint(57, "Breakpoints");
 		IJavaLineBreakpoint breakpoint2 = createLineBreakpoint(58, "Breakpoints");
 		InstallVoter v1 = new InstallVoter(DONT_CARE, breakpoint1);
@@ -536,7 +536,7 @@ public class JavaBreakpointListenerTests extends AbstractDebugTest implements IJ
 	/**
 	 * Vote: Suspend 3, Don't Care 0, Don't Suspend 0 == SUSPEND
 	 */
-	public void testUnanimousSuspendVote() throws Exception {
+	public void testUnanimousSuspendVote() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IJavaLineBreakpoint breakpoint = createLineBreakpoint(57, "Breakpoints");
 		SuspendVoter v1 = new SuspendVoter(SUSPEND, breakpoint);
 		SuspendVoter v2 = new SuspendVoter(SUSPEND, breakpoint);
@@ -561,7 +561,7 @@ public class JavaBreakpointListenerTests extends AbstractDebugTest implements IJ
 	/**
 	 * Vote: Suspend 0, Don't Care 3, Don't Suspend 0 == SUSPEND
 	 */
-	public void testDontCareSuspendVote() throws Exception {
+	public void testDontCareSuspendVote() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IJavaLineBreakpoint breakpoint = createLineBreakpoint(57, "Breakpoints");
 		SuspendVoter v1 = new SuspendVoter(DONT_CARE, breakpoint);
 		SuspendVoter v2 = new SuspendVoter(DONT_CARE, breakpoint);
@@ -586,7 +586,7 @@ public class JavaBreakpointListenerTests extends AbstractDebugTest implements IJ
 	/**
 	 * Vote: Suspend 1, Don't Care 2, Don't Suspend 0 == SUSPEND
 	 */
-	public void testSuspendDontCareVote() throws Exception {
+	public void testSuspendDontCareVote() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IJavaLineBreakpoint breakpoint = createLineBreakpoint(57, "Breakpoints");
 		SuspendVoter v1 = new SuspendVoter(SUSPEND, breakpoint);
 		SuspendVoter v2 = new SuspendVoter(DONT_CARE, breakpoint);
@@ -611,7 +611,7 @@ public class JavaBreakpointListenerTests extends AbstractDebugTest implements IJ
 	/**
 	 * Vote: Suspend 1, Don't Care 0, Don't Suspend 2 == SUSPEND
 	 */
-	public void testSuspendDontVote() throws Exception {
+	public void testSuspendDontVote() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IJavaLineBreakpoint breakpoint = createLineBreakpoint(57, "Breakpoints");
 		SuspendVoter v1 = new SuspendVoter(SUSPEND, breakpoint);
 		SuspendVoter v2 = new SuspendVoter(DONT_SUSPEND, breakpoint);
@@ -636,7 +636,7 @@ public class JavaBreakpointListenerTests extends AbstractDebugTest implements IJ
 	/**
 	 * Vote: Suspend 0, Don't Care 1, Don't Suspend 2 = RESUME
 	 */
-	public void testDontSuspendVote() throws Exception {
+	public void testDontSuspendVote() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IJavaLineBreakpoint breakpoint1 = createLineBreakpoint(54, "Breakpoints");
 		IJavaLineBreakpoint breakpoint2 = createLineBreakpoint(55, "Breakpoints");
 		SuspendVoter v1 = new SuspendVoter(DONT_CARE, breakpoint1);
@@ -757,7 +757,7 @@ public class JavaBreakpointListenerTests extends AbstractDebugTest implements IJ
 	/**
 	 * Tests a breakpoint listener extension.
 	 */
-	public void testEvalListenerExtension() throws Exception {
+	public void testEvalListenerExtension() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String typeName = "HitCountLooper";
 		IJavaLineBreakpoint bp = createLineBreakpoint(19, typeName);
 		bp.addBreakpointListener("org.eclipse.jdt.debug.tests.evalListener");
@@ -775,7 +775,7 @@ public class JavaBreakpointListenerTests extends AbstractDebugTest implements IJ
 			IJavaValue value = result.getValue();
 			assertEquals("Wrong result type", "java.lang.Integer", value.getReferenceTypeName());
 			IVariable[] variables = value.getVariables();
-			for (int i = 0; i < variables.length; i++) {
+			for (int i = 0; i < variables.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				IVariable variable = variables[i];
 				if (variable.getName().equals("value")) {
 					IValue iValue = variable.getValue();
@@ -796,7 +796,7 @@ public class JavaBreakpointListenerTests extends AbstractDebugTest implements IJ
 	 * Tests that a step end that lands on a breakpoint listener that votes to resume
 	 * results in the step completing and suspending.
 	 */
-	public void testStepEndResumeVote() throws Exception {
+	public void testStepEndResumeVote() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String typeName = "HitCountLooper";
 		IJavaLineBreakpoint first = createLineBreakpoint(19, typeName);
 		IJavaLineBreakpoint second = createLineBreakpoint(20, typeName);
@@ -819,7 +819,7 @@ public class JavaBreakpointListenerTests extends AbstractDebugTest implements IJ
 	 * Test that a step over hitting a breakpoint deeper up the stack with a listener
 	 * can perform an evaluation and resume to complete the step.
 	 */
-	public void testStepOverHitsNestedEvaluationHandlerResume() throws Exception {
+	public void testStepOverHitsNestedEvaluationHandlerResume() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String typeName = "MethodLoop";
 		// breakpoint on line 24 is where the step is initiated from
 		IJavaLineBreakpoint first = createLineBreakpoint(27, typeName);
@@ -849,7 +849,7 @@ public class JavaBreakpointListenerTests extends AbstractDebugTest implements IJ
 			IJavaValue value = result.getValue();
 			assertEquals("Wrong result type", "java.lang.Integer", value.getReferenceTypeName());
 			IVariable[] variables = value.getVariables();
-			for (int i = 0; i < variables.length; i++) {
+			for (int i = 0; i < variables.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				IVariable variable = variables[i];
 				if (variable.getName().equals("value")) {
 					IValue iValue = variable.getValue();
@@ -870,7 +870,7 @@ public class JavaBreakpointListenerTests extends AbstractDebugTest implements IJ
 	 * Test that a step over hitting a breakpoint deeper up the stack with a listener
 	 * can perform an evaluation and suspend to abort the step.
 	 */
-	public void testStepOverHitsNestedEvaluationHandlerSuspend() throws Exception {
+	public void testStepOverHitsNestedEvaluationHandlerSuspend() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String typeName = "MethodLoop";
 		// breakpoint on line 24 is where the step is initiated from
 		IJavaLineBreakpoint first = createLineBreakpoint(27, typeName);
@@ -902,7 +902,7 @@ public class JavaBreakpointListenerTests extends AbstractDebugTest implements IJ
 			IJavaValue value = result.getValue();
 			assertEquals("Wrong result type", "java.lang.Integer", value.getReferenceTypeName());
 			IVariable[] variables = value.getVariables();
-			for (int i = 0; i < variables.length; i++) {
+			for (int i = 0; i < variables.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				IVariable variable = variables[i];
 				if (variable.getName().equals("value")) {
 					IValue iValue = variable.getValue();
@@ -922,7 +922,7 @@ public class JavaBreakpointListenerTests extends AbstractDebugTest implements IJ
 	/**
 	 * Suspends an evaluation. Ensures we're returned to the proper top frame.
 	 */
-	public void testSuspendEvaluation() throws Exception {
+	public void testSuspendEvaluation() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String typeName = "MethodLoop";
 		IJavaLineBreakpoint first = createLineBreakpoint(22, typeName);
 		IJavaLineBreakpoint second = createLineBreakpoint(32, typeName);
@@ -954,7 +954,7 @@ public class JavaBreakpointListenerTests extends AbstractDebugTest implements IJ
 	/**
 	 * Test that a global listener gets notifications.
 	 */
-	public void testGlobalListener() throws Exception {
+	public void testGlobalListener() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		GlobalBreakpointListener.clear();
 		String typeName = "HitCountLooper";
 		IJavaLineBreakpoint bp = createLineBreakpoint(19, typeName);
@@ -980,7 +980,7 @@ public class JavaBreakpointListenerTests extends AbstractDebugTest implements IJ
 	/**
 	 * Tests that breakpoint listeners are only notified when condition is true.
 	 */
-	public void testListenersOnConditionalBreakpoint() throws Exception {
+	public void testListenersOnConditionalBreakpoint() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String typeName = "HitCountLooper";
 		Collector collector = new Collector();
 		JDIDebugModel.addJavaBreakpointListener(collector);
@@ -1004,7 +1004,7 @@ public class JavaBreakpointListenerTests extends AbstractDebugTest implements IJ
 	 * Tests that breakpoint listeners are only notified when condition is true
 	 * while stepping to a breakpoint.
 	 */
-	public void testListenersOnConditionalBreakpointStepping() throws Exception {
+	public void testListenersOnConditionalBreakpointStepping() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String typeName = "HitCountLooper";
 		Collector collector = new Collector();
 		JDIDebugModel.addJavaBreakpointListener(collector);
@@ -1040,7 +1040,7 @@ public class JavaBreakpointListenerTests extends AbstractDebugTest implements IJ
 	 * Tests that breakpoint listeners are not notified of "hit" when condition has compilation
 	 * errors. Also they should be notified of the compilation errors.
 	 */
-	public void testListenersOnCompilationError() throws Exception {
+	public void testListenersOnCompilationError() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String typeName = "HitCountLooper";
 		IJavaLineBreakpoint bp = createConditionalLineBreakpoint(20, typeName, "x == 1", true);
 		bp.addBreakpointListener("org.eclipse.jdt.debug.tests.evalListener");
@@ -1063,7 +1063,7 @@ public class JavaBreakpointListenerTests extends AbstractDebugTest implements IJ
 	 * Tests that breakpoint listeners are not notified of "hit" when condition has compilation
 	 * errors. Also they should be notified of the compilation errors.
 	 */
-	public void testListenersOnRuntimeError() throws Exception {
+	public void testListenersOnRuntimeError() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String typeName = "HitCountLooper";
 		IJavaLineBreakpoint bp = createConditionalLineBreakpoint(17, typeName, "(new String()).charAt(34) == 'c'", true);
 		bp.addBreakpointListener("org.eclipse.jdt.debug.tests.evalListener");
@@ -1085,7 +1085,7 @@ public class JavaBreakpointListenerTests extends AbstractDebugTest implements IJ
 	/**
 	 * Tests addition and removal of breakpoint listeners to a breakpoint.
 	 */
-	public void testAddRemoveListeners() throws Exception {
+	public void testAddRemoveListeners() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 			String typeName = "HitCountLooper";
 			IJavaLineBreakpoint bp = createLineBreakpoint(16, typeName);
@@ -1133,7 +1133,7 @@ public class JavaBreakpointListenerTests extends AbstractDebugTest implements IJ
 	/**
 	 * Tests addition of duplicate breakpoint listeners to a breakpoint.
 	 */
-	public void testAddDuplicateListeners() throws Exception {
+	public void testAddDuplicateListeners() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 			String typeName = "HitCountLooper";
 			IJavaLineBreakpoint bp = createLineBreakpoint(19, typeName);
@@ -1164,7 +1164,7 @@ public class JavaBreakpointListenerTests extends AbstractDebugTest implements IJ
 	/**
 	 * Tests that listeners can be retrieved after breakpoint deletion.
 	 */
-	public void testGetListenersAfterDelete() throws Exception {
+	public void testGetListenersAfterDelete() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 			String typeName = "HitCountLooper";
 			IJavaLineBreakpoint bp = createLineBreakpoint(19, typeName);
@@ -1195,7 +1195,7 @@ public class JavaBreakpointListenerTests extends AbstractDebugTest implements IJ
 	 * Tests a breakpoint listener extension gets removal notification when the underlying
 	 * marker is deleted.
 	 */
-	public void testRemovedNotification() throws Exception {
+	public void testRemovedNotification() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String typeName = "HitCountLooper";
 		final IJavaLineBreakpoint bp = createLineBreakpoint(17, typeName);
 		bp.addBreakpointListener("org.eclipse.jdt.debug.tests.evalListener");
@@ -1206,7 +1206,7 @@ public class JavaBreakpointListenerTests extends AbstractDebugTest implements IJ
 		try {
 			thread= launchToLineBreakpoint(typeName, bp);
 			assertTrue(EvalualtionBreakpointListener.HIT);
-			IWorkspaceRunnable runnable = new IWorkspaceRunnable() {
+			IWorkspaceRunnable runnable = new IWorkspaceRunnable() { //FLLDCIM: MARK — T09  ANONYMOUS
 				@Override
 				public void run(IProgressMonitor monitor) throws CoreException {
 					bp.getMarker().delete();

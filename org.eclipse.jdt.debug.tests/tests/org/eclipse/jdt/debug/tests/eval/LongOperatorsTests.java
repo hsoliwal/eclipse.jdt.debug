@@ -33,16 +33,16 @@ public class LongOperatorsTests extends Tests {
 
 	// long + {byte, char, short, int, long, float, double}
 
-	public void testLongPlusByte() throws Throwable {
+	public void testLongPlusByte() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xLong + plusOp + yByte);
+		IValue value = eval(xLong + plusOp + yByte); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("long plus byte : wrong type : ", "long", typeName);
 		long longValue = ((IJavaPrimitiveValue)value).getLongValue();
 		assertEquals("long plus byte : wrong result : ", xLongValue + yByteValue, longValue);
 
-		value = eval(yLong + plusOp + xByte);
+		value = eval(yLong + plusOp + xByte); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("long plus byte : wrong type : ", "long", typeName);
 		longValue = ((IJavaPrimitiveValue)value).getLongValue();
@@ -52,16 +52,16 @@ public class LongOperatorsTests extends Tests {
 		}
 	}
 
-	public void testLongPlusChar() throws Throwable {
+	public void testLongPlusChar() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xLong + plusOp + yChar);
+		IValue value = eval(xLong + plusOp + yChar); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("long plus char : wrong type : ", "long", typeName);
 		long longValue = ((IJavaPrimitiveValue)value).getLongValue();
 		assertEquals("long plus char : wrong result : ", xLongValue + yCharValue, longValue);
 
-		value = eval(yLong + plusOp + xChar);
+		value = eval(yLong + plusOp + xChar); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("long plus char : wrong type : ", "long", typeName);
 		longValue = ((IJavaPrimitiveValue)value).getLongValue();
@@ -71,16 +71,16 @@ public class LongOperatorsTests extends Tests {
 		}
 	}
 
-	public void testLongPlusShort() throws Throwable {
+	public void testLongPlusShort() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xLong + plusOp + yShort);
+		IValue value = eval(xLong + plusOp + yShort); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("long plus short : wrong type : ", "long", typeName);
 		long longValue = ((IJavaPrimitiveValue)value).getLongValue();
 		assertEquals("long plus short : wrong result : ", xLongValue + yShortValue, longValue);
 
-		value = eval(yLong + plusOp + xShort);
+		value = eval(yLong + plusOp + xShort); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("long plus short : wrong type : ", "long", typeName);
 		longValue = ((IJavaPrimitiveValue)value).getLongValue();
@@ -90,16 +90,16 @@ public class LongOperatorsTests extends Tests {
 		}
 	}
 
-	public void testLongPlusInt() throws Throwable {
+	public void testLongPlusInt() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xLong + plusOp + yInt);
+		IValue value = eval(xLong + plusOp + yInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("long plus int : wrong type : ", "long", typeName);
 		long longValue = ((IJavaPrimitiveValue)value).getLongValue();
 		assertEquals("long plus int : wrong result : ", xLongValue + yIntValue, longValue);
 
-		value = eval(yLong + plusOp + xInt);
+		value = eval(yLong + plusOp + xInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("long plus int : wrong type : ", "long", typeName);
 		longValue = ((IJavaPrimitiveValue)value).getLongValue();
@@ -109,16 +109,16 @@ public class LongOperatorsTests extends Tests {
 		}
 	}
 
-	public void testLongPlusLong() throws Throwable {
+	public void testLongPlusLong() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xLong + plusOp + yLong);
+		IValue value = eval(xLong + plusOp + yLong); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("long plus long : wrong type : ", "long", typeName);
 		long longValue = ((IJavaPrimitiveValue)value).getLongValue();
 		assertEquals("long plus long : wrong result : ", xLongValue + yLongValue, longValue);
 
-		value = eval(yLong + plusOp + xLong);
+		value = eval(yLong + plusOp + xLong); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("long plus long : wrong type : ", "long", typeName);
 		longValue = ((IJavaPrimitiveValue)value).getLongValue();
@@ -128,16 +128,16 @@ public class LongOperatorsTests extends Tests {
 		}
 	}
 
-	public void testLongPlusFloat() throws Throwable {
+	public void testLongPlusFloat() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xLong + plusOp + yFloat);
+		IValue value = eval(xLong + plusOp + yFloat); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("long plus float : wrong type : ", "float", typeName);
 		float floatValue = ((IJavaPrimitiveValue)value).getFloatValue();
 		assertEquals("long plus float : wrong result : ", xLongValue + yFloatValue, floatValue, 0);
 
-		value = eval(yLong + plusOp + xFloat);
+		value = eval(yLong + plusOp + xFloat); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("long plus float : wrong type : ", "float", typeName);
 		floatValue = ((IJavaPrimitiveValue)value).getFloatValue();
@@ -147,16 +147,16 @@ public class LongOperatorsTests extends Tests {
 		}
 	}
 
-	public void testLongPlusDouble() throws Throwable {
+	public void testLongPlusDouble() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xLong + plusOp + yDouble);
+		IValue value = eval(xLong + plusOp + yDouble); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("long plus double : wrong type : ", "double", typeName);
 		double doubleValue = ((IJavaPrimitiveValue)value).getDoubleValue();
 		assertEquals("long plus double : wrong result : ", xLongValue + yDoubleValue, doubleValue, 0);
 
-		value = eval(yLong + plusOp + xDouble);
+		value = eval(yLong + plusOp + xDouble); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("long plus double : wrong type : ", "double", typeName);
 		doubleValue = ((IJavaPrimitiveValue)value).getDoubleValue();
@@ -166,20 +166,20 @@ public class LongOperatorsTests extends Tests {
 		}
 	}
 
-	public void testLongPlusString() throws Throwable {
+	public void testLongPlusString() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xLong + plusOp + yString);
+		IValue value = eval(xLong + plusOp + yString); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("long plus java.lang.String : wrong type : ", "java.lang.String", typeName);
 		String stringValue = ((JDIObjectValue)value).getValueString();
-		assertEquals("long plus java.lang.String : wrong result : ", xLongValue + yStringValue, stringValue);
+		assertEquals("long plus java.lang.String : wrong result : ", xLongValue + yStringValue, stringValue); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
-		value = eval(yLong + plusOp + xString);
+		value = eval(yLong + plusOp + xString); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("long plus java.lang.String : wrong type : ", "java.lang.String", typeName);
 		stringValue = ((JDIObjectValue)value).getValueString();
-		assertEquals("long plus java.lang.String : wrong result : ", yLongValue + xStringValue, stringValue);
+		assertEquals("long plus java.lang.String : wrong result : ", yLongValue + xStringValue, stringValue); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		} finally {
 		end();
 		}
@@ -187,16 +187,16 @@ public class LongOperatorsTests extends Tests {
 
 	// long - {byte, char, short, int, long, float, double}
 
-	public void testLongMinusByte() throws Throwable {
+	public void testLongMinusByte() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xLong + minusOp + yByte);
+		IValue value = eval(xLong + minusOp + yByte); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("long minus byte : wrong type : ", "long", typeName);
 		long longValue = ((IJavaPrimitiveValue)value).getLongValue();
 		assertEquals("long minus byte : wrong result : ", xLongValue - yByteValue, longValue);
 
-		value = eval(yLong + minusOp + xByte);
+		value = eval(yLong + minusOp + xByte); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("long minus byte : wrong type : ", "long", typeName);
 		longValue = ((IJavaPrimitiveValue)value).getLongValue();
@@ -206,16 +206,16 @@ public class LongOperatorsTests extends Tests {
 		}
 	}
 
-	public void testLongMinusChar() throws Throwable {
+	public void testLongMinusChar() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xLong + minusOp + yChar);
+		IValue value = eval(xLong + minusOp + yChar); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("long minus char : wrong type : ", "long", typeName);
 		long longValue = ((IJavaPrimitiveValue)value).getLongValue();
 		assertEquals("long minus char : wrong result : ", xLongValue - yCharValue, longValue);
 
-		value = eval(yLong + minusOp + xChar);
+		value = eval(yLong + minusOp + xChar); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("long minus char : wrong type : ", "long", typeName);
 		longValue = ((IJavaPrimitiveValue)value).getLongValue();
@@ -225,16 +225,16 @@ public class LongOperatorsTests extends Tests {
 		}
 	}
 
-	public void testLongMinusShort() throws Throwable {
+	public void testLongMinusShort() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xLong + minusOp + yShort);
+		IValue value = eval(xLong + minusOp + yShort); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("long minus short : wrong type : ", "long", typeName);
 		long longValue = ((IJavaPrimitiveValue)value).getLongValue();
 		assertEquals("long minus short : wrong result : ", xLongValue - yShortValue, longValue);
 
-		value = eval(yLong + minusOp + xShort);
+		value = eval(yLong + minusOp + xShort); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("long minus short : wrong type : ", "long", typeName);
 		longValue = ((IJavaPrimitiveValue)value).getLongValue();
@@ -244,16 +244,16 @@ public class LongOperatorsTests extends Tests {
 		}
 	}
 
-	public void testLongMinusInt() throws Throwable {
+	public void testLongMinusInt() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xLong + minusOp + yInt);
+		IValue value = eval(xLong + minusOp + yInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("long minus int : wrong type : ", "long", typeName);
 		long longValue = ((IJavaPrimitiveValue)value).getLongValue();
 		assertEquals("long minus int : wrong result : ", xLongValue - yIntValue, longValue);
 
-		value = eval(yLong + minusOp + xInt);
+		value = eval(yLong + minusOp + xInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("long minus int : wrong type : ", "long", typeName);
 		longValue = ((IJavaPrimitiveValue)value).getLongValue();
@@ -263,16 +263,16 @@ public class LongOperatorsTests extends Tests {
 		}
 	}
 
-	public void testLongMinusLong() throws Throwable {
+	public void testLongMinusLong() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xLong + minusOp + yLong);
+		IValue value = eval(xLong + minusOp + yLong); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("long minus long : wrong type : ", "long", typeName);
 		long longValue = ((IJavaPrimitiveValue)value).getLongValue();
 		assertEquals("long minus long : wrong result : ", xLongValue - yLongValue, longValue);
 
-		value = eval(yLong + minusOp + xLong);
+		value = eval(yLong + minusOp + xLong); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("long minus long : wrong type : ", "long", typeName);
 		longValue = ((IJavaPrimitiveValue)value).getLongValue();
@@ -282,16 +282,16 @@ public class LongOperatorsTests extends Tests {
 		}
 	}
 
-	public void testLongMinusFloat() throws Throwable {
+	public void testLongMinusFloat() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xLong + minusOp + yFloat);
+		IValue value = eval(xLong + minusOp + yFloat); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("long minus float : wrong type : ", "float", typeName);
 		float floatValue = ((IJavaPrimitiveValue)value).getFloatValue();
 		assertEquals("long minus float : wrong result : ", xLongValue - yFloatValue, floatValue, 0);
 
-		value = eval(yLong + minusOp + xFloat);
+		value = eval(yLong + minusOp + xFloat); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("long minus float : wrong type : ", "float", typeName);
 		floatValue = ((IJavaPrimitiveValue)value).getFloatValue();
@@ -301,16 +301,16 @@ public class LongOperatorsTests extends Tests {
 		}
 	}
 
-	public void testLongMinusDouble() throws Throwable {
+	public void testLongMinusDouble() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xLong + minusOp + yDouble);
+		IValue value = eval(xLong + minusOp + yDouble); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("long minus double : wrong type : ", "double", typeName);
 		double doubleValue = ((IJavaPrimitiveValue)value).getDoubleValue();
 		assertEquals("long minus double : wrong result : ", xLongValue - yDoubleValue, doubleValue, 0);
 
-		value = eval(yLong + minusOp + xDouble);
+		value = eval(yLong + minusOp + xDouble); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("long minus double : wrong type : ", "double", typeName);
 		doubleValue = ((IJavaPrimitiveValue)value).getDoubleValue();
@@ -322,16 +322,16 @@ public class LongOperatorsTests extends Tests {
 
 	// long * {byte, char, short, int, long, float, double}
 
-	public void testLongMultiplyByte() throws Throwable {
+	public void testLongMultiplyByte() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xLong + multiplyOp + yByte);
+		IValue value = eval(xLong + multiplyOp + yByte); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("long multiply byte : wrong type : ", "long", typeName);
 		long longValue = ((IJavaPrimitiveValue)value).getLongValue();
 		assertEquals("long multiply byte : wrong result : ", xLongValue * yByteValue, longValue);
 
-		value = eval(yLong + multiplyOp + xByte);
+		value = eval(yLong + multiplyOp + xByte); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("long multiply byte : wrong type : ", "long", typeName);
 		longValue = ((IJavaPrimitiveValue)value).getLongValue();
@@ -341,16 +341,16 @@ public class LongOperatorsTests extends Tests {
 		}
 	}
 
-	public void testLongMultiplyChar() throws Throwable {
+	public void testLongMultiplyChar() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xLong + multiplyOp + yChar);
+		IValue value = eval(xLong + multiplyOp + yChar); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("long multiply char : wrong type : ", "long", typeName);
 		long longValue = ((IJavaPrimitiveValue)value).getLongValue();
 		assertEquals("long multiply char : wrong result : ", xLongValue * yCharValue, longValue);
 
-		value = eval(yLong + multiplyOp + xChar);
+		value = eval(yLong + multiplyOp + xChar); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("long multiply char : wrong type : ", "long", typeName);
 		longValue = ((IJavaPrimitiveValue)value).getLongValue();
@@ -360,16 +360,16 @@ public class LongOperatorsTests extends Tests {
 		}
 	}
 
-	public void testLongMultiplyShort() throws Throwable {
+	public void testLongMultiplyShort() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xLong + multiplyOp + yShort);
+		IValue value = eval(xLong + multiplyOp + yShort); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("long multiply short : wrong type : ", "long", typeName);
 		long longValue = ((IJavaPrimitiveValue)value).getLongValue();
 		assertEquals("long multiply short : wrong result : ", xLongValue * yShortValue, longValue);
 
-		value = eval(yLong + multiplyOp + xShort);
+		value = eval(yLong + multiplyOp + xShort); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("long multiply short : wrong type : ", "long", typeName);
 		longValue = ((IJavaPrimitiveValue)value).getLongValue();
@@ -379,16 +379,16 @@ public class LongOperatorsTests extends Tests {
 		}
 	}
 
-	public void testLongMultiplyInt() throws Throwable {
+	public void testLongMultiplyInt() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xLong + multiplyOp + yInt);
+		IValue value = eval(xLong + multiplyOp + yInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("long multiply int : wrong type : ", "long", typeName);
 		long longValue = ((IJavaPrimitiveValue)value).getLongValue();
 		assertEquals("long multiply int : wrong result : ", xLongValue * yIntValue, longValue);
 
-		value = eval(yLong + multiplyOp + xInt);
+		value = eval(yLong + multiplyOp + xInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("long multiply int : wrong type : ", "long", typeName);
 		longValue = ((IJavaPrimitiveValue)value).getLongValue();
@@ -398,16 +398,16 @@ public class LongOperatorsTests extends Tests {
 		}
 	}
 
-	public void testLongMultiplyLong() throws Throwable {
+	public void testLongMultiplyLong() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xLong + multiplyOp + yLong);
+		IValue value = eval(xLong + multiplyOp + yLong); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("long multiply long : wrong type : ", "long", typeName);
 		long longValue = ((IJavaPrimitiveValue)value).getLongValue();
 		assertEquals("long multiply long : wrong result : ", xLongValue * yLongValue, longValue);
 
-		value = eval(yLong + multiplyOp + xLong);
+		value = eval(yLong + multiplyOp + xLong); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("long multiply long : wrong type : ", "long", typeName);
 		longValue = ((IJavaPrimitiveValue)value).getLongValue();
@@ -417,16 +417,16 @@ public class LongOperatorsTests extends Tests {
 		}
 	}
 
-	public void testLongMultiplyFloat() throws Throwable {
+	public void testLongMultiplyFloat() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xLong + multiplyOp + yFloat);
+		IValue value = eval(xLong + multiplyOp + yFloat); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("long multiply float : wrong type : ", "float", typeName);
 		float floatValue = ((IJavaPrimitiveValue)value).getFloatValue();
 		assertEquals("long multiply float : wrong result : ", xLongValue * yFloatValue, floatValue, 0);
 
-		value = eval(yLong + multiplyOp + xFloat);
+		value = eval(yLong + multiplyOp + xFloat); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("long multiply float : wrong type : ", "float", typeName);
 		floatValue = ((IJavaPrimitiveValue)value).getFloatValue();
@@ -436,16 +436,16 @@ public class LongOperatorsTests extends Tests {
 		}
 	}
 
-	public void testLongMultiplyDouble() throws Throwable {
+	public void testLongMultiplyDouble() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xLong + multiplyOp + yDouble);
+		IValue value = eval(xLong + multiplyOp + yDouble); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("long multiply double : wrong type : ", "double", typeName);
 		double doubleValue = ((IJavaPrimitiveValue)value).getDoubleValue();
 		assertEquals("long multiply double : wrong result : ", xLongValue * yDoubleValue, doubleValue, 0);
 
-		value = eval(yLong + multiplyOp + xDouble);
+		value = eval(yLong + multiplyOp + xDouble); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("long multiply double : wrong type : ", "double", typeName);
 		doubleValue = ((IJavaPrimitiveValue)value).getDoubleValue();
@@ -457,16 +457,16 @@ public class LongOperatorsTests extends Tests {
 
 	// long / {byte, char, short, int, long, float, double}
 
-	public void testLongDivideByte() throws Throwable {
+	public void testLongDivideByte() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xLong + divideOp + yByte);
+		IValue value = eval(xLong + divideOp + yByte); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("long divide byte : wrong type : ", "long", typeName);
 		long longValue = ((IJavaPrimitiveValue)value).getLongValue();
 		assertEquals("long divide byte : wrong result : ", xLongValue / yByteValue, longValue);
 
-		value = eval(yLong + divideOp + xByte);
+		value = eval(yLong + divideOp + xByte); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("long divide byte : wrong type : ", "long", typeName);
 		longValue = ((IJavaPrimitiveValue)value).getLongValue();
@@ -476,16 +476,16 @@ public class LongOperatorsTests extends Tests {
 		}
 	}
 
-	public void testLongDivideChar() throws Throwable {
+	public void testLongDivideChar() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xLong + divideOp + yChar);
+		IValue value = eval(xLong + divideOp + yChar); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("long divide char : wrong type : ", "long", typeName);
 		long longValue = ((IJavaPrimitiveValue)value).getLongValue();
 		assertEquals("long divide char : wrong result : ", xLongValue / yCharValue, longValue);
 
-		value = eval(yLong + divideOp + xChar);
+		value = eval(yLong + divideOp + xChar); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("long divide char : wrong type : ", "long", typeName);
 		longValue = ((IJavaPrimitiveValue)value).getLongValue();
@@ -495,16 +495,16 @@ public class LongOperatorsTests extends Tests {
 		}
 	}
 
-	public void testLongDivideShort() throws Throwable {
+	public void testLongDivideShort() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xLong + divideOp + yShort);
+		IValue value = eval(xLong + divideOp + yShort); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("long divide short : wrong type : ", "long", typeName);
 		long longValue = ((IJavaPrimitiveValue)value).getLongValue();
 		assertEquals("long divide short : wrong result : ", xLongValue / yShortValue, longValue);
 
-		value = eval(yLong + divideOp + xShort);
+		value = eval(yLong + divideOp + xShort); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("long divide short : wrong type : ", "long", typeName);
 		longValue = ((IJavaPrimitiveValue)value).getLongValue();
@@ -514,16 +514,16 @@ public class LongOperatorsTests extends Tests {
 		}
 	}
 
-	public void testLongDivideInt() throws Throwable {
+	public void testLongDivideInt() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xLong + divideOp + yInt);
+		IValue value = eval(xLong + divideOp + yInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("long divide int : wrong type : ", "long", typeName);
 		long longValue = ((IJavaPrimitiveValue)value).getLongValue();
 		assertEquals("long divide int : wrong result : ", xLongValue / yIntValue, longValue);
 
-		value = eval(yLong + divideOp + xInt);
+		value = eval(yLong + divideOp + xInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("long divide int : wrong type : ", "long", typeName);
 		longValue = ((IJavaPrimitiveValue)value).getLongValue();
@@ -533,16 +533,16 @@ public class LongOperatorsTests extends Tests {
 		}
 	}
 
-	public void testLongDivideLong() throws Throwable {
+	public void testLongDivideLong() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xLong + divideOp + yLong);
+		IValue value = eval(xLong + divideOp + yLong); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("long divide long : wrong type : ", "long", typeName);
 		long longValue = ((IJavaPrimitiveValue)value).getLongValue();
 		assertEquals("long divide long : wrong result : ", xLongValue / yLongValue, longValue);
 
-		value = eval(yLong + divideOp + xLong);
+		value = eval(yLong + divideOp + xLong); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("long divide long : wrong type : ", "long", typeName);
 		longValue = ((IJavaPrimitiveValue)value).getLongValue();
@@ -552,16 +552,16 @@ public class LongOperatorsTests extends Tests {
 		}
 	}
 
-	public void testLongDivideFloat() throws Throwable {
+	public void testLongDivideFloat() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xLong + divideOp + yFloat);
+		IValue value = eval(xLong + divideOp + yFloat); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("long divide float : wrong type : ", "float", typeName);
 		float floatValue = ((IJavaPrimitiveValue)value).getFloatValue();
 		assertEquals("long divide float : wrong result : ", xLongValue / yFloatValue, floatValue, 0);
 
-		value = eval(yLong + divideOp + xFloat);
+		value = eval(yLong + divideOp + xFloat); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("long divide float : wrong type : ", "float", typeName);
 		floatValue = ((IJavaPrimitiveValue)value).getFloatValue();
@@ -571,16 +571,16 @@ public class LongOperatorsTests extends Tests {
 		}
 	}
 
-	public void testLongDivideDouble() throws Throwable {
+	public void testLongDivideDouble() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xLong + divideOp + yDouble);
+		IValue value = eval(xLong + divideOp + yDouble); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("long divide double : wrong type : ", "double", typeName);
 		double doubleValue = ((IJavaPrimitiveValue)value).getDoubleValue();
 		assertEquals("long divide double : wrong result : ", xLongValue / yDoubleValue, doubleValue, 0);
 
-		value = eval(yLong + divideOp + xDouble);
+		value = eval(yLong + divideOp + xDouble); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("long divide double : wrong type : ", "double", typeName);
 		doubleValue = ((IJavaPrimitiveValue)value).getDoubleValue();
@@ -592,16 +592,16 @@ public class LongOperatorsTests extends Tests {
 
 	// long % {byte, char, short, int, long, float, double}
 
-	public void testLongRemainderByte() throws Throwable {
+	public void testLongRemainderByte() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xLong + remainderOp + yByte);
+		IValue value = eval(xLong + remainderOp + yByte); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("long remainder byte : wrong type : ", "long", typeName);
 		long longValue = ((IJavaPrimitiveValue)value).getLongValue();
 		assertEquals("long remainder byte : wrong result : ", xLongValue % yByteValue, longValue);
 
-		value = eval(yLong + remainderOp + xByte);
+		value = eval(yLong + remainderOp + xByte); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("long remainder byte : wrong type : ", "long", typeName);
 		longValue = ((IJavaPrimitiveValue)value).getLongValue();
@@ -611,16 +611,16 @@ public class LongOperatorsTests extends Tests {
 		}
 	}
 
-	public void testLongRemainderChar() throws Throwable {
+	public void testLongRemainderChar() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xLong + remainderOp + yChar);
+		IValue value = eval(xLong + remainderOp + yChar); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("long remainder char : wrong type : ", "long", typeName);
 		long longValue = ((IJavaPrimitiveValue)value).getLongValue();
 		assertEquals("long remainder char : wrong result : ", xLongValue % yCharValue, longValue);
 
-		value = eval(yLong + remainderOp + xChar);
+		value = eval(yLong + remainderOp + xChar); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("long remainder char : wrong type : ", "long", typeName);
 		longValue = ((IJavaPrimitiveValue)value).getLongValue();
@@ -630,16 +630,16 @@ public class LongOperatorsTests extends Tests {
 		}
 	}
 
-	public void testLongRemainderShort() throws Throwable {
+	public void testLongRemainderShort() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xLong + remainderOp + yShort);
+		IValue value = eval(xLong + remainderOp + yShort); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("long remainder short : wrong type : ", "long", typeName);
 		long longValue = ((IJavaPrimitiveValue)value).getLongValue();
 		assertEquals("long remainder short : wrong result : ", xLongValue % yShortValue, longValue);
 
-		value = eval(yLong + remainderOp + xShort);
+		value = eval(yLong + remainderOp + xShort); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("long remainder short : wrong type : ", "long", typeName);
 		longValue = ((IJavaPrimitiveValue)value).getLongValue();
@@ -649,16 +649,16 @@ public class LongOperatorsTests extends Tests {
 		}
 	}
 
-	public void testLongRemainderInt() throws Throwable {
+	public void testLongRemainderInt() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xLong + remainderOp + yInt);
+		IValue value = eval(xLong + remainderOp + yInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("long remainder int : wrong type : ", "long", typeName);
 		long longValue = ((IJavaPrimitiveValue)value).getLongValue();
 		assertEquals("long remainder int : wrong result : ", xLongValue % yIntValue, longValue);
 
-		value = eval(yLong + remainderOp + xInt);
+		value = eval(yLong + remainderOp + xInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("long remainder int : wrong type : ", "long", typeName);
 		longValue = ((IJavaPrimitiveValue)value).getLongValue();
@@ -668,16 +668,16 @@ public class LongOperatorsTests extends Tests {
 		}
 	}
 
-	public void testLongRemainderLong() throws Throwable {
+	public void testLongRemainderLong() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xLong + remainderOp + yLong);
+		IValue value = eval(xLong + remainderOp + yLong); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("long remainder long : wrong type : ", "long", typeName);
 		long longValue = ((IJavaPrimitiveValue)value).getLongValue();
 		assertEquals("long remainder long : wrong result : ", xLongValue % yLongValue, longValue);
 
-		value = eval(yLong + remainderOp + xLong);
+		value = eval(yLong + remainderOp + xLong); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("long remainder long : wrong type : ", "long", typeName);
 		longValue = ((IJavaPrimitiveValue)value).getLongValue();
@@ -687,16 +687,16 @@ public class LongOperatorsTests extends Tests {
 		}
 	}
 
-	public void testLongRemainderFloat() throws Throwable {
+	public void testLongRemainderFloat() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xLong + remainderOp + yFloat);
+		IValue value = eval(xLong + remainderOp + yFloat); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("long remainder float : wrong type : ", "float", typeName);
 		float floatValue = ((IJavaPrimitiveValue)value).getFloatValue();
 		assertEquals("long remainder float : wrong result : ", xLongValue % yFloatValue, floatValue, 0);
 
-		value = eval(yLong + remainderOp + xFloat);
+		value = eval(yLong + remainderOp + xFloat); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("long remainder float : wrong type : ", "float", typeName);
 		floatValue = ((IJavaPrimitiveValue)value).getFloatValue();
@@ -706,16 +706,16 @@ public class LongOperatorsTests extends Tests {
 		}
 	}
 
-	public void testLongRemainderDouble() throws Throwable {
+	public void testLongRemainderDouble() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xLong + remainderOp + yDouble);
+		IValue value = eval(xLong + remainderOp + yDouble); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("long remainder double : wrong type : ", "double", typeName);
 		double doubleValue = ((IJavaPrimitiveValue)value).getDoubleValue();
 		assertEquals("long remainder double : wrong result : ", xLongValue % yDoubleValue, doubleValue, 0);
 
-		value = eval(yLong + remainderOp + xDouble);
+		value = eval(yLong + remainderOp + xDouble); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("long remainder double : wrong type : ", "double", typeName);
 		doubleValue = ((IJavaPrimitiveValue)value).getDoubleValue();
@@ -727,22 +727,22 @@ public class LongOperatorsTests extends Tests {
 
 	// long > {byte, char, short, int, long, float, double}
 
-	public void testLongGreaterByte() throws Throwable {
+	public void testLongGreaterByte() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xLong + greaterOp + yByte);
+		IValue value = eval(xLong + greaterOp + yByte); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("long greater byte : wrong type : ", "boolean", typeName);
 		boolean booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
 		assertEquals("long greater byte : wrong result : ", xLongValue > yByteValue, booleanValue);
 
-		value = eval(yLong + greaterOp + xByte);
+		value = eval(yLong + greaterOp + xByte); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("long greater byte : wrong type : ", "boolean", typeName);
 		booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
 		assertEquals("long greater byte : wrong result : ", yLongValue > xByteValue, booleanValue);
 
-		value = eval(xLong + greaterOp + xByte);
+		value = eval(xLong + greaterOp + xByte); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("long greater byte : wrong type : ", "boolean", typeName);
 		booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
@@ -752,22 +752,22 @@ public class LongOperatorsTests extends Tests {
 		}
 	}
 
-	public void testLongGreaterChar() throws Throwable {
+	public void testLongGreaterChar() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xLong + greaterOp + yChar);
+		IValue value = eval(xLong + greaterOp + yChar); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("long greater char : wrong type : ", "boolean", typeName);
 		boolean booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
 		assertEquals("long greater char : wrong result : ", xLongValue > yCharValue, booleanValue);
 
-		value = eval(yLong + greaterOp + xChar);
+		value = eval(yLong + greaterOp + xChar); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("long greater char : wrong type : ", "boolean", typeName);
 		booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
 		assertEquals("long greater char : wrong result : ", yLongValue > xCharValue, booleanValue);
 
-		value = eval(xLong + greaterOp + xChar);
+		value = eval(xLong + greaterOp + xChar); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("long greater char : wrong type : ", "boolean", typeName);
 		booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
@@ -777,22 +777,22 @@ public class LongOperatorsTests extends Tests {
 		}
 	}
 
-	public void testLongGreaterShort() throws Throwable {
+	public void testLongGreaterShort() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xLong + greaterOp + yShort);
+		IValue value = eval(xLong + greaterOp + yShort); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("long greater short : wrong type : ", "boolean", typeName);
 		boolean booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
 		assertEquals("long greater short : wrong result : ", xLongValue > yShortValue, booleanValue);
 
-		value = eval(yLong + greaterOp + xShort);
+		value = eval(yLong + greaterOp + xShort); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("long greater short : wrong type : ", "boolean", typeName);
 		booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
 		assertEquals("long greater short : wrong result : ", yLongValue > xShortValue, booleanValue);
 
-		value = eval(xLong + greaterOp + xShort);
+		value = eval(xLong + greaterOp + xShort); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("long greater short : wrong type : ", "boolean", typeName);
 		booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
@@ -802,22 +802,22 @@ public class LongOperatorsTests extends Tests {
 		}
 	}
 
-	public void testLongGreaterInt() throws Throwable {
+	public void testLongGreaterInt() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xLong + greaterOp + yInt);
+		IValue value = eval(xLong + greaterOp + yInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("long greater int : wrong type : ", "boolean", typeName);
 		boolean booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
 		assertEquals("long greater int : wrong result : ", xLongValue > yIntValue, booleanValue);
 
-		value = eval(yLong + greaterOp + xInt);
+		value = eval(yLong + greaterOp + xInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("long greater int : wrong type : ", "boolean", typeName);
 		booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
 		assertEquals("long greater int : wrong result : ", yLongValue > xIntValue, booleanValue);
 
-		value = eval(xLong + greaterOp + xInt);
+		value = eval(xLong + greaterOp + xInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("long greater int : wrong type : ", "boolean", typeName);
 		booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
@@ -827,22 +827,22 @@ public class LongOperatorsTests extends Tests {
 		}
 	}
 
-	public void testLongGreaterLong() throws Throwable {
+	public void testLongGreaterLong() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xLong + greaterOp + yLong);
+		IValue value = eval(xLong + greaterOp + yLong); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("long greater long : wrong type : ", "boolean", typeName);
 		boolean booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
 		assertEquals("long greater long : wrong result : ", xLongValue > yLongValue, booleanValue);
 
-		value = eval(yLong + greaterOp + xLong);
+		value = eval(yLong + greaterOp + xLong); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("long greater long : wrong type : ", "boolean", typeName);
 		booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
 		assertEquals("long greater long : wrong result : ", yLongValue > xLongValue, booleanValue);
 
-		value = eval(xLong + greaterOp + xLong);
+		value = eval(xLong + greaterOp + xLong); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("long greater long : wrong type : ", "boolean", typeName);
 		booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
@@ -852,22 +852,22 @@ public class LongOperatorsTests extends Tests {
 		}
 	}
 
-	public void testLongGreaterFloat() throws Throwable {
+	public void testLongGreaterFloat() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xLong + greaterOp + yFloat);
+		IValue value = eval(xLong + greaterOp + yFloat); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("long greater float : wrong type : ", "boolean", typeName);
 		boolean booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
 		assertEquals("long greater float : wrong result : ", xLongValue > yFloatValue, booleanValue);
 
-		value = eval(yLong + greaterOp + xFloat);
+		value = eval(yLong + greaterOp + xFloat); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("long greater float : wrong type : ", "boolean", typeName);
 		booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
 		assertEquals("long greater float : wrong result : ", yLongValue > xFloatValue, booleanValue);
 
-		value = eval(xLong + greaterOp + xFloat);
+		value = eval(xLong + greaterOp + xFloat); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("long greater float : wrong type : ", "boolean", typeName);
 		booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
@@ -877,22 +877,22 @@ public class LongOperatorsTests extends Tests {
 		}
 	}
 
-	public void testLongGreaterDouble() throws Throwable {
+	public void testLongGreaterDouble() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xLong + greaterOp + yDouble);
+		IValue value = eval(xLong + greaterOp + yDouble); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("long greater double : wrong type : ", "boolean", typeName);
 		boolean booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
 		assertEquals("long greater double : wrong result : ", xLongValue > yDoubleValue, booleanValue);
 
-		value = eval(yLong + greaterOp + xDouble);
+		value = eval(yLong + greaterOp + xDouble); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("long greater double : wrong type : ", "boolean", typeName);
 		booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
 		assertEquals("long greater double : wrong result : ", yLongValue > xDoubleValue, booleanValue);
 
-		value = eval(xLong + greaterOp + xDouble);
+		value = eval(xLong + greaterOp + xDouble); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("long greater double : wrong type : ", "boolean", typeName);
 		booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
@@ -904,22 +904,22 @@ public class LongOperatorsTests extends Tests {
 
 	// long >= {byte, char, short, int, long, float, double}
 
-	public void testLongGreaterEqualByte() throws Throwable {
+	public void testLongGreaterEqualByte() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xLong + greaterEqualOp + yByte);
+		IValue value = eval(xLong + greaterEqualOp + yByte); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("long greaterEqual byte : wrong type : ", "boolean", typeName);
 		boolean booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
 		assertEquals("long greaterEqual byte : wrong result : ", xLongValue >= yByteValue, booleanValue);
 
-		value = eval(yLong + greaterEqualOp + xByte);
+		value = eval(yLong + greaterEqualOp + xByte); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("long greaterEqual byte : wrong type : ", "boolean", typeName);
 		booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
 		assertEquals("long greaterEqual byte : wrong result : ", yLongValue >= xByteValue, booleanValue);
 
-		value = eval(xLong + greaterEqualOp + xByte);
+		value = eval(xLong + greaterEqualOp + xByte); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("long greaterEqual byte : wrong type : ", "boolean", typeName);
 		booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
@@ -929,22 +929,22 @@ public class LongOperatorsTests extends Tests {
 		}
 	}
 
-	public void testLongGreaterEqualChar() throws Throwable {
+	public void testLongGreaterEqualChar() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xLong + greaterEqualOp + yChar);
+		IValue value = eval(xLong + greaterEqualOp + yChar); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("long greaterEqual char : wrong type : ", "boolean", typeName);
 		boolean booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
 		assertEquals("long greaterEqual char : wrong result : ", xLongValue >= yCharValue, booleanValue);
 
-		value = eval(yLong + greaterEqualOp + xChar);
+		value = eval(yLong + greaterEqualOp + xChar); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("long greaterEqual char : wrong type : ", "boolean", typeName);
 		booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
 		assertEquals("long greaterEqual char : wrong result : ", yLongValue >= xCharValue, booleanValue);
 
-		value = eval(xLong + greaterEqualOp + xChar);
+		value = eval(xLong + greaterEqualOp + xChar); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("long greaterEqual char : wrong type : ", "boolean", typeName);
 		booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
@@ -954,22 +954,22 @@ public class LongOperatorsTests extends Tests {
 		}
 	}
 
-	public void testLongGreaterEqualShort() throws Throwable {
+	public void testLongGreaterEqualShort() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xLong + greaterEqualOp + yShort);
+		IValue value = eval(xLong + greaterEqualOp + yShort); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("long greaterEqual short : wrong type : ", "boolean", typeName);
 		boolean booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
 		assertEquals("long greaterEqual short : wrong result : ", xLongValue >= yShortValue, booleanValue);
 
-		value = eval(yLong + greaterEqualOp + xShort);
+		value = eval(yLong + greaterEqualOp + xShort); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("long greaterEqual short : wrong type : ", "boolean", typeName);
 		booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
 		assertEquals("long greaterEqual short : wrong result : ", yLongValue >= xShortValue, booleanValue);
 
-		value = eval(xLong + greaterEqualOp + xShort);
+		value = eval(xLong + greaterEqualOp + xShort); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("long greaterEqual short : wrong type : ", "boolean", typeName);
 		booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
@@ -979,22 +979,22 @@ public class LongOperatorsTests extends Tests {
 		}
 	}
 
-	public void testLongGreaterEqualInt() throws Throwable {
+	public void testLongGreaterEqualInt() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xLong + greaterEqualOp + yInt);
+		IValue value = eval(xLong + greaterEqualOp + yInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("long greaterEqual int : wrong type : ", "boolean", typeName);
 		boolean booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
 		assertEquals("long greaterEqual int : wrong result : ", xLongValue >= yIntValue, booleanValue);
 
-		value = eval(yLong + greaterEqualOp + xInt);
+		value = eval(yLong + greaterEqualOp + xInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("long greaterEqual int : wrong type : ", "boolean", typeName);
 		booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
 		assertEquals("long greaterEqual int : wrong result : ", yLongValue >= xIntValue, booleanValue);
 
-		value = eval(xLong + greaterEqualOp + xInt);
+		value = eval(xLong + greaterEqualOp + xInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("long greaterEqual int : wrong type : ", "boolean", typeName);
 		booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
@@ -1004,22 +1004,22 @@ public class LongOperatorsTests extends Tests {
 		}
 	}
 
-	public void testLongGreaterEqualLong() throws Throwable {
+	public void testLongGreaterEqualLong() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xLong + greaterEqualOp + yLong);
+		IValue value = eval(xLong + greaterEqualOp + yLong); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("long greaterEqual long : wrong type : ", "boolean", typeName);
 		boolean booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
 		assertEquals("long greaterEqual long : wrong result : ", xLongValue >= yLongValue, booleanValue);
 
-		value = eval(yLong + greaterEqualOp + xLong);
+		value = eval(yLong + greaterEqualOp + xLong); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("long greaterEqual long : wrong type : ", "boolean", typeName);
 		booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
 		assertEquals("long greaterEqual long : wrong result : ", yLongValue >= xLongValue, booleanValue);
 
-		value = eval(xLong + greaterEqualOp + xLong);
+		value = eval(xLong + greaterEqualOp + xLong); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("long greaterEqual long : wrong type : ", "boolean", typeName);
 		booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
@@ -1029,22 +1029,22 @@ public class LongOperatorsTests extends Tests {
 		}
 	}
 
-	public void testLongGreaterEqualFloat() throws Throwable {
+	public void testLongGreaterEqualFloat() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xLong + greaterEqualOp + yFloat);
+		IValue value = eval(xLong + greaterEqualOp + yFloat); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("long greaterEqual float : wrong type : ", "boolean", typeName);
 		boolean booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
 		assertEquals("long greaterEqual float : wrong result : ", xLongValue >= yFloatValue, booleanValue);
 
-		value = eval(yLong + greaterEqualOp + xFloat);
+		value = eval(yLong + greaterEqualOp + xFloat); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("long greaterEqual float : wrong type : ", "boolean", typeName);
 		booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
 		assertEquals("long greaterEqual float : wrong result : ", yLongValue >= xFloatValue, booleanValue);
 
-		value = eval(xLong + greaterEqualOp + xFloat);
+		value = eval(xLong + greaterEqualOp + xFloat); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("long greaterEqual float : wrong type : ", "boolean", typeName);
 		booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
@@ -1054,22 +1054,22 @@ public class LongOperatorsTests extends Tests {
 		}
 	}
 
-	public void testLongGreaterEqualDouble() throws Throwable {
+	public void testLongGreaterEqualDouble() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xLong + greaterEqualOp + yDouble);
+		IValue value = eval(xLong + greaterEqualOp + yDouble); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("long greaterEqual double : wrong type : ", "boolean", typeName);
 		boolean booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
 		assertEquals("long greaterEqual double : wrong result : ", xLongValue >= yDoubleValue, booleanValue);
 
-		value = eval(yLong + greaterEqualOp + xDouble);
+		value = eval(yLong + greaterEqualOp + xDouble); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("long greaterEqual double : wrong type : ", "boolean", typeName);
 		booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
 		assertEquals("long greaterEqual double : wrong result : ", yLongValue >= xDoubleValue, booleanValue);
 
-		value = eval(xLong + greaterEqualOp + xDouble);
+		value = eval(xLong + greaterEqualOp + xDouble); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("long greaterEqual double : wrong type : ", "boolean", typeName);
 		booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
@@ -1081,22 +1081,22 @@ public class LongOperatorsTests extends Tests {
 
 	// long < {byte, char, short, int, long, float, double}
 
-	public void testLongLessByte() throws Throwable {
+	public void testLongLessByte() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xLong + lessOp + yByte);
+		IValue value = eval(xLong + lessOp + yByte); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("long less byte : wrong type : ", "boolean", typeName);
 		boolean booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
 		assertEquals("long less byte : wrong result : ", xLongValue < yByteValue, booleanValue);
 
-		value = eval(yLong + lessOp + xByte);
+		value = eval(yLong + lessOp + xByte); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("long less byte : wrong type : ", "boolean", typeName);
 		booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
 		assertEquals("long less byte : wrong result : ", yLongValue < xByteValue, booleanValue);
 
-		value = eval(xLong + lessOp + xByte);
+		value = eval(xLong + lessOp + xByte); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("long less byte : wrong type : ", "boolean", typeName);
 		booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
@@ -1106,22 +1106,22 @@ public class LongOperatorsTests extends Tests {
 		}
 	}
 
-	public void testLongLessChar() throws Throwable {
+	public void testLongLessChar() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xLong + lessOp + yChar);
+		IValue value = eval(xLong + lessOp + yChar); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("long less char : wrong type : ", "boolean", typeName);
 		boolean booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
 		assertEquals("long less char : wrong result : ", xLongValue < yCharValue, booleanValue);
 
-		value = eval(yLong + lessOp + xChar);
+		value = eval(yLong + lessOp + xChar); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("long less char : wrong type : ", "boolean", typeName);
 		booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
 		assertEquals("long less char : wrong result : ", yLongValue < xCharValue, booleanValue);
 
-		value = eval(xLong + lessOp + xChar);
+		value = eval(xLong + lessOp + xChar); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("long less char : wrong type : ", "boolean", typeName);
 		booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
@@ -1131,22 +1131,22 @@ public class LongOperatorsTests extends Tests {
 		}
 	}
 
-	public void testLongLessShort() throws Throwable {
+	public void testLongLessShort() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xLong + lessOp + yShort);
+		IValue value = eval(xLong + lessOp + yShort); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("long less short : wrong type : ", "boolean", typeName);
 		boolean booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
 		assertEquals("long less short : wrong result : ", xLongValue < yShortValue, booleanValue);
 
-		value = eval(yLong + lessOp + xShort);
+		value = eval(yLong + lessOp + xShort); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("long less short : wrong type : ", "boolean", typeName);
 		booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
 		assertEquals("long less short : wrong result : ", yLongValue < xShortValue, booleanValue);
 
-		value = eval(xLong + lessOp + xShort);
+		value = eval(xLong + lessOp + xShort); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("long less short : wrong type : ", "boolean", typeName);
 		booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
@@ -1156,22 +1156,22 @@ public class LongOperatorsTests extends Tests {
 		}
 	}
 
-	public void testLongLessInt() throws Throwable {
+	public void testLongLessInt() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xLong + lessOp + yInt);
+		IValue value = eval(xLong + lessOp + yInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("long less int : wrong type : ", "boolean", typeName);
 		boolean booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
 		assertEquals("long less int : wrong result : ", xLongValue < yIntValue, booleanValue);
 
-		value = eval(yLong + lessOp + xInt);
+		value = eval(yLong + lessOp + xInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("long less int : wrong type : ", "boolean", typeName);
 		booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
 		assertEquals("long less int : wrong result : ", yLongValue < xIntValue, booleanValue);
 
-		value = eval(xLong + lessOp + xInt);
+		value = eval(xLong + lessOp + xInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("long less int : wrong type : ", "boolean", typeName);
 		booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
@@ -1181,22 +1181,22 @@ public class LongOperatorsTests extends Tests {
 		}
 	}
 
-	public void testLongLessLong() throws Throwable {
+	public void testLongLessLong() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xLong + lessOp + yLong);
+		IValue value = eval(xLong + lessOp + yLong); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("long less long : wrong type : ", "boolean", typeName);
 		boolean booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
 		assertEquals("long less long : wrong result : ", xLongValue < yLongValue, booleanValue);
 
-		value = eval(yLong + lessOp + xLong);
+		value = eval(yLong + lessOp + xLong); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("long less long : wrong type : ", "boolean", typeName);
 		booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
 		assertEquals("long less long : wrong result : ", yLongValue < xLongValue, booleanValue);
 
-		value = eval(xLong + lessOp + xLong);
+		value = eval(xLong + lessOp + xLong); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("long less long : wrong type : ", "boolean", typeName);
 		booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
@@ -1206,22 +1206,22 @@ public class LongOperatorsTests extends Tests {
 		}
 	}
 
-	public void testLongLessFloat() throws Throwable {
+	public void testLongLessFloat() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xLong + lessOp + yFloat);
+		IValue value = eval(xLong + lessOp + yFloat); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("long less float : wrong type : ", "boolean", typeName);
 		boolean booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
 		assertEquals("long less float : wrong result : ", xLongValue < yFloatValue, booleanValue);
 
-		value = eval(yLong + lessOp + xFloat);
+		value = eval(yLong + lessOp + xFloat); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("long less float : wrong type : ", "boolean", typeName);
 		booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
 		assertEquals("long less float : wrong result : ", yLongValue < xFloatValue, booleanValue);
 
-		value = eval(xLong + lessOp + xFloat);
+		value = eval(xLong + lessOp + xFloat); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("long less float : wrong type : ", "boolean", typeName);
 		booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
@@ -1231,22 +1231,22 @@ public class LongOperatorsTests extends Tests {
 		}
 	}
 
-	public void testLongLessDouble() throws Throwable {
+	public void testLongLessDouble() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xLong + lessOp + yDouble);
+		IValue value = eval(xLong + lessOp + yDouble); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("long less double : wrong type : ", "boolean", typeName);
 		boolean booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
 		assertEquals("long less double : wrong result : ", xLongValue < yDoubleValue, booleanValue);
 
-		value = eval(yLong + lessOp + xDouble);
+		value = eval(yLong + lessOp + xDouble); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("long less double : wrong type : ", "boolean", typeName);
 		booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
 		assertEquals("long less double : wrong result : ", yLongValue < xDoubleValue, booleanValue);
 
-		value = eval(xLong + lessOp + xDouble);
+		value = eval(xLong + lessOp + xDouble); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("long less double : wrong type : ", "boolean", typeName);
 		booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
@@ -1258,22 +1258,22 @@ public class LongOperatorsTests extends Tests {
 
 	// long <= {byte, char, short, int, long, float, double}
 
-	public void testLongLessEqualByte() throws Throwable {
+	public void testLongLessEqualByte() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xLong + lessEqualOp + yByte);
+		IValue value = eval(xLong + lessEqualOp + yByte); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("long lessEqual byte : wrong type : ", "boolean", typeName);
 		boolean booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
 		assertEquals("long lessEqual byte : wrong result : ", xLongValue <= yByteValue, booleanValue);
 
-		value = eval(yLong + lessEqualOp + xByte);
+		value = eval(yLong + lessEqualOp + xByte); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("long lessEqual byte : wrong type : ", "boolean", typeName);
 		booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
 		assertEquals("long lessEqual byte : wrong result : ", yLongValue <= xByteValue, booleanValue);
 
-		value = eval(xLong + lessEqualOp + xByte);
+		value = eval(xLong + lessEqualOp + xByte); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("long lessEqual byte : wrong type : ", "boolean", typeName);
 		booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
@@ -1283,22 +1283,22 @@ public class LongOperatorsTests extends Tests {
 		}
 	}
 
-	public void testLongLessEqualChar() throws Throwable {
+	public void testLongLessEqualChar() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xLong + lessEqualOp + yChar);
+		IValue value = eval(xLong + lessEqualOp + yChar); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("long lessEqual char : wrong type : ", "boolean", typeName);
 		boolean booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
 		assertEquals("long lessEqual char : wrong result : ", xLongValue <= yCharValue, booleanValue);
 
-		value = eval(yLong + lessEqualOp + xChar);
+		value = eval(yLong + lessEqualOp + xChar); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("long lessEqual char : wrong type : ", "boolean", typeName);
 		booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
 		assertEquals("long lessEqual char : wrong result : ", yLongValue <= xCharValue, booleanValue);
 
-		value = eval(xLong + lessEqualOp + xChar);
+		value = eval(xLong + lessEqualOp + xChar); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("long lessEqual char : wrong type : ", "boolean", typeName);
 		booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
@@ -1308,22 +1308,22 @@ public class LongOperatorsTests extends Tests {
 		}
 	}
 
-	public void testLongLessEqualShort() throws Throwable {
+	public void testLongLessEqualShort() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xLong + lessEqualOp + yShort);
+		IValue value = eval(xLong + lessEqualOp + yShort); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("long lessEqual short : wrong type : ", "boolean", typeName);
 		boolean booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
 		assertEquals("long lessEqual short : wrong result : ", xLongValue <= yShortValue, booleanValue);
 
-		value = eval(yLong + lessEqualOp + xShort);
+		value = eval(yLong + lessEqualOp + xShort); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("long lessEqual short : wrong type : ", "boolean", typeName);
 		booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
 		assertEquals("long lessEqual short : wrong result : ", yLongValue <= xShortValue, booleanValue);
 
-		value = eval(xLong + lessEqualOp + xShort);
+		value = eval(xLong + lessEqualOp + xShort); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("long lessEqual short : wrong type : ", "boolean", typeName);
 		booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
@@ -1333,22 +1333,22 @@ public class LongOperatorsTests extends Tests {
 		}
 	}
 
-	public void testLongLessEqualInt() throws Throwable {
+	public void testLongLessEqualInt() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xLong + lessEqualOp + yInt);
+		IValue value = eval(xLong + lessEqualOp + yInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("long lessEqual int : wrong type : ", "boolean", typeName);
 		boolean booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
 		assertEquals("long lessEqual int : wrong result : ", xLongValue <= yIntValue, booleanValue);
 
-		value = eval(yLong + lessEqualOp + xInt);
+		value = eval(yLong + lessEqualOp + xInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("long lessEqual int : wrong type : ", "boolean", typeName);
 		booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
 		assertEquals("long lessEqual int : wrong result : ", yLongValue <= xIntValue, booleanValue);
 
-		value = eval(xLong + lessEqualOp + xInt);
+		value = eval(xLong + lessEqualOp + xInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("long lessEqual int : wrong type : ", "boolean", typeName);
 		booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
@@ -1358,22 +1358,22 @@ public class LongOperatorsTests extends Tests {
 		}
 	}
 
-	public void testLongLessEqualLong() throws Throwable {
+	public void testLongLessEqualLong() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xLong + lessEqualOp + yLong);
+		IValue value = eval(xLong + lessEqualOp + yLong); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("long lessEqual long : wrong type : ", "boolean", typeName);
 		boolean booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
 		assertEquals("long lessEqual long : wrong result : ", xLongValue <= yLongValue, booleanValue);
 
-		value = eval(yLong + lessEqualOp + xLong);
+		value = eval(yLong + lessEqualOp + xLong); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("long lessEqual long : wrong type : ", "boolean", typeName);
 		booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
 		assertEquals("long lessEqual long : wrong result : ", yLongValue <= xLongValue, booleanValue);
 
-		value = eval(xLong + lessEqualOp + xLong);
+		value = eval(xLong + lessEqualOp + xLong); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("long lessEqual long : wrong type : ", "boolean", typeName);
 		booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
@@ -1383,22 +1383,22 @@ public class LongOperatorsTests extends Tests {
 		}
 	}
 
-	public void testLongLessEqualFloat() throws Throwable {
+	public void testLongLessEqualFloat() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xLong + lessEqualOp + yFloat);
+		IValue value = eval(xLong + lessEqualOp + yFloat); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("long lessEqual float : wrong type : ", "boolean", typeName);
 		boolean booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
 		assertEquals("long lessEqual float : wrong result : ", xLongValue <= yFloatValue, booleanValue);
 
-		value = eval(yLong + lessEqualOp + xFloat);
+		value = eval(yLong + lessEqualOp + xFloat); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("long lessEqual float : wrong type : ", "boolean", typeName);
 		booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
 		assertEquals("long lessEqual float : wrong result : ", yLongValue <= xFloatValue, booleanValue);
 
-		value = eval(xLong + lessEqualOp + xFloat);
+		value = eval(xLong + lessEqualOp + xFloat); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("long lessEqual float : wrong type : ", "boolean", typeName);
 		booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
@@ -1408,22 +1408,22 @@ public class LongOperatorsTests extends Tests {
 		}
 	}
 
-	public void testLongLessEqualDouble() throws Throwable {
+	public void testLongLessEqualDouble() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xLong + lessEqualOp + yDouble);
+		IValue value = eval(xLong + lessEqualOp + yDouble); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("long lessEqual double : wrong type : ", "boolean", typeName);
 		boolean booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
 		assertEquals("long lessEqual double : wrong result : ", xLongValue <= yDoubleValue, booleanValue);
 
-		value = eval(yLong + lessEqualOp + xDouble);
+		value = eval(yLong + lessEqualOp + xDouble); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("long lessEqual double : wrong type : ", "boolean", typeName);
 		booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
 		assertEquals("long lessEqual double : wrong result : ", yLongValue <= xDoubleValue, booleanValue);
 
-		value = eval(xLong + lessEqualOp + xDouble);
+		value = eval(xLong + lessEqualOp + xDouble); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("long lessEqual double : wrong type : ", "boolean", typeName);
 		booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
@@ -1435,22 +1435,22 @@ public class LongOperatorsTests extends Tests {
 
 	// long == {byte, char, short, int, long, float, double}
 
-	public void testLongEqualEqualByte() throws Throwable {
+	public void testLongEqualEqualByte() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xLong + equalEqualOp + yByte);
+		IValue value = eval(xLong + equalEqualOp + yByte); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("long equalEqual byte : wrong type : ", "boolean", typeName);
 		boolean booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
 		assertEquals("long equalEqual byte : wrong result : ", xLongValue == yByteValue, booleanValue);
 
-		value = eval(yLong + equalEqualOp + xByte);
+		value = eval(yLong + equalEqualOp + xByte); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("long equalEqual byte : wrong type : ", "boolean", typeName);
 		booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
 		assertEquals("long equalEqual byte : wrong result : ", yLongValue == xByteValue, booleanValue);
 
-		value = eval(xLong + equalEqualOp + xByte);
+		value = eval(xLong + equalEqualOp + xByte); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("long equalEqual byte : wrong type : ", "boolean", typeName);
 		booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
@@ -1460,22 +1460,22 @@ public class LongOperatorsTests extends Tests {
 		}
 	}
 
-	public void testLongEqualEqualChar() throws Throwable {
+	public void testLongEqualEqualChar() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xLong + equalEqualOp + yChar);
+		IValue value = eval(xLong + equalEqualOp + yChar); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("long equalEqual char : wrong type : ", "boolean", typeName);
 		boolean booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
 		assertEquals("long equalEqual char : wrong result : ", xLongValue == yCharValue, booleanValue);
 
-		value = eval(yLong + equalEqualOp + xChar);
+		value = eval(yLong + equalEqualOp + xChar); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("long equalEqual char : wrong type : ", "boolean", typeName);
 		booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
 		assertEquals("long equalEqual char : wrong result : ", yLongValue == xCharValue, booleanValue);
 
-		value = eval(xLong + equalEqualOp + xChar);
+		value = eval(xLong + equalEqualOp + xChar); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("long equalEqual char : wrong type : ", "boolean", typeName);
 		booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
@@ -1485,22 +1485,22 @@ public class LongOperatorsTests extends Tests {
 		}
 	}
 
-	public void testLongEqualEqualShort() throws Throwable {
+	public void testLongEqualEqualShort() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xLong + equalEqualOp + yShort);
+		IValue value = eval(xLong + equalEqualOp + yShort); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("long equalEqual short : wrong type : ", "boolean", typeName);
 		boolean booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
 		assertEquals("long equalEqual short : wrong result : ", xLongValue == yShortValue, booleanValue);
 
-		value = eval(yLong + equalEqualOp + xShort);
+		value = eval(yLong + equalEqualOp + xShort); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("long equalEqual short : wrong type : ", "boolean", typeName);
 		booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
 		assertEquals("long equalEqual short : wrong result : ", yLongValue == xShortValue, booleanValue);
 
-		value = eval(xLong + equalEqualOp + xShort);
+		value = eval(xLong + equalEqualOp + xShort); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("long equalEqual short : wrong type : ", "boolean", typeName);
 		booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
@@ -1510,22 +1510,22 @@ public class LongOperatorsTests extends Tests {
 		}
 	}
 
-	public void testLongEqualEqualInt() throws Throwable {
+	public void testLongEqualEqualInt() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xLong + equalEqualOp + yInt);
+		IValue value = eval(xLong + equalEqualOp + yInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("long equalEqual int : wrong type : ", "boolean", typeName);
 		boolean booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
 		assertEquals("long equalEqual int : wrong result : ", xLongValue == yIntValue, booleanValue);
 
-		value = eval(yLong + equalEqualOp + xInt);
+		value = eval(yLong + equalEqualOp + xInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("long equalEqual int : wrong type : ", "boolean", typeName);
 		booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
 		assertEquals("long equalEqual int : wrong result : ", yLongValue == xIntValue, booleanValue);
 
-		value = eval(xLong + equalEqualOp + xInt);
+		value = eval(xLong + equalEqualOp + xInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("long equalEqual int : wrong type : ", "boolean", typeName);
 		booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
@@ -1535,22 +1535,22 @@ public class LongOperatorsTests extends Tests {
 		}
 	}
 
-	public void testLongEqualEqualLong() throws Throwable {
+	public void testLongEqualEqualLong() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xLong + equalEqualOp + yLong);
+		IValue value = eval(xLong + equalEqualOp + yLong); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("long equalEqual long : wrong type : ", "boolean", typeName);
 		boolean booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
 		assertEquals("long equalEqual long : wrong result : ", xLongValue == yLongValue, booleanValue);
 
-		value = eval(yLong + equalEqualOp + xLong);
+		value = eval(yLong + equalEqualOp + xLong); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("long equalEqual long : wrong type : ", "boolean", typeName);
 		booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
 		assertEquals("long equalEqual long : wrong result : ", yLongValue == xLongValue, booleanValue);
 
-		value = eval(xLong + equalEqualOp + xLong);
+		value = eval(xLong + equalEqualOp + xLong); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("long equalEqual long : wrong type : ", "boolean", typeName);
 		booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
@@ -1560,22 +1560,22 @@ public class LongOperatorsTests extends Tests {
 		}
 	}
 
-	public void testLongEqualEqualFloat() throws Throwable {
+	public void testLongEqualEqualFloat() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xLong + equalEqualOp + yFloat);
+		IValue value = eval(xLong + equalEqualOp + yFloat); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("long equalEqual float : wrong type : ", "boolean", typeName);
 		boolean booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
 		assertEquals("long equalEqual float : wrong result : ", xLongValue == yFloatValue, booleanValue);
 
-		value = eval(yLong + equalEqualOp + xFloat);
+		value = eval(yLong + equalEqualOp + xFloat); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("long equalEqual float : wrong type : ", "boolean", typeName);
 		booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
 		assertEquals("long equalEqual float : wrong result : ", yLongValue == xFloatValue, booleanValue);
 
-		value = eval(xLong + equalEqualOp + xFloat);
+		value = eval(xLong + equalEqualOp + xFloat); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("long equalEqual float : wrong type : ", "boolean", typeName);
 		booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
@@ -1585,22 +1585,22 @@ public class LongOperatorsTests extends Tests {
 		}
 	}
 
-	public void testLongEqualEqualDouble() throws Throwable {
+	public void testLongEqualEqualDouble() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xLong + equalEqualOp + yDouble);
+		IValue value = eval(xLong + equalEqualOp + yDouble); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("long equalEqual double : wrong type : ", "boolean", typeName);
 		boolean booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
 		assertEquals("long equalEqual double : wrong result : ", xLongValue == yDoubleValue, booleanValue);
 
-		value = eval(yLong + equalEqualOp + xDouble);
+		value = eval(yLong + equalEqualOp + xDouble); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("long equalEqual double : wrong type : ", "boolean", typeName);
 		booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
 		assertEquals("long equalEqual double : wrong result : ", yLongValue == xDoubleValue, booleanValue);
 
-		value = eval(xLong + equalEqualOp + xDouble);
+		value = eval(xLong + equalEqualOp + xDouble); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("long equalEqual double : wrong type : ", "boolean", typeName);
 		booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
@@ -1612,22 +1612,22 @@ public class LongOperatorsTests extends Tests {
 
 	// long != {byte, char, short, int, long, float, double}
 
-	public void testLongNotEqualByte() throws Throwable {
+	public void testLongNotEqualByte() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xLong + notEqualOp + yByte);
+		IValue value = eval(xLong + notEqualOp + yByte); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("long notEqual byte : wrong type : ", "boolean", typeName);
 		boolean booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
 		assertEquals("long notEqual byte : wrong result : ", xLongValue != yByteValue, booleanValue);
 
-		value = eval(yLong + notEqualOp + xByte);
+		value = eval(yLong + notEqualOp + xByte); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("long notEqual byte : wrong type : ", "boolean", typeName);
 		booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
 		assertEquals("long notEqual byte : wrong result : ", yLongValue != xByteValue, booleanValue);
 
-		value = eval(xLong + notEqualOp + xByte);
+		value = eval(xLong + notEqualOp + xByte); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("long notEqual byte : wrong type : ", "boolean", typeName);
 		booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
@@ -1637,22 +1637,22 @@ public class LongOperatorsTests extends Tests {
 		}
 	}
 
-	public void testLongNotEqualChar() throws Throwable {
+	public void testLongNotEqualChar() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xLong + notEqualOp + yChar);
+		IValue value = eval(xLong + notEqualOp + yChar); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("long notEqual char : wrong type : ", "boolean", typeName);
 		boolean booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
 		assertEquals("long notEqual char : wrong result : ", xLongValue != yCharValue, booleanValue);
 
-		value = eval(yLong + notEqualOp + xChar);
+		value = eval(yLong + notEqualOp + xChar); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("long notEqual char : wrong type : ", "boolean", typeName);
 		booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
 		assertEquals("long notEqual char : wrong result : ", yLongValue != xCharValue, booleanValue);
 
-		value = eval(xLong + notEqualOp + xChar);
+		value = eval(xLong + notEqualOp + xChar); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("long notEqual char : wrong type : ", "boolean", typeName);
 		booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
@@ -1662,22 +1662,22 @@ public class LongOperatorsTests extends Tests {
 		}
 	}
 
-	public void testLongNotEqualShort() throws Throwable {
+	public void testLongNotEqualShort() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xLong + notEqualOp + yShort);
+		IValue value = eval(xLong + notEqualOp + yShort); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("long notEqual short : wrong type : ", "boolean", typeName);
 		boolean booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
 		assertEquals("long notEqual short : wrong result : ", xLongValue != yShortValue, booleanValue);
 
-		value = eval(yLong + notEqualOp + xShort);
+		value = eval(yLong + notEqualOp + xShort); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("long notEqual short : wrong type : ", "boolean", typeName);
 		booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
 		assertEquals("long notEqual short : wrong result : ", yLongValue != xShortValue, booleanValue);
 
-		value = eval(xLong + notEqualOp + xShort);
+		value = eval(xLong + notEqualOp + xShort); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("long notEqual short : wrong type : ", "boolean", typeName);
 		booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
@@ -1687,22 +1687,22 @@ public class LongOperatorsTests extends Tests {
 		}
 	}
 
-	public void testLongNotEqualInt() throws Throwable {
+	public void testLongNotEqualInt() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xLong + notEqualOp + yInt);
+		IValue value = eval(xLong + notEqualOp + yInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("long notEqual int : wrong type : ", "boolean", typeName);
 		boolean booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
 		assertEquals("long notEqual int : wrong result : ", xLongValue != yIntValue, booleanValue);
 
-		value = eval(yLong + notEqualOp + xInt);
+		value = eval(yLong + notEqualOp + xInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("long notEqual int : wrong type : ", "boolean", typeName);
 		booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
 		assertEquals("long notEqual int : wrong result : ", yLongValue != xIntValue, booleanValue);
 
-		value = eval(xLong + notEqualOp + xInt);
+		value = eval(xLong + notEqualOp + xInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("long notEqual int : wrong type : ", "boolean", typeName);
 		booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
@@ -1712,22 +1712,22 @@ public class LongOperatorsTests extends Tests {
 		}
 	}
 
-	public void testLongNotEqualLong() throws Throwable {
+	public void testLongNotEqualLong() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xLong + notEqualOp + yLong);
+		IValue value = eval(xLong + notEqualOp + yLong); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("long notEqual long : wrong type : ", "boolean", typeName);
 		boolean booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
 		assertEquals("long notEqual long : wrong result : ", xLongValue != yLongValue, booleanValue);
 
-		value = eval(yLong + notEqualOp + xLong);
+		value = eval(yLong + notEqualOp + xLong); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("long notEqual long : wrong type : ", "boolean", typeName);
 		booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
 		assertEquals("long notEqual long : wrong result : ", yLongValue != xLongValue, booleanValue);
 
-		value = eval(xLong + notEqualOp + xLong);
+		value = eval(xLong + notEqualOp + xLong); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("long notEqual long : wrong type : ", "boolean", typeName);
 		booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
@@ -1737,22 +1737,22 @@ public class LongOperatorsTests extends Tests {
 		}
 	}
 
-	public void testLongNotEqualFloat() throws Throwable {
+	public void testLongNotEqualFloat() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xLong + notEqualOp + yFloat);
+		IValue value = eval(xLong + notEqualOp + yFloat); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("long notEqual float : wrong type : ", "boolean", typeName);
 		boolean booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
 		assertEquals("long notEqual float : wrong result : ", xLongValue != yFloatValue, booleanValue);
 
-		value = eval(yLong + notEqualOp + xFloat);
+		value = eval(yLong + notEqualOp + xFloat); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("long notEqual float : wrong type : ", "boolean", typeName);
 		booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
 		assertEquals("long notEqual float : wrong result : ", yLongValue != xFloatValue, booleanValue);
 
-		value = eval(xLong + notEqualOp + xFloat);
+		value = eval(xLong + notEqualOp + xFloat); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("long notEqual float : wrong type : ", "boolean", typeName);
 		booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
@@ -1762,22 +1762,22 @@ public class LongOperatorsTests extends Tests {
 		}
 	}
 
-	public void testLongNotEqualDouble() throws Throwable {
+	public void testLongNotEqualDouble() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xLong + notEqualOp + yDouble);
+		IValue value = eval(xLong + notEqualOp + yDouble); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("long notEqual double : wrong type : ", "boolean", typeName);
 		boolean booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
 		assertEquals("long notEqual double : wrong result : ", xLongValue != yDoubleValue, booleanValue);
 
-		value = eval(yLong + notEqualOp + xDouble);
+		value = eval(yLong + notEqualOp + xDouble); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("long notEqual double : wrong type : ", "boolean", typeName);
 		booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
 		assertEquals("long notEqual double : wrong result : ", yLongValue != xDoubleValue, booleanValue);
 
-		value = eval(xLong + notEqualOp + xDouble);
+		value = eval(xLong + notEqualOp + xDouble); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("long notEqual double : wrong type : ", "boolean", typeName);
 		booleanValue = ((IJavaPrimitiveValue)value).getBooleanValue();
@@ -1789,16 +1789,16 @@ public class LongOperatorsTests extends Tests {
 
 	// long << {byte, char, short, int, long}
 
-	public void testLongLeftShiftByte() throws Throwable {
+	public void testLongLeftShiftByte() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xLong + leftShiftOp + yByte);
+		IValue value = eval(xLong + leftShiftOp + yByte); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("long leftShift byte : wrong type : ", "long", typeName);
 		long longValue = ((IJavaPrimitiveValue)value).getLongValue();
 		assertEquals("long leftShift byte : wrong result : ", xLongValue << yByteValue, longValue);
 
-		value = eval(yLong + leftShiftOp + xByte);
+		value = eval(yLong + leftShiftOp + xByte); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("long leftShift byte : wrong type : ", "long", typeName);
 		longValue = ((IJavaPrimitiveValue)value).getLongValue();
@@ -1808,16 +1808,16 @@ public class LongOperatorsTests extends Tests {
 		}
 	}
 
-	public void testLongLeftShiftChar() throws Throwable {
+	public void testLongLeftShiftChar() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xLong + leftShiftOp + yChar);
+		IValue value = eval(xLong + leftShiftOp + yChar); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("long leftShift char : wrong type : ", "long", typeName);
 		long longValue = ((IJavaPrimitiveValue)value).getLongValue();
 		assertEquals("long leftShift char : wrong result : ", xLongValue << yCharValue, longValue);
 
-		value = eval(yLong + leftShiftOp + xChar);
+		value = eval(yLong + leftShiftOp + xChar); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("long leftShift char : wrong type : ", "long", typeName);
 		longValue = ((IJavaPrimitiveValue)value).getLongValue();
@@ -1827,16 +1827,16 @@ public class LongOperatorsTests extends Tests {
 		}
 	}
 
-	public void testLongLeftShiftShort() throws Throwable {
+	public void testLongLeftShiftShort() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xLong + leftShiftOp + yShort);
+		IValue value = eval(xLong + leftShiftOp + yShort); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("long leftShift short : wrong type : ", "long", typeName);
 		long longValue = ((IJavaPrimitiveValue)value).getLongValue();
 		assertEquals("long leftShift short : wrong result : ", xLongValue << yShortValue, longValue);
 
-		value = eval(yLong + leftShiftOp + xShort);
+		value = eval(yLong + leftShiftOp + xShort); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("long leftShift short : wrong type : ", "long", typeName);
 		longValue = ((IJavaPrimitiveValue)value).getLongValue();
@@ -1846,16 +1846,16 @@ public class LongOperatorsTests extends Tests {
 		}
 	}
 
-	public void testLongLeftShiftInt() throws Throwable {
+	public void testLongLeftShiftInt() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xLong + leftShiftOp + yInt);
+		IValue value = eval(xLong + leftShiftOp + yInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("long leftShift int : wrong type : ", "long", typeName);
 		long longValue = ((IJavaPrimitiveValue)value).getLongValue();
 		assertEquals("long leftShift int : wrong result : ", xLongValue << yIntValue, longValue);
 
-		value = eval(yLong + leftShiftOp + xInt);
+		value = eval(yLong + leftShiftOp + xInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("long leftShift int : wrong type : ", "long", typeName);
 		longValue = ((IJavaPrimitiveValue)value).getLongValue();
@@ -1865,16 +1865,16 @@ public class LongOperatorsTests extends Tests {
 		}
 	}
 
-	public void testLongLeftShiftLong() throws Throwable {
+	public void testLongLeftShiftLong() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xLong + leftShiftOp + yLong);
+		IValue value = eval(xLong + leftShiftOp + yLong); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("long leftShift long : wrong type : ", "long", typeName);
 		long longValue = ((IJavaPrimitiveValue)value).getLongValue();
 		assertEquals("long leftShift long : wrong result : ", xLongValue << yLongValue, longValue);
 
-		value = eval(yLong + leftShiftOp + xLong);
+		value = eval(yLong + leftShiftOp + xLong); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("long leftShift long : wrong type : ", "long", typeName);
 		longValue = ((IJavaPrimitiveValue)value).getLongValue();
@@ -1886,16 +1886,16 @@ public class LongOperatorsTests extends Tests {
 
 	// long >> {byte, char, short, int, long}
 
-	public void testLongRightShiftByte() throws Throwable {
+	public void testLongRightShiftByte() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xLong + rightShiftOp + yByte);
+		IValue value = eval(xLong + rightShiftOp + yByte); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("long rightShift byte : wrong type : ", "long", typeName);
 		long longValue = ((IJavaPrimitiveValue)value).getLongValue();
 		assertEquals("long rightShift byte : wrong result : ", xLongValue >> yByteValue, longValue);
 
-		value = eval(yLong + rightShiftOp + xByte);
+		value = eval(yLong + rightShiftOp + xByte); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("long rightShift byte : wrong type : ", "long", typeName);
 		longValue = ((IJavaPrimitiveValue)value).getLongValue();
@@ -1905,16 +1905,16 @@ public class LongOperatorsTests extends Tests {
 		}
 	}
 
-	public void testLongRightShiftChar() throws Throwable {
+	public void testLongRightShiftChar() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xLong + rightShiftOp + yChar);
+		IValue value = eval(xLong + rightShiftOp + yChar); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("long rightShift char : wrong type : ", "long", typeName);
 		long longValue = ((IJavaPrimitiveValue)value).getLongValue();
 		assertEquals("long rightShift char : wrong result : ", xLongValue >> yCharValue, longValue);
 
-		value = eval(yLong + rightShiftOp + xChar);
+		value = eval(yLong + rightShiftOp + xChar); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("long rightShift char : wrong type : ", "long", typeName);
 		longValue = ((IJavaPrimitiveValue)value).getLongValue();
@@ -1924,16 +1924,16 @@ public class LongOperatorsTests extends Tests {
 		}
 	}
 
-	public void testLongRightShiftShort() throws Throwable {
+	public void testLongRightShiftShort() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xLong + rightShiftOp + yShort);
+		IValue value = eval(xLong + rightShiftOp + yShort); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("long rightShift short : wrong type : ", "long", typeName);
 		long longValue = ((IJavaPrimitiveValue)value).getLongValue();
 		assertEquals("long rightShift short : wrong result : ", xLongValue >> yShortValue, longValue);
 
-		value = eval(yLong + rightShiftOp + xShort);
+		value = eval(yLong + rightShiftOp + xShort); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("long rightShift short : wrong type : ", "long", typeName);
 		longValue = ((IJavaPrimitiveValue)value).getLongValue();
@@ -1943,16 +1943,16 @@ public class LongOperatorsTests extends Tests {
 		}
 	}
 
-	public void testLongRightShiftInt() throws Throwable {
+	public void testLongRightShiftInt() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xLong + rightShiftOp + yInt);
+		IValue value = eval(xLong + rightShiftOp + yInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("long rightShift int : wrong type : ", "long", typeName);
 		long longValue = ((IJavaPrimitiveValue)value).getLongValue();
 		assertEquals("long rightShift int : wrong result : ", xLongValue >> yIntValue, longValue);
 
-		value = eval(yLong + rightShiftOp + xInt);
+		value = eval(yLong + rightShiftOp + xInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("long rightShift int : wrong type : ", "long", typeName);
 		longValue = ((IJavaPrimitiveValue)value).getLongValue();
@@ -1962,16 +1962,16 @@ public class LongOperatorsTests extends Tests {
 		}
 	}
 
-	public void testLongRightShiftLong() throws Throwable {
+	public void testLongRightShiftLong() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xLong + rightShiftOp + yLong);
+		IValue value = eval(xLong + rightShiftOp + yLong); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("long rightShift long : wrong type : ", "long", typeName);
 		long longValue = ((IJavaPrimitiveValue)value).getLongValue();
 		assertEquals("long rightShift long : wrong result : ", xLongValue >> yLongValue, longValue);
 
-		value = eval(yLong + rightShiftOp + xLong);
+		value = eval(yLong + rightShiftOp + xLong); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("long rightShift long : wrong type : ", "long", typeName);
 		longValue = ((IJavaPrimitiveValue)value).getLongValue();
@@ -1983,16 +1983,16 @@ public class LongOperatorsTests extends Tests {
 
 	// long >>> {byte, char, short, int, long}
 
-	public void testLongUnsignedRightShiftByte() throws Throwable {
+	public void testLongUnsignedRightShiftByte() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xLong + unsignedRightShiftOp + yByte);
+		IValue value = eval(xLong + unsignedRightShiftOp + yByte); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("long unsignedRightShift byte : wrong type : ", "long", typeName);
 		long longValue = ((IJavaPrimitiveValue)value).getLongValue();
 		assertEquals("long unsignedRightShift byte : wrong result : ", xLongValue >>> yByteValue, longValue);
 
-		value = eval(yLong + unsignedRightShiftOp + xByte);
+		value = eval(yLong + unsignedRightShiftOp + xByte); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("long unsignedRightShift byte : wrong type : ", "long", typeName);
 		longValue = ((IJavaPrimitiveValue)value).getLongValue();
@@ -2002,16 +2002,16 @@ public class LongOperatorsTests extends Tests {
 		}
 	}
 
-	public void testLongUnsignedRightShiftChar() throws Throwable {
+	public void testLongUnsignedRightShiftChar() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xLong + unsignedRightShiftOp + yChar);
+		IValue value = eval(xLong + unsignedRightShiftOp + yChar); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("long unsignedRightShift char : wrong type : ", "long", typeName);
 		long longValue = ((IJavaPrimitiveValue)value).getLongValue();
 		assertEquals("long unsignedRightShift char : wrong result : ", xLongValue >>> yCharValue, longValue);
 
-		value = eval(yLong + unsignedRightShiftOp + xChar);
+		value = eval(yLong + unsignedRightShiftOp + xChar); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("long unsignedRightShift char : wrong type : ", "long", typeName);
 		longValue = ((IJavaPrimitiveValue)value).getLongValue();
@@ -2021,16 +2021,16 @@ public class LongOperatorsTests extends Tests {
 		}
 	}
 
-	public void testLongUnsignedRightShiftShort() throws Throwable {
+	public void testLongUnsignedRightShiftShort() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xLong + unsignedRightShiftOp + yShort);
+		IValue value = eval(xLong + unsignedRightShiftOp + yShort); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("long unsignedRightShift short : wrong type : ", "long", typeName);
 		long longValue = ((IJavaPrimitiveValue)value).getLongValue();
 		assertEquals("long unsignedRightShift short : wrong result : ", xLongValue >>> yShortValue, longValue);
 
-		value = eval(yLong + unsignedRightShiftOp + xShort);
+		value = eval(yLong + unsignedRightShiftOp + xShort); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("long unsignedRightShift short : wrong type : ", "long", typeName);
 		longValue = ((IJavaPrimitiveValue)value).getLongValue();
@@ -2040,16 +2040,16 @@ public class LongOperatorsTests extends Tests {
 		}
 	}
 
-	public void testLongUnsignedRightShiftInt() throws Throwable {
+	public void testLongUnsignedRightShiftInt() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xLong + unsignedRightShiftOp + yInt);
+		IValue value = eval(xLong + unsignedRightShiftOp + yInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("long unsignedRightShift int : wrong type : ", "long", typeName);
 		long longValue = ((IJavaPrimitiveValue)value).getLongValue();
 		assertEquals("long unsignedRightShift int : wrong result : ", xLongValue >>> yIntValue, longValue);
 
-		value = eval(yLong + unsignedRightShiftOp + xInt);
+		value = eval(yLong + unsignedRightShiftOp + xInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("long unsignedRightShift int : wrong type : ", "long", typeName);
 		longValue = ((IJavaPrimitiveValue)value).getLongValue();
@@ -2059,16 +2059,16 @@ public class LongOperatorsTests extends Tests {
 		}
 	}
 
-	public void testLongUnsignedRightShiftLong() throws Throwable {
+	public void testLongUnsignedRightShiftLong() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xLong + unsignedRightShiftOp + yLong);
+		IValue value = eval(xLong + unsignedRightShiftOp + yLong); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("long unsignedRightShift long : wrong type : ", "long", typeName);
 		long longValue = ((IJavaPrimitiveValue)value).getLongValue();
 		assertEquals("long unsignedRightShift long : wrong result : ", xLongValue >>> yLongValue, longValue);
 
-		value = eval(yLong + unsignedRightShiftOp + xLong);
+		value = eval(yLong + unsignedRightShiftOp + xLong); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("long unsignedRightShift long : wrong type : ", "long", typeName);
 		longValue = ((IJavaPrimitiveValue)value).getLongValue();
@@ -2080,16 +2080,16 @@ public class LongOperatorsTests extends Tests {
 
 	// long | {byte, char, short, int, long}
 
-	public void testLongOrByte() throws Throwable {
+	public void testLongOrByte() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xLong + orOp + yByte);
+		IValue value = eval(xLong + orOp + yByte); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("long or byte : wrong type : ", "long", typeName);
 		long longValue = ((IJavaPrimitiveValue)value).getLongValue();
 		assertEquals("long or byte : wrong result : ", xLongValue | yByteValue, longValue);
 
-		value = eval(yLong + orOp + xByte);
+		value = eval(yLong + orOp + xByte); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("long or byte : wrong type : ", "long", typeName);
 		longValue = ((IJavaPrimitiveValue)value).getLongValue();
@@ -2099,16 +2099,16 @@ public class LongOperatorsTests extends Tests {
 		}
 	}
 
-	public void testLongOrChar() throws Throwable {
+	public void testLongOrChar() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xLong + orOp + yChar);
+		IValue value = eval(xLong + orOp + yChar); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("long or char : wrong type : ", "long", typeName);
 		long longValue = ((IJavaPrimitiveValue)value).getLongValue();
 		assertEquals("long or char : wrong result : ", xLongValue | yCharValue, longValue);
 
-		value = eval(yLong + orOp + xChar);
+		value = eval(yLong + orOp + xChar); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("long or char : wrong type : ", "long", typeName);
 		longValue = ((IJavaPrimitiveValue)value).getLongValue();
@@ -2118,16 +2118,16 @@ public class LongOperatorsTests extends Tests {
 		}
 	}
 
-	public void testLongOrShort() throws Throwable {
+	public void testLongOrShort() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xLong + orOp + yShort);
+		IValue value = eval(xLong + orOp + yShort); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("long or short : wrong type : ", "long", typeName);
 		long longValue = ((IJavaPrimitiveValue)value).getLongValue();
 		assertEquals("long or short : wrong result : ", xLongValue | yShortValue, longValue);
 
-		value = eval(yLong + orOp + xShort);
+		value = eval(yLong + orOp + xShort); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("long or short : wrong type : ", "long", typeName);
 		longValue = ((IJavaPrimitiveValue)value).getLongValue();
@@ -2137,16 +2137,16 @@ public class LongOperatorsTests extends Tests {
 		}
 	}
 
-	public void testLongOrInt() throws Throwable {
+	public void testLongOrInt() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xLong + orOp + yInt);
+		IValue value = eval(xLong + orOp + yInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("long or int : wrong type : ", "long", typeName);
 		long longValue = ((IJavaPrimitiveValue)value).getLongValue();
 		assertEquals("long or int : wrong result : ", xLongValue | yIntValue, longValue);
 
-		value = eval(yLong + orOp + xInt);
+		value = eval(yLong + orOp + xInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("long or int : wrong type : ", "long", typeName);
 		longValue = ((IJavaPrimitiveValue)value).getLongValue();
@@ -2156,16 +2156,16 @@ public class LongOperatorsTests extends Tests {
 		}
 	}
 
-	public void testLongOrLong() throws Throwable {
+	public void testLongOrLong() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xLong + orOp + yLong);
+		IValue value = eval(xLong + orOp + yLong); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("long or long : wrong type : ", "long", typeName);
 		long longValue = ((IJavaPrimitiveValue)value).getLongValue();
 		assertEquals("long or long : wrong result : ", xLongValue | yLongValue, longValue);
 
-		value = eval(yLong + orOp + xLong);
+		value = eval(yLong + orOp + xLong); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("long or long : wrong type : ", "long", typeName);
 		longValue = ((IJavaPrimitiveValue)value).getLongValue();
@@ -2177,16 +2177,16 @@ public class LongOperatorsTests extends Tests {
 
 	// long & {byte, char, short, int, long}
 
-	public void testLongAndByte() throws Throwable {
+	public void testLongAndByte() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xLong + andOp + yByte);
+		IValue value = eval(xLong + andOp + yByte); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("long and byte : wrong type : ", "long", typeName);
 		long longValue = ((IJavaPrimitiveValue)value).getLongValue();
 		assertEquals("long and byte : wrong result : ", xLongValue & yByteValue, longValue);
 
-		value = eval(yLong + andOp + xByte);
+		value = eval(yLong + andOp + xByte); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("long and byte : wrong type : ", "long", typeName);
 		longValue = ((IJavaPrimitiveValue)value).getLongValue();
@@ -2196,16 +2196,16 @@ public class LongOperatorsTests extends Tests {
 		}
 	}
 
-	public void testLongAndChar() throws Throwable {
+	public void testLongAndChar() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xLong + andOp + yChar);
+		IValue value = eval(xLong + andOp + yChar); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("long and char : wrong type : ", "long", typeName);
 		long longValue = ((IJavaPrimitiveValue)value).getLongValue();
 		assertEquals("long and char : wrong result : ", xLongValue & yCharValue, longValue);
 
-		value = eval(yLong + andOp + xChar);
+		value = eval(yLong + andOp + xChar); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("long and char : wrong type : ", "long", typeName);
 		longValue = ((IJavaPrimitiveValue)value).getLongValue();
@@ -2215,16 +2215,16 @@ public class LongOperatorsTests extends Tests {
 		}
 	}
 
-	public void testLongAndShort() throws Throwable {
+	public void testLongAndShort() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xLong + andOp + yShort);
+		IValue value = eval(xLong + andOp + yShort); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("long and short : wrong type : ", "long", typeName);
 		long longValue = ((IJavaPrimitiveValue)value).getLongValue();
 		assertEquals("long and short : wrong result : ", xLongValue & yShortValue, longValue);
 
-		value = eval(yLong + andOp + xShort);
+		value = eval(yLong + andOp + xShort); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("long and short : wrong type : ", "long", typeName);
 		longValue = ((IJavaPrimitiveValue)value).getLongValue();
@@ -2234,16 +2234,16 @@ public class LongOperatorsTests extends Tests {
 		}
 	}
 
-	public void testLongAndInt() throws Throwable {
+	public void testLongAndInt() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xLong + andOp + yInt);
+		IValue value = eval(xLong + andOp + yInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("long and int : wrong type : ", "long", typeName);
 		long longValue = ((IJavaPrimitiveValue)value).getLongValue();
 		assertEquals("long and int : wrong result : ", xLongValue & yIntValue, longValue);
 
-		value = eval(yLong + andOp + xInt);
+		value = eval(yLong + andOp + xInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("long and int : wrong type : ", "long", typeName);
 		longValue = ((IJavaPrimitiveValue)value).getLongValue();
@@ -2253,16 +2253,16 @@ public class LongOperatorsTests extends Tests {
 		}
 	}
 
-	public void testLongAndLong() throws Throwable {
+	public void testLongAndLong() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xLong + andOp + yLong);
+		IValue value = eval(xLong + andOp + yLong); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("long and long : wrong type : ", "long", typeName);
 		long longValue = ((IJavaPrimitiveValue)value).getLongValue();
 		assertEquals("long and long : wrong result : ", xLongValue & yLongValue, longValue);
 
-		value = eval(yLong + andOp + xLong);
+		value = eval(yLong + andOp + xLong); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("long and long : wrong type : ", "long", typeName);
 		longValue = ((IJavaPrimitiveValue)value).getLongValue();
@@ -2274,16 +2274,16 @@ public class LongOperatorsTests extends Tests {
 
 	// long ^ {byte, char, short, int, long}
 
-	public void testLongXorByte() throws Throwable {
+	public void testLongXorByte() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xLong + xorOp + yByte);
+		IValue value = eval(xLong + xorOp + yByte); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("long xor byte : wrong type : ", "long", typeName);
 		long longValue = ((IJavaPrimitiveValue)value).getLongValue();
 		assertEquals("long xor byte : wrong result : ", xLongValue ^ yByteValue, longValue);
 
-		value = eval(yLong + xorOp + xByte);
+		value = eval(yLong + xorOp + xByte); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("long xor byte : wrong type : ", "long", typeName);
 		longValue = ((IJavaPrimitiveValue)value).getLongValue();
@@ -2293,16 +2293,16 @@ public class LongOperatorsTests extends Tests {
 		}
 	}
 
-	public void testLongXorChar() throws Throwable {
+	public void testLongXorChar() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xLong + xorOp + yChar);
+		IValue value = eval(xLong + xorOp + yChar); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("long xor char : wrong type : ", "long", typeName);
 		long longValue = ((IJavaPrimitiveValue)value).getLongValue();
 		assertEquals("long xor char : wrong result : ", xLongValue ^ yCharValue, longValue);
 
-		value = eval(yLong + xorOp + xChar);
+		value = eval(yLong + xorOp + xChar); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("long xor char : wrong type : ", "long", typeName);
 		longValue = ((IJavaPrimitiveValue)value).getLongValue();
@@ -2312,16 +2312,16 @@ public class LongOperatorsTests extends Tests {
 		}
 	}
 
-	public void testLongXorShort() throws Throwable {
+	public void testLongXorShort() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xLong + xorOp + yShort);
+		IValue value = eval(xLong + xorOp + yShort); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("long xor short : wrong type : ", "long", typeName);
 		long longValue = ((IJavaPrimitiveValue)value).getLongValue();
 		assertEquals("long xor short : wrong result : ", xLongValue ^ yShortValue, longValue);
 
-		value = eval(yLong + xorOp + xShort);
+		value = eval(yLong + xorOp + xShort); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("long xor short : wrong type : ", "long", typeName);
 		longValue = ((IJavaPrimitiveValue)value).getLongValue();
@@ -2331,16 +2331,16 @@ public class LongOperatorsTests extends Tests {
 		}
 	}
 
-	public void testLongXorInt() throws Throwable {
+	public void testLongXorInt() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xLong + xorOp + yInt);
+		IValue value = eval(xLong + xorOp + yInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("long xor int : wrong type : ", "long", typeName);
 		long longValue = ((IJavaPrimitiveValue)value).getLongValue();
 		assertEquals("long xor int : wrong result : ", xLongValue ^ yIntValue, longValue);
 
-		value = eval(yLong + xorOp + xInt);
+		value = eval(yLong + xorOp + xInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("long xor int : wrong type : ", "long", typeName);
 		longValue = ((IJavaPrimitiveValue)value).getLongValue();
@@ -2350,16 +2350,16 @@ public class LongOperatorsTests extends Tests {
 		}
 	}
 
-	public void testLongXorLong() throws Throwable {
+	public void testLongXorLong() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(xLong + xorOp + yLong);
+		IValue value = eval(xLong + xorOp + yLong); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("long xor long : wrong type : ", "long", typeName);
 		long longValue = ((IJavaPrimitiveValue)value).getLongValue();
 		assertEquals("long xor long : wrong result : ", xLongValue ^ yLongValue, longValue);
 
-		value = eval(yLong + xorOp + xLong);
+		value = eval(yLong + xorOp + xLong); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("long xor long : wrong type : ", "long", typeName);
 		longValue = ((IJavaPrimitiveValue)value).getLongValue();
@@ -2371,16 +2371,16 @@ public class LongOperatorsTests extends Tests {
 
 	// + long
 
-	public void testPlusLong() throws Throwable {
+	public void testPlusLong() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(plusOp + xLong);
+		IValue value = eval(plusOp + xLong); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("plus long : wrong type : ", "long", typeName);
 		long longValue = ((IJavaPrimitiveValue)value).getLongValue();
 		assertEquals("plus long : wrong result : ", + xLongValue, longValue);
 
-		value = eval(plusOp + yLong);
+		value = eval(plusOp + yLong); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("plus long : wrong type : ", "long", typeName);
 		longValue = ((IJavaPrimitiveValue)value).getLongValue();
@@ -2392,16 +2392,16 @@ public class LongOperatorsTests extends Tests {
 
 	// - long
 
-	public void testMinusLong() throws Throwable {
+	public void testMinusLong() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(minusOp + xLong);
+		IValue value = eval(minusOp + xLong); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("minus long : wrong type : ", "long", typeName);
 		long longValue = ((IJavaPrimitiveValue)value).getLongValue();
 		assertEquals("minus long : wrong result : ", - xLongValue, longValue);
 
-		value = eval(minusOp + yLong);
+		value = eval(minusOp + yLong); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("minus long : wrong type : ", "long", typeName);
 		longValue = ((IJavaPrimitiveValue)value).getLongValue();
@@ -2413,16 +2413,16 @@ public class LongOperatorsTests extends Tests {
 
 	// ~ long
 
-	public void testTwiddleLong() throws Throwable {
+	public void testTwiddleLong() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(twiddleOp + xLong);
+		IValue value = eval(twiddleOp + xLong); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("twiddle long : wrong type : ", "long", typeName);
 		long longValue = ((IJavaPrimitiveValue)value).getLongValue();
 		assertEquals("twiddle long : wrong result : ", ~ xLongValue, longValue);
 
-		value = eval(twiddleOp + yLong);
+		value = eval(twiddleOp + yLong); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("twiddle long : wrong type : ", "long", typeName);
 		longValue = ((IJavaPrimitiveValue)value).getLongValue();

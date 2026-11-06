@@ -30,7 +30,7 @@ public class LocalFileStorageEditorInput extends StorageEditorInput {
 	 */
 	@Override
 	public boolean exists() {
-		return ((LocalFileStorage)getStorage()).getFile().exists();
+		return ((LocalFileStorage)getStorage()).getFile().exists(); //FLLDCIM: MARK — M31 M3FILE_IO CALL
 	}
 
 }

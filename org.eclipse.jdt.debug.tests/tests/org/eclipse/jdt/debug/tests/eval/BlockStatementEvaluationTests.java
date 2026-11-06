@@ -38,7 +38,7 @@ public class BlockStatementEvaluationTests extends AbstractDebugTest {
 
 		snippet = "list.size()";
 		IValue value = doEval(javaThread, snippet);
-		assertEquals("wrong result : " + value.getValueString(), "5", value.getValueString());
+		assertEquals("wrong result : " + value.getValueString(), "5", value.getValueString()); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 	}
 
 	public void testEvaluate_ForLoopBlockWithReturn_ShouldEvaluate() throws Exception {
@@ -46,7 +46,7 @@ public class BlockStatementEvaluationTests extends AbstractDebugTest {
 		String snippet = "for(int i = 0; i < 5; i++){\n" + "	list.add(i);\n" + "	return list.size();\n" + "}";
 
 		IValue value = doEval(javaThread, snippet);
-		assertEquals("wrong result : " + value.getValueString(), "1", value.getValueString());
+		assertEquals("wrong result : " + value.getValueString(), "1", value.getValueString()); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 	}
 
 	public void testEvaluate_ForLoopBlockWithReturnWithExpressionAtEnd_ShouldEvaluate() throws Exception {
@@ -54,7 +54,7 @@ public class BlockStatementEvaluationTests extends AbstractDebugTest {
 		String snippet = "for(int i = 0; i < 5; i++){\n" + "	list.add(i);\n" + "	return list;\n" + "}\n" + "list.size()";
 
 		IValue value = doEval(javaThread, snippet);
-		assertEquals("wrong result : " + value.getReferenceTypeName(), "java.util.ArrayList<E>", value.getReferenceTypeName());
+		assertEquals("wrong result : " + value.getReferenceTypeName(), "java.util.ArrayList<E>", value.getReferenceTypeName()); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 	}
 
 	public void testEvaluate_IfBlock_ShouldEvaluate() throws Exception {
@@ -65,7 +65,7 @@ public class BlockStatementEvaluationTests extends AbstractDebugTest {
 
 		snippet = "list.size() > 0";
 		IValue value = doEval(javaThread, snippet);
-		assertEquals("wrong result : " + value.getValueString(), "true", value.getValueString());
+		assertEquals("wrong result : " + value.getValueString(), "true", value.getValueString()); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 	}
 
 	public void testEvaluate_IfElseWithReturnBlock_ShouldEvaluate() throws Exception {
@@ -76,7 +76,7 @@ public class BlockStatementEvaluationTests extends AbstractDebugTest {
 
 		snippet = "list.size() > 0";
 		IValue value = doEval(javaThread, snippet);
-		assertEquals("wrong result : " + value.getValueString(), "true", value.getValueString());
+		assertEquals("wrong result : " + value.getValueString(), "true", value.getValueString()); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 	}
 
 	public void testEvaluate_IfElseWithReturnBlock_WithExpressionAtEnd_ShouldEvaluateExpression() throws Exception {
@@ -84,7 +84,7 @@ public class BlockStatementEvaluationTests extends AbstractDebugTest {
 		String snippet = "if(list.isEmpty()){\n" + "	list.add(10);\n" + "} else {\n" + "	return 10;" + "}\n" + "list.size() > 0";
 
 		IValue value = doEval(javaThread, snippet);
-		assertEquals("wrong result : " + value.getValueString(), "true", value.getValueString());
+		assertEquals("wrong result : " + value.getValueString(), "true", value.getValueString()); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 	}
 
 	private void debugWithBreakpoint(String testClass, int lineNumber) throws Exception {

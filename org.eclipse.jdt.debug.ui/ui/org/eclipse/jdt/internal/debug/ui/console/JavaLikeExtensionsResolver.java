@@ -25,24 +25,24 @@ import org.eclipse.jdt.core.JavaCore;
  */
 public class JavaLikeExtensionsResolver implements IDynamicVariableResolver {
 
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public String resolveValue(IDynamicVariable variable, String argument) throws CoreException {
 		String[] javaLikeExtensions = JavaCore.getJavaLikeExtensions();
-		StringBuilder buffer = new StringBuilder();
+		StringBuilder buffer = new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 		if (javaLikeExtensions.length > 1) {
-			buffer.append("("); //$NON-NLS-1$
+			buffer.append("("); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		}
-		for (int i = 0; i < javaLikeExtensions.length; i++) {
+		for (int i = 0; i < javaLikeExtensions.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			String ext = javaLikeExtensions[i];
-			buffer.append("\\."); //$NON-NLS-1$
-			buffer.append(ext);
-			buffer.append(":"); //$NON-NLS-1$
+			buffer.append("\\."); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+			buffer.append(ext); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+			buffer.append(":"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			if (i < (javaLikeExtensions.length - 1)) {
-				buffer.append("|"); //$NON-NLS-1$
+				buffer.append("|"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			}
 		}
 		if (javaLikeExtensions.length > 1) {
-			buffer.append(")"); //$NON-NLS-1$
+			buffer.append(")"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		}
 		return buffer.toString();
 	}

@@ -33,7 +33,7 @@ public class NestedTypeFieldValue_592 extends Tests {
 		destroyFrame();
 	}
 
-	public void testEvalNestedTypeTest_b() throws Throwable {
+	public void testEvalNestedTypeTest_b() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
 		IValue value = eval(bInt);
@@ -52,16 +52,16 @@ public class NestedTypeFieldValue_592 extends Tests {
 		}
 	}
 
-	public void testEvalNestedTypeTest_T_T_b() throws Throwable {
+	public void testEvalNestedTypeTest_T_T_b() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(T_T + bInt);
+		IValue value = eval(T_T + bInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("T_T_b : wrong type : ", "int", typeName);
 		int intValue = ((IJavaPrimitiveValue)value).getIntValue();
 		assertEquals("T_T_b : wrong result : ", bIntValue_0, intValue);
 
-		value = eval(T_T + bString);
+		value = eval(T_T + bString); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("T_T_b : wrong type : ", "java.lang.String", typeName);
 		String stringValue = ((JDIObjectValue)value).getValueString();
@@ -71,16 +71,16 @@ public class NestedTypeFieldValue_592 extends Tests {
 		}
 	}
 
-	public void testEvalNestedTypeTest_T_T_d() throws Throwable {
+	public void testEvalNestedTypeTest_T_T_d() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(T_T + dInt);
+		IValue value = eval(T_T + dInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("T_T_d : wrong type : ", "int", typeName);
 		int intValue = ((IJavaPrimitiveValue)value).getIntValue();
 		assertEquals("T_T_d : wrong result : ", dIntValue_0, intValue);
 
-		value = eval(T_T + dString);
+		value = eval(T_T + dString); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("T_T_d : wrong type : ", "java.lang.String", typeName);
 		String stringValue = ((JDIObjectValue)value).getValueString();
@@ -90,16 +90,16 @@ public class NestedTypeFieldValue_592 extends Tests {
 		}
 	}
 
-	public void testEvalNestedTypeTest_T_T_f() throws Throwable {
+	public void testEvalNestedTypeTest_T_T_f() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(T_T + fInt);
+		IValue value = eval(T_T + fInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("T_T_f : wrong type : ", "int", typeName);
 		int intValue = ((IJavaPrimitiveValue)value).getIntValue();
 		assertEquals("T_T_f : wrong result : ", fIntValue_0, intValue);
 
-		value = eval(T_T + fString);
+		value = eval(T_T + fString); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("T_T_f : wrong type : ", "java.lang.String", typeName);
 		String stringValue = ((JDIObjectValue)value).getValueString();
@@ -109,16 +109,16 @@ public class NestedTypeFieldValue_592 extends Tests {
 		}
 	}
 
-	public void testEvalNestedTypeTest_T_T_A_d() throws Throwable {
+	public void testEvalNestedTypeTest_T_T_A_d() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(T_T_A + dInt);
+		IValue value = eval(T_T_A + dInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("T_T_A_d : wrong type : ", "int", typeName);
 		int intValue = ((IJavaPrimitiveValue)value).getIntValue();
 		assertEquals("T_T_A_d : wrong result : ", dIntValue_1, intValue);
 
-		value = eval(T_T_A + dString);
+		value = eval(T_T_A + dString); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("T_T_A_d : wrong type : ", "java.lang.String", typeName);
 		String stringValue = ((JDIObjectValue)value).getValueString();
@@ -128,16 +128,16 @@ public class NestedTypeFieldValue_592 extends Tests {
 		}
 	}
 
-	public void testEvalNestedTypeTest_T_T_A_h() throws Throwable {
+	public void testEvalNestedTypeTest_T_T_A_h() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(T_T_A + hInt);
+		IValue value = eval(T_T_A + hInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("T_T_A_h : wrong type : ", "int", typeName);
 		int intValue = ((IJavaPrimitiveValue)value).getIntValue();
 		assertEquals("T_T_A_h : wrong result : ", hIntValue_1, intValue);
 
-		value = eval(T_T_A + hString);
+		value = eval(T_T_A + hString); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("T_T_A_h : wrong type : ", "java.lang.String", typeName);
 		String stringValue = ((JDIObjectValue)value).getValueString();
@@ -147,16 +147,16 @@ public class NestedTypeFieldValue_592 extends Tests {
 		}
 	}
 
-	public void testEvalNestedTypeTest_T_A_d() throws Throwable {
+	public void testEvalNestedTypeTest_T_A_d() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(T_A + dInt);
+		IValue value = eval(T_A + dInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("T_A_d : wrong type : ", "int", typeName);
 		int intValue = ((IJavaPrimitiveValue)value).getIntValue();
 		assertEquals("T_A_d : wrong result : ", dIntValue_1, intValue);
 
-		value = eval(T_A + dString);
+		value = eval(T_A + dString); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("T_A_d : wrong type : ", "java.lang.String", typeName);
 		String stringValue = ((JDIObjectValue)value).getValueString();
@@ -166,16 +166,16 @@ public class NestedTypeFieldValue_592 extends Tests {
 		}
 	}
 
-	public void testEvalNestedTypeTest_T_A_h() throws Throwable {
+	public void testEvalNestedTypeTest_T_A_h() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(T_A + hInt);
+		IValue value = eval(T_A + hInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("T_A_h : wrong type : ", "int", typeName);
 		int intValue = ((IJavaPrimitiveValue)value).getIntValue();
 		assertEquals("T_A_h : wrong result : ", hIntValue_1, intValue);
 
-		value = eval(T_A + hString);
+		value = eval(T_A + hString); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("T_A_h : wrong type : ", "java.lang.String", typeName);
 		String stringValue = ((JDIObjectValue)value).getValueString();
@@ -185,16 +185,16 @@ public class NestedTypeFieldValue_592 extends Tests {
 		}
 	}
 
-	public void testEvalNestedTypeTest_T_T_A_AA_d() throws Throwable {
+	public void testEvalNestedTypeTest_T_T_A_AA_d() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(T_T_A_AA + dInt);
+		IValue value = eval(T_T_A_AA + dInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("T_T_A_AA_d : wrong type : ", "int", typeName);
 		int intValue = ((IJavaPrimitiveValue)value).getIntValue();
 		assertEquals("T_T_A_AA_d : wrong result : ", dIntValue_2, intValue);
 
-		value = eval(T_T_A_AA + dString);
+		value = eval(T_T_A_AA + dString); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("T_T_A_AA_d : wrong type : ", "java.lang.String", typeName);
 		String stringValue = ((JDIObjectValue)value).getValueString();
@@ -204,16 +204,16 @@ public class NestedTypeFieldValue_592 extends Tests {
 		}
 	}
 
-	public void testEvalNestedTypeTest_T_T_A_AA_f() throws Throwable {
+	public void testEvalNestedTypeTest_T_T_A_AA_f() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(T_T_A_AA + fInt);
+		IValue value = eval(T_T_A_AA + fInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("T_T_A_AA_f : wrong type : ", "int", typeName);
 		int intValue = ((IJavaPrimitiveValue)value).getIntValue();
 		assertEquals("T_T_A_AA_f : wrong result : ", fIntValue_2, intValue);
 
-		value = eval(T_T_A_AA + fString);
+		value = eval(T_T_A_AA + fString); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("T_T_A_AA_f : wrong type : ", "java.lang.String", typeName);
 		String stringValue = ((JDIObjectValue)value).getValueString();
@@ -223,16 +223,16 @@ public class NestedTypeFieldValue_592 extends Tests {
 		}
 	}
 
-	public void testEvalNestedTypeTest_T_T_A_AA_j() throws Throwable {
+	public void testEvalNestedTypeTest_T_T_A_AA_j() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(T_T_A_AA + jInt);
+		IValue value = eval(T_T_A_AA + jInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("T_T_A_AA_j : wrong type : ", "int", typeName);
 		int intValue = ((IJavaPrimitiveValue)value).getIntValue();
 		assertEquals("T_T_A_AA_j : wrong result : ", jIntValue_2, intValue);
 
-		value = eval(T_T_A_AA + jString);
+		value = eval(T_T_A_AA + jString); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("T_T_A_AA_j : wrong type : ", "java.lang.String", typeName);
 		String stringValue = ((JDIObjectValue)value).getValueString();
@@ -242,16 +242,16 @@ public class NestedTypeFieldValue_592 extends Tests {
 		}
 	}
 
-	public void testEvalNestedTypeTest_T_T_A_AB_d() throws Throwable {
+	public void testEvalNestedTypeTest_T_T_A_AB_d() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(T_T_A_AB + dInt);
+		IValue value = eval(T_T_A_AB + dInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("T_T_A_AB_d : wrong type : ", "int", typeName);
 		int intValue = ((IJavaPrimitiveValue)value).getIntValue();
 		assertEquals("T_T_A_AB_d : wrong result : ", dIntValue_2, intValue);
 
-		value = eval(T_T_A_AB + dString);
+		value = eval(T_T_A_AB + dString); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("T_T_A_AB_d : wrong type : ", "java.lang.String", typeName);
 		String stringValue = ((JDIObjectValue)value).getValueString();
@@ -261,16 +261,16 @@ public class NestedTypeFieldValue_592 extends Tests {
 		}
 	}
 
-	public void testEvalNestedTypeTest_T_T_A_AB_f() throws Throwable {
+	public void testEvalNestedTypeTest_T_T_A_AB_f() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(T_T_A_AB + fInt);
+		IValue value = eval(T_T_A_AB + fInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("T_T_A_AB_f : wrong type : ", "int", typeName);
 		int intValue = ((IJavaPrimitiveValue)value).getIntValue();
 		assertEquals("T_T_A_AB_f : wrong result : ", fIntValue_2, intValue);
 
-		value = eval(T_T_A_AB + fString);
+		value = eval(T_T_A_AB + fString); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("T_T_A_AB_f : wrong type : ", "java.lang.String", typeName);
 		String stringValue = ((JDIObjectValue)value).getValueString();
@@ -280,16 +280,16 @@ public class NestedTypeFieldValue_592 extends Tests {
 		}
 	}
 
-	public void testEvalNestedTypeTest_T_T_A_AB_j() throws Throwable {
+	public void testEvalNestedTypeTest_T_T_A_AB_j() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(T_T_A_AB + jInt);
+		IValue value = eval(T_T_A_AB + jInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("T_T_A_AB_j : wrong type : ", "int", typeName);
 		int intValue = ((IJavaPrimitiveValue)value).getIntValue();
 		assertEquals("T_T_A_AB_j : wrong result : ", jIntValue_2, intValue);
 
-		value = eval(T_T_A_AB + jString);
+		value = eval(T_T_A_AB + jString); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("T_T_A_AB_j : wrong type : ", "java.lang.String", typeName);
 		String stringValue = ((JDIObjectValue)value).getValueString();
@@ -299,16 +299,16 @@ public class NestedTypeFieldValue_592 extends Tests {
 		}
 	}
 
-	public void testEvalNestedTypeTest_T_A_AA_d() throws Throwable {
+	public void testEvalNestedTypeTest_T_A_AA_d() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(T_A_AA + dInt);
+		IValue value = eval(T_A_AA + dInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("T_A_AA_d : wrong type : ", "int", typeName);
 		int intValue = ((IJavaPrimitiveValue)value).getIntValue();
 		assertEquals("T_A_AA_d : wrong result : ", dIntValue_2, intValue);
 
-		value = eval(T_A_AA + dString);
+		value = eval(T_A_AA + dString); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("T_A_AA_d : wrong type : ", "java.lang.String", typeName);
 		String stringValue = ((JDIObjectValue)value).getValueString();
@@ -318,16 +318,16 @@ public class NestedTypeFieldValue_592 extends Tests {
 		}
 	}
 
-	public void testEvalNestedTypeTest_T_A_AA_f() throws Throwable {
+	public void testEvalNestedTypeTest_T_A_AA_f() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(T_A_AA + fInt);
+		IValue value = eval(T_A_AA + fInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("T_A_AA_f : wrong type : ", "int", typeName);
 		int intValue = ((IJavaPrimitiveValue)value).getIntValue();
 		assertEquals("T_A_AA_f : wrong result : ", fIntValue_2, intValue);
 
-		value = eval(T_A_AA + fString);
+		value = eval(T_A_AA + fString); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("T_A_AA_f : wrong type : ", "java.lang.String", typeName);
 		String stringValue = ((JDIObjectValue)value).getValueString();
@@ -337,16 +337,16 @@ public class NestedTypeFieldValue_592 extends Tests {
 		}
 	}
 
-	public void testEvalNestedTypeTest_T_A_AA_j() throws Throwable {
+	public void testEvalNestedTypeTest_T_A_AA_j() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(T_A_AA + jInt);
+		IValue value = eval(T_A_AA + jInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("T_A_AA_j : wrong type : ", "int", typeName);
 		int intValue = ((IJavaPrimitiveValue)value).getIntValue();
 		assertEquals("T_A_AA_j : wrong result : ", jIntValue_2, intValue);
 
-		value = eval(T_A_AA + jString);
+		value = eval(T_A_AA + jString); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("T_A_AA_j : wrong type : ", "java.lang.String", typeName);
 		String stringValue = ((JDIObjectValue)value).getValueString();
@@ -356,16 +356,16 @@ public class NestedTypeFieldValue_592 extends Tests {
 		}
 	}
 
-	public void testEvalNestedTypeTest_T_A_AB_d() throws Throwable {
+	public void testEvalNestedTypeTest_T_A_AB_d() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(T_A_AB + dInt);
+		IValue value = eval(T_A_AB + dInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("T_A_AB_d : wrong type : ", "int", typeName);
 		int intValue = ((IJavaPrimitiveValue)value).getIntValue();
 		assertEquals("T_A_AB_d : wrong result : ", dIntValue_2, intValue);
 
-		value = eval(T_A_AB + dString);
+		value = eval(T_A_AB + dString); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("T_A_AB_d : wrong type : ", "java.lang.String", typeName);
 		String stringValue = ((JDIObjectValue)value).getValueString();
@@ -375,16 +375,16 @@ public class NestedTypeFieldValue_592 extends Tests {
 		}
 	}
 
-	public void testEvalNestedTypeTest_T_A_AB_f() throws Throwable {
+	public void testEvalNestedTypeTest_T_A_AB_f() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(T_A_AB + fInt);
+		IValue value = eval(T_A_AB + fInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("T_A_AB_f : wrong type : ", "int", typeName);
 		int intValue = ((IJavaPrimitiveValue)value).getIntValue();
 		assertEquals("T_A_AB_f : wrong result : ", fIntValue_2, intValue);
 
-		value = eval(T_A_AB + fString);
+		value = eval(T_A_AB + fString); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("T_A_AB_f : wrong type : ", "java.lang.String", typeName);
 		String stringValue = ((JDIObjectValue)value).getValueString();
@@ -394,16 +394,16 @@ public class NestedTypeFieldValue_592 extends Tests {
 		}
 	}
 
-	public void testEvalNestedTypeTest_T_A_AB_j() throws Throwable {
+	public void testEvalNestedTypeTest_T_A_AB_j() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(T_A_AB + jInt);
+		IValue value = eval(T_A_AB + jInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("T_A_AB_j : wrong type : ", "int", typeName);
 		int intValue = ((IJavaPrimitiveValue)value).getIntValue();
 		assertEquals("T_A_AB_j : wrong result : ", jIntValue_2, intValue);
 
-		value = eval(T_A_AB + jString);
+		value = eval(T_A_AB + jString); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("T_A_AB_j : wrong type : ", "java.lang.String", typeName);
 		String stringValue = ((JDIObjectValue)value).getValueString();
@@ -413,16 +413,16 @@ public class NestedTypeFieldValue_592 extends Tests {
 		}
 	}
 
-	public void testEvalNestedTypeTest_T_T_B_d() throws Throwable {
+	public void testEvalNestedTypeTest_T_T_B_d() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(T_T_B + dInt);
+		IValue value = eval(T_T_B + dInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("T_T_B_d : wrong type : ", "int", typeName);
 		int intValue = ((IJavaPrimitiveValue)value).getIntValue();
 		assertEquals("T_T_B_d : wrong result : ", dIntValue_1, intValue);
 
-		value = eval(T_T_B + dString);
+		value = eval(T_T_B + dString); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("T_T_B_d : wrong type : ", "java.lang.String", typeName);
 		String stringValue = ((JDIObjectValue)value).getValueString();
@@ -432,16 +432,16 @@ public class NestedTypeFieldValue_592 extends Tests {
 		}
 	}
 
-	public void testEvalNestedTypeTest_T_T_B_h() throws Throwable {
+	public void testEvalNestedTypeTest_T_T_B_h() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(T_T_B + hInt);
+		IValue value = eval(T_T_B + hInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("T_T_B_h : wrong type : ", "int", typeName);
 		int intValue = ((IJavaPrimitiveValue)value).getIntValue();
 		assertEquals("T_T_B_h : wrong result : ", hIntValue_1, intValue);
 
-		value = eval(T_T_B + hString);
+		value = eval(T_T_B + hString); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("T_T_B_h : wrong type : ", "java.lang.String", typeName);
 		String stringValue = ((JDIObjectValue)value).getValueString();
@@ -451,16 +451,16 @@ public class NestedTypeFieldValue_592 extends Tests {
 		}
 	}
 
-	public void testEvalNestedTypeTest_T_B_d() throws Throwable {
+	public void testEvalNestedTypeTest_T_B_d() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(T_B + dInt);
+		IValue value = eval(T_B + dInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("T_B_d : wrong type : ", "int", typeName);
 		int intValue = ((IJavaPrimitiveValue)value).getIntValue();
 		assertEquals("T_B_d : wrong result : ", dIntValue_1, intValue);
 
-		value = eval(T_B + dString);
+		value = eval(T_B + dString); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("T_B_d : wrong type : ", "java.lang.String", typeName);
 		String stringValue = ((JDIObjectValue)value).getValueString();
@@ -470,16 +470,16 @@ public class NestedTypeFieldValue_592 extends Tests {
 		}
 	}
 
-	public void testEvalNestedTypeTest_T_B_h() throws Throwable {
+	public void testEvalNestedTypeTest_T_B_h() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(T_B + hInt);
+		IValue value = eval(T_B + hInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("T_B_h : wrong type : ", "int", typeName);
 		int intValue = ((IJavaPrimitiveValue)value).getIntValue();
 		assertEquals("T_B_h : wrong result : ", hIntValue_1, intValue);
 
-		value = eval(T_B + hString);
+		value = eval(T_B + hString); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("T_B_h : wrong type : ", "java.lang.String", typeName);
 		String stringValue = ((JDIObjectValue)value).getValueString();
@@ -489,16 +489,16 @@ public class NestedTypeFieldValue_592 extends Tests {
 		}
 	}
 
-	public void testEvalNestedTypeTest_T_T_B_BB_d() throws Throwable {
+	public void testEvalNestedTypeTest_T_T_B_BB_d() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(T_T_B_BB + dInt);
+		IValue value = eval(T_T_B_BB + dInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("T_T_B_BB_d : wrong type : ", "int", typeName);
 		int intValue = ((IJavaPrimitiveValue)value).getIntValue();
 		assertEquals("T_T_B_BB_d : wrong result : ", dIntValue_2, intValue);
 
-		value = eval(T_T_B_BB + dString);
+		value = eval(T_T_B_BB + dString); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("T_T_B_BB_d : wrong type : ", "java.lang.String", typeName);
 		String stringValue = ((JDIObjectValue)value).getValueString();
@@ -508,16 +508,16 @@ public class NestedTypeFieldValue_592 extends Tests {
 		}
 	}
 
-	public void testEvalNestedTypeTest_T_T_B_BB_f() throws Throwable {
+	public void testEvalNestedTypeTest_T_T_B_BB_f() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(T_T_B_BB + fInt);
+		IValue value = eval(T_T_B_BB + fInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("T_T_B_BB_f : wrong type : ", "int", typeName);
 		int intValue = ((IJavaPrimitiveValue)value).getIntValue();
 		assertEquals("T_T_B_BB_f : wrong result : ", fIntValue_2, intValue);
 
-		value = eval(T_T_B_BB + fString);
+		value = eval(T_T_B_BB + fString); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("T_T_B_BB_f : wrong type : ", "java.lang.String", typeName);
 		String stringValue = ((JDIObjectValue)value).getValueString();
@@ -527,16 +527,16 @@ public class NestedTypeFieldValue_592 extends Tests {
 		}
 	}
 
-	public void testEvalNestedTypeTest_T_T_B_BB_j() throws Throwable {
+	public void testEvalNestedTypeTest_T_T_B_BB_j() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(T_T_B_BB + jInt);
+		IValue value = eval(T_T_B_BB + jInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("T_T_B_BB_j : wrong type : ", "int", typeName);
 		int intValue = ((IJavaPrimitiveValue)value).getIntValue();
 		assertEquals("T_T_B_BB_j : wrong result : ", jIntValue_2, intValue);
 
-		value = eval(T_T_B_BB + jString);
+		value = eval(T_T_B_BB + jString); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("T_T_B_BB_j : wrong type : ", "java.lang.String", typeName);
 		String stringValue = ((JDIObjectValue)value).getValueString();
@@ -546,16 +546,16 @@ public class NestedTypeFieldValue_592 extends Tests {
 		}
 	}
 
-	public void testEvalNestedTypeTest_T_B_BB_d() throws Throwable {
+	public void testEvalNestedTypeTest_T_B_BB_d() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(T_B_BB + dInt);
+		IValue value = eval(T_B_BB + dInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("T_B_BB_d : wrong type : ", "int", typeName);
 		int intValue = ((IJavaPrimitiveValue)value).getIntValue();
 		assertEquals("T_B_BB_d : wrong result : ", dIntValue_2, intValue);
 
-		value = eval(T_B_BB + dString);
+		value = eval(T_B_BB + dString); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("T_B_BB_d : wrong type : ", "java.lang.String", typeName);
 		String stringValue = ((JDIObjectValue)value).getValueString();
@@ -565,16 +565,16 @@ public class NestedTypeFieldValue_592 extends Tests {
 		}
 	}
 
-	public void testEvalNestedTypeTest_T_B_BB_f() throws Throwable {
+	public void testEvalNestedTypeTest_T_B_BB_f() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(T_B_BB + fInt);
+		IValue value = eval(T_B_BB + fInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("T_B_BB_f : wrong type : ", "int", typeName);
 		int intValue = ((IJavaPrimitiveValue)value).getIntValue();
 		assertEquals("T_B_BB_f : wrong result : ", fIntValue_2, intValue);
 
-		value = eval(T_B_BB + fString);
+		value = eval(T_B_BB + fString); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("T_B_BB_f : wrong type : ", "java.lang.String", typeName);
 		String stringValue = ((JDIObjectValue)value).getValueString();
@@ -584,16 +584,16 @@ public class NestedTypeFieldValue_592 extends Tests {
 		}
 	}
 
-	public void testEvalNestedTypeTest_T_B_BB_j() throws Throwable {
+	public void testEvalNestedTypeTest_T_B_BB_j() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval(T_B_BB + jInt);
+		IValue value = eval(T_B_BB + jInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("T_B_BB_j : wrong type : ", "int", typeName);
 		int intValue = ((IJavaPrimitiveValue)value).getIntValue();
 		assertEquals("T_B_BB_j : wrong result : ", jIntValue_2, intValue);
 
-		value = eval(T_B_BB + jString);
+		value = eval(T_B_BB + jString); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("T_B_BB_j : wrong type : ", "java.lang.String", typeName);
 		String stringValue = ((JDIObjectValue)value).getValueString();

@@ -43,13 +43,13 @@ public class PerfConditionalBreakpointsTests extends AbstractDebugPerformanceTes
 
     private final int fMeasuredRuns = 10;
 
-    private class BreakpointListener implements IDebugEventSetListener {
+    private class BreakpointListener implements IDebugEventSetListener { //FLLDCIM: MARK — T27  IMPLEMENTS
         /**
          * @see org.eclipse.debug.core.IDebugEventSetListener#handleDebugEvents(org.eclipse.debug.core.DebugEvent[])
          */
         @Override
 		public void handleDebugEvents(DebugEvent[] events) {
-            for (int i = 0; i < events.length; i++) {
+            for (int i = 0; i < events.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
                 DebugEvent event = events[i];
                 if (event.getKind() == DebugEvent.SUSPEND && event.getDetail() == DebugEvent.BREAKPOINT) {
                     IJavaThread source = (IJavaThread) event.getSource();
@@ -69,7 +69,7 @@ public class PerfConditionalBreakpointsTests extends AbstractDebugPerformanceTes
     /**
      * Tests the performance of launching to conditional breakpoints
      */
-    public void testConditionalBreakpoints() throws Exception {
+    public void testConditionalBreakpoints() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
         tagAsSummary("Conditional Breakpoint Test", Dimension.ELAPSED_PROCESS);
         // just in case
         removeAllBreakpoints();
@@ -77,7 +77,7 @@ public class PerfConditionalBreakpointsTests extends AbstractDebugPerformanceTes
         fBP = createLineBreakpoint(25, fTypeName);
 
         BreakpointListener listener = new BreakpointListener();
-        DebugPlugin.getDefault().addDebugEventListener(listener);
+        DebugPlugin.getDefault().addDebugEventListener(listener); //FLLDCIM: MARK — T27 DEBUG_EVENT_ADAPTER CALL
         ILaunchConfiguration config = getLaunchConfiguration(fTypeName);
         try {
             launchAndTerminate(config, 5 * 60 * 1000, false);
@@ -95,7 +95,7 @@ public class PerfConditionalBreakpointsTests extends AbstractDebugPerformanceTes
         }
     }
 
-    private synchronized void breakpointHit(IJavaThread thread) {
+    private synchronized void breakpointHit(IJavaThread thread) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
         try {
             if (!fConditionalBreakpointSet) {
                 fBP.delete();

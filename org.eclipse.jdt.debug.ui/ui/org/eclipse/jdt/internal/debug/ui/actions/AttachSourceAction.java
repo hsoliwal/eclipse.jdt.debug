@@ -26,7 +26,7 @@ import org.eclipse.swt.SWT;
 /**
  * Attach source to an archive or variable.
  */
-public class AttachSourceAction extends RuntimeClasspathAction {
+public class AttachSourceAction extends RuntimeClasspathAction { //FLLDCIM: MARK — T04  IMPLEMENTS
 
 	private IRuntimeClasspathEntry[] fEntries;
 
@@ -49,7 +49,7 @@ public class AttachSourceAction extends RuntimeClasspathAction {
 	public void run() {
 		IClasspathEntry classpathEntry = BuildPathDialogAccess.configureSourceAttachment(getShell(), fEntries[0].getClasspathEntry());
 		if (classpathEntry != null) {
-			for (IRuntimeClasspathEntry entry : fEntries) {
+			for (IRuntimeClasspathEntry entry : fEntries) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				entry.setSourceAttachmentPath(classpathEntry.getSourceAttachmentPath());
 				entry.setSourceAttachmentRootPath(classpathEntry.getSourceAttachmentRootPath());
 				getViewer().refresh(entry);
@@ -61,12 +61,12 @@ public class AttachSourceAction extends RuntimeClasspathAction {
 	/* (non-Javadoc)
 	 * @see org.eclipse.ui.actions.BaseSelectionListenerAction#updateSelection(org.eclipse.jface.viewers.IStructuredSelection)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	protected boolean updateSelection(IStructuredSelection selection) {
 		fEntries = new IRuntimeClasspathEntry[selection.size()];
 		Iterator<?> iterator = selection.iterator();
 		int i = 0;
-		while (iterator.hasNext()) {
+		while (iterator.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			Object selected= iterator.next();
 			if (selected instanceof IRuntimeClasspathEntry entry) {
 				int type = entry.getType();

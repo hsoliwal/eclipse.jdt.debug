@@ -73,7 +73,7 @@ public class JavaMainTab extends SharedJavaMainTab {
 	 *
 	 * @since 2.1
 	 */
-	public static final String ATTR_INCLUDE_EXTERNAL_JARS = IJavaDebugUIConstants.PLUGIN_ID + ".INCLUDE_EXTERNAL_JARS"; //$NON-NLS-1$
+	public static final String ATTR_INCLUDE_EXTERNAL_JARS = IJavaDebugUIConstants.PLUGIN_ID + ".INCLUDE_EXTERNAL_JARS"; //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 	/**
 	 * Boolean launch configuration attribute indicating whether types inheriting
 	 * a main method should be considered when searching for a main type.
@@ -81,7 +81,7 @@ public class JavaMainTab extends SharedJavaMainTab {
 	 *
 	 * @since 3.0
 	 */
-	public static final String ATTR_CONSIDER_INHERITED_MAIN = IJavaDebugUIConstants.PLUGIN_ID + ".CONSIDER_INHERITED_MAIN"; //$NON-NLS-1$
+	public static final String ATTR_CONSIDER_INHERITED_MAIN = IJavaDebugUIConstants.PLUGIN_ID + ".CONSIDER_INHERITED_MAIN"; //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 	// UI widgets
 	private Button fSearchExternalJarsCheckButton;
@@ -102,15 +102,15 @@ public class JavaMainTab extends SharedJavaMainTab {
 	@Override
 	protected void createMainTypeExtensions(Composite parent) {
 		fSearchExternalJarsCheckButton = SWTFactory.createCheckButton(parent, LauncherMessages.JavaMainTab_E_xt__jars_6, null, false, 2);
-		fSearchExternalJarsCheckButton.addSelectionListener(getDefaultListener());
+		fSearchExternalJarsCheckButton.addSelectionListener(getDefaultListener()); //FLLDCIM: MARK — T03 SELECTION_LANE CALL
 
 		fConsiderInheritedMainButton = SWTFactory.createCheckButton(parent, LauncherMessages.JavaMainTab_22, null, false, 2);
-		fConsiderInheritedMainButton.addSelectionListener(getDefaultListener());
+		fConsiderInheritedMainButton.addSelectionListener(getDefaultListener()); //FLLDCIM: MARK — T03 SELECTION_LANE CALL
 
 		ILaunchConfigurationDialog dialog = getLaunchConfigurationDialog();
 		if (dialog != null && ILaunchManager.DEBUG_MODE.equals(dialog.getMode())) {
 			fStopInMainCheckButton = SWTFactory.createCheckButton(parent, LauncherMessages.JavaMainTab_Suspend_In_Main, null, false, 1);
-			fStopInMainCheckButton.addSelectionListener(getDefaultListener());
+			fStopInMainCheckButton.addSelectionListener(getDefaultListener()); //FLLDCIM: MARK — T03 SELECTION_LANE CALL
 		}
 	}
 
@@ -137,7 +137,7 @@ public class JavaMainTab extends SharedJavaMainTab {
 	/**
 	 * Show a dialog that lists all main types
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	protected void handleSearchButtonSelected() {
 		IJavaProject project = getJavaProject();
 		IJavaElement[] elements = null;
@@ -193,7 +193,7 @@ public class JavaMainTab extends SharedJavaMainTab {
 		updateExternalJars(config);
 	}
 
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public boolean isValid(ILaunchConfiguration config) {
 		setErrorMessage(null);
 		setMessage(null);
@@ -228,7 +228,7 @@ public class JavaMainTab extends SharedJavaMainTab {
 		return true;
 	}
 
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public void performApply(ILaunchConfigurationWorkingCopy config) {
 		config.setAttribute(IJavaLaunchConfigurationConstants.ATTR_PROJECT_NAME, fProjText.getText().trim());
 		config.setAttribute(IJavaLaunchConfigurationConstants.ATTR_MAIN_TYPE_NAME, fMainText.getText().trim());

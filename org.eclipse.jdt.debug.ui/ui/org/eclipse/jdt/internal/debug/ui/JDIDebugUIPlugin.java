@@ -283,7 +283,7 @@ public class JDIDebugUIPlugin extends AbstractUIPlugin {
 		}
 	}
 
-	public static void statusDialog(String title, IStatus status) {
+	public static void statusDialog(String title, IStatus status) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		Shell shell = getActiveWorkbenchShell();
 		String message = status.getMessage();
 		long currentLines = message.lines().limit(STATUS_LINE_LIMIT + 1).count();
@@ -366,7 +366,7 @@ public class JDIDebugUIPlugin extends AbstractUIPlugin {
 	 * @param classAttribute the name of the attribute carrying the class
 	 * @return the extension object
 	 */
-	public static Object createExtension(final IConfigurationElement element, final String classAttribute) throws CoreException {
+	public static Object createExtension(final IConfigurationElement element, final String classAttribute) throws CoreException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		// If plugin has been loaded create extension.
 		// Otherwise, show busy cursor then create extension.
 		Bundle bundle = Platform.getBundle(element.getContributor().getName());
@@ -395,7 +395,7 @@ public class JDIDebugUIPlugin extends AbstractUIPlugin {
 	/* (non-Javadoc)
 	 * @see org.osgi.framework.BundleActivator#start(org.osgi.framework.BundleContext)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public void start(BundleContext context) throws Exception {
 		super.start(context);
 		IAdapterManager manager= Platform.getAdapterManager();
@@ -474,14 +474,14 @@ public class JDIDebugUIPlugin extends AbstractUIPlugin {
 		IEclipsePreferences instancePreferences = getInstancePreferences();
 		stackFrameCategorizer = new StackFrameCategorizer(Platform.getPreferencesService(), instancePreferences);
 		instancePreferences.addPreferenceChangeListener(stackFrameCategorizer);
-		DebugPlugin.getDefault().addDebugEventListener(stackFrameCategorizer);
+		DebugPlugin.getDefault().addDebugEventListener(stackFrameCategorizer); //FLLDCIM: MARK — T27 DEBUG_EVENT_ADAPTER CALL
 		JDIDebugPlugin.getDefault().setStackFrameCategorizer(stackFrameCategorizer::categorize);
 	}
 
 	/* (non-Javadoc)
 	 * @see org.osgi.framework.BundleActivator#stop(org.osgi.framework.BundleContext)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public void stop(BundleContext context) throws Exception {
 		try {
 			setShuttingDown(true);
@@ -585,8 +585,8 @@ public class JDIDebugUIPlugin extends AbstractUIPlugin {
 	 * are included.  If no Java projects are provided, all Java projects in the
 	 * workspace are considered.
 	 */
-	public static ElementListSelectionDialog createAllPackagesDialog(Shell shell, IJavaProject[] originals, final boolean includeDefaultPackage) throws JavaModelException{
-		final List<IPackageFragment> packageList = new ArrayList<>();
+	public static ElementListSelectionDialog createAllPackagesDialog(Shell shell, IJavaProject[] originals, final boolean includeDefaultPackage) throws JavaModelException{ //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
+		final List<IPackageFragment> packageList = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 		if (originals == null) {
 			IWorkspaceRoot wsroot= ResourcesPlugin.getWorkspace().getRoot();
 			IJavaModel model= JavaCore.create(wsroot);
@@ -595,15 +595,15 @@ public class JDIDebugUIPlugin extends AbstractUIPlugin {
 		final IJavaProject[] projects= originals;
 		final JavaModelException[] exception= new JavaModelException[1];
 		final boolean[] monitorCanceled = new boolean[] {false};
-		IRunnableWithProgress r= new IRunnableWithProgress() {
-			@Override
+		IRunnableWithProgress r= new IRunnableWithProgress() { //FLLDCIM: MARK — T09  ANONYMOUS
+			@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 			public void run(IProgressMonitor monitor) {
 				try {
-					Set<String> packageNameSet= new HashSet<>();
+					Set<String> packageNameSet= new HashSet<>(); //FLLDCIM: MARK — M03 M3_SET_LANES NEW
 					monitor.beginTask(DebugUIMessages.JDIDebugUIPlugin_Searching_1, projects.length);
-					for (int i = 0; i < projects.length; i++) {
+					for (int i = 0; i < projects.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 						IPackageFragment[] pkgs= projects[i].getPackageFragments();
-						for (int j = 0; j < pkgs.length; j++) {
+						for (int j = 0; j < pkgs.length; j++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 							if (monitor.isCanceled()) {
 								monitorCanceled[0] = true;
 								return;
@@ -670,11 +670,11 @@ public class JDIDebugUIPlugin extends AbstractUIPlugin {
 	}
 
 	protected void initializeVMInstallTypePageMap() {
-		fVmInstallTypePageMap = new HashMap<>(10);
+		fVmInstallTypePageMap = new HashMap<>(10); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
 
 		IExtensionPoint extensionPoint= Platform.getExtensionRegistry().getExtensionPoint(getUniqueIdentifier(), IJavaDebugUIConstants.EXTENSION_POINT_VM_INSTALL_TYPE_PAGE);
 		IConfigurationElement[] infos= extensionPoint.getConfigurationElements();
-		for (int i = 0; i < infos.length; i++) {
+		for (int i = 0; i < infos.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			String id = infos[i].getAttribute("vmInstallTypeID"); //$NON-NLS-1$
 			fVmInstallTypePageMap.put(id, infos[i]);
 		}

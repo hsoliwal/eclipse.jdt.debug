@@ -45,14 +45,14 @@ import org.eclipse.ui.views.navigator.ResourceComparator;
 /**
  * Adds an internal folder to the runtime class path.
  */
-public class AddFolderAction extends RuntimeClasspathAction {
+public class AddFolderAction extends RuntimeClasspathAction { //FLLDCIM: MARK — T04  IMPLEMENTS
 
 	/**
 	 * provides a filter to remove the files from the ElementSelectionDialog
 	 *
 	 * @since 3.2
 	 */
-	static class FileFilter extends ViewerFilter {
+	static class FileFilter extends ViewerFilter { //FLLDCIM: MARK — T23  IMPLEMENTS
 		@Override
 		public boolean select(Viewer viewer, Object parentElement, Object element) {
 			if(element instanceof IProject) {
@@ -75,14 +75,14 @@ public class AddFolderAction extends RuntimeClasspathAction {
 	 *
 	 * @see IAction#run()
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public void run() {
 
 		ISelectionStatusValidator validator= new ISelectionStatusValidator() {
 			List<IResource> fAlreadySelected = getSelectedFolders();
 			@Override
 			public IStatus validate(Object[] selection) {
-				for (Object s : selection) {
+				for (Object s : selection) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 					if (!(s instanceof IContainer)) {
 						return new Status(IStatus.ERROR, JDIDebugPlugin.getUniqueIdentifier(), IJavaDebugUIConstants.INTERNAL_ERROR, "Selection must be a folder", null);  //$NON-NLS-1$
 					} else if (fAlreadySelected.contains(s)) {
@@ -98,7 +98,7 @@ public class AddFolderAction extends RuntimeClasspathAction {
 		ITreeContentProvider cp= new WorkbenchContentProvider();
 
 		ElementTreeSelectionDialog dialog= new ElementTreeSelectionDialog(getShell(), lp, cp);
-		dialog.addFilter(new FileFilter());
+		dialog.addFilter(new FileFilter()); //FLLDCIM: MARK — T23 FILTER_LANE CALL
         dialog.setComparator(new ResourceComparator(ResourceComparator.NAME));
 		dialog.setValidator(validator);
 		dialog.setTitle(ActionMessages.AddFolderAction_Folder_Selection_4);
@@ -108,7 +108,7 @@ public class AddFolderAction extends RuntimeClasspathAction {
 		if (dialog.open() == Window.OK) {
 			Object[] elements= dialog.getResult();
 			IRuntimeClasspathEntry[] res= new IRuntimeClasspathEntry[elements.length];
-			for (int i= 0; i < res.length; i++) {
+			for (int i= 0; i < res.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				IResource elem= (IResource)elements[i];
 				res[i]= JavaRuntime.newArchiveRuntimeClasspathEntry(elem);
 			}
@@ -123,9 +123,9 @@ public class AddFolderAction extends RuntimeClasspathAction {
 	 */
 	protected List<IResource> getSelectedFolders() {
 		List<IRuntimeClasspathEntry> list = getEntriesAsList();
-		List<IResource> folders = new ArrayList<>();
+		List<IResource> folders = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 		Iterator<IRuntimeClasspathEntry> iter = list.iterator();
-		while (iter.hasNext()) {
+		while (iter.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			IRuntimeClasspathEntry entry = iter.next();
 			if (entry.getType() == IRuntimeClasspathEntry.ARCHIVE) {
 				IResource res = entry.getResource();

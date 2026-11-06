@@ -31,7 +31,7 @@ public class LambdaCollector extends ASTVisitor {
 	public LambdaCollector(int lineOffset, int lineEndPosition) {
 		fLineOffset = lineOffset;
 		fLineEndPosition = lineEndPosition;
-		lambdaExpressions = new ArrayList<>();
+		lambdaExpressions = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 	}
 
 	@Override

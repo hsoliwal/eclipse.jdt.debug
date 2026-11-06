@@ -68,7 +68,7 @@ public class ArchiveSourceLocation extends PlatformObject implements IJavaSource
 	 * Cache of shared zip files. Zip files are closed
 	 * when the launching plug-in is shutdown.
 	 */
-	private static HashMap<String, ZipFile> fZipFileCache = new HashMap<>(5);
+	private static HashMap<String, ZipFile> fZipFileCache = new HashMap<>(5); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
 
 	/**
 	 * Returns a zip file with the given name
@@ -82,7 +82,7 @@ public class ArchiveSourceLocation extends PlatformObject implements IJavaSource
 		synchronized (fZipFileCache) {
 			ZipFile zip = fZipFileCache.get(name);
 			if (zip == null) {
-				zip = new ZipFile(name);
+				zip = new ZipFile(name); //FLLDCIM: MARK — M25 M3FILE_ARCHIVE_STREAM NEW
 				fZipFileCache.put(name, zip);
 			}
 			return zip;
@@ -99,7 +99,7 @@ public class ArchiveSourceLocation extends PlatformObject implements IJavaSource
 	public static void closeArchives() {
 		synchronized (fZipFileCache) {
 			Iterator<ZipFile> iter = fZipFileCache.values().iterator();
-			while (iter.hasNext()) {
+			while (iter.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				try (ZipFile file = iter.next()) {
 					synchronized (file) {
 						file.close();
@@ -155,7 +155,7 @@ public class ArchiveSourceLocation extends PlatformObject implements IJavaSource
 	/* (non-Javadoc)
 	 * @see org.eclipse.jdt.launching.sourcelookup.IJavaSourceLocation#findSourceElement(java.lang.String)
 	 */
-	@Deprecated
+	@Deprecated //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	@Override
 	public Object findSourceElement(String name) throws CoreException {
 		try {
@@ -168,8 +168,8 @@ public class ArchiveSourceLocation extends PlatformObject implements IJavaSource
 			String pathStr= name.replace('.', '/');
 			int lastSlash = pathStr.lastIndexOf('/');
 			String typeName = pathStr;
-			do {
-				IPath entryPath = new Path(typeName + ".java"); //$NON-NLS-1$
+			do { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
+				IPath entryPath = new Path(typeName + ".java"); //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 				autoDetectRoot(entryPath);
 				if (getRootPath() != null) {
 					entryPath = getRootPath().append(entryPath);
@@ -199,7 +199,7 @@ public class ArchiveSourceLocation extends PlatformObject implements IJavaSource
 	 * @param path source file name, excluding root path
 	 * @throws CoreException  if unable to detect the root path for this source archive
 	 */
-	private void autoDetectRoot(IPath path) throws CoreException {
+	private void autoDetectRoot(IPath path) throws CoreException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		if (!fRootDetected) {
 			ZipFile zip = null;
 			try {
@@ -209,10 +209,10 @@ public class ArchiveSourceLocation extends PlatformObject implements IJavaSource
 					NLS.bind(LaunchingMessages.ArchiveSourceLocation_Exception_occurred_while_detecting_root_source_directory_in_archive__0__1, new String[] {getName()}), e));
 			}
 			synchronized (zip) {
-				Enumeration<? extends ZipEntry> entries = zip.entries();
+				Enumeration<? extends ZipEntry> entries = zip.entries(); //FLLDCIM: MARK — M25 M3FILE_ARCHIVE_STREAM CALL
 				String fileName = path.toString();
 				try {
-					while (entries.hasMoreElements()) {
+					while (entries.hasMoreElements()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 						ZipEntry entry = entries.nextElement();
 						String entryName = entry.getName();
 						if (entryName.endsWith(fileName)) {
@@ -339,7 +339,7 @@ public class ArchiveSourceLocation extends PlatformObject implements IJavaSource
 	/* (non-Javadoc)
 	 * @see org.eclipse.jdt.launching.sourcelookup.IJavaSourceLocation#initializeFrom(java.lang.String)
 	 */
-	@Deprecated
+	@Deprecated //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	@Override
 	public void initializeFrom(String memento) throws CoreException {
 		Exception ex = null;

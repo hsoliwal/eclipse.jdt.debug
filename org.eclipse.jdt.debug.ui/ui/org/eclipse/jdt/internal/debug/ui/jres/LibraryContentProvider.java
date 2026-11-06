@@ -39,7 +39,7 @@ import org.eclipse.jface.viewers.Viewer;
  * @see LibraryLocation
  * @see LibraryStandin
  */
-public class LibraryContentProvider implements ITreeContentProvider {
+public class LibraryContentProvider implements ITreeContentProvider { //FLLDCIM: MARK — M22  IMPLEMENTS
 
 	private Viewer fViewer;
 
@@ -84,7 +84,7 @@ public class LibraryContentProvider implements ITreeContentProvider {
 		}
 	}
 
-	private final HashMap<LibraryStandin, Object[]> fChildren= new HashMap<>();
+	private final HashMap<LibraryStandin, Object[]> fChildren= new HashMap<>(); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
 
 	private LibraryStandin[] fLibraries= new LibraryStandin[0];
 
@@ -154,7 +154,7 @@ public class LibraryContentProvider implements ITreeContentProvider {
 	 */
 	public void setLibraries(LibraryLocation[] libs) {
 		fLibraries = new LibraryStandin[libs.length];
-		for (int i = 0; i < libs.length; i++) {
+		for (int i = 0; i < libs.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			fLibraries[i] = new LibraryStandin(libs[i]);
 		}
 		if (fViewer != null) {
@@ -170,7 +170,7 @@ public class LibraryContentProvider implements ITreeContentProvider {
 	 */
 	public LibraryLocation[] getLibraries() {
 		LibraryLocation[] locations = new LibraryLocation[fLibraries.length];
-		for (int i = 0; i < locations.length; i++) {
+		for (int i = 0; i < locations.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			locations[i] = fLibraries[i].toLibraryLocation();
 		}
 		return locations;
@@ -185,8 +185,8 @@ public class LibraryContentProvider implements ITreeContentProvider {
 	 * the current viewer selection, or an empty set, never <code>null</code>
 	 */
 	private Set<Object> getSelectedLibraries(IStructuredSelection selection) {
-		Set<Object> libraries= new HashSet<>();
-		for (Iterator<?> iter= selection.iterator(); iter.hasNext();) {
+		Set<Object> libraries= new HashSet<>(); //FLLDCIM: MARK — M03 M3_SET_LANES NEW
+		for (Iterator<?> iter= selection.iterator(); iter.hasNext();) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			Object element= iter.next();
 			if (element instanceof LibraryStandin) {
 				libraries.add(element);
@@ -203,7 +203,7 @@ public class LibraryContentProvider implements ITreeContentProvider {
 	 */
 	public void up(IStructuredSelection selection) {
 		Set<Object> libraries= getSelectedLibraries(selection);
-		for (int i= 0; i < fLibraries.length - 1; i++) {
+		for (int i= 0; i < fLibraries.length - 1; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			if (libraries.contains(fLibraries[i + 1])) {
 				LibraryStandin temp= fLibraries[i];
 				fLibraries[i]= fLibraries[i + 1];
@@ -220,7 +220,7 @@ public class LibraryContentProvider implements ITreeContentProvider {
 	 */
 	public void down(IStructuredSelection selection) {
 		Set<Object> libraries= getSelectedLibraries(selection);
-		for (int i= fLibraries.length - 1; i > 0; i--) {
+		for (int i= fLibraries.length - 1; i > 0; i--) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			if (libraries.contains(fLibraries[i - 1])) {
 				LibraryStandin temp= fLibraries[i];
 				fLibraries[i]= fLibraries[i - 1];
@@ -235,13 +235,13 @@ public class LibraryContentProvider implements ITreeContentProvider {
 	 * Remove the libraries contained in the given selection.
 	 * @param selection the current viewer selection
 	 */
-	public void remove(IStructuredSelection selection) {
-		List<LibraryStandin> newLibraries = new ArrayList<>();
-		for (int i = 0; i < fLibraries.length; i++) {
+	public void remove(IStructuredSelection selection) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
+		List<LibraryStandin> newLibraries = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
+		for (int i = 0; i < fLibraries.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			newLibraries.add(fLibraries[i]);
 		}
 		Iterator<?> iterator = selection.iterator();
-		while (iterator.hasNext()) {
+		while (iterator.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			Object element = iterator.next();
 			if (element instanceof LibraryStandin) {
 				newLibraries.remove(element);
@@ -261,13 +261,13 @@ public class LibraryContentProvider implements ITreeContentProvider {
 	 * @param selection the selection to add the new libraries before in the list, or after if the selection
 	 * is empty.
 	 */
-	public void add(LibraryLocation[] libs, IStructuredSelection selection) {
-		List<LibraryStandin> newLibraries = new ArrayList<>(fLibraries.length + libs.length);
-		for (int i = 0; i < fLibraries.length; i++) {
+	public void add(LibraryLocation[] libs, IStructuredSelection selection) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
+		List<LibraryStandin> newLibraries = new ArrayList<>(fLibraries.length + libs.length); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
+		for (int i = 0; i < fLibraries.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			newLibraries.add(fLibraries[i]);
 		}
-		List<LibraryStandin> toAdd = new ArrayList<>(libs.length);
-		for (int i = 0; i < libs.length; i++) {
+		List<LibraryStandin> toAdd = new ArrayList<>(libs.length); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
+		for (int i = 0; i < libs.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			toAdd.add(new LibraryStandin(libs[i]));
 		}
 		if (selection.isEmpty()) {
@@ -297,7 +297,7 @@ public class LibraryContentProvider implements ITreeContentProvider {
 	public void setJavadoc(URL javadocLocation, IStructuredSelection selection) {
 		Set<Object> libraries= getSelectedLibraries(selection);
 		Iterator<Object> iterator = libraries.iterator();
-		while (iterator.hasNext()) {
+		while (iterator.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			LibraryStandin standin = (LibraryStandin) iterator.next();
 			standin.setJavadocLocation(javadocLocation);
 		}
@@ -320,7 +320,7 @@ public class LibraryContentProvider implements ITreeContentProvider {
 			sourceAttachmentRootPath = Path.EMPTY;
 		}
 		Iterator<Object> iterator = libraries.iterator();
-		while (iterator.hasNext()) {
+		while (iterator.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			LibraryStandin standin = (LibraryStandin) iterator.next();
 			standin.setSystemLibrarySourcePath(sourceAttachmentPath);
 			standin.setPackageRootPath(sourceAttachmentRootPath);
@@ -342,7 +342,7 @@ public class LibraryContentProvider implements ITreeContentProvider {
 			annotationsAttachmentPath = Path.EMPTY;
 		}
 		Iterator<Object> iterator = libraries.iterator();
-		while (iterator.hasNext()) {
+		while (iterator.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			LibraryStandin standin = (LibraryStandin) iterator.next();
 			standin.setExternalAnnotationsPath(annotationsAttachmentPath);
 		}

@@ -33,7 +33,7 @@ public class ChangeMethodSignatureUnitTests extends AbstractRefactoringDebugTest
 		super(name);
 	}
 
-	public void testPublicTypeMethodChange() throws Exception {
+	public void testPublicTypeMethodChange() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 			String 	src = "src",
 					pack = "a.b.c",
@@ -42,7 +42,7 @@ public class ChangeMethodSignatureUnitTests extends AbstractRefactoringDebugTest
 					methodName = "testMethod1",
 					methodSig = "()V";
 			//create breakpoint to test
-			createMethodBreakpoint(pack+"."+type, methodName, methodSig, true, false);
+			createMethodBreakpoint(pack+"."+type, methodName, methodSig, true, false); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 			//refactor
 			Refactoring ref = setupRefactor(src, pack, cunit, type, methodName, methodSig);
 			performRefactor(ref);
@@ -52,7 +52,7 @@ public class ChangeMethodSignatureUnitTests extends AbstractRefactoringDebugTest
 			IJavaMethodBreakpoint methodBreakpoint = (IJavaMethodBreakpoint) breakpoints[0];
 			assertTrue("Breakpoint Marker has ceased existing",methodBreakpoint.getMarker().exists());
 			assertEquals("wrong method Signature", "(QObject;)V", methodBreakpoint.getMethodSignature());
-			assertEquals("wrong type name", pack+"."+type, methodBreakpoint.getTypeName());
+			assertEquals("wrong type name", pack+"."+type, methodBreakpoint.getTypeName()); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 			assertEquals("breakpoint attached to wrong method","changedMethod",methodBreakpoint.getMethodName());
 		} catch (Exception e) {
 			throw e;
@@ -61,7 +61,7 @@ public class ChangeMethodSignatureUnitTests extends AbstractRefactoringDebugTest
 		}
 	}//end testBreakPoint
 
-	public void testInnerTypeMethodChange() throws Exception {
+	public void testInnerTypeMethodChange() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 			String 	src = "src",
 					pack = "a.b.c",
@@ -70,7 +70,7 @@ public class ChangeMethodSignatureUnitTests extends AbstractRefactoringDebugTest
 					methodName = "innerTypeMethod",
 					methodSig = "()V";
 			//create breakpoint to test
-			createMethodBreakpoint(pack+"."+type, methodName, methodSig, true, false);
+			createMethodBreakpoint(pack+"."+type, methodName, methodSig, true, false); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 			//refactor
 			Refactoring ref = setupRefactor(src, pack, cunit, type, methodName, methodSig);
 			performRefactor(ref);
@@ -80,7 +80,7 @@ public class ChangeMethodSignatureUnitTests extends AbstractRefactoringDebugTest
 			IJavaMethodBreakpoint methodBreakpoint = (IJavaMethodBreakpoint) breakpoints[0];
 			assertTrue("Breakpoint Marker has ceased existing",methodBreakpoint.getMarker().exists());
 			assertEquals("wrong method Signature", "(QObject;)V", methodBreakpoint.getMethodSignature());
-			assertEquals("wrong type name", pack+"."+type, methodBreakpoint.getTypeName());
+			assertEquals("wrong type name", pack+"."+type, methodBreakpoint.getTypeName()); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 			assertEquals("breakpoint attached to wrong method","changedMethod",methodBreakpoint.getMethodName());
 		} catch (Exception e) {
 			throw e;
@@ -89,7 +89,7 @@ public class ChangeMethodSignatureUnitTests extends AbstractRefactoringDebugTest
 		}
 	}//end testBreakPoint
 
-	public void testNonPublicTypeMethodChange() throws Exception {
+	public void testNonPublicTypeMethodChange() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 			String 	src = "src",
 					pack = "a.b.c",
@@ -109,7 +109,7 @@ public class ChangeMethodSignatureUnitTests extends AbstractRefactoringDebugTest
 			IJavaMethodBreakpoint methodBreakpoint = (IJavaMethodBreakpoint) breakpoints[0];
 			assertTrue("Breakpoint Marker has ceased existing",methodBreakpoint.getMarker().exists());
 			assertEquals("wrong method Signature", "(QObject;)V", methodBreakpoint.getMethodSignature());
-			assertEquals("wrong type name", pack+"."+type, methodBreakpoint.getTypeName());
+			assertEquals("wrong type name", pack+"."+type, methodBreakpoint.getTypeName()); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 			assertEquals("breakpoint attached to wrong method","changedMethod",methodBreakpoint.getMethodName());
 		} catch (Exception e) {
 			throw e;
@@ -120,7 +120,7 @@ public class ChangeMethodSignatureUnitTests extends AbstractRefactoringDebugTest
 
 
 //////////////////////////////////////////////////////////////////////////////////////
-	private Refactoring setupRefactor(String root, String targetPackageName, String cuName, String typeName, String methodName, String methodSig) throws Exception {
+	private Refactoring setupRefactor(String root, String targetPackageName, String cuName, String typeName, String methodName, String methodSig) throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 
 		IJavaProject javaProject = get14Project();
 		ICompilationUnit cunit = getCompilationUnit(javaProject, root, targetPackageName, cuName);
@@ -155,7 +155,7 @@ public class ChangeMethodSignatureUnitTests extends AbstractRefactoringDebugTest
 	 */
 	protected IType getLowestType(ICompilationUnit cu, String input)
 	{
-		for(int i=0;i<input.length();i++)
+		for(int i=0;i<input.length();i++) //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 		{
 			if(input.charAt(i)=='$')
 			{//Enclosing$Inner$MoreInner
@@ -177,7 +177,7 @@ public class ChangeMethodSignatureUnitTests extends AbstractRefactoringDebugTest
 	 * eg: EnclosingType$InnerType
 	 */
 	private IType getInnermostType(IType enclosing, String name) {
-		for(int i=0;i<name.length();i++)
+		for(int i=0;i<name.length();i++) //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 		{
 			if(name.charAt(i)=='$')
 			{//Enclosing$Inner$MoreInner

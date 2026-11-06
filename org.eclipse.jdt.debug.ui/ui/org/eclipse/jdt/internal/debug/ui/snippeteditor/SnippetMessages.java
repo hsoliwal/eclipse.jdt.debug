@@ -32,7 +32,7 @@ public class SnippetMessages {
 		try {
 			return fgResourceBundle.getString(key);
 		} catch (MissingResourceException e) {
-			return "!" + key + "!";//$NON-NLS-2$ //$NON-NLS-1$
+			return "!" + key + "!";//$NON-NLS-2$ //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		}
 	}
 
@@ -46,7 +46,7 @@ public class SnippetMessages {
 		try {
 			format= fgResourceBundle.getString(key);
 		} catch (MissingResourceException e) {
-			return "!" + key + "!";//$NON-NLS-2$ //$NON-NLS-1$
+			return "!" + key + "!";//$NON-NLS-2$ //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		}
 		if (arg == null) {
 			arg= Util.ZERO_LENGTH_STRING;

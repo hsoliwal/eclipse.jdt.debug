@@ -63,7 +63,7 @@ public class SuspendVMBreakpointsTests extends AbstractDebugTest {
 	/**
 	 * Tests that the VM is suspended when a specific exception breakpoint is hit
 	 */
-	public void testSuspendVmExceptionBreakpoint() throws Exception {
+	public void testSuspendVmExceptionBreakpoint() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String typeName = "ThrowsNPE";
 		IJavaExceptionBreakpoint ex = createExceptionBreakpoint("java.lang.NullPointerException", true, false);
 		ex.setSuspendPolicy(IJavaBreakpoint.SUSPEND_VM);
@@ -89,7 +89,7 @@ public class SuspendVMBreakpointsTests extends AbstractDebugTest {
 	/**
 	 * Tests that the VM is suspended when a specific access watchpoint is hit
 	 */
-	public void testSuspendVmAccessWatchpointBreakpoint() throws Exception {
+	public void testSuspendVmAccessWatchpointBreakpoint() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String typeName = "org.eclipse.debug.tests.targets.Watchpoint";
 
 		IJavaWatchpoint wp = createWatchpoint(typeName, "list", true, false);
@@ -118,7 +118,7 @@ public class SuspendVMBreakpointsTests extends AbstractDebugTest {
 	/**
 	 * Tests that the VM is suspended when a specific modification watchpoint is hit
 	 */
-	public void testSuspendVmModificationWatchpointBreakpoint() throws Exception {
+	public void testSuspendVmModificationWatchpointBreakpoint() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String typeName = "org.eclipse.debug.tests.targets.Watchpoint";
 
 		IJavaWatchpoint wp = createWatchpoint(typeName, "list", false, true);
@@ -150,7 +150,7 @@ public class SuspendVMBreakpointsTests extends AbstractDebugTest {
 	/**
 	 * Tests that the VM is suspended when a specific method entry breakpoint is hit
 	 */
-	public void testSuspendVmMethodEntryBreakpoint() throws Exception {
+	public void testSuspendVmMethodEntryBreakpoint() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String typeName = "DropTests";
 		IJavaBreakpoint bp = createMethodBreakpoint(typeName, "method4", "()V", true, false);
 		bp.setSuspendPolicy(IJavaBreakpoint.SUSPEND_VM);
@@ -175,7 +175,7 @@ public class SuspendVMBreakpointsTests extends AbstractDebugTest {
 	/**
 	 * Tests that the VM is suspended when a specific method exit breakpoint is hit
 	 */
-	public void testSuspendVmMethodExitBreakpoint() throws Exception {
+	public void testSuspendVmMethodExitBreakpoint() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String typeName = "DropTests";
 		IJavaBreakpoint bp = createMethodBreakpoint(typeName, "method1", "()V", false, true);
 		bp.setSuspendPolicy(IJavaBreakpoint.SUSPEND_VM);
@@ -204,8 +204,8 @@ public class SuspendVMBreakpointsTests extends AbstractDebugTest {
 		try {
 			IJavaDebugTarget debugTarget = (IJavaDebugTarget)thread.getDebugTarget();
 			IThread[] threads = debugTarget.getThreads();
-			for (int i = 0; i < threads.length; i++) {
-				assertTrue("Thread wasn't suspended when a SUSPEND_VM breakpoint was hit, thread=" + threads[i].getName(), threads[i].isSuspended());
+			for (int i = 0; i < threads.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
+				assertTrue("Thread wasn't suspended when a SUSPEND_VM breakpoint was hit, thread=" + threads[i].getName(), threads[i].isSuspended()); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 			}
 		} catch (DebugException e) {
 			fail(e.getMessage());
@@ -220,7 +220,7 @@ public class SuspendVMBreakpointsTests extends AbstractDebugTest {
 	 *
 	 * @throws Exception
 	 */
-	public void testMultipleSuspendVmLineBreakpoints() throws Exception {
+	public void testMultipleSuspendVmLineBreakpoints() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String typeName = "DropTests";
 		IJavaLineBreakpoint bp18 = createLineBreakpoint(18, typeName);
 		bp18.setSuspendPolicy(IJavaBreakpoint.SUSPEND_VM);
@@ -270,11 +270,11 @@ public class SuspendVMBreakpointsTests extends AbstractDebugTest {
 		TestUtil.waitForJobs(getName(), 50, 10000);
 		TestUtil.runEventLoop();
 		IThread[] threads = debugTarget.getThreads();
-		for (IThread thread : threads) {
+		for (IThread thread : threads) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			if (thread == notSuspended) {
 				continue;
 			}
-			assertTrue("Thread wasn't suspended when a SUSPEND_VM breakpoint was hit, thread=" + thread.getName(), thread.isSuspended());
+			assertTrue("Thread wasn't suspended when a SUSPEND_VM breakpoint was hit, thread=" + thread.getName(), thread.isSuspended()); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		}
 	}
 
@@ -285,8 +285,8 @@ public class SuspendVMBreakpointsTests extends AbstractDebugTest {
 		TestUtil.waitForJobs(getName(), 100, 10000);
 		TestUtil.runEventLoop();
 		IThread[] threads = debugTarget.getThreads();
-		for (IThread thread : threads) {
-			assertFalse("All threads should be suspended, but at least one not: thread=" + thread.getName(), thread.isSuspended());
+		for (IThread thread : threads) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
+			assertFalse("All threads should be suspended, but at least one not: thread=" + thread.getName(), thread.isSuspended()); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		}
 		assertFalse("Shouldn't be suspended", debugTarget.isSuspended());
 	}

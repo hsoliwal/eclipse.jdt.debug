@@ -39,7 +39,7 @@ public class InstanceFilterEditor {
 	private final InstanceFilterContentProvider fContentProvider;
 	private final CheckHandler fCheckHandler;
 
-	public InstanceFilterEditor(Composite parent, IJavaBreakpoint breakpoint) {
+	public InstanceFilterEditor(Composite parent, IJavaBreakpoint breakpoint) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		fBreakpoint= breakpoint;
 		fContentProvider= new InstanceFilterContentProvider();
 		fCheckHandler= new CheckHandler();
@@ -71,13 +71,13 @@ public class InstanceFilterEditor {
 		data.heightHint= 100;
 
 		fInstanceViewer= CheckboxTableViewer.newCheckList(fParent, SWT.BORDER);
-		fInstanceViewer.addCheckStateListener(fCheckHandler);
+		fInstanceViewer.addCheckStateListener(fCheckHandler); //FLLDCIM: MARK — T21 CHECK_STATE_LANE CALL
 		fInstanceViewer.getTable().setLayoutData(data);
 		fInstanceViewer.setContentProvider(fContentProvider);
 		IDebugModelPresentation pres = DebugUITools.newDebugModelPresentation();
 		pres.setAttribute(JDIModelPresentation.DISPLAY_QUALIFIED_NAMES, Boolean.TRUE);
-		fInstanceViewer.setLabelProvider(pres);
-		fInstanceViewer.setInput(fBreakpoint);
+		fInstanceViewer.setLabelProvider(pres); //FLLDCIM: MARK — T24 LABEL_DELTA CALL
+		fInstanceViewer.setInput(fBreakpoint); //FLLDCIM: MARK — M21 FULL_REBUILD_TO_DELTA CALL
 		setInitialCheckedState();
 	}
 
@@ -90,7 +90,7 @@ public class InstanceFilterEditor {
 	 */
 	protected void setInitialCheckedState() {
 		try {
-			for (IJavaObject object : fBreakpoint.getInstanceFilters()) {
+			for (IJavaObject object : fBreakpoint.getInstanceFilters()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				fCheckHandler.checkObject(object, true);
 			}
 		} catch (CoreException e) {
@@ -100,7 +100,7 @@ public class InstanceFilterEditor {
 
 	protected void doStore() {
 		try {
-			for (IJavaObject object : fBreakpoint.getInstanceFilters()) {
+			for (IJavaObject object : fBreakpoint.getInstanceFilters()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				if (!fInstanceViewer.getChecked(object)) {
 					fBreakpoint.removeInstanceFilter(object);
 				}
@@ -110,7 +110,7 @@ public class InstanceFilterEditor {
 		}
 	}
 
-	class CheckHandler implements ICheckStateListener {
+	class CheckHandler implements ICheckStateListener { //FLLDCIM: MARK — T21  IMPLEMENTS
 
 		@Override
 		public void checkStateChanged(CheckStateChangedEvent event) {
@@ -123,7 +123,7 @@ public class InstanceFilterEditor {
 
 	}
 
-	class InstanceFilterContentProvider implements ITreeContentProvider {
+	class InstanceFilterContentProvider implements ITreeContentProvider { //FLLDCIM: MARK — M22  IMPLEMENTS
 
 		/**
 		 * @see ITreeContentProvider#getChildren(Object)

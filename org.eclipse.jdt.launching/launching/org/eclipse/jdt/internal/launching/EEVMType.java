@@ -57,7 +57,7 @@ public class EEVMType extends AbstractVMInstallType {
 	 * @param eeDescription the execution-environment to query
 	 * @return javadoc location specified in the properties or <code>null</code> if none
 	 */
-	public static URL getJavadocLocation(ExecutionEnvironmentDescription eeDescription) {
+	public static URL getJavadocLocation(ExecutionEnvironmentDescription eeDescription) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String javadoc = eeDescription.getProperty(ExecutionEnvironmentDescription.JAVADOC_LOC);
 		if (javadoc != null && javadoc.length() > 0){
 			try{
@@ -113,7 +113,7 @@ public class EEVMType extends AbstractVMInstallType {
 	 */
 	public static IStatus validateDefinitionFile(ExecutionEnvironmentDescription description) {
 		// validate required properties
-		for (String key : REQUIRED_PROPERTIES) {
+		for (String key : REQUIRED_PROPERTIES) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			String property = description.getProperty(key);
 			if (property == null) {
 				return Status.error(NLS.bind(LaunchingMessages.EEVMType_1, key));
@@ -159,7 +159,7 @@ public class EEVMType extends AbstractVMInstallType {
 	 */
 	@Override
 	public IStatus validateInstallLocation(File installLocation) {
-		if (installLocation.exists()) {
+		if (installLocation.exists()) { //FLLDCIM: MARK — M31 M3FILE_IO CALL
 			return new Status(IStatus.INFO, LaunchingPlugin.ID_PLUGIN, LaunchingMessages.EEVMType_4);
 		}
 		return Status.error(NLS.bind(LaunchingMessages.EEVMType_3, installLocation.getPath()));

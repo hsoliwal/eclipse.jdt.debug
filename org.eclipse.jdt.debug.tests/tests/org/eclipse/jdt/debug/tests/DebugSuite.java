@@ -46,7 +46,7 @@ public abstract class DebugSuite extends TestSuite {
 	 * waiter blocks the UI when a resource changes.
 	 * @see junit.framework.TestSuite#run(junit.framework.TestResult)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public void run(final TestResult result) {
 		final Display display = Display.getCurrent();
 		Thread thread = null;
@@ -55,7 +55,7 @@ public abstract class DebugSuite extends TestSuite {
 				@Override
 				public void run() {
 					try {
-						for (Enumeration<Test> e= tests(); e.hasMoreElements(); ) {
+						for (Enumeration<Test> e= tests(); e.hasMoreElements(); ) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 							if (result.shouldStop()) {
 								break;
 							}
@@ -74,7 +74,7 @@ public abstract class DebugSuite extends TestSuite {
 			e.printStackTrace();
 		}
 
-		while (fTesting) {
+		while (fTesting) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			try {
 				if (!display.readAndDispatch()) {
 					display.sleep();

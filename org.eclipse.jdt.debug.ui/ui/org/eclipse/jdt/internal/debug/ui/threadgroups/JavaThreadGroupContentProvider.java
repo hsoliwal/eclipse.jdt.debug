@@ -53,17 +53,17 @@ public class JavaThreadGroupContentProvider extends JavaElementContentProvider {
 		return EMPTY;
 	}
 
-	protected Object[] getChildren(IJavaThreadGroup group) throws CoreException {
+	protected Object[] getChildren(IJavaThreadGroup group) throws CoreException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		if (isAvailable(group)) {
 			IJavaThreadGroup[] threadGroups = group.getThreadGroups();
 			IJavaThread[] threads = group.getThreads();
 			Object[] kids = new Object[threadGroups.length + threads.length];
 			int index = 0;
-			for (IJavaThread thread : threads) {
+			for (IJavaThread thread : threads) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				kids[index]= thread;
 				index++;
 			}
-			for (IJavaThreadGroup threadGroup : threadGroups) {
+			for (IJavaThreadGroup threadGroup : threadGroups) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				kids[index] = threadGroup;
 				index++;
 			}

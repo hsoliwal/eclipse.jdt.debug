@@ -43,7 +43,7 @@ public class DebugShellVariableTests extends AbstractDebugUiTests {
 	private IJavaThread javaThread;
 	private IDebugContextProvider debugContextProvider;
 
-	public DebugShellVariableTests(String name) {
+	public DebugShellVariableTests(String name) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		super(name);
 		debugContextProvider = new IDebugContextProvider() {
 			@Override
@@ -126,7 +126,7 @@ public class DebugShellVariableTests extends AbstractDebugUiTests {
 				return comp.computeCompletionProposals(viewer, completionIndex);
 			}
 		});
-		assertNull(String.format("Has errors : %s", comp.getErrorMessage()), comp.getErrorMessage());
+		assertNull(String.format("Has errors : %s", comp.getErrorMessage()), comp.getErrorMessage()); //FLLDCIM: MARK — M11 FORMAT_PRECOMPUTE CALL
 		assertNotNull("proposals are null", proposals);
 
 		return Arrays.asList(proposals);

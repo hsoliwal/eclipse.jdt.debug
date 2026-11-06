@@ -22,7 +22,7 @@ import org.eclipse.jface.dialogs.Dialog;
 /**
  * Opens a dialog to allow the user to choose among advanced actions.
  */
-public class AddAdvancedAction extends RuntimeClasspathAction {
+public class AddAdvancedAction extends RuntimeClasspathAction { //FLLDCIM: MARK — T04  IMPLEMENTS
 
 	private final IAction[] fActions;
 
@@ -50,7 +50,7 @@ public class AddAdvancedAction extends RuntimeClasspathAction {
 	public void setViewer(IClasspathViewer viewer) {
 		super.setViewer(viewer);
 		if (fActions != null) {
-			for (IAction action : fActions) {
+			for (IAction action : fActions) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				if (action instanceof RuntimeClasspathAction) {
 					((RuntimeClasspathAction) action).setViewer(viewer);
 				}

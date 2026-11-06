@@ -67,14 +67,14 @@ public class JavaLogicalStructures implements ILogicalStructureProvider {
 	/**
 	 * The list of java logical structures listeners.
 	 */
-	private static Set<IJavaStructuresListener> fListeners = new HashSet<>();
+	private static Set<IJavaStructuresListener> fListeners = new HashSet<>(); //FLLDCIM: MARK — M03 M3_SET_LANES NEW
 
 	/**
 	 * Preference key for the list of user defined Java logical structures
 	 *
 	 * @since 3.1
 	 */
-	private static final String PREF_JAVA_LOGICAL_STRUCTURES = JDIDebugModel
+	private static final String PREF_JAVA_LOGICAL_STRUCTURES = JDIDebugModel //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 			.getPluginIdentifier() + ".PREF_JAVA_LOGICAL_STRUCTURES"; //$NON-NLS-1$
 
 	/**
@@ -90,7 +90,7 @@ public class JavaLogicalStructures implements ILogicalStructureProvider {
 				initUserDefinedJavaLogicalStructures();
 				initJavaLogicalStructureMap();
 				Iterator<IJavaStructuresListener> iter = fListeners.iterator();
-				while (iter.hasNext()) {
+				while (iter.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 					iter.next().logicalStructuresChanged();
 				}
 			}
@@ -112,14 +112,14 @@ public class JavaLogicalStructures implements ILogicalStructureProvider {
 	}
 
 	private static void initJavaLogicalStructureMap() {
-		fJavaLogicalStructureMap = new HashMap<>();
+		fJavaLogicalStructureMap = new HashMap<>(); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
 		addAllLogicalStructures(fPluginContributedJavaLogicalStructures);
 		addAllLogicalStructures(fUserDefinedJavaLogicalStructures);
 	}
 
 	private static void addAllLogicalStructures(
 			List<JavaLogicalStructure> pluginContributedJavaLogicalStructures) {
-		for (JavaLogicalStructure logicalStructure : pluginContributedJavaLogicalStructures) {
+		for (JavaLogicalStructure logicalStructure : pluginContributedJavaLogicalStructures) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			addLogicalStructure(logicalStructure);
 		}
 	}
@@ -128,7 +128,7 @@ public class JavaLogicalStructures implements ILogicalStructureProvider {
 		String typeName = structure.getQualifiedTypeName();
 		List<JavaLogicalStructure> logicalStructure = fJavaLogicalStructureMap.get(typeName);
 		if (logicalStructure == null) {
-			logicalStructure = new ArrayList<>();
+			logicalStructure = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 			fJavaLogicalStructureMap.put(typeName, logicalStructure);
 		}
 		logicalStructure.add(structure);
@@ -138,13 +138,13 @@ public class JavaLogicalStructures implements ILogicalStructureProvider {
 	 * Get the configuration elements for the extension point.
 	 */
 	private static void initPluginContributedJavaLogicalStructure() {
-		fPluginContributedJavaLogicalStructures = new ArrayList<>();
+		fPluginContributedJavaLogicalStructures = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 		IExtensionPoint extensionPoint = Platform.getExtensionRegistry()
 				.getExtensionPoint(JDIDebugPlugin.getUniqueIdentifier(),
 						JDIDebugPlugin.EXTENSION_POINT_JAVA_LOGICAL_STRUCTURES);
 		IConfigurationElement[] javaLogicalStructureElements = extensionPoint
 				.getConfigurationElements();
-		for (IConfigurationElement javaLogicalStructureElement : javaLogicalStructureElements) {
+		for (IConfigurationElement javaLogicalStructureElement : javaLogicalStructureElements) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			try {
 				fPluginContributedJavaLogicalStructures
 						.add(new JavaLogicalStructure(
@@ -158,8 +158,8 @@ public class JavaLogicalStructures implements ILogicalStructureProvider {
 	/**
 	 * Get the user defined logical structures (from the preference store).
 	 */
-	private static void initUserDefinedJavaLogicalStructures() {
-		fUserDefinedJavaLogicalStructures = new ArrayList<>();
+	private static void initUserDefinedJavaLogicalStructures() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
+		fUserDefinedJavaLogicalStructures = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 		String logicalStructuresString = Platform.getPreferencesService().getString(
 				JDIDebugPlugin.getUniqueIdentifier(),
 				PREF_JAVA_LOGICAL_STRUCTURES,
@@ -167,7 +167,7 @@ public class JavaLogicalStructures implements ILogicalStructureProvider {
 				null);
 		StringTokenizer tokenizer = new StringTokenizer(
 				logicalStructuresString, "\0", true); //$NON-NLS-1$
-		while (tokenizer.hasMoreTokens()) {
+		while (tokenizer.hasMoreTokens()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			String type = tokenizer.nextToken();
 			tokenizer.nextToken();
 			String description = tokenizer.nextToken();
@@ -185,7 +185,7 @@ public class JavaLogicalStructures implements ILogicalStructureProvider {
 			int variablesCounter = Integer.parseInt(variablesCounterValue);
 			tokenizer.nextToken();
 			String[][] variables = new String[variablesCounter][2];
-			for (int i = 0; i < variablesCounter; i++) {
+			for (int i = 0; i < variablesCounter; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				variables[i][0] = tokenizer.nextToken();
 				tokenizer.nextToken();
 				variables[i][1] = tokenizer.nextToken();
@@ -199,26 +199,26 @@ public class JavaLogicalStructures implements ILogicalStructureProvider {
 	/**
 	 * Save the user defined logical structures in the preference store.
 	 */
-	public static void saveUserDefinedJavaLogicalStructures() {
-		StringBuilder logicalStructuresString = new StringBuilder();
-		for (JavaLogicalStructure logicalStructure : fUserDefinedJavaLogicalStructures) {
-			logicalStructuresString.append(
+	public static void saveUserDefinedJavaLogicalStructures() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
+		StringBuilder logicalStructuresString = new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
+		for (JavaLogicalStructure logicalStructure : fUserDefinedJavaLogicalStructures) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
+			logicalStructuresString.append( //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				logicalStructure.getQualifiedTypeName()).append('\0');
-			logicalStructuresString.append(logicalStructure.getDescription())
+			logicalStructuresString.append(logicalStructure.getDescription()) //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				.append('\0');
-			logicalStructuresString.append(
+			logicalStructuresString.append( //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				logicalStructure.isSubtypes() ? IS_SUBTYPE_TRUE
 					: IS_SUBTYPE_FALSE).append('\0');
 			String value = logicalStructure.getValue();
 			if (value != null) {
-				logicalStructuresString.append(value);
+				logicalStructuresString.append(value); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			}
-			logicalStructuresString.append('\0');
+			logicalStructuresString.append('\0'); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			String[][] variables = logicalStructure.getVariables();
-			logicalStructuresString.append(variables.length).append('\0');
-			for (String[] strings : variables) {
-				logicalStructuresString.append(strings[0]).append('\0');
-				logicalStructuresString.append(strings[1]).append('\0');
+			logicalStructuresString.append(variables.length).append('\0'); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+			for (String[] strings : variables) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
+				logicalStructuresString.append(strings[0]).append('\0'); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+				logicalStructuresString.append(strings[1]).append('\0'); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			}
 		}
 		IEclipsePreferences node = InstanceScope.INSTANCE.getNode(JDIDebugPlugin.getUniqueIdentifier());
@@ -239,10 +239,10 @@ public class JavaLogicalStructures implements ILogicalStructureProvider {
 		JavaLogicalStructure[] logicalStructures = new JavaLogicalStructure[fPluginContributedJavaLogicalStructures
 				.size() + fUserDefinedJavaLogicalStructures.size()];
 		int i = 0;
-		for (JavaLogicalStructure logicalStructure : fPluginContributedJavaLogicalStructures) {
+		for (JavaLogicalStructure logicalStructure : fPluginContributedJavaLogicalStructures) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			logicalStructures[i++] = logicalStructure;
 		}
-		for (JavaLogicalStructure logicalStructure : fUserDefinedJavaLogicalStructures) {
+		for (JavaLogicalStructure logicalStructure : fUserDefinedJavaLogicalStructures) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			logicalStructures[i++] = logicalStructure;
 		}
 		return logicalStructures;
@@ -265,13 +265,13 @@ public class JavaLogicalStructures implements ILogicalStructureProvider {
 		fListeners.remove(listener);
 	}
 
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public ILogicalStructureType[] getLogicalStructureTypes(IValue value) {
 		if (!(value instanceof IJavaObject)) {
 			return new ILogicalStructureType[0];
 		}
 		IJavaObject javaValue = (IJavaObject) value;
-		List<JavaLogicalStructure> logicalStructures = new ArrayList<>();
+		List<JavaLogicalStructure> logicalStructures = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 		try {
 			IJavaType type = javaValue.getJavaType();
 			if (!(type instanceof IJavaClassType)) {
@@ -284,14 +284,14 @@ public class JavaLogicalStructures implements ILogicalStructureProvider {
 				logicalStructures.addAll(list);
 			}
 			IJavaClassType superClass = classType.getSuperclass();
-			while (superClass != null) {
+			while (superClass != null) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				addIfIsSubtype(logicalStructures,
 						fJavaLogicalStructureMap.get(superClass
 								.getName()));
 				superClass = superClass.getSuperclass();
 			}
 			IJavaInterfaceType[] superInterfaces = classType.getAllInterfaces();
-			for (IJavaInterfaceType superInterface : superInterfaces) {
+			for (IJavaInterfaceType superInterface : superInterfaces) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				addIfIsSubtype(logicalStructures,
 						fJavaLogicalStructureMap.get(superInterface
 								.getName()));
@@ -308,7 +308,7 @@ public class JavaLogicalStructures implements ILogicalStructureProvider {
 		if (list == null) {
 			return;
 		}
-		for(JavaLogicalStructure jls : list) {
+		for(JavaLogicalStructure jls : list) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			if (jls.isSubtypes()) {
 				logicalStructures.add(jls);
 			}

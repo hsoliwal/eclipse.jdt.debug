@@ -34,7 +34,7 @@ public class JavaModelProxyFactory implements IModelProxyFactory {
 		if (IDebugUIConstants.ID_DEBUG_VIEW.equals(context.getId())) {
 			if (element instanceof IJavaDebugTarget) {
 				ILaunch launch = ((IDebugTarget) element).getLaunch();
-				for (Object child : launch.getChildren()) {
+				for (Object child : launch.getChildren()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 					if (child == element) {
 						// ensure the target is a visible child of the launch
 						return new JavaDebugTargetProxy((IDebugTarget) element);

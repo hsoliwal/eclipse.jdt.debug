@@ -37,7 +37,7 @@ public class StratumTests extends AbstractDebugTest {
 	/**
 	 * Test available strata on a type.
 	 */
-	public void testAvailableStrata() throws Exception {
+	public void testAvailableStrata() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String typeName = "Breakpoints";
 		createLineBreakpoint(81, typeName);
 
@@ -88,7 +88,7 @@ public class StratumTests extends AbstractDebugTest {
 	/**
 	 * Test set / get default stratum on a java debug target.
 	 */
-	public void testSetGetDefaultStratum() throws Exception {
+	public void testSetGetDefaultStratum() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String typeName = "Breakpoints";
 		createLineBreakpoint(81, typeName);
 

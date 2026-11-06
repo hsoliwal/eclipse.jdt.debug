@@ -53,7 +53,7 @@ public class JavaConsoleTracker implements IPatternMatchListenerDelegate {
     /* (non-Javadoc)
      * @see org.eclipse.ui.console.IPatternMatchListenerDelegate#matchFound(org.eclipse.ui.console.PatternMatchEvent)
      */
-    @Override
+    @Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
     public void matchFound(PatternMatchEvent event) {
         try {
             int offset = event.getOffset() + 1; // skip the leading (
@@ -61,7 +61,7 @@ public class JavaConsoleTracker implements IPatternMatchListenerDelegate {
 
             String text = fConsole.getDocument().get(offset, length);
             // Remove the ANSI escape sequences
-            String textNew = text.replaceAll(JavaStackTraceHyperlink.ANSI_ESCAPE_REGEX, ""); //$NON-NLS-1$
+            String textNew = text.replaceAll(JavaStackTraceHyperlink.ANSI_ESCAPE_REGEX, ""); //$NON-NLS-1$ //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
             int delta = text.indexOf(textNew);
             if (delta != -1) {
                 offset += delta;

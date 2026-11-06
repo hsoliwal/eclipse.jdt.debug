@@ -47,13 +47,13 @@ public class JavaContentProviderFilter {
 		return PinnedFieldsManager.getDefault().movePinnedFirst(context.getId(), filterHiddenVariables(variables, context));
 	}
 
-	private static Object[] filterHiddenVariables(Object[] variables, IPresentationContext context) throws DebugException {
+	private static Object[] filterHiddenVariables(Object[] variables, IPresentationContext context) throws DebugException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		boolean filterStatics = !includeStatic(context);
 		boolean filterConstants = !includeConstants(context);
 
 		if (filterStatics || filterConstants) {
-			List<Object> keep = new ArrayList<>(variables.length);
-			for (Object variable : variables) {
+			List<Object> keep = new ArrayList<>(variables.length); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
+			for (Object variable : variables) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				boolean filter = false;
 				if (variable instanceof IJavaVariable) {
 					IJavaVariable var = (IJavaVariable) variable;
@@ -84,7 +84,7 @@ public class JavaContentProviderFilter {
 	 */
 	private static boolean includeStatic(IPresentationContext context){
 		IPreferenceStore store = JDIDebugUIPlugin.getDefault().getPreferenceStore();
-		String statics = context.getId() + "." + IJDIPreferencesConstants.PREF_SHOW_STATIC_VARIABLES; //$NON-NLS-1$
+		String statics = context.getId() + "." + IJDIPreferencesConstants.PREF_SHOW_STATIC_VARIABLES; //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		return store.getBoolean(statics);
 	}
 
@@ -98,7 +98,7 @@ public class JavaContentProviderFilter {
 	 */
 	private static boolean includeConstants(IPresentationContext context){
 		IPreferenceStore store = JDIDebugUIPlugin.getDefault().getPreferenceStore();
-		String constants = context.getId() + "." + IJDIPreferencesConstants.PREF_SHOW_CONSTANTS; //$NON-NLS-1$
+		String constants = context.getId() + "." + IJDIPreferencesConstants.PREF_SHOW_CONSTANTS; //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		return store.getBoolean(constants);
 	}
 }

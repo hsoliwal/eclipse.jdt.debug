@@ -161,7 +161,7 @@ public class DetailFormatterDialog extends StatusDialog implements ITypeProvider
 	 *
 	 * @see org.eclipse.jface.dialogs.Dialog#createDialogArea(Composite)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	protected Control createDialogArea(Composite parent) {
 		IWorkbench workbench = PlatformUI.getWorkbench();
 
@@ -178,7 +178,7 @@ public class DetailFormatterDialog extends StatusDialog implements ITypeProvider
 		fTypeNameText = SWTFactory.createSingleText(innerContainer, 2);
 		fTypeNameText.setEditable(fEditTypeName);
 		fTypeNameText.setText(fDetailFormatter.getTypeName());
-		fTypeNameText.addModifyListener(new ModifyListener() {
+		fTypeNameText.addModifyListener(new ModifyListener() { //FLLDCIM: MARK — T02 TEXT_INPUT_DEBOUNCE CALL
 			@Override
 			public void modifyText(ModifyEvent e) {
 				fTypeSearched= false;
@@ -192,7 +192,7 @@ public class DetailFormatterDialog extends StatusDialog implements ITypeProvider
 		gridLayout.horizontalSpan = 1;
 		gridLayout.grabExcessHorizontalSpace = true;
 		primitiveSearchButton.setLayoutData(gridLayout);
-		primitiveSearchButton.addListener(SWT.Selection, new Listener() {
+		primitiveSearchButton.addListener(SWT.Selection, new Listener() { //FLLDCIM: MARK — T13 SWT_TYPED_EVENT CALL
 			@Override
 			public void handleEvent(Event e) {
 				selectPrimitiveType();
@@ -202,7 +202,7 @@ public class DetailFormatterDialog extends StatusDialog implements ITypeProvider
 		Button typeSearchButton = SWTFactory.createPushButton(innerContainer, DebugUIMessages.DetailFormatterDialog_Select__type_4, null);
 		typeSearchButton.setEnabled(fEditTypeName);
 		typeSearchButton.setLayoutData(gridLayout);
-		typeSearchButton.addListener(SWT.Selection, new Listener() {
+		typeSearchButton.addListener(SWT.Selection, new Listener() { //FLLDCIM: MARK — T13 SWT_TYPED_EVENT CALL
 			@Override
 			public void handleEvent(Event e) {
 				selectType();
@@ -249,7 +249,7 @@ public class DetailFormatterDialog extends StatusDialog implements ITypeProvider
 	 *
 	 * @param parent parent composite
 	 */
-	private void createSnippetViewer(Composite parent) {
+	private void createSnippetViewer(Composite parent) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		fSnippetViewer= new JDISourceViewer(parent,  null, SWT.BORDER | SWT.V_SCROLL | SWT.H_SCROLL | SWT.LEFT_TO_RIGHT);
 		fSnippetViewer.setInput(this);
 
@@ -272,7 +272,7 @@ public class DetailFormatterDialog extends StatusDialog implements ITypeProvider
 		control.setLayoutData(gd);
 		document.set(fDetailFormatter.getSnippet());
 
-		fSnippetViewer.getDocument().addDocumentListener(new IDocumentListener() {
+		fSnippetViewer.getDocument().addDocumentListener(new IDocumentListener() { //FLLDCIM: MARK — T28  ANONYMOUS
 			@Override
 			public void documentAboutToBeChanged(DocumentEvent event) {
 			}
@@ -320,7 +320,7 @@ public class DetailFormatterDialog extends StatusDialog implements ITypeProvider
 	/**
 	 * Open the 'select type' dialog, and set the user choice into the formatter.
 	 */
-	private void selectType() {
+	private void selectType() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		Shell shell= getShell();
 		SelectionDialog dialog= null;
 		try {
@@ -348,14 +348,14 @@ public class DetailFormatterDialog extends StatusDialog implements ITypeProvider
 	/**
 	 * Open the 'select type' dialog, and set the primitive into the formatter.
 	 */
-	private void selectPrimitiveType() {
+	private void selectPrimitiveType() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		Shell shell = getShell();
 		ListDialog listDialog = new ListDialog(shell);
 		listDialog.setTitle(DebugUIMessages.DetailFormatterPrimitiveSelectionTitle);
 		listDialog.setMessage(DebugUIMessages.DetailFormatterPrimitiveSelectionLabel);
 		listDialog.setInput(getPrimitiveTypes().toArray());
 		listDialog.setContentProvider(ArrayContentProvider.getInstance());
-		listDialog.setLabelProvider(new LabelProvider() {
+		listDialog.setLabelProvider(new LabelProvider() { //FLLDCIM: MARK — T24 LABEL_DELTA CALL
 			@Override
 			public String getText(Object element) {
 				return (String) element;
@@ -386,7 +386,7 @@ public class DetailFormatterDialog extends StatusDialog implements ITypeProvider
 	 * Use the Java search engine to find the type which corresponds
 	 * to the given name.
 	 */
-	private void findCorrespondingType() {
+	private void findCorrespondingType() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		if (fTypeSearched) {
 			return;
 		}

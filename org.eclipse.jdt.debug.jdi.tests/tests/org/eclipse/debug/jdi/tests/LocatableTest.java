@@ -47,7 +47,7 @@ public class LocatableTest extends AbstractJDITest {
 	/**
 	 * Init the fields that are used by this test only.
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public void localSetUp() {
 		// Get all kinds of locatable
 
@@ -111,18 +111,18 @@ public class LocatableTest extends AbstractJDITest {
 	/**
 	 * Test JDI location()
 	 */
-	public void testJDILocation() {
+	public void testJDILocation() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		ListIterator<Mirror> iterator = fLocatables.listIterator();
-		while (iterator.hasNext()) {
+		while (iterator.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			Locatable locatable = (Locatable) iterator.next();
 			Location location = locatable.location();
-			assertNotNull("1." + locatable, location);
+			assertNotNull("1." + locatable, location); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 			assertTrue(
-				"2." + locatable,
+				"2." + locatable, //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 				(location.codeIndex()) >= 0 || (location.codeIndex() == -1));
-			assertNotNull("3." + locatable, location.declaringType());
+			assertNotNull("3." + locatable, location.declaringType()); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 			assertTrue(
-				"4." + locatable,
+				"4." + locatable, //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 				(location.lineNumber() > 0) || (location.lineNumber() == -1));
 			assertNotNull("5", location.method());
 			try {

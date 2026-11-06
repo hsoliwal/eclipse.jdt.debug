@@ -55,14 +55,14 @@ public class TextTestResult extends TestResult {
 	public void printErrors() {
 		if (errorCount() != 0) {
 			if (errorCount() == 1)
-				System.out.println("There was " + errorCount() + " error:");
+				System.out.println("There was " + errorCount() + " error:"); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 			else
-				System.out.println("There were " + errorCount() + " errors:");
+				System.out.println("There were " + errorCount() + " errors:"); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 			int i = 1;
-			for (Enumeration<?> e = errors(); e.hasMoreElements(); i++) {
+			for (Enumeration<?> e = errors(); e.hasMoreElements(); i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				TestFailure failure = (TestFailure) e.nextElement();
-				System.out.println(i + ") " + failure.failedTest());
+				System.out.println(i + ") " + failure.failedTest()); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 				failure.thrownException().printStackTrace();
 				System.out.println();
 			}
@@ -71,21 +71,21 @@ public class TextTestResult extends TestResult {
 	/**
 	 * Prints failures to the standard output
 	 */
-	public void printFailures() {
+	public void printFailures() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		if (failureCount() != 0) {
 			if (failureCount() == 1)
-				System.out.println("There was " + failureCount() + " failure:");
+				System.out.println("There was " + failureCount() + " failure:"); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 			else
 				System.out.println(
-					"There were " + failureCount() + " failures:");
+					"There were " + failureCount() + " failures:"); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 			int i = 1;
-			for (Enumeration<?> e = failures(); e.hasMoreElements(); i++) {
+			for (Enumeration<?> e = failures(); e.hasMoreElements(); i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				TestFailure failure = (TestFailure) e.nextElement();
-				System.out.print(i + ") " + failure.failedTest());
+				System.out.print(i + ") " + failure.failedTest()); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 				Throwable t = failure.thrownException();
 				if (t.getMessage() != null)
-					System.out.println(" \"" + t.getMessage() + "\"");
+					System.out.println(" \"" + t.getMessage() + "\""); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 				else {
 					System.out.println();
 					failure.thrownException().printStackTrace();
@@ -96,18 +96,18 @@ public class TextTestResult extends TestResult {
 	/**
 	 * Prints the header of the report
 	 */
-	public void printHeader() {
+	public void printHeader() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		if (wasSuccessful()) {
 			System.out.println();
 			System.out.print("OK");
-			System.out.println(" (" + runCount() + " tests)");
+			System.out.println(" (" + runCount() + " tests)"); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 		} else {
 			System.out.println();
 			System.out.println("!!!FAILURES!!!");
 			System.out.println("Test Results:");
 			System.out.println(
-				"Run: "
+				"Run: " //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 					+ runCount()
 					+ " Failures: "
 					+ failureCount()

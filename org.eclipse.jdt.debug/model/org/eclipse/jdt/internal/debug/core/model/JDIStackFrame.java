@@ -172,7 +172,7 @@ public class JDIStackFrame extends JDIDebugElement implements IJavaStackFrame {
 	 *            depth in the call stack, or -1 to indicate the frame should become invalid
 	 * @return a frame to refer to the given frame or <code>null</code>
 	 */
-	protected JDIStackFrame bind(StackFrame frame, int depth) {
+	protected JDIStackFrame bind(StackFrame frame, int depth) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		synchronized (fThread) {
 			if (fDepth == -2) {
 				// first initialization
@@ -262,7 +262,7 @@ public class JDIStackFrame extends JDIDebugElement implements IJavaStackFrame {
 	/**
 	 * @see IStep#canStepReturn()
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public boolean canStepReturn() {
 		try {
 			if (!exists() || isObsolete() || !getThread().canStepReturn()) {
@@ -309,7 +309,7 @@ public class JDIStackFrame extends JDIDebugElement implements IJavaStackFrame {
 		return list.toArray(new IVariable[list.size()]);
 	}
 
-	protected List<IJavaVariable> getVariables0() throws DebugException {
+	protected List<IJavaVariable> getVariables0() throws DebugException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		synchronized (fThread) {
 
 			if (fVariables == null || isDifferentLambdaContext(this)) {
@@ -323,7 +323,7 @@ public class JDIStackFrame extends JDIDebugElement implements IJavaStackFrame {
 				}
 
 				Method method = getUnderlyingMethod();
-				fVariables = new ArrayList<>();
+				fVariables = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 				// #isStatic() does not claim to throw any exceptions - so it is
 				// not try/catch coded
 				if (method.isStatic()) {
@@ -343,7 +343,7 @@ public class JDIStackFrame extends JDIDebugElement implements IJavaStackFrame {
 					}
 					if (allFields != null) {
 						Iterator<Field> fields = allFields.iterator();
-						while (fields.hasNext()) {
+						while (fields.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 							Field field = fields.next();
 							if (field.isStatic()) {
 								fVariables.add(new JDIFieldVariable(
@@ -351,7 +351,7 @@ public class JDIStackFrame extends JDIDebugElement implements IJavaStackFrame {
 										field, declaringType));
 							}
 						}
-						Collections.sort(fVariables,
+						Collections.sort(fVariables, //FLLDCIM: MARK — M16 SORT_LANE CALL
 								(a, b) -> {
 									JDIFieldVariable v1 = (JDIFieldVariable) a;
 									JDIFieldVariable v2 = (JDIFieldVariable) b;
@@ -389,7 +389,7 @@ public class JDIStackFrame extends JDIDebugElement implements IJavaStackFrame {
 				// add locals
 				Iterator<LocalVariable> variables = getUnderlyingVisibleVariables()
 						.iterator();
-				while (variables.hasNext()) {
+				while (variables.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 					LocalVariable var = variables.next();
 					fVariables.add(new JDILocalVariable(this, var));
 				}
@@ -404,7 +404,7 @@ public class JDIStackFrame extends JDIDebugElement implements IJavaStackFrame {
 	/**
 	 * Tries to resolve "real" captured variable names by inspecting corresponding Java source code (if available)
 	 */
-	protected void tryToResolveLambdaVariableNames(IJavaValue value, ObjectReference underlyingThisObject) {
+	protected void tryToResolveLambdaVariableNames(IJavaValue value, ObjectReference underlyingThisObject) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		if (!isProbablyJavaCode()) {
 			// See bug 562056: we won't parse Java code if the current frame doesn't belong to Java, because
 			// we will most likely have different source line numbers and will produce garbage or errors
@@ -466,7 +466,7 @@ public class JDIStackFrame extends JDIDebugElement implements IJavaStackFrame {
 			this.lineNo = lineNo;
 		}
 
-		@Override
+		@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		public boolean visit(LambdaExpression lambdaExpression) {
 			// check if the lineNo fall in lambda region, it can either be single or multiline lambda body.
 			if (lineNo < cu.getLineNumber(lambdaExpression.getStartPosition())
@@ -486,7 +486,7 @@ public class JDIStackFrame extends JDIDebugElement implements IJavaStackFrame {
 			int i = 0;
 			if (methodIsStatic) {
 				if (synVars.length == allFields.size()) {
-					while (listIterator.hasNext()) {
+					while (listIterator.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 						FieldImpl field = (FieldImpl) listIterator.next();
 						String newName = synVars[i].getName();
 						FieldImpl newField = createRenamedCopy(field, newName);
@@ -496,7 +496,7 @@ public class JDIStackFrame extends JDIDebugElement implements IJavaStackFrame {
 				}
 			} else {
 				if (synVars.length + 1 == allFields.size()) {
-					while (listIterator.hasNext()) {
+					while (listIterator.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 						FieldImpl field = (FieldImpl) listIterator.next();
 						// remove 'this' field from the fields of the lambda
 						if (i == 0) {
@@ -521,7 +521,7 @@ public class JDIStackFrame extends JDIDebugElement implements IJavaStackFrame {
 	/**
 	 * If there is a return value from a "step return" that belongs to this frame, insert it as first element
 	 */
-	private void addStepReturnValue(List<IJavaVariable> variables) {
+	private void addStepReturnValue(List<IJavaVariable> variables) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		if (fIsTop) {
 			MethodResult methodResult = fThread.getMethodResult();
 			if (methodResult != null && methodResult.fResultType != null) {
@@ -578,7 +578,7 @@ public class JDIStackFrame extends JDIDebugElement implements IJavaStackFrame {
 	/**
 	 * @see IJavaStackFrame#getArgumentTypeNames()
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public List<String> getArgumentTypeNames() throws DebugException {
 		try {
 			Method underlyingMethod = getUnderlyingMethod();
@@ -590,8 +590,8 @@ public class JDIStackFrame extends JDIDebugElement implements IJavaStackFrame {
 			// generic signature
 			String[] parameterTypes = Signature
 					.getParameterTypes(genericSignature);
-			List<String> argumentTypeNames = new ArrayList<>();
-			for (String parameterType : parameterTypes) {
+			List<String> argumentTypeNames = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
+			for (String parameterType : parameterTypes) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				argumentTypeNames.add(Signature.toString(parameterType)
 						.replace('/', '.'));
 			}
@@ -711,7 +711,7 @@ public class JDIStackFrame extends JDIDebugElement implements IJavaStackFrame {
 	 *
 	 * @see JDIDebugElement#targetRequestFailed(String, RuntimeException)
 	 */
-	protected void updateVariables() throws DebugException {
+	protected void updateVariables() throws DebugException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		if (fVariables == null) {
 			return;
 		}
@@ -779,7 +779,7 @@ public class JDIStackFrame extends JDIDebugElement implements IJavaStackFrame {
 			return;
 		}
 		int localIndex = -1;
-		while (index < fVariables.size()) {
+		while (index < fVariables.size()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			Object var = fVariables.get(index);
 			if (var instanceof JDILocalVariable) {
 				JDILocalVariable local = (JDILocalVariable) fVariables
@@ -802,7 +802,7 @@ public class JDIStackFrame extends JDIDebugElement implements IJavaStackFrame {
 
 		// add any new locals
 		Iterator<LocalVariable> newOnes = locals.iterator();
-		while (newOnes.hasNext()) {
+		while (newOnes.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			JDILocalVariable local = new JDILocalVariable(this, newOnes.next());
 			fVariables.add(local);
 		}
@@ -821,7 +821,7 @@ public class JDIStackFrame extends JDIDebugElement implements IJavaStackFrame {
 	/**
 	 * @see IJavaStackFrame#supportsDropToFrame()
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public boolean supportsDropToFrame() {
 		JDIThread thread = (JDIThread) getThread();
 		JDIDebugTarget target = (JDIDebugTarget) thread.getDebugTarget();
@@ -858,7 +858,7 @@ public class JDIStackFrame extends JDIDebugElement implements IJavaStackFrame {
 				}
 				int index = 0;
 				JDIStackFrame frame = null;
-				while (index < frames.size()) {
+				while (index < frames.size()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 					frame = (JDIStackFrame) frames.get(index);
 					index++;
 					if (frame.isNative()) {
@@ -919,15 +919,15 @@ public class JDIStackFrame extends JDIDebugElement implements IJavaStackFrame {
 	/**
 	 * @see IJavaStackFrame#findVariable(String)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public IJavaVariable findVariable(String varName) throws DebugException {
 		if (isNative()) {
 			return null;
 		}
 		IVariable[] variables = getVariables();
-		List<IJavaVariable> possibleMatches = new ArrayList<>();
+		List<IJavaVariable> possibleMatches = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 		IJavaVariable thisVariable = null;
-		for (IVariable variable : variables) {
+		for (IVariable variable : variables) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			IJavaVariable var = (IJavaVariable) variable;
 			if (var.getName().equals(varName)) {
 				possibleMatches.add(var);
@@ -942,15 +942,15 @@ public class JDIStackFrame extends JDIDebugElement implements IJavaStackFrame {
 				JDILambdaVariable lambda = (JDILambdaVariable) var;
 				JDIObjectValue ov = (JDIObjectValue) lambda.getValue();
 				IVariable[] lvars = ov.getVariables();
-				for (IVariable lv : lvars) {
+				for (IVariable lv : lvars) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 					String name = lv.getName();
-					if (name.startsWith(SYNTHETIC_OUTER_LOCAL_PREFIX) && (SYNTHETIC_OUTER_LOCAL_PREFIX + varName).equals(name)) {
+					if (name.startsWith(SYNTHETIC_OUTER_LOCAL_PREFIX) && (SYNTHETIC_OUTER_LOCAL_PREFIX + varName).equals(name)) { //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 						possibleMatches.add((IJavaVariable) lv);
 					}
 				}
 			}
 		}
-		for(IJavaVariable variable: possibleMatches){
+		for(IJavaVariable variable: possibleMatches){ //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			// Local Variable has more preference than Field Variable
 			if(variable instanceof JDILocalVariable){
 				return variable;
@@ -962,7 +962,7 @@ public class JDIStackFrame extends JDIDebugElement implements IJavaStackFrame {
 
 		if (thisVariable != null) {
 			IVariable[] thisChildren = thisVariable.getValue().getVariables();
-			for (IVariable element : thisChildren) {
+			for (IVariable element : thisChildren) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				IJavaVariable var = (IJavaVariable) element;
 				if (var.getName().equals(varName)) {
 					return var;
@@ -978,7 +978,7 @@ public class JDIStackFrame extends JDIDebugElement implements IJavaStackFrame {
 	 *
 	 * @see JDIDebugElement#targetRequestFailed(String, RuntimeException)
 	 */
-	protected List<LocalVariable> getUnderlyingVisibleVariables() throws DebugException {
+	protected List<LocalVariable> getUnderlyingVisibleVariables() throws DebugException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		synchronized (fThread) {
 			List<LocalVariable> variables = Collections.EMPTY_LIST;
 			try {
@@ -1008,7 +1008,7 @@ public class JDIStackFrame extends JDIDebugElement implements IJavaStackFrame {
 	 *
 	 * @see JDIDebugElement#targetRequestFailed(String, RuntimeException)
 	 */
-	protected ObjectReference getUnderlyingThisObject() throws DebugException {
+	protected ObjectReference getUnderlyingThisObject() throws DebugException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		synchronized (fThread) {
 			if ((fStackFrame == null || fThisObject == null) && !isStatic() && !(getUnderlyingStackFrame() == null)) {
 				try {
@@ -1060,7 +1060,7 @@ public class JDIStackFrame extends JDIDebugElement implements IJavaStackFrame {
 	/**
 	 * @see IJavaStackFrame#getDeclaringTypeName()
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public String getDeclaringTypeName() throws DebugException {
 		synchronized (fThread) {
 			try {
@@ -1084,7 +1084,7 @@ public class JDIStackFrame extends JDIDebugElement implements IJavaStackFrame {
 	/**
 	 * @see IJavaStackFrame#getReceivingTypeName()
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public String getReceivingTypeName() throws DebugException {
 		if (fStackFrame == null || fReceivingTypeName == null) {
 			try {
@@ -1354,7 +1354,7 @@ public class JDIStackFrame extends JDIDebugElement implements IJavaStackFrame {
 	 *                frame (is in an interim state where this frame's thread
 	 *                has been resumed, and is not yet suspended).
 	 */
-	protected StackFrame getUnderlyingStackFrame() throws DebugException {
+	protected StackFrame getUnderlyingStackFrame() throws DebugException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		synchronized (fThread) {
 			if (fStackFrame == null) {
 				if (fDepth == -1) {
@@ -1416,7 +1416,7 @@ public class JDIStackFrame extends JDIDebugElement implements IJavaStackFrame {
 	public IJavaVariable[] getLocalVariables() throws DebugException {
 		List<LocalVariable> list = getUnderlyingVisibleVariables();
 		IJavaVariable[] locals = new IJavaVariable[list.size()];
-		for (int i = 0; i < list.size(); i++) {
+		for (int i = 0; i < list.size(); i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			locals[i] = new JDILocalVariable(this, list.get(i));
 		}
 		return locals;
@@ -1676,7 +1676,7 @@ public class JDIStackFrame extends JDIDebugElement implements IJavaStackFrame {
 	 *
 	 * @see org.eclipse.jdt.debug.core.IJavaStackFrame#canForceReturn()
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public boolean canForceReturn() {
 		if (getJavaDebugTarget().supportsForceReturn() && isSuspended()) {
 			try {
@@ -1705,7 +1705,7 @@ public class JDIStackFrame extends JDIDebugElement implements IJavaStackFrame {
 	 * org.eclipse.jdt.debug.core.IJavaStackFrame#forceReturn(org.eclipse.jdt
 	 * .debug.core.IJavaValue)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public void forceReturn(IJavaValue value) throws DebugException {
 		if (isTopStackFrame()) {
 			fThread.forceReturn(value);

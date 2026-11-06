@@ -49,7 +49,7 @@ public class AdvancedSourceLookupParticipant implements ISourceLookupParticipant
 
 	private ISourceLookupDirector director;
 
-	private final Map<File, ISourceContainer> containers = new HashMap<>();
+	private final Map<File, ISourceContainer> containers = new HashMap<>(); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
 
 	public AdvancedSourceLookupParticipant() {
 		this(IJDIHelpers.INSTANCE);
@@ -84,7 +84,7 @@ public class AdvancedSourceLookupParticipant implements ISourceLookupParticipant
 		return container.findSourceElements(sourcePath);
 	}
 
-	public ISourceContainer getSourceContainer(Object element, boolean refresh, IProgressMonitor monitor) throws CoreException {
+	public ISourceContainer getSourceContainer(Object element, boolean refresh, IProgressMonitor monitor) throws CoreException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		File location = jdi.getClassesLocation(element);
 
 		if (location == null) {
@@ -122,7 +122,7 @@ public class AdvancedSourceLookupParticipant implements ISourceLookupParticipant
 		}
 
 		// dependency of one of workspace projects on the call stack also provides java project context
-		for (File frameLocation : jdi.getStackFramesClassesLocations(element)) {
+		for (File frameLocation : jdi.getStackFramesClassesLocations(element)) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			ISourceContainer entryContainer = projectLocator.createClasspathEntryContainer(frameLocation, location);
 			if (entryContainer != null) {
 				return cacheContainer(element, location, entryContainer);
@@ -140,7 +140,7 @@ public class AdvancedSourceLookupParticipant implements ISourceLookupParticipant
 		//
 
 		// checksum-based lookup in various sources (central, nexus, pde target platform, p2 repositories)
-		for (ISourceContainerResolver repository : getSourceContainerResolvers()) {
+		for (ISourceContainerResolver repository : getSourceContainerResolvers()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			Collection<ISourceContainer> members = repository.resolveSourceContainers(location, monitor);
 			if (members != null && !members.isEmpty()) {
 				return cacheContainer(element, location, CompositeSourceContainer.compose(members));
@@ -164,14 +164,14 @@ public class AdvancedSourceLookupParticipant implements ISourceLookupParticipant
 		return container;
 	}
 
-	protected Collection<ISourceContainerResolver> getSourceContainerResolvers() {
-		List<ISourceContainerResolver> result = new ArrayList<>();
+	protected Collection<ISourceContainerResolver> getSourceContainerResolvers() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
+		List<ISourceContainerResolver> result = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 
 		IExtensionRegistry registry = Platform.getExtensionRegistry();
 
 		IConfigurationElement[] elements = registry.getConfigurationElementsFor(AdvancedSourceLookupSupport.ID_sourceContainerResolvers);
 
-		for (IConfigurationElement element : elements) {
+		for (IConfigurationElement element : elements) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			if ("resolver".equals(element.getName())) { //$NON-NLS-1$
 				try {
 					result.add((ISourceContainerResolver) element.createExecutableExtension("class")); //$NON-NLS-1$
@@ -201,7 +201,7 @@ public class AdvancedSourceLookupParticipant implements ISourceLookupParticipant
 
 	protected void disposeContainers() {
 		synchronized (containers) {
-			for (ISourceContainer container : containers.values()) {
+			for (ISourceContainer container : containers.values()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				if (container != null) // possible for non-maven jars
 				{
 					container.dispose();
@@ -227,7 +227,7 @@ public class AdvancedSourceLookupParticipant implements ISourceLookupParticipant
 
 		AdvancedSourceLookupParticipant sourceLookup = null;
 		if (sourceLocator instanceof ISourceLookupDirector) {
-			for (ISourceLookupParticipant participant : ((ISourceLookupDirector) sourceLocator).getParticipants()) {
+			for (ISourceLookupParticipant participant : ((ISourceLookupDirector) sourceLocator).getParticipants()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				if (participant instanceof AdvancedSourceLookupParticipant) {
 					sourceLookup = (AdvancedSourceLookupParticipant) participant;
 					break;

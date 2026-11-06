@@ -74,7 +74,7 @@ public class EvalualtionBreakpointListener implements IJavaBreakpointListener {
 	/**
 	 * List of breakpoints with compilation errors
 	 */
-	public static List<IJavaLineBreakpoint> COMPILATION_ERRORS = new ArrayList<>();
+	public static List<IJavaLineBreakpoint> COMPILATION_ERRORS = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 
 	/**
 	 * Lock used to notify when a notification is received.
@@ -84,7 +84,7 @@ public class EvalualtionBreakpointListener implements IJavaBreakpointListener {
 	/**
 	 * List of breakpoints with runtime errors
 	 */
-	public static List<IJavaLineBreakpoint> RUNTIME_ERRORS = new ArrayList<>();
+	public static List<IJavaLineBreakpoint> RUNTIME_ERRORS = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 
 	public static void reset() {
 		VOTE = IJavaBreakpointListener.DONT_CARE;
@@ -129,7 +129,7 @@ public class EvalualtionBreakpointListener implements IJavaBreakpointListener {
 	/* (non-Javadoc)
 	 * @see org.eclipse.jdt.debug.core.IJavaBreakpointListener#breakpointHit(org.eclipse.jdt.debug.core.IJavaThread, org.eclipse.jdt.debug.core.IJavaBreakpoint)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public int breakpointHit(IJavaThread thread, IJavaBreakpoint breakpoint) {
 		HIT = true;
 		final Object lock = new Object();

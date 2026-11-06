@@ -27,7 +27,7 @@ import org.eclipse.ui.IViewPart;
 /**
  * An action delegate that toggles the state of its viewer to show/hide certain java threads.
  */
-abstract class AbstractThreadsViewFilterAction extends ViewFilterAction implements IDebugEventSetListener {
+abstract class AbstractThreadsViewFilterAction extends ViewFilterAction implements IDebugEventSetListener { //FLLDCIM: MARK — T23  IMPLEMENTS
 
 	@Override
 	public boolean select(Viewer viewer, Object parentElement, Object element) {
@@ -46,7 +46,7 @@ abstract class AbstractThreadsViewFilterAction extends ViewFilterAction implemen
 		return true;
 	}
 
-	private void refresh(Object source) {
+	private void refresh(Object source) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		final IJavaThread thread = getJavaThread(source);
 		if (thread != null) {
 			try {
@@ -56,11 +56,11 @@ abstract class AbstractThreadsViewFilterAction extends ViewFilterAction implemen
 						public void run() {
 							StructuredViewer viewer = getStructuredViewer();
 							if (viewer != null) {
-								viewer.refresh();
+								viewer.refresh(); //FLLDCIM: MARK — M21 FULL_REBUILD_TO_DELTA CALL
 							}
 						}
 					};
-					JDIDebugUIPlugin.getStandardDisplay().asyncExec(r);
+					JDIDebugUIPlugin.getStandardDisplay().asyncExec(r); //FLLDCIM: MARK — T08 UI_THREAD_SYNCHRONIZER CALL
 					return;
 				}
 			}
@@ -88,7 +88,7 @@ abstract class AbstractThreadsViewFilterAction extends ViewFilterAction implemen
 	@Override
 	public void init(IViewPart view) {
 		super.init(view);
-		DebugPlugin.getDefault().addDebugEventListener(this);
+		DebugPlugin.getDefault().addDebugEventListener(this); //FLLDCIM: MARK — T27 DEBUG_EVENT_ADAPTER CALL
 	}
 
 	@Override
@@ -103,7 +103,7 @@ abstract class AbstractThreadsViewFilterAction extends ViewFilterAction implemen
 			// if showing all threads, no need to worry about displaying/hiding
 			return;
 		}
-		for (DebugEvent event : events) {
+		for (DebugEvent event : events) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			switch (event.getKind()) {
 				case DebugEvent.RESUME:
 					if (event.getDetail() == DebugEvent.CLIENT_REQUEST) {

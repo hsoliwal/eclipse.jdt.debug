@@ -37,7 +37,7 @@ public class LambdaUtils extends org.eclipse.jdt.internal.debug.core.model.Lambd
 	private static int indexOf(IJavaStackFrame frame, IStackFrame[] stackFrames) {
 		int j = 0;
 		boolean found = false;
-		for (; j < stackFrames.length; j++) {
+		for (; j < stackFrames.length; j++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			if (stackFrames[j] == frame) {
 				found = true;
 				break;
@@ -59,7 +59,7 @@ public class LambdaUtils extends org.eclipse.jdt.internal.debug.core.model.Lambd
 	 * @return <code>null</code> if local variable not found or return the found variable
 	 * @since 3.8
 	 */
-	public static IVariable findLocalVariableFromLambdaScope(IJavaStackFrame frame, ILocalVariable local) throws DebugException, CoreException {
+	public static IVariable findLocalVariableFromLambdaScope(IJavaStackFrame frame, ILocalVariable local) throws DebugException, CoreException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		// This can be local variable defined in the lambda body
 		IVariable var = JavaDebugHover.findLocalVariable(frame, local.getElementName());
 		if (var != null) {
@@ -80,7 +80,7 @@ public class LambdaUtils extends org.eclipse.jdt.internal.debug.core.model.Lambd
 		IJavaElement parent = local.getParent();
 		String enclosingMethodName = parent.getElementName();
 		List<String> methodTypeNames = getArgumentTypeNames(parent);
-		for (; i < stackFrames.length; i++) {
+		for (; i < stackFrames.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			IJavaStackFrame currFrame = (IJavaStackFrame) stackFrames[i];
 			String methodName = currFrame.getMethodName();
 			List<String> typeNames = currFrame.getArgumentTypeNames();
@@ -97,7 +97,7 @@ public class LambdaUtils extends org.eclipse.jdt.internal.debug.core.model.Lambd
 		return null;
 	}
 
-	private static List<String> getArgumentTypeNames(IJavaElement parent) throws CoreException {
+	private static List<String> getArgumentTypeNames(IJavaElement parent) throws CoreException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		if (!(parent instanceof IMethod method)) {
 			return null;
 		}
@@ -105,14 +105,14 @@ public class LambdaUtils extends org.eclipse.jdt.internal.debug.core.model.Lambd
 		if (type == null) {
 			return null;
 		}
-		List<String> psig = new ArrayList<>();
+		List<String> psig = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 		String[] ptypes = method.getParameterTypes();
-		for (String ps : ptypes) {
+		for (String ps : ptypes) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			@SuppressWarnings("restriction")
-			StringBuilder resolvedName = new StringBuilder().append(org.eclipse.jdt.internal.corext.util.JavaModelUtil.getResolvedTypeName(ps, type));
+			StringBuilder resolvedName = new StringBuilder().append(org.eclipse.jdt.internal.corext.util.JavaModelUtil.getResolvedTypeName(ps, type)); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			int arrayCount = Signature.getArrayCount(ps);
-			for (int i = 0; i < arrayCount; i++) {
-				resolvedName.append("[]"); //$NON-NLS-1$
+			for (int i = 0; i < arrayCount; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
+				resolvedName.append("[]"); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			}
 			psig.add(resolvedName.toString());
 		}

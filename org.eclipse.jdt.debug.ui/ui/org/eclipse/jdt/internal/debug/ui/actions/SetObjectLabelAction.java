@@ -34,7 +34,7 @@ import org.eclipse.jface.window.Window;
  */
 public class SetObjectLabelAction extends ObjectActionDelegate {
 
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public void run(IAction action) {
 		IStructuredSelection selection = getCurrentSelection();
 		if (selection == null || selection.size() != 1) {
@@ -90,7 +90,7 @@ public class SetObjectLabelAction extends ObjectActionDelegate {
 	private void refresh() {
 		StructuredViewer viewer = getStructuredViewer();
 		if (viewer != null) {
-			viewer.refresh();
+			viewer.refresh(); //FLLDCIM: MARK — M21 FULL_REBUILD_TO_DELTA CALL
 		}
 	}
 

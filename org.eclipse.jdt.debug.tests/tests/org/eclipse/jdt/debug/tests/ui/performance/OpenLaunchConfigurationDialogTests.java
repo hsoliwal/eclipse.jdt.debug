@@ -49,7 +49,7 @@ public class OpenLaunchConfigurationDialogTests extends AbstractDebugPerformance
         // cold run
         ILaunchConfiguration config = getLaunchConfiguration("Breakpoints");
 		IStructuredSelection selection= new StructuredSelection(config);
-		for (int i = 0; i < 100; i++) {
+		for (int i = 0; i < 100; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 		    openLCD(selection, fgIdentifier);
         }
 

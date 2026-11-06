@@ -54,7 +54,7 @@ public class TcpipSpy extends Thread {
 	private final DataOutputStream fDataOut;
 
 	private static VerbosePacketStream out = new VerbosePacketStream(System.out);
-	private static Map<Integer, JdwpConversation> fPackets = new HashMap<>();
+	private static Map<Integer, JdwpConversation> fPackets = new HashMap<>(); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW //FLLDCIM: MARK — M10 M3_PRIMITIVE_LANES FIELD
 
 	private static int fFieldIDSize;
 	private static int fMethodIDSize;
@@ -70,7 +70,7 @@ public class TcpipSpy extends Thread {
 		fHasSizes = false;
 	}
 
-	public static void main(String[] args) {
+	public static void main(String[] args) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		int inPort = 0;
 		String serverHost = null;
 		int outPort = 0;
@@ -93,7 +93,7 @@ public class TcpipSpy extends Thread {
 					.format("Writing output to {0}", new Object[] { file.getAbsolutePath() })); //$NON-NLS-1$
 			try {
 				out = new VerbosePacketStream(new BufferedOutputStream(
-						new FileOutputStream(file)));
+						new FileOutputStream(file))); //FLLDCIM: MARK — M31 M3FILE_IO NEW
 			} catch (FileNotFoundException e) {
 				out.println(MessageFormat
 						.format("Could not open {0}.  Using stdout instead", new Object[] { file.getAbsolutePath() })); //$NON-NLS-1$
@@ -113,21 +113,21 @@ public class TcpipSpy extends Thread {
 		}
 	}
 
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public void run() {
 		try {
 			// Skip handshake.
 			int handshakeLength;
 
 			handshakeLength = handshakeBytes.length;
-			while (handshakeLength-- > 0) {
+			while (handshakeLength-- > 0) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				int b = fDataIn.read();
 				fDataOut.write(b);
 			}
 			fDataOut.flush();
 
 			// Print all packages.
-			while (true) {
+			while (true) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				JdwpPacket p = JdwpPacket.read(fDataIn);
 				// we need to store conversation only for command send by the
 				// debugger,

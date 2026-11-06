@@ -132,13 +132,13 @@ public class StepIntoSelectionHandler implements IDebugEventFilter {
 	/**
 	 * @see org.eclipse.debug.core.IDebugEventFilter#filterDebugEvents(DebugEvent[])
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public DebugEvent[] filterDebugEvents(DebugEvent[] events) {
 		// we only expect one event from our thread - find the event
 		DebugEvent event = null;
 		int index = -1;
 		int threadEvents = 0;
-		for (int i = 0; i < events.length; i++) {
+		for (int i = 0; i < events.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			DebugEvent e = events[i];
 			if (isExpectedEvent(e)) {
 				event = e;
@@ -158,7 +158,7 @@ public class StepIntoSelectionHandler implements IDebugEventFilter {
 		DebugEvent[] filtered = new DebugEvent[events.length - 1];
 		if (filtered.length > 0) {
 			int j = 0;
-			for (int i = 0; i < events.length; i++) {
+			for (int i = 0; i < events.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				if (i != index) {
 					filtered[j] = events[i];
 					j++;
@@ -260,7 +260,7 @@ public class StepIntoSelectionHandler implements IDebugEventFilter {
 						missed();
 						return events;
 					}
-					DebugPlugin.getDefault().asyncExec(r);
+					DebugPlugin.getDefault().asyncExec(r); //FLLDCIM: MARK — T08 UI_THREAD_SYNCHRONIZER CALL
 					// filter the events
 						return filtered;
 				} catch (CoreException e) {
@@ -292,7 +292,7 @@ public class StepIntoSelectionHandler implements IDebugEventFilter {
 				new MessageDialog(JDIDebugUIPlugin.getActiveWorkbenchShell(),  ActionMessages.StepIntoSelectionHandler_1, null, NLS.bind(ActionMessages.StepIntoSelectionHandler_Execution_did_not_enter____0____before_the_current_method_returned__1, methodName), MessageDialog.INFORMATION, new String[] {ActionMessages.StepIntoSelectionHandler_2}, 0).open();
 			}
 		};
-		JDIDebugUIPlugin.getStandardDisplay().asyncExec(r);
+		JDIDebugUIPlugin.getStandardDisplay().asyncExec(r); //FLLDCIM: MARK — T08 UI_THREAD_SYNCHRONIZER CALL
 	}
 
 	/**

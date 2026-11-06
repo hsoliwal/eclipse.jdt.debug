@@ -120,7 +120,7 @@ public class FolderSourceContainerTests extends AbstractDebugTest {
 
 	public void testRelativePathName() throws Exception {
 		FolderSourceContainer container = getContainer(false, false);
-		Object[] objects = container.findSourceElements(".."+File.separatorChar+".classpath");
+		Object[] objects = container.findSourceElements(".."+File.separatorChar+".classpath"); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		assertEquals("Expected a hit", 1, objects.length);
 		assertEquals("Wrong file", get14Project().getProject().getFile(new Path(".classpath")), objects[0]);
 	}

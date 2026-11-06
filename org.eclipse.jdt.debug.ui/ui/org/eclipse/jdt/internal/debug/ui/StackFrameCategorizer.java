@@ -41,8 +41,8 @@ import org.eclipse.jdt.internal.ui.filtertable.Filter;
 /**
  * Service to help categorize the stack frames into {@link IJavaStackFrame.Category}, based on the internally stored preferences.
  */
-public class StackFrameCategorizer implements IPreferenceChangeListener, IDebugEventSetListener {
-	private final static String PREFIX = JDIDebugUIPlugin.getUniqueIdentifier() + ".enable_category_"; //$NON-NLS-1$
+public class StackFrameCategorizer implements IPreferenceChangeListener, IDebugEventSetListener { //FLLDCIM: MARK — T27  IMPLEMENTS
+	private final static String PREFIX = JDIDebugUIPlugin.getUniqueIdentifier() + ".enable_category_"; //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 	/**
 	 * The user specified a filter, can be used for highlighting specific, very important code layers.
@@ -84,7 +84,7 @@ public class StackFrameCategorizer implements IPreferenceChangeListener, IDebugE
 	 */
 	record Filters(String[] filters) {
 		boolean match(String fqcName) {
-			for (String filter : filters) {
+			for (String filter : filters) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				if (filter.endsWith("*")) { //$NON-NLS-1$
 					if (fqcName.startsWith(filter.substring(0, filter.length() - 1))) {
 						return true;
@@ -194,7 +194,7 @@ public class StackFrameCategorizer implements IPreferenceChangeListener, IDebugE
 	 * Categorize the given {@link IJavaStackFrame} into a {@link Category} based on the rules and filters, and where those classes are in the
 	 * project. For example if in a source folder, in a library or in a test source folder, etc.
 	 */
-	public IJavaStackFrame.Category categorize(IJavaStackFrame frame) {
+	public IJavaStackFrame.Category categorize(IJavaStackFrame frame) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 			var refTypeName = frame.getReferenceType().getName();
 			if (isEnabled(CATEGORY_CUSTOM_FILTERED) && custom.match(refTypeName)) {
@@ -251,7 +251,7 @@ public class StackFrameCategorizer implements IPreferenceChangeListener, IDebugE
 	/**
 	 * Determine the {@link SourceOrigin} of the given frame's class by locating its source element through the launch's source locator.
 	 */
-	private SourceOrigin computeSourceOrigin(IJavaStackFrame frame, ISourceLocator sourceLocator) {
+	private SourceOrigin computeSourceOrigin(IJavaStackFrame frame, ISourceLocator sourceLocator) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		if (sourceLocator == null) {
 			return SourceOrigin.UNKNOWN;
 		}
@@ -276,7 +276,7 @@ public class StackFrameCategorizer implements IPreferenceChangeListener, IDebugE
 	 */
 	@Override
 	public void handleDebugEvents(DebugEvent[] events) {
-		for (DebugEvent event : events) {
+		for (DebugEvent event : events) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			if (event.getKind() == DebugEvent.TERMINATE && event.getSource() instanceof IJavaDebugTarget target) {
 				ISourceLocator locator = target.getLaunch().getSourceLocator();
 				sourceOriginCache.keySet().removeIf(key -> key.sourceLocator() == locator);
@@ -289,7 +289,7 @@ public class StackFrameCategorizer implements IPreferenceChangeListener, IDebugE
 	}
 
 	private String getNameOfTheFlagToEnable(Category category) {
-		return PREFIX + category.name();
+		return PREFIX + category.name(); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 	}
 
 	public void setEnabled(Category category, boolean flag) {
@@ -304,9 +304,9 @@ public class StackFrameCategorizer implements IPreferenceChangeListener, IDebugE
 	 * @return list
 	 */
 	private String[] parseList(String listString) {
-		List<String> list = new ArrayList<>(10);
+		List<String> list = new ArrayList<>(10); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 		StringTokenizer tokenizer = new StringTokenizer(listString, ",");//$NON-NLS-1$
-		while (tokenizer.hasMoreTokens()) {
+		while (tokenizer.hasMoreTokens()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			String token = tokenizer.nextToken();
 			list.add(token);
 		}
@@ -330,9 +330,9 @@ public class StackFrameCategorizer implements IPreferenceChangeListener, IDebugE
 	 *            name of the classes.
 	 */
 	public void addTypesToActiveCustomFilters(Set<String> classNames) {
-		List<String> actives = new ArrayList<>(List.of(getActiveCustomStackFilter()));
-		List<String> inactives = new ArrayList<>(List.of(getInactiveCustomStackFilter()));
-		for (String className : classNames) {
+		List<String> actives = new ArrayList<>(List.of(getActiveCustomStackFilter())); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
+		List<String> inactives = new ArrayList<>(List.of(getInactiveCustomStackFilter())); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
+		for (String className : classNames) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			inactives.remove(className);
 			if (!actives.contains(className)) {
 				actives.add(className);

@@ -73,7 +73,7 @@ public class SimpleDetailPane implements IDetailPane {
 	 * @param typeId type of variable
 	 * @return the color to use
 	 */
-	private Color getColor(int typeId){
+	private Color getColor(int typeId){ //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		if (typeId == TYPE_PRIVATE){
 			if (colorPrivate == null || colorPrivate.isDisposed()){
 				colorPrivate = new Color(255, 0, 0);
@@ -101,7 +101,7 @@ public class SimpleDetailPane implements IDetailPane {
 	/* (non-Javadoc)
 	 * @see org.eclipse.debug.ui.IDetailPane#display(org.eclipse.jface.viewers.IStructuredSelection)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public void display(IStructuredSelection selection) {
 		if (selection == null || selection.size() == 0){
 			theLabel.setBackground(theLabel.getParent().getBackground());

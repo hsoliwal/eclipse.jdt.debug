@@ -38,10 +38,10 @@ public class DefaultEntryResolver implements IRuntimeClasspathEntryResolver {
 		IRuntimeClasspathEntry2 entry2 = (IRuntimeClasspathEntry2)entry;
 		IRuntimeClasspathEntry[] entries;
 		entries = entry2.getRuntimeClasspathEntries(configuration);
-		List<IRuntimeClasspathEntry> resolved = new ArrayList<>();
-		for (int i = 0; i < entries.length; i++) {
+		List<IRuntimeClasspathEntry> resolved = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
+		for (int i = 0; i < entries.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			IRuntimeClasspathEntry[] temp = JavaRuntime.resolveRuntimeClasspathEntry(entries[i], configuration);
-			for (int j = 0; j < temp.length; j++) {
+			for (int j = 0; j < temp.length; j++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				resolved.add(temp[j]);
 			}
 		}
@@ -65,10 +65,10 @@ public class DefaultEntryResolver implements IRuntimeClasspathEntryResolver {
 	public IRuntimeClasspathEntry[] resolveRuntimeClasspathEntry(IRuntimeClasspathEntry entry, IJavaProject project, boolean excludeTestCode) throws CoreException {
 		IRuntimeClasspathEntry2 entry2 = (IRuntimeClasspathEntry2)entry;
 		IRuntimeClasspathEntry[] entries = entry2.getRuntimeClasspathEntries(excludeTestCode);
-		List<IRuntimeClasspathEntry> resolved = new ArrayList<>();
-		for (int i = 0; i < entries.length; i++) {
+		List<IRuntimeClasspathEntry> resolved = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
+		for (int i = 0; i < entries.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			IRuntimeClasspathEntry[] temp = JavaRuntime.resolveRuntimeClasspathEntry(entries[i], project, excludeTestCode);
-			for (int j = 0; j < temp.length; j++) {
+			for (int j = 0; j < temp.length; j++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				resolved.add(temp[j]);
 			}
 		}

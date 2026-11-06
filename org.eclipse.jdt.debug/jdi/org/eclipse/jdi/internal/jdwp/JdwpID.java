@@ -64,8 +64,8 @@ public abstract class JdwpID {
 	public static final byte TYPE_TAG_ARRAY = 3; // ReferenceType is an array.
 
 	/** Mapping of command codes to strings. */
-	private static HashMap<Integer, String> fTagMap = null;
-	private static HashMap<Integer, String> fTypeTagMap = null;
+	private static HashMap<Integer, String> fTagMap = null; //FLLDCIM: MARK — M10 M3_PRIMITIVE_LANES FIELD
+	private static HashMap<Integer, String> fTypeTagMap = null; //FLLDCIM: MARK — M10 M3_PRIMITIVE_LANES FIELD
 
 	/** Jdwp representation of null ID. */
 	protected static final int VALUE_NULL = 0;
@@ -135,7 +135,7 @@ public abstract class JdwpID {
 	public void read(DataInputStream inStream) throws IOException {
 		fValue = 0;
 		int size = getSize();
-		for (int i = 0; i < size; i++) {
+		for (int i = 0; i < size; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			int b = inStream.readUnsignedByte(); // Note that the byte must be
 													// treated as unsigned.
 			fValue = fValue << 8 | b;
@@ -147,7 +147,7 @@ public abstract class JdwpID {
 	 */
 	public void write(DataOutputStream outStream) throws IOException {
 		int size = getSize();
-		for (int i = size - 1; i >= 0; i--) {
+		for (int i = size - 1; i >= 0; i--) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			byte b = (byte) (fValue >>> 8 * i); // Note that >>> must be used
 												// because fValue must be
 												// treated as unsigned.
@@ -158,15 +158,15 @@ public abstract class JdwpID {
 	/**
 	 * Retrieves constant mappings.
 	 */
-	public static void getConstantMaps() {
+	public static void getConstantMaps() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		if (fTagMap != null) {
 			return;
 		}
 
 		java.lang.reflect.Field[] fields = JdwpID.class.getDeclaredFields();
-		fTagMap = new HashMap<>();
-		fTypeTagMap = new HashMap<>();
-		for (Field field : fields) {
+		fTagMap = new HashMap<>(); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
+		fTypeTagMap = new HashMap<>(); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
+		for (Field field : fields) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			if ((field.getModifiers() & java.lang.reflect.Modifier.PUBLIC) == 0
 					|| (field.getModifiers() & java.lang.reflect.Modifier.STATIC) == 0
 					|| (field.getModifiers() & java.lang.reflect.Modifier.FINAL) == 0) {

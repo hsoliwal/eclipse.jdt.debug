@@ -32,16 +32,16 @@ public class NumericTypesCastTests extends Tests {
 
 	// (byte) {byte, char, short, int, long, float, double}
 
-	public void testByteCastByte() throws Throwable {
+	public void testByteCastByte() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval("(byte)" + xByte);
+		IValue value = eval("(byte)" + xByte); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("(byte) byte : wrong type : ", "byte", typeName);
 		byte byteValue = ((IJavaPrimitiveValue)value).getByteValue();
 		assertEquals("(byte) byte : wrong result : ", xByteValue, byteValue);
 
-		value = eval("(byte)" + yByte);
+		value = eval("(byte)" + yByte); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("(byte) byte : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -51,16 +51,16 @@ public class NumericTypesCastTests extends Tests {
 		}
 	}
 
-	public void testByteCastChar() throws Throwable {
+	public void testByteCastChar() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval("(byte)" + xChar);
+		IValue value = eval("(byte)" + xChar); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("(byte) char : wrong type : ", "byte", typeName);
 		byte byteValue = ((IJavaPrimitiveValue)value).getByteValue();
 		assertEquals("(byte) char : wrong result : ", (byte) xCharValue, byteValue);
 
-		value = eval("(byte)" + yChar);
+		value = eval("(byte)" + yChar); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("(byte) char : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -70,16 +70,16 @@ public class NumericTypesCastTests extends Tests {
 		}
 	}
 
-	public void testByteCastShort() throws Throwable {
+	public void testByteCastShort() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval("(byte)" + xShort);
+		IValue value = eval("(byte)" + xShort); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("(byte) short : wrong type : ", "byte", typeName);
 		byte byteValue = ((IJavaPrimitiveValue)value).getByteValue();
 		assertEquals("(byte) short : wrong result : ", ( byte) xShortValue, byteValue);
 
-		value = eval("(byte)" + yShort);
+		value = eval("(byte)" + yShort); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("(byte) short : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -89,16 +89,16 @@ public class NumericTypesCastTests extends Tests {
 		}
 	}
 
-	public void testByteCastInt() throws Throwable {
+	public void testByteCastInt() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval("(byte)" + xInt);
+		IValue value = eval("(byte)" + xInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("(byte) int : wrong type : ", "byte", typeName);
 		byte byteValue = ((IJavaPrimitiveValue)value).getByteValue();
 		assertEquals("(byte) int : wrong result : ", ( byte) xIntValue, byteValue);
 
-		value = eval("(byte)" + yInt);
+		value = eval("(byte)" + yInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("(byte) int : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -108,16 +108,16 @@ public class NumericTypesCastTests extends Tests {
 		}
 	}
 
-	public void testByteCastLong() throws Throwable {
+	public void testByteCastLong() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval("(byte)" + xLong);
+		IValue value = eval("(byte)" + xLong); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("(byte) long : wrong type : ", "byte", typeName);
 		byte byteValue = ((IJavaPrimitiveValue)value).getByteValue();
 		assertEquals("(byte) long : wrong result : ", ( byte) xLongValue, byteValue);
 
-		value = eval("(byte)" + yLong);
+		value = eval("(byte)" + yLong); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("(byte) long : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -127,16 +127,16 @@ public class NumericTypesCastTests extends Tests {
 		}
 	}
 
-	public void testByteCastFloat() throws Throwable {
+	public void testByteCastFloat() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval("(byte)" + xFloat);
+		IValue value = eval("(byte)" + xFloat); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("(byte) float : wrong type : ", "byte", typeName);
 		byte byteValue = ((IJavaPrimitiveValue)value).getByteValue();
 		assertEquals("(byte) float : wrong result : ", ( byte) xFloatValue, byteValue);
 
-		value = eval("(byte)" + yFloat);
+		value = eval("(byte)" + yFloat); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("(byte) float : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -146,16 +146,16 @@ public class NumericTypesCastTests extends Tests {
 		}
 	}
 
-	public void testByteCastDouble() throws Throwable {
+	public void testByteCastDouble() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval("(byte)" + xDouble);
+		IValue value = eval("(byte)" + xDouble); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("(byte) double : wrong type : ", "byte", typeName);
 		byte byteValue = ((IJavaPrimitiveValue)value).getByteValue();
 		assertEquals("(byte) double : wrong result : ", ( byte) xDoubleValue, byteValue);
 
-		value = eval("(byte)" + yDouble);
+		value = eval("(byte)" + yDouble); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("(byte) double : wrong type : ", "byte", typeName);
 		byteValue = ((IJavaPrimitiveValue)value).getByteValue();
@@ -167,16 +167,16 @@ public class NumericTypesCastTests extends Tests {
 
 	// (char) {byte, char, short, int, long, float, double}
 
-	public void testCharCastByte() throws Throwable {
+	public void testCharCastByte() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval("(char)" + xByte);
+		IValue value = eval("(char)" + xByte); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("(char) byte : wrong type : ", "char", typeName);
 		char charValue = ((IJavaPrimitiveValue)value).getCharValue();
 		assertEquals("(char) byte : wrong result : ", ( char) xByteValue, charValue);
 
-		value = eval("(char)" + yByte);
+		value = eval("(char)" + yByte); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("(char) byte : wrong type : ", "char", typeName);
 		charValue = ((IJavaPrimitiveValue)value).getCharValue();
@@ -186,16 +186,16 @@ public class NumericTypesCastTests extends Tests {
 		}
 	}
 
-	public void testCharCastChar() throws Throwable {
+	public void testCharCastChar() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval("(char)" + xChar);
+		IValue value = eval("(char)" + xChar); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("(char) char : wrong type : ", "char", typeName);
 		char charValue = ((IJavaPrimitiveValue)value).getCharValue();
 		assertEquals("(char) char : wrong result : ", xCharValue, charValue);
 
-		value = eval("(char)" + yChar);
+		value = eval("(char)" + yChar); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("(char) char : wrong type : ", "char", typeName);
 		charValue = ((IJavaPrimitiveValue)value).getCharValue();
@@ -205,16 +205,16 @@ public class NumericTypesCastTests extends Tests {
 		}
 	}
 
-	public void testCharCastShort() throws Throwable {
+	public void testCharCastShort() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval("(char)" + xShort);
+		IValue value = eval("(char)" + xShort); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("(char) short : wrong type : ", "char", typeName);
 		char charValue = ((IJavaPrimitiveValue)value).getCharValue();
 		assertEquals("(char) short : wrong result : ", ( char) xShortValue, charValue);
 
-		value = eval("(char)" + yShort);
+		value = eval("(char)" + yShort); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("(char) short : wrong type : ", "char", typeName);
 		charValue = ((IJavaPrimitiveValue)value).getCharValue();
@@ -224,16 +224,16 @@ public class NumericTypesCastTests extends Tests {
 		}
 	}
 
-	public void testCharCastInt() throws Throwable {
+	public void testCharCastInt() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval("(char)" + xInt);
+		IValue value = eval("(char)" + xInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("(char) int : wrong type : ", "char", typeName);
 		char charValue = ((IJavaPrimitiveValue)value).getCharValue();
 		assertEquals("(char) int : wrong result : ", ( char) xIntValue, charValue);
 
-		value = eval("(char)" + yInt);
+		value = eval("(char)" + yInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("(char) int : wrong type : ", "char", typeName);
 		charValue = ((IJavaPrimitiveValue)value).getCharValue();
@@ -243,16 +243,16 @@ public class NumericTypesCastTests extends Tests {
 		}
 	}
 
-	public void testCharCastLong() throws Throwable {
+	public void testCharCastLong() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval("(char)" + xLong);
+		IValue value = eval("(char)" + xLong); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("(char) long : wrong type : ", "char", typeName);
 		char charValue = ((IJavaPrimitiveValue)value).getCharValue();
 		assertEquals("(char) long : wrong result : ", ( char) xLongValue, charValue);
 
-		value = eval("(char)" + yLong);
+		value = eval("(char)" + yLong); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("(char) long : wrong type : ", "char", typeName);
 		charValue = ((IJavaPrimitiveValue)value).getCharValue();
@@ -262,16 +262,16 @@ public class NumericTypesCastTests extends Tests {
 		}
 	}
 
-	public void testCharCastFloat() throws Throwable {
+	public void testCharCastFloat() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval("(char)" + xFloat);
+		IValue value = eval("(char)" + xFloat); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("(char) float : wrong type : ", "char", typeName);
 		char charValue = ((IJavaPrimitiveValue)value).getCharValue();
 		assertEquals("(char) float : wrong result : ", ( char) xFloatValue, charValue);
 
-		value = eval("(char)" + yFloat);
+		value = eval("(char)" + yFloat); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("(char) float : wrong type : ", "char", typeName);
 		charValue = ((IJavaPrimitiveValue)value).getCharValue();
@@ -281,16 +281,16 @@ public class NumericTypesCastTests extends Tests {
 		}
 	}
 
-	public void testCharCastDouble() throws Throwable {
+	public void testCharCastDouble() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval("(char)" + xDouble);
+		IValue value = eval("(char)" + xDouble); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("(char) double : wrong type : ", "char", typeName);
 		char charValue = ((IJavaPrimitiveValue)value).getCharValue();
 		assertEquals("(char) double : wrong result : ", ( char) xDoubleValue, charValue);
 
-		value = eval("(char)" + yDouble);
+		value = eval("(char)" + yDouble); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("(char) double : wrong type : ", "char", typeName);
 		charValue = ((IJavaPrimitiveValue)value).getCharValue();
@@ -302,16 +302,16 @@ public class NumericTypesCastTests extends Tests {
 
 	// (short) {byte, char, short, int, long, float, double}
 
-	public void testShortCastByte() throws Throwable {
+	public void testShortCastByte() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval("(short)" + xByte);
+		IValue value = eval("(short)" + xByte); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("(short) byte : wrong type : ", "short", typeName);
 		short shortValue = ((IJavaPrimitiveValue)value).getShortValue();
 		assertEquals("(short) byte : wrong result : ", xByteValue, shortValue);
 
-		value = eval("(short)" + yByte);
+		value = eval("(short)" + yByte); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("(short) byte : wrong type : ", "short", typeName);
 		shortValue = ((IJavaPrimitiveValue)value).getShortValue();
@@ -321,16 +321,16 @@ public class NumericTypesCastTests extends Tests {
 		}
 	}
 
-	public void testShortCastChar() throws Throwable {
+	public void testShortCastChar() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval("(short)" + xChar);
+		IValue value = eval("(short)" + xChar); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("(short) char : wrong type : ", "short", typeName);
 		short shortValue = ((IJavaPrimitiveValue)value).getShortValue();
 		assertEquals("(short) char : wrong result : ", (short) xCharValue, shortValue);
 
-		value = eval("(short)" + yChar);
+		value = eval("(short)" + yChar); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("(short) char : wrong type : ", "short", typeName);
 		shortValue = ((IJavaPrimitiveValue)value).getShortValue();
@@ -340,16 +340,16 @@ public class NumericTypesCastTests extends Tests {
 		}
 	}
 
-	public void testShortCastShort() throws Throwable {
+	public void testShortCastShort() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval("(short)" + xShort);
+		IValue value = eval("(short)" + xShort); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("(short) short : wrong type : ", "short", typeName);
 		short shortValue = ((IJavaPrimitiveValue)value).getShortValue();
 		assertEquals("(short) short : wrong result : ", xShortValue, shortValue);
 
-		value = eval("(short)" + yShort);
+		value = eval("(short)" + yShort); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("(short) short : wrong type : ", "short", typeName);
 		shortValue = ((IJavaPrimitiveValue)value).getShortValue();
@@ -359,16 +359,16 @@ public class NumericTypesCastTests extends Tests {
 		}
 	}
 
-	public void testShortCastInt() throws Throwable {
+	public void testShortCastInt() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval("(short)" + xInt);
+		IValue value = eval("(short)" + xInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("(short) int : wrong type : ", "short", typeName);
 		short shortValue = ((IJavaPrimitiveValue)value).getShortValue();
 		assertEquals("(short) int : wrong result : ", ( short) xIntValue, shortValue);
 
-		value = eval("(short)" + yInt);
+		value = eval("(short)" + yInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("(short) int : wrong type : ", "short", typeName);
 		shortValue = ((IJavaPrimitiveValue)value).getShortValue();
@@ -378,16 +378,16 @@ public class NumericTypesCastTests extends Tests {
 		}
 	}
 
-	public void testShortCastLong() throws Throwable {
+	public void testShortCastLong() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval("(short)" + xLong);
+		IValue value = eval("(short)" + xLong); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("(short) long : wrong type : ", "short", typeName);
 		short shortValue = ((IJavaPrimitiveValue)value).getShortValue();
 		assertEquals("(short) long : wrong result : ", ( short) xLongValue, shortValue);
 
-		value = eval("(short)" + yLong);
+		value = eval("(short)" + yLong); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("(short) long : wrong type : ", "short", typeName);
 		shortValue = ((IJavaPrimitiveValue)value).getShortValue();
@@ -397,16 +397,16 @@ public class NumericTypesCastTests extends Tests {
 		}
 	}
 
-	public void testShortCastFloat() throws Throwable {
+	public void testShortCastFloat() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval("(short)" + xFloat);
+		IValue value = eval("(short)" + xFloat); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("(short) float : wrong type : ", "short", typeName);
 		short shortValue = ((IJavaPrimitiveValue)value).getShortValue();
 		assertEquals("(short) float : wrong result : ", ( short) xFloatValue, shortValue);
 
-		value = eval("(short)" + yFloat);
+		value = eval("(short)" + yFloat); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("(short) float : wrong type : ", "short", typeName);
 		shortValue = ((IJavaPrimitiveValue)value).getShortValue();
@@ -416,16 +416,16 @@ public class NumericTypesCastTests extends Tests {
 		}
 	}
 
-	public void testShortCastDouble() throws Throwable {
+	public void testShortCastDouble() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval("(short)" + xDouble);
+		IValue value = eval("(short)" + xDouble); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("(short) double : wrong type : ", "short", typeName);
 		short shortValue = ((IJavaPrimitiveValue)value).getShortValue();
 		assertEquals("(short) double : wrong result : ", ( short) xDoubleValue, shortValue);
 
-		value = eval("(short)" + yDouble);
+		value = eval("(short)" + yDouble); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("(short) double : wrong type : ", "short", typeName);
 		shortValue = ((IJavaPrimitiveValue)value).getShortValue();
@@ -437,16 +437,16 @@ public class NumericTypesCastTests extends Tests {
 
 	// (int) {byte, char, short, int, long, float, double}
 
-	public void testIntCastByte() throws Throwable {
+	public void testIntCastByte() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval("(int)" + xByte);
+		IValue value = eval("(int)" + xByte); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("(int) byte : wrong type : ", "int", typeName);
 		int intValue = ((IJavaPrimitiveValue)value).getIntValue();
 		assertEquals("(int) byte : wrong result : ", xByteValue, intValue);
 
-		value = eval("(int)" + yByte);
+		value = eval("(int)" + yByte); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("(int) byte : wrong type : ", "int", typeName);
 		intValue = ((IJavaPrimitiveValue)value).getIntValue();
@@ -456,16 +456,16 @@ public class NumericTypesCastTests extends Tests {
 		}
 	}
 
-	public void testIntCastChar() throws Throwable {
+	public void testIntCastChar() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval("(int)" + xChar);
+		IValue value = eval("(int)" + xChar); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("(int) char : wrong type : ", "int", typeName);
 		int intValue = ((IJavaPrimitiveValue)value).getIntValue();
 		assertEquals("(int) char : wrong result : ", xCharValue, intValue);
 
-		value = eval("(int)" + yChar);
+		value = eval("(int)" + yChar); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("(int) char : wrong type : ", "int", typeName);
 		intValue = ((IJavaPrimitiveValue)value).getIntValue();
@@ -475,16 +475,16 @@ public class NumericTypesCastTests extends Tests {
 		}
 	}
 
-	public void testIntCastShort() throws Throwable {
+	public void testIntCastShort() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval("(int)" + xShort);
+		IValue value = eval("(int)" + xShort); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("(int) short : wrong type : ", "int", typeName);
 		int intValue = ((IJavaPrimitiveValue)value).getIntValue();
 		assertEquals("(int) short : wrong result : ", xShortValue, intValue);
 
-		value = eval("(int)" + yShort);
+		value = eval("(int)" + yShort); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("(int) short : wrong type : ", "int", typeName);
 		intValue = ((IJavaPrimitiveValue)value).getIntValue();
@@ -494,16 +494,16 @@ public class NumericTypesCastTests extends Tests {
 		}
 	}
 
-	public void testIntCastInt() throws Throwable {
+	public void testIntCastInt() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval("(int)" + xInt);
+		IValue value = eval("(int)" + xInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("(int) int : wrong type : ", "int", typeName);
 		int intValue = ((IJavaPrimitiveValue)value).getIntValue();
 		assertEquals("(int) int : wrong result : ", xIntValue, intValue);
 
-		value = eval("(int)" + yInt);
+		value = eval("(int)" + yInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("(int) int : wrong type : ", "int", typeName);
 		intValue = ((IJavaPrimitiveValue)value).getIntValue();
@@ -513,16 +513,16 @@ public class NumericTypesCastTests extends Tests {
 		}
 	}
 
-	public void testIntCastLong() throws Throwable {
+	public void testIntCastLong() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval("(int)" + xLong);
+		IValue value = eval("(int)" + xLong); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("(int) long : wrong type : ", "int", typeName);
 		int intValue = ((IJavaPrimitiveValue)value).getIntValue();
 		assertEquals("(int) long : wrong result : ", ( int) xLongValue, intValue);
 
-		value = eval("(int)" + yLong);
+		value = eval("(int)" + yLong); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("(int) long : wrong type : ", "int", typeName);
 		intValue = ((IJavaPrimitiveValue)value).getIntValue();
@@ -532,16 +532,16 @@ public class NumericTypesCastTests extends Tests {
 		}
 	}
 
-	public void testIntCastFloat() throws Throwable {
+	public void testIntCastFloat() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval("(int)" + xFloat);
+		IValue value = eval("(int)" + xFloat); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("(int) float : wrong type : ", "int", typeName);
 		int intValue = ((IJavaPrimitiveValue)value).getIntValue();
 		assertEquals("(int) float : wrong result : ", ( int) xFloatValue, intValue);
 
-		value = eval("(int)" + yFloat);
+		value = eval("(int)" + yFloat); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("(int) float : wrong type : ", "int", typeName);
 		intValue = ((IJavaPrimitiveValue)value).getIntValue();
@@ -551,16 +551,16 @@ public class NumericTypesCastTests extends Tests {
 		}
 	}
 
-	public void testIntCastDouble() throws Throwable {
+	public void testIntCastDouble() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval("(int)" + xDouble);
+		IValue value = eval("(int)" + xDouble); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("(int) double : wrong type : ", "int", typeName);
 		int intValue = ((IJavaPrimitiveValue)value).getIntValue();
 		assertEquals("(int) double : wrong result : ", ( int) xDoubleValue, intValue);
 
-		value = eval("(int)" + yDouble);
+		value = eval("(int)" + yDouble); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("(int) double : wrong type : ", "int", typeName);
 		intValue = ((IJavaPrimitiveValue)value).getIntValue();
@@ -572,16 +572,16 @@ public class NumericTypesCastTests extends Tests {
 
 	// (long) {byte, char, short, int, long, float, double}
 
-	public void testLongCastByte() throws Throwable {
+	public void testLongCastByte() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval("(long)" + xByte);
+		IValue value = eval("(long)" + xByte); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("(long) byte : wrong type : ", "long", typeName);
 		long longValue = ((IJavaPrimitiveValue)value).getLongValue();
 		assertEquals("(long) byte : wrong result : ", xByteValue, longValue);
 
-		value = eval("(long)" + yByte);
+		value = eval("(long)" + yByte); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("(long) byte : wrong type : ", "long", typeName);
 		longValue = ((IJavaPrimitiveValue)value).getLongValue();
@@ -591,16 +591,16 @@ public class NumericTypesCastTests extends Tests {
 		}
 	}
 
-	public void testLongCastChar() throws Throwable {
+	public void testLongCastChar() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval("(long)" + xChar);
+		IValue value = eval("(long)" + xChar); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("(long) char : wrong type : ", "long", typeName);
 		long longValue = ((IJavaPrimitiveValue)value).getLongValue();
 		assertEquals("(long) char : wrong result : ", xCharValue, longValue);
 
-		value = eval("(long)" + yChar);
+		value = eval("(long)" + yChar); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("(long) char : wrong type : ", "long", typeName);
 		longValue = ((IJavaPrimitiveValue)value).getLongValue();
@@ -610,16 +610,16 @@ public class NumericTypesCastTests extends Tests {
 		}
 	}
 
-	public void testLongCastShort() throws Throwable {
+	public void testLongCastShort() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval("(long)" + xShort);
+		IValue value = eval("(long)" + xShort); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("(long) short : wrong type : ", "long", typeName);
 		long longValue = ((IJavaPrimitiveValue)value).getLongValue();
 		assertEquals("(long) short : wrong result : ", xShortValue, longValue);
 
-		value = eval("(long)" + yShort);
+		value = eval("(long)" + yShort); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("(long) short : wrong type : ", "long", typeName);
 		longValue = ((IJavaPrimitiveValue)value).getLongValue();
@@ -629,16 +629,16 @@ public class NumericTypesCastTests extends Tests {
 		}
 	}
 
-	public void testLongCastInt() throws Throwable {
+	public void testLongCastInt() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval("(long)" + xInt);
+		IValue value = eval("(long)" + xInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("(long) int : wrong type : ", "long", typeName);
 		long longValue = ((IJavaPrimitiveValue)value).getLongValue();
 		assertEquals("(long) int : wrong result : ", xIntValue, longValue);
 
-		value = eval("(long)" + yInt);
+		value = eval("(long)" + yInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("(long) int : wrong type : ", "long", typeName);
 		longValue = ((IJavaPrimitiveValue)value).getLongValue();
@@ -648,16 +648,16 @@ public class NumericTypesCastTests extends Tests {
 		}
 	}
 
-	public void testLongCastLong() throws Throwable {
+	public void testLongCastLong() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval("(long)" + xLong);
+		IValue value = eval("(long)" + xLong); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("(long) long : wrong type : ", "long", typeName);
 		long longValue = ((IJavaPrimitiveValue)value).getLongValue();
 		assertEquals("(long) long : wrong result : ", xLongValue, longValue);
 
-		value = eval("(long)" + yLong);
+		value = eval("(long)" + yLong); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("(long) long : wrong type : ", "long", typeName);
 		longValue = ((IJavaPrimitiveValue)value).getLongValue();
@@ -667,16 +667,16 @@ public class NumericTypesCastTests extends Tests {
 		}
 	}
 
-	public void testLongCastFloat() throws Throwable {
+	public void testLongCastFloat() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval("(long)" + xFloat);
+		IValue value = eval("(long)" + xFloat); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("(long) float : wrong type : ", "long", typeName);
 		long longValue = ((IJavaPrimitiveValue)value).getLongValue();
 		assertEquals("(long) float : wrong result : ", ( long) xFloatValue, longValue);
 
-		value = eval("(long)" + yFloat);
+		value = eval("(long)" + yFloat); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("(long) float : wrong type : ", "long", typeName);
 		longValue = ((IJavaPrimitiveValue)value).getLongValue();
@@ -686,16 +686,16 @@ public class NumericTypesCastTests extends Tests {
 		}
 	}
 
-	public void testLongCastDouble() throws Throwable {
+	public void testLongCastDouble() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval("(long)" + xDouble);
+		IValue value = eval("(long)" + xDouble); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("(long) double : wrong type : ", "long", typeName);
 		long longValue = ((IJavaPrimitiveValue)value).getLongValue();
 		assertEquals("(long) double : wrong result : ", ( long) xDoubleValue, longValue);
 
-		value = eval("(long)" + yDouble);
+		value = eval("(long)" + yDouble); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("(long) double : wrong type : ", "long", typeName);
 		longValue = ((IJavaPrimitiveValue)value).getLongValue();
@@ -707,16 +707,16 @@ public class NumericTypesCastTests extends Tests {
 
 	// (float) {byte, char, short, int, long, float, double}
 
-	public void testFloatCastByte() throws Throwable {
+	public void testFloatCastByte() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval("(float)" + xByte);
+		IValue value = eval("(float)" + xByte); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("(float) byte : wrong type : ", "float", typeName);
 		float floatValue = ((IJavaPrimitiveValue)value).getFloatValue();
 		assertEquals("(float) byte : wrong result : ", xByteValue, floatValue, 0);
 
-		value = eval("(float)" + yByte);
+		value = eval("(float)" + yByte); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("(float) byte : wrong type : ", "float", typeName);
 		floatValue = ((IJavaPrimitiveValue)value).getFloatValue();
@@ -726,16 +726,16 @@ public class NumericTypesCastTests extends Tests {
 		}
 	}
 
-	public void testFloatCastChar() throws Throwable {
+	public void testFloatCastChar() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval("(float)" + xChar);
+		IValue value = eval("(float)" + xChar); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("(float) char : wrong type : ", "float", typeName);
 		float floatValue = ((IJavaPrimitiveValue)value).getFloatValue();
 		assertEquals("(float) char : wrong result : ", xCharValue, floatValue, 0);
 
-		value = eval("(float)" + yChar);
+		value = eval("(float)" + yChar); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("(float) char : wrong type : ", "float", typeName);
 		floatValue = ((IJavaPrimitiveValue)value).getFloatValue();
@@ -745,16 +745,16 @@ public class NumericTypesCastTests extends Tests {
 		}
 	}
 
-	public void testFloatCastShort() throws Throwable {
+	public void testFloatCastShort() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval("(float)" + xShort);
+		IValue value = eval("(float)" + xShort); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("(float) short : wrong type : ", "float", typeName);
 		float floatValue = ((IJavaPrimitiveValue)value).getFloatValue();
 		assertEquals("(float) short : wrong result : ", xShortValue, floatValue, 0);
 
-		value = eval("(float)" + yShort);
+		value = eval("(float)" + yShort); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("(float) short : wrong type : ", "float", typeName);
 		floatValue = ((IJavaPrimitiveValue)value).getFloatValue();
@@ -764,16 +764,16 @@ public class NumericTypesCastTests extends Tests {
 		}
 	}
 
-	public void testFloatCastInt() throws Throwable {
+	public void testFloatCastInt() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval("(float)" + xInt);
+		IValue value = eval("(float)" + xInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("(float) int : wrong type : ", "float", typeName);
 		float floatValue = ((IJavaPrimitiveValue)value).getFloatValue();
 		assertEquals("(float) int : wrong result : ", xIntValue, floatValue, 0);
 
-		value = eval("(float)" + yInt);
+		value = eval("(float)" + yInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("(float) int : wrong type : ", "float", typeName);
 		floatValue = ((IJavaPrimitiveValue)value).getFloatValue();
@@ -783,16 +783,16 @@ public class NumericTypesCastTests extends Tests {
 		}
 	}
 
-	public void testFloatCastLong() throws Throwable {
+	public void testFloatCastLong() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval("(float)" + xLong);
+		IValue value = eval("(float)" + xLong); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("(float) long : wrong type : ", "float", typeName);
 		float floatValue = ((IJavaPrimitiveValue)value).getFloatValue();
 		assertEquals("(float) long : wrong result : ", xLongValue, floatValue, 0);
 
-		value = eval("(float)" + yLong);
+		value = eval("(float)" + yLong); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("(float) long : wrong type : ", "float", typeName);
 		floatValue = ((IJavaPrimitiveValue)value).getFloatValue();
@@ -802,16 +802,16 @@ public class NumericTypesCastTests extends Tests {
 		}
 	}
 
-	public void testFloatCastFloat() throws Throwable {
+	public void testFloatCastFloat() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval("(float)" + xFloat);
+		IValue value = eval("(float)" + xFloat); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("(float) float : wrong type : ", "float", typeName);
 		float floatValue = ((IJavaPrimitiveValue)value).getFloatValue();
 		assertEquals("(float) float : wrong result : ", xFloatValue, floatValue, 0);
 
-		value = eval("(float)" + yFloat);
+		value = eval("(float)" + yFloat); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("(float) float : wrong type : ", "float", typeName);
 		floatValue = ((IJavaPrimitiveValue)value).getFloatValue();
@@ -821,16 +821,16 @@ public class NumericTypesCastTests extends Tests {
 		}
 	}
 
-	public void testFloatCastDouble() throws Throwable {
+	public void testFloatCastDouble() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval("(float)" + xDouble);
+		IValue value = eval("(float)" + xDouble); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("(float) double : wrong type : ", "float", typeName);
 		float floatValue = ((IJavaPrimitiveValue)value).getFloatValue();
 		assertEquals("(float) double : wrong result : ", ( float) xDoubleValue, floatValue, 0);
 
-		value = eval("(float)" + yDouble);
+		value = eval("(float)" + yDouble); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("(float) double : wrong type : ", "float", typeName);
 		floatValue = ((IJavaPrimitiveValue)value).getFloatValue();
@@ -842,16 +842,16 @@ public class NumericTypesCastTests extends Tests {
 
 	// (double) {byte, char, short, int, long, float, double}
 
-	public void testDoubleCastByte() throws Throwable {
+	public void testDoubleCastByte() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval("(double)" + xByte);
+		IValue value = eval("(double)" + xByte); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("(double) byte : wrong type : ", "double", typeName);
 		double doubleValue = ((IJavaPrimitiveValue)value).getDoubleValue();
 		assertEquals("(double) byte : wrong result : ", xByteValue, doubleValue, 0);
 
-		value = eval("(double)" + yByte);
+		value = eval("(double)" + yByte); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("(double) byte : wrong type : ", "double", typeName);
 		doubleValue = ((IJavaPrimitiveValue)value).getDoubleValue();
@@ -861,16 +861,16 @@ public class NumericTypesCastTests extends Tests {
 		}
 	}
 
-	public void testDoubleCastChar() throws Throwable {
+	public void testDoubleCastChar() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval("(double)" + xChar);
+		IValue value = eval("(double)" + xChar); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("(double) char : wrong type : ", "double", typeName);
 		double doubleValue = ((IJavaPrimitiveValue)value).getDoubleValue();
 		assertEquals("(double) char : wrong result : ", xCharValue, doubleValue, 0);
 
-		value = eval("(double)" + yChar);
+		value = eval("(double)" + yChar); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("(double) char : wrong type : ", "double", typeName);
 		doubleValue = ((IJavaPrimitiveValue)value).getDoubleValue();
@@ -880,16 +880,16 @@ public class NumericTypesCastTests extends Tests {
 		}
 	}
 
-	public void testDoubleCastShort() throws Throwable {
+	public void testDoubleCastShort() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval("(double)" + xShort);
+		IValue value = eval("(double)" + xShort); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("(double) short : wrong type : ", "double", typeName);
 		double doubleValue = ((IJavaPrimitiveValue)value).getDoubleValue();
 		assertEquals("(double) short : wrong result : ", xShortValue, doubleValue, 0);
 
-		value = eval("(double)" + yShort);
+		value = eval("(double)" + yShort); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("(double) short : wrong type : ", "double", typeName);
 		doubleValue = ((IJavaPrimitiveValue)value).getDoubleValue();
@@ -899,16 +899,16 @@ public class NumericTypesCastTests extends Tests {
 		}
 	}
 
-	public void testDoubleCastInt() throws Throwable {
+	public void testDoubleCastInt() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval("(double)" + xInt);
+		IValue value = eval("(double)" + xInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("(double) int : wrong type : ", "double", typeName);
 		double doubleValue = ((IJavaPrimitiveValue)value).getDoubleValue();
 		assertEquals("(double) int : wrong result : ", xIntValue, doubleValue, 0);
 
-		value = eval("(double)" + yInt);
+		value = eval("(double)" + yInt); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("(double) int : wrong type : ", "double", typeName);
 		doubleValue = ((IJavaPrimitiveValue)value).getDoubleValue();
@@ -918,16 +918,16 @@ public class NumericTypesCastTests extends Tests {
 		}
 	}
 
-	public void testDoubleCastLong() throws Throwable {
+	public void testDoubleCastLong() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval("(double)" + xLong);
+		IValue value = eval("(double)" + xLong); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("(double) long : wrong type : ", "double", typeName);
 		double doubleValue = ((IJavaPrimitiveValue)value).getDoubleValue();
 		assertEquals("(double) long : wrong result : ", xLongValue, doubleValue, 0);
 
-		value = eval("(double)" + yLong);
+		value = eval("(double)" + yLong); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("(double) long : wrong type : ", "double", typeName);
 		doubleValue = ((IJavaPrimitiveValue)value).getDoubleValue();
@@ -937,16 +937,16 @@ public class NumericTypesCastTests extends Tests {
 		}
 	}
 
-	public void testDoubleCastFloat() throws Throwable {
+	public void testDoubleCastFloat() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval("(double)" + xFloat);
+		IValue value = eval("(double)" + xFloat); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("(double) float : wrong type : ", "double", typeName);
 		double doubleValue = ((IJavaPrimitiveValue)value).getDoubleValue();
 		assertEquals("(double) float : wrong result : ", xFloatValue, doubleValue, 0);
 
-		value = eval("(double)" + yFloat);
+		value = eval("(double)" + yFloat); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("(double) float : wrong type : ", "double", typeName);
 		doubleValue = ((IJavaPrimitiveValue)value).getDoubleValue();
@@ -956,16 +956,16 @@ public class NumericTypesCastTests extends Tests {
 		}
 	}
 
-	public void testDoubleCastDouble() throws Throwable {
+	public void testDoubleCastDouble() throws Throwable { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		try {
 		init();
-		IValue value = eval("(double)" + xDouble);
+		IValue value = eval("(double)" + xDouble); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		String typeName = value.getReferenceTypeName();
 		assertEquals("(double) double : wrong type : ", "double", typeName);
 		double doubleValue = ((IJavaPrimitiveValue)value).getDoubleValue();
 		assertEquals("(double) double : wrong result : ", xDoubleValue, doubleValue, 0);
 
-		value = eval("(double)" + yDouble);
+		value = eval("(double)" + yDouble); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		typeName = value.getReferenceTypeName();
 		assertEquals("(double) double : wrong type : ", "double", typeName);
 		doubleValue = ((IJavaPrimitiveValue)value).getDoubleValue();

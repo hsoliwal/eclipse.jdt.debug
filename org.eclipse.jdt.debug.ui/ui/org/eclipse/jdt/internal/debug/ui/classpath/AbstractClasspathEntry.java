@@ -19,7 +19,7 @@ import java.util.List;
 
 public abstract class AbstractClasspathEntry implements IClasspathEntry {
 
-	protected List<IClasspathEntry> childEntries = new ArrayList<>();
+	protected List<IClasspathEntry> childEntries = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 	protected IClasspathEntry parent = null;
 
 	/* (non-Javadoc)

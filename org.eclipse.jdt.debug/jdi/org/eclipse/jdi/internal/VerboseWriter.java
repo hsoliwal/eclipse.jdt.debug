@@ -59,7 +59,7 @@ public class VerboseWriter {
 	 * these lines are also printed.
 	 */
 	public synchronized void println() {
-		while (fExtraVerboseLines > 0) {
+		while (fExtraVerboseLines > 0) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			fExtraVerboseLines--;
 			markLn();
 		}
@@ -106,7 +106,7 @@ public class VerboseWriter {
 	/**
 	 * Prints verbose line.
 	 */
-	public synchronized void println(String description, byte value, Map<Integer, String> valueToString) {
+	public synchronized void println(String description, byte value, Map<Integer, String> valueToString) { //FLLDCIM: MARK — M10 M3_PRIMITIVE_LANES PARAMETER
 		printDescription(description);
 		printHex(value);
 		printValue(value, valueToString);
@@ -116,7 +116,7 @@ public class VerboseWriter {
 	/**
 	 * Prints verbose line.
 	 */
-	public synchronized void println(String description, short value, Map<Integer, String> valueToString) {
+	public synchronized void println(String description, short value, Map<Integer, String> valueToString) { //FLLDCIM: MARK — M10 M3_PRIMITIVE_LANES PARAMETER
 		printDescription(description);
 		printHex(value);
 		printValue(value, valueToString);
@@ -126,7 +126,7 @@ public class VerboseWriter {
 	/**
 	 * Prints verbose line.
 	 */
-	public synchronized void println(String description, int value, Map<Integer, String> valueToString) {
+	public synchronized void println(String description, int value, Map<Integer, String> valueToString) { //FLLDCIM: MARK — M10 M3_PRIMITIVE_LANES PARAMETER
 		printDescription(description);
 		printHex(value);
 		printValue(value, valueToString);
@@ -229,7 +229,7 @@ public class VerboseWriter {
 		print(str);
 		int spaces = width - str.length();
 		if (spaces > 0) {
-			for (int i = 0; i < spaces; i++) {
+			for (int i = 0; i < spaces; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				print(' ');
 			}
 		}
@@ -259,7 +259,7 @@ public class VerboseWriter {
 
 		int abspos = 3 * pos;
 		buffer[abspos] = ' ';
-		do {
+		do { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			int t = b & 15;
 			if (t > 9) {
 				t = t - 10 + 'a';
@@ -275,7 +275,7 @@ public class VerboseWriter {
 	 * Appends remaining spaces to hex dump.
 	 */
 	private static void appendHexSpaces(char[] buffer, int pos) {
-		for (int i = 3 * pos; i <= VERBOSE_HEX_WIDTH - 3; i += 3) {
+		for (int i = 3 * pos; i <= VERBOSE_HEX_WIDTH - 3; i += 3) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			buffer[i] = ' ';
 			buffer[i + 1] = ' ';
 			buffer[i + 2] = ' ';
@@ -301,7 +301,7 @@ public class VerboseWriter {
 	 */
 	public synchronized void printHex(short s) {
 		char buffer[] = new char[VERBOSE_HEX_WIDTH];
-		for (int i = 1; i >= 0; i--) {
+		for (int i = 1; i >= 0; i--) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			appendHexByte((byte) (s >>> i * 8), buffer, 1 - i);
 		}
 		appendHexSpaces(buffer, 2);
@@ -313,7 +313,7 @@ public class VerboseWriter {
 	 */
 	public synchronized void printHex(int integer) {
 		char buffer[] = new char[VERBOSE_HEX_WIDTH];
-		for (int i = 3; i >= 0; i--) {
+		for (int i = 3; i >= 0; i--) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			appendHexByte((byte) (integer >>> i * 8), buffer, 3 - i);
 		}
 		appendHexSpaces(buffer, 4);
@@ -325,7 +325,7 @@ public class VerboseWriter {
 	 */
 	public synchronized void printHex(long l) {
 		char buffer[] = new char[VERBOSE_HEX_WIDTH];
-		for (int i = 7; i >= 0; i--) {
+		for (int i = 7; i >= 0; i--) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			appendHexByte((byte) (l >>> i * 8), buffer, 7 - i);
 		}
 		appendHexSpaces(buffer, 8);
@@ -378,13 +378,13 @@ public class VerboseWriter {
 	 * Therefore, a println after a printHex can result in more than one line
 	 * being printed to the PrintWriter.
 	 */
-	public synchronized void printHex(byte[] bytes) {
+	public synchronized void printHex(byte[] bytes) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		int startPosition = position();
 		char linebuf[] = new char[VERBOSE_HEX_WIDTH];
 		int extraLines = 0;
 		int byteOnLine = 0;
 
-		for (byte b : bytes) {
+		for (byte b : bytes) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			if (byteOnLine == VERBOSE_HEX_BYTES_PER_LINE) {
 				appendHexSpaces(linebuf, VERBOSE_HEX_BYTES_PER_LINE);
 				if (extraLines++ > 0) {
@@ -412,7 +412,7 @@ public class VerboseWriter {
 	 * Prints string representation of a value given a Map from values to
 	 * strings.
 	 */
-	public synchronized void printValue(int value, Map<Integer, String> valueToString) {
+	public synchronized void printValue(int value, Map<Integer, String> valueToString) { //FLLDCIM: MARK — M10 M3_PRIMITIVE_LANES PARAMETER
 		Integer val = Integer.valueOf(value);
 		if (valueToString == null) {
 			print(val.toString());
@@ -420,7 +420,7 @@ public class VerboseWriter {
 		}
 		String result = valueToString.get(val);
 		if (result == null) {
-			print(val.toString() + JDIMessages.VerboseWriter___unknown_value__1);
+			print(val.toString() + JDIMessages.VerboseWriter___unknown_value__1); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		} else {
 			print(result);
 		}
@@ -446,7 +446,7 @@ public class VerboseWriter {
 	 * Prints string representation of a value given a Vector with the names of
 	 * the bits.
 	 */
-	public synchronized void printValue(int value, String[] bitNames) {
+	public synchronized void printValue(int value, String[] bitNames) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		Integer val = Integer.valueOf(value);
 		if (bitNames == null) {
 			print(val.toString());
@@ -455,7 +455,7 @@ public class VerboseWriter {
 
 		boolean bitsSet = false;
 
-		for (int i = 0; i < bitNames.length; i++) {
+		for (int i = 0; i < bitNames.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			// Test if bit is set in value.
 			if ((1 << i & value) == 0) {
 				continue;
@@ -543,12 +543,12 @@ public class VerboseWriter {
 	 * Flush buffer. If autoflush is off, this method is synchronized on the
 	 * PrintWriter given in the constructor.
 	 */
-	public synchronized void flush() {
+	public synchronized void flush() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		int bufSize = fLineBuffer.size();
 		StringWriter sw = new StringWriter();
 		PrintWriter pw = new PrintWriter(sw);
 
-		for (int i = 0; i < bufSize - 1; i++) {
+		for (int i = 0; i < bufSize - 1; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			pw.println(fLineBuffer.get(i));
 		}
 
@@ -581,7 +581,7 @@ public class VerboseWriter {
 		if (delta < 0) {
 			fPosition = pos;
 		} else {
-			while (delta-- > 0) {
+			while (delta-- > 0) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				println();
 			}
 		}

@@ -74,7 +74,7 @@ public class JavaDebugTargetTests extends AbstractDebugTest {
 		}
 	}
 
-	public void testIsAvailable() throws Exception {
+	public void testIsAvailable() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String typeName = "Breakpoints";
 		createLineBreakpoint(55, typeName);
 
@@ -124,7 +124,7 @@ public class JavaDebugTargetTests extends AbstractDebugTest {
 	/**
 	 * Tests that debug target ignores breakpoints from unrelated projects, see bugs 5188 and 508524
 	 */
-	public void testSupportsResource() throws Exception {
+	public void testSupportsResource() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String typeName = "org.eclipse.debug.tests.targets.HcrClass";
 		IJavaProject project1 = get14Project();
 		IJavaProject project2 = get15Project();
@@ -163,7 +163,7 @@ public class JavaDebugTargetTests extends AbstractDebugTest {
 			assertNotEquals(bp1, bp2);
 
 			// Launch the second project config: the breakpoint from first one shouldn't be supported
-			thread = launchToBreakpoint(project2, typeName, typeName + CLONE_SUFFIX, true);
+			thread = launchToBreakpoint(project2, typeName, typeName + CLONE_SUFFIX, true); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 			assertNotNull("Breakpoint not hit within timeout period", thread);
 			target = (JDIDebugTarget) thread.getDebugTarget();
 			assertTrue(target.isAvailable());

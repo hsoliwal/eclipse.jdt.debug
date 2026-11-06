@@ -60,7 +60,7 @@ public class BreakpointRenameTypeParticipant extends BreakpointRenameParticipant
      * @see org.eclipse.jdt.internal.debug.core.refactoring.BreakpointRenameParticipant#gatherChanges(org.eclipse.core.resources.IMarker[],
      *      java.util.List, java.lang.String)
      */
-    @Override
+    @Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	protected void gatherChanges(IMarker[] markers, List<Change> changes, String simpleDestName) throws CoreException, OperationCanceledException {
         IType originalType = (IType) getOriginalElement();
         ICompilationUnit originalCU = originalType.getCompilationUnit();
@@ -74,9 +74,9 @@ public class BreakpointRenameTypeParticipant extends BreakpointRenameParticipant
             // assume extension is same as original
             IResource res = originalCU.getResource();
             if (res != null) {
-                ext = '.' + res.getFileExtension();
+                ext = '.' + res.getFileExtension(); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
             }
-            destCU = originalType.getPackageFragment().getCompilationUnit(simpleDestName + ext);
+            destCU = originalType.getPackageFragment().getCompilationUnit(simpleDestName + ext); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
         }
 
         // newType is the type that is changing - it may contain nested members with breakpoints
@@ -84,7 +84,7 @@ public class BreakpointRenameTypeParticipant extends BreakpointRenameParticipant
         newType = (IType) BreakpointChange.findElement(destCU, newType);
 
 
-		for (IMarker marker : markers) {
+		for (IMarker marker : markers) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			IBreakpoint breakpoint = getBreakpoint(marker);
 			if (breakpoint instanceof IJavaBreakpoint) {
 				IJavaBreakpoint javaBreakpoint = (IJavaBreakpoint) breakpoint;

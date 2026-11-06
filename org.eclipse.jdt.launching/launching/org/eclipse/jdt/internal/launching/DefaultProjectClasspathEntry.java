@@ -154,14 +154,14 @@ public class DefaultProjectClasspathEntry extends AbstractRuntimeClasspathEntry 
 	 *
 	 * @see org.eclipse.jdt.launching.IRuntimeClasspathEntry2#getRuntimeClasspathEntries(boolean)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public IRuntimeClasspathEntry[] getRuntimeClasspathEntries(boolean excludeTestCode) throws CoreException {
 		IClasspathEntry entry = JavaCore.newProjectEntry(getJavaProject().getProject().getFullPath());
-		List<Object> classpathEntries = new ArrayList<>(5);
-		List<IClasspathEntry> expanding = new ArrayList<>(5);
+		List<Object> classpathEntries = new ArrayList<>(5); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
+		List<IClasspathEntry> expanding = new ArrayList<>(5); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 		expandProject(entry, classpathEntries, expanding, excludeTestCode, isExportedEntriesOnly(), getJavaProject(), false);
 		IRuntimeClasspathEntry[] runtimeEntries = new IRuntimeClasspathEntry[classpathEntries.size()];
-		for (int i = 0; i < runtimeEntries.length; i++) {
+		for (int i = 0; i < runtimeEntries.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			Object e = classpathEntries.get(i);
 			if (e instanceof IClasspathEntry cpe) {
 				runtimeEntries[i] = new RuntimeClasspathEntry(cpe);
@@ -170,8 +170,8 @@ public class DefaultProjectClasspathEntry extends AbstractRuntimeClasspathEntry 
 			}
 		}
 		// remove bootpath entries - this is a default user classpath
-		List<IRuntimeClasspathEntry> ordered = new ArrayList<>(runtimeEntries.length);
-		for (int i = 0; i < runtimeEntries.length; i++) {
+		List<IRuntimeClasspathEntry> ordered = new ArrayList<>(runtimeEntries.length); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
+		for (int i = 0; i < runtimeEntries.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			if (runtimeEntries[i].getClasspathProperty() == IRuntimeClasspathEntry.USER_CLASSES) {
 				ordered.add(runtimeEntries[i]);
 			}
@@ -200,11 +200,11 @@ public class DefaultProjectClasspathEntry extends AbstractRuntimeClasspathEntry 
 	 *                if unable to expand the classpath
 	 */
 	public static void expandProject(IClasspathEntry projectEntry, List<Object> expandedPath, List<IClasspathEntry> expanding, boolean excludeTestCode, boolean exportedEntriesOnly, IJavaProject rootProject, boolean isModularJVM) throws CoreException {
-		final Set<Object> visitedEntries = new HashSet<>();
+		final Set<Object> visitedEntries = new HashSet<>(); //FLLDCIM: MARK — M03 M3_SET_LANES NEW
 		expandProjectInternal(projectEntry, expandedPath, visitedEntries, expanding, excludeTestCode, exportedEntriesOnly, rootProject, isModularJVM);
 	}
 
-	public static void expandProjectInternal(IClasspathEntry projectEntry, List<Object> expandedPath, Set<Object> visitedEntries, List<IClasspathEntry> expanding, boolean excludeTestCode, boolean exportedEntriesOnly, IJavaProject rootProject, boolean isModularJVM) throws CoreException {
+	public static void expandProjectInternal(IClasspathEntry projectEntry, List<Object> expandedPath, Set<Object> visitedEntries, List<IClasspathEntry> expanding, boolean excludeTestCode, boolean exportedEntriesOnly, IJavaProject rootProject, boolean isModularJVM) throws CoreException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		expanding.add(projectEntry);
 		// 1. Get the raw classpath
 		// 2. Replace source folder entries with a project entry
@@ -223,9 +223,9 @@ public class DefaultProjectClasspathEntry extends AbstractRuntimeClasspathEntry 
 		}
 
 		IClasspathEntry[] buildPath = project.getRawClasspath();
-		List<IClasspathEntry> unexpandedPath = new ArrayList<>(buildPath.length);
+		List<IClasspathEntry> unexpandedPath = new ArrayList<>(buildPath.length); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 		boolean projectAdded = false;
-		for (int i = 0; i < buildPath.length; i++) {
+		for (int i = 0; i < buildPath.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			IClasspathEntry classpathEntry = buildPath[i];
 			if (excludeTestCode && classpathEntry.isTest()) {
 				continue;
@@ -248,7 +248,7 @@ public class DefaultProjectClasspathEntry extends AbstractRuntimeClasspathEntry 
 		// 3. expand each project entry (except for the root project)
 		// 4. replace each container entry with a runtime entry associated with the project
 		Iterator<IClasspathEntry> iter = unexpandedPath.iterator();
-		while (iter.hasNext()) {
+		while (iter.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			IClasspathEntry entry = iter.next();
 			if (entry == projectEntry) {
 				expandedPath.add(entry);
@@ -287,7 +287,7 @@ public class DefaultProjectClasspathEntry extends AbstractRuntimeClasspathEntry 
 							// check for duplicate/redundant entries
 							boolean duplicate = false;
 							ClasspathContainerInitializer initializer = JavaCore.getClasspathContainerInitializer(r.getPath().segment(0));
-							for (int i = 0; i < expandedPath.size(); i++) {
+							for (int i = 0; i < expandedPath.size(); i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 								Object o = expandedPath.get(i);
 								if (o instanceof IRuntimeClasspathEntry re) {
 									if (re.getType() == IRuntimeClasspathEntry.CONTAINER) {
@@ -346,7 +346,7 @@ public class DefaultProjectClasspathEntry extends AbstractRuntimeClasspathEntry 
 								if (!visitedEntries.contains(entry)) {
 									visitedEntries.add(entry);
 									IPackageFragmentRoot[] roots = project.findPackageFragmentRoots(entry);
-									for (int i = 0; i < roots.length; i++) {
+									for (int i = 0; i < roots.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 										IPackageFragmentRoot root = roots[i];
 										r = JavaRuntime.newArchiveRuntimeClasspathEntry(root.getPath(), entry.getSourceAttachmentPath(), entry.getSourceAttachmentRootPath(), entry.getAccessRules(), entry.getExtraAttributes(), entry.isExported());
 										if (isModularJVM) {

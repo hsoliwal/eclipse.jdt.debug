@@ -74,7 +74,7 @@ public class EvaluationResult implements IEvaluationResult {
 		setEvaluationEngine(engine);
 		setThread(thread);
 		setSnippet(snippet);
-		fErrors = new ArrayList<>();
+		fErrors = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 	}
 
 	/**
@@ -112,7 +112,7 @@ public class EvaluationResult implements IEvaluationResult {
 	public Message[] getErrors() {
 		Message[] messages = new Message[fErrors.size()];
 		int i = 0;
-		for (String errMsg : fErrors) {
+		for (String errMsg : fErrors) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			messages[i++] = new Message(errMsg, -1);
 		}
 		return messages;

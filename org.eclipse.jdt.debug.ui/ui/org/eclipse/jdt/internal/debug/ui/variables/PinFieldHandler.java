@@ -61,9 +61,9 @@ public class PinFieldHandler extends AbstractHandler implements IElementUpdater 
 	}
 
 	private static List<IJavaFieldVariable> getFields(Object selection) {
-		List<IJavaFieldVariable> fields = new ArrayList<>();
+		List<IJavaFieldVariable> fields = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 		if (selection instanceof IStructuredSelection structured) {
-			for (Object element : structured) {
+			for (Object element : structured) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				if (!(element instanceof IJavaFieldVariable field)) {
 					return List.of();
 				}

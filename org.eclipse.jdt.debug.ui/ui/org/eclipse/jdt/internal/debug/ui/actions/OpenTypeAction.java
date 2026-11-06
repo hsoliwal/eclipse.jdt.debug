@@ -52,7 +52,7 @@ public abstract class OpenTypeAction extends ObjectActionDelegate {
 		}
 		Iterator<?> itr= selection.iterator();
 		try {
-			while (itr.hasNext()) {
+			while (itr.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				Object element= itr.next();
 				if (openElement(action, element)) {
 					return;
@@ -102,13 +102,13 @@ public abstract class OpenTypeAction extends ObjectActionDelegate {
 	 * @param e selected element to resolve a source element for
 	 * @return the source element to open or <code>null</code> if none
 	 */
-	protected IType resolveSourceElement(Object e) throws CoreException {
+	protected IType resolveSourceElement(Object e) throws CoreException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IType source = null;
 		IAdaptable element= (IAdaptable) e;
 		IDebugElement dbgElement= getDebugElement(element);
 		if (dbgElement != null) {
 			IJavaType type = getTypeToOpen(dbgElement);
-			while (type instanceof IJavaArrayType) {
+			while (type instanceof IJavaArrayType) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				type = ((IJavaArrayType)type).getComponentType();
 			}
 			if (type != null) {
@@ -153,7 +153,7 @@ public abstract class OpenTypeAction extends ObjectActionDelegate {
 	 * @return type or <code>null</code>
 	 * @throws CoreException if search failed
 	 */
-	public static IType findTypeInWorkspace(String typeName, boolean findOnlyUniqueMatch) throws CoreException {
+	public static IType findTypeInWorkspace(String typeName, boolean findOnlyUniqueMatch) throws CoreException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		int dot= typeName.lastIndexOf('.');
 		char[][] qualifications;
 		String simpleName;
@@ -172,7 +172,7 @@ public abstract class OpenTypeAction extends ObjectActionDelegate {
 		return findAnyTypeInWorkspace(qualifications, typeNames);
 	}
 
-	private static IType findAnyTypeInWorkspace(char[][] qualifications,
+	private static IType findAnyTypeInWorkspace(char[][] qualifications, //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 			char[][] typeNames) throws JavaModelException {
 		class ResultException extends RuntimeException {
 			private static final long serialVersionUID= 1L;
@@ -195,7 +195,7 @@ public abstract class OpenTypeAction extends ObjectActionDelegate {
 		return null;
 	}
 
-	private static IType findUniqueTypeInWorkspace(char[][] qualifications,
+	private static IType findUniqueTypeInWorkspace(char[][] qualifications, //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 			char[][] typeNames) throws JavaModelException {
 		final IType[] result = { null };
 		TypeNameMatchRequestor requestor= new TypeNameMatchRequestor() {

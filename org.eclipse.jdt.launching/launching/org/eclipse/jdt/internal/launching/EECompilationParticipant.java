@@ -51,7 +51,7 @@ public class EECompilationParticipant extends CompilationParticipant {
 	 * A set of projects that have been cleaned. When the build finishes for
 	 * a project that has been cleaned, we check for EE problems.
 	 */
-	private final Set<IJavaProject> fCleaned = new HashSet<>();
+	private final Set<IJavaProject> fCleaned = new HashSet<>(); //FLLDCIM: MARK — M03 M3_SET_LANES NEW
 
 	/* (non-Javadoc)
 	 * @see org.eclipse.jdt.core.compiler.CompilationParticipant#isActive(org.eclipse.jdt.core.IJavaProject)
@@ -73,7 +73,7 @@ public class EECompilationParticipant extends CompilationParticipant {
 	/* (non-Javadoc)
 	 * @see org.eclipse.jdt.core.compiler.CompilationParticipant#buildFinished(org.eclipse.jdt.core.IJavaProject)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public void buildFinished(IJavaProject project) {
 		super.buildFinished(project);
 		if (fCleaned.remove(project)) {
@@ -81,7 +81,7 @@ public class EECompilationParticipant extends CompilationParticipant {
 			IPath container = null;
 			try {
 				IClasspathEntry[] rawClasspath = project.getRawClasspath();
-				for (int j = 0; j < rawClasspath.length; j++) {
+				for (int j = 0; j < rawClasspath.length; j++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 					IClasspathEntry entry = rawClasspath[j];
 					if (entry.getEntryKind() == IClasspathEntry.CPE_CONTAINER) {
 						IPath path = entry.getPath();
@@ -152,7 +152,7 @@ public class EECompilationParticipant extends CompilationParticipant {
 	 * @param vm
 	 *            VM binding resolved for the project
 	 */
-	private void validateCompliance(String eeId, final IJavaProject project, IVMInstall vm) {
+	private void validateCompliance(String eeId, final IJavaProject project, IVMInstall vm) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String id = project.getOption(JavaCore.COMPILER_COMPLIANCE, true);
 		if (!eeId.equals(id)) {
 			// validate compliance only if release flag is not enabled
@@ -160,7 +160,7 @@ public class EECompilationParticipant extends CompilationParticipant {
 				IExecutionEnvironmentsManager manager = JavaRuntime.getExecutionEnvironmentsManager();
 				IExecutionEnvironment[] environments = manager.getExecutionEnvironments();
 				IExecutionEnvironment finalEnvironment = null;
-				for (IExecutionEnvironment environment : environments) {
+				for (IExecutionEnvironment environment : environments) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 					if (environment.getId().indexOf(id) != -1) {
 						finalEnvironment = environment;
 						break;
@@ -186,7 +186,7 @@ public class EECompilationParticipant extends CompilationParticipant {
 	 * @param project associated project
 	 * @param vm VM binding resolved for the project
 	 */
-	private void validateEnvironment(String id, final IJavaProject project, IVMInstall vm) {
+	private void validateEnvironment(String id, final IJavaProject project, IVMInstall vm) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IExecutionEnvironmentsManager manager = JavaRuntime.getExecutionEnvironmentsManager();
 		final IExecutionEnvironment environment = manager.getEnvironment(id);
 		if (environment != null) {
@@ -200,7 +200,7 @@ public class EECompilationParticipant extends CompilationParticipant {
 				// first determine if there is a strictly compatible JRE available
 				IVMInstall[] compatibleVMs = environment.getCompatibleVMs();
 				int exact = 0;
-				for (int i = 0; i < compatibleVMs.length; i++) {
+				for (int i = 0; i < compatibleVMs.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 					if (environment.isStrictlyCompatible(compatibleVMs[i])) {
 						exact++;
 					}
@@ -230,7 +230,7 @@ public class EECompilationParticipant extends CompilationParticipant {
 		}
 	}
 
-	public static String getCompilerCompliance(IVMInstall2 vMInstall) {
+	public static String getCompilerCompliance(IVMInstall2 vMInstall) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String version = vMInstall.getJavaVersion();
 		if (version == null) {
 			return null;
@@ -313,9 +313,9 @@ public class EECompilationParticipant extends CompilationParticipant {
 	 * @param project the given project or <code>null</code>
 	 * @return the severity level for the given preference key or -1
 	 */
-	private int getSeverityLevel(String prefkey, IProject project) {
+	private int getSeverityLevel(String prefkey, IProject project) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		IPreferencesService service = Platform.getPreferencesService();
-		List<IScopeContext> scopes = new ArrayList<>();
+		List<IScopeContext> scopes = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 		scopes.add(InstanceScope.INSTANCE);
 		if(project != null) {
 			scopes.add(new ProjectScope(project));
@@ -366,7 +366,7 @@ public class EECompilationParticipant extends CompilationParticipant {
 	 */
 	private void createProblemMarker(IJavaProject javaProject, String message, int severity, String problemId, String location) {
 		try {
-			Map<String, Object> attributes = new HashMap<>();
+			Map<String, Object> attributes = new HashMap<>(); //FLLDCIM: MARK — M01 M3_HASH_LANES NEW
 			attributes.put(IMarker.MESSAGE, message);
 			attributes.put(IMarker.SEVERITY, Integer.valueOf(severity));
 			attributes.put(IMarker.LOCATION, location);

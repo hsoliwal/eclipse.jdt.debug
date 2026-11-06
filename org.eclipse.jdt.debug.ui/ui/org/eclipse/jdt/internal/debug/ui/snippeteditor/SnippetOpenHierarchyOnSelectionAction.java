@@ -36,7 +36,7 @@ import org.eclipse.ui.handlers.IHandlerService;
  * the connected Java source editor. In addition, if the element is a type, it also
  * opens shows the element in the type hierarchy viewer.
  */
-public class SnippetOpenHierarchyOnSelectionAction extends OpenTypeHierarchyAction {
+public class SnippetOpenHierarchyOnSelectionAction extends OpenTypeHierarchyAction { //FLLDCIM: MARK — T04  IMPLEMENTS
 
 	private JavaSnippetEditor fEditor;
 	private String fDialogTitle;
@@ -98,8 +98,8 @@ public class SnippetOpenHierarchyOnSelectionAction extends OpenTypeHierarchyActi
 	 */
 	protected List<IJavaElement> filterResolveResults(IJavaElement[] codeResolveResults) {
 		int nResults= codeResolveResults.length;
-		List<IJavaElement> refs= new ArrayList<>(nResults);
-		for (int i= 0; i < nResults; i++) {
+		List<IJavaElement> refs= new ArrayList<>(nResults); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
+		for (int i= 0; i < nResults; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			if (codeResolveResults[i] instanceof ISourceReference) {
 				refs.add(codeResolveResults[i]);
 			}
@@ -112,7 +112,7 @@ public class SnippetOpenHierarchyOnSelectionAction extends OpenTypeHierarchyActi
 	 * Shows a dialog for resolving an ambigous Java element.
 	 * Utility method that can be called by subclassers.
 	 */
-	protected IJavaElement selectJavaElement(List<IJavaElement> elements, Shell shell, String title, String message) {
+	protected IJavaElement selectJavaElement(List<IJavaElement> elements, Shell shell, String title, String message) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 
 		int nResults= elements.size();
 
@@ -137,7 +137,7 @@ public class SnippetOpenHierarchyOnSelectionAction extends OpenTypeHierarchyActi
 			Object[] selection= dialog.getResult();
 			if (selection != null && selection.length > 0) {
 				nResults= selection.length;
-				for (int i= 0; i < nResults; i++) {
+				for (int i= 0; i < nResults; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 					Object current= selection[i];
 					if (current instanceof IJavaElement) {
 						return (IJavaElement) current;

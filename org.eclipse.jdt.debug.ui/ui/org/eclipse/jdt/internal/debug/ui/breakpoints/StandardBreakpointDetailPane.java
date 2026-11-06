@@ -26,7 +26,7 @@ public class StandardBreakpointDetailPane extends AbstractDetailPane {
 	/**
 	 * Identifier for this detail pane editor
 	 */
-	public static final String DETAIL_PANE_STANDARD = JDIDebugUIPlugin.getUniqueIdentifier() + ".DETAIL_PANE_STANDARD"; //$NON-NLS-1$
+	public static final String DETAIL_PANE_STANDARD = JDIDebugUIPlugin.getUniqueIdentifier() + ".DETAIL_PANE_STANDARD"; //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 
 	public StandardBreakpointDetailPane() {
 		super(BreakpointMessages.StandardBreakpointDetailPane_0, BreakpointMessages.StandardBreakpointDetailPane_0, DETAIL_PANE_STANDARD);

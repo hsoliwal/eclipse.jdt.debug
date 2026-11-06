@@ -44,11 +44,11 @@ public class SendStaticMessage extends CompoundInstruction {
 		fTypeName = typeName;
 	}
 
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public void execute() throws CoreException {
 		IJavaValue[] args = new IJavaValue[fArgCount];
 		// args are in reverse order
-		for (int i = fArgCount - 1; i >= 0; i--) {
+		for (int i = fArgCount - 1; i >= 0; i--) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			args[i] = popValue();
 		}
 

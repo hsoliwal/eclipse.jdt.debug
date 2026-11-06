@@ -37,7 +37,7 @@ public class JavaNativeStackTraceHyperlink extends JavaStackTraceHyperlink {
 		return -1;
 	}
 
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	protected String getTypeName(String linkText) throws CoreException {
 		String typeName;
     	int index = linkText.indexOf('(');

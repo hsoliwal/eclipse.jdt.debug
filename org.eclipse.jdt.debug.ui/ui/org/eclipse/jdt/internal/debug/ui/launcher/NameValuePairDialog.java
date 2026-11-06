@@ -53,7 +53,7 @@ public class NameValuePairDialog extends Dialog {
 	/**
 	 * @see Dialog#createDialogArea(Composite)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	protected Control createDialogArea(Composite parent) {
 		Font font = parent.getFont();
 
@@ -64,7 +64,7 @@ public class NameValuePairDialog extends Dialog {
 		fNameLabel.setText(fFieldLabels[0]);
 		fNameLabel.setFont(font);
 
-		ModifyListener listener= new ModifyListener() {
+		ModifyListener listener= new ModifyListener() { //FLLDCIM: MARK — T02  ANONYMOUS
 			@Override
 			public void modifyText(ModifyEvent e) {
 				updateButtons();
@@ -77,7 +77,7 @@ public class NameValuePairDialog extends Dialog {
 		gd.widthHint = 300;
 		fNameText.setLayoutData(gd);
 		fNameText.setFont(font);
-		fNameText.addModifyListener(listener);
+		fNameText.addModifyListener(listener); //FLLDCIM: MARK — T02 TEXT_INPUT_DEBOUNCE CALL
 
 		fValueLabel = new Label(comp, SWT.NONE);
 		fValueLabel.setText(fFieldLabels[1]);
@@ -89,7 +89,7 @@ public class NameValuePairDialog extends Dialog {
 		gd.widthHint = 300;
 		fValueText.setLayoutData(gd);
 		fValueText.setFont(font);
-		fValueText.addModifyListener(listener);
+		fValueText.addModifyListener(listener); //FLLDCIM: MARK — T02 TEXT_INPUT_DEBOUNCE CALL
 
 		applyDialogFont(comp);
 		return comp;

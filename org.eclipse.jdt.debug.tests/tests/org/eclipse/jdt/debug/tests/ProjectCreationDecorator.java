@@ -53,7 +53,7 @@ public class ProjectCreationDecorator extends AbstractDebugTest {
 	}
 
     public void testPerspectiveSwtich() {
-        DebugUIPlugin.getStandardDisplay().syncExec(new Runnable() {
+        DebugUIPlugin.getStandardDisplay().syncExec(new Runnable() { //FLLDCIM: MARK — T08 UI_THREAD_SYNCHRONIZER CALL
             @Override
 			public void run() {
                 IWorkbench workbench = PlatformUI.getWorkbench();
@@ -92,18 +92,18 @@ public class ProjectCreationDecorator extends AbstractDebugTest {
         IProject project = get14Project().getProject();
         IMarker[] markers = project.findMarkers(IMarker.PROBLEM, true, IResource.DEPTH_INFINITE);
         int errors = 0;
-        for (int i = 0; i < markers.length; i++) {
+        for (int i = 0; i < markers.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
             IMarker marker = markers[i];
             Integer severity = (Integer) marker.getAttribute(IMarker.SEVERITY);
             if (severity != null && severity.intValue() >= IMarker.SEVERITY_ERROR) {
-            	System.err.println("Found problem in 1.4 test project: "+marker.getResource().getFullPath().toString()+" "+ marker.getAttribute(IMarker.MESSAGE));
+            	System.err.println("Found problem in 1.4 test project: "+marker.getResource().getFullPath().toString()+" "+ marker.getAttribute(IMarker.MESSAGE)); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
                 errors++;
             }
     	}
-		assertEquals("Unexpected compile errors in project. Expected 0 found " + markers.length, 0, errors);
+		assertEquals("Unexpected compile errors in project. Expected 0 found " + markers.length, 0, errors); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
     }
 
-    public void testClassFilesGenerated() throws Exception {
+    public void testClassFilesGenerated() throws Exception { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
         waitForBuild();
         IPath outputLocation = get14Project().getOutputLocation();
         IWorkspace workspace = ResourcesPlugin.getWorkspace();
@@ -111,7 +111,7 @@ public class ProjectCreationDecorator extends AbstractDebugTest {
         IFolder folder = (IFolder) root.findMember(outputLocation);
         IResource[] children = folder.members();
         int classFiles = 0;
-        for (int i = 0; i < children.length; i++) {
+        for (int i = 0; i < children.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
             IResource child = children[i];
             if (child.getType() == IResource.FILE) {
                 IFile file = (IFile) child;

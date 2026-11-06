@@ -113,7 +113,7 @@ import com.sun.jdi.ObjectReference;
  * debug action visibility.
  * </ul>
  */
-public class JavaDebugOptionsManager implements IDebugEventSetListener, IPropertyChangeListener, IJavaBreakpointListener, ILaunchListener, IBreakpointsListener, IJavaStructuresListener {
+public class JavaDebugOptionsManager implements IDebugEventSetListener, IPropertyChangeListener, IJavaBreakpointListener, ILaunchListener, IBreakpointsListener, IJavaStructuresListener { //FLLDCIM: MARK — T27  IMPLEMENTS
 
 	/**
 	 * Singleton options manager
@@ -156,7 +156,7 @@ public class JavaDebugOptionsManager implements IDebugEventSetListener, IPropert
 	private static Set<String> fgDisplayOptions;
 
 	static {
-		fgDisplayOptions = new HashSet<>();
+		fgDisplayOptions = new HashSet<>(); //FLLDCIM: MARK — M03 M3_SET_LANES NEW
 		fgDisplayOptions.add(IJDIPreferencesConstants.PREF_SHOW_CHAR);
 		fgDisplayOptions.add(IJDIPreferencesConstants.PREF_SHOW_HEX);
 		fgDisplayOptions.add(IJDIPreferencesConstants.PREF_SHOW_UNSIGNED);
@@ -173,7 +173,7 @@ public class JavaDebugOptionsManager implements IDebugEventSetListener, IPropert
 			super(DebugUIMessages.JavaDebugOptionsManager_0);
 		}
 
-		@Override
+		@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		protected IStatus run(IProgressMonitor monitor) {
 			MultiStatus status = new MultiStatus(JDIDebugUIPlugin.getUniqueIdentifier(), IJavaDebugUIConstants.INTERNAL_ERROR, "Java debug options failed to initialize", null);  //$NON-NLS-1$
 			// compilation error breakpoint
@@ -248,7 +248,7 @@ public class JavaDebugOptionsManager implements IDebugEventSetListener, IPropert
 		}
 		JDIDebugModel.removeJavaBreakpointListener(this);
         JavaLogicalStructures.removeStructuresListener(this);
-		System.getProperties().remove(JDIDebugUIPlugin.getUniqueIdentifier() + ".debuggerActive"); //$NON-NLS-1$
+		System.getProperties().remove(JDIDebugUIPlugin.getUniqueIdentifier() + ".debuggerActive"); //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 	}
 
 	/**
@@ -270,7 +270,7 @@ public class JavaDebugOptionsManager implements IDebugEventSetListener, IPropert
 	 */
 	protected void notifyTargets(IBreakpoint breakpoint, int kind) {
 		IDebugTarget[] targets = DebugPlugin.getDefault().getLaunchManager().getDebugTargets();
-		for (int i = 0; i < targets.length; i++) {
+		for (int i = 0; i < targets.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			if (targets[i] instanceof IJavaDebugTarget) {
 				IJavaDebugTarget target = (IJavaDebugTarget)targets[i];
 				notifyTarget(target, breakpoint, kind);
@@ -303,7 +303,7 @@ public class JavaDebugOptionsManager implements IDebugEventSetListener, IPropert
 	 */
 	protected void notifyTargetsOfFilters() {
 		IDebugTarget[] targets = DebugPlugin.getDefault().getLaunchManager().getDebugTargets();
-		for (int i = 0; i < targets.length; i++) {
+		for (int i = 0; i < targets.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			if (targets[i] instanceof IJavaDebugTarget) {
 				IJavaDebugTarget target = (IJavaDebugTarget)targets[i];
 				notifyTargetOfFilters(target);
@@ -336,7 +336,7 @@ public class JavaDebugOptionsManager implements IDebugEventSetListener, IPropert
 	/**
 	 * @see IPropertyChangeListener#propertyChange(PropertyChangeEvent)
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public void propertyChange(PropertyChangeEvent event) {
 		String property = event.getProperty();
 		if (property.equals(IJDIPreferencesConstants.PREF_SUSPEND_ON_COMPILATION_ERRORS)) {
@@ -470,9 +470,9 @@ public class JavaDebugOptionsManager implements IDebugEventSetListener, IPropert
 	 * @return list
 	 */
 	public static String[] parseList(String listString) {
-		List<String> list = new ArrayList<>(10);
+		List<String> list = new ArrayList<>(10); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
 		StringTokenizer tokenizer = new StringTokenizer(listString, ","); //$NON-NLS-1$
-		while (tokenizer.hasMoreTokens()) {
+		while (tokenizer.hasMoreTokens()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			String token = tokenizer.nextToken();
 			list.add(token);
 		}
@@ -524,9 +524,9 @@ public class JavaDebugOptionsManager implements IDebugEventSetListener, IPropert
 	 *
 	 * @see IDebugEventSetListener#handleDebugEvents(DebugEvent[])
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public void handleDebugEvents(DebugEvent[] events) {
-		for (int i = 0; i < events.length; i++) {
+		for (int i = 0; i < events.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			DebugEvent event = events[i];
 			if (event.getKind() == DebugEvent.CREATE) {
 				Object source = event.getSource();
@@ -611,7 +611,7 @@ public class JavaDebugOptionsManager implements IDebugEventSetListener, IPropert
 	 *            the exceptionBreakpoint that just fired
 	 * @return {@code true} if the current breakpoint hit should be skipped.
 	 */
-	public boolean shouldSkipSubsequentOccurrence(JDIThread thread, IJavaExceptionBreakpoint exceptionBreakpoint) {
+	public boolean shouldSkipSubsequentOccurrence(JDIThread thread, IJavaExceptionBreakpoint exceptionBreakpoint) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		if (exceptionBreakpoint == fSuspendOnExceptionBreakpoint) {
 			// this breakpoint doesn't have the recurrence property, wait until we are called from SuspendOnUncaughtExceptionListener itself
 			return false;
@@ -645,10 +645,10 @@ public class JavaDebugOptionsManager implements IDebugEventSetListener, IPropert
 					MessageDialog.QUESTION, 0, //
 					DebugUIMessages.JavaDebugOptionsManager_skip_buttonLabel, //
 					DebugUIMessages.JavaDebugOptionsManager_suspend_buttonLabel);
-			parentShell.getDisplay().syncExec(this::open);
+			parentShell.getDisplay().syncExec(this::open); //FLLDCIM: MARK — T08 UI_THREAD_SYNCHRONIZER CALL
 		}
 
-		@Override
+		@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		protected Control createCustomArea(Composite parent) {
 			Composite panel = new Composite(parent, SWT.NONE);
 			panel.setFont(parent.getFont());
@@ -664,7 +664,7 @@ public class JavaDebugOptionsManager implements IDebugEventSetListener, IPropert
 			Button button = new Button(panel, SWT.CHECK);
 			button.setText(DebugUIMessages.JavaDebugOptionsManager_exceptionRecurrence_remember_decision);
 			button.setSelection(false);
-			button.addSelectionListener(new SelectionAdapter() {
+			button.addSelectionListener(new SelectionAdapter() { //FLLDCIM: MARK — T03 SELECTION_LANE CALL
 				@Override
 				public void widgetSelected(SelectionEvent e) {
 					fRememberChoice = !fRememberChoice;
@@ -673,7 +673,7 @@ public class JavaDebugOptionsManager implements IDebugEventSetListener, IPropert
 			return panel;
 		}
 
-		@Override
+		@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		public int open() {
 			int ret = super.open();
 			switch (ret) {
@@ -719,7 +719,7 @@ public class JavaDebugOptionsManager implements IDebugEventSetListener, IPropert
 	 * @param frame stack frame
 	 * @return marker representing compilation problem, or <code>null</code>
 	 */
-	public IMarker getProblem(IJavaStackFrame frame) {
+	public IMarker getProblem(IJavaStackFrame frame) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		ILaunch launch = frame.getLaunch();
 		if (launch != null) {
 			ISourceLookupResult result = DebugUITools.lookupSource(frame, null);
@@ -729,7 +729,7 @@ public class JavaDebugOptionsManager implements IDebugEventSetListener, IPropert
 					IResource resource = (IResource) sourceElement;
 					IMarker[] markers = resource.findMarkers("org.eclipse.jdt.core.problem", true, IResource.DEPTH_INFINITE); //$NON-NLS-1$
 					int line = frame.getLineNumber();
-					for (int i = 0; i < markers.length; i++) {
+					for (int i = 0; i < markers.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 						IMarker marker = markers[i];
 						if (marker.getAttribute(IMarker.LINE_NUMBER, -1) == line && marker.getAttribute(IMarker.SEVERITY, -1) == IMarker.SEVERITY_ERROR) {
 							return marker;
@@ -764,24 +764,24 @@ public class JavaDebugOptionsManager implements IDebugEventSetListener, IPropert
 	 */
 	@Override
 	public void breakpointHasCompilationErrors(final IJavaLineBreakpoint breakpoint, final Message[] errors) {
-		StringBuilder message= new StringBuilder();
+		StringBuilder message= new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 		Message error;
-		for (int i=0, numErrors= errors.length; i < numErrors; i++) {
+		for (int i=0, numErrors= errors.length; i < numErrors; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			error= errors[i];
-			message.append(error.getMessage());
-			message.append("\n "); //$NON-NLS-1$
+			message.append(error.getMessage()); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+			message.append("\n "); //$NON-NLS-1$ //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		}
 		IStatus status= new Status(IStatus.ERROR, JDIDebugUIPlugin.getUniqueIdentifier(), IStatus.ERROR, message.toString(), null);
 		openConditionErrorDialog(breakpoint, DebugUIMessages.JavaDebugOptionsManager_Conditional_breakpoint_has_compilation_error_s___2, status);
 	}
 
-	private void openConditionErrorDialog(final IJavaLineBreakpoint breakpoint, final String errorMessage, final IStatus status) {
+	private void openConditionErrorDialog(final IJavaLineBreakpoint breakpoint, final String errorMessage, final IStatus status) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		final Display display= JDIDebugUIPlugin.getStandardDisplay();
 		if (display.isDisposed()) {
 			return;
 		}
 		final String message = NLS.bind(errorMessage, fLabelProvider.getText(breakpoint));
-		display.asyncExec(new Runnable() {
+		display.asyncExec(new Runnable() { //FLLDCIM: MARK — T08 UI_THREAD_SYNCHRONIZER CALL
 			@Override
 			public void run() {
 				if (display.isDisposed()) {
@@ -814,7 +814,7 @@ public class JavaDebugOptionsManager implements IDebugEventSetListener, IPropert
 		fActivated = true;
 		initializeProblemHandling();
 		notifyTargetsOfFilters();
-		DebugPlugin.getDefault().addDebugEventListener(this);
+		DebugPlugin.getDefault().addDebugEventListener(this); //FLLDCIM: MARK — T27 DEBUG_EVENT_ADAPTER CALL
 		JDIDebugModel.addJavaBreakpointListener(this);
         JavaLogicalStructures.addStructuresListener(this);
 	}
@@ -852,8 +852,8 @@ public class JavaDebugOptionsManager implements IDebugEventSetListener, IPropert
 	@Override
 	public void breakpointsAdded(final IBreakpoint[] breakpoints) {
 		// if a breakpoint is added, but already has a message, do not update it
-		List<IBreakpoint> update = new ArrayList<>();
-		for (int i = 0; i < breakpoints.length; i++) {
+		List<IBreakpoint> update = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
+		for (int i = 0; i < breakpoints.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			IBreakpoint breakpoint = breakpoints[i];
 			try {
 				if (breakpoint instanceof IJavaBreakpoint && breakpoint.getMarker().getAttribute(IMarker.MESSAGE) == null) {
@@ -873,11 +873,11 @@ public class JavaDebugOptionsManager implements IDebugEventSetListener, IPropert
 	 *
 	 * @see org.eclipse.debug.core.IBreakpointsListener#breakpointsAdded(org.eclipse.debug.core.model.IBreakpoint[])
 	 */
-	private void updateBreakpointMessages(final IBreakpoint[] breakpoints) {
-		IWorkspaceRunnable runnable = new IWorkspaceRunnable() {
-			@Override
+	private void updateBreakpointMessages(final IBreakpoint[] breakpoints) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
+		IWorkspaceRunnable runnable = new IWorkspaceRunnable() { //FLLDCIM: MARK — T09  ANONYMOUS
+			@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 			public void run(IProgressMonitor monitor) throws CoreException {
-				for (int i = 0; i < breakpoints.length; i++) {
+				for (int i = 0; i < breakpoints.length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 					IBreakpoint breakpoint = breakpoints[i];
 					if (breakpoint instanceof IJavaBreakpoint) {
 						String info = fLabelProvider.getText(breakpoint);
@@ -897,7 +897,7 @@ public class JavaDebugOptionsManager implements IDebugEventSetListener, IPropert
 						}
 						IMarker marker = breakpoint.getMarker();
 						if (marker.exists()) {
-							marker.setAttribute(IMarker.MESSAGE, type + info);
+							marker.setAttribute(IMarker.MESSAGE, type + info); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 						}
 					}
 				}
@@ -994,8 +994,8 @@ public class JavaDebugOptionsManager implements IDebugEventSetListener, IPropert
 	 * debug context), and the expressions view by firing a content change event on
 	 * the expressions having a Java value.
 	 */
-    protected void variableViewSettingsChanged() {
-		List<DebugEvent> events = new ArrayList<>();
+    protected void variableViewSettingsChanged() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
+		List<DebugEvent> events = new ArrayList<>(); //FLLDCIM: MARK — M02 M3_ARRAY_LANES NEW
         // If a Java stack frame is selected in the Debug view, fire a change event on
         // it so the variables view will update for any structure changes.
         IAdaptable selected = DebugUITools.getDebugContext();
@@ -1005,7 +1005,7 @@ public class JavaDebugOptionsManager implements IDebugEventSetListener, IPropert
 				events.add(new DebugEvent(frame, DebugEvent.CHANGE));
             }
         }
-		for (IExpression expression : DebugPlugin.getDefault().getExpressionManager().getExpressions()) {
+		for (IExpression expression : DebugPlugin.getDefault().getExpressionManager().getExpressions()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			if (expression.getValue() instanceof IJavaValue) {
 				events.add(new DebugEvent(expression, DebugEvent.CHANGE, DebugEvent.CONTENT));
 			}

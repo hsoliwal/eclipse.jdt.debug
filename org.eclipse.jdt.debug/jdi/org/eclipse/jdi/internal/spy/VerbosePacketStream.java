@@ -167,7 +167,7 @@ public class VerbosePacketStream extends PrintStream {
 			printData(packet);
 			println();
 		} catch (UnableToParseDataException e) {
-			println("\n" + e.getMessage() + ':'); //$NON-NLS-1$
+			println("\n" + e.getMessage() + ':'); //$NON-NLS-1$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 			printDescription("Remaining data:"); //$NON-NLS-1$
 			byte[] data = e.getRemainingData();
 			if (data == null) {
@@ -179,7 +179,7 @@ public class VerbosePacketStream extends PrintStream {
 		}
 	}
 
-	protected void printHeader(JdwpPacket packet, boolean fromVM)
+	protected void printHeader(JdwpPacket packet, boolean fromVM) //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 			throws UnableToParseDataException {
 		if (fromVM) {
 			println("From VM"); //$NON-NLS-1$
@@ -255,7 +255,7 @@ public class VerbosePacketStream extends PrintStream {
 		}
 	}
 
-	private void printCommandData(JdwpCommandPacket command)
+	private void printCommandData(JdwpCommandPacket command) //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 			throws IOException, UnableToParseDataException {
 		byte[] data = command.data();
 		if (data == null) {
@@ -557,12 +557,12 @@ public class VerbosePacketStream extends PrintStream {
 			int cset = commandId >> 8;
 			int cmd = commandId & 0xFF;
 			println(MessageFormat
-					.format("Unknown command : {0} {1}", new Object[] { "" + cset, "" + cmd })); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+					.format("Unknown command : {0} {1}", new Object[] { "" + cset, "" + cmd })); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 			break;
 		}
 	}
 
-	private void printReplyData(JdwpReplyPacket reply) throws IOException,
+	private void printReplyData(JdwpReplyPacket reply) throws IOException, //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 			UnableToParseDataException {
 		byte[] data = reply.data();
 		if (data == null) {
@@ -864,7 +864,7 @@ public class VerbosePacketStream extends PrintStream {
 			int cset = commandId >> 8;
 			int cmd = commandId & 0xFF;
 			println(MessageFormat
-					.format("Unknown command : {0} {1}", new Object[] { "" + cset, "" + cmd })); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+					.format("Unknown command : {0} {1}", new Object[] { "" + cset, "" + cmd })); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 			break;
 		}
 	}
@@ -875,7 +875,7 @@ public class VerbosePacketStream extends PrintStream {
 		println();
 	}
 
-	private void printRefTypeTagValue(byte refTypeTag) {
+	private void printRefTypeTagValue(byte refTypeTag) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		printHex(refTypeTag);
 		print(" ("); //$NON-NLS-1$
 		switch (refTypeTag) {
@@ -894,7 +894,7 @@ public class VerbosePacketStream extends PrintStream {
 		print(')');
 	}
 
-	private void printClassStatus(int status) {
+	private void printClassStatus(int status) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		printDescription("Status:"); //$NON-NLS-1$
 		printHex(status);
 		print(" ("); //$NON-NLS-1$
@@ -928,7 +928,7 @@ public class VerbosePacketStream extends PrintStream {
 		println(')');
 	}
 
-	private void printClassModifiers(int modifiers) {
+	private void printClassModifiers(int modifiers) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		printDescription("Modifiers:"); //$NON-NLS-1$
 		printHex(modifiers);
 		print(" ("); //$NON-NLS-1$
@@ -1004,7 +1004,7 @@ public class VerbosePacketStream extends PrintStream {
 		println(')');
 	}
 
-	private void printMethodModifiers(int modifiers) {
+	private void printMethodModifiers(int modifiers) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		printDescription("Modifiers:"); //$NON-NLS-1$
 		printHex(modifiers);
 		print(" ("); //$NON-NLS-1$
@@ -1104,7 +1104,7 @@ public class VerbosePacketStream extends PrintStream {
 		println(')');
 	}
 
-	private void printFieldModifiers(int modifiers) {
+	private void printFieldModifiers(int modifiers) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		printDescription("Modifiers:"); //$NON-NLS-1$
 		printHex(modifiers);
 		print(" ("); //$NON-NLS-1$
@@ -1198,7 +1198,7 @@ public class VerbosePacketStream extends PrintStream {
 		println(')');
 	}
 
-	private void printThreadStatus(int threadStatus) {
+	private void printThreadStatus(int threadStatus) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		printDescription("Thread status:"); //$NON-NLS-1$
 		printHex(threadStatus);
 		print(" ("); //$NON-NLS-1$
@@ -1235,7 +1235,7 @@ public class VerbosePacketStream extends PrintStream {
 		println(')');
 	}
 
-	private void printEventKind(byte eventKind) {
+	private void printEventKind(byte eventKind) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		printDescription("Event kind:"); //$NON-NLS-1$
 		printHex(eventKind);
 		print(" ("); //$NON-NLS-1$
@@ -1301,7 +1301,7 @@ public class VerbosePacketStream extends PrintStream {
 		println(')');
 	}
 
-	private void printSuspendPolicy(byte suspendPolicy) {
+	private void printSuspendPolicy(byte suspendPolicy) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		printDescription("Suspend policy:"); //$NON-NLS-1$
 		printHex(suspendPolicy);
 		print(" ("); //$NON-NLS-1$
@@ -1322,7 +1322,7 @@ public class VerbosePacketStream extends PrintStream {
 		println(')');
 	}
 
-	private void printStepDepth(int setDepth) {
+	private void printStepDepth(int setDepth) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		printDescription("Step depth:"); //$NON-NLS-1$
 		printHex(setDepth);
 		print(" ("); //$NON-NLS-1$
@@ -1385,7 +1385,7 @@ public class VerbosePacketStream extends PrintStream {
 			throws IOException, UnableToParseDataException {
 		int classesCount = in.readInt();
 		println("Classes count:", classesCount); //$NON-NLS-1$
-		for (int i = 0; i < classesCount; i++) {
+		for (int i = 0; i < classesCount; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			byte refTypeTag = in.readByte();
 			long typeId = readReferenceTypeID(in);
 			int status = in.readInt();
@@ -1399,7 +1399,7 @@ public class VerbosePacketStream extends PrintStream {
 			UnableToParseDataException {
 		int classesCount = in.readInt();
 		println("Classes count:", classesCount); //$NON-NLS-1$
-		for (int i = 0; i < classesCount; i++) {
+		for (int i = 0; i < classesCount; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			byte refTypeTag = in.readByte();
 			long typeId = readReferenceTypeID(in);
 			String signature = readString(in);
@@ -1415,7 +1415,7 @@ public class VerbosePacketStream extends PrintStream {
 			UnableToParseDataException {
 		int threadsCount = in.readInt();
 		println("Threads count:", threadsCount); //$NON-NLS-1$
-		for (int i = 0; i < threadsCount; i++) {
+		for (int i = 0; i < threadsCount; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			long threadId = readObjectID(in);
 			printlnObjectId("Thread id:", threadId); //$NON-NLS-1$
 		}
@@ -1425,13 +1425,13 @@ public class VerbosePacketStream extends PrintStream {
 			throws IOException, UnableToParseDataException {
 		int groupsCount = in.readInt();
 		println("Threads count:", groupsCount); //$NON-NLS-1$
-		for (int i = 0; i < groupsCount; i++) {
+		for (int i = 0; i < groupsCount; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			long threadGroupId = readObjectID(in);
 			printlnObjectId("Thread id:", threadGroupId); //$NON-NLS-1$
 		}
 	}
 
-	private void printVmIdSizesReply(DataInputStream in) throws IOException {
+	private void printVmIdSizesReply(DataInputStream in) throws IOException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		int fieldIDSize = in.readInt();
 		int methodIDSize = in.readInt();
 		int objectIDSize = in.readInt();
@@ -1490,13 +1490,13 @@ public class VerbosePacketStream extends PrintStream {
 		println("Base directory:", baseDir); //$NON-NLS-1$
 		int classpathCount = in.readInt();
 		println("Classpaths count:", classpathCount); //$NON-NLS-1$
-		for (int i = 0; i < classpathCount; i++) {
+		for (int i = 0; i < classpathCount; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			String path = readString(in);
 			println("Classpath:", path); //$NON-NLS-1$
 		}
 		int bootclasspathCount = in.readInt();
 		println("Bootclasspaths count:", bootclasspathCount); //$NON-NLS-1$
-		for (int i = 0; i < bootclasspathCount; i++) {
+		for (int i = 0; i < bootclasspathCount; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			String path = readString(in);
 			println("Bootclasspath:", path); //$NON-NLS-1$
 		}
@@ -1506,7 +1506,7 @@ public class VerbosePacketStream extends PrintStream {
 			throws IOException, UnableToParseDataException {
 		int requestsCount = in.readInt();
 		println("Requests Count:", requestsCount); //$NON-NLS-1$
-		for (int i = 0; i < requestsCount; i++) {
+		for (int i = 0; i < requestsCount; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			long objectId = readObjectID(in);
 			int refsCounts = in.readInt();
 			printlnObjectId("Object id:", objectId); //$NON-NLS-1$
@@ -1514,7 +1514,7 @@ public class VerbosePacketStream extends PrintStream {
 		}
 	}
 
-	private void printVmCapabilitiesNewReply(DataInputStream in)
+	private void printVmCapabilitiesNewReply(DataInputStream in) //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 			throws IOException {
 		printVmCapabilitiesReply(in);
 		boolean canRedefineClasses = in.readBoolean();
@@ -1573,12 +1573,12 @@ public class VerbosePacketStream extends PrintStream {
 			throws IOException, UnableToParseDataException {
 		int typesCount = in.readInt();
 		println("Types count:", typesCount); //$NON-NLS-1$
-		for (int i = 0; i < typesCount; i++) {
+		for (int i = 0; i < typesCount; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			long typeId = readReferenceTypeID(in);
 			int classfileLength = in.readInt();
 			printlnReferenceTypeId("Type id:", typeId); //$NON-NLS-1$
 			println("Classfile length:", classfileLength); //$NON-NLS-1$
-			while ((classfileLength -= in.skipBytes(classfileLength)) != 0) {
+			while ((classfileLength -= in.skipBytes(classfileLength)) != 0) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			}
 			printDescription("Class bytes:"); //$NON-NLS-1$
 			println("skipped"); //$NON-NLS-1$
@@ -1595,7 +1595,7 @@ public class VerbosePacketStream extends PrintStream {
 			throws IOException, UnableToParseDataException {
 		int classesCount = in.readInt();
 		println("Classes count:", classesCount); //$NON-NLS-1$
-		for (int i = 0; i < classesCount; i++) {
+		for (int i = 0; i < classesCount; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			byte refTypeTag = in.readByte();
 			long typeId = readReferenceTypeID(in);
 			String signature = readString(in);
@@ -1635,7 +1635,7 @@ public class VerbosePacketStream extends PrintStream {
 			UnableToParseDataException {
 		int fieldsCount = in.readInt();
 		println("Fields count:", fieldsCount); //$NON-NLS-1$
-		for (int i = 0; i < fieldsCount; i++) {
+		for (int i = 0; i < fieldsCount; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			long fieldId = readFieldID(in);
 			String name = readString(in);
 			String signature = readString(in);
@@ -1651,7 +1651,7 @@ public class VerbosePacketStream extends PrintStream {
 			UnableToParseDataException {
 		int methodsCount = in.readInt();
 		println("Methods count:", methodsCount); //$NON-NLS-1$
-		for (int i = 0; i < methodsCount; i++) {
+		for (int i = 0; i < methodsCount; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			long methodId = readMethodID(in);
 			String name = readString(in);
 			String signature = readString(in);
@@ -1669,7 +1669,7 @@ public class VerbosePacketStream extends PrintStream {
 		int fieldsCount = in.readInt();
 		printlnReferenceTypeId("Type id:", typeId); //$NON-NLS-1$
 		println("Fields count:", fieldsCount); //$NON-NLS-1$
-		for (int i = 0; i < fieldsCount; i++) {
+		for (int i = 0; i < fieldsCount; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			long fieldId = readFieldID(in);
 			printlnFieldId("Field id:", fieldId); //$NON-NLS-1$
 		}
@@ -1679,7 +1679,7 @@ public class VerbosePacketStream extends PrintStream {
 			UnableToParseDataException {
 		int valuesCount = in.readInt();
 		println("Values count:", valuesCount); //$NON-NLS-1$
-		for (int i = 0; i < valuesCount; i++) {
+		for (int i = 0; i < valuesCount; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			readAndPrintlnTaggedValue("Value:", in); //$NON-NLS-1$
 		}
 	}
@@ -1693,7 +1693,7 @@ public class VerbosePacketStream extends PrintStream {
 			throws IOException, UnableToParseDataException {
 		int typesCount = in.readInt();
 		println("Types count:", typesCount); //$NON-NLS-1$
-		for (int i = 0; i < typesCount; i++) {
+		for (int i = 0; i < typesCount; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			byte typeTag = in.readByte();
 			long typeId = readReferenceTypeID(in);
 			printRefTypeTag(typeTag);
@@ -1710,7 +1710,7 @@ public class VerbosePacketStream extends PrintStream {
 			UnableToParseDataException {
 		int interfacesCount = in.readInt();
 		println("Interfaces count:", interfacesCount); //$NON-NLS-1$
-		for (int i = 0; i < interfacesCount; i++) {
+		for (int i = 0; i < interfacesCount; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			long interfaceId = readReferenceTypeID(in);
 			printlnReferenceTypeId("Interface type id:", interfaceId); //$NON-NLS-1$
 		}
@@ -1740,7 +1740,7 @@ public class VerbosePacketStream extends PrintStream {
 			throws IOException, UnableToParseDataException {
 		int fieldsCount = in.readInt();
 		println("Fields count:", fieldsCount); //$NON-NLS-1$
-		for (int i = 0; i < fieldsCount; i++) {
+		for (int i = 0; i < fieldsCount; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			long fieldId = readFieldID(in);
 			String name = readString(in);
 			String signature = readString(in);
@@ -1758,7 +1758,7 @@ public class VerbosePacketStream extends PrintStream {
 			throws IOException, UnableToParseDataException {
 		int methodsCount = in.readInt();
 		println("Methods count:", methodsCount); //$NON-NLS-1$
-		for (int i = 0; i < methodsCount; i++) {
+		for (int i = 0; i < methodsCount; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			long methodId = readMethodID(in);
 			String name = readString(in);
 			String genericSignature = readString(in);
@@ -1804,7 +1804,7 @@ public class VerbosePacketStream extends PrintStream {
 		printlnObjectId("Thread id:", threadId); //$NON-NLS-1$
 		printlnMethodId("Method id:", methodId); //$NON-NLS-1$
 		println("Arguments count:", argumentsCount); //$NON-NLS-1$
-		for (int i = 0; i < argumentsCount; i++) {
+		for (int i = 0; i < argumentsCount; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			readAndPrintlnTaggedValue("Argument:", in); //$NON-NLS-1$
 		}
 		int invocationOptions = in.readInt();
@@ -1866,7 +1866,7 @@ public class VerbosePacketStream extends PrintStream {
 		println("Lowest valid code index:", start); //$NON-NLS-1$
 		println("Highest valid code index:", end); //$NON-NLS-1$
 		println("Number of lines:", lines); //$NON-NLS-1$
-		for (int i = 0; i < lines; i++) {
+		for (int i = 0; i < lines; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			long lineCodeIndex = in.readLong();
 			int lineNumber = in.readInt();
 			println("Line code Index:", lineCodeIndex); //$NON-NLS-1$
@@ -1874,13 +1874,13 @@ public class VerbosePacketStream extends PrintStream {
 		}
 	}
 
-	private void printMVariableTableReply(DataInputStream in)
+	private void printMVariableTableReply(DataInputStream in) //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 			throws IOException {
 		int slotsUsedByArgs = in.readInt();
 		int variablesCount = in.readInt();
 		println("Nb of slots used by all args:", slotsUsedByArgs); //$NON-NLS-1$
 		println("Nb of variables:", variablesCount); //$NON-NLS-1$
-		for (int i = 0; i < variablesCount; i++) {
+		for (int i = 0; i < variablesCount; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			long codeIndex = in.readLong();
 			String name = readString(in);
 			String signature = readString(in);
@@ -1897,7 +1897,7 @@ public class VerbosePacketStream extends PrintStream {
 	private void printMBytecodesReply(DataInputStream in) throws IOException {
 		int bytes = in.readInt();
 		println("Nb of bytes:", bytes); //$NON-NLS-1$
-		while ((bytes -= in.skipBytes(bytes)) != 0) {
+		while ((bytes -= in.skipBytes(bytes)) != 0) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 		}
 		printDescription("Method bytes:"); //$NON-NLS-1$
 		println("skipped"); //$NON-NLS-1$
@@ -1908,13 +1908,13 @@ public class VerbosePacketStream extends PrintStream {
 		println("Is obsolete:", isObsolete); //$NON-NLS-1$
 	}
 
-	private void printMVariableTableWithGenericReply(DataInputStream in)
+	private void printMVariableTableWithGenericReply(DataInputStream in) //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 			throws IOException {
 		int slotsUsedByArgs = in.readInt();
 		int variablesCount = in.readInt();
 		println("Nb of slots used by all args:", slotsUsedByArgs); //$NON-NLS-1$
 		println("Nb of variables:", variablesCount); //$NON-NLS-1$
-		for (int i = 0; i < variablesCount; i++) {
+		for (int i = 0; i < variablesCount; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			long codeIndex = in.readLong();
 			String name = readString(in);
 			String signature = readString(in);
@@ -1950,7 +1950,7 @@ public class VerbosePacketStream extends PrintStream {
 		int fieldsCount = in.readInt();
 		println("Object id:", objectId); //$NON-NLS-1$
 		println("Fields count:", fieldsCount); //$NON-NLS-1$
-		for (int i = 0; i < fieldsCount; i++) {
+		for (int i = 0; i < fieldsCount; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			long fieldId = readFieldID(in);
 			println("Field id:", fieldId); //$NON-NLS-1$
 		}
@@ -1960,7 +1960,7 @@ public class VerbosePacketStream extends PrintStream {
 			UnableToParseDataException {
 		int valuesCount = in.readInt();
 		println("Values count:", valuesCount); //$NON-NLS-1$
-		for (int i = 0; i < valuesCount; i++) {
+		for (int i = 0; i < valuesCount; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			readAndPrintlnTaggedValue("Value:", in); //$NON-NLS-1$
 		}
 	}
@@ -1984,7 +1984,7 @@ public class VerbosePacketStream extends PrintStream {
 		println("Entry count:", entryCount); //$NON-NLS-1$
 		println("Nb of waiters:", waiters); //$NON-NLS-1$
 		long waiterThreadId;
-		for (int i = 0; i < waiters; i++) {
+		for (int i = 0; i < waiters; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			waiterThreadId = readObjectID(in);
 			printlnObjectId("Waiting thread id:", waiterThreadId); //$NON-NLS-1$
 		}
@@ -2002,7 +2002,7 @@ public class VerbosePacketStream extends PrintStream {
 		printlnReferenceTypeId("Class type id:", classTypeId); //$NON-NLS-1$
 		printlnMethodId("Method id:", methodId); //$NON-NLS-1$
 		println("Arguments count:", argsCount); //$NON-NLS-1$
-		for (int i = 0; i < argsCount; i++) {
+		for (int i = 0; i < argsCount; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			readAndPrintlnTaggedValue("Argument:", in); //$NON-NLS-1$
 		}
 		int invocationOption = in.readInt();
@@ -2071,7 +2071,7 @@ public class VerbosePacketStream extends PrintStream {
 			UnableToParseDataException {
 		int framesCount = in.readInt();
 		println("Frames count:", framesCount); //$NON-NLS-1$
-		for (int i = 0; i < framesCount; i++) {
+		for (int i = 0; i < framesCount; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			long frameId = readFrameID(in);
 			printlnFrameId("Frame id:", frameId); //$NON-NLS-1$
 			readAndPrintLocation(in);
@@ -2087,7 +2087,7 @@ public class VerbosePacketStream extends PrintStream {
 			throws IOException, UnableToParseDataException {
 		int monitorsCount = in.readInt();
 		println("Monitors count:", monitorsCount); //$NON-NLS-1$
-		for (int i = 0; i < monitorsCount; i++) {
+		for (int i = 0; i < monitorsCount; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			byte signatureByte = in.readByte();
 			long monitorObjectId = readObjectID(in);
 			printlnTaggedObjectId(
@@ -2138,13 +2138,13 @@ public class VerbosePacketStream extends PrintStream {
 			UnableToParseDataException {
 		int childThreadsCount = in.readInt();
 		println("Child threads count:", childThreadsCount); //$NON-NLS-1$
-		for (int i = 0; i < childThreadsCount; i++) {
+		for (int i = 0; i < childThreadsCount; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			long childThreadId = readObjectID(in);
 			printlnObjectId("Child thread id:", childThreadId); //$NON-NLS-1$
 		}
 		int childGroupThreadsCount = in.readInt();
 		println("Child group threads count:", childGroupThreadsCount); //$NON-NLS-1$
-		for (int i = 0; i < childGroupThreadsCount; i++) {
+		for (int i = 0; i < childGroupThreadsCount; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			long childGroupThreadId = readObjectID(in);
 			printlnObjectId("Child group thread id:", childGroupThreadId); //$NON-NLS-1$
 		}
@@ -2198,7 +2198,7 @@ public class VerbosePacketStream extends PrintStream {
 			throws IOException, UnableToParseDataException {
 		int classesCount = in.readInt();
 		println("Classes count:", classesCount); //$NON-NLS-1$
-		for (int i = 0; i < classesCount; i++) {
+		for (int i = 0; i < classesCount; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			byte refTypeTag = in.readByte();
 			long typeId = readReferenceTypeID(in);
 			printRefTypeTag(refTypeTag);
@@ -2206,7 +2206,7 @@ public class VerbosePacketStream extends PrintStream {
 		}
 	}
 
-	private void printErSetCommand(DataInputStream in) throws IOException,
+	private void printErSetCommand(DataInputStream in) throws IOException, //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 			UnableToParseDataException {
 		byte eventKind = in.readByte();
 		byte suspendPolicy = in.readByte();
@@ -2214,7 +2214,7 @@ public class VerbosePacketStream extends PrintStream {
 		printEventKind(eventKind);
 		printSuspendPolicy(suspendPolicy);
 		println("Modifiers count:", modifiersCount); //$NON-NLS-1$
-		for (int i = 0; i < modifiersCount; i++) {
+		for (int i = 0; i < modifiersCount; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			byte modKind = in.readByte();
 			printDescription("Modifier kind:"); //$NON-NLS-1$
 			printHex(modKind);
@@ -2315,7 +2315,7 @@ public class VerbosePacketStream extends PrintStream {
 		printlnObjectId("Thread object id:", threadId); //$NON-NLS-1$
 		printlnFrameId("Frame id:", frameId); //$NON-NLS-1$
 		println("Slots count:", slotsCount); //$NON-NLS-1$
-		for (int i = 0; i < slotsCount; i++) {
+		for (int i = 0; i < slotsCount; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			int slotIndex = in.readInt();
 			byte signatureTag = in.readByte();
 			println("Slot index:", slotIndex); //$NON-NLS-1$
@@ -2329,7 +2329,7 @@ public class VerbosePacketStream extends PrintStream {
 			UnableToParseDataException {
 		int valuesCount = in.readInt();
 		println("Values count:", valuesCount); //$NON-NLS-1$
-		for (int i = 0; i < valuesCount; i++) {
+		for (int i = 0; i < valuesCount; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			readAndPrintlnTaggedValue("Value:", in); //$NON-NLS-1$
 		}
 	}
@@ -2342,7 +2342,7 @@ public class VerbosePacketStream extends PrintStream {
 		printlnObjectId("Thread object id:", threadId); //$NON-NLS-1$
 		printlnFrameId("Frame id:", frameId); //$NON-NLS-1$
 		println("Slots count:", slotsCount); //$NON-NLS-1$
-		for (int i = 0; i < slotsCount; i++) {
+		for (int i = 0; i < slotsCount; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			int slotIndex = in.readInt();
 			println("Slot index:", slotIndex); //$NON-NLS-1$
 			readAndPrintlnTaggedValue("Values:", in); //$NON-NLS-1$
@@ -2370,13 +2370,13 @@ public class VerbosePacketStream extends PrintStream {
 		printlnReferenceTypeId("Type id:", typeId); //$NON-NLS-1$
 	}
 
-	private void printECompositeCommand(DataInputStream in) throws IOException,
+	private void printECompositeCommand(DataInputStream in) throws IOException, //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 			UnableToParseDataException {
 		byte suspendPolicy = in.readByte();
 		int eventsCount = in.readInt();
 		printSuspendPolicy(suspendPolicy);
 		println("Events count:", eventsCount); //$NON-NLS-1$
-		for (int i = 0; i < eventsCount; i++) {
+		for (int i = 0; i < eventsCount; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			byte eventKind = in.readByte();
 			int requestId = in.readInt();
 			printEventKind(eventKind);
@@ -2463,16 +2463,16 @@ public class VerbosePacketStream extends PrintStream {
 	 * Reads String from Jdwp stream. Read a UTF where length has 4 bytes, and
 	 * not just 2. This code was based on the OTI Retysin source for readUTF.
 	 */
-	private static String readString(DataInputStream in) throws IOException {
+	private static String readString(DataInputStream in) throws IOException { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		int utfSize = in.readInt();
 		byte utfBytes[] = new byte[utfSize];
 		in.readFully(utfBytes);
 		/* Guess at buffer size */
-		StringBuilder strBuffer = new StringBuilder(utfSize / 3 * 2);
-		for (int i = 0; i < utfSize;) {
+		StringBuilder strBuffer = new StringBuilder(utfSize / 3 * 2); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
+		for (int i = 0; i < utfSize;) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			int a = utfBytes[i] & 0xFF;
 			if ((a >> 4) < 12) {
-				strBuffer.append((char) a);
+				strBuffer.append((char) a); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 				i++;
 			} else {
 				int b = utfBytes[i + 1] & 0xFF;
@@ -2481,7 +2481,7 @@ public class VerbosePacketStream extends PrintStream {
 						throw new UTFDataFormatException(
 								"Second byte input does not match UTF Specification"); //$NON-NLS-1$
 					}
-					strBuffer.append((char) (((a & 0x1F) << 6) | (b & 0x3F)));
+					strBuffer.append((char) (((a & 0x1F) << 6) | (b & 0x3F))); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 					i += 2;
 				} else {
 					int c = utfBytes[i + 2] & 0xFF;
@@ -2490,7 +2490,7 @@ public class VerbosePacketStream extends PrintStream {
 							throw new UTFDataFormatException(
 									"Second or third byte input does not mach UTF Specification_"); //$NON-NLS-1$
 						}
-						strBuffer.append((char) (((a & 0x0F) << 12)
+						strBuffer.append((char) (((a & 0x0F) << 12) //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 								| ((b & 0x3F) << 6) | (c & 0x3F)));
 						i += 3;
 					} else {
@@ -2507,7 +2507,7 @@ public class VerbosePacketStream extends PrintStream {
 		byte[] buffer = new byte[100];
 		byte[] res = new byte[0], newRes;
 		int resLength = 0, length;
-		while ((length = in.read(buffer)) != -1) {
+		while ((length = in.read(buffer)) != -1) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			newRes = new byte[resLength + length];
 			System.arraycopy(res, 0, newRes, 0, resLength);
 			System.arraycopy(buffer, 0, newRes, resLength, length);
@@ -2564,7 +2564,7 @@ public class VerbosePacketStream extends PrintStream {
 
 	private long readID(DataInputStream in, int size) throws IOException {
 		long id = 0;
-		for (int i = 0; i < size; i++) {
+		for (int i = 0; i < size; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			int b = in.readUnsignedByte(); // Note that the byte must be treated
 											// as unsigned.
 			id = id << 8 | b;
@@ -2578,7 +2578,7 @@ public class VerbosePacketStream extends PrintStream {
 		readAndPrintlnUntaggedValue(description, in, tag, true);
 	}
 
-	private void readAndPrintlnUntaggedValue(String description,
+	private void readAndPrintlnUntaggedValue(String description, //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 			DataInputStream in, byte tag, boolean printTagValue)
 			throws IOException, UnableToParseDataException {
 		printDescription(description);
@@ -2674,7 +2674,7 @@ public class VerbosePacketStream extends PrintStream {
 		println();
 	}
 
-	private void printSignatureByte(byte signatureByte, boolean printValue) {
+	private void printSignatureByte(byte signatureByte, boolean printValue) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		String type;
 		switch (signatureByte) {
 		case VOID_TAG:
@@ -2737,7 +2737,7 @@ public class VerbosePacketStream extends PrintStream {
 		} else {
 			print(" ("); //$NON-NLS-1$
 		}
-		print(type + ')');
+		print(type + ')'); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 	}
 
 	private void readAndPrintLocation(DataInputStream in) throws IOException,
@@ -2752,7 +2752,7 @@ public class VerbosePacketStream extends PrintStream {
 		println("          index:", index); //$NON-NLS-1$
 	}
 
-	private void readAndPrintArrayRegion(DataInputStream in)
+	private void readAndPrintArrayRegion(DataInputStream in) //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 			throws IOException, UnableToParseDataException {
 		byte signatureByte = in.readByte();
 		int valuesCount = in.readInt();
@@ -2768,12 +2768,12 @@ public class VerbosePacketStream extends PrintStream {
 		case THREAD_GROUP_TAG:
 		case CLASS_LOADER_TAG:
 		case CLASS_OBJECT_TAG:
-			for (int i = 0; i < valuesCount; i++) {
+			for (int i = 0; i < valuesCount; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				readAndPrintlnTaggedValue("Value", in); //$NON-NLS-1$
 			}
 			break;
 		default:
-			for (int i = 0; i < valuesCount; i++) {
+			for (int i = 0; i < valuesCount; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				readAndPrintlnUntaggedValue("Value", in, signatureByte, false); //$NON-NLS-1$
 			}
 			break;
@@ -2797,15 +2797,15 @@ public class VerbosePacketStream extends PrintStream {
 	protected void println(String description, String value) {
 		printDescription(description);
 		print('\"');
-		StringBuilder val = new StringBuilder();
+		StringBuilder val = new StringBuilder(); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 		int pos = 0, lastPos = 0;
-		while ((pos = value.indexOf('\n', lastPos)) != -1) {
+		while ((pos = value.indexOf('\n', lastPos)) != -1) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			pos++;
-			val.append(value.substring(lastPos, pos));
-			val.append(shift);
+			val.append(value.substring(lastPos, pos)); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
+			val.append(shift); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 			lastPos = pos;
 		}
-		val.append(value.substring(lastPos, value.length()));
+		val.append(value.substring(lastPos, value.length())); //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 		print(val);
 		println('"');
 	}
@@ -2903,13 +2903,13 @@ public class VerbosePacketStream extends PrintStream {
 		printHexString(Long.toHexString(l).toUpperCase(), 16);
 	}
 
-	protected void printHex(byte[] b) {
+	protected void printHex(byte[] b) { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		if (b == null) {
 			println("NULL"); //$NON-NLS-1$
 			return;
 		}
 		int i, length;
-		for (i = 0, length = b.length; i < length; i++) {
+		for (i = 0, length = b.length; i < length; i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			String hexa = Integer.toHexString(b[i]).toUpperCase();
 			if (hexa.length() == 1) {
 				print('0');

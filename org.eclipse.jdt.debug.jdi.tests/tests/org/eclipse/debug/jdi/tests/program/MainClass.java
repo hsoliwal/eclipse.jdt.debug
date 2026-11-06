@@ -165,7 +165,7 @@ public class MainClass extends Date implements Runnable, Printable {
 		fMainThread = Thread.currentThread();
 
 		// Prevent this thread from dying
-		while (true) {
+		while (true) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			try {
 				Thread.sleep(1000);
 			} catch (InterruptedException e) {
@@ -177,7 +177,7 @@ public class MainClass extends Date implements Runnable, Printable {
 	 */
 	@Override
 	public void print(OutputStream out) {
-		String string = fInt++ +". " + fString;
+		String string = fInt++ +". " + fString; //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		PrintWriter writer = new PrintWriter(out);
 		writer.println(string);
 		writer.flush();
@@ -192,9 +192,9 @@ public class MainClass extends Date implements Runnable, Printable {
 	 * @since 3.3
 	 */
 	public int printNumber(OutputStream out, int num) {
-		String blah = "foo"+foo();
+		String blah = "foo"+foo(); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		PrintWriter writer = new PrintWriter(out);
-		writer.println("The specified number is: "+num);
+		writer.println("The specified number is: "+num); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		writer.flush();
 		return num;
 	}
@@ -274,7 +274,7 @@ public class MainClass extends Date implements Runnable, Printable {
 	/**
 	 * @see java.lang.Runnable#run()
 	 */
-	@Override
+	@Override //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 	public void run() {
 		try {
 			Thread t = Thread.currentThread();
@@ -285,7 +285,7 @@ public class MainClass extends Date implements Runnable, Printable {
 				System.out.println("CONSTANT=2");
 			}
 
-			while (true) {
+			while (true) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 				printAndSignal();
 				triggerEvent();
 				useLocalVars(t, o);
@@ -371,7 +371,7 @@ public class MainClass extends Date implements Runnable, Printable {
 	/**
 	 *	Trigger an event for the front-end.
 	 */
-	private void triggerEvent() {
+	private void triggerEvent() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 		/* Ensure we do it only once */
 		String eventType = fEventType;
 		fEventType = "";
@@ -449,7 +449,7 @@ public class MainClass extends Date implements Runnable, Printable {
 		} else if (eventType.equals("ThreadDeathEvent")) {
 			triggerThreadDeathEvent();
 		} else {
-			System.out.println("Unknown event type: " + eventType);
+			System.out.println("Unknown event type: " + eventType); //FLLDCIM: MARK — M33 M3STRING_COMPOSITE CONCAT
 		}
 	}
 
