@@ -687,9 +687,9 @@ public class JavaMethodBreakpoint extends JavaLineBreakpoint implements //FLLDCI
 	 * @return the modified pattern
 	 */
 	private String convertToRegularExpression(String stringMatcherPattern) {
-		String regex = METHOD_DOT_PATTERN.matcher(stringMatcherPattern).replaceAll("\\\\."); //$NON-NLS-1$//$NON-NLS-2$ //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
-		regex = METHOD_STAR_PATTERN.matcher(regex).replaceAll("\\.\\*"); //$NON-NLS-1$//$NON-NLS-2$ //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
-		regex = METHOD_DOLLAR_PATTERN.matcher(regex).replaceAll("\\\\\\$"); //$NON-NLS-1$ //$NON-NLS-2$ //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
+		String regex = METHOD_DOT_PATTERN.matcher(stringMatcherPattern).replaceAll("\\\\."); //$NON-NLS-1$ //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
+		regex = METHOD_STAR_PATTERN.matcher(regex).replaceAll("\\.\\*"); //$NON-NLS-1$ //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
+		regex = METHOD_DOLLAR_PATTERN.matcher(regex).replaceAll("\\\\\\$"); //$NON-NLS-1$  //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
 		return regex;
 	}
 

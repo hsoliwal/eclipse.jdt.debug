@@ -11,8 +11,22 @@ Tools and raw evidence: [`docs/m3/jdk21/release-20261109`](../jdk21/release-2026
 | G2b | Parse gate: every tracked Java source (1650 files, test bundles included, test-input folders excluded), JDK 25 javac `--release 21` stopped after parsing | PASS | PARSE_GATE.tsv |
 | G3 | Recipe fixed point (`apply_jdk21.sh` + `apply_jdk21_pins.sh` change nothing on master) | PASS | RECIPE_CHANGES.tsv |
 | G4 | Metadata consistent: Tycho bundle/feature versions match their pom, no EE above 21 in a Java-21 bundle | PASS | META.tsv |
-| G5 | Full Tycho build of this repository on JDK 21 | PENDING | not run locally (disk and time budget); the javac gate G2 covers language level and API |
+| G5 | Full Tycho build of this repository on JDK 21 (`mvn -B clean verify -DskipTests`, fork parent + SDK target from the fork aggregator, other components from the upstream 4.42 I-build repository) | PASS | BUILD SUCCESS in 245 s, modules 7/7 ok, 0 failed, 0 [ERROR] rows (BUILD_G5.tsv, BUILD_G5_ERRORS.tsv, BUILD_G5.log.gz) |
 | G6 | Eclipse SDK product build and launch on JDK 21 | PENDING | aggregator verdict, eclipse.platform.releng.aggregator docs/m3/release/RELEASE_READINESS.md |
+
+## What this PR changes
+
+Fork master `6a67f7d657f4` passes G1 to G4, but its Tycho build on JDK 21 (G5) failed in two attempts with ECJ errors
+that M3 lanes left in bundles compiled with NLS problems as errors (javac does not check NLS tags, so G2 cannot see them):
+
+| Attempt | Result | Rows |
+| --- | --- | --- |
+| 1 | BUILD FAILURE, org.eclipse.jdt.debug | 5 x "Unnecessary $NON-NLS$ tag": the regex-hoist lane turned `replaceAll("\.", "\\.") //$NON-NLS-1$//$NON-NLS-2$` into a one-literal hoisted-Pattern call and kept both tags (JavaExceptionBreakpoint 524-525, JavaMethodBreakpoint 690-692) |
+| 2 (`--fail-at-end`) | BUILD FAILURE, org.eclipse.jdt.debug.ui | 2 x "Non-externalized string literal": the StringBuilder fold wrote `return "" + uniqueId;` / `return "" + count;` (upstream: `buffer.append(n)`) without a tag (JavaVariableLabelProvider 176, 194) |
+| 3 | BUILD SUCCESS, 7/7 modules, 245 s | 0 |
+
+Fill (`fix_nls_tags.sh`, BLLSE-driven from the Maven log, plus a static scan of lane-anchored lines): surplus tags removed,
+missing tags appended; only comments change, so G2 and G2b are unaffected.
 
 ## Re-run
 

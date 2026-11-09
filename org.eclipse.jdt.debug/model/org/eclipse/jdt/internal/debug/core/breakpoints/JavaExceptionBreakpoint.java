@@ -521,8 +521,8 @@ public class JavaExceptionBreakpoint extends JavaBreakpoint implements //FLLDCIM
 				return true;
 			}
 
-			filter = FILTER_DOT_PATTERN.matcher(filter).replaceAll("\\\\."); //$NON-NLS-1$//$NON-NLS-2$ //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
-			filter = FILTER_STAR_PATTERN.matcher(filter).replaceAll("\\.\\*"); //$NON-NLS-1$//$NON-NLS-2$ //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
+			filter = FILTER_DOT_PATTERN.matcher(filter).replaceAll("\\\\."); //$NON-NLS-1$ //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
+			filter = FILTER_STAR_PATTERN.matcher(filter).replaceAll("\\.\\*"); //$NON-NLS-1$ //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
 			Pattern pattern = Pattern.compile(filter); //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
 			if (pattern.matcher(typeName).find()) { //FLLDCIM: MARK — M12 REGEX_PRECOMPUTE CALL
 				return true;
