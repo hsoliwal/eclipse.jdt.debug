@@ -173,7 +173,7 @@ public class JavaVariableLabelProvider extends VariableLabelProvider implements 
 			if (value instanceof JDIObjectValue objectValue) {
 				long uniqueId = objectValue.getUniqueId();
 				if (uniqueId >= 0) {
-					return "" + uniqueId;
+					return "" + uniqueId; //$NON-NLS-1$
 					// preserved predecessor annotation: //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 					// preserved predecessor annotation: //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 				}
@@ -191,7 +191,7 @@ public class JavaVariableLabelProvider extends VariableLabelProvider implements 
 					if (count == -1) {
 						return DebugUIMessages.JavaVariableLabelProvider_0;
 					}
-					return "" + count;
+					return "" + count; //$NON-NLS-1$
 					// preserved predecessor annotation: //FLLDCIM: MARK — M14 M3STRING_COMPOSITE CALL
 					// preserved predecessor annotation: //FLLDCIM: MARK — M14 M3STRING_COMPOSITE NEW
 				}
