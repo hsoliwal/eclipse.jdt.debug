@@ -409,6 +409,13 @@ public abstract class ReferenceTypeImpl extends TypeImpl implements
 		setGenericSignature(genericSignature);
 	}
 
+	@Override
+	public void setSignature(String signature) {
+		super.setSignature(signature);
+		// Lets the VM find this mirror by signature when the class is unloaded.
+		virtualMachineImpl().signatureKnown(this);
+	}
+
 	/**
 	 * @return Returns type tag.
 	 */
@@ -418,9 +425,17 @@ public abstract class ReferenceTypeImpl extends TypeImpl implements
 	 * Flushes all stored Jdwp results.
 	 */
 	public void flushStoredJdwpResults() { //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
+		flushOwnStoredJdwpResults();
+	}
+
+	/**
+	 * Flushes the stored Jdwp results of this type only, and not those of the
+	 * types that depend on it.
+	 */
+	final void flushOwnStoredJdwpResults() {
 		// Flush Methods.
 		if (fMethods != null) {
-			for (Method method : fMethods) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
+			for (Method method : fMethods) {
 				((MethodImpl)method).flushStoredJdwpResults();
 			}
 			fMethods = null;
@@ -429,7 +444,7 @@ public abstract class ReferenceTypeImpl extends TypeImpl implements
 
 		// Flush Fields.
 		if (fFields != null) {
-			for (Field field : fFields) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
+			for (Field field : fFields) {
 				((FieldImpl)field).flushStoredJdwpResults();
 			}
 			fFields = null;

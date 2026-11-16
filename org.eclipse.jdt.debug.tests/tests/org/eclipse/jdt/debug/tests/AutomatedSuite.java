@@ -21,15 +21,18 @@ import org.eclipse.jdt.debug.test.stepping.StatementSteppingTests;
 import org.eclipse.jdt.debug.test.stepping.StepFilterTests;
 import org.eclipse.jdt.debug.test.stepping.StepIntoSelectionTests;
 import org.eclipse.jdt.debug.test.stepping.StepIntoSelectionWithGenerics;
+import org.eclipse.jdt.debug.test.stepping.StepOutOfCodeBlockTests;
 import org.eclipse.jdt.debug.testplugin.JavaProjectHelper;
 import org.eclipse.jdt.debug.tests.breakpoints.BreakpointListenerTests;
 import org.eclipse.jdt.debug.tests.breakpoints.BreakpointLocationVerificationTests;
+import org.eclipse.jdt.debug.tests.breakpoints.BreakpointRemovalTests;
 import org.eclipse.jdt.debug.tests.breakpoints.BreakpointWorkingSetTests;
 import org.eclipse.jdt.debug.tests.breakpoints.ConditionalBreakpointsInJava8Tests;
 import org.eclipse.jdt.debug.tests.breakpoints.ConditionalBreakpointsTests;
 import org.eclipse.jdt.debug.tests.breakpoints.ConditionalBreakpointsWithFileClass;
 import org.eclipse.jdt.debug.tests.breakpoints.ConditionalBreakpointsWithGenerics;
 import org.eclipse.jdt.debug.tests.breakpoints.DeferredBreakpointTests;
+import org.eclipse.jdt.debug.tests.breakpoints.DependencyBreakpointsTests;
 import org.eclipse.jdt.debug.tests.breakpoints.DisableOnHitTest;
 import org.eclipse.jdt.debug.tests.breakpoints.ExceptionBreakpointTests;
 import org.eclipse.jdt.debug.tests.breakpoints.HitCountBreakpointsTests;
@@ -86,6 +89,7 @@ import org.eclipse.jdt.debug.tests.core.InstructionPointerTests;
 import org.eclipse.jdt.debug.tests.core.JDWPTests;
 import org.eclipse.jdt.debug.tests.core.JavaDebugTargetTests;
 import org.eclipse.jdt.debug.tests.core.JavaLibraryPathTests;
+import org.eclipse.jdt.debug.tests.core.JreConfigurationFileTests;
 import org.eclipse.jdt.debug.tests.core.LineTrackerTests;
 import org.eclipse.jdt.debug.tests.core.LiteralTests17;
 import org.eclipse.jdt.debug.tests.core.LocalVariableTests;
@@ -274,6 +278,7 @@ public class AutomatedSuite extends DebugSuite {
 		addTest(new TestSuite(ClasspathProviderTests.class));
 		addTest(new TestSuite(BootpathTests.class));
 		addTest(new TestSuite(EEDefinitionTests.class));
+		addTest(new TestSuite(JreConfigurationFileTests.class));
 		addTest(new TestSuite(ResolveRuntimeClasspathTests.class));
 		if (JavaProjectHelper.isJava9Compatible()) {
 			addTest(new TestSuite(ModuleOptionsTests.class));
@@ -417,6 +422,7 @@ public class AutomatedSuite extends DebugSuite {
 		addTest(new TestSuite(TargetPatternBreakpointTests.class));
 		addTest(new TestSuite(BreakpointListenerTests.class));
 		addTest(new TestSuite(JavaBreakpointListenerTests.class));
+		addTest(new TestSuite(BreakpointRemovalTests.class));
 		addTest(new TestSuite(MiscBreakpointsTests.class));
 		addTest(new TestSuite(ThreadNameChangeTests.class));
 		addTest(new TestSuite(BreakpointLocationVerificationTests.class));
@@ -430,6 +436,7 @@ public class AutomatedSuite extends DebugSuite {
 		addTest(new TestSuite(PinnedFieldsEdgeCaseTests.class));
 		addTest(new TestSuite(PinnedFieldsViewTests.class));
 		addTest(new TestSuite(DisableOnHitTest.class));
+		addTest(new TestSuite(DependencyBreakpointsTests.class));
 
 		if (JavaProjectHelper.isJava8Compatible()) {
 			addTest(new TestSuite(TestToggleBreakpointsTarget8.class));
@@ -453,6 +460,7 @@ public class AutomatedSuite extends DebugSuite {
 		}
 		if (JavaProjectHelper.isJava23_Compatible()) {
 			addTest(new TestSuite(VirtualThreadsDebugViewTests.class));
+			addTest(new TestSuite(StepOutOfCodeBlockTests.class));
 		}
 	}
 }

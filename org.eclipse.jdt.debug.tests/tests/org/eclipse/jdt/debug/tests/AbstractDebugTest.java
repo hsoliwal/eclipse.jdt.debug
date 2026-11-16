@@ -179,7 +179,7 @@ import junit.framework.TestCase;
 @SuppressWarnings("deprecation")
 public abstract class AbstractDebugTest extends TestCase implements  IEvaluationListener {
 
-	private static final int SOCKET_BIND_ERROR_MAX_RETRIES = 3;
+	protected static final int SOCKET_BIND_ERROR_MAX_RETRIES = 3;
 	private static boolean setupFirstTest = false;
 
 	public static final String MULTI_OUTPUT_PROJECT_NAME = "MultiOutput";
@@ -224,7 +224,7 @@ public abstract class AbstractDebugTest extends TestCase implements  IEvaluation
 			"SuspendVMConditionalBreakpointsTestSnippet", "FileConditionSnippet2", "compare.CompareObjectsStringTest", "compare.CompareListObjects",
 			"compare.CompareMapObjects", "compare.CompareSetObjects", "compare.CompareNormalObjects", "compare.CompareArrayObjects",
 			"StatementStep", "StatementStepArgument", "StatementStepNested", "StatementStepWithOperations", "WatchItemContext",
-			"PinnedFieldsTarget", "StatementStepReturn", "StatementStepAssignment" };
+			"PinnedFieldsTarget", "StatementStepReturn", "StatementStepAssignment", "DependencyTest", "ExternalClassTst" };
 
 	/**
 	 * the default timeout
@@ -714,6 +714,7 @@ public abstract class AbstractDebugTest extends TestCase implements  IEvaluation
 				jp.setOption(JavaCore.COMPILER_COMPLIANCE, JavaCore.VERSION_23);
 				jp.setOption(JavaCore.COMPILER_CODEGEN_TARGET_PLATFORM, JavaCore.VERSION_23);
 				cfgs.add(createLaunchConfiguration(jp, "Main21"));
+				cfgs.add(createLaunchConfiguration(jp, "StepOutCodeBlockPgm"));
 				loaded23 = true;
 				waitForBuild();
 				assertNoErrorMarkersExist(jp.getProject());
