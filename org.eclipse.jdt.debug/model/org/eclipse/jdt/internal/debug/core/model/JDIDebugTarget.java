@@ -1629,17 +1629,31 @@ public class JDIDebugTarget extends JDIDebugElement implements //FLLDCIM: MARK â
 		if (!isAvailable()) {
 			return;
 		}
-		if (supportsBreakpoint(breakpoint)) {
+		// A removal notification can arrive after the marker is no longer
+		// available. Use the target's installed state instead of marker data.
+		boolean installed = false;
+		synchronized (fBreakpoints) {
+			for (IBreakpoint installedBreakpoint : fBreakpoints) {
+				if (installedBreakpoint == breakpoint) {
+					installed = true;
+					break;
+				}
+			}
+		}
+		if (installed) {
 			try {
 				((JavaBreakpoint) breakpoint).removeFromTarget(this);
-				getBreakpoints().remove(breakpoint);
+			} catch (CoreException e) {
+				logError(e);
+			} finally {
+				synchronized (fBreakpoints) {
+					fBreakpoints.removeIf(installedBreakpoint -> installedBreakpoint == breakpoint);
+				}
 				Iterator<JDIThread> threads = getThreadIterator();
 				while (threads.hasNext()) { //FLLDCIM: MARK â€” M32 LOOP_TO_LANE LOOP
 					threads.next()
 							.removeCurrentBreakpoint(breakpoint);
 				}
-			} catch (CoreException e) {
-				logError(e);
 			}
 		}
 	}

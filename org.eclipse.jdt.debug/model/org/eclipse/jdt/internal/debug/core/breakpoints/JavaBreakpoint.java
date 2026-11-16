@@ -313,7 +313,7 @@ public abstract class JavaBreakpoint extends Breakpoint implements IJavaBreakpoi
 		// deletion.
 		// Don't try updating the marker (decrementing the install count) if
 		// it no longer exists.
-		if (!(request instanceof ClassPrepareRequest) && getMarker().exists()) {
+		if (!(request instanceof ClassPrepareRequest) && markerExists()) {
 			decrementInstallCount();
 		}
 	}
@@ -899,21 +899,46 @@ public abstract class JavaBreakpoint extends Breakpoint implements IJavaBreakpoi
 	 */
 	public void removeFromTarget(final JDIDebugTarget target) //FLLDCIM: MARK — ML METHOD_SPLIT METHOD
 			throws CoreException {
-		removeRequests(target);
-		Object removed = fFilteredThreadsByTarget.remove(target);
-		boolean changed = removed != null;
-		boolean markerExists = markerExists();
-		if (!markerExists || (markerExists && getInstallCount() == 0)) {
-			fInstalledTypeName = null;
-		}
-
-		// remove instance filters
-		if (fInstanceFilters != null && !fInstanceFilters.isEmpty()) {
-			for (int i = 0; i < fInstanceFilters.size(); i++) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
-				IJavaObject object = fInstanceFilters.get(i);
-				if (object.getDebugTarget().equals(target)) {
-					fInstanceFilters.remove(i);
-					changed = true;
+		Throwable failure = null;
+		try {
+			removeRequests(target);
+		} catch (CoreException | RuntimeException | Error e) {
+			failure = e;
+			throw e;
+		} finally {
+			try {
+				// Release the breakpoint's side of the association even when
+				// request deregistration fails. Do this before reading the marker.
+				boolean changed = fFilteredThreadsByTarget.remove(target) != null;
+				if (fInstanceFilters != null) {
+					changed |= fInstanceFilters.removeIf(object -> object.getDebugTarget().equals(target));
+				}
+				if (!markerExists() || getInstallCount() == 0) {
+					fInstalledTypeName = null;
+				}
+				if (changed) {
+					fireChanged();
+				}
+			} catch (CoreException | RuntimeException | Error cleanupFailure) {
+				if (failure == null) {
+					failure = cleanupFailure;
+					throw cleanupFailure;
+				}
+				if (failure != cleanupFailure) {
+					failure.addSuppressed(cleanupFailure);
+				}
+			} finally {
+				// A marker read or change notification must not prevent removal
+				// notification or replace the original deregistration failure.
+				try {
+					fireRemoved(target);
+				} catch (RuntimeException | Error notificationFailure) {
+					if (failure == null) {
+						throw notificationFailure;
+					}
+					if (failure != notificationFailure) {
+						failure.addSuppressed(notificationFailure);
+					}
 				}
 			}
 		}
@@ -940,6 +965,7 @@ public abstract class JavaBreakpoint extends Breakpoint implements IJavaBreakpoi
 		// ConcurrentModificationException
 		Iterator<EventRequest> iter = requests.iterator();
 		EventRequest req;
+		CoreException failure = null;
 		while (iter.hasNext()) { //FLLDCIM: MARK — M32 LOOP_TO_LANE LOOP
 			req = iter.next();
 			try {
@@ -957,10 +983,22 @@ public abstract class JavaBreakpoint extends Breakpoint implements IJavaBreakpoi
 			} catch (RuntimeException e) {
 				target.internalError(e);
 			} finally {
-				deregisterRequest(req, target);
+				try {
+					deregisterRequest(req, target);
+				} catch (CoreException e) {
+					// A marker update failure must not leave the other VM requests active.
+					if (failure == null) {
+						failure = e;
+					} else if (failure != e) {
+						failure.addSuppressed(e);
+					}
+				}
 			}
 		}
 		fRequestsByTarget.remove(target);
+		if (failure != null) {
+			throw failure;
+		}
 	}
 
 	/**
@@ -1221,10 +1259,11 @@ public abstract class JavaBreakpoint extends Breakpoint implements IJavaBreakpoi
 	 *            debug target
 	 */
 	protected void fireRemoved(IJavaDebugTarget target) {
+		// State cleanup must not depend on the plugin or its notification.
+		setInstalledIn(target, false);
 		JDIDebugPlugin plugin = JDIDebugPlugin.getDefault();
 		if (plugin != null) {
 			plugin.fireBreakpointRemoved(target, this);
-			setInstalledIn(target, false);
 		}
 	}
 
