@@ -942,13 +942,6 @@ public abstract class JavaBreakpoint extends Breakpoint implements IJavaBreakpoi
 				}
 			}
 		}
-		// fire change notification if required
-		if (changed) {
-			fireChanged();
-		}
-
-		// notification
-		fireRemoved(target);
 	}
 
 	/**
